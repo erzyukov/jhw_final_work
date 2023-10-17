@@ -7,6 +7,6 @@ namespace Game
     {
         protected override void Configure(IContainerBuilder builder)
         {
-        }
-    }
+		}
+	}
 }

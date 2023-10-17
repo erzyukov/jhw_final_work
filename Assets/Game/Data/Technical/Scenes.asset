@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 178d2ac031b9d3b44ab255a063c8f10e, type: 3}
+  m_Name: Scenes
+  m_EditorClassIdentifier: 
+  Splash:
+    _sceneAsset: {fileID: 102900000, guid: 39c70e975a2bb2b4faa2905b9de62b35, type: 3}
+    _sceneName: 0 - Splash
+  Main:
+    _sceneAsset: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
+    _sceneName: 1 - Main
+  Levels:
+  - _sceneAsset: {fileID: 102900000, guid: 39607b32dcfe3064d85dc87ec8dc5d2a, type: 3}
+    _sceneName: Level 1
