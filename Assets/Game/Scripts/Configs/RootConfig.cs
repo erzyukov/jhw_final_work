@@ -7,8 +7,10 @@ namespace Game.Configs
 	{
 		[SerializeField] private ScenesConfig _scenes;
 		[SerializeField] private UnitsConfig _units;
+		[SerializeField] private BattleFieldConfig _battleField;
 
 		public ScenesConfig Scenes => _scenes;
 		public UnitsConfig Units => _units;
+		public BattleFieldConfig BattleField => _battleField;
 	}
 }

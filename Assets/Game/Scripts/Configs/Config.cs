@@ -3,6 +3,7 @@
 	public enum Config
 	{
 		Units = 1,
+		BattleField,
 
 		// Technical
 		Root = 300,
