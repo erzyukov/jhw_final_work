@@ -1,8 +1,8 @@
-using UnityEngine;
-using DG.Tweening;
-
-namespace Game
+namespace Game.Effects
 {
+	using UnityEngine;
+	using DG.Tweening;
+
     public class Rotator : MonoBehaviour
     {
 		[SerializeField] private Vector3 _direction;

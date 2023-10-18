@@ -1,9 +1,11 @@
-using UnityEngine;
-using VContainer;
-using VContainer.Unity;
-
-namespace Game
+namespace Game.LifetimeScope
 {
+	using Configs;
+	using Core;
+	using UnityEngine;
+	using VContainer;
+	using VContainer.Unity;
+
     public class RootLifetimeScope : LifetimeScope
     {
 		[SerializeField] private RootConfig _rootConfig;

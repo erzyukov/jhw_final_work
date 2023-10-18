@@ -1,8 +1,8 @@
-using VContainer;
-using VContainer.Unity;
-
-namespace Game
+namespace Game.LifetimeScope
 {
+	using VContainer;
+	using VContainer.Unity;
+
     public class MainSceneLifetimeScope : LifetimeScope
     {
         protected override void Configure(IContainerBuilder builder)

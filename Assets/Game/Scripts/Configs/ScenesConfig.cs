@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-namespace Game
+﻿namespace Game.Configs
 {
+	using Utilities;
+	using System.Collections.Generic;
+	using UnityEngine;
+
 	[CreateAssetMenu(fileName = "Scenes", menuName = "Configs/Scenes", order = (int)Config.Scenes)]
 	public class ScenesConfig : ScriptableObject
 	{

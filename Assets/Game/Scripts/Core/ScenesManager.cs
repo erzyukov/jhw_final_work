@@ -1,13 +1,14 @@
-using System;
-using System.Collections;
-using System.Threading.Tasks;
-using UniRx;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using VContainer;
-
-namespace Game
+namespace Game.Core
 {
+	using Configs;
+	using System;
+	using System.Collections;
+	using System.Threading.Tasks;
+	using UniRx;
+	using UnityEngine;
+	using UnityEngine.SceneManagement;
+	using VContainer;
+
 	public interface IScenesManager
 	{
 		ReactiveCommand OnSplashComplete { get; }
