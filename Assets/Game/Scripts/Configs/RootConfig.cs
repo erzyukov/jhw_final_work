@@ -6,9 +6,9 @@ namespace Game.Configs
 	public class RootConfig : ScriptableObject
 	{
 		[SerializeField] private ScenesConfig _scenes;
-		[SerializeField] private UnitsConfig _combatUnits;
+		[SerializeField] private UnitsConfig _units;
 
 		public ScenesConfig Scenes => _scenes;
-		public UnitsConfig CombatUnits => _combatUnits;
+		public UnitsConfig Units => _units;
 	}
 }

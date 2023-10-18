@@ -10,6 +10,7 @@
 	public class UnitCreator : ControllerBase, IStartable
 	{
 		[Inject] IHudUnitPanel _hudUnitPanel;
+		[Inject] UnitViewFactory _unitViewFactory;
 
 		public void Start()
 		{
@@ -21,6 +22,8 @@
 		private void CreateUnit(Unit.Type type)
 		{
 			Debug.LogWarning($"type: {type}");
+
+			_unitViewFactory.Create(type);
 		}
 	}
 }

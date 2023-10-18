@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Root
   m_EditorClassIdentifier: 
   _scenes: {fileID: 11400000, guid: 473ad5fc18b696845914808028cf1fd8, type: 2}
-  _combatUnits: {fileID: 11400000, guid: c879d22ebd0222d4f96b291f8c5290d9, type: 2}
+  _units: {fileID: 11400000, guid: c879d22ebd0222d4f96b291f8c5290d9, type: 2}

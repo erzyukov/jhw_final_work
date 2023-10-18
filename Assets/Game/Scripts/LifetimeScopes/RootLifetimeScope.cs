@@ -23,6 +23,7 @@ namespace Game.LifetimeScope
 		private void RegisterConfigs(IContainerBuilder builder)
 		{
 			builder.RegisterInstance(_rootConfig.Scenes);
+			builder.RegisterInstance(_rootConfig.Units);
 		}
 	}
 }

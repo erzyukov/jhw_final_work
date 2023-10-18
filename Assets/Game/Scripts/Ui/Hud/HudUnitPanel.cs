@@ -1,28 +1,28 @@
 namespace Game.Ui
 {
-	using Units;
 	using System;
 	using UniRx;
 	using UnityEngine;
 	using UnityEngine.UI;
+	using Unit = Units.Unit;
 
 	public interface IHudUnitPanel
 	{
-		ReactiveCommand<Units.Unit.Type> UnitSelectButtonPressed { get; }
+		ReactiveCommand<Unit.Type> UnitSelectButtonPressed { get; }
 	}
 
 	public class HudUnitPanel : MonoBehaviour, IHudUnitPanel
 	{
 		[SerializeField] private CommandButton[] _commandButtons;
 
-		public ReactiveCommand<Units.Unit.Type> UnitSelectButtonPressed { get; } = new ReactiveCommand<Units.Unit.Type>();
+		public ReactiveCommand<Unit.Type> UnitSelectButtonPressed { get; } = new ReactiveCommand<Unit.Type>();
 
 		private void Awake()
 		{
             foreach (var commandButton in _commandButtons)
             {
 				commandButton.Button.OnClickAsObservable()
-					.Subscribe(_ => UnitSelectButtonPressed.Execute(commandButton.CombatUnitType))
+					.Subscribe(_ => UnitSelectButtonPressed.Execute(commandButton.UnitType))
 					.AddTo(this);
 			}
         }
@@ -30,7 +30,7 @@ namespace Game.Ui
 		[Serializable]
 		public struct CommandButton
 		{
-			public Units.Unit.Type CombatUnitType;
+			public Unit.Type UnitType;
 			public Button Button;
 		}
     }

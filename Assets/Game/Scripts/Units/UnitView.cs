@@ -2,8 +2,8 @@ namespace Game.Units
 {
 	using UnityEngine;
 
-    public class UnitView : MonoBehaviour
-    {
+	public class UnitView : MonoBehaviour
+	{
 
-    }
+	}
 }
