@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 33572367}
   - component: {fileID: 33572366}
   - component: {fileID: 33572368}
+  - component: {fileID: 33572369}
   m_Layer: 5
   m_Name: UnitsPanel
   m_TagString: Untagged
@@ -229,6 +230,25 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &33572369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33572364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1242c71e978af4dab06065bd5a888f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _commandButtons:
+  - UnitType: 0
+    Button: {fileID: 638314181}
+  - UnitType: 1
+    Button: {fileID: 507461606}
+  - UnitType: 2
+    Button: {fileID: 1793318465}
 --- !u!1 &95438203
 GameObject:
   m_ObjectHideFlags: 0
