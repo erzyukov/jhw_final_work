@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba901327ab9d1e14aaec6b0d0294ba36, type: 3}
-  m_Name: CombatUnits
+  m_Name: Units
   m_EditorClassIdentifier: 
   _prefabs:
   - Type: 0

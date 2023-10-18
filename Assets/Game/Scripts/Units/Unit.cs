@@ -1,6 +1,6 @@
 ﻿namespace Game.Units
 {
-	public class CombatUnit
+	public class Unit
 	{
 
 		public enum Type

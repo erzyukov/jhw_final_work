@@ -11,7 +11,7 @@ namespace Game.LifetimeScope
         {
 			builder.RegisterComponentInHierarchy<HudUnitPanel>().AsImplementedInterfaces();
 
-			builder.Register<CombatUnitCreator>(Lifetime.Singleton).AsImplementedInterfaces();
+			builder.Register<UnitCreator>(Lifetime.Singleton).AsImplementedInterfaces();
 		}
 	}
 }

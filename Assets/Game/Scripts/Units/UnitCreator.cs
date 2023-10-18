@@ -7,7 +7,7 @@
 	using UnityEngine;
 	using UniRx;
 
-	public class CombatUnitCreator : ControllerBase, IStartable
+	public class UnitCreator : ControllerBase, IStartable
 	{
 		[Inject] IHudUnitPanel _hudUnitPanel;
 
@@ -18,7 +18,7 @@
 				.AddTo(this);
 		}
 
-		private void CreateUnit(CombatUnit.Type type)
+		private void CreateUnit(Unit.Type type)
 		{
 			Debug.LogWarning($"type: {type}");
 		}

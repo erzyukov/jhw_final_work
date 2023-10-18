@@ -8,14 +8,14 @@ namespace Game.Ui
 
 	public interface IHudUnitPanel
 	{
-		ReactiveCommand<CombatUnit.Type> UnitSelectButtonPressed { get; }
+		ReactiveCommand<Units.Unit.Type> UnitSelectButtonPressed { get; }
 	}
 
 	public class HudUnitPanel : MonoBehaviour, IHudUnitPanel
 	{
 		[SerializeField] private CommandButton[] _commandButtons;
 
-		public ReactiveCommand<CombatUnit.Type> UnitSelectButtonPressed { get; } = new ReactiveCommand<CombatUnit.Type>();
+		public ReactiveCommand<Units.Unit.Type> UnitSelectButtonPressed { get; } = new ReactiveCommand<Units.Unit.Type>();
 
 		private void Awake()
 		{
@@ -30,7 +30,7 @@ namespace Game.Ui
 		[Serializable]
 		public struct CommandButton
 		{
-			public CombatUnit.Type CombatUnitType;
+			public Units.Unit.Type CombatUnitType;
 			public Button Button;
 		}
     }
