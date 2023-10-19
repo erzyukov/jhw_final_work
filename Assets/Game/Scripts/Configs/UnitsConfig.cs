@@ -12,13 +12,13 @@ namespace Game.Configs
 
 		public UnitPrefab[] Prefabs => _prefabs;
 
-		public UnitView GetPrefab(Unit.Type type) => 
+		public UnitView GetPrefab(Unit.Kind type) => 
 			_prefabs.Where(element => element.Type == type).First().Prefab;
 
 		[Serializable]
 		public struct UnitPrefab
 		{
-			public Unit.Type Type;
+			public Unit.Kind Type;
 			public UnitView Prefab;
 		}
     }

@@ -2,6 +2,7 @@ namespace Game.LifetimeScope
 {
 	using Game.Ui;
 	using Game.Units;
+	using UnityEngine;
 	using VContainer;
 	using VContainer.Unity;
 
@@ -13,6 +14,8 @@ namespace Game.LifetimeScope
 
 			builder.Register<UnitViewFactory>(Lifetime.Singleton);
 			builder.Register<UnitCreator>(Lifetime.Singleton).AsImplementedInterfaces();
+
+			builder.RegisterComponentInHierarchy<Camera>();
 		}
 	}
 }

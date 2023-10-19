@@ -8,7 +8,7 @@
 	{
 		[Inject] UnitsConfig _unitsConfig;
 
-		public UnitView Create(Unit.Type type)
+		public UnitView Create(Unit.Kind type)
 		{
 			UnitView prefab = _unitsConfig.GetPrefab(type);
 			return Object.Instantiate(prefab);

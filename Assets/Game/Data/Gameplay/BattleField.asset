@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b463ec8361cda41bf2197608c54def, type: 3}
   m_Name: BattleField
   m_EditorClassIdentifier: 
-  _defaultPlatoonSize: {x: 2, y: 2}
+  _defaultPlatoonSize: {x: 3, y: 2}
+  _platoonPrefab: {fileID: 8373615427908898270, guid: 4c658ab25bdab5d4a9be992c0f234789, type: 3}
+  _platoonCellPrefab: {fileID: 6631650576725672165, guid: 01c05006e556c5e4682880b22d5cf977, type: 3}
+  _platoonCellWidth: 2

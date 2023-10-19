@@ -24,6 +24,7 @@ namespace Game.LifetimeScope
 		{
 			builder.RegisterInstance(_rootConfig.Scenes);
 			builder.RegisterInstance(_rootConfig.Units);
+			builder.RegisterInstance(_rootConfig.BattleField);
 		}
 	}
 }

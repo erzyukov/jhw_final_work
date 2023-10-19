@@ -5,8 +5,8 @@ namespace Game.LifetimeScopes
 
     public class LevelSceneLifetimeScope : LifetimeScope
     {
-        protected override void Configure(IContainerBuilder builder)
+		protected override void Configure(IContainerBuilder builder)
         {
-        }
-    }
+		}
+	}
 }

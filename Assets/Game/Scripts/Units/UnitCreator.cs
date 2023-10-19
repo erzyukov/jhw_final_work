@@ -19,7 +19,7 @@
 				.AddTo(this);
 		}
 
-		private void CreateUnit(Unit.Type type)
+		private void CreateUnit(Unit.Kind type)
 		{
 			Debug.LogWarning($"type: {type}");
 
