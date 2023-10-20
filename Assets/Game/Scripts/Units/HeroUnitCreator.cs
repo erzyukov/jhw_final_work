@@ -25,8 +25,8 @@
 		{
 			if (_platoon.HasFreeSpace)
 			{
-				UnitView view = _unitViewFactory.Create(type);
-				Unit unit = new Unit(type, view);
+				IUnitView view = _unitViewFactory.Create(type);
+				IUnit unit = new Unit(type, view);
 				_platoon.AddUnit(unit);
 			}
 		}

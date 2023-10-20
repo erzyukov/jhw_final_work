@@ -10,23 +10,23 @@
 	{
 		bool HasFreeSpace { get; }
 		void InitMap(Map<PlatoonCell> map);
-		void AddUnit(Unit unit);
+		void AddUnit(IUnit unit);
 	}
 
 	public class Platoon : IPlatoon
 	{
 		private Map<PlatoonCell> _map;
-		private List<Unit> _units;
+		private List<IUnit> _units;
 
 		public bool HasFreeSpace => _map.Any(position => _map[position].HasUnit == false);
 
 		public void InitMap(Map<PlatoonCell> map)
 		{
 			_map = map;
-			_units = new List<Unit>();
+			_units = new List<IUnit>();
 		}
 
-		public void AddUnit(Unit unit)
+		public void AddUnit(IUnit unit)
 		{
 			_units.Add(unit);
 			PlatoonCell freeCell = _map.Where(position => _map[position].HasUnit == false).Select(position => _map[position]).FirstOrDefault();
