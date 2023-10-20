@@ -1779,7 +1779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7863230898415610567, guid: 152afcf8b81ee4349b9be35b43d8c2e5, type: 3}
       propertyPath: m_Name
-      value: MainSceneLifetimeScope
+      value: MainSceneContext
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 152afcf8b81ee4349b9be35b43d8c2e5, type: 3}

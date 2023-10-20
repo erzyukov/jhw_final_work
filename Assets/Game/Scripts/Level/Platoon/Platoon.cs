@@ -1,8 +1,7 @@
-﻿namespace Game.Level
+﻿namespace Game.Platoon
 {
 	using Units;
 	using Utilities;
-	using UnityEngine;
 	using System.Linq;
 	using System.Collections.Generic;
 

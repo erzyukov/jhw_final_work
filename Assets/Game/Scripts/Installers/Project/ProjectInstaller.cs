@@ -1,4 +1,4 @@
-namespace Game.LifetimeScope
+namespace Game.Installers
 {
 	using Configs;
 	using Core;
@@ -6,7 +6,7 @@ namespace Game.LifetimeScope
 	using VContainer;
 	using VContainer.Unity;
 
-    public class RootLifetimeScope : LifetimeScope
+    public class ProjectInstaller : LifetimeScope
     {
 		[SerializeField] private RootConfig _rootConfig;
 		

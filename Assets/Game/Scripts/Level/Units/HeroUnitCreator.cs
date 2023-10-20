@@ -6,7 +6,7 @@
 	using VContainer.Unity;
 	using UnityEngine;
 	using UniRx;
-	using Game.Level;
+	using Game.Platoon;
 
 	public class HeroUnitCreator : ControllerBase, IStartable
 	{

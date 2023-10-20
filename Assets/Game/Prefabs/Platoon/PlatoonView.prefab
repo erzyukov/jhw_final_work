@@ -90,6 +90,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentReference:
-    TypeName: Game.LifetimeScopes.LevelSceneLifetimeScope
+    TypeName: Game.Installers.LevelSceneInstaller
   autoRun: 1
   autoInjectGameObjects: []

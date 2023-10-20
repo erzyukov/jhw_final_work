@@ -1,4 +1,4 @@
-namespace Game.Level
+namespace Game.Platoon
 {
 	using Utilities;
 	using Configs;

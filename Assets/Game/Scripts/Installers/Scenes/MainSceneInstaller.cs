@@ -1,4 +1,4 @@
-namespace Game.LifetimeScope
+namespace Game.Installers
 {
 	using Game.Ui;
 	using Game.Units;
@@ -6,7 +6,7 @@ namespace Game.LifetimeScope
 	using VContainer;
 	using VContainer.Unity;
 
-    public class MainSceneLifetimeScope : LifetimeScope
+    public class MainSceneInstaller : LifetimeScope
     {
         protected override void Configure(IContainerBuilder builder)
         {

@@ -1,10 +1,9 @@
-namespace Game.LifetimeScope
+namespace Game.Installers
 {
 	using Game.Units;
 	using VContainer;
-	using VContainer.Unity;
 
-    public class HeroPlatoonLifetimeScope : PlatoonLifetimeScope
+    public class HeroPlatoonInstaller : PlatoonInstaller
 	{
         protected override void Configure(IContainerBuilder builder)
         {

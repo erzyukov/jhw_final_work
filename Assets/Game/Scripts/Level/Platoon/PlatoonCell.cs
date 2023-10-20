@@ -1,10 +1,9 @@
-﻿namespace Game.Level
+﻿namespace Game.Platoon
 {
 	using Utilities;
 	using Units;
 	using UnityEngine;
 	using UniRx;
-	using System;
 
 	public interface IPlatoonCell
 	{
