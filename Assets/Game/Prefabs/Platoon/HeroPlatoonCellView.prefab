@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 6631650576725672164}
   - component: {fileID: 6631650576725672165}
   m_Layer: 0
-  m_Name: PlatoonCellView
+  m_Name: HeroPlatoonCellView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

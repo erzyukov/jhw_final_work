@@ -13,7 +13,6 @@ namespace Game.LifetimeScope
 			builder.RegisterComponentInHierarchy<HudUnitPanel>().AsImplementedInterfaces();
 
 			builder.Register<UnitViewFactory>(Lifetime.Singleton);
-			builder.Register<UnitCreator>(Lifetime.Singleton).AsImplementedInterfaces();
 
 			builder.RegisterComponentInHierarchy<Camera>();
 		}
