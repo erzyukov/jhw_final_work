@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6631650576263730031}
   - component: {fileID: 6631650576263730026}
   - component: {fileID: 6631650576263730025}
+  - component: {fileID: 5207237617189359518}
+  - component: {fileID: 5985842902026375532}
   m_Layer: 0
   m_Name: Cell
   m_TagString: Untagged
@@ -76,6 +78,31 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5207237617189359518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6631650576263730030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b309dac751dff1d429a77b9239dfdf1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &5985842902026375532
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6631650576263730030}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 0.01}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6631650576725672187
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +153,7 @@ MonoBehaviour:
   _canvas: {fileID: 6631650577527189681}
   _platform: {fileID: 6631650576263730025}
   _selectedColor: {r: 0.5455677, g: 0.69411767, b: 0.4862745, a: 0.4}
+  _cellPointerEvents: {fileID: 5207237617189359518}
 --- !u!1 &6631650577259251067
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,9 +3,11 @@
 	using Utilities;
 	using Units;
 	using UnityEngine;
+	using UniRx;
 
 	public interface IPlatoonCell
 	{
+		ReactiveCommand PointerEntred { get; }
 		bool HasUnit { get; }
 		Vector2Int Position { get; }
 		void SetUnit(IUnit unit);
@@ -26,6 +28,8 @@
 			_cellView = cellView;
 			_position = position;
 		}
+
+		public ReactiveCommand PointerEntred => _cellView.PointerEntred;
 
 		public bool HasUnit => _unit != null;
 

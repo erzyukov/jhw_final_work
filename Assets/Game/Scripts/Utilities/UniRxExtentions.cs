@@ -7,7 +7,7 @@
 	{
 		readonly CompositeDisposable _disposable = new CompositeDisposable();
 
-		void IDisposable.Dispose() => _disposable.Dispose();
+		public virtual void Dispose() => _disposable.Dispose();
 
 		public void AddDisposable(IDisposable item)
 		{

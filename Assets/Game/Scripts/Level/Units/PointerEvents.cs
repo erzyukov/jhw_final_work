@@ -4,7 +4,7 @@ namespace Game
 	using UnityEngine;
 	using UnityEngine.EventSystems;
 
-	public interface IUnitUiEvents
+	public interface IPointerEvents
 	{
 		ReactiveCommand<Vector3> PointerMoved { get; }
 		ReactiveCommand PointerUped { get; }
@@ -13,7 +13,7 @@ namespace Game
 		ReactiveCommand PointerExited { get; }
 	}
 
-	public class UnitPointerEvents : MonoBehaviour, IUnitUiEvents, IPointerEnterHandler, IPointerDownHandler
+	public class PointerEvents : MonoBehaviour, IPointerEvents, IPointerEnterHandler, IPointerDownHandler
 		, IPointerUpHandler, IPointerMoveHandler, IPointerExitHandler
 	{
 		public ReactiveCommand<Vector3> PointerMoved { get; } = new ReactiveCommand<Vector3>();
@@ -25,7 +25,7 @@ namespace Game
 		public void OnPointerMove(PointerEventData eventData)
 		{
 			PointerMoved.Execute(eventData.pointerCurrentRaycast.worldPosition);
-			Debug.LogWarning($"MouseMove: {eventData.pointerCurrentRaycast.worldPosition}");
+			//Debug.LogWarning($"MouseMove: {eventData.pointerCurrentRaycast.worldPosition}");
 		}
 
 		public void OnPointerUp(PointerEventData eventData) =>

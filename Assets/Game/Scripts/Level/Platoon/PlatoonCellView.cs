@@ -1,10 +1,12 @@
 namespace Game
 {
+	using UniRx;
 	using UnityEngine;
 	using UnityEngine.UI;
 
 	public interface IPlatoonCellView
 	{
+		ReactiveCommand PointerEntred { get; }
 		Transform UnitPivot { get; }
 		void Init(Camera camera);
 		void SetPosition(Vector3 position);
@@ -18,10 +20,12 @@ namespace Game
 		[SerializeField] private Canvas _canvas;
 		[SerializeField] private Image _platform;
 		[SerializeField] private Color _selectedColor;
+		[SerializeField] private PointerEvents _cellPointerEvents;
 
 
 		private Color _defaultColor;
 
+		public ReactiveCommand PointerEntred => _cellPointerEvents.PointerEntered;
 		public Transform UnitPivot => _unitPivot;
 
 		private void Start()
