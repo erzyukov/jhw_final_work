@@ -3,67 +3,49 @@
 	using Utilities;
 	using Units;
 	using UnityEngine;
-	using UniRx;
 
 	public interface IPlatoonCell
 	{
 		bool HasUnit { get; }
+		Vector2Int Position { get; }
 		void SetUnit(IUnit unit);
 		void Clear();
+		void SelectCell();
+		void DeselectCell();
 	}
 
 	public class PlatoonCell : ControllerBase, IPlatoonCell
 	{
 		private IPlatoonCellView _cellView;
 		private IUnit _unit;
+		private Vector2Int _position;
 
-		readonly CompositeDisposable unitDisposable = new CompositeDisposable();
-
-		public PlatoonCell(IPlatoonCellView cellView, Camera camera)
+		public PlatoonCell(IPlatoonCellView cellView, Camera camera, Vector2Int position)
 		{
 			cellView.Init(camera);
 			_cellView = cellView;
+			_position = position;
 		}
 
 		public bool HasUnit => _unit != null;
+
+		public Vector2Int Position => _position;
 
 		public void SetUnit(IUnit unit)
 		{
 			_unit = unit;
 			_unit.SetViewParent(_cellView.UnitPivot);
-			SubscribeUnit();
 		}
 
 		public void Clear()
 		{
-			UnsubscribeUnit();
 			_unit = null;
 		}
 
-		private void SubscribeUnit()
-		{
-			_unit.Focused
-				.Subscribe(_ => OnUnitFocused())
-				.AddTo(this)
-				.AddTo(unitDisposable);
-
-			_unit.Blured
-				.Subscribe(_ => OnUnitBlured())
-				.AddTo(this)
-				.AddTo(unitDisposable);
-		}
-
-		private void UnsubscribeUnit() =>
-			unitDisposable.Dispose();
-
-		private void OnUnitFocused()
-		{
+		public void SelectCell() =>
 			_cellView.Select();
-		}
 
-		private void OnUnitBlured()
-		{
+		public void DeselectCell() =>
 			_cellView.Deselect();
-		}
 	}
 }

@@ -5,13 +5,13 @@
 
 	public class ControllerBase : IDisposable
 	{
-		readonly CompositeDisposable disposable = new CompositeDisposable();
+		readonly CompositeDisposable _disposable = new CompositeDisposable();
 
-		void IDisposable.Dispose() => disposable.Dispose();
+		void IDisposable.Dispose() => _disposable.Dispose();
 
 		public void AddDisposable(IDisposable item)
 		{
-			disposable.Add(item);
+			_disposable.Add(item);
 		}
 	}
 

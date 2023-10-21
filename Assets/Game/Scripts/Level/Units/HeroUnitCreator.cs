@@ -4,7 +4,6 @@
 	using Utilities;
 	using VContainer;
 	using VContainer.Unity;
-	using UnityEngine;
 	using UniRx;
 	using Game.Platoon;
 

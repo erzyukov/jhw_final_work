@@ -28,7 +28,7 @@ namespace Game.Platoon
 			foreach (Vector2Int cellPosition in map)
 			{
 				IPlatoonCellView cellView = GameObject.Instantiate(_config.PlatoonCellPrefab, _view.Transform);
-				map[cellPosition] = new PlatoonCell(cellView, _camera);
+				map[cellPosition] = new PlatoonCell(cellView, _camera, cellPosition);
 				Vector3 worldPosition = GetCellWorldPosition(cellPosition);
 				cellView.SetPosition(worldPosition);
 			}
