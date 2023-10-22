@@ -11,13 +11,16 @@
 	{
 		ReactiveCommand<IUnit> UnitAdded { get; }
 		ReactiveCommand<IUnit> UnitRemoved { get; }
-		ReactiveCommand<PlatoonCell> PointerEnteredToCell { get; }
+		ReactiveCommand<PlatoonCell> PointerEnteredCell { get; }
+		ReactiveCommand<PlatoonCell> PointerExitedCell { get; }
 		bool HasFreeSpace { get; }
 		void InitMap(Map<PlatoonCell> map);
-		PlatoonCell GetPlatoonCell(Vector2Int position);
+		PlatoonCell GetCell(Vector2Int position);
+		PlatoonCell GetCell(IUnit unit);
 		void AddUnit(IUnit unit);
 		void AddUnit(IUnit unit, IPlatoonCell platoonCell);
 		void RemoveUnit(IUnit unit);
+		void SetIgnoreUnistRaycast(bool value);
 	}
 
 	public class Platoon : ControllerBase, IPlatoon
@@ -27,7 +30,8 @@
 
 		public ReactiveCommand<IUnit> UnitAdded { get; } = new ReactiveCommand<IUnit>();
 		public ReactiveCommand<IUnit> UnitRemoved { get; } = new ReactiveCommand<IUnit>();
-		public ReactiveCommand<PlatoonCell> PointerEnteredToCell { get; } = new ReactiveCommand<PlatoonCell>();
+		public ReactiveCommand<PlatoonCell> PointerEnteredCell { get; } = new ReactiveCommand<PlatoonCell>();
+		public ReactiveCommand<PlatoonCell> PointerExitedCell { get; } = new ReactiveCommand<PlatoonCell>();
 		public bool HasFreeSpace => _map.Any(position => _map[position].HasUnit == false);
 
 		public void InitMap(Map<PlatoonCell> map)
@@ -37,13 +41,20 @@
 			foreach (var position in _map)
 			{
 				_map[position].PointerEntred
-					.Subscribe(_ => PointerEnteredToCell.Execute(_map[position]))
+					.Subscribe(_ => PointerEnteredCell.Execute(_map[position]))
+					.AddTo(this);
+
+				_map[position].PointerExited
+					.Subscribe(_ => PointerExitedCell.Execute(_map[position]))
 					.AddTo(this);
 			}
 		}
 
-		public PlatoonCell GetPlatoonCell(Vector2Int position) =>
+		public PlatoonCell GetCell(Vector2Int position) =>
 			_map[position];
+
+		public PlatoonCell GetCell(IUnit unit) =>
+			_map.Where(position => _map[position].Unit == unit).Select(position => _map[position]).FirstOrDefault();
 
 		public void AddUnit(IUnit unit)
 		{
@@ -62,15 +73,20 @@
 
 			_units.Add(unit);
 			platoonCell.SetUnit(unit);
-			unit.Position = platoonCell.Position;
 			UnitAdded.Execute(unit);
 		}
 
 		public void RemoveUnit(IUnit unit)
 		{
 			_units.Remove(unit);
-			_map[unit.Position].Clear();
+			GetCell(unit)?.Clear();
 			UnitRemoved.Execute(unit);
+		}
+
+		public void SetIgnoreUnistRaycast(bool value)
+		{
+            foreach (var unit in _units)
+				(unit as IHeroUnit).SetIgnoreRaycast(value);
 		}
 	}
 }

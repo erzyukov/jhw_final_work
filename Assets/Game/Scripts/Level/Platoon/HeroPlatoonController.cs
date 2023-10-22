@@ -8,8 +8,6 @@
 	using VContainer.Unity;
 	using UniRx;
 	using System.Collections.Generic;
-	using System;
-	using static UnityEngine.UI.CanvasScaler;
 	using UnityEngine;
 
 	public class HeroPlatoonController : ControllerBase, IStartable
@@ -24,7 +22,9 @@
 		private Dictionary<IUnit, CompositeDisposable> _unitDisposable = new Dictionary<IUnit, CompositeDisposable>();
 		private State _state;
 		private IHeroUnit _risedUnit;
+		private IUnit _swapedUnit;
 		private IPlatoonCell _lastSelectedCell;
+		private IPlatoonCell _initialUnitCell;
 
 		public void Start()
 		{
@@ -32,14 +32,12 @@
 				.Subscribe(CreateUnit)
 				.AddTo(this);
 
-			/*
-			_platoon.UnitRemoved
-				.Subscribe(OnUnitRemoved)
+			_platoon.PointerEnteredCell
+				.Subscribe(OnPointerEnteredCell)
 				.AddTo(this);
-			*/
 
-			_platoon.PointerEnteredToCell
-				.Subscribe(OnPointerEnteredToCell)
+			_platoon.PointerExitedCell
+				.Subscribe(OnPointerExitedCell)
 				.AddTo(this);
 		}
 
@@ -58,7 +56,6 @@
 		private void SubscribeUnit(IHeroUnit unit)
 		{
 			_unitDisposable.Add(unit, new CompositeDisposable());
-			//PlatoonCell platoonCell = _platoon.GetPlatoonCell(unit.Position);
 
 			unit.Rised
 				.Subscribe(_ => OnUnitRised(unit))
@@ -72,54 +69,87 @@
 
 			unit.Focused
 				.Where(_ => _state != State.UnitRised)
-				.Subscribe(_ => SelectCell(_platoon.GetPlatoonCell(unit.Position)))
+				.Subscribe(_ => OnCellFocused(_platoon.GetCell(unit)))
 				.AddTo(this)
 				.AddTo(_unitDisposable[unit]);
 
 			unit.Blured
-				.Subscribe(_ => _platoon.GetPlatoonCell(unit.Position).DeselectCell())
+				.Subscribe(_ => _platoon.GetCell(unit).DeselectCell())
 				.AddTo(this)
 				.AddTo(_unitDisposable[unit]);
 		}
 
-/*
-		private void OnUnitRemoved(IUnit unit)
-		{
-			_unitDisposable[unit].Dispose();
-			_unitDisposable.Remove(unit);
-		}
-*/
 		private void OnUnitRised(IHeroUnit unit)
 		{
-			unit.Transform.localPosition = unit.Transform.localPosition.WithY(UnitRaiseYOffset);
+			_platoon.SetIgnoreUnistRaycast(true);
+			_initialUnitCell = _platoon.GetCell(unit);
+			ApplyUnitRisedFx(unit);
 			_state = State.UnitRised;
 			_risedUnit = unit;
 		}
 
 		private void OnUnitPutDowned(IHeroUnit unit)
 		{
-			unit.Transform.localPosition = unit.Transform.localPosition.WithY(UnitDefaultYOffset);
+			_platoon.SetIgnoreUnistRaycast(false);
+			RemoveUnitRisedFx(unit);
 			_state = State.None;
 			_risedUnit = null;
+			_initialUnitCell = null;
+			_swapedUnit = null;
 		}
 
-		private void OnPointerEnteredToCell(PlatoonCell cell)
+		private void ApplyUnitRisedFx(IHeroUnit unit) =>
+			unit.Transform.localPosition = unit.Transform.localPosition.WithY(UnitRaiseYOffset);
+
+		private void RemoveUnitRisedFx(IHeroUnit unit) =>
+			unit.Transform.localPosition = unit.Transform.localPosition.WithY(UnitDefaultYOffset);
+
+		private void OnPointerEnteredCell(PlatoonCell cell)
 		{
 			if (_state != State.UnitRised)
 				return;
 
-			SelectCell(cell);
+			OnCellFocused(cell);
 
 			if (cell.HasUnit)
-				return;
+				SwapRisedUnitWithCell(cell);
+			else
+				MoveRisedUnitToCell(cell);
 
-			_platoon.RemoveUnit(_risedUnit);
-			_platoon.AddUnit(_risedUnit, cell);
-
-			_risedUnit.Transform.localPosition = _risedUnit.Transform.localPosition.WithY(UnitRaiseYOffset);
+			ApplyUnitRisedFx(_risedUnit);
 		}
 
-		private void SelectCell(IPlatoonCell cell)
+		private void SwapRisedUnitWithCell(PlatoonCell cell)
+		{
+			_swapedUnit = cell.Unit;
+
+			_platoon.RemoveUnit(_risedUnit);
+			_platoon.RemoveUnit(_swapedUnit);
+
+			_platoon.AddUnit(_risedUnit, cell);
+			_platoon.AddUnit(_swapedUnit, _initialUnitCell);
+		}
+
+		private void MoveRisedUnitToCell(PlatoonCell cell)
+		{
+			_platoon.RemoveUnit(_risedUnit);
+			_platoon.AddUnit(_risedUnit, cell);
+		}
+
+		private void OnPointerExitedCell(PlatoonCell cell)
+		{
+			if (_state != State.UnitRised || _swapedUnit == null)
+				return;
+			
+			_platoon.RemoveUnit(_risedUnit);
+			_platoon.RemoveUnit(_swapedUnit);
+
+			_platoon.AddUnit(_swapedUnit, cell);
+
+			_swapedUnit = null;
+		}
+
+		private void OnCellFocused(IPlatoonCell cell)
 		{
 			_lastSelectedCell?.DeselectCell();
 			_lastSelectedCell = cell;
@@ -131,6 +161,7 @@
 			None,
 			UnitFocused,
 			UnitRised,
+			UnitMoved,
 		}
 	}
 }

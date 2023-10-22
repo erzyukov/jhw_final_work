@@ -8,7 +8,9 @@
 	public interface IPlatoonCell
 	{
 		ReactiveCommand PointerEntred { get; }
+		ReactiveCommand PointerExited { get; }
 		bool HasUnit { get; }
+		IUnit Unit { get; }
 		Vector2Int Position { get; }
 		void SetUnit(IUnit unit);
 		void Clear();
@@ -30,8 +32,11 @@
 		}
 
 		public ReactiveCommand PointerEntred => _cellView.PointerEntred;
+		public ReactiveCommand PointerExited => _cellView.PointerExited;
 
 		public bool HasUnit => _unit != null;
+
+		public IUnit Unit => _unit;
 
 		public Vector2Int Position => _position;
 

@@ -4,9 +4,9 @@
 
 	public interface IUnit
 	{
-		Vector2Int Position { get; set; }
 		void SetViewParent(Transform tranform);
 		Unit.Kind GetKind();
+		void SetIgnoreRaycast(bool value);
 	}
 
 	public class Unit : IUnit
@@ -20,13 +20,14 @@
 			_unitView = unitView;
 		}
 		
-		public Vector2Int Position { get; set; }
-
 		public void SetViewParent(Transform transform) =>
 			_unitView.SetParent(transform);
 
 		public Kind GetKind() => 
 			_kind;
+
+		public void SetIgnoreRaycast(bool value) => 
+			_unitView.SetIgnoreRaycast(value);
 
 		public enum Kind
 		{

@@ -7,6 +7,7 @@ namespace Game
 	public interface IPlatoonCellView
 	{
 		ReactiveCommand PointerEntred { get; }
+		ReactiveCommand PointerExited { get; }
 		Transform UnitPivot { get; }
 		void Init(Camera camera);
 		void SetPosition(Vector3 position);
@@ -26,6 +27,7 @@ namespace Game
 		private Color _defaultColor;
 
 		public ReactiveCommand PointerEntred => _cellPointerEvents.PointerEntered;
+		public ReactiveCommand PointerExited => _cellPointerEvents.PointerExited;
 		public Transform UnitPivot => _unitPivot;
 
 		private void Start()
