@@ -111,7 +111,7 @@
 
 			OnCellFocused(cell);
 
-			if (cell.HasUnit)
+			if (cell.HasUnit && cell.Unit != _risedUnit)
 				SwapRisedUnitWithCell(cell);
 			else
 				MoveRisedUnitToCell(cell);
