@@ -9,6 +9,7 @@ namespace Game.Platoon
 	public class PlatoonBuilder : ControllerBase, IStartable
 	{
 		[Inject] private BattleFieldConfig _config;
+		[Inject] private PlatoonCellView _cellViewPrefab;
 		[Inject] private IPlatoon _platoon;
 		[Inject] private IPlatoonView _view;
 		[Inject] private Camera _camera;
@@ -27,7 +28,7 @@ namespace Game.Platoon
 
 			foreach (Vector2Int cellPosition in map)
 			{
-				IPlatoonCellView cellView = GameObject.Instantiate(_config.PlatoonCellPrefab, _view.Transform);
+				IPlatoonCellView cellView = GameObject.Instantiate(_cellViewPrefab, _view.Transform);
 				map[cellPosition] = new PlatoonCell(cellView, _camera, cellPosition);
 				Vector3 worldPosition = GetCellWorldPosition(cellPosition);
 				cellView.SetPosition(worldPosition);

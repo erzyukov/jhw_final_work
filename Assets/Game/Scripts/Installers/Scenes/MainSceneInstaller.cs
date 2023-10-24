@@ -8,7 +8,7 @@ namespace Game.Installers
 
     public class MainSceneInstaller : LifetimeScope
     {
-        protected override void Configure(IContainerBuilder builder)
+		protected override void Configure(IContainerBuilder builder)
         {
 			builder.RegisterComponentInHierarchy<HudUnitPanel>().AsImplementedInterfaces();
 

@@ -6,14 +6,9 @@ namespace Game.Configs
 	public class BattleFieldConfig : ScriptableObject
 	{
 		[SerializeField] private Vector2Int _defaultPlatoonSize;
-		[SerializeField] private PlatoonView _platoonPrefab;
-		[SerializeField] private PlatoonCellView _platoonCellPrefab;
 		[SerializeField] private float _platoonCellWidth;
 
 		public Vector2Int DefaultPlatoonSize => _defaultPlatoonSize;
-		public PlatoonView PlatoonPrefab => _platoonPrefab;
-		public PlatoonCellView PlatoonCellPrefab => _platoonCellPrefab;
 		public float PlatoonCellWidth => _platoonCellWidth;
-
 	}
 }

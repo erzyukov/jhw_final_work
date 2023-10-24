@@ -1,7 +1,7 @@
 namespace Game.Installers
 {
 	using Platoon;
-	using Units;
+	using UnityEngine;
 	using VContainer;
 
     public class HeroPlatoonInstaller : PlatoonInstaller

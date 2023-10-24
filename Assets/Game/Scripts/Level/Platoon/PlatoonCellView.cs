@@ -23,7 +23,6 @@ namespace Game
 		[SerializeField] private Color _selectedColor;
 		[SerializeField] private PointerEvents _cellPointerEvents;
 
-
 		private Color _defaultColor;
 
 		public ReactiveCommand PointerEntred => _cellPointerEvents.PointerEntered;
