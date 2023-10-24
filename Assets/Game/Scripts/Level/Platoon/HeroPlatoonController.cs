@@ -1,6 +1,7 @@
 ﻿namespace Game.Platoon
 {
 	using Utilities;
+	using Configs;
 	using Units;
 	using Unit = Units.Unit;
 	using Ui;
@@ -8,13 +9,13 @@
 	using VContainer.Unity;
 	using UniRx;
 	using System.Collections.Generic;
-	using UnityEngine;
 
 	public class HeroPlatoonController : ControllerBase, IStartable
 	{
 		[Inject] private IPlatoon _platoon;
 		[Inject] private IHudUnitPanel _hudUnitPanel;
 		[Inject] private UnitViewFactory _unitViewFactory;
+		[Inject] private UnitsConfig _unitsConfig;
 
 		const float UnitRaiseYOffset = 0.3f;
 		const float UnitDefaultYOffset = 0;
@@ -46,7 +47,7 @@
 			if (_platoon.HasFreeSpace)
 			{
 				IUnitView view = _unitViewFactory.Create(type);
-				IHeroUnit unit = new HeroUnit(type, view);
+				IHeroUnit unit = new HeroUnit(type, view, _unitsConfig.Units[type]);
 				_platoon.AddUnit(unit);
 
 				SubscribeUnit(unit);

@@ -3,23 +3,29 @@ namespace Game.Configs
 	using Units;
 	using System;
 	using UnityEngine;
-	using System.Linq;
+	using System.Collections.Generic;
 
 	[CreateAssetMenu(fileName = "Units", menuName = "Configs/Units", order = (int)Config.Units)]
 	public class UnitsConfig : ScriptableObject
 	{
-		[SerializeField] private UnitPrefab[] _prefabs;
+		[SerializeField] private UnitData[] _units;
 
-		public UnitPrefab[] Prefabs => _prefabs;
+		private Dictionary<Unit.Kind, UnitConfig> _unitData;
 
-		public UnitView GetPrefab(Unit.Kind type) => 
-			_prefabs.Where(element => element.Type == type).First().Prefab;
+		public Dictionary<Unit.Kind, UnitConfig> Units => _unitData;
 
+		public void Initialize()
+		{
+			_unitData = new Dictionary<Unit.Kind, UnitConfig>();
+            foreach (var unit in _units)
+				_unitData.Add(unit.Type, unit.Config);
+		}
+		
 		[Serializable]
-		public struct UnitPrefab
+		public struct UnitData
 		{
 			public Unit.Kind Type;
-			public UnitView Prefab;
+			public UnitConfig Config;
 		}
     }
 }

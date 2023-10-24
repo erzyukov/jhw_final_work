@@ -1,5 +1,6 @@
 ﻿namespace Game.Units
 {
+	using Game.Configs;
 	using UniRx;
 	using UnityEngine;
 
@@ -16,7 +17,7 @@
 	{
 		PointerEvents _pointerEvents;
 
-		public HeroUnit(Kind kind, IUnitView unitView) : base(kind, unitView)
+		public HeroUnit(Kind kind, IUnitView unitView, UnitConfig config) : base(kind, unitView, config)
 		{
 			_pointerEvents = unitView.GameObject.AddComponent<PointerEvents>();
 		}

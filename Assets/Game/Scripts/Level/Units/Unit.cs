@@ -1,5 +1,6 @@
 ﻿namespace Game.Units
 {
+	using Game.Configs;
 	using UnityEngine;
 
 	public interface IUnit
@@ -13,11 +14,14 @@
 	{
 		protected Kind _kind;
 		protected IUnitView _unitView;
+		protected UnitConfig _config;
 
 		public Unit(Kind kind, IUnitView unitView)
+		public Unit(Kind kind, IUnitView unitView, UnitConfig config)
 		{
 			_kind = kind;
 			_unitView = unitView;
+			_config = config;
 		}
 		
 		public void SetViewParent(Transform transform) =>

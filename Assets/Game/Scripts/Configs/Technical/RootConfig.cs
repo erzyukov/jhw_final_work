@@ -12,5 +12,10 @@ namespace Game.Configs
 		public ScenesConfig Scenes => _scenes;
 		public UnitsConfig Units => _units;
 		public BattleFieldConfig BattleField => _battleField;
+
+		public void Initialize()
+		{
+			_units.Initialize();
+		}
 	}
 }

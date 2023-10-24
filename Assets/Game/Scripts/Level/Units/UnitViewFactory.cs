@@ -10,7 +10,7 @@
 
 		public IUnitView Create(Unit.Kind type)
 		{
-			UnitView prefab = _unitsConfig.GetPrefab(type);
+			UnitView prefab = _unitsConfig.Units[type].Prefab;
 			return Object.Instantiate(prefab);
 		}
 	}

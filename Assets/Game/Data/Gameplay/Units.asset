@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba901327ab9d1e14aaec6b0d0294ba36, type: 3}
   m_Name: Units
   m_EditorClassIdentifier: 
-  _prefabs:
+  _units:
   - Type: 0
-    Prefab: {fileID: 4003439543062545915, guid: 64ae14bfe4e2c6a448b3ca6d26b20df9, type: 3}
+    Config: {fileID: 11400000, guid: afafe5346bf1e544daa470fd14b26621, type: 2}
   - Type: 1
-    Prefab: {fileID: 1460995376022634747, guid: 289f930d2bd99dc468c21226bb705974, type: 3}
+    Config: {fileID: 11400000, guid: 85f933ad5177f094aa1605e40e916cba, type: 2}
   - Type: 2
-    Prefab: {fileID: -8968695580197726785, guid: 2bdf6c4473e04e44bac1592b176412cf, type: 3}
+    Config: {fileID: 11400000, guid: f08a42a5ab33c944ab8517a1d5583913, type: 2}
