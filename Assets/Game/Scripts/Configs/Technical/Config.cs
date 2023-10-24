@@ -5,6 +5,8 @@
 		Units = 1,
 		Unit,
 		BattleField,
+		Enemy,
+		EnemySpawn,
 
 		// Technical
 		Root = 300,
