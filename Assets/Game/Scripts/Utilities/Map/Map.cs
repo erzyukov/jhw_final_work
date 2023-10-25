@@ -3,6 +3,7 @@ namespace Game.Utilities
 	using System.Collections;
 	using System.Collections.Generic;
 	using UnityEngine;
+	using UnityEngine.UIElements;
 
 	public interface IMap<T> : IEnumerable<Vector2Int>
 	{
@@ -13,6 +14,7 @@ namespace Game.Utilities
 		T this[int x, int y] { get; set; }
 		T this[Vector2Int p] { get; set; }
 
+		bool HasPoint(Vector2Int position);
 		bool HasPoint(int x, int y);
 		bool IsElementOnCell(int x, int y, T cell);
 		T Get(int x, int y);
@@ -45,6 +47,9 @@ namespace Game.Utilities
 			get => Get(p.x, p.y);
 			set => Set(p.x, p.y, value);
 		}
+
+		public bool HasPoint(Vector2Int position) =>
+			HasPoint(position.x, position.y);
 
 		public bool HasPoint(int x, int y) => 
 			_rect.Contains(new Vector2Int(x, y));

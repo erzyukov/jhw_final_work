@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a7f1e2fe8dc97448aa880b797598014, type: 3}
-  m_Name: EnemySpawnLevel1
+  m_Name: EnemySpawnLevel-1
   m_EditorClassIdentifier: 
   _spawnOrder:
   - Delay: 0

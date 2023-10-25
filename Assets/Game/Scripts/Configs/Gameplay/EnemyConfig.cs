@@ -5,8 +5,8 @@
 	[CreateAssetMenu(fileName = "Enemy", menuName = "Configs/Enemy", order = (int)Config.Enemy)]
 	public class EnemyConfig : ScriptableObject
 	{
-		[SerializeField] private EnemySpawnConfig[] _levelSpawnOrder;
+		[SerializeField] private EnemySpawnConfig[] _enemySpawnConfigs;
 
-		public EnemySpawnConfig GetSpawnOrder(int levelIndex) => _levelSpawnOrder[levelIndex];
+		public EnemySpawnConfig GetSpawnConfig(int levelIndex) => _enemySpawnConfigs[levelIndex];
 	}
 }

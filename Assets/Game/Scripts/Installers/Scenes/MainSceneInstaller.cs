@@ -1,5 +1,6 @@
 namespace Game.Installers
 {
+	using Game.Core;
 	using Game.Ui;
 	using Game.Units;
 	using UnityEngine;
@@ -13,6 +14,7 @@ namespace Game.Installers
 			builder.RegisterComponentInHierarchy<HudUnitPanel>().AsImplementedInterfaces();
 
 			builder.Register<UnitViewFactory>(Lifetime.Singleton);
+			builder.Register<GameLevel>(Lifetime.Singleton).AsImplementedInterfaces();
 
 			builder.RegisterComponentInHierarchy<Camera>();
 		}

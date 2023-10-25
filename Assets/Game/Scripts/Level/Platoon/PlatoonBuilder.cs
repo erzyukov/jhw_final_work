@@ -1,7 +1,8 @@
 namespace Game.Platoon
 {
-	using Utilities;
+	using Core;
 	using Configs;
+	using Utilities;
 	using UnityEngine;
 	using VContainer;
 	using VContainer.Unity;
@@ -9,6 +10,7 @@ namespace Game.Platoon
 	public class PlatoonBuilder : ControllerBase, IStartable
 	{
 		[Inject] private BattleFieldConfig _config;
+		[Inject] private IGameLevel _gameLevel;
 		[Inject] private PlatoonCellView _cellViewPrefab;
 		[Inject] private IPlatoon _platoon;
 		[Inject] private IPlatoonView _view;
@@ -19,11 +21,11 @@ namespace Game.Platoon
 		public void Start()
 		{
 			float zSign = Mathf.Sign(_view.Transform.position.z);
-			float platoonXOffset = zSign * _config.DefaultPlatoonSize.x / 2f * _config.PlatoonCellWidth;
+			float platoonXOffset = zSign * _gameLevel.PlatoonSize.x / 2f * _config.PlatoonCellWidth;
 			_viewOffset = _view.Transform.position.WithX(platoonXOffset);
 			_view.SetPosition(_viewOffset);
 
-			RectInt rect = new RectInt(Vector2Int.zero, _config.DefaultPlatoonSize);
+			RectInt rect = new RectInt(Vector2Int.zero, _gameLevel.PlatoonSize);
 			Map<PlatoonCell> map = new Map<PlatoonCell>(rect);
 
 			foreach (Vector2Int cellPosition in map)

@@ -27,5 +27,13 @@
 
 			return v;
 		}
+
+		public static Vector2Int WithX(this Vector2Int v, int x)
+		{
+			v.x = x;
+
+			return v;
+		}
+
 	}
 }
