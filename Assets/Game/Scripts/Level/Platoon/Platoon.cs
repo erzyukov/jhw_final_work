@@ -13,6 +13,7 @@
 		ReactiveCommand<IUnit> UnitRemoved { get; }
 		ReactiveCommand<PlatoonCell> PointerEnteredCell { get; }
 		ReactiveCommand<PlatoonCell> PointerExitedCell { get; }
+		List<IUnit> Units { get; }
 		bool HasFreeSpace { get; }
 		void InitMap(Map<PlatoonCell> map);
 		PlatoonCell GetCell(Vector2Int position);
@@ -33,6 +34,7 @@
 		public ReactiveCommand<PlatoonCell> PointerEnteredCell { get; } = new ReactiveCommand<PlatoonCell>();
 		public ReactiveCommand<PlatoonCell> PointerExitedCell { get; } = new ReactiveCommand<PlatoonCell>();
 		public bool HasFreeSpace => _map.Any(position => _map[position].HasUnit == false);
+		public List<IUnit> Units => _units;
 
 		public void InitMap(Map<PlatoonCell> map)
 		{
@@ -51,7 +53,7 @@
 		}
 
 		public PlatoonCell GetCell(Vector2Int position) =>
-			_map[position];
+			_map.HasPoint(position) ? _map[position] : null;
 
 		public PlatoonCell GetCell(IUnit unit) =>
 			_map.Where(position => _map[position].Unit == unit).Select(position => _map[position]).FirstOrDefault();

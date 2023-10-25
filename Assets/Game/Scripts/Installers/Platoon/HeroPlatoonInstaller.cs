@@ -3,6 +3,7 @@ namespace Game.Installers
 	using Platoon;
 	using UnityEngine;
 	using VContainer;
+	using VContainer.Unity;
 
     public class HeroPlatoonInstaller : PlatoonInstaller
 	{
@@ -11,6 +12,8 @@ namespace Game.Installers
 			base.Configure(builder);
 
 			builder.Register<HeroPlatoonController>(Lifetime.Scoped).AsImplementedInterfaces();
+
+			builder.RegisterComponentInHierarchy<HeroPlatoonFacade>().AsImplementedInterfaces();
 		}
 	}
 }
