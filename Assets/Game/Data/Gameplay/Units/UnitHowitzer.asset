@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UnitHowitzer
   m_EditorClassIdentifier: 
   _title: "\u0413\u0430\u0443\u0431\u0438\u0446\u0430"
-  _prefab: {fileID: -8968695580197726785, guid: 2bdf6c4473e04e44bac1592b176412cf, type: 3}
+  _prefab: {fileID: 9004953397474591569, guid: 0bde0f7ddefeb7848b1b321063423f1c, type: 3}
   _shootDelay: 3
   _damage: 15
   _health: 40

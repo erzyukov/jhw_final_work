@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UnitHeavyTank
   m_EditorClassIdentifier: 
   _title: "\u0422\u044F\u0436\u0435\u043B\u044B\u0439 \u0442\u0430\u043D\u043A"
-  _prefab: {fileID: 4003439543062545915, guid: 64ae14bfe4e2c6a448b3ca6d26b20df9, type: 3}
+  _prefab: {fileID: 8079440363669675339, guid: 9b9c556272fdaa145baec4261c060b17, type: 3}
   _shootDelay: 2
   _damage: 10
   _health: 80

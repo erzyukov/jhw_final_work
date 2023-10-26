@@ -10,7 +10,7 @@
 	using UniRx;
 	using System.Collections.Generic;
 
-	public class HeroPlatoonController : ControllerBase, IStartable
+	public class HeroPlatoonController : ControllerBase, IStartable, ITickable
 	{
 		[Inject] private IPlatoon _platoon;
 		[Inject] private IHudUnitPanel _hudUnitPanel;
@@ -40,6 +40,12 @@
 			_platoon.PointerExitedCell
 				.Subscribe(OnPointerExitedCell)
 				.AddTo(this);
+		}
+
+		public void Tick()
+		{
+			for (int i = 0; i < _platoon.Units.Count; i++)
+				_platoon.Units[i].UpdateView();
 		}
 
 		private void CreateUnit(Unit.Kind type)

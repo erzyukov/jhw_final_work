@@ -3,17 +3,23 @@ namespace Game.Units
 	using Game.Core;
 	using System.Collections.Generic;
 	using UnityEngine;
+	using UnityEngine.UI;
 
 	public interface IUnitView
 	{
 		GameObject GameObject { get; }
 		void SetParent(Transform transform);
 		void SetIgnoreRaycast(bool value);
+		void SetHealthRatio(float value);
+		void SetCooldownRatio(float value);
 	}
 
 	public class UnitView : MonoBehaviour, IUnitView
 	{
-		List<GameObject> _unitGameObjects;
+		[SerializeField] private Slider _health;
+		[SerializeField] private Slider _cooldown;
+
+		private List<GameObject> _unitGameObjects;
 
 		public GameObject GameObject => gameObject;
 
@@ -35,5 +41,8 @@ namespace Game.Units
 			foreach (GameObject item in _unitGameObjects)
 				item.gameObject.layer = layer;
 		}
+
+		public void SetHealthRatio(float value) => _health.value = value;
+		public void SetCooldownRatio(float value) => _cooldown.value = value;
 	}
 }

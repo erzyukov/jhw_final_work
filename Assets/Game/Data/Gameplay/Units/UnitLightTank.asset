@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UnitLightTank
   m_EditorClassIdentifier: 
   _title: "\u041B\u0435\u0433\u043A\u0438\u0439 \u0442\u0430\u043D\u043A"
-  _prefab: {fileID: 1460995376022634747, guid: 289f930d2bd99dc468c21226bb705974, type: 3}
+  _prefab: {fileID: 463702684926248443, guid: a33594728f6111e4a933d6c6ba58c853, type: 3}
   _shootDelay: 1
   _damage: 6
   _health: 60

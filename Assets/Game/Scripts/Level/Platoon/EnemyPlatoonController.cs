@@ -1,5 +1,3 @@
-using static Game.Configs.EnemySpawnConfig;
-
 namespace Game.Platoon
 {
 	using Utilities;
@@ -34,6 +32,9 @@ namespace Game.Platoon
 
 		public void Tick()
 		{
+			for (int i = 0; i < _platoon.Units.Count; i++)
+				_platoon.Units[i].UpdateView();
+
 			if (_spawnTimer.IsReady == false || _targetCell.HasUnit)
 				return;
 
