@@ -13,11 +13,7 @@ namespace Game.Installers
 		protected override void Configure(IContainerBuilder builder)
         {
 			RegisterConfigs(builder);
-
-			GameObject scenesManagerGameObject = new GameObject("ScenesManager");
-			DontDestroyOnLoad(scenesManagerGameObject);
-			IScenesManager scenesManager = scenesManagerGameObject.AddComponent<ScenesManager>();
-			builder.RegisterComponent(scenesManager).As<IScenesManager>();
+			RegisterSceneManager(builder);
 		}
 
 		private void RegisterConfigs(IContainerBuilder builder)
@@ -28,6 +24,14 @@ namespace Game.Installers
 			builder.RegisterInstance(_rootConfig.Enemy);
 
 			_rootConfig.Initialize();
+		}
+
+		private void RegisterSceneManager(IContainerBuilder builder)
+		{
+			GameObject scenesManagerGameObject = new GameObject("ScenesManager");
+			DontDestroyOnLoad(scenesManagerGameObject);
+			IScenesManager scenesManager = scenesManagerGameObject.AddComponent<ScenesManager>();
+			builder.RegisterComponent(scenesManager).As<IScenesManager>();
 		}
 	}
 }

@@ -41,7 +41,7 @@
 
 		public void Shoot(IUnit target)
 		{
-			_shootTimer.Set(_config.ShootDelay);
+			_shootTimer.Set(_config.AttackDelay);
 			target.TakeDamage(_config.Damage);
 			//Debug.LogWarning($">> {_config.Title} shooted!");
 		}
@@ -65,7 +65,7 @@
 
 		public void UpdateView()
 		{
-			_unitView.SetCooldownRatio(_shootTimer.Remained / _config.ShootDelay);
+			_unitView.SetCooldownRatio(_shootTimer.Remained / _config.AttackDelay);
 		}
 
 		public enum Kind
