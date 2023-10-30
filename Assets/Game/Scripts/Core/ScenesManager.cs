@@ -69,7 +69,7 @@ namespace Game.Core
 		private bool IsSceneLoaded(string sceneName) => SceneManager.GetSceneByName(sceneName).isLoaded;
 		private void LoadScene(string sceneName) => SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
 		private void UnloadScene(string sceneName) => SceneManager.UnloadSceneAsync(sceneName);
-		private string GetLevelSceneName() => _scenesConfig.Levels[DefaultLevelIndex].SceneName;
+		private string GetLevelSceneName() => _scenesConfig.Regions[DefaultLevelIndex].SceneName;
 
 		private async void LoadSceneAsync(string name, Action onLoadSceneCallback = null)
 		{
