@@ -1,20 +1,41 @@
 ﻿namespace Game.Core
 {
 	using Configs;
+	using Game.Profiles;
 	using UnityEngine;
 	using VContainer;
 
 	public interface IGameLevel
 	{
 		int LevelIndex { get; }
-		Vector2Int PlatoonSize { get; }
+		void GoToRegion(int number);
+		void GoToLevel(int number);
+		void GoToWave(int number);
 	}
 
 	public class GameLevel : IGameLevel
 	{
-		[Inject] private BattleFieldConfig _battleFieldConfig;
+		[Inject] GameProfile _profile;
 
-		public int LevelIndex => 0;
-		public Vector2Int PlatoonSize => _battleFieldConfig.DefaultPlatoonSize;
+		#region IGameLevel
+
+		public int LevelIndex => _profile.LevelNumber.Value - 1;
+
+		public void GoToRegion(int number)
+		{
+
+		}
+
+		public void GoToLevel(int number)
+		{
+
+		}
+
+		public void GoToWave(int number)
+		{
+
+		}
+
+		#endregion
 	}
 }

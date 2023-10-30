@@ -15,7 +15,7 @@
 	public class TargetFinderSelector : IStartable, ITargetFinderSelector
 	{
 		[Inject] private UnitsConfig _unitsConfig;
-		[Inject] private IGameLevel _gameLevel;
+		[Inject] private BattleFieldConfig _battleFieldConfig;
 
 		private Dictionary<Kind, TargetFinder> _targetFinders;
 
@@ -28,15 +28,15 @@
 				switch (unit.Key)
 				{
 					case Kind.HeavyTank:
-						_targetFinders.Add(unit.Key, new HeavyTankTargetFinder(_gameLevel.PlatoonSize));
+						_targetFinders.Add(unit.Key, new HeavyTankTargetFinder(_battleFieldConfig.TeamFieldSize));
 						break;
 
 					case Kind.LightTank:
-						_targetFinders.Add(unit.Key, new LightTankTargetFinder(_gameLevel.PlatoonSize));
+						_targetFinders.Add(unit.Key, new LightTankTargetFinder(_battleFieldConfig.TeamFieldSize));
 						break;
 
 					case Kind.Howitzer:
-						_targetFinders.Add(unit.Key, new HowitzerTargetFinder(_gameLevel.PlatoonSize));
+						_targetFinders.Add(unit.Key, new HowitzerTargetFinder(_battleFieldConfig.TeamFieldSize));
 						break;
 
 					default:

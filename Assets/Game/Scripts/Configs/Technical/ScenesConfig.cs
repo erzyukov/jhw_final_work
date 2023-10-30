@@ -9,10 +9,10 @@
 	{
 		[SerializeField] private SceneField _splash;
 		[SerializeField] private SceneField _main;
-		[SerializeField] private List<SceneField> _levels;
+		[SerializeField] private List<SceneField> _regions;
 
 		public SceneField Splash => _splash;
 		public SceneField Main => _main;
-		public List<SceneField> Levels => _levels;
+		public List<SceneField> Regions => _regions;
 	}
 }

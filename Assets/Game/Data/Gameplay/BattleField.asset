@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b463ec8361cda41bf2197608c54def, type: 3}
   m_Name: BattleField
   m_EditorClassIdentifier: 
-  _defaultPlatoonSize: {x: 3, y: 4}
-  _platoonCellWidth: 2
+  _teamFieldSize: {x: 5, y: 4}
+  _fieldCellWidth: 2
