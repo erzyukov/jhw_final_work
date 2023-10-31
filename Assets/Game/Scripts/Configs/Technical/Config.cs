@@ -8,6 +8,12 @@
 		Enemy,
 		EnemySpawn,
 
+		// Levels
+		Regions = 250,
+		Region,
+		Level,
+		Wave,
+
 		// Technical
 		Root = 300,
 		Scenes,
