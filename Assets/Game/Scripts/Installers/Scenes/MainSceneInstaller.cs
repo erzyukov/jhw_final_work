@@ -1,6 +1,7 @@
 namespace Game.Installers
 {
 	using Core;
+	using Game.Dev;
 	using UnityEngine;
 	using VContainer;
 	using VContainer.Unity;
@@ -19,6 +20,7 @@ namespace Game.Installers
 			//DevCheats devCheats = new DevCheats();
 			//builder.RegisterInstance(devCheats);
 
+			builder.Register<DevCheats>(Lifetime.Singleton).AsImplementedInterfaces();
 		}
 	}
 }
