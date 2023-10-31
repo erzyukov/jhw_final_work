@@ -1,8 +1,6 @@
 namespace Game.Installers
 {
-	using Game.Core;
-	using Game.Ui;
-	using Game.Units;
+	using Core;
 	using UnityEngine;
 	using VContainer;
 	using VContainer.Unity;
@@ -11,12 +9,16 @@ namespace Game.Installers
     {
 		protected override void Configure(IContainerBuilder builder)
         {
-			builder.RegisterComponentInHierarchy<HudUnitPanel>().AsImplementedInterfaces();
+			//builder.RegisterComponentInHierarchy<HudUnitPanel>().AsImplementedInterfaces();
 
-			builder.Register<UnitViewFactory>(Lifetime.Singleton);
+			//builder.Register<UnitViewFactory>(Lifetime.Singleton);
+
 			builder.Register<GameLevel>(Lifetime.Singleton).AsImplementedInterfaces();
-
 			builder.RegisterComponentInHierarchy<Camera>();
+
+			//DevCheats devCheats = new DevCheats();
+			//builder.RegisterInstance(devCheats);
+
 		}
 	}
 }

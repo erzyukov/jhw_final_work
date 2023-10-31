@@ -1,6 +1,7 @@
 namespace Game.Installers
 {
 	using Battle;
+	using UnityEngine;
 	using VContainer;
 	using VContainer.Unity;
 
@@ -8,8 +9,8 @@ namespace Game.Installers
     {
 		protected override void Configure(IContainerBuilder builder)
         {
-			builder.Register<BattleSimulator>(Lifetime.Singleton).AsImplementedInterfaces();
-			builder.Register<TargetFinderSelector>(Lifetime.Singleton).AsImplementedInterfaces();
+			//builder.Register<BattleSimulator>(Lifetime.Singleton).AsImplementedInterfaces();
+			//builder.Register<TargetFinderSelector>(Lifetime.Singleton).AsImplementedInterfaces();
 		}
 	}
 }

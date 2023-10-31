@@ -2,6 +2,7 @@ namespace Game.Installers
 {
 	using Configs;
 	using Core;
+	using Game.Input;
 	using Game.Profiles;
 	using UnityEngine;
 	using VContainer;
@@ -16,6 +17,8 @@ namespace Game.Installers
 			RegisterConfigs(builder);
 			RegisterGameProfile(builder);
 			RegisterSceneManager(builder);
+
+			builder.Register<InputHandler>(Lifetime.Singleton).AsImplementedInterfaces();
 		}
 
 		private void RegisterConfigs(IContainerBuilder builder)
