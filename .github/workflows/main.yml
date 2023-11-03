@@ -1,11 +1,43 @@
-name: Actions 😎
+name: Actions
 
 on: [push, pull_request]
 
 jobs:
-  build:
-    name: Build my project
+  testRunner:
+    name: Test in ${{ matrix.testMode }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        testMode:
+          - EditMode
+          - PlayMode
+    steps:
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: false
+      # Tests
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v2
+        id: testRunner
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+      # Upload
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Test results (${{ matrix.testMode }})
+          path: ${{ steps.testRunner.outputs.artifactsPath }}
+
+  buildWebGL:
+    needs: testRunner
+    name: Build for WebGL
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
     steps:
       # Checkout
       - name: Checkout repository
@@ -20,14 +52,6 @@ jobs:
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
             Library-
-
-      # Test
-      - name: Run tests
-        uses: game-ci/unity-test-runner@v3
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
 
       # Build
       - name: Build project
@@ -48,18 +72,19 @@ jobs:
           path: build/WebGL
 
   deployPages:
-    needs: build
+    needs: buildWebGL
     name: Deploy to Github Pages
     runs-on: ubuntu-latest
     steps:
+      # Checkout	
       - name: Checkout code
         uses: actions/checkout@v2
-
+      # Download
       - uses: actions/download-artifact@v2
         with:
           name: build-WebGL
           path: build
-
+      # Deploy
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
