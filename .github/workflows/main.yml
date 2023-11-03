@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    name: Build my project ✨
+    name: Build my project
     runs-on: ubuntu-latest
     steps:
       # Checkout
@@ -44,5 +44,24 @@ jobs:
       # Output
       - uses: actions/upload-artifact@v3
         with:
-          name: Build
+          name: build-WebGL
+          path: build/WebGL
+
+  deployPages:
+    needs: build
+    name: Deploy to Github Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: build-WebGL
           path: build
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: build/WebGL
