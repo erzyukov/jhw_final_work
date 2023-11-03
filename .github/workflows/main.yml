@@ -11,7 +11,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          token: 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
           lfs: false
 
       # Cache
