@@ -1,12 +1,10 @@
-﻿using Game.Platoon;
-using Game.Units;
-using Game.Utilities;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
-namespace Game.Field
+﻿namespace Game.Field
 {
+	using Game.Units;
+	using Game.Utilities;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
 
 	public interface IField<T>
 	{
@@ -65,5 +63,11 @@ namespace Game.Field
 			_units.Remove(unit);
 			GetCell(unit)?.Clear();
 		}
+	}
+
+	public enum FieldType
+	{
+		Hero,
+		Enemy,
 	}
 }

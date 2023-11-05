@@ -8,6 +8,7 @@
 
 	public class FieldBuilder: IStartable
 	{
+		[Inject] private FieldType _fieldType;
 		[Inject] private BattleFieldConfig _config;
 		[Inject] private FieldCellView _cellViewPrefab;
 		[Inject] private IField<FieldCell> _field;
@@ -29,6 +30,7 @@
 			foreach (Vector2Int cellPosition in map)
 			{
 				IFieldCellView cellView = GameObject.Instantiate(_cellViewPrefab, _view.Transform);
+				cellView.SetColor(GetCellColor(cellPosition));
 				map[cellPosition] = new FieldCell(cellView, cellPosition);
 				Vector3 worldPosition = GetCellWorldPosition(cellPosition);
 				cellView.SetPosition(worldPosition);
@@ -46,6 +48,15 @@
 			worldPosition += _viewOffset;
 
 			return worldPosition;
+		}
+
+		private Color GetCellColor(Vector2Int cellPosition)
+		{
+			bool isEven = (cellPosition.x + cellPosition.y) % 2 == 0;
+			Color color = _fieldType == FieldType.Hero
+				? (isEven) ? _config.HeroEvenCollor : _config.HeroOddCollor
+				:  (isEven) ? _config.EnemyEvenCollor : _config.EnemyOddCollor;
+			return color;
 		}
 	}
 }

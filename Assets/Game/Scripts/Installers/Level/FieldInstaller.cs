@@ -2,11 +2,14 @@
 {
 	using Configs;
 	using Field;
+	using UnityEngine;
 	using VContainer;
 	using VContainer.Unity;
 
 	public class FieldInstaller : LifetimeScope
 	{
+		[SerializeField] private FieldType _fieldType;
+
 		protected override void Configure(IContainerBuilder builder)
 		{
 			builder.Register(container =>
@@ -16,6 +19,8 @@
 				},
 				Lifetime.Singleton
 			);
+
+			builder.RegisterInstance(_fieldType);
 
 			FieldView view = GetComponent<FieldView>();
 			builder.RegisterComponent(view).AsImplementedInterfaces();

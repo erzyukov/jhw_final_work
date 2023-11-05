@@ -218,6 +218,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1006807825511717703, guid: 79e59ed124605dd42b8fe565bf7eb69f, type: 3}
+      propertyPath: _fieldType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8373615427908898268, guid: 79e59ed124605dd42b8fe565bf7eb69f, type: 3}
       propertyPath: m_Name
       value: EnemyFieldView
