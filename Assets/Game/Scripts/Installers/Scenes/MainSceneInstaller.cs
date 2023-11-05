@@ -16,11 +16,10 @@ namespace Game.Installers
 
 			builder.Register<GameLevel>(Lifetime.Singleton).AsImplementedInterfaces();
 			builder.RegisterComponentInHierarchy<Camera>();
-
-			//DevCheats devCheats = new DevCheats();
-			//builder.RegisterInstance(devCheats);
-
+			
+			// Debug
 			builder.Register<DevCheats>(Lifetime.Singleton).AsImplementedInterfaces();
+			builder.Register<CoreTests>(Lifetime.Singleton).AsImplementedInterfaces();
 		}
 	}
 }

@@ -1,6 +1,7 @@
 namespace Game.Installers
 {
 	using Battle;
+	using Game.Core;
 	using UnityEngine;
 	using VContainer;
 	using VContainer.Unity;

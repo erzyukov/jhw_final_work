@@ -1,8 +1,11 @@
 namespace Game.Core
 {
 	using Configs;
+	using Game.Utilities;
+	using Profiles;
 	using System;
 	using System.Collections;
+	using System.Linq;
 	using System.Threading.Tasks;
 	using UniRx;
 	using UnityEngine;
@@ -11,16 +14,20 @@ namespace Game.Core
 
 	public interface IScenesManager
 	{
-		ReactiveCommand OnSplashComplete { get; }
-		ReactiveCommand OnLevelLoaded { get; }
+		ReactiveCommand SplashCompleted { get; }
+		ReactiveCommand LevelLoaded { get; }
 		ReactiveProperty<float> SceneLoadProgress { get; }
+
+		void LoadLevel();
+		void UnloadLevel();
 	}
 
 	public class ScenesManager : MonoBehaviour, IScenesManager
 	{
 		[Inject] private ScenesConfig _scenesConfig;
+		[Inject] private LevelsConfig _levelsConfig;
+		[Inject] private GameProfile _profile;
 
-		private const int DefaultLevelIndex = 0;
 		private void Start() => StartCoroutine(LoadScenes());
 
 		private IEnumerator LoadScenes()
@@ -29,7 +36,7 @@ namespace Game.Core
 			{
 				yield return null;
 
-				OnSplashComplete.Execute();
+				SplashCompleted.Execute();
 			}
 
 			if (!IsSceneLoaded(_scenesConfig.Main))
@@ -49,27 +56,44 @@ namespace Game.Core
 
 		#region IScenesManager
 
-		public ReactiveCommand OnSplashComplete { get; } = new ReactiveCommand();
-		public ReactiveCommand OnLevelLoaded { get; } = new ReactiveCommand();
+		public ReactiveCommand SplashCompleted { get; } = new ReactiveCommand();
+		public ReactiveCommand LevelLoaded { get; } = new ReactiveCommand();
 
 		public ReactiveProperty<float> SceneLoadProgress { get; } = new ReactiveProperty<float>();
 
-		#endregion
-
-		private void LoadLevel()
+		public void LoadLevel()
 		{
 			LoadSceneAsync(GetLevelSceneName(), () =>
 			{
-				OnLevelLoaded.Execute();
+				LevelLoaded.Execute();
 				SetIslandActiveScene();
 			});
 		}
+
+		public void UnloadLevel() => UnloadScene(GetLevelSceneName());
+
+		#endregion
 
 		private void SetIslandActiveScene() => SceneManager.SetActiveScene(SceneManager.GetSceneByName(GetLevelSceneName()));
 		private bool IsSceneLoaded(string sceneName) => SceneManager.GetSceneByName(sceneName).isLoaded;
 		private void LoadScene(string sceneName) => SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
 		private void UnloadScene(string sceneName) => SceneManager.UnloadSceneAsync(sceneName);
-		private string GetLevelSceneName() => _scenesConfig.Regions[DefaultLevelIndex].SceneName;
+		private string GetLevelSceneName()
+		{
+			Region region = _levelsConfig.Levels[_profile.LevelNumber.Value - 1].Region;
+
+			return GetLevelSceneName(region);
+		}
+
+		private string GetLevelSceneName(Region regionType)
+		{
+			SceneField sceneField = _scenesConfig.Regions.Where(region => region.Region == regionType).FirstOrDefault().Scene;
+
+			if (sceneField == null)
+				throw new Exception($"Can`t found region scene with type: \"{regionType}\" in scenes config!");
+
+			return sceneField.SceneName;
+		}
 
 		private async void LoadSceneAsync(string name, Action onLoadSceneCallback = null)
 		{

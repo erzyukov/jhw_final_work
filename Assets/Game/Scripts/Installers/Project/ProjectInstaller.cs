@@ -27,6 +27,7 @@ namespace Game.Installers
 			builder.RegisterInstance(_rootConfig.Units);
 			builder.RegisterInstance(_rootConfig.BattleField);
 			builder.RegisterInstance(_rootConfig.Enemy);
+			builder.RegisterInstance(_rootConfig.Levels);
 
 			_rootConfig.Initialize();
 		}

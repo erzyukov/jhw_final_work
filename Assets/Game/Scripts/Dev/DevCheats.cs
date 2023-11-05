@@ -8,22 +8,24 @@
 	using VContainer;
 	using VContainer.Unity;
 	using System;
+	using Game.Profiles;
 	using UnityEngine;
 
 	public class DevCheats : ControllerBase, IStartable
 	{
 		[Inject] IInputHandler _inputManager;
 		[Inject] IGameLevel _gameLevel;
+		[Inject] private GameProfile _profile;
 
 		private Controls.DevCheatsActions Cheats => _inputManager.DevCheats;
 
 		public void Start()
 		{
-			Subscribe(Cheats.NextWave, () => Debug.LogWarning("Go To Next Wave"));
+			Subscribe(Cheats.NextWave, () => _gameLevel.GoToNextWave());
 			
-			Subscribe(Cheats.NextLevel, () => Debug.LogWarning("Go To Next Level"));
+			Subscribe(Cheats.NextLevel, () => _gameLevel.GoToLevel(_profile.LevelNumber.Value + 1));
 
-			Subscribe(Cheats.PrevLevel, () => Debug.LogWarning("Go To Previous Level"));
+			Subscribe(Cheats.PrevLevel, () => _gameLevel.GoToLevel(_profile.LevelNumber.Value - 1));
 		}
 
 		void Subscribe(InputAction inputAction, Action action)

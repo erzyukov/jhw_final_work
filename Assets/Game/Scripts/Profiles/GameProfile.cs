@@ -6,8 +6,7 @@ namespace Game.Profiles
 	[Serializable]
 	public class GameProfile
     {
-		public IntReactiveProperty RegionNumber = new IntReactiveProperty(1);
-		public IntReactiveProperty LevelNumber = new IntReactiveProperty(1);
-		public IntReactiveProperty WaveNumber = new IntReactiveProperty(1);
+		public readonly IntReactiveProperty LevelNumber = new IntReactiveProperty(1);
+		public readonly IntReactiveProperty WaveNumber = new IntReactiveProperty(0);
 	}
 }

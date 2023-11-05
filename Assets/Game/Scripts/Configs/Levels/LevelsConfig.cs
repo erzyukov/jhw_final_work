@@ -2,8 +2,8 @@ namespace Game.Configs
 {
 	using UnityEngine;
 
-	[CreateAssetMenu(fileName = "Region", menuName = "Configs/Region", order = (int)Config.Region)]
-	public class RegionConfig : ScriptableObject
+	[CreateAssetMenu(fileName = "Levels", menuName = "Configs/Levels", order = (int)Config.Levels)]
+	public class LevelsConfig : ScriptableObject
 	{
 		[SerializeField] private LevelConfig[] _levels;
 

@@ -9,13 +9,13 @@ namespace Game.Configs
 		[SerializeField] private UnitsConfig _units;
 		[SerializeField] private BattleFieldConfig _battleField;
 		[SerializeField] private EnemyConfig _enemy;
-		[SerializeField] private RegionsConfig _regions;
+		[SerializeField] private LevelsConfig _levels;
 
 		public ScenesConfig Scenes => _scenes;
 		public UnitsConfig Units => _units;
 		public BattleFieldConfig BattleField => _battleField;
 		public EnemyConfig Enemy => _enemy;
-		public RegionsConfig Regions => _regions;
+		public LevelsConfig Levels => _levels;
 
 		public void Initialize()
 		{

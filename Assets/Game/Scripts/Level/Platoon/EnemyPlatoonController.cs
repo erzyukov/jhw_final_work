@@ -26,7 +26,7 @@ namespace Game.Platoon
 		public void Start()
 		{
 			_spawnTimer = new Timer();
-			_spawnConfig = _config.GetSpawnConfig(_gameLevel.LevelIndex);
+			_spawnConfig = _config.GetSpawnConfig(0);
 			InitNextSpawnData();
 		}
 

@@ -10,7 +10,7 @@
 
 		// Levels
 		Regions = 250,
-		Region,
+		Levels,
 		Level,
 		Wave,
 
