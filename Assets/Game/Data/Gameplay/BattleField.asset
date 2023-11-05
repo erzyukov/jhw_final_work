@@ -13,4 +13,9 @@ MonoBehaviour:
   m_Name: BattleField
   m_EditorClassIdentifier: 
   _teamFieldSize: {x: 5, y: 4}
-  _fieldCellWidth: 2
+  _fieldCellWidth: 1
+  _fieldCellPrefab: {fileID: 4718736829820020704, guid: 250f0711a59ca5842aa61eec8ca5efba, type: 3}
+  _heroEvenCollor: {r: 0, g: 0, b: 0, a: 0}
+  _heroOddCollor: {r: 0, g: 0, b: 0, a: 0}
+  _enemyEvenCollor: {r: 0, g: 0, b: 0, a: 0}
+  _enemyOddCollor: {r: 0, g: 0, b: 0, a: 0}
