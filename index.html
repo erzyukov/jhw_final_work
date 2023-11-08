@@ -3,38 +3,365 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Merge War: Demon Rise Battler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=no"/>
+
+    <!-- Консоль добавлена -->
+    <!-- Фиксация экрана на телефонах включена -->
+    <!-- Фиксация экрана на ПК включена -->
+    <!-- Тени вокруг экрана с игрой включены -->
+    <!-- Полосы по бокам изменены -->
+    <!-- Загрузочный экран изменен -->
+
+    <style>
+      /* Убираем выделение по нажатию клавиш */
+      canvas:focus {
+        outline: none;
+      }
+      html, body {
+        /* Убираем отступы */
+        padding: 0;
+        margin: 0;
+
+        /* Отключаем скролл и лонгтап на IOS */
+        overflow: hidden;
+        -webkit-touch-callout:none;
+        -webkit-user-select:none;
+        -khtml-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+        user-select:none;
+        -webkit-tap-highlight-color:rgba(0,0,0,0);
+
+        /* Ставим высоту на 100% */
+        height: 100%;
+
+        /* Меняем цвет полос */
+      	background-image: linear-gradient(#2976fa, #6919c6);
+
+        /* Центрируем, если привязана картинка или творим магию, чтобы можно было использовать градиент */
+  	background-position-x: 50%;
+  	background-repeat: no-repeat;
+ 	background-size: cover;
+        background-attachment: fixed;
+      }
+      /* Самодельная консоль */
+      #console {
+        position: relative;
+      }
+      button.console-button {
+    	position: absolute;
+    	bottom: 20px;
+   	right: 20px;
+   	width: 50px;
+   	height: 50px;
+   	background-color: #007bff;
+    	color: #fff;
+   	border: none;
+    	border-radius: 50%;
+    	cursor: pointer;
+        z-index: 11000;
+        font-size: 30px;
+        /* Играемся с прозрачностью */
+        opacity: 85%;
+        /* Добавляем тени */
+        -webkit-box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.6);
+        -moz-box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.6);
+        box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.6);
+      }
+      #console-panel {
+    	position: fixed;
+   	background-color: #262526;
+   	height: 50%;
+        margin: auto;
+    	bottom: 0;
+        left: 0;
+        right: 0; 
+        z-index: 10000;
+        border-radius: 15px 15px 0 0;
+        display: none;
+      }
+      #console-content {
+        max-height: calc(100% - 70px);
+        max-width: 100%;
+        overflow: auto;
+        padding: 15px;
+        margin: 20px; 
+        position: relative;
+        color: white;
+        font-family: sans-serif;
+      }
+      /* Стандартные элементы от Unity */
+      #unity-container {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+      }
+      #unity-canvas {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+
+        /* Меняем цвет загрузочного экрана */
+        background-image: linear-gradient(#2976fa, #6919c6);
+
+        /* Центрируем, если привязана картинка или творим магию, чтобы можно было использовать градиент */
+  	background-position-x: 50%;
+  	background-repeat: no-repeat;
+ 	background-size: cover;
+        background-attachment: fixed;
+
+        /* Добавляем тени по бокам */
+	-webkit-box-shadow: 0px 5px 10px 10px rgba(34, 60, 80, 0.2); 
+	-moz-box-shadow: 0px 5px 10px 10px rgba(34, 60, 80, 0.2); 
+	box-shadow: 0px 5px 10px 10px rgba(34, 60, 80, 0.2); 
+      }
+      #unity-loading-bar {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+      }
+      #unity-logo {
+        width: 144px;
+        height: 144px;
+
+        /* Меняем изображение лого */
+        background: url('logo.png');
+
+        background-position: center;
+  	background-repeat: no-repeat;
+      }
+      #unity-progress-bar-empty {
+        width: 135px;
+        height: 18px;
+        margin-top: 10px;
+        background: url('loader-empty.png');
+        background-position: center;
+  	background-repeat: no-repeat;
+      }
+      #unity-progress-bar-full { 
+        width: 0%; 
+        height: 18px; 
+        margin-top: 10px; 
+        background: url('loader-full.png');
+        background-position: center;
+  	background-repeat: no-repeat;
+      }
+    </style>
+
   </head>
-  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
-    <canvas id="unity-canvas" width=1080 height=1920 style="width: 1080px; height: 1920px; background: #231F20"></canvas>
-    <script src="Build/WebGL.loader.js"></script>
+  <body>
+    <div class="console">
+      <button id="console-button" class="console-button">▲</button>
+      <div id="console-panel" class="console-panel">
+        <div id="console-content" class="console-content"></div>
+      </div>
+    </div>
+    <div id="unity-container">
+      <canvas id="unity-canvas" tabindex="-1"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+    </div>
     <script>
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
 
-        var canvas = document.querySelector("#unity-canvas");
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        canvas.style.position = "fixed";
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
 
-        document.body.style.textAlign = "left";
+      // Выключаем появление меню при правом клике мыши
+      document.addEventListener('contextmenu', event => event.preventDefault());
+
+      // Проверяем устройство
+      var isTouchDevice;
+
+      if('ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        isTouchDevice = true;
+      } else {
+        isTouchDevice = false;
       }
 
-      createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/WebGL.data.unityweb",
-        frameworkUrl: "Build/WebGL.framework.js.unityweb",
-        codeUrl: "Build/WebGL.wasm.unityweb",
+      // Определение домена
+      var isEnglish;
+
+      var currentURL = window.location.href;
+      if(currentURL.indexOf(".com") > -1) {
+        isEnglish = true;
+      } else {
+        isEnglish = false;
+      }
+
+      // Возвращаем фокус, если кликнули по экрану
+      window.addEventListener('pointerdown', () => {
+        window.focus();
+        canvas.focus();
+      });
+      window.addEventListener('touchstart', () => {
+        window.focus();
+        canvas.focus();
+      });
+
+      // Функционал самодельной консоли
+      var consoleButton = document.getElementById("console-button");
+      var consolePanel = document.getElementById("console-panel");
+      var consoleContent = document.getElementById("console-content");
+
+      // Отлавливаем сообщения с настоящей консоли
+      console.log = function() {
+        var logArguments = Array.from(arguments);
+        var logMessage = logArguments.join(' ');
+        writeToConsole("> " + logMessage);
+      };
+
+      console.warn = function() {
+        var warnArguments = Array.from(arguments);
+        var warnMessage = warnArguments.join(' ');
+        writeToConsole("> " + warnMessage, "yellow");
+      };
+
+      console.error = function() {
+        var errorArguments = Array.from(arguments);
+        var errorMessage = errorArguments.join(' ');
+        if(errorMessage.includes("both async and sync fetching of the wasm failed")) {
+          console.help("Чика: Убедитесь, что интернет соедининение в норме");
+        }
+        writeToConsole("> " + errorMessage, "red");
+      };
+
+      window.onerror = function(message, source, lineno, colno, error) {
+        console.error(message);
+        return false;
+      };
+
+      console.help = function(helpMessage) {
+        writeToConsole("> " + helpMessage, "#60b8d8");
+      };
+
+      // Отлавливаем странные смс с Unity
+      function unityShowBanner(msg, type) {
+        if(type === 'error') {
+          console.error(msg);
+          if(msg.includes("Unable to parse")) {
+            console.help("Чика: Скорее всего, вы забыли поставить галочку рядом с Decompression Fallback, который находится в Player Settings (File > Build Settings > Player Settings > Publishing Settings). Не забывайте ставить его, если вы используете Gzip или Brotli. В ином же случае попробуйте убрать сжатие (Compression Format: none) и снять галочку с Decompression Fallback");
+          }
+        } else if(type === "warning") {
+          console.warn(msg);
+        }
+      }
+
+      // Записываем сообщения в самодельную консоль
+      function writeToConsole(text, color) {
+        const newLine = document.createElement('div');
+
+        if(color) {
+          newLine.style.color = color;
+        }
+
+        newLine.textContent = text;
+        consoleContent.appendChild(newLine);
+        consoleContent.scrollTop = consoleContent.scrollHeight;
+      }
+
+      // Функционал кнопки для открытия и закрытия консоли
+      var consoleIsOpen;
+
+      consoleButton.addEventListener("click", function () {
+        if(consoleIsOpen) {
+          consolePanel.style.display = "none";
+          consoleButton.innerText ="▲";
+          consoleIsOpen = false;
+          consoleButton.style.opacity = "85%";
+        } else {
+          consolePanel.style.display = "block";
+          consoleIsOpen = true;
+          consoleButton.innerText ="▼";
+          consoleButton.style.opacity = "50%";
+        }
+      });
+
+      // Загрузка файлов
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/WebGL.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/a6edc8ddab906da4002ff6f99756259c.data.unityweb",
+        frameworkUrl: buildUrl + "/97110173c4ae2f61b14b9dea4296d5b1.js.unityweb",
+        codeUrl: buildUrl + "/c74942ff3e5d8d26213dcc611dadd081.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Erzyk Team",
         productName: "Merge War: Demon Rise Battler",
-        productVersion: "0.0.59",
-        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-      });
+        productVersion: "0.0.64",
+        showBanner: unityShowBanner,
+      };
+
+
+      // Фиксируем экран с игрой
+      function updateAspectRatio() {
+        var windowWidth = window.innerWidth;
+        var windowHeight = window.innerHeight;
+        var containerAspectRatio = 9 / 16;
+        
+        if (windowWidth / windowHeight > containerAspectRatio) {
+          canvas.style.width = windowHeight * containerAspectRatio + "px";
+          canvas.style.height = "100vh";
+        } else {
+          canvas.style.width = "100vw";
+          canvas.style.height = windowWidth / containerAspectRatio + "px";
+        }
+
+        // Центрируем
+        canvas.style.margin = "auto";
+        canvas.style.top = "0";
+        canvas.style.left = "0";
+        canvas.style.bottom = "0";
+        canvas.style.right = "0";
+      }
+
+      loadingBar.style.display = "block";
+
+      // Подключаем myGameInstance для связи Unity с браузером
+      var myGameInstance = null;
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      // Ловим ошибку с файлом
+      script.onerror = () => {
+        console.error("Failed to load resourse: " + loaderUrl);
+        console.help("Чика: Попробуйте убрать сжатие (Compression Format: none) и снять галочку с Decompression Fallback в Player Settings (File > Build Settings > Player Settings > Publishing Settings). Всегда делайте билд в папку с англ.названием. А еще убедитесь в том, что в консоли движка нет ошибок");
+      };
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          myGameInstance = unityInstance;
+          loadingBar.style.display = "none";
+          canvas.style.backgroundImage = "none";
+
+          // Недобросовестная реклама
+          if(isEnglish) {
+            writeToConsole("> " + "Ad: The game uses a free version of advanced templates for Unity. Our group: https://t.me/chikadev. To support us and explore the templates, please visit: https://boosty.to/chikadev. Enjoy your game! Best regards, Chika", "orange");
+          } else {
+            writeToConsole("> " + "Реклама: Игра использует бесплатную версию расширенных шаблонов для Unity. Наша группа: https://t.me/chikadev. Поддержать и ознакомиться с шаблонами можно здесь: https://boosty.to/chikadev. Приятной игры! С уважением, Чика", "orange");
+          }
+
+          // Проверяем устройство и фиксируем экран, если включено
+          if(isTouchDevice) {
+            updateAspectRatio();
+            window.addEventListener("resize", updateAspectRatio);
+          } else {
+            updateAspectRatio();
+            window.addEventListener("resize", updateAspectRatio);
+          }
+
+        }).catch((message) => {
+          console.error(message);
+        });
+      };
+      document.body.appendChild(script);
     </script>
   </body>
 </html>
