@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58a8962aa6ab5a944a393eaf29e5ca58, type: 3}
-  m_Name: Root
+  m_Script: {fileID: 11500000, guid: e65716f6019de7143960ac510d0f67bd, type: 3}
+  m_Name: ConfigInstaller
   m_EditorClassIdentifier: 
   _scenes: {fileID: 11400000, guid: 473ad5fc18b696845914808028cf1fd8, type: 2}
   _units: {fileID: 11400000, guid: c879d22ebd0222d4f96b291f8c5290d9, type: 2}

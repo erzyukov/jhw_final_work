@@ -2,7 +2,6 @@ namespace Game.Profiles
 {
 	public interface IGameProfileManager
 	{
-		void Initialize();
 		GameProfile GameProfile { get; }
 	}
 
@@ -12,7 +11,7 @@ namespace Game.Profiles
 
 		public GameProfile GameProfile => _gameProfile;
 
-		public void Initialize()
+		public void OnInstantiated()
 		{
 			_gameProfile = new GameProfile();
 		}

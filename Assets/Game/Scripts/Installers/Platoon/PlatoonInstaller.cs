@@ -1,16 +1,15 @@
 namespace Game.Installers
 {
-	using Platoon;
 	using UnityEngine;
-	using VContainer;
-	using VContainer.Unity;
+	using Zenject;
 
-    public class PlatoonInstaller : LifetimeScope
-    {
+    public class PlatoonInstaller : MonoInstaller
+	{
 		[SerializeField] private PlatoonCellView _platoonCellPrefab;
 
-		protected override void Configure(IContainerBuilder builder)
-        {
+		public override void InstallBindings()
+		{
+			/*
 			builder.RegisterComponent(_platoonCellPrefab);
 
 			PlatoonView platoonView = GetComponent<PlatoonView>();
@@ -18,6 +17,7 @@ namespace Game.Installers
 
 			builder.Register<Platoon>(Lifetime.Scoped).AsImplementedInterfaces();
 			builder.Register<PlatoonBuilder>(Lifetime.Scoped).AsImplementedInterfaces();
+			*/
 		}
 	}
 }

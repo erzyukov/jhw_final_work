@@ -4,10 +4,9 @@
 	using Platoon;
 	using Units;
 	using Utilities;
-	using VContainer.Unity;
 	using UnityEngine;
 	using Kind = Units.Unit.Kind;
-	using VContainer;
+	using Zenject;
 
 	public interface IBattleSimulator
 	{
@@ -15,7 +14,7 @@
 		void RegisterEnemyPlatoonFacade(EnemyPlatoonFacade enemyPlatoon);
 	}
 
-	public class BattleSimulator : ControllerBase, IStartable, ITickable, IBattleSimulator
+	public class BattleSimulator : ControllerBase, IInitializable, ITickable, IBattleSimulator
 	{
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private ITargetFinderSelector _targetFinderSelector;
@@ -23,7 +22,7 @@
 		private HeroPlatoonFacade _heroPlatoon;
 		private EnemyPlatoonFacade _enemyPlatoon;
 
-		public void Start()
+		public void Initialize()
 		{
 		}
 

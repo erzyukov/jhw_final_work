@@ -2,13 +2,12 @@ namespace Game.Platoon
 {
 	using Utilities;
 	using Core;
-	using VContainer;
-	using VContainer.Unity;
 	using Configs;
 	using Units;
 	using SpawnData = Configs.EnemySpawnConfig.SpawnData;
+	using Zenject;
 
-	public class EnemyPlatoonController : ControllerBase, IStartable, ITickable
+	public class EnemyPlatoonController : ControllerBase, IInitializable, ITickable
 	{
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private EnemyConfig _config;
@@ -23,7 +22,7 @@ namespace Game.Platoon
 		private SpawnData _currentSpawnData;
 		private PlatoonCell _targetCell;
 
-		public void Start()
+		public void Initialize()
 		{
 			_spawnTimer = new Timer();
 			_spawnConfig = _config.GetSpawnConfig(0);

@@ -5,13 +5,11 @@
 	using Input;
 	using UniRx;
 	using UnityEngine.InputSystem;
-	using VContainer;
-	using VContainer.Unity;
 	using System;
 	using Game.Profiles;
-	using UnityEngine;
+	using Zenject;
 
-	public class DevCheats : ControllerBase, IStartable
+	public class DevCheats : ControllerBase, IInitializable
 	{
 		[Inject] IInputHandler _inputManager;
 		[Inject] IGameLevel _gameLevel;
@@ -19,10 +17,10 @@
 
 		private Controls.DevCheatsActions Cheats => _inputManager.DevCheats;
 
-		public void Start()
+		public void Initialize()
 		{
 			Subscribe(Cheats.NextWave, () => _gameLevel.GoToNextWave());
-			
+
 			Subscribe(Cheats.NextLevel, () => _gameLevel.GoToLevel(_profile.LevelNumber.Value + 1));
 
 			Subscribe(Cheats.PrevLevel, () => _gameLevel.GoToLevel(_profile.LevelNumber.Value - 1));

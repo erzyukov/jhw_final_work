@@ -2,57 +2,65 @@ namespace Game.Installers
 {
 	using Configs;
 	using Core;
+	using Game.Dev;
 	using Game.Input;
 	using Game.Profiles;
 	using UnityEngine;
-	using VContainer;
-	using VContainer.Unity;
+	using Zenject;
 
-	public class ProjectInstaller : LifetimeScope
+	public class ProjectInstaller : MonoInstaller
 	{
-		[SerializeField] private RootConfig _rootConfig;
+//		[SerializeField] private RootConfig _rootConfig;
+/*
+		[DllImport("__Internal")]
+		private static extern void Hello();
 
-		protected override void Configure(IContainerBuilder builder)
+		[DllImport("__Internal")]
+		private static extern void PrintFloatArray(float[] array, int size);
+
+		[DllImport("__Internal")]
+		private static extern void HelloString(string str);
+
+		[DllImport("__Internal")]
+		private static extern void WebGLConsoleLog(string str);
+*/
+
+		public override void InstallBindings()
 		{
-			RegisterConfigs(builder);
-			RegisterGameProfile(builder);
-			RegisterSceneManager(builder);
+			/*
+						Hello();
+						float[] a = new float[] { 1, 2, 3, 4, 5 };
+						PrintFloatArray(a, a.Length);
+						HelloString("string!!!!");
+						WebGLConsoleLog("Console.log");
+			*/
+			WebGLDebug.Log("[Project] ProjectInstaller: Configure");
 
-			builder.Register<InputHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+			RegisterGameProfile();
+
+			Container
+				.BindInterfacesTo<ScenesManager>()
+				.FromNewComponentOnNewGameObject()
+				.AsSingle()
+				.NonLazy();
+
+			Container
+				.BindInterfacesTo<InputHandler>()
+				.AsSingle();
 		}
 
-		private void RegisterConfigs(IContainerBuilder builder)
+		private void RegisterGameProfile()
 		{
-			builder.RegisterInstance(_rootConfig.Scenes);
-			builder.RegisterInstance(_rootConfig.Units);
-			builder.RegisterInstance(_rootConfig.BattleField);
-			builder.RegisterInstance(_rootConfig.Enemy);
-			builder.RegisterInstance(_rootConfig.Levels);
+			Container
+				.BindInterfacesTo<GameProfileManager>()
+				.AsSingle()
+				.OnInstantiated<GameProfileManager>((ic, o) => o.OnInstantiated());
 
-			_rootConfig.Initialize();
-		}
-
-		private void RegisterGameProfile(IContainerBuilder builder)
-		{
-			builder.Register<GameProfileManager>(Lifetime.Singleton).AsImplementedInterfaces();
-
-			builder.Register(container =>
-				{
-					IGameProfileManager gameProfileManager = container.Resolve<IGameProfileManager>();
-					gameProfileManager.Initialize();
-
-					return gameProfileManager.GameProfile;
-				},
-				Lifetime.Singleton
-			);
-		}
-
-		private void RegisterSceneManager(IContainerBuilder builder)
-		{
-			GameObject scenesManagerGameObject = new GameObject("ScenesManager");
-			DontDestroyOnLoad(scenesManagerGameObject);
-			IScenesManager scenesManager = scenesManagerGameObject.AddComponent<ScenesManager>();
-			builder.RegisterComponent(scenesManager).As<IScenesManager>();
+			Container
+				.Bind<GameProfile>()
+				.FromResolveGetter<IGameProfileManager>(gameProfileManager => gameProfileManager.GameProfile)
+				.AsSingle()
+				.MoveIntoAllSubContainers();
 		}
 	}
 }

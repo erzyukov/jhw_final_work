@@ -5,12 +5,11 @@
 	using Units;
 	using Unit = Units.Unit;
 	using Ui;
-	using VContainer;
-	using VContainer.Unity;
 	using UniRx;
 	using System.Collections.Generic;
+	using Zenject;
 
-	public class HeroPlatoonController : ControllerBase, IStartable, ITickable
+	public class HeroPlatoonController : ControllerBase, IInitializable, ITickable
 	{
 		[Inject] private IPlatoon _platoon;
 		[Inject] private IHudUnitPanel _hudUnitPanel;
@@ -27,7 +26,7 @@
 		private IPlatoonCell _lastSelectedCell;
 		private IPlatoonCell _initialUnitCell;
 
-		public void Start()
+		public void Initialize()
 		{
 			_hudUnitPanel.UnitSelectButtonPressed
 				.Subscribe(CreateUnit)

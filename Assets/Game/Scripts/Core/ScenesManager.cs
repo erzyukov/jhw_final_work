@@ -10,7 +10,7 @@ namespace Game.Core
 	using UniRx;
 	using UnityEngine;
 	using UnityEngine.SceneManagement;
-	using VContainer;
+	using Zenject;
 
 	public interface IScenesManager
 	{
@@ -26,7 +26,7 @@ namespace Game.Core
 	{
 		[Inject] private ScenesConfig _scenesConfig;
 		[Inject] private LevelsConfig _levelsConfig;
-		[Inject] private GameProfile _profile;
+		[Inject] private IGameProfileManager _profileManager;
 
 		private void Start() => StartCoroutine(LoadScenes());
 
@@ -80,7 +80,7 @@ namespace Game.Core
 		private void UnloadScene(string sceneName) => SceneManager.UnloadSceneAsync(sceneName);
 		private string GetLevelSceneName()
 		{
-			Region region = _levelsConfig.Levels[_profile.LevelNumber.Value - 1].Region;
+			Region region = _levelsConfig.Levels[_profileManager.GameProfile.LevelNumber.Value - 1].Region;
 
 			return GetLevelSceneName(region);
 		}

@@ -4,10 +4,9 @@ namespace Game.Platoon
 	using Configs;
 	using Utilities;
 	using UnityEngine;
-	using VContainer;
-	using VContainer.Unity;
+	using Zenject;
 
-	public class PlatoonBuilder : ControllerBase, IStartable
+	public class PlatoonBuilder : ControllerBase, IInitializable
 	{
 		[Inject] private BattleFieldConfig _config;
 		[Inject] private PlatoonCellView _cellViewPrefab;
@@ -19,7 +18,7 @@ namespace Game.Platoon
 
 		private Vector3 _viewOffset;
 
-		public void Start()
+		public void Initialize()
 		{
 			float zSign = Mathf.Sign(_view.Transform.position.z);
 			float platoonXOffset = zSign * _battleFieldConfig.TeamFieldSize.x / 2f * _config.FieldCellWidth;

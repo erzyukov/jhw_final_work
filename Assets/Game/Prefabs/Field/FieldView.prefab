@@ -40,8 +40,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8373615427908898271}
-  - component: {fileID: -8304705498919818157}
+  - component: {fileID: 5347964819234069120}
   - component: {fileID: 1006807825511717703}
+  - component: {fileID: -8304705498919818157}
   m_Layer: 0
   m_Name: FieldView
   m_TagString: Untagged
@@ -65,7 +66,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-8304705498919818157
+--- !u!114 &5347964819234069120
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,9 +75,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8373615427908898268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36d93cf07b3988f40bbafd2e1ec4d037, type: 3}
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 1006807825511717703}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!114 &1006807825511717703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,7 +96,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f051e01688848fc46a72dc2b064ecd67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentReference:
-    TypeName: Game.Installers.LevelSceneInstaller
-  autoRun: 1
-  autoInjectGameObjects: []
+  _fieldType: 0
+--- !u!114 &-8304705498919818157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8373615427908898268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d93cf07b3988f40bbafd2e1ec4d037, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

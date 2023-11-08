@@ -3,8 +3,7 @@
 	using Configs;
 	using Core;
 	using System.Collections.Generic;
-	using VContainer;
-	using VContainer.Unity;
+	using Zenject;
 	using Kind = Units.Unit.Kind;
 
 	public interface ITargetFinderSelector
@@ -12,14 +11,14 @@
 		ITargetFinder GetTargetFinder(Kind type);
 	}
 
-	public class TargetFinderSelector : IStartable, ITargetFinderSelector
+	public class TargetFinderSelector : IInitializable, ITargetFinderSelector
 	{
 		[Inject] private UnitsConfig _unitsConfig;
 		[Inject] private BattleFieldConfig _battleFieldConfig;
 
 		private Dictionary<Kind, TargetFinder> _targetFinders;
 
-		public void Start()
+		public void Initialize()
 		{
 			_targetFinders = new Dictionary<Kind, TargetFinder>();
 

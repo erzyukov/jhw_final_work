@@ -3,16 +3,16 @@ namespace Game.Core
 	using Game.Profiles;
 	using Game.Utilities;
 	using UnityEngine;
-	using VContainer;
-	using VContainer.Unity;
 	using UniRx;
+	using Game.Dev;
+	using Zenject;
 
-	public class CoreTests : ControllerBase, IStartable
+	public class CoreTests : ControllerBase, IInitializable
     {
 		[Inject] GameProfile _profile;
 		[Inject] IScenesManager _scenesManager;
 
-		public void Start()
+		public void Initialize()
 		{
 			ProfileSubscribe();
 			SceneManagerSubscribe();
@@ -21,22 +21,22 @@ namespace Game.Core
 		private void SceneManagerSubscribe()
 		{
 			_scenesManager.LevelLoaded
-				.Subscribe(_ => Debug.Log($"[Test] ScenesManager: Level Loaded"))
+				.Subscribe(_ => WebGLDebug.Log($"[Test] ScenesManager: Level Loaded"))
 				.AddTo(this);
 
 			_scenesManager.SceneLoadProgress
-				.Subscribe(v => Debug.Log($"[Test] ScenesManager: LoadingProgress={v}"))
+				.Subscribe(v => WebGLDebug.Log($"[Test] ScenesManager: LoadingProgress={v}"))
 				.AddTo(this);
 		}
 
 		private void ProfileSubscribe()
 		{
 			_profile.LevelNumber
-				.Subscribe(v => Debug.Log($"[Test] LevelNumber changed: {v}"))
+				.Subscribe(v => WebGLDebug.Log($"[Test] LevelNumber changed: {v}"))
 				.AddTo(this);
 
 			_profile.WaveNumber
-				.Subscribe(v => Debug.Log($"[Test] WaveNumber changed: {v}"))
+				.Subscribe(v => WebGLDebug.Log($"[Test] WaveNumber changed: {v}"))
 				.AddTo(this);
 		}
 	}

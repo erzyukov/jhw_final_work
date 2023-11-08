@@ -3,10 +3,9 @@
 	using Configs;
 	using Utilities;
 	using UnityEngine;
-	using VContainer;
-	using VContainer.Unity;
+	using Zenject;
 
-	public class FieldBuilder: IStartable
+	public class FieldBuilder: IInitializable
 	{
 		[Inject] private FieldType _fieldType;
 		[Inject] private BattleFieldConfig _config;
@@ -16,7 +15,7 @@
 
 		private Vector3 _viewOffset;
 
-		public void Start()
+		public void Initialize()
 		{
 			float zSign = Mathf.Sign(_view.Transform.position.z);
 			float fieldXOffset = zSign * (_config.TeamFieldSize.x - 1) / 2f * _config.FieldCellWidth;

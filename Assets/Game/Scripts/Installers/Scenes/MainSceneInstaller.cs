@@ -1,25 +1,45 @@
 namespace Game.Installers
 {
 	using Core;
+	using Game.Configs;
 	using Game.Dev;
+	using System;
 	using UnityEngine;
-	using VContainer;
-	using VContainer.Unity;
+	using Zenject;
 
-    public class MainSceneInstaller : LifetimeScope
-    {
-		protected override void Configure(IContainerBuilder builder)
-        {
+    public class MainSceneInstaller : MonoInstaller
+	{
+		public override void InstallBindings()
+		{
+			WebGLDebug.Log("[Project] MainSceneInstaller: Configure");
+
+			Container
+				.BindInterfacesTo<GameLevel>()
+				.AsSingle();
+
+			Container
+				.Bind<Camera>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
+			InstallDebugServicies();
+
+			/*
 			//builder.RegisterComponentInHierarchy<HudUnitPanel>().AsImplementedInterfaces();
 
 			//builder.Register<UnitViewFactory>(Lifetime.Singleton);
+			*/
+		}
 
-			builder.Register<GameLevel>(Lifetime.Singleton).AsImplementedInterfaces();
-			builder.RegisterComponentInHierarchy<Camera>();
-			
-			// Debug
-			builder.Register<DevCheats>(Lifetime.Singleton).AsImplementedInterfaces();
-			builder.Register<CoreTests>(Lifetime.Singleton).AsImplementedInterfaces();
+		private void InstallDebugServicies()
+		{
+			Container
+				.BindInterfacesTo<DevCheats>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<CoreTests>()
+				.AsSingle();
 		}
 	}
 }

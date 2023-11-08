@@ -2,14 +2,16 @@ namespace Game.Installers
 {
 	using Battle;
 	using Game.Core;
+	using Game.Dev;
 	using UnityEngine;
-	using VContainer;
-	using VContainer.Unity;
+	using Zenject;
 
-    public class LevelSceneInstaller : LifetimeScope
-    {
-		protected override void Configure(IContainerBuilder builder)
-        {
+    public class LevelSceneInstaller : MonoInstaller
+	{
+		public override void InstallBindings()
+		{
+			WebGLDebug.Log("[Project] LevelSceneInstaller: Configure");
+
 			//builder.Register<BattleSimulator>(Lifetime.Singleton).AsImplementedInterfaces();
 			//builder.Register<TargetFinderSelector>(Lifetime.Singleton).AsImplementedInterfaces();
 		}

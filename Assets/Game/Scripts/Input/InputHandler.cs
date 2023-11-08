@@ -3,20 +3,20 @@
 	using System;
 	using UniRx;
 	using UnityEngine.InputSystem;
-	using VContainer.Unity;
+	using Zenject;
 
 	public interface IInputHandler
 	{
 		Controls.DevCheatsActions DevCheats { get; }
 	}
 
-	public class InputHandler : IInputHandler, IStartable
+	public class InputHandler : IInputHandler, IInitializable
 	{
 		private Controls _controls;
 
 		public Controls.DevCheatsActions DevCheats { get; private set; }
 
-		public void Start()
+		public void Initialize()
 		{
 			_controls = new Controls();
 			DevCheats = _controls.DevCheats;

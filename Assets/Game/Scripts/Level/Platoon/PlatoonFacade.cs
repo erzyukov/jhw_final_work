@@ -4,8 +4,8 @@ namespace Game.Platoon
 	using Battle;
 	using System.Collections.Generic;
 	using UnityEngine;
-	using VContainer;
 	using System.Linq;
+	using Zenject;
 
 	public interface IPlatoonFacade
 	{

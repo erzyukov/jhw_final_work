@@ -5,8 +5,7 @@
 	using Game.Utilities;
 	using UniRx;
 	using UnityEngine;
-	using VContainer;
-	using VContainer.Unity;
+	using Zenject;
 
 	public interface IGameLevel
 	{
@@ -16,13 +15,13 @@
 		void GoToNextWave();
 	}
 
-	public class GameLevel : ControllerBase, IGameLevel, IStartable
+	public class GameLevel : ControllerBase, IGameLevel, IInitializable
 	{
 		[Inject] private GameProfile _profile;
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] private IScenesManager _scenesManager;
 
-		public void Start()
+		public void Initialize()
 		{
 			_scenesManager.LevelLoaded
 				.Subscribe(_ => OnLevelLoaded())

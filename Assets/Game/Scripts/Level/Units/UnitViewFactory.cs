@@ -1,8 +1,8 @@
 ﻿namespace Game.Units
 {
 	using Configs;
-	using VContainer;
 	using UnityEngine;
+	using Zenject;
 
 	public class UnitViewFactory
 	{
