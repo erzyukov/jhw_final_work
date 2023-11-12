@@ -1,15 +1,29 @@
 namespace Game.Units
 {
+	using Game.Configs;
+	using UnityEngine;
 	using Zenject;
 
 	public class UnitInstaller : Installer<UnitInstaller>
 	{
 		[Inject] private Species _species;
+		[Inject] private UnitsConfig _unitsConfig;
 
 		public override void InstallBindings()
 		{
+			Debug.LogWarning($"UnitInstaller: InstallBindings");
+
 			Container
 				.BindInstance(_species);
+
+			Container
+				.BindInstance(_unitsConfig.Units[_species]);
+
+			Container.BindFactory<Object, IUnitModel, UnitModel.Factory>().FromFactory<PrefabFactory<IUnitModel>>();
+
+			Container
+				.BindInterfacesTo<UnitView>()
+				.FromComponentOnRoot();
 
 			Container
 				.Bind<UnitFacade>()
@@ -19,11 +33,13 @@ namespace Game.Units
 				.BindInterfacesTo<Unit>()
 				.AsSingle();
 
-			/*
 			Container
-				.BindInterfacesTo<UnitView>()
-				.FromComponentOnRoot();
+				.BindInterfacesTo<UnitBuilder>()
+				.AsSingle()
+				.OnInstantiated<UnitBuilder>((ic, o) => o.OnInstantiated())
+				.NonLazy();
 
+			/*
 			Container
 				.Bind<UnitView>()
 				.FromNewComponentOnRoot()

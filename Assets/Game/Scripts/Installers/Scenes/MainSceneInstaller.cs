@@ -13,8 +13,6 @@ namespace Game.Installers
 
 		public override void InstallBindings()
 		{
-			WebGLDebug.Log("[Project] MainSceneInstaller: Configure");
-
 			Container
 				.BindInterfacesTo<GameLevel>()
 				.AsSingle();
@@ -34,15 +32,6 @@ namespace Game.Installers
 				.BindFactory<Species, UnitFacade, UnitFacade.Factory>()
 				.FromSubContainerResolve()
 				.ByNewPrefabInstaller<UnitInstaller>(_unitsConfig.UnitPrefab);
-
-			/*
-			Container
-				.BindFactory<Object, IUnitFacade, UnitFacade.Factory>()
-				.FromFactory<UnitFactory>()
-				.NonLazy();
-			*/
-
-			//Container.BindFactory<Object, UnitFacade, UnitFacade.Factory>().FromFactory<PrefabFactory<UnitFacade>>();
 		}
 
 		private void InstallDebugServicies()
