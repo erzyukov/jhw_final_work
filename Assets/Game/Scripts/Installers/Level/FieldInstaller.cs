@@ -1,7 +1,7 @@
 ﻿namespace Game.Installers
 {
-	using Configs;
-	using Field;
+	using Game.Configs;
+	using Game.Field;
 	using Game.Dev;
 	using UnityEngine;
 	using Zenject;

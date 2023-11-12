@@ -1,7 +1,7 @@
 ﻿namespace Game.Field
 {
-	using Configs;
-	using Utilities;
+	using Game.Configs;
+	using Game.Utilities;
 	using UnityEngine;
 	using Zenject;
 

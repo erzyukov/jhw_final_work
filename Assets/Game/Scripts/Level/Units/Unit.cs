@@ -1,6 +1,5 @@
 namespace Game.Units
 {
-	using UnityEngine;
 	using Zenject;
 
 	public interface IUnit

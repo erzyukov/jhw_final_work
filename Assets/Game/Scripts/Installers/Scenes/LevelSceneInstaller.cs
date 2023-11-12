@@ -1,6 +1,6 @@
 namespace Game.Installers
 {
-	using Battle;
+	using Game.Battle;
 	using Game.Core;
 	using Game.Dev;
 	using UnityEngine;

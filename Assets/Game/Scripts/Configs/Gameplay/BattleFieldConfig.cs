@@ -1,6 +1,6 @@
 namespace Game.Configs
 {
-	using Field;
+	using Game.Field;
 	using UnityEngine;
 
 	[CreateAssetMenu(fileName = "BattleField", menuName = "Configs/BattleField", order = (int)Config.BattleField)]

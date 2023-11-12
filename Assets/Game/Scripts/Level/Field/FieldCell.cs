@@ -1,8 +1,8 @@
-﻿using Game.Units;
-using UnityEngine;
-
-namespace Game.Field
+﻿namespace Game.Field
 {
+	using Game.Units;
+	using UnityEngine;
+
 	public interface IFieldCell
 	{
 		bool HasUnit { get; }

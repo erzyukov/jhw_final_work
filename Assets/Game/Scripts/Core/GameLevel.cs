@@ -1,6 +1,6 @@
 ﻿namespace Game.Core
 {
-	using Configs;
+	using Game.Configs;
 	using Game.Profiles;
 	using Game.Utilities;
 	using UniRx;
