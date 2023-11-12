@@ -15,7 +15,7 @@ namespace Game.Configs
 		public struct WaveUnit
 		{
 			public Vector2 Position;
-			public Unit.Kind Unit;
+			public Species Species;
 		}
 	}
 }

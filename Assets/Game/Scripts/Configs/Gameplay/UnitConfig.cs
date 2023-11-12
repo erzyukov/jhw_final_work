@@ -1,23 +1,28 @@
 ﻿namespace Game.Configs
 {
 	using Game.Units;
+	using System;
 	using UnityEngine;
 
 	[CreateAssetMenu(fileName = "Unit", menuName = "Configs/Unit", order = (int)Config.Unit)]
 	public class UnitConfig : ScriptableObject
 	{
 		[SerializeField] private string _title;
-		[SerializeField] private UnitView _prefab;
-		[SerializeField] private float _attackDelay;
-		[SerializeField] private float _attackRange;
-		[SerializeField] private float _damage;
-		[SerializeField] private float _health;
+		[SerializeField] private Class _class;
+		[SerializeField] private Grade[] _grades;
 
 		public string Title => _title;
-		public UnitView Prefab => _prefab;
-		public float AttackDelay => _attackDelay;
-		public float AttackRange => _attackRange;
-		public float Damage => _damage;
-		public float Health => _health;
+		public Class Class => _class;
+		public Grade[] Grades => _grades;
+
+		[Serializable]
+		public struct Grade
+		{
+			public GameObject Prefab;
+			public float AttackDelay;
+			public float AttackRange;
+			public float Damage;
+			public float Health;
+		}
 	}
 }

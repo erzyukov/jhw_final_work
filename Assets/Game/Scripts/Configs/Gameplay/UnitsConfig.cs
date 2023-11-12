@@ -8,23 +8,25 @@ namespace Game.Configs
 	[CreateAssetMenu(fileName = "Units", menuName = "Configs/Units", order = (int)Config.Units)]
 	public class UnitsConfig : ScriptableObject
 	{
+		[SerializeField] private UnitModel _unitPrefab;
 		[SerializeField] private UnitData[] _units;
 
-		private Dictionary<Unit.Kind, UnitConfig> _unitData;
+		private Dictionary<Species, UnitConfig> _unitData;
 
-		public Dictionary<Unit.Kind, UnitConfig> Units => _unitData;
+		public GameObject UnitPrefab;
+		public Dictionary<Species, UnitConfig> Units => _unitData;
 
 		public void Initialize()
 		{
-			_unitData = new Dictionary<Unit.Kind, UnitConfig>();
+			_unitData = new Dictionary<Species, UnitConfig>();
             foreach (var unit in _units)
-				_unitData.Add(unit.Type, unit.Config);
+				_unitData.Add(unit.Species, unit.Config);
 		}
 		
 		[Serializable]
 		public struct UnitData
 		{
-			public Unit.Kind Type;
+			public Species Species;
 			public UnitConfig Config;
 		}
     }

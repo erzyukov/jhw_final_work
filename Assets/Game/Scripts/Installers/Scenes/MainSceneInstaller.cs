@@ -3,16 +3,16 @@ namespace Game.Installers
 	using Core;
 	using Game.Configs;
 	using Game.Dev;
-	using System;
+	using Game.Units;
 	using UnityEngine;
 	using Zenject;
 
     public class MainSceneInstaller : MonoInstaller
 	{
+		[Inject] private UnitsConfig _unitsConfig;
+
 		public override void InstallBindings()
 		{
-			WebGLDebug.Log("[Project] MainSceneInstaller: Configure");
-
 			Container
 				.BindInterfacesTo<GameLevel>()
 				.AsSingle();
@@ -22,13 +22,16 @@ namespace Game.Installers
 				.FromComponentInHierarchy()
 				.AsSingle();
 
+			InstallUnits();
 			InstallDebugServicies();
+		}
 
-			/*
-			//builder.RegisterComponentInHierarchy<HudUnitPanel>().AsImplementedInterfaces();
-
-			//builder.Register<UnitViewFactory>(Lifetime.Singleton);
-			*/
+		private void InstallUnits()
+		{
+			Container
+				.BindFactory<Species, UnitFacade, UnitFacade.Factory>()
+				.FromSubContainerResolve()
+				.ByNewPrefabInstaller<UnitInstaller>(_unitsConfig.UnitPrefab);
 		}
 
 		private void InstallDebugServicies()

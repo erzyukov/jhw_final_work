@@ -2,11 +2,9 @@
 {
 	using Configs;
 	using Field;
-	using Game.Core;
 	using Game.Dev;
 	using UnityEngine;
 	using Zenject;
-
 	
 	public class FieldInstaller : MonoInstaller
 	{
@@ -33,23 +31,6 @@
 			Container
 				.BindInterfacesTo<FieldBuilder>()
 				.AsSingle();
-			/*
-			builder.Register(container =>
-				{
-					BattleFieldConfig config = container.Resolve<BattleFieldConfig>();
-					return config.FieldCellView;
-				},
-				Lifetime.Singleton
-			);
-
-			builder.RegisterInstance(_fieldType);
-
-			FieldView view = GetComponent<FieldView>();
-			builder.RegisterComponent(view).AsImplementedInterfaces();
-
-			builder.Register<Field<FieldCell>>(Lifetime.Scoped).AsImplementedInterfaces();
-			builder.Register<FieldBuilder>(Lifetime.Scoped).AsImplementedInterfaces();
-			*/
 		}
 	}
 }

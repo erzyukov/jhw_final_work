@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
+  m_Name: HeroInfantrymanUnit
+  m_EditorClassIdentifier: 
+  _title: "\u041F\u0435\u0445\u043E\u0442\u0438\u043D\u0435\u0446"
+  _class: 0
+  _grades:
+  - Prefab: {fileID: 1503547998484457933, guid: e9cec3f7a3fe02c40b0fdfbc71216dae, type: 3}
+    AttackDelay: 0.95
+    AttackRange: 0.2
+    Damage: 10
+    Health: 50
+  - Prefab: {fileID: 1503547998484457933, guid: 16c45076db1453a4db3b912cd5e9aa59, type: 3}
+    AttackDelay: 0.94
+    AttackRange: 0.2
+    Damage: 18
+    Health: 80
+  - Prefab: {fileID: 1503547998484457933, guid: 61366e3e9599ee84184a33bc4273b843, type: 3}
+    AttackDelay: 0.93
+    AttackRange: 0.2
+    Damage: 32
+    Health: 120
+  - Prefab: {fileID: 1503547998484457933, guid: c40234831e0083c4586e3734e03db2cf, type: 3}
+    AttackDelay: 0.92
+    AttackRange: 0.2
+    Damage: 60
+    Health: 200
