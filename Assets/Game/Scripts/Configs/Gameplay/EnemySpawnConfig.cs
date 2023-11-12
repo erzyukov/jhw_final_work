@@ -1,6 +1,6 @@
 ﻿namespace Game.Configs
 {
-	using Units;
+	using Game.Units;
 	using System;
 	using UnityEngine;
 

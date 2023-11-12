@@ -1,7 +1,6 @@
 ﻿namespace Game.Dev
 {
 	using System.Runtime.InteropServices;
-	//using VContainer.Unity;
 
 	public static class WebGLDebug
 	{

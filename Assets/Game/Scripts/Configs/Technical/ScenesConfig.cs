@@ -1,6 +1,6 @@
 ﻿namespace Game.Configs
 {
-	using Utilities;
+	using Game.Utilities;
 	using System.Collections.Generic;
 	using UnityEngine;
 	using System;

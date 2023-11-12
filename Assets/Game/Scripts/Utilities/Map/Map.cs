@@ -3,7 +3,6 @@ namespace Game.Utilities
 	using System.Collections;
 	using System.Collections.Generic;
 	using UnityEngine;
-	using UnityEngine.UIElements;
 
 	public interface IMap<T> : IEnumerable<Vector2Int>
 	{

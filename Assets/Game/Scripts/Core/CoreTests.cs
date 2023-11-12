@@ -2,9 +2,9 @@ namespace Game.Core
 {
 	using Game.Profiles;
 	using Game.Utilities;
+	using Game.Dev;
 	using UnityEngine;
 	using UniRx;
-	using Game.Dev;
 	using Zenject;
 
 	public class CoreTests : ControllerBase, IInitializable

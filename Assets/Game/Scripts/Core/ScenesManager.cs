@@ -1,8 +1,8 @@
 namespace Game.Core
 {
-	using Configs;
+	using Game.Configs;
 	using Game.Utilities;
-	using Profiles;
+	using Game.Profiles;
 	using System;
 	using System.Collections;
 	using System.Linq;
@@ -15,6 +15,7 @@ namespace Game.Core
 	public interface IScenesManager
 	{
 		ReactiveCommand SplashCompleted { get; }
+		ReactiveCommand MainLoaded { get; }
 		ReactiveCommand LevelLoaded { get; }
 		ReactiveProperty<float> SceneLoadProgress { get; }
 
@@ -46,10 +47,12 @@ namespace Game.Core
 				yield return null;
 			}
 
+			MainLoaded.Execute();
+
 			if (IsSceneLoaded(_scenesConfig.Splash))
 				UnloadScene(_scenesConfig.Splash);
 
-			LoadLevel();
+			//LoadLevel();
 
 			yield return null;
 		}
@@ -57,6 +60,7 @@ namespace Game.Core
 		#region IScenesManager
 
 		public ReactiveCommand SplashCompleted { get; } = new ReactiveCommand();
+		public ReactiveCommand MainLoaded { get; } = new ReactiveCommand();
 		public ReactiveCommand LevelLoaded { get; } = new ReactiveCommand();
 
 		public ReactiveProperty<float> SceneLoadProgress { get; } = new ReactiveProperty<float>();

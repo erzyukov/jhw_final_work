@@ -1,6 +1,6 @@
 namespace Game.Installers
 {
-	using Core;
+	using Game.Core;
 	using Game.Configs;
 	using Game.Dev;
 	using Game.Units;
