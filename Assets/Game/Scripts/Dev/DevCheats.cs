@@ -8,12 +8,15 @@
 	using System;
 	using Game.Profiles;
 	using Zenject;
+	using Game.Units;
+	using UnityEngine;
 
 	public class DevCheats : ControllerBase, IInitializable
 	{
-		[Inject] IInputHandler _inputManager;
-		[Inject] IGameLevel _gameLevel;
+		[Inject] private IInputHandler _inputManager;
+		[Inject] private IGameLevel _gameLevel;
 		[Inject] private GameProfile _profile;
+		[Inject] private UnitFacade.Factory _unitFactory;
 
 		private Controls.DevCheatsActions Cheats => _inputManager.DevCheats;
 
@@ -24,6 +27,12 @@
 			Subscribe(Cheats.NextLevel, () => _gameLevel.GoToLevel(_profile.LevelNumber.Value + 1));
 
 			Subscribe(Cheats.PrevLevel, () => _gameLevel.GoToLevel(_profile.LevelNumber.Value - 1));
+
+			Subscribe(Cheats.BuyUnit, () =>
+			{
+				IUnitFacade unit = _unitFactory.Create(Species.HeroInfantryman);
+				Debug.LogWarning($"Unit {unit.Species} bought!");
+			});
 		}
 
 		void Subscribe(InputAction inputAction, Action action)

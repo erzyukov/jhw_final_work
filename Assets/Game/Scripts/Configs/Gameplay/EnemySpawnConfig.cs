@@ -16,7 +16,7 @@
 		{
 			public float Delay;
 			public Vector2Int Position;
-			public Unit.Kind Type;
+			//public Unit.Kind Type;
 		}
 	}
 }

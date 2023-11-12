@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba901327ab9d1e14aaec6b0d0294ba36, type: 3}
   m_Name: Units
   m_EditorClassIdentifier: 
+  _unitPrefab: {fileID: 0}
   _units:
-  - Type: 0
+  - Species: 1
     Config: {fileID: 11400000, guid: afafe5346bf1e544daa470fd14b26621, type: 2}
-  - Type: 1
-    Config: {fileID: 11400000, guid: 85f933ad5177f094aa1605e40e916cba, type: 2}
-  - Type: 2
-    Config: {fileID: 11400000, guid: f08a42a5ab33c944ab8517a1d5583913, type: 2}
+  UnitPrefab: {fileID: 8733958787987239910, guid: 51826799d4a3bd54985dcaf25f6cd13e, type: 3}

@@ -34,8 +34,8 @@ namespace Game.Field
 
 		public void SetUnit(IUnit unit)
 		{
-			_unit = unit;
-			_unit.SetViewParent(_cellView.UnitPivot);
+			//_unit = unit;
+			//_unit.SetViewParent(_cellView.UnitPivot);
 		}
 
 		public void Clear()

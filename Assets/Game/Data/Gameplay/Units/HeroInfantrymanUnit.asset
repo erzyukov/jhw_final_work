@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
-  m_Name: UnitHowitzer
+  m_Name: HeroInfantrymanUnit
   m_EditorClassIdentifier: 
-  _title: "\u0413\u0430\u0443\u0431\u0438\u0446\u0430"
-  _prefab: {fileID: 9004953397474591569, guid: 0bde0f7ddefeb7848b1b321063423f1c, type: 3}
-  _shootDelay: 3
-  _damage: 15
-  _health: 40
+  _title: "\u041F\u0435\u0445\u043E\u0442\u0438\u043D\u0435\u0446"
+  _class: 0
+  _prefab: {fileID: 1503547998484457933, guid: e9cec3f7a3fe02c40b0fdfbc71216dae, type: 3}
+  _attackDelay: 1
+  _attackRange: 0.5
+  _damage: 10
+  _health: 80

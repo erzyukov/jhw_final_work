@@ -55,6 +55,15 @@ namespace Game.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BuyUnit"",
+                    ""type"": ""Button"",
+                    ""id"": ""e36d820e-5aed-46cb-8430-c8624448bad5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -90,6 +99,17 @@ namespace Game.Input
                     ""action"": ""PrevLevel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b4926dfa-765c-4597-9acd-fe4b7cd9be96"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BuyUnit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,6 +121,7 @@ namespace Game.Input
             m_DevCheats_NextWave = m_DevCheats.FindAction("NextWave", throwIfNotFound: true);
             m_DevCheats_NextLevel = m_DevCheats.FindAction("NextLevel", throwIfNotFound: true);
             m_DevCheats_PrevLevel = m_DevCheats.FindAction("PrevLevel", throwIfNotFound: true);
+            m_DevCheats_BuyUnit = m_DevCheats.FindAction("BuyUnit", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -163,6 +184,7 @@ namespace Game.Input
         private readonly InputAction m_DevCheats_NextWave;
         private readonly InputAction m_DevCheats_NextLevel;
         private readonly InputAction m_DevCheats_PrevLevel;
+        private readonly InputAction m_DevCheats_BuyUnit;
         public struct DevCheatsActions
         {
             private @Controls m_Wrapper;
@@ -170,6 +192,7 @@ namespace Game.Input
             public InputAction @NextWave => m_Wrapper.m_DevCheats_NextWave;
             public InputAction @NextLevel => m_Wrapper.m_DevCheats_NextLevel;
             public InputAction @PrevLevel => m_Wrapper.m_DevCheats_PrevLevel;
+            public InputAction @BuyUnit => m_Wrapper.m_DevCheats_BuyUnit;
             public InputActionMap Get() { return m_Wrapper.m_DevCheats; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -188,6 +211,9 @@ namespace Game.Input
                     @PrevLevel.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnPrevLevel;
                     @PrevLevel.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnPrevLevel;
                     @PrevLevel.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnPrevLevel;
+                    @BuyUnit.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnBuyUnit;
+                    @BuyUnit.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnBuyUnit;
+                    @BuyUnit.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnBuyUnit;
                 }
                 m_Wrapper.m_DevCheatsActionsCallbackInterface = instance;
                 if (instance != null)
@@ -201,6 +227,9 @@ namespace Game.Input
                     @PrevLevel.started += instance.OnPrevLevel;
                     @PrevLevel.performed += instance.OnPrevLevel;
                     @PrevLevel.canceled += instance.OnPrevLevel;
+                    @BuyUnit.started += instance.OnBuyUnit;
+                    @BuyUnit.performed += instance.OnBuyUnit;
+                    @BuyUnit.canceled += instance.OnBuyUnit;
                 }
             }
         }
@@ -210,6 +239,7 @@ namespace Game.Input
             void OnNextWave(InputAction.CallbackContext context);
             void OnNextLevel(InputAction.CallbackContext context);
             void OnPrevLevel(InputAction.CallbackContext context);
+            void OnBuyUnit(InputAction.CallbackContext context);
         }
     }
 }
