@@ -23,6 +23,10 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<InputHandler>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<GameCycle>()
+				.AsSingle();
 		}
 
 		private void RegisterGameProfile()
