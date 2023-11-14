@@ -1,8 +1,10 @@
-﻿namespace Game.UI
+﻿namespace Game.Ui
 {
+	using Game.Core;
 	using Game.Utilities;
 	using System.Collections.Generic;
 	using UniRx;
+	using UnityEngine;
 	using Zenject;
 
 	public interface IScreenNavigator
@@ -15,7 +17,8 @@
 
 	public class ScreenNavigator : ControllerBase, IScreenNavigator, IInitializable
 	{
-		[Inject] List<IUiScreen> _screens;
+		[Inject] private List<IUiScreen> _screens;
+		[Inject] private IGameCycle _gameCycle;
 
 		readonly ReactiveProperty<Screen> _screen;
 
@@ -30,8 +33,26 @@
 			foreach (var screen in _screens)
 			{
 				screen.Closed
-					.Subscribe(_ => _screen.Value = UI.Screen.None)
+					.Subscribe(_ => _screen.Value = Ui.Screen.None)
 					.AddTo(this);
+			}
+
+			_gameCycle.State
+				.Subscribe(OnGameCycleChangeHandler)
+				.AddTo(this);
+		}
+
+		private void OnGameCycleChangeHandler(GameState state)
+		{
+			switch (state)
+			{
+				case GameState.None: 
+				case GameState.LoadingLobby: 
+					Open(Ui.Screen.Loading);
+					break;
+				case GameState.Lobby:
+					Open(Ui.Screen.Lobby);
+					break;
 			}
 		}
 
@@ -47,7 +68,7 @@
 
 		public void CloseActive()
 		{
-			Open(UI.Screen.None);
+			Open(Ui.Screen.None);
 		}
 
 		#endregion

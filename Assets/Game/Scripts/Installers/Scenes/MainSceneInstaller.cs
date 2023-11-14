@@ -6,8 +6,10 @@ namespace Game.Installers
 	using Game.Units;
 	using UnityEngine;
 	using Zenject;
+	using System;
+	using Game.Ui;
 
-    public class MainSceneInstaller : MonoInstaller
+	public class MainSceneInstaller : MonoInstaller
 	{
 		[Inject] private UnitsConfig _unitsConfig;
 
@@ -22,8 +24,21 @@ namespace Game.Installers
 				.FromComponentInHierarchy()
 				.AsSingle();
 
+			InstallUI();
 			InstallUnits();
 			InstallDebugServicies();
+		}
+
+		private void InstallUI()
+		{
+			Container
+				.Bind<IUiScreen>()
+				.FromComponentsInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<ScreenNavigator>()
+				.AsSingle();
 		}
 
 		private void InstallUnits()
