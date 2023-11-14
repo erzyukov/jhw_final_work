@@ -1,4 +1,4 @@
-namespace Game.UI
+namespace Game.Ui
 {
 	using UniRx;
 	using UnityEngine;
@@ -7,6 +7,7 @@ namespace Game.UI
 	public enum Screen
 	{
 		None,
+		Loading,
 		Lobby,
 		Win,
 		Lose,

@@ -2,6 +2,7 @@
 {
 	using Game.Configs;
 	using Game.Profiles;
+	using Game.Ui;
 	using Game.Utilities;
 	using UniRx;
 	using UnityEngine;
