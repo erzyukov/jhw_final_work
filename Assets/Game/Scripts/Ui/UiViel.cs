@@ -37,8 +37,12 @@ namespace Game.Ui
 
 		private void SetActive(bool value)
 		{
+			if (value)
+				gameObject.SetActive(true);
+
 			float alpha = value ? 1 : 0;
-			_veil.DOFade(alpha, _duration);
+			_veil.DOFade(alpha, _duration)
+				.OnComplete(() => gameObject.SetActive(false));
 		}
 	}
 }

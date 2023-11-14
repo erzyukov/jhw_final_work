@@ -6671,7 +6671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _veil: {fileID: 4701965884879959254}
-  _duration: 0.8
+  _duration: 0.5
 --- !u!1001 &6558836500754652646
 PrefabInstance:
   m_ObjectHideFlags: 0
