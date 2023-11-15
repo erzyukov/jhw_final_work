@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c9157cb07299e4bbc3316422d2e102, type: 3}
   m_Name: Level-2
   m_EditorClassIdentifier: 
+  _title: "\u042D\u0422\u0410\u041F 1-2"
   _region: 0
   _waves:
   - {fileID: 11400000, guid: 03a0124f4045b0a4e9c2b867a57b8b48, type: 2}

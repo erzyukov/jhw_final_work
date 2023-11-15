@@ -2,6 +2,7 @@
 {
 	using Game.Configs;
 	using Game.Profiles;
+	using Game.Ui;
 	using Game.Utilities;
 	using UniRx;
 	using UnityEngine;
@@ -20,6 +21,8 @@
 		[Inject] private GameProfile _profile;
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] private IScenesManager _scenesManager;
+		[Inject] private IGameCycle _gameCycle;
+		[Inject] private IUiViel _uiViel;
 
 		public void Initialize()
 		{
@@ -36,17 +39,20 @@
 
 		public void GoToLevel(int number)
 		{
-			// TODO: Show veil screen
-
-			if (IsLevelLoaded.Value)
+			_uiViel.SetActive(true, () =>
 			{
-				_scenesManager.UnloadLevel();
-				IsLevelLoaded.Value = false;
-			}
+				if (IsLevelLoaded.Value)
+				{
+					_scenesManager.UnloadLevel();
+					IsLevelLoaded.Value = false;
+				}
 
-			_profile.LevelNumber.Value = ClampLevelNumber(number);
+				_profile.LevelNumber.Value = ClampLevelNumber(number);
 
-			_scenesManager.LoadLevel();
+				_gameCycle.SetState(GameState.LoadingLevel);
+
+				_scenesManager.LoadLevel();
+			});
 		}
 
 		public void GoToNextWave()
@@ -66,19 +72,24 @@
 
 		void FinishLevel()
 		{
-			LevelFinished.Execute();
-			_profile.WaveNumber.Value = 0;
-			_scenesManager.UnloadLevel();
-			IsLevelLoaded.Value = false;
+			_uiViel.SetActive(true, () =>
+			{
+				LevelFinished.Execute();
+				_profile.WaveNumber.Value = 0;
+				_scenesManager.UnloadLevel();
+				IsLevelLoaded.Value = false;
+			});
 		}
 
 		int ClampLevelNumber(int number) => Mathf.Clamp(number, 1, _levelsConfig.Levels.Length);
 
 		void OnLevelLoaded()
 		{
-			IsLevelLoaded.Value = true;
-
-			// TODO: Hide veil screen
+			_uiViel.SetActive(false, () =>
+			{
+				IsLevelLoaded.Value = true;
+				_gameCycle.SetState(GameState.TacticalStage);
+			});
 		}
 	}
 }

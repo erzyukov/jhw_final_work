@@ -2,6 +2,7 @@
 {
 	using Game.Utilities;
 	using UniRx;
+	using UnityEngine.SceneManagement;
 	using Zenject;
 
 	public interface IGameCycle
@@ -14,10 +15,14 @@
 	{
 		[Inject] IScenesManager _scenesManager;
 
-		public ReactiveProperty<GameState> State { get; } = new ReactiveProperty<GameState>();
+		public ReactiveProperty<GameState> State { get; } = new ReactiveProperty<GameState>(GameState.None);
 
 		public void Initialize()
 		{
+			_scenesManager.SplashCompleted
+				.Subscribe(_ => SetState(GameState.LoadingLobby))
+				.AddTo(this);
+
 			_scenesManager.MainLoaded
 				.Subscribe(_ => SetState(GameState.Lobby))
 				.AddTo(this);

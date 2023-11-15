@@ -33,6 +33,8 @@ namespace Game.Core
 
 		private IEnumerator LoadScenes()
 		{
+			WaitForFixedUpdate wait = new WaitForFixedUpdate();
+
 			if (IsSceneLoaded(_scenesConfig.Splash))
 			{
 				yield return null;
@@ -40,12 +42,16 @@ namespace Game.Core
 				SplashCompleted.Execute();
 			}
 
+			yield return wait;
+
 			if (!IsSceneLoaded(_scenesConfig.Main))
 			{
 				LoadScene(_scenesConfig.Main);
 
 				yield return null;
 			}
+
+			yield return wait;
 
 			MainLoaded.Execute();
 
