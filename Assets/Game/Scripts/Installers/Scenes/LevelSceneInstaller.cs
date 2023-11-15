@@ -1,8 +1,7 @@
 namespace Game.Installers
 {
-	using Game.Core;
 	using Game.Dev;
-	using UnityEngine;
+	using Game.Level;
 	using Zenject;
 
     public class LevelSceneInstaller : MonoInstaller
@@ -10,9 +9,10 @@ namespace Game.Installers
 		public override void InstallBindings()
 		{
 			WebGLDebug.Log("[Project] LevelSceneInstaller: Configure");
-
-			//builder.Register<BattleSimulator>(Lifetime.Singleton).AsImplementedInterfaces();
-			//builder.Register<TargetFinderSelector>(Lifetime.Singleton).AsImplementedInterfaces();
+			
+			Container
+				.BindInterfacesTo<HeroUnitSummoner>()
+				.AsSingle();
 		}
 	}
 }

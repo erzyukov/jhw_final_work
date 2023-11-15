@@ -4,33 +4,25 @@
 	using Zenject;
 	using UniRx;
 	using Game.Core;
-	using Game.Units;
 	using Game.Configs;
+	using Game.Level;
 
 	public class UiTacticalStage : ControllerBase, IInitializable
 	{
 		[Inject] private IUiTacticalStageHud _hud;
 		[Inject] private IGameCycle _gameCycle;
-		[Inject] private UnitFacade.Factory _unitFactory;
+		[Inject] private IHeroUnitSummoner _heroUnitSummoner;
 		[Inject] private CurrencyConfig _currencyConfig;
 
 		public void Initialize()
 		{
-			_hud.Opening
-				.Subscribe(_ => OnOpeningHandler())
-				.AddTo(this);
-
 			_hud.StartBattleButtonClicked
 				.Subscribe(_ => _gameCycle.SetState(GameState.BattleStage))
 				.AddTo(this);
 
 			_hud.SummonButtonClicked
-				.Subscribe(_ => _unitFactory.Create(Species.HeroInfantryman))
+				.Subscribe(_ => _heroUnitSummoner.Summon())
 				.AddTo(this);
-		}
-
-		private void OnOpeningHandler()
-		{
 			_hud.SetSummonPrice(_currencyConfig.UnitSummonPrice);
 		}
 	}
