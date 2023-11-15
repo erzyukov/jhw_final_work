@@ -1,48 +1,34 @@
 namespace Game.Ui
 {
-	using Game.Core;
-	using Game.Utilities;
 	using UnityEngine;
 	using DG.Tweening;
 	using UnityEngine.UI;
-	using Zenject;
-	using UniRx;
+	using System;
 
-    public class UiViel : MonoBehaviour
+	public interface IUiViel
+	{
+		void SetActive(bool value, Action onCompete = null);
+	}
+
+    public class UiViel : MonoBehaviour, IUiViel
 	{
 		[SerializeField] private Image _veil;
 		[SerializeField] private float _duration;
 
-		[Inject] private IGameCycle _gameCycle;
-
-		private void Start()
-		{
-			_gameCycle.State
-				.Subscribe(OnGameCycleStateChanged)
-				.AddTo(this);
-		}
-
-		private void OnGameCycleStateChanged(GameState state)
-		{
-			switch (state)
-			{
-				case GameState.LoadingLobby:
-					SetActive(true);
-					break;
-				default: 
-					SetActive(false);
-					break;
-			}
-		}
-
-		private void SetActive(bool value)
+		public void SetActive(bool value, Action onCompete = null)
 		{
 			if (value)
 				gameObject.SetActive(true);
 
 			float alpha = value ? 1 : 0;
 			_veil.DOFade(alpha, _duration)
-				.OnComplete(() => gameObject.SetActive(false));
+				.OnComplete(() =>
+				{
+					onCompete?.Invoke();
+
+					if (value == false)
+						gameObject.SetActive(false);
+				});
 		}
 	}
 }

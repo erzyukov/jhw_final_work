@@ -6,17 +6,20 @@
 	using System;
 	using UniRx;
 
-	public interface IUiLobbyScreen
+	public interface IUiLobbyScreen : IUiScreen
 	{
-		void SetTitle(string value);
-		void SetLastWaveTitle(string value);
 		IObservable<Unit> PlayButtonClicked { get; }
+		void SetTitle(string value);
+		void SetLastWaveValue(string value);
+		void SetLastWaveActive(bool value);
 	}
 
 	public class UiLobbyScreen : UiScreen, IUiLobbyScreen
 	{
 		[SerializeField] private TextMeshProUGUI _levelTitle;
-		[SerializeField] private TextMeshProUGUI _lastWaveTitle;
+		[SerializeField] private GameObject _lastWave;
+		[SerializeField] private TextMeshProUGUI _lastWaveValue;
+		[SerializeField] private string _lastWavePrefix;
 		[SerializeField] private Button _playButton;
 
 		public override Screen Screen => Screen.Lobby;
@@ -27,8 +30,10 @@
 		
 		public void SetTitle(string value) => _levelTitle.text = value;
 
-		public void SetLastWaveTitle(string value) => _lastWaveTitle.text = value;
-		
+		public void SetLastWaveValue(string value) => _lastWaveValue.text = _lastWavePrefix + value;
+
+		public void SetLastWaveActive(bool value) => _lastWave.SetActive(value);
+
 		#endregion
 	}
 }

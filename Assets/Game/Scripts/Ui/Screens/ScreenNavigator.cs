@@ -19,6 +19,7 @@
 	{
 		[Inject] private List<IUiScreen> _screens;
 		[Inject] private IGameCycle _gameCycle;
+		[Inject] private IUiViel _uiViel;
 
 		readonly ReactiveProperty<Screen> _screen;
 
@@ -44,12 +45,14 @@
 
 		private void OnGameCycleChangeHandler(GameState state)
 		{
+			CloseActive();
+
 			switch (state)
 			{
-				case GameState.None: 
-				case GameState.LoadingLobby: 
-					Open(Ui.Screen.Loading);
-					break;
+				//case GameState.None: 
+				//case GameState.LoadingLobby: 
+					//Open(Ui.Screen.Loading);
+					//break;
 				case GameState.Lobby:
 					Open(Ui.Screen.Lobby);
 					break;
@@ -64,6 +67,7 @@
 		{
 			_screen.Value = screen;
 			_screens.ForEach(s => s.SetActive(s.Screen == screen));
+			_uiViel.SetActive(false);
 		}
 
 		public void CloseActive()
