@@ -8,6 +8,7 @@ namespace Game.Installers
 	using Zenject;
 	using System;
 	using Game.Ui;
+	using Game.Level;
 
 	public class MainSceneInstaller : MonoInstaller
 	{
@@ -25,6 +26,7 @@ namespace Game.Installers
 				.AsSingle();
 
 			InstallUI();
+			InstallHero();
 			InstallUnits();
 			InstallDebugServicies();
 		}
@@ -34,6 +36,13 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<UiViel>()
 				.FromComponentInHierarchy()
+				.AsSingle();
+		}
+
+		private void InstallHero()
+		{
+			Container
+				.BindInterfacesTo<HeroSummonCurrency>()
 				.AsSingle();
 		}
 
