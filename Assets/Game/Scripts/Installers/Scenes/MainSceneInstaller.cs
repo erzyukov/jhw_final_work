@@ -35,24 +35,6 @@ namespace Game.Installers
 				.BindInterfacesTo<UiViel>()
 				.FromComponentInHierarchy()
 				.AsSingle();
-
-			Container
-				.Bind<IUiScreen>()
-				.FromComponentsInHierarchy()
-				.AsSingle();
-
-			Container
-				.BindInterfacesTo<ScreenNavigator>()
-				.AsSingle();
-
-			Container
-				.BindInterfacesTo<UiLobbyScreen>()
-				.FromComponentInHierarchy()
-				.AsSingle();
-
-			Container
-				.BindInterfacesTo<UiLobby>()
-				.AsSingle();
 		}
 
 		private void InstallUnits()
