@@ -20,6 +20,11 @@ namespace Game.Installers
 					.Bind<IUiHudPartition>()
 					.FromComponentsInHierarchy()
 					.AsSingle();
+
+				Container
+					.BindInterfacesTo<UiHaveNeedOfMessage>()
+					.FromComponentInHierarchy()
+					.AsSingle();
 			}
 
 			TacticalStageInstall();
