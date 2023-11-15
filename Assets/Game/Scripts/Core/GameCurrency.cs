@@ -1,12 +1,15 @@
 ﻿namespace Game.Core
 {
 	using Game.Profiles;
+	using UniRx;
 	using Zenject;
 
 	public interface IGameCurrency
 	{
 		void AddSoftCurrency(int value);
 		bool TrySpendSoftCurrency(int amount);
+		void AddSummonCurrency(int value);
+		bool TrySpendSummonCurrency(int amount);
 	}
 
 	public class GameCurrency : IGameCurrency
@@ -15,19 +18,24 @@
 
 		private GameProfile GameProfile => _gameProfileManager.GameProfile;
 
-		public void AddSoftCurrency(int value)
+		public void AddSoftCurrency(int value) => AddCurrency(GameProfile.SoftCurrency, value);
+		public bool TrySpendSoftCurrency(int value) => TrySpendCurrency(GameProfile.SoftCurrency, value);
+
+		public void AddSummonCurrency(int value) => AddCurrency(GameProfile.SummonCurrency, value);
+		public bool TrySpendSummonCurrency(int value) => TrySpendCurrency(GameProfile.SummonCurrency, value);
+
+		void AddCurrency(IntReactiveProperty currency, int value)
 		{
-			GameProfile.SoftCurrency.Value += value;
-			
+			currency.Value += value;
 			Save();
 		}
 
-		public bool TrySpendSoftCurrency(int value)
+		bool TrySpendCurrency(IntReactiveProperty currency, int value)
 		{
-			if (value > GameProfile.SoftCurrency.Value)
+			if (value > currency.Value)
 				return false;
 
-			GameProfile.SoftCurrency.Value -= value;
+			currency.Value -= value;
 			Save();
 
 			return true;
