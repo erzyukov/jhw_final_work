@@ -17,3 +17,4 @@ MonoBehaviour:
   _battleField: {fileID: 11400000, guid: 67d76da5b9bc6f646a94e824fa96aa81, type: 2}
   _enemy: {fileID: 11400000, guid: c3a21572df3c6104a9a0fbbe69a11295, type: 2}
   _levels: {fileID: 11400000, guid: 3db0c9857269dcb4292b0347aec55d42, type: 2}
+  _currency: {fileID: 11400000, guid: efa57f5a6fe940f4b9e00a51738b1392, type: 2}

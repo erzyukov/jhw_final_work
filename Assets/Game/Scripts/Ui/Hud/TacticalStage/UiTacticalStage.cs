@@ -5,12 +5,14 @@
 	using UniRx;
 	using Game.Core;
 	using Game.Units;
+	using Game.Configs;
 
 	public class UiTacticalStage : ControllerBase, IInitializable
 	{
 		[Inject] private IUiTacticalStageHud _hud;
 		[Inject] private IGameCycle _gameCycle;
 		[Inject] private UnitFacade.Factory _unitFactory;
+		[Inject] private CurrencyConfig _currencyConfig;
 
 		public void Initialize()
 		{
@@ -29,7 +31,7 @@
 
 		private void OnOpeningHandler()
 		{
-			_hud.SetSummonPrice(5);
+			_hud.SetSummonPrice(_currencyConfig.UnitSummonPrice);
 		}
 	}
 }
