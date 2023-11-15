@@ -39,6 +39,8 @@
 
 		public void GoToLevel(int number)
 		{
+			_gameCycle.SetState(GameState.LoadingLevel);
+
 			_uiViel.SetActive(true, () =>
 			{
 				if (IsLevelLoaded.Value)
@@ -48,8 +50,6 @@
 				}
 
 				_profile.LevelNumber.Value = ClampLevelNumber(number);
-
-				_gameCycle.SetState(GameState.LoadingLevel);
 
 				_scenesManager.LoadLevel();
 			});
@@ -85,10 +85,11 @@
 
 		void OnLevelLoaded()
 		{
+			_gameCycle.SetState(GameState.TacticalStage);
+
 			_uiViel.SetActive(false, () =>
 			{
 				IsLevelLoaded.Value = true;
-				_gameCycle.SetState(GameState.TacticalStage);
 			});
 		}
 	}

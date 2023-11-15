@@ -52,7 +52,7 @@ namespace UniRx
         {
             ForceExecute(Unit.Default);
         }
-    }
+	}
 
     public class ReactiveCommand<T> : IReactiveCommand<T>, IDisposable
     {

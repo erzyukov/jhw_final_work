@@ -3900,13 +3900,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1242171328}
+  - component: {fileID: 1242171329}
   m_Layer: 5
   m_Name: TacticalStage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1242171328
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3929,6 +3930,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1242171329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242171327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d9496234967b44a8f8f51ef0884f0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activeInGameStates: 04000000
+  _summonPrice: {fileID: 623662937}
+  _summonButton: {fileID: 666483733}
+  _startBattleButton: {fileID: 2095204207}
 --- !u!1 &1248763955
 GameObject:
   m_ObjectHideFlags: 0

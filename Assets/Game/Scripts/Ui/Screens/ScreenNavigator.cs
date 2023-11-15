@@ -4,7 +4,6 @@
 	using Game.Utilities;
 	using System.Collections.Generic;
 	using UniRx;
-	using UnityEngine;
 	using Zenject;
 
 	public interface IScreenNavigator
@@ -13,7 +12,6 @@
 		void Open(Screen screen);
 		void CloseActive();
 	}
-
 
 	public class ScreenNavigator : ControllerBase, IScreenNavigator, IInitializable
 	{
@@ -49,10 +47,6 @@
 
 			switch (state)
 			{
-				//case GameState.None: 
-				//case GameState.LoadingLobby: 
-					//Open(Ui.Screen.Loading);
-					//break;
 				case GameState.Lobby:
 					Open(Ui.Screen.Lobby);
 					break;
