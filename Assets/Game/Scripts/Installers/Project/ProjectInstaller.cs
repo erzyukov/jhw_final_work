@@ -24,9 +24,7 @@ namespace Game.Installers
 				.BindInterfacesTo<InputHandler>()
 				.AsSingle();
 
-			Container
-				.BindInterfacesTo<GameCycle>()
-				.AsSingle();
+			RegisterGameControllers();
 		}
 
 		private void RegisterGameProfile()
@@ -41,6 +39,17 @@ namespace Game.Installers
 				.FromResolveGetter<IGameProfileManager>(gameProfileManager => gameProfileManager.GameProfile)
 				.AsSingle()
 				.MoveIntoAllSubContainers();
+		}
+
+		private void RegisterGameControllers()
+		{
+			Container
+				.BindInterfacesTo<GameCycle>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<GameCurrency>()
+				.AsSingle();
 		}
 	}
 }
