@@ -1,38 +1,71 @@
 namespace Game.Installers
 {
 	using Game.Ui;
+	using UnityEngine;
 	using Zenject;
 
 	public class HudInstaller : MonoInstaller
 	{
+		[SerializeField] private SceneContext _sceneContext;
+
 		public override void InstallBindings()
 		{
-			Container
-				.BindInterfacesTo<HudNavigator>()
-				.AsSingle();
+			if (_sceneContext == SceneContext.Main)
+			{
+				Container
+					.BindInterfacesTo<HudNavigator>()
+					.AsSingle();
 
-			Container
-				.Bind<IUiHudPartition>()
-				.FromComponentsInHierarchy()
-				.AsSingle();
+				Container
+					.Bind<IUiHudPartition>()
+					.FromComponentsInHierarchy()
+					.AsSingle();
+			}
 
-			Container
-				.BindInterfacesTo<UiTacticalStageHud>()
-				.FromComponentInHierarchy()
-				.AsSingle();
+			TacticalStageInstall();
+			CommonGameplayInstall();
+		}
 
-			Container
-				.BindInterfacesTo<UiTacticalStage>()
-				.AsSingle();
+		private void TacticalStageInstall()
+		{
+			if (_sceneContext == SceneContext.Main)
+			{
+				Container
+					.BindInterfacesTo<UiTacticalStageHud>()
+					.FromComponentInHierarchy()
+					.AsSingle();
+			}
 
-			Container
-				.BindInterfacesTo<UiCommonGameplayHud>()
-				.FromComponentInHierarchy()
-				.AsSingle();
+			if (_sceneContext == SceneContext.Level)
+			{
+				Container
+					.BindInterfacesTo<UiTacticalStage>()
+					.AsSingle();
+			}
+		}
 
-			Container
-				.BindInterfacesTo<UiCommonGameplay>()
-				.AsSingle();
+		private void CommonGameplayInstall()
+		{
+			if (_sceneContext == SceneContext.Main)
+			{
+				Container
+					.BindInterfacesTo<UiCommonGameplayHud>()
+					.FromComponentInHierarchy()
+					.AsSingle();
+			}
+
+			if (_sceneContext == SceneContext.Level)
+			{
+				Container
+					.BindInterfacesTo<UiCommonGameplay>()
+					.AsSingle();
+			}
+		}
+
+		public enum SceneContext
+		{
+			Main,
+			Level
 		}
 	}
 }
