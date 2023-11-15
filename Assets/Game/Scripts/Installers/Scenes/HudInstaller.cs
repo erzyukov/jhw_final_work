@@ -24,6 +24,15 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<UiTacticalStage>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiCommonGameplayHud>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiCommonGameplay>()
+				.AsSingle();
 		}
 	}
 }
