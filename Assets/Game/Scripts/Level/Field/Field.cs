@@ -17,6 +17,7 @@
 		void AddUnit(IUnitFacade unit, T fieldCell);
 		void AddUnit(IUnitFacade unit, Vector2Int position);
 		void RemoveUnit(IUnitFacade unit);
+		void Clear();
 	}
 
 	public class Field<T> : IField<T> where T : FieldCell
@@ -43,7 +44,7 @@
 		public void AddUnit(IUnitFacade unit)
 		{
 			List<T> freeCells = _map.Where(position => _map[position].HasUnit == false).Select(position => _map[position]).ToList();
-			T freeCell = freeCells[Random.Range(0, freeCells.Count)];
+			T freeCell = freeCells[UnityEngine.Random.Range(0, freeCells.Count)];
 
 			if (freeCell == null)
 				return;
@@ -63,13 +64,24 @@
 		public void AddUnit(IUnitFacade unit, Vector2Int position)
 		{
 			if(_map[position].HasUnit == false)
-				_map[position].SetUnit(unit);
+				AddUnit(unit, _map[position]);
 		}
 
 		public void RemoveUnit(IUnitFacade unit)
 		{
 			_units.Remove(unit);
 			GetCell(unit)?.Clear();
+		}
+
+		public void Clear()
+		{
+			for (int i = 0; i < _units.Count; i++)
+			{
+				_units[i].DestroyView();
+				GetCell(_units[i])?.Clear();
+			}
+
+			_units.Clear();
 		}
 	}
 

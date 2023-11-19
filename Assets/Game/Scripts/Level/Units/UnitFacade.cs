@@ -7,6 +7,7 @@
 	{
 		Species Species { get; }
 		void SetViewParent(Transform parent);
+		void DestroyView();
 	}
 
 	public class UnitFacade : IUnitFacade
@@ -20,6 +21,8 @@
 		public Species Species => _species; // _unit.Species;
 
 		public void SetViewParent(Transform parent) => _view.SetParent(parent);
+
+		public void DestroyView() => _view.Destroy();
 
 		#endregion
 

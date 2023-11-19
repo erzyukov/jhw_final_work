@@ -65,11 +65,17 @@
 			
 			if (_profile.WaveNumber.Value < waveCount)
 			{
-				_profile.WaveNumber.Value++;
 				_gameCycle.SetState(GameState.LoadingWave);
+				_uiViel.SetActive(true, () =>
+				{
+					_profile.WaveNumber.Value++;
+					_gameCycle.SetState(GameState.TacticalStage);
+				});
 			}
 			else
+			{
 				FinishLevel();
+			}
 		}
 
 		#endregion

@@ -1,8 +1,8 @@
 ﻿namespace Game.Core
 {
+	using Game.Dev;
 	using Game.Utilities;
 	using UniRx;
-	using UnityEngine.SceneManagement;
 	using Zenject;
 
 	public interface IGameCycle
@@ -25,6 +25,10 @@
 
 			_scenesManager.MainLoaded
 				.Subscribe(_ => SetState(GameState.Lobby))
+				.AddTo(this);
+
+			State
+				.Subscribe(v => WebGLDebug.Log($">>> StateChanged: {v}"))
 				.AddTo(this);
 		}
 

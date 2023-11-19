@@ -36,13 +36,6 @@ namespace Game.Units
 				.AsSingle()
 				.OnInstantiated<UnitBuilder>((ic, o) => o.OnInstantiated())
 				.NonLazy();
-
-			/*
-			Container
-				.Bind<UnitView>()
-				.FromNewComponentOnRoot()
-				.AsSingle();
-			*/
 		}
 	}
 }

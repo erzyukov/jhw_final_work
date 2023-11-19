@@ -21,9 +21,19 @@
 		public void Initialize()
 		{
 			_gameCycle.State
+				.Where(state => state == GameState.LoadingWave)
+				.Subscribe(_ => OnLoadingWaveHandler())
+				.AddTo(this);
+
+			_gameCycle.State
 				.Where(state => state == GameState.TacticalStage)
 				.Subscribe(_ => OnTacticalStageHandler())
 				.AddTo(this);
+		}
+
+		private void OnLoadingWaveHandler()
+		{
+			_fieldFacade.Clear();
 		}
 
 		private void OnTacticalStageHandler()

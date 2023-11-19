@@ -1,6 +1,23 @@
 ﻿namespace Game.Field
 {
-	public interface IFieldEnemyFacade : IFieldFacade {}
+	using Game.Level;
+	using UnityEngine;
+	using Zenject;
 
-	public class FieldEnemyFacade : FieldFacade, IFieldEnemyFacade { }
+	public interface IFieldEnemyFacade : IFieldFacade
+	{
+		void Clear();
+	}
+
+	public class FieldEnemyFacade : FieldFacade, IFieldEnemyFacade
+	{
+		#region IFieldEnemyFacade
+
+		public void Clear()
+		{
+			Field.Clear();
+		}
+
+		#endregion
+	}
 }

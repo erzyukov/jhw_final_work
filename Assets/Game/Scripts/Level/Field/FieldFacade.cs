@@ -13,13 +13,13 @@ namespace Game.Field
 
 	public class FieldFacade : MonoBehaviour, IFieldFacade
 	{
-		[Inject] private IField<FieldCell> _field;
+		[Inject] protected IField<FieldCell> Field;
 
 		#region IFieldFacade
 
-		public bool HasFreeSpace => _field.HasFreeSpace;
-		public void AddUnit(IUnitFacade unit) => _field.AddUnit(unit);
-		public void AddUnit(IUnitFacade unit, Vector2Int position) => _field.AddUnit(unit, position);
+		public bool HasFreeSpace => Field.HasFreeSpace;
+		public void AddUnit(IUnitFacade unit) => Field.AddUnit(unit);
+		public void AddUnit(IUnitFacade unit, Vector2Int position) => Field.AddUnit(unit, position);
 
 		#endregion
 	}

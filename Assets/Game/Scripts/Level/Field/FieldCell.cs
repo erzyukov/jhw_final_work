@@ -40,6 +40,7 @@
 
 		public void Clear()
 		{
+			_unit.SetViewParent(null);
 			_unit = null;
 		}
 
