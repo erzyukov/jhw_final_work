@@ -52,6 +52,10 @@ namespace Game.Installers
 				.BindFactory<Species, UnitFacade, UnitFacade.Factory>()
 				.FromSubContainerResolve()
 				.ByNewPrefabInstaller<UnitInstaller>(_unitsConfig.UnitPrefab);
+
+			Container
+				.BindFactory<UnityEngine.Object, IUnitModel, UnitModel.Factory>()
+				.FromFactory<PrefabFactory<IUnitModel>>();
 		}
 
 		private void InstallDebugServicies()

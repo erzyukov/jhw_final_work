@@ -19,8 +19,6 @@ namespace Game.Units
 			Container
 				.BindInstance(_unitsConfig.Units[_species]);
 
-			Container.BindFactory<Object, IUnitModel, UnitModel.Factory>().FromFactory<PrefabFactory<IUnitModel>>();
-
 			Container
 				.BindInterfacesTo<UnitView>()
 				.FromComponentOnRoot();

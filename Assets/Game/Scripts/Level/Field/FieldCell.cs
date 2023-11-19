@@ -6,23 +6,23 @@
 	public interface IFieldCell
 	{
 		bool HasUnit { get; }
-		IUnit Unit { get; }
+		IUnitFacade Unit { get; }
 		Vector2Int Position { get; }
-		void SetUnit(IUnit unit);
+		void SetUnit(IUnitFacade unit);
 		void Clear();
 	}
 
 	public class FieldCell : IFieldCell
 	{
 		private IFieldCellView _cellView;
-		private IUnit _unit;
+		private IUnitFacade _unit;
 		private Vector2Int _position;
 
 		#region IFieldCell
 
 		public bool HasUnit => _unit != null;
 
-		public IUnit Unit => _unit;
+		public IUnitFacade Unit => _unit;
 
 		public Vector2Int Position => _position;
 
@@ -32,10 +32,10 @@
 			_position = position;
 		}
 
-		public void SetUnit(IUnit unit)
+		public void SetUnit(IUnitFacade unit)
 		{
-			//_unit = unit;
-			//_unit.SetViewParent(_cellView.UnitPivot);
+			_unit = unit;
+			_unit.SetViewParent(_cellView.UnitPivot);
 		}
 
 		public void Clear()

@@ -1,5 +1,9 @@
 ﻿namespace Game.Level
 {
+	using Game.Configs;
+	using Game.Core;
+	using Game.Field;
+	using Game.Ui;
 	using Game.Units;
 	using Game.Utilities;
 	using Zenject;
@@ -11,7 +15,11 @@
 
 	public class HeroUnitSummoner : ControllerBase, IHeroUnitSummoner, IInitializable
 	{
-		[Inject] private UnitFacade.Factory _unitFactory;
+		[Inject] private CurrencyConfig _currencyConfig;
+		[Inject] private IGameCurrency _gameCurrency;
+		[Inject] private IUiHaveNeedOfMessage _haveNeedOfMessage;
+		[Inject] private IUnitSpawner _unitSpawner;
+		[Inject] private IFieldHeroFacade _fieldFacade;
 
 		public void Initialize()
 		{
@@ -20,7 +28,21 @@
 
 		public void Summon()
 		{
-			_unitFactory.Create(Species.HeroInfantryman);
+			if (_fieldFacade.HasFreeSpace == false)
+			{
+				// TODO: show message: out of free space
+				return;
+			}
+
+			int summonPrice = _currencyConfig.UnitSummonPrice;
+			if (_gameCurrency.TrySpendSummonCurrency(summonPrice) == false)
+			{
+				_haveNeedOfMessage.ShowMessage(NeedMessage.SummonCurrency);
+				return;
+			}
+
+			IUnitFacade unit = _unitSpawner.SpawnHeroUnit();
+			_fieldFacade.AddUnit(unit);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 namespace Game.Installers
 {
 	using Game.Dev;
+	using Game.Field;
 	using Game.Level;
 	using Zenject;
 
@@ -12,6 +13,15 @@ namespace Game.Installers
 			
 			Container
 				.BindInterfacesTo<HeroUnitSummoner>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UnitSpawner>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<FieldHeroFacade>()
+				.FromComponentInHierarchy()
 				.AsSingle();
 		}
 	}
