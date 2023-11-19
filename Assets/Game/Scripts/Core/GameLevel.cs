@@ -6,6 +6,7 @@
 	using Game.Utilities;
 	using UniRx;
 	using UnityEngine;
+	using UnityEngine.Profiling;
 	using Zenject;
 
 	public interface IGameLevel
@@ -63,7 +64,10 @@
 			int waveCount = _levelsConfig.Levels[_profile.LevelNumber.Value].Waves.Length;
 			
 			if (_profile.WaveNumber.Value < waveCount)
+			{
 				_profile.WaveNumber.Value++;
+				_gameCycle.SetState(GameState.LoadingWave);
+			}
 			else
 				FinishLevel();
 		}
@@ -85,6 +89,9 @@
 
 		void OnLevelLoaded()
 		{
+			if (_profile.WaveNumber.Value == 0)
+				_profile.WaveNumber.Value++;
+
 			_gameCycle.SetState(GameState.TacticalStage);
 
 			_uiViel.SetActive(false, () =>

@@ -1,18 +1,24 @@
 namespace Game.Installers
 {
+	using Game.Configs;
 	using Game.Dev;
 	using Game.Field;
 	using Game.Level;
+	using Game.Profiles;
 	using Zenject;
 
     public class LevelSceneInstaller : MonoInstaller
 	{
+		[Inject] private LevelsConfig _levelsConfig;
+		[Inject] private GameProfile _gameProfile;
+
 		public override void InstallBindings()
 		{
 			WebGLDebug.Log("[Project] LevelSceneInstaller: Configure");
-			
+
+			LevelConfig levelConfig = _levelsConfig.Levels[_gameProfile.LevelNumber.Value - 1];
 			Container
-				.BindInterfacesTo<HeroUnitSummoner>()
+				.BindInstance(levelConfig)
 				.AsSingle();
 
 			Container
@@ -22,6 +28,19 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<FieldHeroFacade>()
 				.FromComponentInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<HeroUnitSummoner>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<FieldEnemyFacade>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<EnemyUnitSummoner>()
 				.AsSingle();
 		}
 	}

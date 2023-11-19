@@ -15,10 +15,11 @@
 		T GetCell(IUnitFacade unit);
 		void AddUnit(IUnitFacade unit);
 		void AddUnit(IUnitFacade unit, T fieldCell);
+		void AddUnit(IUnitFacade unit, Vector2Int position);
 		void RemoveUnit(IUnitFacade unit);
 	}
 
-	public class Field<T>: IField<T> where T : FieldCell
+	public class Field<T> : IField<T> where T : FieldCell
 	{
 		private Map<T> _map;
 		private List<IUnitFacade> _units;
@@ -57,6 +58,12 @@
 
 			_units.Add(unit);
 			fieldCell.SetUnit(unit);
+		}
+
+		public void AddUnit(IUnitFacade unit, Vector2Int position)
+		{
+			if(_map[position].HasUnit == false)
+				_map[position].SetUnit(unit);
 		}
 
 		public void RemoveUnit(IUnitFacade unit)

@@ -33,7 +33,7 @@
 
 	public enum GameState
 	{
-		None,
+		None			= 0,
 		LoadingLobby,
 		Lobby,
 		LoadingLevel,

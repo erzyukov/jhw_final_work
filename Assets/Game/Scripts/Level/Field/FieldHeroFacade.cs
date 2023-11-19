@@ -1,14 +1,6 @@
 namespace Game.Field
 {
-	using UnityEngine;
+	public interface IFieldHeroFacade : IFieldFacade {}
 
-	public interface IFieldHeroFacade : IFieldFacade
-	{
-
-	}
-
-    public class FieldHeroFacade : FieldFacade, IFieldHeroFacade
-	{
-
-    }
+    public class FieldHeroFacade : FieldFacade, IFieldHeroFacade {}
 }

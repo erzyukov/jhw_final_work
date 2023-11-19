@@ -41,7 +41,8 @@
 				return;
 			}
 
-			IUnitFacade unit = _unitSpawner.SpawnHeroUnit();
+			Species defaultSpecies = Species.HeroInfantryman;
+			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(defaultSpecies);
 			_fieldFacade.AddUnit(unit);
 		}
 	}

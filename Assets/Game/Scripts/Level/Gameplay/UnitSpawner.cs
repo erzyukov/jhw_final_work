@@ -5,7 +5,7 @@
 
 	public interface IUnitSpawner
 	{
-		IUnitFacade SpawnHeroUnit();
+		IUnitFacade SpawnHeroUnit(Species species);
 	}
 
 	public class UnitSpawner : IUnitSpawner
@@ -14,9 +14,9 @@
 
 		#region IUnitSpawner
 
-		public IUnitFacade SpawnHeroUnit()
+		public IUnitFacade SpawnHeroUnit(Species species)
 		{
-			return _unitFactory.Create(Species.HeroInfantryman);
+			return _unitFactory.Create(species);
 		}
 
 		#endregion
