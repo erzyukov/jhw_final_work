@@ -7,6 +7,7 @@
 		BattleField,
 		Enemy,
 		EnemySpawn,
+		Currency,
 
 		// Levels
 		Regions = 250,

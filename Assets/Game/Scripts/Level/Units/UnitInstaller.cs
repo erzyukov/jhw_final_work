@@ -19,8 +19,6 @@ namespace Game.Units
 			Container
 				.BindInstance(_unitsConfig.Units[_species]);
 
-			Container.BindFactory<Object, IUnitModel, UnitModel.Factory>().FromFactory<PrefabFactory<IUnitModel>>();
-
 			Container
 				.BindInterfacesTo<UnitView>()
 				.FromComponentOnRoot();
@@ -38,13 +36,6 @@ namespace Game.Units
 				.AsSingle()
 				.OnInstantiated<UnitBuilder>((ic, o) => o.OnInstantiated())
 				.NonLazy();
-
-			/*
-			Container
-				.Bind<UnitView>()
-				.FromNewComponentOnRoot()
-				.AsSingle();
-			*/
 		}
 	}
 }

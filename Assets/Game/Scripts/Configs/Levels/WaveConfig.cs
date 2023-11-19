@@ -14,7 +14,7 @@ namespace Game.Configs
 		[Serializable]
 		public struct WaveUnit
 		{
-			public Vector2 Position;
+			public Vector2Int Position;
 			public Species Species;
 		}
 	}

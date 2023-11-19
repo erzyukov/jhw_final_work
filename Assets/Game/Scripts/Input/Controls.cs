@@ -64,6 +64,24 @@ namespace Game.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AddSoftCurrency"",
+                    ""type"": ""Button"",
+                    ""id"": ""47560b4f-7371-410f-91bb-2624a09de6d4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AddSummonCurrency"",
+                    ""type"": ""Button"",
+                    ""id"": ""f283a0b2-ff97-4a3a-8f40-a22a0db38a0f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -110,6 +128,28 @@ namespace Game.Input
                     ""action"": ""BuyUnit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa0a49b9-ca52-45d8-9f07-b7b022c933e8"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddSoftCurrency"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3cf19889-84d1-471e-9c7f-d74e0227f3c5"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddSummonCurrency"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -122,6 +162,8 @@ namespace Game.Input
             m_DevCheats_NextLevel = m_DevCheats.FindAction("NextLevel", throwIfNotFound: true);
             m_DevCheats_PrevLevel = m_DevCheats.FindAction("PrevLevel", throwIfNotFound: true);
             m_DevCheats_BuyUnit = m_DevCheats.FindAction("BuyUnit", throwIfNotFound: true);
+            m_DevCheats_AddSoftCurrency = m_DevCheats.FindAction("AddSoftCurrency", throwIfNotFound: true);
+            m_DevCheats_AddSummonCurrency = m_DevCheats.FindAction("AddSummonCurrency", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -185,6 +227,8 @@ namespace Game.Input
         private readonly InputAction m_DevCheats_NextLevel;
         private readonly InputAction m_DevCheats_PrevLevel;
         private readonly InputAction m_DevCheats_BuyUnit;
+        private readonly InputAction m_DevCheats_AddSoftCurrency;
+        private readonly InputAction m_DevCheats_AddSummonCurrency;
         public struct DevCheatsActions
         {
             private @Controls m_Wrapper;
@@ -193,6 +237,8 @@ namespace Game.Input
             public InputAction @NextLevel => m_Wrapper.m_DevCheats_NextLevel;
             public InputAction @PrevLevel => m_Wrapper.m_DevCheats_PrevLevel;
             public InputAction @BuyUnit => m_Wrapper.m_DevCheats_BuyUnit;
+            public InputAction @AddSoftCurrency => m_Wrapper.m_DevCheats_AddSoftCurrency;
+            public InputAction @AddSummonCurrency => m_Wrapper.m_DevCheats_AddSummonCurrency;
             public InputActionMap Get() { return m_Wrapper.m_DevCheats; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -214,6 +260,12 @@ namespace Game.Input
                     @BuyUnit.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnBuyUnit;
                     @BuyUnit.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnBuyUnit;
                     @BuyUnit.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnBuyUnit;
+                    @AddSoftCurrency.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnAddSoftCurrency;
+                    @AddSoftCurrency.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnAddSoftCurrency;
+                    @AddSoftCurrency.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnAddSoftCurrency;
+                    @AddSummonCurrency.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnAddSummonCurrency;
+                    @AddSummonCurrency.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnAddSummonCurrency;
+                    @AddSummonCurrency.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnAddSummonCurrency;
                 }
                 m_Wrapper.m_DevCheatsActionsCallbackInterface = instance;
                 if (instance != null)
@@ -230,6 +282,12 @@ namespace Game.Input
                     @BuyUnit.started += instance.OnBuyUnit;
                     @BuyUnit.performed += instance.OnBuyUnit;
                     @BuyUnit.canceled += instance.OnBuyUnit;
+                    @AddSoftCurrency.started += instance.OnAddSoftCurrency;
+                    @AddSoftCurrency.performed += instance.OnAddSoftCurrency;
+                    @AddSoftCurrency.canceled += instance.OnAddSoftCurrency;
+                    @AddSummonCurrency.started += instance.OnAddSummonCurrency;
+                    @AddSummonCurrency.performed += instance.OnAddSummonCurrency;
+                    @AddSummonCurrency.canceled += instance.OnAddSummonCurrency;
                 }
             }
         }
@@ -240,6 +298,8 @@ namespace Game.Input
             void OnNextLevel(InputAction.CallbackContext context);
             void OnPrevLevel(InputAction.CallbackContext context);
             void OnBuyUnit(InputAction.CallbackContext context);
+            void OnAddSoftCurrency(InputAction.CallbackContext context);
+            void OnAddSummonCurrency(InputAction.CallbackContext context);
         }
     }
 }

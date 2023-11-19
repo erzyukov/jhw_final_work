@@ -8,6 +8,7 @@ namespace Game.Installers
 	using Zenject;
 	using System;
 	using Game.Ui;
+	using Game.Level;
 
 	public class MainSceneInstaller : MonoInstaller
 	{
@@ -25,6 +26,7 @@ namespace Game.Installers
 				.AsSingle();
 
 			InstallUI();
+			InstallHero();
 			InstallUnits();
 			InstallDebugServicies();
 		}
@@ -35,23 +37,12 @@ namespace Game.Installers
 				.BindInterfacesTo<UiViel>()
 				.FromComponentInHierarchy()
 				.AsSingle();
+		}
 
+		private void InstallHero()
+		{
 			Container
-				.Bind<IUiScreen>()
-				.FromComponentsInHierarchy()
-				.AsSingle();
-
-			Container
-				.BindInterfacesTo<ScreenNavigator>()
-				.AsSingle();
-
-			Container
-				.BindInterfacesTo<UiLobbyScreen>()
-				.FromComponentInHierarchy()
-				.AsSingle();
-
-			Container
-				.BindInterfacesTo<UiLobby>()
+				.BindInterfacesTo<HeroSummonCurrency>()
 				.AsSingle();
 		}
 
@@ -61,6 +52,10 @@ namespace Game.Installers
 				.BindFactory<Species, UnitFacade, UnitFacade.Factory>()
 				.FromSubContainerResolve()
 				.ByNewPrefabInstaller<UnitInstaller>(_unitsConfig.UnitPrefab);
+
+			Container
+				.BindFactory<UnityEngine.Object, IUnitModel, UnitModel.Factory>()
+				.FromFactory<PrefabFactory<IUnitModel>>();
 		}
 
 		private void InstallDebugServicies()

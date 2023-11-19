@@ -6,16 +6,23 @@
 	public interface IUnitFacade
 	{
 		Species Species { get; }
+		void SetViewParent(Transform parent);
+		void DestroyView();
 	}
 
 	public class UnitFacade : IUnitFacade
 	{
 		//[Inject] private IUnit _unit;
 		[Inject] private Species _species;
+		[Inject] private IUnitView _view;
 
 		#region IUnitFacade
 
 		public Species Species => _species; // _unit.Species;
+
+		public void SetViewParent(Transform parent) => _view.SetParent(parent);
+
+		public void DestroyView() => _view.Destroy();
 
 		#endregion
 

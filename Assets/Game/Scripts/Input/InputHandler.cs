@@ -21,7 +21,7 @@
 			_controls = new Controls();
 			DevCheats = _controls.DevCheats;
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 			DevCheats.Enable();
 #endif
 		}
