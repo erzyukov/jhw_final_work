@@ -13,10 +13,11 @@
 
 	public class UnitBuilder : IUnitBuilder
 	{
+		[Inject] private IUnitView _unitView;
 		[Inject] private UnitsConfig _unitsConfig;
 		[Inject] private UnitConfig _unitConfig;
+		[Inject] private UnitGrade _unitGrade;
 		[Inject] private UnitModel.Factory _unitModelFactory;
-		[Inject] private IUnitView _unitView;
 
 		private IUnitModel _view;
 
@@ -31,7 +32,7 @@
 
 		public void SetupUnitView(int index)
 		{
-			_view = _unitModelFactory.Create(_unitConfig.Grades[index].Prefab);
+			_view = _unitModelFactory.Create(_unitGrade.Prefab);
 			_unitView.ModelContainer.DestroyChildren();
 			_view.Transform.SetParent(_unitView.ModelContainer, false);
 
