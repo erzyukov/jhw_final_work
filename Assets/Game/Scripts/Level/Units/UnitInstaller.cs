@@ -56,6 +56,10 @@ namespace Game.Units
 			Container
 				.BindInterfacesTo<UnitHealth>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UnitAttacker>()
+				.AsSingle();
 		}
 	}
 }

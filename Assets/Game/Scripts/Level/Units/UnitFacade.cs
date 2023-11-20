@@ -12,6 +12,7 @@
 		Species Species { get; }
 		Transform Transform { get; }
 		void SetViewParent(Transform parent);
+		void TakeDamage(float damage);
 		void DestroyView();
 	}
 
@@ -34,6 +35,8 @@
 		public Transform Transform => _view.Transform;
 
 		public void SetViewParent(Transform parent) => _view.SetParent(parent);
+
+		public void TakeDamage(float damage) => _health.TakeDamage(damage);
 
 		public void DestroyView() => _view.Destroy();
 

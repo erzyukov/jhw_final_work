@@ -23,7 +23,7 @@
 		private IUnitFacade _target;
 		private IFieldFacade _alliedField;
 		private IFieldFacade _enemyField;
-		IDisposable _targetDisposable;
+		private IDisposable _targetDisposable;
 
 		public void Initialize()
 		{
