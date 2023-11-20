@@ -13,6 +13,7 @@
 		void InitMap(Map<T> map);
 		T GetCell(Vector2Int position);
 		T GetCell(IUnitFacade unit);
+		bool HasUnit(IUnitFacade unit);
 		void AddUnit(IUnitFacade unit);
 		void AddUnit(IUnitFacade unit, T fieldCell);
 		void AddUnit(IUnitFacade unit, Vector2Int position);
@@ -40,6 +41,9 @@
 
 		public T GetCell(IUnitFacade unit) =>
 			_map.Where(position => _map[position].Unit == unit).Select(position => _map[position]).FirstOrDefault();
+
+		public bool HasUnit(IUnitFacade unit) =>
+			_units.Where(u => u == unit).Count() != 0;
 
 		public void AddUnit(IUnitFacade unit)
 		{

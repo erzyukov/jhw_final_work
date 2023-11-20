@@ -13,6 +13,7 @@
 
 	public class UnitBuilder : IUnitBuilder
 	{
+		[Inject] private UnitsConfig _unitsConfig;
 		[Inject] private UnitConfig _unitConfig;
 		[Inject] private UnitModel.Factory _unitModelFactory;
 		[Inject] private IUnitView _unitView;
@@ -33,6 +34,9 @@
 			_view = _unitModelFactory.Create(_unitConfig.Grades[index].Prefab);
 			_unitView.ModelContainer.DestroyChildren();
 			_view.Transform.SetParent(_unitView.ModelContainer, false);
+
+			_unitView.NavMeshAgent.speed = _unitsConfig.Speed;
+			_unitView.NavMeshAgent.stoppingDistance = _unitConfig.AttackRange;
 		}
 
 		#endregion

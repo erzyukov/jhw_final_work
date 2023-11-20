@@ -5,12 +5,14 @@ namespace Game.Installers
 	using Game.Field;
 	using Game.Level;
 	using Game.Profiles;
+	using Game.Units;
 	using Zenject;
 
     public class LevelSceneInstaller : MonoInstaller
 	{
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] private GameProfile _gameProfile;
+		[Inject] private UnitsConfig _unitsConfig;
 
 		public override void InstallBindings()
 		{
@@ -42,6 +44,21 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<EnemyUnitSummoner>()
 				.AsSingle();
+
+			InstallUnits();
 		}
+
+		private void InstallUnits()
+		{
+			Container
+				.BindFactory<Species, UnitFacade, UnitFacade.Factory>()
+				.FromSubContainerResolve()
+				.ByNewPrefabInstaller<UnitInstaller>(_unitsConfig.UnitPrefab);
+
+			Container
+				.BindFactory<UnityEngine.Object, IUnitModel, UnitModel.Factory>()
+				.FromFactory<PrefabFactory<IUnitModel>>();
+		}
+
 	}
 }

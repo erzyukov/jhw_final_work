@@ -1,19 +1,14 @@
 namespace Game.Installers
 {
 	using Game.Core;
-	using Game.Configs;
 	using Game.Dev;
-	using Game.Units;
 	using UnityEngine;
 	using Zenject;
-	using System;
 	using Game.Ui;
 	using Game.Level;
 
 	public class MainSceneInstaller : MonoInstaller
 	{
-		[Inject] private UnitsConfig _unitsConfig;
-
 		public override void InstallBindings()
 		{
 			Container
@@ -27,7 +22,6 @@ namespace Game.Installers
 
 			InstallUI();
 			InstallHero();
-			InstallUnits();
 			InstallDebugServicies();
 		}
 
@@ -44,18 +38,6 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<HeroSummonCurrency>()
 				.AsSingle();
-		}
-
-		private void InstallUnits()
-		{
-			Container
-				.BindFactory<Species, UnitFacade, UnitFacade.Factory>()
-				.FromSubContainerResolve()
-				.ByNewPrefabInstaller<UnitInstaller>(_unitsConfig.UnitPrefab);
-
-			Container
-				.BindFactory<UnityEngine.Object, IUnitModel, UnitModel.Factory>()
-				.FromFactory<PrefabFactory<IUnitModel>>();
 		}
 
 		private void InstallDebugServicies()
