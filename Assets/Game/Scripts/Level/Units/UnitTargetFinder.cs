@@ -3,6 +3,7 @@
 	using Game.Core;
 	using Game.Field;
 	using Game.Utilities;
+	using System;
 	using System.Linq;
 	using UniRx;
 	using Zenject;
@@ -10,6 +11,7 @@
 	public interface IUnitTargetFinder
 	{
 		ReactiveCommand<IUnitFacade> TargetFound { get; }
+		ReactiveCommand TargetLost { get; }
 	}
 
 	public class UnitTargetFinder : ControllerBase, IUnitTargetFinder, IInitializable, ITickable
@@ -21,6 +23,7 @@
 		private IUnitFacade _target;
 		private IFieldFacade _alliedField;
 		private IFieldFacade _enemyField;
+		IDisposable _targetDisposable;
 
 		public void Initialize()
 		{
@@ -42,6 +45,8 @@
 
 		public ReactiveCommand<IUnitFacade> TargetFound { get; } = new ReactiveCommand<IUnitFacade>();
 
+		public ReactiveCommand TargetLost { get; } = new ReactiveCommand();
+
 		#endregion
 
 		private void OnBattleStageHandler()
@@ -57,7 +62,12 @@
 				.FirstOrDefault();
 
 			if (_target != null)
+			{
 				TargetFound.Execute(_target);
+
+				_targetDisposable = _target.Died
+					.Subscribe(_ => OnTargetDiedHandler());
+			}
 		}
 
 		private void InitFields()
@@ -70,6 +80,13 @@
 				if (_fields[i].HasUnit(_unitFacade) == false)
 					_enemyField = _fields[i];
 			}
+		}
+
+		private void OnTargetDiedHandler()
+		{
+			TargetLost.Execute();
+			_target = null;
+			_targetDisposable.Dispose();
 		}
 	}
 }

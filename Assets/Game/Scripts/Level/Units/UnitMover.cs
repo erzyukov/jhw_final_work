@@ -3,7 +3,6 @@
 	using Game.Utilities;
 	using Zenject;
 	using UniRx;
-	using System;
 
 	public interface IUnitMover
 	{
@@ -16,12 +15,15 @@
 		[Inject] private IUnitView _unitView;
 
 		IUnitFacade _target;
-		IDisposable _targetDisposable;
 
 		public void Initialize()
 		{
 			_targetFinder.TargetFound
 				.Subscribe(OnTargetFoundHandler)
+				.AddTo(this);
+
+			_targetFinder.TargetLost
+				.Subscribe(_ => _target = null)
 				.AddTo(this);
 		}
 
@@ -36,14 +38,6 @@
 		private void OnTargetFoundHandler(IUnitFacade target)
 		{
 			_target = target;
-			_targetDisposable = target.Died
-				.Subscribe(_ => OnTargetDiedHandler());
-		}
-
-		private void OnTargetDiedHandler()
-		{
-			_target = null;
-			_targetDisposable.Dispose();
 		}
 	}
 }
