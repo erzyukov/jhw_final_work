@@ -23,6 +23,7 @@
 		{
 			_baseHealth = _unitGrade.Health;
 			_health = _unitGrade.Health;
+			HealthRate.Value = 1;
 		}
 
 		#region IUnitHealth
