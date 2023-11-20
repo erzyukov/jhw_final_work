@@ -15,6 +15,7 @@
 	public class UnitHealth : ControllerBase, IUnitHealth, IInitializable
 	{
 		[Inject] private UnitGrade _unitGrade;
+		[Inject] private IUnitView _view;
 
 		private float _baseHealth;
 		private float _health;
@@ -41,10 +42,12 @@
 
 			HealthRate.Value = _health / _baseHealth;
 
-			Debug.LogWarning($"Unit health: {_health}");
-
 			if (_health == 0)
+			{
 				Died.Execute();
+				// TODO: destroy view mast do some controller (for ex fsm)
+				_view.Destroy();
+			}
 		}
 
 		#endregion

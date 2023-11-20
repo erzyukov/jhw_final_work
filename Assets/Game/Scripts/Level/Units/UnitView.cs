@@ -29,7 +29,11 @@ namespace Game.Units
 
 		public void SetParent(Transform parent) => transform.SetParent(parent, false);
 
-		public void Destroy() => Object.Destroy(gameObject);
+		public void Destroy()
+		{
+			gameObject.SetActive(false);
+			Object.Destroy(gameObject);
+		}
 
 		#endregion
 	}

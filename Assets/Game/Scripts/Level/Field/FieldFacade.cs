@@ -12,6 +12,7 @@ namespace Game.Field
 		bool HasUnit(IUnitFacade unit);
 		void AddUnit(IUnitFacade unit);
 		void AddUnit(IUnitFacade unit, Vector2Int position);
+		void RemoveUnit(IUnitFacade unit);
 	}
 
 	public class FieldFacade : MonoBehaviour, IFieldFacade
@@ -25,6 +26,7 @@ namespace Game.Field
 		public bool HasUnit(IUnitFacade unit) => Field.HasUnit(unit);
 		public void AddUnit(IUnitFacade unit) => Field.AddUnit(unit);
 		public void AddUnit(IUnitFacade unit, Vector2Int position) => Field.AddUnit(unit, position);
+		public void RemoveUnit(IUnitFacade unit) => Field.RemoveUnit(unit);
 
 		#endregion
 	}

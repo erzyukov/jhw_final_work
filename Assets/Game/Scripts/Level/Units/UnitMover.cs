@@ -4,7 +4,6 @@
 	using Zenject;
 	using UniRx;
 	using System;
-	using static UnityEngine.GraphicsBuffer;
 
 	public interface IUnitMover
 	{
@@ -17,6 +16,7 @@
 		[Inject] private IUnitView _unitView;
 
 		IUnitFacade _target;
+		IDisposable _targetDisposable;
 
 		public void Initialize()
 		{
@@ -36,6 +36,14 @@
 		private void OnTargetFoundHandler(IUnitFacade target)
 		{
 			_target = target;
+			_targetDisposable = target.Died
+				.Subscribe(_ => OnTargetDiedHandler());
+		}
+
+		private void OnTargetDiedHandler()
+		{
+			_target = null;
+			_targetDisposable.Dispose();
 		}
 	}
 }

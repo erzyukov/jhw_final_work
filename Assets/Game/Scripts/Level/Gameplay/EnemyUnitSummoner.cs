@@ -9,6 +9,8 @@
 	using UniRx;
 	using Zenject;
 	using UnityEngine;
+	using System.Collections.Generic;
+	using System;
 
 	public class EnemyUnitSummoner : ControllerBase, IInitializable
 	{
@@ -17,6 +19,8 @@
 		[Inject] private IGameCycle _gameCycle;
 		[Inject] private LevelConfig _levelConfig;
 		[Inject] private GameProfile _gameProfile;
+
+		Dictionary<IUnitFacade, IDisposable> _unitSubscribes = new Dictionary<IUnitFacade, IDisposable>();
 
 		public void Initialize()
 		{
@@ -47,6 +51,24 @@
 		{
 			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(species);
 			_fieldFacade.AddUnit(unit, position);
+
+			_unitSubscribes.Add(unit, default);
+			SubscribeToUnit(unit);
+		}
+
+
+		private void SubscribeToUnit(IUnitFacade unit)
+		{
+			_unitSubscribes[unit] = unit.Died
+				.Subscribe(_ => UnitDiedHandler(unit));
+		}
+
+		private void UnitDiedHandler(IUnitFacade unit)
+		{
+			_fieldFacade.RemoveUnit(unit);
+			unit.DestroyView();
+			_unitSubscribes[unit].Dispose();
+			_unitSubscribes.Remove(unit);
 		}
 	}
 }

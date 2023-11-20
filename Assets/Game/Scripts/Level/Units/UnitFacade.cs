@@ -1,11 +1,13 @@
 ﻿namespace Game.Units
 {
 	using Game.Configs;
+	using UniRx;
 	using UnityEngine;
 	using Zenject;
 
 	public interface IUnitFacade
 	{
+		ReactiveCommand Died { get; }
 		string Name { get; }
 		Species Species { get; }
 		Transform Transform { get; }
@@ -19,8 +21,11 @@
 		[Inject] private Species _species;
 		[Inject] private IUnitView _view;
 		[Inject] private UnitConfig _config;
+		[Inject] private IUnitHealth _health;
 
 		#region IUnitFacade
+
+		public ReactiveCommand Died => _health.Died;
 
 		public string Name => _config.Title;
 
