@@ -9,11 +9,13 @@ namespace Game.Configs
 	public class UnitsConfig : ScriptableObject
 	{
 		[SerializeField] private GameObject _unitPrefab;
+		[SerializeField] private float _speed;
 		[SerializeField] private UnitData[] _units;
 
 		private Dictionary<Species, UnitConfig> _unitData;
 
 		public GameObject UnitPrefab => _unitPrefab;
+		public float Speed => _speed;
 		public Dictionary<Species, UnitConfig> Units => _unitData;
 		
 		public void Initialize()

@@ -16,7 +16,7 @@
 		[Inject] private IInputHandler _inputManager;
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private GameProfile _profile;
-		[Inject] private UnitFacade.Factory _unitFactory;
+		//[Inject] private UnitFacade.Factory _unitFactory;
 		[Inject] private IGameCurrency _gameCurrency;
 
 		const int SoftCurrencyCheatAmount = 10000;
@@ -32,11 +32,13 @@
 
 			Subscribe(Cheats.PrevLevel, () => _gameLevel.GoToLevel(_profile.LevelNumber.Value - 1));
 
+			/*
 			Subscribe(Cheats.BuyUnit, () =>
 			{
 				IUnitFacade unit = _unitFactory.Create(Species.HeroInfantryman);
 				Debug.LogWarning($"Unit {unit.Species} bought!");
 			});
+			*/
 
 			Subscribe(Cheats.AddSoftCurrency, () => _gameCurrency.AddSoftCurrency(SoftCurrencyCheatAmount));
 			

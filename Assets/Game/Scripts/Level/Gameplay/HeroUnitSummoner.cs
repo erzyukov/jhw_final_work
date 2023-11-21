@@ -6,7 +6,10 @@
 	using Game.Ui;
 	using Game.Units;
 	using Game.Utilities;
+	using System;
+	using System.Collections.Generic;
 	using Zenject;
+	using UniRx;
 
 	public interface IHeroUnitSummoner
 	{
@@ -20,6 +23,8 @@
 		[Inject] private IUiHaveNeedOfMessage _haveNeedOfMessage;
 		[Inject] private IUnitSpawner _unitSpawner;
 		[Inject] private IFieldHeroFacade _fieldFacade;
+
+		Dictionary<IUnitFacade, IDisposable> _unitSubscribes = new Dictionary<IUnitFacade, IDisposable>();
 
 		public void Initialize()
 		{
@@ -44,6 +49,23 @@
 			Species defaultSpecies = Species.HeroInfantryman;
 			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(defaultSpecies);
 			_fieldFacade.AddUnit(unit);
+
+			_unitSubscribes.Add(unit, default);
+			SubscribeToUnit(unit);
+		}
+
+		private void SubscribeToUnit(IUnitFacade unit)
+		{
+			_unitSubscribes[unit] = unit.Died
+				.Subscribe(_ => UnitDiedHandler(unit));
+		}
+
+		private void UnitDiedHandler(IUnitFacade unit)
+		{
+			_fieldFacade.RemoveUnit(unit);
+			unit.DestroyView();
+			_unitSubscribes[unit].Dispose();
+			_unitSubscribes.Remove(unit);
 		}
 	}
 }

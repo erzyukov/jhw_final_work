@@ -14,24 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: "\u0414\u0435\u043C\u043E\u043D"
   _class: 0
+  _attackRange: 0.7
   _grades:
   - Prefab: {fileID: 1503547998484457933, guid: 2409fbd3b3ba81a4286813ce3d283d39, type: 3}
     AttackDelay: 0.95
-    AttackRange: 0.2
     Damage: 10
     Health: 50
   - Prefab: {fileID: 1503547998484457933, guid: 2409fbd3b3ba81a4286813ce3d283d39, type: 3}
     AttackDelay: 0.94
-    AttackRange: 0.2
     Damage: 18
     Health: 80
   - Prefab: {fileID: 1503547998484457933, guid: 2409fbd3b3ba81a4286813ce3d283d39, type: 3}
     AttackDelay: 0.93
-    AttackRange: 0.2
     Damage: 32
     Health: 120
   - Prefab: {fileID: 1503547998484457933, guid: 2409fbd3b3ba81a4286813ce3d283d39, type: 3}
     AttackDelay: 0.92
-    AttackRange: 0.2
     Damage: 60
     Health: 200
