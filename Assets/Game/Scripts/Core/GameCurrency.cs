@@ -4,6 +4,9 @@
 	using UniRx;
 	using Zenject;
 
+	// TODO: Add summon currency message
+	// TODO: Add summon currency animate
+
 	public interface IGameCurrency
 	{
 		void AddSoftCurrency(int value);
@@ -19,12 +22,16 @@
 
 		private GameProfile GameProfile => _gameProfileManager.GameProfile;
 
+		#region IGameCurrency
+
 		public void AddSoftCurrency(int value) => AddCurrency(GameProfile.SoftCurrency, value);
 		public bool TrySpendSoftCurrency(int value) => TrySpendCurrency(GameProfile.SoftCurrency, value);
 
 		public void SetSummonCurrency(int value) => GameProfile.SummonCurrency.Value = value;
 		public void AddSummonCurrency(int value) => AddCurrency(GameProfile.SummonCurrency, value);
 		public bool TrySpendSummonCurrency(int value) => TrySpendCurrency(GameProfile.SummonCurrency, value);
+
+		#endregion
 
 		void AddCurrency(IntReactiveProperty currency, int value)
 		{
