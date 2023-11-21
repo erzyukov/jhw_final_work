@@ -10,9 +10,10 @@ namespace Game.Field
 		List<IUnitFacade> Units { get; }
 		bool HasFreeSpace { get; }
 		bool HasUnit(IUnitFacade unit);
-		void AddUnit(IUnitFacade unit);
-		void AddUnit(IUnitFacade unit, Vector2Int position);
+		Vector2Int AddUnit(IUnitFacade unit);
+		Vector2Int AddUnit(IUnitFacade unit, Vector2Int position);
 		void RemoveUnit(IUnitFacade unit);
+		void Clear();
 	}
 
 	public class FieldFacade : MonoBehaviour, IFieldFacade
@@ -24,9 +25,10 @@ namespace Game.Field
 		public List<IUnitFacade> Units => Field.Units;
 		public bool HasFreeSpace => Field.HasFreeSpace;
 		public bool HasUnit(IUnitFacade unit) => Field.HasUnit(unit);
-		public void AddUnit(IUnitFacade unit) => Field.AddUnit(unit);
-		public void AddUnit(IUnitFacade unit, Vector2Int position) => Field.AddUnit(unit, position);
+		public Vector2Int AddUnit(IUnitFacade unit) => Field.AddUnit(unit);
+		public Vector2Int AddUnit(IUnitFacade unit, Vector2Int position) => Field.AddUnit(unit, position);
 		public void RemoveUnit(IUnitFacade unit) => Field.RemoveUnit(unit);
+		public void Clear() => Field.Clear();
 
 		#endregion
 	}

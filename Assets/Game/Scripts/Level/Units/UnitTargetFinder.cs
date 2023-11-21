@@ -6,12 +6,14 @@
 	using System;
 	using System.Linq;
 	using UniRx;
+	using UnityEngine;
 	using Zenject;
 
 	public interface IUnitTargetFinder
 	{
 		ReactiveCommand<IUnitFacade> TargetFound { get; }
 		ReactiveCommand TargetLost { get; }
+		void Reset();
 	}
 
 	public class UnitTargetFinder : ControllerBase, IUnitTargetFinder, IInitializable, ITickable
@@ -35,7 +37,7 @@
 
 		public void Tick()
 		{
-			if (_target == null && _enemyField != null && _enemyField.Units.Count != 0)
+			if (_target == null && _enemyField != null && _enemyField.Units.Count != 0 && _levelCycle.State.Value == GameState.BattleStage)
 			{
 				SelectTarget();
 			}
@@ -46,6 +48,13 @@
 		public ReactiveCommand<IUnitFacade> TargetFound { get; } = new ReactiveCommand<IUnitFacade>();
 
 		public ReactiveCommand TargetLost { get; } = new ReactiveCommand();
+
+		public void Reset()
+		{
+			TargetLost.Execute();
+			_target = null;
+			_targetDisposable.Dispose();
+		}
 
 		#endregion
 
@@ -84,9 +93,7 @@
 
 		private void OnTargetDiedHandler()
 		{
-			TargetLost.Execute();
-			_target = null;
-			_targetDisposable.Dispose();
+			Reset();
 		}
 	}
 }

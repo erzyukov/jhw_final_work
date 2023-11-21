@@ -13,16 +13,17 @@
 		Transform Transform { get; }
 		void SetViewParent(Transform parent);
 		void TakeDamage(float damage);
-		void DestroyView();
+		void Reset();
+		void Destroy();
 	}
 
 	public class UnitFacade : IUnitFacade
 	{
-		//[Inject] private IUnit _unit;
 		[Inject] private Species _species;
 		[Inject] private IUnitView _view;
 		[Inject] private UnitConfig _config;
 		[Inject] private IUnitHealth _health;
+		[Inject] private IUnitTargetFinder _targetFinder;
 
 		#region IUnitFacade
 
@@ -30,7 +31,7 @@
 
 		public string Name => _config.Title;
 
-		public Species Species => _species; // _unit.Species;
+		public Species Species => _species;
 
 		public Transform Transform => _view.Transform;
 
@@ -38,27 +39,22 @@
 
 		public void TakeDamage(float damage) => _health.TakeDamage(damage);
 
-		public void DestroyView() => _view.Destroy();
+		public void Reset()
+		{
+			// TODO: Reset All
+			_health.Reset();
+			_targetFinder.Reset();
+			_view.ResetPosition();
+			_view.SetActive(true);
+		}
+
+		public void Destroy()
+		{
+			_view.Destroy();
+		}
 
 		#endregion
 
-		//public class Factory : PlaceholderFactory<Object, IUnitFacade> {}
 		public class Factory : PlaceholderFactory<Species, UnitFacade> {}
 	}
-
-	/*
-	public class UnitFactory : IFactory<Object, IUnitFacade>
-	{
-		[Inject] readonly DiContainer _container;
-
-		public IUnitFacade Create(Object prefab)
-		{
-			IUnitFacade unitFacade = _container.InstantiatePrefabForComponent<IUnitFacade>(prefab);
-
-			
-
-			return unitFacade;
-		}
-	}
-	*/
 }

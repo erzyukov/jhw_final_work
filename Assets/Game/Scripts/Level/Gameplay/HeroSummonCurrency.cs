@@ -22,6 +22,7 @@
 
 		private void OnTacticalStageBeginHandler()
 		{
+			// TODO: Add currency, not set
 			_gameCurrency.SetSummonCurrency(_currencyConfig.SummonCurrencyAtWaveStart);
 		}
 	}
