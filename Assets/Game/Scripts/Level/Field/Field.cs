@@ -5,12 +5,16 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
+	using UniRx;
 	using UnityEngine;
 
 	public interface IField<T>
 	{
-		List<IUnitFacade> Units { get; }
+		//IntReactiveProperty UnitsCount { get; }
+		ReactiveCollection<IUnitFacade> Units { get; }
+		//List<IUnitFacade> Units { get; }
 		bool HasFreeSpace { get; }
+
 		void InitMap(Map<T> map);
 		T GetCell(Vector2Int position);
 		T GetCell(IUnitFacade unit);
@@ -25,16 +29,21 @@
 	public class Field<T> : IField<T> where T : FieldCell
 	{
 		private Map<T> _map;
-		private List<IUnitFacade> _units;
+		private ReactiveCollection<IUnitFacade> _units = new ReactiveCollection<IUnitFacade>();
 
-		public List<IUnitFacade> Units => _units;
+		#region MyRegion
+
+		public ReactiveCollection<IUnitFacade> Units => _units;
+
+		public IntReactiveProperty UnitsCount { get; } = new IntReactiveProperty();
+
+		//public List<IUnitFacade> Units => _units;
 
 		public bool HasFreeSpace => _map.Any(position => _map[position].HasUnit == false);
 
 		public void InitMap(Map<T> map)
 		{
 			_map = map;
-			_units = new List<IUnitFacade>();
 		}
 
 		public T GetCell(Vector2Int position) =>
@@ -90,6 +99,8 @@
 
 			_units.Clear();
 		}
+
+		#endregion
 	}
 
 	public enum FieldType

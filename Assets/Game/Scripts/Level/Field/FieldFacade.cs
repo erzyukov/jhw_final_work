@@ -1,13 +1,14 @@
 namespace Game.Field
 {
 	using Game.Units;
-	using System.Collections.Generic;
+	using UniRx;
 	using UnityEngine;
 	using Zenject;
 
 	public interface IFieldFacade
 	{
-		List<IUnitFacade> Units { get; }
+		//IntReactiveProperty UnitsCount { get; }
+		ReactiveCollection<IUnitFacade> Units { get; }
 		bool HasFreeSpace { get; }
 		bool HasUnit(IUnitFacade unit);
 		Vector2Int AddUnit(IUnitFacade unit);
@@ -22,7 +23,8 @@ namespace Game.Field
 
 		#region IFieldFacade
 
-		public List<IUnitFacade> Units => Field.Units;
+		//public IntReactiveProperty UnitsCount => Field.UnitsCount;
+		public ReactiveCollection<IUnitFacade> Units => Field.Units;
 		public bool HasFreeSpace => Field.HasFreeSpace;
 		public bool HasUnit(IUnitFacade unit) => Field.HasUnit(unit);
 		public Vector2Int AddUnit(IUnitFacade unit) => Field.AddUnit(unit);
