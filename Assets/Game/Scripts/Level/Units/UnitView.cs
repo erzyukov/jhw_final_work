@@ -10,7 +10,8 @@ namespace Game.Units
 		NavMeshAgent NavMeshAgent { get; }
 
 		void SetParent(Transform parent);
-
+		void SetActive(bool value);
+		void ResetPosition();
 		void Destroy();
 	}
 
@@ -29,9 +30,18 @@ namespace Game.Units
 
 		public void SetParent(Transform parent) => transform.SetParent(parent, false);
 
+		public void SetActive(bool value) => gameObject.SetActive(value);
+
+		public void ResetPosition()
+		{
+			//transform.SetParent(transform.parent, false);
+			transform.localPosition = Vector3.zero;
+			transform.localRotation = Quaternion.identity;
+		}
+
 		public void Destroy()
 		{
-			gameObject.SetActive(false);
+			SetActive(false);
 			Object.Destroy(gameObject);
 		}
 

@@ -3,6 +3,7 @@ namespace Game.Installers
 	using Game.Configs;
 	using Game.Dev;
 	using Game.Field;
+	using Game.Gameplay;
 	using Game.Level;
 	using Game.Profiles;
 	using Game.Units;
@@ -43,6 +44,10 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<EnemyUnitSummoner>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<BattleHandler>()
 				.AsSingle();
 
 			InstallUnits();

@@ -10,6 +10,7 @@
 	using System.Collections.Generic;
 	using Zenject;
 	using UniRx;
+	using UnityEngine;
 
 	public interface IHeroUnitSummoner
 	{
@@ -23,12 +24,17 @@
 		[Inject] private IUiHaveNeedOfMessage _haveNeedOfMessage;
 		[Inject] private IUnitSpawner _unitSpawner;
 		[Inject] private IFieldHeroFacade _fieldFacade;
+		[Inject] private IGameCycle _gameCycle;
 
 		Dictionary<IUnitFacade, IDisposable> _unitSubscribes = new Dictionary<IUnitFacade, IDisposable>();
+		Dictionary<IUnitFacade, Vector2Int> _unitsDisplace = new Dictionary<IUnitFacade, Vector2Int>();
 
 		public void Initialize()
 		{
-			
+			_gameCycle.State
+				.Where(state => state == GameState.TacticalStage)
+				.Subscribe(_ => RestoreUnitsOnField())
+				.AddTo(this);
 		}
 
 		public void Summon()
@@ -48,24 +54,26 @@
 
 			Species defaultSpecies = Species.HeroInfantryman;
 			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(defaultSpecies);
-			_fieldFacade.AddUnit(unit);
+			Vector2Int position = _fieldFacade.AddUnit(unit);
 
-			_unitSubscribes.Add(unit, default);
+			_unitsDisplace.Add(unit, position);
+
 			SubscribeToUnit(unit);
 		}
 
 		private void SubscribeToUnit(IUnitFacade unit)
 		{
+			_unitSubscribes.Add(unit, default);
 			_unitSubscribes[unit] = unit.Died
 				.Subscribe(_ => UnitDiedHandler(unit));
 		}
 
-		private void UnitDiedHandler(IUnitFacade unit)
+		private void RestoreUnitsOnField()
 		{
-			_fieldFacade.RemoveUnit(unit);
-			unit.DestroyView();
-			_unitSubscribes[unit].Dispose();
-			_unitSubscribes.Remove(unit);
+            foreach (var unit in _unitsDisplace)
+				unit.Key.Reset();
 		}
+
+		private void UnitDiedHandler(IUnitFacade unit) {}
 	}
 }

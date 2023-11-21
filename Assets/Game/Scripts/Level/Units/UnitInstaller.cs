@@ -1,7 +1,6 @@
 namespace Game.Units
 {
 	using Game.Configs;
-	using UnityEngine;
 	using Zenject;
 
 	public class UnitInstaller : Installer<UnitInstaller>
@@ -14,8 +13,6 @@ namespace Game.Units
 
 		public override void InstallBindings()
 		{
-			Debug.LogWarning($"UnitInstaller: InstallBindings");
-
 			Container
 				.BindInstance(_species);
 

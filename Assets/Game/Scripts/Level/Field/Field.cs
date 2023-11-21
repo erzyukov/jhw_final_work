@@ -2,21 +2,26 @@
 {
 	using Game.Units;
 	using Game.Utilities;
+	using System;
 	using System.Collections.Generic;
 	using System.Linq;
+	using UniRx;
 	using UnityEngine;
 
 	public interface IField<T>
 	{
-		List<IUnitFacade> Units { get; }
+		//IntReactiveProperty UnitsCount { get; }
+		ReactiveCollection<IUnitFacade> Units { get; }
+		//List<IUnitFacade> Units { get; }
 		bool HasFreeSpace { get; }
+
 		void InitMap(Map<T> map);
 		T GetCell(Vector2Int position);
 		T GetCell(IUnitFacade unit);
 		bool HasUnit(IUnitFacade unit);
-		void AddUnit(IUnitFacade unit);
-		void AddUnit(IUnitFacade unit, T fieldCell);
-		void AddUnit(IUnitFacade unit, Vector2Int position);
+		Vector2Int AddUnit(IUnitFacade unit);
+		Vector2Int AddUnit(IUnitFacade unit, T fieldCell);
+		Vector2Int AddUnit(IUnitFacade unit, Vector2Int position);
 		void RemoveUnit(IUnitFacade unit);
 		void Clear();
 	}
@@ -24,16 +29,21 @@
 	public class Field<T> : IField<T> where T : FieldCell
 	{
 		private Map<T> _map;
-		private List<IUnitFacade> _units;
+		private ReactiveCollection<IUnitFacade> _units = new ReactiveCollection<IUnitFacade>();
 
-		public List<IUnitFacade> Units => _units;
+		#region MyRegion
+
+		public ReactiveCollection<IUnitFacade> Units => _units;
+
+		public IntReactiveProperty UnitsCount { get; } = new IntReactiveProperty();
+
+		//public List<IUnitFacade> Units => _units;
 
 		public bool HasFreeSpace => _map.Any(position => _map[position].HasUnit == false);
 
 		public void InitMap(Map<T> map)
 		{
 			_map = map;
-			_units = new List<IUnitFacade>();
 		}
 
 		public T GetCell(Vector2Int position) =>
@@ -45,48 +55,52 @@
 		public bool HasUnit(IUnitFacade unit) =>
 			_units.Where(u => u == unit).Count() != 0;
 
-		public void AddUnit(IUnitFacade unit)
+		public Vector2Int AddUnit(IUnitFacade unit)
 		{
 			List<T> freeCells = _map.Where(position => _map[position].HasUnit == false).Select(position => _map[position]).ToList();
 			T freeCell = freeCells[UnityEngine.Random.Range(0, freeCells.Count)];
 
 			if (freeCell == null)
-				return;
+				throw new Exception($"All fields are buisy!");
 
-			AddUnit(unit, freeCell);
+			return AddUnit(unit, freeCell);
 		}
 
-		public void AddUnit(IUnitFacade unit, T fieldCell)
+		public Vector2Int AddUnit(IUnitFacade unit, T fieldCell)
 		{
 			if (fieldCell.HasUnit)
-				return;
+				throw new Exception($"Field with position {fieldCell.Position} is buisy!");
 
 			_units.Add(unit);
 			fieldCell.SetUnit(unit);
+
+			return fieldCell.Position;
 		}
 
-		public void AddUnit(IUnitFacade unit, Vector2Int position)
+		public Vector2Int AddUnit(IUnitFacade unit, Vector2Int position)
 		{
-			if(_map[position].HasUnit == false)
-				AddUnit(unit, _map[position]);
+			return AddUnit(unit, _map[position]);
 		}
 
 		public void RemoveUnit(IUnitFacade unit)
 		{
 			_units.Remove(unit);
 			GetCell(unit)?.Clear();
+			unit.Destroy();
 		}
 
 		public void Clear()
 		{
 			for (int i = 0; i < _units.Count; i++)
 			{
-				_units[i].DestroyView();
 				GetCell(_units[i])?.Clear();
+				_units[i].Destroy();
 			}
 
 			_units.Clear();
 		}
+
+		#endregion
 	}
 
 	public enum FieldType

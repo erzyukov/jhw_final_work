@@ -4,6 +4,7 @@
 	using Game.Profiles;
 	using Game.Ui;
 	using Game.Utilities;
+	using System;
 	using UniRx;
 	using UnityEngine;
 	using UnityEngine.Profiling;
@@ -88,7 +89,13 @@
 				_profile.WaveNumber.Value = 0;
 				_scenesManager.UnloadLevel();
 				IsLevelLoaded.Value = false;
+				_gameCycle.SetState(GameState.Lobby);
 			});
+		}
+
+		private void LoadNextLevel()
+		{
+			GoToLevel(_profile.LevelNumber.Value + 1);
 		}
 
 		int ClampLevelNumber(int number) => Mathf.Clamp(number, 1, _levelsConfig.Levels.Length);

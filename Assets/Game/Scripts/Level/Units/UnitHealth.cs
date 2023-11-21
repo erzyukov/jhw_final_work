@@ -9,7 +9,9 @@
 	{
 		FloatReactiveProperty HealthRate { get; }
 		ReactiveCommand Died { get; }
+
 		void TakeDamage(float damage);
+		void Reset();
 	}
 
 	public class UnitHealth : ControllerBase, IUnitHealth, IInitializable
@@ -22,9 +24,7 @@
 
 		public void Initialize()
 		{
-			_baseHealth = _unitGrade.Health;
-			_health = _unitGrade.Health;
-			HealthRate.Value = 1;
+			Reset();
 		}
 
 		#region IUnitHealth
@@ -46,8 +46,15 @@
 			{
 				Died.Execute();
 				// TODO: destroy view mast do some controller (for ex fsm)
-				_view.Destroy();
+				_view.SetActive(false);
 			}
+		}
+
+		public void Reset()
+		{
+			_baseHealth = _unitGrade.Health;
+			_health = _unitGrade.Health;
+			HealthRate.Value = 1;
 		}
 
 		#endregion

@@ -66,7 +66,6 @@
 		private void UnitDiedHandler(IUnitFacade unit)
 		{
 			_fieldFacade.RemoveUnit(unit);
-			unit.DestroyView();
 			_unitSubscribes[unit].Dispose();
 			_unitSubscribes.Remove(unit);
 		}
