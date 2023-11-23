@@ -13,6 +13,8 @@ namespace Game.Units
 
 		public override void InstallBindings()
 		{
+			#region Instances
+
 			Container
 				.BindInstance(_species);
 
@@ -24,9 +26,17 @@ namespace Game.Units
 			Container
 				.BindInstance(unitGrade);
 
+			#endregion
+
+			#region View
+
 			Container
 				.BindInterfacesTo<UnitView>()
 				.FromComponentOnRoot();
+			
+			#endregion
+
+			#region Base
 
 			Container
 				.Bind<UnitFacade>()
@@ -43,6 +53,14 @@ namespace Game.Units
 				.NonLazy();
 
 			Container
+				.BindInterfacesTo<UnitFsm>()
+				.AsSingle();
+
+			#endregion
+
+			#region Components
+
+			Container
 				.BindInterfacesTo<UnitTargetFinder>()
 				.AsSingle();
 
@@ -57,6 +75,8 @@ namespace Game.Units
 			Container
 				.BindInterfacesTo<UnitAttacker>()
 				.AsSingle();
+			
+			#endregion
 		}
 	}
 }

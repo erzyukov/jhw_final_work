@@ -1,24 +1,24 @@
 ﻿namespace Game.Units
 {
-	using Game.Core;
 	using Game.Field;
 	using Game.Utilities;
 	using System;
 	using System.Linq;
 	using UniRx;
-	using UnityEngine;
 	using Zenject;
 
 	public interface IUnitTargetFinder
 	{
 		ReactiveCommand<IUnitFacade> TargetFound { get; }
 		ReactiveCommand TargetLost { get; }
+		bool HasTarget { get; }
+		IUnitFacade Target { get; }
+		void SearchTarget();
 		void Reset();
 	}
 
-	public class UnitTargetFinder : ControllerBase, IUnitTargetFinder, IInitializable, ITickable
+	public class UnitTargetFinder : ControllerBase, IUnitTargetFinder
 	{
-		[Inject] private IGameCycle _levelCycle;
 		[Inject] private IFieldFacade[] _fields;
 		[Inject] private UnitFacade _unitFacade;
 
@@ -27,45 +27,35 @@
 		private IFieldFacade _enemyField;
 		private IDisposable _targetDisposable;
 
-		public void Initialize()
-		{
-			_levelCycle.State
-				.Where(state => state == GameState.BattleStage)
-				.Subscribe(_ => OnBattleStageHandler())
-				.AddTo(this);
-		}
-
-		public void Tick()
-		{
-			if (_target == null && _enemyField != null && _enemyField.Units.Count != 0 && _levelCycle.State.Value == GameState.BattleStage)
-			{
-				SelectTarget();
-			}
-		}
-
 		#region IUnitTargetFinder
 
 		public ReactiveCommand<IUnitFacade> TargetFound { get; } = new ReactiveCommand<IUnitFacade>();
 
 		public ReactiveCommand TargetLost { get; } = new ReactiveCommand();
 
+		public bool HasTarget => _target != null;
+		
+		public IUnitFacade Target => _target;
+
+		public void SearchTarget()
+		{
+			InitFields();
+			SelectTarget();
+		}
+
 		public void Reset()
 		{
-			TargetLost.Execute();
 			_target = null;
-			_targetDisposable.Dispose();
+			_targetDisposable?.Dispose();
 		}
 
 		#endregion
 
-		private void OnBattleStageHandler()
-		{
-			InitFields();
-			SelectTarget();
-        }
-
 		private void SelectTarget()
 		{
+			if (_enemyField == null || _enemyField.Units.Count == 0)
+				return;
+
 			_target = _enemyField.Units
 				.OrderBy(u => (_unitFacade.Transform.position - u.Transform.position).sqrMagnitude)
 				.FirstOrDefault();
@@ -81,6 +71,7 @@
 
 		private void InitFields()
 		{
+			// TODO: refact, how we can take out define allied field?
 			for (int i = 0; i < _fields.Length; i++)
 			{
 				if (_fields[i].HasUnit(_unitFacade))
@@ -93,6 +84,7 @@
 
 		private void OnTargetDiedHandler()
 		{
+			TargetLost.Execute();
 			Reset();
 		}
 	}

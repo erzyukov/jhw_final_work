@@ -14,18 +14,12 @@
 		void Reset();
 	}
 
-	public class UnitHealth : ControllerBase, IUnitHealth, IInitializable
+	public class UnitHealth : ControllerBase, IUnitHealth
 	{
 		[Inject] private UnitGrade _unitGrade;
-		[Inject] private IUnitView _view;
 
 		private float _baseHealth;
 		private float _health;
-
-		public void Initialize()
-		{
-			Reset();
-		}
 
 		#region IUnitHealth
 
@@ -43,11 +37,7 @@
 			HealthRate.Value = _health / _baseHealth;
 
 			if (_health == 0)
-			{
 				Died.Execute();
-				// TODO: destroy view mast do some controller (for ex fsm)
-				_view.SetActive(false);
-			}
 		}
 
 		public void Reset()
