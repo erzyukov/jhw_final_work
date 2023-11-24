@@ -17,7 +17,7 @@
 		void Summon();
 	}
 
-	public class HeroUnitSummoner : ControllerBase, IHeroUnitSummoner, IInitializable
+	public class HeroUnitSummoner : ControllerBase, IHeroUnitSummoner
 	{
 		[Inject] private CurrencyConfig _currencyConfig;
 		[Inject] private IGameCurrency _gameCurrency;
@@ -27,15 +27,6 @@
 		[Inject] private IGameCycle _gameCycle;
 
 		Dictionary<IUnitFacade, IDisposable> _unitSubscribes = new Dictionary<IUnitFacade, IDisposable>();
-		Dictionary<IUnitFacade, Vector2Int> _unitsDisplace = new Dictionary<IUnitFacade, Vector2Int>();
-
-		public void Initialize()
-		{
-			_gameCycle.State
-				.Where(state => state == GameState.TacticalStage)
-				.Subscribe(_ => RestoreUnitsOnField())
-				.AddTo(this);
-		}
 
 		public void Summon()
 		{
@@ -56,8 +47,6 @@
 			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(defaultSpecies);
 			Vector2Int position = _fieldFacade.AddUnit(unit);
 
-			_unitsDisplace.Add(unit, position);
-
 			SubscribeToUnit(unit);
 		}
 
@@ -66,12 +55,6 @@
 			_unitSubscribes.Add(unit, default);
 			_unitSubscribes[unit] = unit.Died
 				.Subscribe(_ => UnitDiedHandler(unit));
-		}
-
-		private void RestoreUnitsOnField()
-		{
-            foreach (var unit in _unitsDisplace)
-				unit.Key.Reset();
 		}
 
 		private void UnitDiedHandler(IUnitFacade unit) {}

@@ -10,28 +10,26 @@
 		FloatReactiveProperty HealthRate { get; }
 		ReactiveCommand Died { get; }
 
+		bool IsDead { get; }
+
 		void TakeDamage(float damage);
 		void Reset();
 	}
 
-	public class UnitHealth : ControllerBase, IUnitHealth, IInitializable
+	public class UnitHealth : ControllerBase, IUnitHealth
 	{
 		[Inject] private UnitGrade _unitGrade;
-		[Inject] private IUnitView _view;
 
 		private float _baseHealth;
 		private float _health;
-
-		public void Initialize()
-		{
-			Reset();
-		}
 
 		#region IUnitHealth
 
 		public FloatReactiveProperty HealthRate { get; } = new FloatReactiveProperty();
 
 		public ReactiveCommand Died { get; } = new ReactiveCommand();
+
+		public bool IsDead => _health <= 0;
 
 		public void TakeDamage(float damage)
 		{
@@ -43,11 +41,7 @@
 			HealthRate.Value = _health / _baseHealth;
 
 			if (_health == 0)
-			{
 				Died.Execute();
-				// TODO: destroy view mast do some controller (for ex fsm)
-				_view.SetActive(false);
-			}
 		}
 
 		public void Reset()

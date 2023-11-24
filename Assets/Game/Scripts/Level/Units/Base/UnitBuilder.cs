@@ -2,6 +2,7 @@
 {
 	using Game.Configs;
 	using Game.Utilities;
+	using UnityEngine;
 	using Zenject;
 
 	public interface IUnitBuilder
@@ -38,6 +39,12 @@
 
 			_unitView.NavMeshAgent.speed = _unitsConfig.Speed;
 			_unitView.NavMeshAgent.stoppingDistance = _unitConfig.AttackRange;
+
+			#region Debug
+
+			_unitView.Transform.name += $" - {Random.Range(1000, 9999)}";
+
+			#endregion
 		}
 
 		#endregion

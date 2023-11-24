@@ -8,13 +8,23 @@
 
 	public class BattleHandler : ControllerBase, IInitializable
 	{
-		[Inject] IGameCycle _gameCycle;
-		[Inject] IGameLevel _gameLevel;
-		[Inject] IFieldHeroFacade _fieldHeroFacade;
-		[Inject] IFieldEnemyFacade _fieldEnemyFacade;
+		[Inject] private IGameCycle _gameCycle;
+		[Inject] private IGameLevel _gameLevel;
+		[Inject] private IFieldHeroFacade _fieldHeroFacade;
+		[Inject] private IFieldEnemyFacade _fieldEnemyFacade;
 
 		public void Initialize()
 		{
+			_gameCycle.State
+				.Where(state => state == GameState.TacticalStage)
+				.Subscribe(_ => RestoreUnitsOnField())
+				.AddTo(this);
+
+			_gameCycle.State
+				.Where(state => state == GameState.BattleStage)
+				.Subscribe(_ => OnBattleStageHandler())
+				.AddTo(this);
+
 			_fieldEnemyFacade.Units.ObserveCountChanged()
 				.Subscribe(OnHeroUnitsCountChanged)
 				.AddTo(this);
@@ -27,6 +37,21 @@
 				_gameCycle.SetState(GameState.CompleteWave);
 				_gameLevel.GoToNextWave();
 			}
+		}
+
+		private void RestoreUnitsOnField()
+		{
+			foreach (var unit in _fieldHeroFacade.Units)
+				unit.Reset();
+		}
+
+		private void OnBattleStageHandler()
+		{
+            foreach (var unit in _fieldHeroFacade.Units)
+				unit.EnableAttack();
+
+			foreach (var unit in _fieldEnemyFacade.Units)
+				unit.EnableAttack();
 		}
 	}
 }

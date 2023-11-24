@@ -11,8 +11,11 @@
 		string Name { get; }
 		Species Species { get; }
 		Transform Transform { get; }
+		bool IsDead { get; }
+
 		void SetViewParent(Transform parent);
 		void TakeDamage(float damage);
+		void EnableAttack();
 		void Reset();
 		void Destroy();
 	}
@@ -23,7 +26,7 @@
 		[Inject] private IUnitView _view;
 		[Inject] private UnitConfig _config;
 		[Inject] private IUnitHealth _health;
-		[Inject] private IUnitTargetFinder _targetFinder;
+		[Inject] private IUnitFsm _fsm;
 
 		#region IUnitFacade
 
@@ -35,23 +38,17 @@
 
 		public Transform Transform => _view.Transform;
 
+		public bool IsDead => _health.IsDead;
+
 		public void SetViewParent(Transform parent) => _view.SetParent(parent);
 
 		public void TakeDamage(float damage) => _health.TakeDamage(damage);
 
-		public void Reset()
-		{
-			// TODO: Reset All
-			_health.Reset();
-			_targetFinder.Reset();
-			_view.ResetPosition();
-			_view.SetActive(true);
-		}
+		public void EnableAttack() => _fsm.Transition(UnitState.SearchTarget);
 
-		public void Destroy()
-		{
-			_view.Destroy();
-		}
+		public void Reset() => _fsm.Transition(UnitState.Idle);
+
+		public void Destroy() => _view.Destroy();
 
 		#endregion
 

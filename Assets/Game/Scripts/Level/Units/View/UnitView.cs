@@ -34,7 +34,6 @@ namespace Game.Units
 
 		public void ResetPosition()
 		{
-			//transform.SetParent(transform.parent, false);
 			transform.localPosition = Vector3.zero;
 			transform.localRotation = Quaternion.identity;
 		}
