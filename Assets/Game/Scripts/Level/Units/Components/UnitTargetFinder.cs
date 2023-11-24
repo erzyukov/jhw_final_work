@@ -1,10 +1,12 @@
 ﻿namespace Game.Units
 {
+	using Game.Configs;
 	using Game.Field;
 	using Game.Utilities;
 	using System;
 	using System.Linq;
 	using UniRx;
+	using UnityEngine;
 	using Zenject;
 
 	public interface IUnitTargetFinder
@@ -21,6 +23,7 @@
 	{
 		[Inject] private IFieldFacade[] _fields;
 		[Inject] private UnitFacade _unitFacade;
+		[Inject] private UnitConfig _config;
 
 		private IUnitFacade _target;
 		private IFieldFacade _alliedField;
@@ -57,6 +60,7 @@
 				return;
 
 			_target = _enemyField.Units
+				.Where(u => u.IsDead == false)
 				.OrderBy(u => (_unitFacade.Transform.position - u.Transform.position).sqrMagnitude)
 				.FirstOrDefault();
 
@@ -84,6 +88,15 @@
 
 		private void OnTargetDiedHandler()
 		{
+			#region Debug
+
+			if (_config.IsDebug)
+			{
+				Debug.LogWarning($">>>> Target die!");
+			}
+			
+			#endregion
+
 			TargetLost.Execute();
 			Reset();
 		}

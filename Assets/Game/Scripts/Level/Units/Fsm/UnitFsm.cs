@@ -1,8 +1,10 @@
 ﻿namespace Game.Units
 {
+	using Game.Configs;
 	using Game.Utilities;
 	using System;
 	using UniRx;
+	using UnityEngine;
 	using Zenject;
 
 	public interface IUnitFsm
@@ -17,13 +19,20 @@
 		[Inject] private IUnitMover _mover;
 		[Inject] private IUnitAttacker _attacker;
 		[Inject] private IUnitView _view;
+		[Inject] private UnitConfig _config;
 
 		readonly private CompositeDisposable _disposable = new CompositeDisposable();
+
+		private IUnitFacade _target;
 
 		public void Initialize()
 		{
 			_targetFinder.TargetFound
-				.Subscribe(_ => Transition(UnitState.TargetFound))
+				.Subscribe(target =>
+				{
+					_target = target;
+					Transition(UnitState.TargetFound);
+				})
 				.AddTo(_disposable);
 
 			_mover.ReachedDestination
@@ -42,6 +51,21 @@
 		public virtual void Dispose() => _disposable.Dispose();
 
 		#region SimpleFsmBase
+
+		public override void Transition(UnitState state)
+		{
+			#region Debug
+
+			if (_config.IsDebug)
+			{
+				string target = (_target == null) ? "none" : _target.Transform.name;
+				Debug.LogWarning($"State changed: {state} | target = {target}");
+			}
+
+			#endregion
+
+			base.Transition(state);
+		}
 
 		protected override void StateTransitions()
 		{

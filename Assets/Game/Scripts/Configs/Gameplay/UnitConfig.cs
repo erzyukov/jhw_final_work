@@ -10,10 +10,12 @@
 		[SerializeField] private Class _class;
 		[SerializeField] private float _attackRange;
 		[SerializeField] private UnitGrade[] _grades;
+		[SerializeField] private bool _isDebug;
 
 		public string Title => _title;
 		public Class Class => _class;
 		public float AttackRange => _attackRange;
 		public UnitGrade[] Grades => _grades;
+		public bool IsDebug => _isDebug;
 	}
 }

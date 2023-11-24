@@ -2,7 +2,6 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using UnityEngine;
 
 	public abstract class SimpleFsmBase<T> where T : struct, IComparable
 	{

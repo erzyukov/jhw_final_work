@@ -11,6 +11,7 @@
 		string Name { get; }
 		Species Species { get; }
 		Transform Transform { get; }
+		bool IsDead { get; }
 
 		void SetViewParent(Transform parent);
 		void TakeDamage(float damage);
@@ -36,6 +37,8 @@
 		public Species Species => _species;
 
 		public Transform Transform => _view.Transform;
+
+		public bool IsDead => _health.IsDead;
 
 		public void SetViewParent(Transform parent) => _view.SetParent(parent);
 

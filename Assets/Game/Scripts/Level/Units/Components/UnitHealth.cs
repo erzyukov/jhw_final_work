@@ -10,6 +10,8 @@
 		FloatReactiveProperty HealthRate { get; }
 		ReactiveCommand Died { get; }
 
+		bool IsDead { get; }
+
 		void TakeDamage(float damage);
 		void Reset();
 	}
@@ -26,6 +28,8 @@
 		public FloatReactiveProperty HealthRate { get; } = new FloatReactiveProperty();
 
 		public ReactiveCommand Died { get; } = new ReactiveCommand();
+
+		public bool IsDead => _health <= 0;
 
 		public void TakeDamage(float damage)
 		{

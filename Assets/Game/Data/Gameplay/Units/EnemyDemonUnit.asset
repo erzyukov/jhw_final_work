@@ -17,8 +17,8 @@ MonoBehaviour:
   _attackRange: 0.7
   _grades:
   - Prefab: {fileID: 1503547998484457933, guid: 2409fbd3b3ba81a4286813ce3d283d39, type: 3}
-    AttackDelay: 0.95
-    Damage: 10
+    AttackDelay: 0.1
+    Damage: 4
     Health: 50
   - Prefab: {fileID: 1503547998484457933, guid: 2409fbd3b3ba81a4286813ce3d283d39, type: 3}
     AttackDelay: 0.94
@@ -32,3 +32,4 @@ MonoBehaviour:
     AttackDelay: 0.92
     Damage: 60
     Health: 200
+  _isDebug: 0
