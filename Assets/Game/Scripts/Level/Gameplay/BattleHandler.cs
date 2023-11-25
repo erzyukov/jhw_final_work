@@ -1,8 +1,10 @@
 ﻿namespace Game.Gameplay
 {
+	using Game.Configs;
 	using Game.Core;
 	using Game.Field;
 	using Game.Utilities;
+	using System;
 	using UniRx;
 	using Zenject;
 
@@ -12,6 +14,7 @@
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private IFieldHeroFacade _fieldHeroFacade;
 		[Inject] private IFieldEnemyFacade _fieldEnemyFacade;
+		[Inject] private TimingsConfig _timingsConfig;
 
 		public void Initialize()
 		{
@@ -34,8 +37,13 @@
 		{
 			if (count == 0)
 			{
-				_gameCycle.SetState(GameState.CompleteWave);
-				_gameLevel.GoToNextWave();
+				Observable.Timer(TimeSpan.FromSeconds(_timingsConfig.WaveTransitionDelay))
+					.Subscribe(_ =>
+					{
+						_gameCycle.SetState(GameState.CompleteWave);
+						_gameLevel.GoToNextWave();
+					})
+					.AddTo(this);
 			}
 		}
 

@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Timings
   m_EditorClassIdentifier: 
   _experienceAnimationDuration: 1
+  _waveTransitionDelay: 0.8
