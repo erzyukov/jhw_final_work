@@ -10,6 +10,7 @@
 		Vector2Int Position { get; }
 		void SetUnit(IUnitFacade unit);
 		void Clear();
+		void SetFieldCellRenderEnabled(bool value);
 	}
 
 	public class FieldCell : IFieldCell
@@ -43,6 +44,9 @@
 			_unit.SetViewParent(null);
 			_unit = null;
 		}
+
+		public void SetFieldCellRenderEnabled(bool value) =>
+			_cellView.SetFieldCellRenderEnabled(value);
 
 		#endregion
 	}

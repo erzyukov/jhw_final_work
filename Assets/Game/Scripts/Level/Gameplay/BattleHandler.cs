@@ -20,7 +20,7 @@
 		{
 			_gameCycle.State
 				.Where(state => state == GameState.TacticalStage)
-				.Subscribe(_ => RestoreUnitsOnField())
+				.Subscribe(_ => OnTacticalStageHandler())
 				.AddTo(this);
 
 			_gameCycle.State
@@ -47,15 +47,20 @@
 			}
 		}
 
-		private void RestoreUnitsOnField()
+		private void OnTacticalStageHandler()
 		{
+			_fieldHeroFacade.SetFieldRenderEnabled(true);
+			_fieldEnemyFacade.SetFieldRenderEnabled(true);
 			foreach (var unit in _fieldHeroFacade.Units)
 				unit.Reset();
 		}
 
 		private void OnBattleStageHandler()
 		{
-            foreach (var unit in _fieldHeroFacade.Units)
+			_fieldHeroFacade.SetFieldRenderEnabled(false);
+			_fieldEnemyFacade.SetFieldRenderEnabled(false);
+
+			foreach (var unit in _fieldHeroFacade.Units)
 				unit.EnableAttack();
 
 			foreach (var unit in _fieldEnemyFacade.Units)
