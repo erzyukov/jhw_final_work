@@ -13,6 +13,7 @@ namespace Game.Installers
 		[SerializeField] private EnemyConfig _enemy;
 		[SerializeField] private LevelsConfig _levels;
 		[SerializeField] private CurrencyConfig _currency;
+		[SerializeField] private TimingsConfig _timings;
 
 		public override void InstallBindings()
 		{
@@ -24,6 +25,7 @@ namespace Game.Installers
 			Container.BindInstance(_enemy);
 			Container.BindInstance(_levels);
 			Container.BindInstance(_currency);
+			Container.BindInstance(_timings);
 		}
 	}
 }

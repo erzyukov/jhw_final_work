@@ -11,9 +11,7 @@ namespace Game.Installers
 	{
 		public override void InstallBindings()
 		{
-			Container
-				.BindInterfacesTo<GameLevel>()
-				.AsSingle();
+			InstallGameControllers();
 
 			Container
 				.Bind<Camera>()
@@ -48,6 +46,17 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<CoreTests>()
+				.AsSingle();
+		}
+
+		private void InstallGameControllers()
+		{
+			Container
+				.BindInterfacesTo<GameLevel>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<GameHero>()
 				.AsSingle();
 		}
 	}

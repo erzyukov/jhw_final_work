@@ -8,11 +8,6 @@ namespace Game.Installers
 		public override void InstallBindings()
 		{
 			Container
-				.Bind<IUiScreen>()
-				.FromComponentsInHierarchy()
-				.AsSingle();
-
-			Container
 				.BindInterfacesTo<ScreenNavigator>()
 				.AsSingle();
 
@@ -23,6 +18,15 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<UiLobby>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiWinScreen>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiWin>()
 				.AsSingle();
 		}
 	}

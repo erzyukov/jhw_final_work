@@ -17,7 +17,7 @@
 		public void Initialize()
 		{
 			_lobbyScreen.Opening
-				.Subscribe(_ => OnScreenOpening())
+				.Subscribe(_ => OnScreenOpeningHandler())
 				.AddTo(this);
 
 			_lobbyScreen.PlayButtonClicked
@@ -25,7 +25,7 @@
 				.AddTo(this);
 		}
 
-		private void OnScreenOpening()
+		private void OnScreenOpeningHandler()
 		{
 			int levelIndex = _profile.LevelNumber.Value - 1;
 			LevelConfig levelConfig = _levelsConfig.Levels[levelIndex];

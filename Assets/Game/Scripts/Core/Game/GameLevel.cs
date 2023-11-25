@@ -16,6 +16,9 @@
 		ReactiveCommand LevelFinished { get; }
 		void GoToLevel(int number);
 		void GoToNextWave();
+		void FinishLevel();
+		int GetLevelExperience();
+		int GetLevelReward();
 	}
 
 	public class GameLevel : ControllerBase, IGameLevel, IInitializable
@@ -25,6 +28,11 @@
 		[Inject] private IScenesManager _scenesManager;
 		[Inject] private IGameCycle _gameCycle;
 		[Inject] private IUiViel _uiViel;
+
+		// TODO: realize level experience amout calculate
+		private const int ExperienceByLevel = 100;
+		// TODO: realize level soft currency amout calculate
+		private const int SoftCurrencyByLevel = 35;
 
 		public void Initialize()
 		{
@@ -75,13 +83,11 @@
 			}
 			else
 			{
-				FinishLevel();
+				_gameCycle.SetState(GameState.WinBattle);
 			}
 		}
 
-		#endregion
-
-		void FinishLevel()
+		public void FinishLevel()
 		{
 			_uiViel.SetActive(true, () =>
 			{
@@ -92,6 +98,18 @@
 				_gameCycle.SetState(GameState.Lobby);
 			});
 		}
+
+		public int GetLevelExperience()
+		{
+			return ExperienceByLevel;
+		}
+
+		public int GetLevelReward()
+		{
+			return SoftCurrencyByLevel;
+		}
+
+		#endregion
 
 		private void LoadNextLevel()
 		{
