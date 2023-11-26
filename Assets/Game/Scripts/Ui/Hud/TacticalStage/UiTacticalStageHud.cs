@@ -11,6 +11,8 @@ namespace Game.Ui
 		IObservable<Unit> SummonButtonClicked { get; }
 		IObservable<Unit> StartBattleButtonClicked { get; }
 		void SetSummonPrice(int value);
+		void SetSummonButtonActive(bool value);
+		void SetStartBattleButtonActive(bool value);
 	}
 
 	public class UiTacticalStageHud : UiHudPartition, IUiTacticalStageHud
@@ -26,6 +28,10 @@ namespace Game.Ui
 		public IObservable<Unit> StartBattleButtonClicked => _startBattleButton.OnClickAsObservable();
 
 		public void SetSummonPrice(int value) => _summonPrice.text = value.ToString();
+
+		public void SetSummonButtonActive(bool value) => _summonButton.gameObject.SetActive(value);
+
+		public void SetStartBattleButtonActive(bool value) => _startBattleButton.gameObject.SetActive(value);
 
 		#endregion
 	}
