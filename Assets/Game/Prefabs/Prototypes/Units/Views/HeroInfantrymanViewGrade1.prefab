@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4979439236031808108}
   - component: {fileID: -3272273062254429049}
+  - component: {fileID: 1181812958671037704}
   m_Layer: 0
   m_Name: HeroInfantrymanViewGrade1
   m_TagString: Untagged
@@ -43,6 +44,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 989dba3addc0b4e46b9888c192ef0a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1181812958671037704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503547998484457933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb2c48d860db0d94e93e6b6971dbf95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6536869740223472630

@@ -312,7 +312,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1346
+  m_Name: pb_Mesh-231300
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -643,6 +643,10 @@ PrefabInstance:
     - target: {fileID: 1464319315194564202, guid: 42bb5beb8c98edc4eaa853cc474ec723, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2688952480079204416, guid: 42bb5beb8c98edc4eaa853cc474ec723, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2688952480079204417, guid: 42bb5beb8c98edc4eaa853cc474ec723, type: 3}
       propertyPath: m_Mesh
