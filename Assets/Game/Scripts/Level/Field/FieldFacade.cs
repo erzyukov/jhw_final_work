@@ -9,6 +9,7 @@ namespace Game.Field
 	{
 		ReactiveCollection<IUnitFacade> Units { get; }
 		bool HasFreeSpace { get; }
+		IFieldEvents Events { get; }
 		bool HasUnit(IUnitFacade unit);
 		Vector2Int AddUnit(IUnitFacade unit);
 		Vector2Int AddUnit(IUnitFacade unit, Vector2Int position);
@@ -20,11 +21,13 @@ namespace Game.Field
 	public class FieldFacade : MonoBehaviour, IFieldFacade
 	{
 		[Inject] protected IField<FieldCell> Field;
+		[Inject] private IFieldEvents _events;
 
 		#region IFieldFacade
 
 		public ReactiveCollection<IUnitFacade> Units => Field.Units;
 		public bool HasFreeSpace => Field.HasFreeSpace;
+		public IFieldEvents Events => _events;
 		public bool HasUnit(IUnitFacade unit) => Field.HasUnit(unit);
 		public virtual Vector2Int AddUnit(IUnitFacade unit) => Field.AddUnit(unit);
 		public virtual Vector2Int AddUnit(IUnitFacade unit, Vector2Int position) => Field.AddUnit(unit, position);

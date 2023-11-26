@@ -2,10 +2,7 @@
 {
 	using Game.Core;
 	using Game.Field;
-	using Game.Units;
 	using Game.Utilities;
-	using System;
-	using System.Collections.Generic;
 	using UniRx;
 	using Zenject;
 
@@ -15,8 +12,6 @@
 		[Inject] private IFieldHeroFacade _fieldHeroFacade;
 		[Inject] private IFieldEnemyFacade _fieldEnemyFacade;
 
-		Dictionary<IUnitFacade, IDisposable> _unitsLifetime = new Dictionary<IUnitFacade, IDisposable>();
-
 		public void Initialize()
 		{
 			_gameCycle.State
@@ -24,44 +19,13 @@
 				.Subscribe(_ => OnTacticalStageHandler())
 				.AddTo(this);
 
-			Observable.Merge(
-					_fieldHeroFacade.Units.ObserveAdd().Select(element => element.Value),
-					_fieldHeroFacade.Units.ObserveReplace().Select(element => element.NewValue)
-				)
-				.Subscribe(unit => OnUnitAddedHandler(unit))
+			_fieldHeroFacade.Events.UnitAdded
+				.Subscribe(unit => unit.SetDraggableActive(true))
 				.AddTo(this);
 
-			Observable.Merge(
-					_fieldHeroFacade.Units.ObserveRemove().Select(element => element.Value),
-					_fieldHeroFacade.Units.ObserveReplace().Select(element => element.OldValue)
-				)
-				.Subscribe(unit => OnUnitRemovedHandler(unit))
+			_fieldHeroFacade.Events.UnitDropped
+				.Subscribe(unit => unit.ResetPosition())
 				.AddTo(this);
-
-			_fieldHeroFacade.Units.ObserveReset()
-				.Subscribe(_ => OnUnitsRemovedHandler())
-				.AddTo(this);
-		}
-
-		private void OnUnitsRemovedHandler()
-		{
-            foreach (var unit in _unitsLifetime)
-				unit.Value.Dispose();
-
-			_unitsLifetime.Clear();
-		}
-
-		private void OnUnitRemovedHandler(IUnitFacade unit)
-		{
-			_unitsLifetime[unit].Dispose();
-			_unitsLifetime.Remove(unit);
-		}
-
-		private void OnUnitAddedHandler(IUnitFacade unit)
-		{
-			unit.SetDraggableActive(true);
-			IDisposable unitLifetime = unit.Dropped.Subscribe(_ => unit.ResetPosition());
-			_unitsLifetime.Add(unit, unitLifetime);
 		}
 
 		private void OnTacticalStageHandler()
