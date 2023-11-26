@@ -10,9 +10,7 @@
 
 	public interface IField<T>
 	{
-		//IntReactiveProperty UnitsCount { get; }
 		ReactiveCollection<IUnitFacade> Units { get; }
-		//List<IUnitFacade> Units { get; }
 		bool HasFreeSpace { get; }
 
 		void InitMap(Map<T> map);
@@ -24,6 +22,7 @@
 		Vector2Int AddUnit(IUnitFacade unit, Vector2Int position);
 		void RemoveUnit(IUnitFacade unit);
 		void Clear();
+		void SetFieldRenderEnabled(bool value);
 	}
 
 	public class Field<T> : IField<T> where T : FieldCell
@@ -36,8 +35,6 @@
 		public ReactiveCollection<IUnitFacade> Units => _units;
 
 		public IntReactiveProperty UnitsCount { get; } = new IntReactiveProperty();
-
-		//public List<IUnitFacade> Units => _units;
 
 		public bool HasFreeSpace => _map.Any(position => _map[position].HasUnit == false);
 
@@ -99,6 +96,12 @@
 
 			_units.Clear();
 		}
+
+		public void SetFieldRenderEnabled(bool value)
+		{
+            foreach (var cellPosition in _map)
+				_map[cellPosition].SetFieldCellRenderEnabled(value);
+        }
 
 		#endregion
 	}

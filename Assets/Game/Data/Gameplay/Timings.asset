@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe2dcf87ae241344a7ced1f1a34fa2d, type: 3}
-  m_Name: Currency
+  m_Script: {fileID: 11500000, guid: 921ed839c3799b544a81f4e6ef6ad0e7, type: 3}
+  m_Name: Timings
   m_EditorClassIdentifier: 
-  _unitSummonPrice: 3
-  _summonCurrencyAtWaveStart: 8
+  _experienceAnimationDuration: 1
+  _waveTransitionDelay: 0.8

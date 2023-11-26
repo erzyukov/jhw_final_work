@@ -8,6 +8,7 @@
 		Enemy,
 		EnemySpawn,
 		Currency,
+		Timings,
 
 		// Levels
 		Regions = 250,

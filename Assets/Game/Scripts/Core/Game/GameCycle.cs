@@ -2,7 +2,6 @@
 {
 	using Game.Dev;
 	using Game.Utilities;
-	using System;
 	using UniRx;
 	using Zenject;
 
@@ -46,6 +45,7 @@
 		BattleStage,
 		CompleteWave,
 		LoadingWave,
-		CompleteBattle,
+		WinBattle,
+		LoseBattle,
 	}
 }

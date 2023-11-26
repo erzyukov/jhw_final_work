@@ -12,7 +12,7 @@ namespace Game.Installers
 		{
 			WebGLDebug.Log("[Project] ProjectInstaller: Configure");
 
-			RegisterGameProfile();
+			InstallGameProfile();
 
 			Container
 				.BindInterfacesTo<ScenesManager>()
@@ -24,10 +24,10 @@ namespace Game.Installers
 				.BindInterfacesTo<InputHandler>()
 				.AsSingle();
 
-			RegisterGameControllers();
+			InstallGameControllers();
 		}
 
-		private void RegisterGameProfile()
+		private void InstallGameProfile()
 		{
 			Container
 				.BindInterfacesTo<GameProfileManager>()
@@ -41,7 +41,7 @@ namespace Game.Installers
 				.MoveIntoAllSubContainers();
 		}
 
-		private void RegisterGameControllers()
+		private void InstallGameControllers()
 		{
 			Container
 				.BindInterfacesTo<GameCycle>()
