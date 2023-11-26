@@ -10,9 +10,12 @@
 	{
 		ReactiveCommand Dragging { get; }
 		ReactiveCommand Dropped { get; }
+		ReactiveCommand PointerDowned { get; }
+		ReactiveCommand PointerUped { get; }
 		ReactiveCommand Died { get; }
 		string Name { get; }
 		Species Species { get; }
+		int GradeIndex { get; }
 		Transform Transform { get; }
 		bool IsDead { get; }
 
@@ -33,6 +36,7 @@
 		[Inject] private IUnitHealth _health;
 		[Inject] private IUnitFsm _fsm;
 		[Inject] private IDraggable _draggable;
+		[Inject] private int _gradeIndex;
 
 		#region IUnitFacade
 
@@ -40,11 +44,17 @@
 		
 		public ReactiveCommand Dropped => _draggable.Dropped;
 
+		public ReactiveCommand PointerDowned => _draggable.PointerDowned;
+
+		public ReactiveCommand PointerUped => _draggable.PointerUped;
+
 		public ReactiveCommand Died => _health.Died;
 
 		public string Name => _config.Title;
 
 		public Species Species => _species;
+
+		public int GradeIndex => _gradeIndex;
 
 		public Transform Transform => _view.Transform;
 

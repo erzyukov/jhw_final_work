@@ -14,14 +14,15 @@
 		ReactiveCommand UnitsCleared { get; }
 		ReactiveCommand<IUnitFacade> UnitDragging { get; }
 		ReactiveCommand<IUnitFacade> UnitDropped { get; }
+		ReactiveCommand<IUnitFacade> UnitPointerDowned { get; }
+		ReactiveCommand<IUnitFacade> UnitPointerUped { get; }
 	}
 
 	public class FieldEvents : ControllerBase, IFieldEvents, IInitializable
 	{
 		[Inject] private IField<FieldCell> _field;
 
-		Dictionary<IUnitFacade, IDisposable> _unitsDraggingLifetime = new Dictionary<IUnitFacade, IDisposable>();
-		Dictionary<IUnitFacade, IDisposable> _unitsDroppedLifetime = new Dictionary<IUnitFacade, IDisposable>();
+		Dictionary<IUnitFacade, IDisposable> _unitsLifetime = new Dictionary<IUnitFacade, IDisposable>();
 
 		public void Initialize()
 		{
@@ -52,6 +53,8 @@
 		public ReactiveCommand UnitsCleared { get; } = new ReactiveCommand();
 		public ReactiveCommand<IUnitFacade> UnitDragging { get; } = new ReactiveCommand<IUnitFacade>();
 		public ReactiveCommand<IUnitFacade> UnitDropped { get; } = new ReactiveCommand<IUnitFacade>();
+		public ReactiveCommand<IUnitFacade> UnitPointerDowned { get; } = new ReactiveCommand<IUnitFacade>();
+		public ReactiveCommand<IUnitFacade> UnitPointerUped { get; } = new ReactiveCommand<IUnitFacade>();
 
 		#endregion
 
@@ -59,33 +62,30 @@
 		{
 			UnitsCleared.Execute();
 
-			foreach (var unit in _unitsDraggingLifetime)
+			foreach (var unit in _unitsLifetime)
 				unit.Value.Dispose();
 
-			_unitsDraggingLifetime.Clear();
-
-			foreach (var unit in _unitsDroppedLifetime)
-				unit.Value.Dispose();
-
-			_unitsDroppedLifetime.Clear();
+			_unitsLifetime.Clear();
 		}
 
 		private void OnUnitAddedHandler(IUnitFacade unit)
 		{
 			UnitAdded.Execute(unit);
-			IDisposable dragging = unit.Dragging.Subscribe(_ => UnitDragging.Execute(unit));
-			_unitsDraggingLifetime.Add(unit, dragging);
-			IDisposable dropped = unit.Dropped.Subscribe(_ => UnitDropped.Execute(unit));
-			_unitsDroppedLifetime.Add(unit, dropped);
+
+			CompositeDisposable disposable = new CompositeDisposable();
+			_unitsLifetime.Add(unit, disposable);
+
+			unit.Dragging.Subscribe(_ => UnitDragging.Execute(unit)).AddTo(disposable);
+			unit.Dropped.Subscribe(_ => UnitDropped.Execute(unit)).AddTo(disposable);
+			unit.PointerDowned.Subscribe(_ => UnitPointerDowned.Execute(unit)).AddTo(disposable);
+			unit.PointerUped.Subscribe(_ => UnitPointerUped.Execute(unit)).AddTo(disposable);
 		}
 
 		private void OnUnitRemovedHandler(IUnitFacade unit)
 		{
 			UnitRemoved.Execute(unit);
-			_unitsDraggingLifetime[unit].Dispose();
-			_unitsDraggingLifetime.Remove(unit);
-			_unitsDroppedLifetime[unit].Dispose();
-			_unitsDroppedLifetime.Remove(unit);
+			_unitsLifetime[unit].Dispose();
+			_unitsLifetime.Remove(unit);
 		}
 	}
 }

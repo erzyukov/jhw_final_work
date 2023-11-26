@@ -9,6 +9,8 @@ namespace Game.Utilities
 	{
 		ReactiveCommand Dragging { get; }
 		ReactiveCommand Dropped { get; }
+		ReactiveCommand PointerDowned { get; }
+		ReactiveCommand PointerUped { get; }
 		void SetActive(bool value);
 	}
 
@@ -29,6 +31,8 @@ namespace Game.Utilities
 
 		public ReactiveCommand Dragging { get; } = new ReactiveCommand();
 		public ReactiveCommand Dropped { get; } = new ReactiveCommand();
+		public ReactiveCommand PointerDowned { get; } = new ReactiveCommand();
+		public ReactiveCommand PointerUped { get; } = new ReactiveCommand();
 
 		public void SetActive(bool value) =>
 			_isActive = value;
@@ -66,11 +70,12 @@ namespace Game.Utilities
 
 		public void OnPointerDown(PointerEventData eventData)
 		{
+			PointerDowned.Execute();
 		}
 
 		public void OnPointerUp(PointerEventData eventData)
 		{
-
+			PointerUped.Execute();
 		}
 
 		public void OnInitializePotentialDrag(PointerEventData eventData)

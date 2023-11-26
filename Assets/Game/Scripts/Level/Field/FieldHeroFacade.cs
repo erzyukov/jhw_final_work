@@ -7,6 +7,7 @@ namespace Game.Field
 	public interface IFieldHeroFacade : IFieldFacade
 	{
 		IntReactiveProperty AliveUnitsCount { get; }
+
 		void SetDraggableActive(bool value);
 	}
 

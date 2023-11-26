@@ -11,6 +11,8 @@
 		void SetUnit(IUnitFacade unit);
 		void Clear();
 		void SetFieldCellRenderEnabled(bool value);
+		void Select();
+		void Deselect();
 	}
 
 	public class FieldCell : IFieldCell
@@ -47,6 +49,12 @@
 
 		public void SetFieldCellRenderEnabled(bool value) =>
 			_cellView.SetFieldCellRenderEnabled(value);
+
+		public void Select() => 
+			_cellView.Select();
+
+		public void Deselect() => 
+			_cellView.Deselect();
 
 		#endregion
 	}

@@ -23,6 +23,9 @@ namespace Game.Units
 			Container
 				.BindInstance(unitConfig);
 
+			Container
+				.BindInstance(GradeIndex);
+
 			UnitGrade unitGrade = unitConfig.Grades[GradeIndex];
 			Container
 				.BindInstance(unitGrade);

@@ -1,6 +1,7 @@
 namespace Game.Field
 {
 	using Game.Units;
+	using System.Collections.Generic;
 	using UniRx;
 	using UnityEngine;
 	using Zenject;
@@ -16,6 +17,7 @@ namespace Game.Field
 		void RemoveUnit(IUnitFacade unit);
 		void Clear();
 		void SetFieldRenderEnabled(bool value);
+		List<IFieldCell> FindSameUnitCells(IUnitFacade unit);
 	}
 
 	public class FieldFacade : MonoBehaviour, IFieldFacade
@@ -34,6 +36,7 @@ namespace Game.Field
 		public void RemoveUnit(IUnitFacade unit) => Field.RemoveUnit(unit);
 		public virtual void Clear() => Field.Clear();
 		public void SetFieldRenderEnabled(bool value) => Field.SetFieldRenderEnabled(value);
+		public List<IFieldCell> FindSameUnitCells(IUnitFacade unit) => Field.FindSameUnitCells(unit);
 
 		#endregion
 	}

@@ -15,6 +15,7 @@ namespace Game.Configs
 		[SerializeField] private Color _heroOddCollor;
 		[SerializeField] private Color _enemyEvenCollor;
 		[SerializeField] private Color _enemyOddCollor;
+		[SerializeField] private Color _selectedCollor;
 
 		public Vector2Int TeamFieldSize => _teamFieldSize;
 		public float FieldCellWidth => _fieldCellWidth;
@@ -23,5 +24,6 @@ namespace Game.Configs
 		public Color HeroOddCollor => _heroOddCollor;
 		public Color EnemyEvenCollor => _enemyEvenCollor;
 		public Color EnemyOddCollor => _enemyOddCollor;
+		public Color SelectedCollor => _selectedCollor;
 	}
 }

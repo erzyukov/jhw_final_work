@@ -51,6 +51,10 @@ namespace Game.Installers
 				.AsSingle();
 
 			Container
+				.BindInterfacesTo<UnitMerger>()
+				.AsSingle();
+
+			Container
 				.BindInterfacesTo<BattleStageHandler>()
 				.AsSingle();
 
