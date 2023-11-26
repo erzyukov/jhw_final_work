@@ -53,6 +53,9 @@
 				case GameState.WinBattle:
 					Open(Ui.Screen.Win);
 					break;
+				case GameState.LoseBattle:
+					Open(Ui.Screen.Lose);
+					break;
 			}
 		}
 

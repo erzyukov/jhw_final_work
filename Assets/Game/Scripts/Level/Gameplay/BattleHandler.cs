@@ -6,6 +6,7 @@
 	using Game.Utilities;
 	using System;
 	using UniRx;
+	using UnityEngine;
 	using Zenject;
 
 	public class BattleHandler : ControllerBase, IInitializable
@@ -29,11 +30,22 @@
 				.AddTo(this);
 
 			_fieldEnemyFacade.Units.ObserveCountChanged()
+				.Subscribe(OnEnemyUnitsCountChanged)
+				.AddTo(this);
+
+			_fieldHeroFacade.AliveUnitsCount
+				.Where(_ => _gameCycle.State.Value == GameState.BattleStage)
 				.Subscribe(OnHeroUnitsCountChanged)
 				.AddTo(this);
 		}
 
 		private void OnHeroUnitsCountChanged(int count)
+		{
+			if (count == 0)
+				_gameCycle.SetState(GameState.LoseBattle);
+		}
+
+		private void OnEnemyUnitsCountChanged(int count)
 		{
 			if (count == 0)
 			{

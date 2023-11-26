@@ -20,17 +20,16 @@ namespace Game.Field
 	public class FieldFacade : MonoBehaviour, IFieldFacade
 	{
 		[Inject] protected IField<FieldCell> Field;
-		[Inject] private IFieldView _fieldView;
 
 		#region IFieldFacade
 
 		public ReactiveCollection<IUnitFacade> Units => Field.Units;
 		public bool HasFreeSpace => Field.HasFreeSpace;
 		public bool HasUnit(IUnitFacade unit) => Field.HasUnit(unit);
-		public Vector2Int AddUnit(IUnitFacade unit) => Field.AddUnit(unit);
-		public Vector2Int AddUnit(IUnitFacade unit, Vector2Int position) => Field.AddUnit(unit, position);
+		public virtual Vector2Int AddUnit(IUnitFacade unit) => Field.AddUnit(unit);
+		public virtual Vector2Int AddUnit(IUnitFacade unit, Vector2Int position) => Field.AddUnit(unit, position);
 		public void RemoveUnit(IUnitFacade unit) => Field.RemoveUnit(unit);
-		public void Clear() => Field.Clear();
+		public virtual void Clear() => Field.Clear();
 		public void SetFieldRenderEnabled(bool value) => Field.SetFieldRenderEnabled(value);
 
 		#endregion

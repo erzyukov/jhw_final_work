@@ -28,6 +28,15 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<UiWin>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiLoseScreen>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiLose>()
+				.AsSingle();
 		}
 	}
 }
