@@ -6,10 +6,9 @@
 	using Game.Utilities;
 	using System;
 	using UniRx;
-	using UnityEngine;
 	using Zenject;
 
-	public class BattleHandler : ControllerBase, IInitializable
+	public class BattleStageHandler : ControllerBase, IInitializable
 	{
 		[Inject] private IGameCycle _gameCycle;
 		[Inject] private IGameLevel _gameLevel;
@@ -19,11 +18,6 @@
 
 		public void Initialize()
 		{
-			_gameCycle.State
-				.Where(state => state == GameState.TacticalStage)
-				.Subscribe(_ => OnTacticalStageHandler())
-				.AddTo(this);
-
 			_gameCycle.State
 				.Where(state => state == GameState.BattleStage)
 				.Subscribe(_ => OnBattleStageHandler())
@@ -59,17 +53,10 @@
 			}
 		}
 
-		private void OnTacticalStageHandler()
-		{
-			_fieldHeroFacade.SetFieldRenderEnabled(true);
-			_fieldEnemyFacade.SetFieldRenderEnabled(true);
-			foreach (var unit in _fieldHeroFacade.Units)
-				unit.Reset();
-		}
-
 		private void OnBattleStageHandler()
 		{
 			_fieldHeroFacade.SetFieldRenderEnabled(false);
+			_fieldHeroFacade.SetDraggableActive(false);
 			_fieldEnemyFacade.SetFieldRenderEnabled(false);
 
 			foreach (var unit in _fieldHeroFacade.Units)

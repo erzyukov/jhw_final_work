@@ -116,10 +116,12 @@
 			_mover.Stop();
 			_view.ResetPosition();
 			_view.SetActive(true);
+			_view.NavMeshAgent.enabled = false;
 		}
 
 		protected override void OnEnterSearchTargetHandler()
 		{
+			_view.NavMeshAgent.enabled = true;
 			_targetFinder.SearchTarget();
 		}
 

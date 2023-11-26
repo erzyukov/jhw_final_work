@@ -47,7 +47,11 @@ namespace Game.Installers
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<BattleHandler>()
+				.BindInterfacesTo<TacticalStageHandler>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<BattleStageHandler>()
 				.AsSingle();
 
 			InstallUnits();
