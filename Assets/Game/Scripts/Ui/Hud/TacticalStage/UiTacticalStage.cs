@@ -28,12 +28,15 @@
 				.AddTo(this);
 			_hud.SetSummonPrice(_currencyConfig.UnitSummonPrice);
 
+			// TODO: refact and return this logic
+			/*
 			Observable.Merge(
 					_fieldHeroFacade.Events.UnitDragging.Select(_ => false),
 					_fieldHeroFacade.Events.UnitDropped.Select(_ => true)
 				)
 				.Subscribe(SetUiActive)
 				.AddTo(this);
+			*/
 		}
 
 		private void SetUiActive(bool value)
