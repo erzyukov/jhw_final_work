@@ -23,6 +23,7 @@
 		void RemoveUnit(IUnitFacade unit);
 		void Clear();
 		void SetFieldRenderEnabled(bool value);
+		List<IFieldCell> FindSameUnitCells(IUnitFacade compareUnit);
 	}
 
 	public class Field<T> : IField<T> where T : FieldCell
@@ -102,6 +103,14 @@
             foreach (var cellPosition in _map)
 				_map[cellPosition].SetFieldCellRenderEnabled(value);
         }
+
+		public List<IFieldCell> FindSameUnitCells(IUnitFacade compareUnit)
+		{
+			return Units
+				.Where(unit => unit.Species == compareUnit.Species && unit.GradeIndex == compareUnit.GradeIndex && unit != compareUnit)
+				.Select(unit => GetCell(unit))
+				.ToList<IFieldCell>();
+		}
 
 		#endregion
 	}

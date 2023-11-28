@@ -3,11 +3,12 @@ namespace Game.Field
 	using Game.Units;
 	using UniRx;
 	using UnityEngine;
-	using static UnityEngine.UI.CanvasScaler;
 
 	public interface IFieldHeroFacade : IFieldFacade
 	{
 		IntReactiveProperty AliveUnitsCount { get; }
+
+		void SetDraggableActive(bool value);
 	}
 
 	public class FieldHeroFacade : FieldFacade, IFieldHeroFacade
@@ -15,6 +16,12 @@ namespace Game.Field
 		#region IFieldHeroFacade
 		
 		public IntReactiveProperty AliveUnitsCount { get; } = new IntReactiveProperty();
+
+		public void SetDraggableActive(bool value)
+		{
+            foreach (var unit in Units)
+				unit.SetDraggableActive(value);
+        }
 
 		#endregion
 

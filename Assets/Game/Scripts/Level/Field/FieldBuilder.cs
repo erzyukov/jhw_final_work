@@ -29,6 +29,7 @@
 			{
 				IFieldCellView cellView = GameObject.Instantiate(_cellViewPrefab, _view.Transform);
 				cellView.SetColor(GetCellColor(cellPosition));
+				cellView.SetSelectedColor(_config.SelectedCollor);
 				map[cellPosition] = new FieldCell(cellView, cellPosition);
 				Vector3 worldPosition = GetCellWorldPosition(cellPosition);
 				cellView.SetPosition(worldPosition);

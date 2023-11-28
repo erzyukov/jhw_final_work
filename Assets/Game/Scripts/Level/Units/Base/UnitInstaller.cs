@@ -1,6 +1,7 @@
 namespace Game.Units
 {
 	using Game.Configs;
+	using Game.Utilities;
 	using Zenject;
 
 	public class UnitInstaller : Installer<UnitInstaller>
@@ -22,6 +23,9 @@ namespace Game.Units
 			Container
 				.BindInstance(unitConfig);
 
+			Container
+				.BindInstance(GradeIndex);
+
 			UnitGrade unitGrade = unitConfig.Grades[GradeIndex];
 			Container
 				.BindInstance(unitGrade);
@@ -33,7 +37,11 @@ namespace Game.Units
 			Container
 				.BindInterfacesTo<UnitView>()
 				.FromComponentOnRoot();
-			
+
+			Container
+				.BindInterfacesTo<Draggable>()
+				.FromComponentOnRoot();
+
 			#endregion
 
 			#region Base

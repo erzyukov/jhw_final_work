@@ -31,6 +31,10 @@
 			Container
 				.BindInterfacesTo<FieldBuilder>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<FieldEvents>()
+				.AsSingle();
 		}
 	}
 }

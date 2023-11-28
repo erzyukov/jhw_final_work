@@ -19,3 +19,4 @@ MonoBehaviour:
   _heroOddCollor: {r: 0.79550564, g: 0.8, b: 0.5213483, a: 1}
   _enemyEvenCollor: {r: 0.8, g: 0.6039216, b: 0.5176471, a: 1}
   _enemyOddCollor: {r: 1, g: 0.7529412, b: 0.6509804, a: 1}
+  _selectedCollor: {r: 0.5377398, g: 0.8490566, b: 0.11614456, a: 1}
