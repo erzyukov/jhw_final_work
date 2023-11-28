@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4979439236031808108}
   - component: {fileID: -3272273062254429049}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HeroInfantrymanViewGrade1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,8 +56,8 @@ GameObject:
   - component: {fileID: 7363738128014689617}
   - component: {fileID: 7783338182726741043}
   - component: {fileID: 3527022911808713124}
-  - component: {fileID: 5634895502851743387}
-  m_Layer: 0
+  - component: {fileID: 6166963327099152793}
+  m_Layer: 7
   m_Name: UnitModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5634895502851743387
+--- !u!136 &6166963327099152793
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

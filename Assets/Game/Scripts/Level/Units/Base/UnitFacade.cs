@@ -12,6 +12,8 @@
 		ReactiveCommand Dropped { get; }
 		ReactiveCommand PointerDowned { get; }
 		ReactiveCommand PointerUped { get; }
+		ReactiveCommand MergeInitiated { get; }
+		ReactiveCommand MergeCanceled { get; }
 		ReactiveCommand Died { get; }
 		string Name { get; }
 		Species Species { get; }
@@ -48,6 +50,10 @@
 
 		public ReactiveCommand PointerUped => _draggable.PointerUped;
 
+		public ReactiveCommand MergeInitiated => _view.MergeInitiated;
+
+		public ReactiveCommand MergeCanceled => _view.MergeCanceled;
+
 		public ReactiveCommand Died => _health.Died;
 
 		public string Name => _config.Title;
@@ -76,6 +82,6 @@
 
 		#endregion
 
-		public class Factory : PlaceholderFactory<Species, UnitFacade> {}
+		public class Factory : PlaceholderFactory<Species, int, UnitFacade> {}
 	}
 }

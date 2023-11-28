@@ -1,10 +1,14 @@
 namespace Game.Units
 {
+	using UniRx;
 	using UnityEngine;
 	using UnityEngine.AI;
 
 	public interface IUnitView
 	{
+		ReactiveCommand MergeInitiated { get; }
+		ReactiveCommand MergeCanceled { get; }
+
 		Transform Transform { get; }
 		Transform ModelContainer { get; }
 		NavMeshAgent NavMeshAgent { get; }
@@ -20,7 +24,17 @@ namespace Game.Units
 		[SerializeField] private Transform _modelContainer;
 		[SerializeField] private NavMeshAgent _navMeshAgent;
 
+		private void OnTriggerEnter(Collider other) => 
+			MergeInitiated.Execute();
+
+		private void OnTriggerExit(Collider other) =>
+			MergeCanceled.Execute();
+
 		#region IUnitView
+
+		public ReactiveCommand MergeInitiated { get; } = new ReactiveCommand();
+		
+		public ReactiveCommand MergeCanceled { get; } = new ReactiveCommand();
 
 		public Transform Transform => transform;
 
