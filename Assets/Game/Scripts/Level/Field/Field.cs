@@ -35,8 +35,6 @@
 
 		public ReactiveCollection<IUnitFacade> Units => _units;
 
-		public IntReactiveProperty UnitsCount { get; } = new IntReactiveProperty();
-
 		public bool HasFreeSpace => _map.Any(position => _map[position].HasUnit == false);
 
 		public void InitMap(Map<T> map)

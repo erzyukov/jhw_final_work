@@ -18,6 +18,7 @@
 		ReactiveCommand<IUnitFacade> UnitPointerUped { get; }
 		ReactiveCommand<IUnitFacade> UnitMergeInitiated { get; }
 		ReactiveCommand<IUnitFacade> UnitMergeCanceled { get; }
+		ReactiveCommand<IUnitFacade> UnitDied { get; }
 	}
 
 	public class FieldEvents : ControllerBase, IFieldEvents, IInitializable
@@ -58,6 +59,7 @@
 		public ReactiveCommand<IUnitFacade> UnitPointerUped { get; } = new ReactiveCommand<IUnitFacade>();
 		public ReactiveCommand<IUnitFacade> UnitMergeInitiated { get; } = new ReactiveCommand<IUnitFacade>();
 		public ReactiveCommand<IUnitFacade> UnitMergeCanceled { get; } = new ReactiveCommand<IUnitFacade>();
+		public ReactiveCommand<IUnitFacade> UnitDied { get; } = new ReactiveCommand<IUnitFacade>();
 
 		#endregion
 
@@ -84,6 +86,7 @@
 			unit.PointerUped.Subscribe(_ => UnitPointerUped.Execute(unit)).AddTo(disposable);
 			unit.MergeInitiated.Subscribe(_ => UnitMergeInitiated.Execute(unit)).AddTo(disposable);
 			unit.MergeCanceled.Subscribe(_ => UnitMergeCanceled.Execute(unit)).AddTo(disposable);
+			unit.Died.Subscribe(_ => UnitDied.Execute(unit)).AddTo(disposable);
 		}
 
 		private void OnUnitRemovedHandler(IUnitFacade unit)
