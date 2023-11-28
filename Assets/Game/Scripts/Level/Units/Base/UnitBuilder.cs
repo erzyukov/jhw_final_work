@@ -7,7 +7,7 @@
 
 	public interface IUnitBuilder
 	{
-		IUnitModel View { get; }
+		IUnitModel Model { get; }
 
 		void SetupUnitView(int index);
 	}
@@ -20,7 +20,7 @@
 		[Inject] private UnitGrade _unitGrade;
 		[Inject] private UnitModel.Factory _unitModelFactory;
 
-		private IUnitModel _view;
+		private IUnitModel _model;
 
 		public void OnInstantiated()
 		{
@@ -29,13 +29,13 @@
 
 		#region IUnitBuilder
 
-		public IUnitModel View => _view;
+		public IUnitModel Model => _model;
 
 		public void SetupUnitView(int index)
 		{
-			_view = _unitModelFactory.Create(_unitGrade.Prefab);
+			_model = _unitModelFactory.Create(_unitGrade.Prefab);
 			_unitView.ModelContainer.DestroyChildren();
-			_view.Transform.SetParent(_unitView.ModelContainer, false);
+			_model.Transform.SetParent(_unitView.ModelContainer, false);
 
 			_unitView.NavMeshAgent.speed = _unitsConfig.Speed;
 			_unitView.NavMeshAgent.stoppingDistance = _unitConfig.AttackRange;

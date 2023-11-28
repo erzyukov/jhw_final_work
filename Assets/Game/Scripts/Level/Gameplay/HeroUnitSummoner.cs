@@ -14,7 +14,8 @@
 
 	public interface IHeroUnitSummoner
 	{
-		void Summon();
+		bool TryBuy();
+		void Summon(Species species, int gradeIndex, Vector2Int position);
 	}
 
 	public class HeroUnitSummoner : ControllerBase, IHeroUnitSummoner
@@ -28,24 +29,44 @@
 
 		Dictionary<IUnitFacade, IDisposable> _unitSubscribes = new Dictionary<IUnitFacade, IDisposable>();
 
-		public void Summon()
+		#region IHeroUnitSummoner
+
+		public bool TryBuy()
 		{
 			if (_fieldFacade.HasFreeSpace == false)
 			{
 				// TODO: show message: out of free space
-				return;
+				return false;
 			}
 
 			int summonPrice = _currencyConfig.UnitSummonPrice;
 			if (_gameCurrency.TrySpendSummonCurrency(summonPrice) == false)
 			{
 				_haveNeedOfMessage.ShowMessage(NeedMessage.SummonCurrency);
-				return;
+				return false;
 			}
 
+			Summon();
+
+			return true;
+		}
+
+		public void Summon(Species species, int gradeIndex, Vector2Int position)
+		{
+			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(species, gradeIndex);
+			_fieldFacade.AddUnit(unit, position);
+
+			SubscribeToUnit(unit);
+		}
+
+		#endregion
+
+		private void Summon()
+		{
 			Species defaultSpecies = Species.HeroInfantryman;
-			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(defaultSpecies);
-			Vector2Int position = _fieldFacade.AddUnit(unit);
+			int defaultGradeIndex = 0;
+			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(defaultSpecies, defaultGradeIndex);
+			_fieldFacade.AddUnit(unit);
 
 			SubscribeToUnit(unit);
 		}

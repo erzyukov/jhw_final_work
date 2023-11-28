@@ -7,10 +7,8 @@ namespace Game.Units
 	public class UnitInstaller : Installer<UnitInstaller>
 	{
 		[Inject] private Species _species;
+		[Inject] private int _gradeIndex;
 		[Inject] private UnitsConfig _unitsConfig;
-
-		// TODO: realize throught GameProfile
-		private const int GradeIndex = 0;
 
 		public override void InstallBindings()
 		{
@@ -24,9 +22,9 @@ namespace Game.Units
 				.BindInstance(unitConfig);
 
 			Container
-				.BindInstance(GradeIndex);
+				.BindInstance(_gradeIndex);
 
-			UnitGrade unitGrade = unitConfig.Grades[GradeIndex];
+			UnitGrade unitGrade = unitConfig.Grades[_gradeIndex];
 			Container
 				.BindInstance(unitGrade);
 

@@ -49,7 +49,7 @@
 
 		private void Summon(Species species, Vector2Int position)
 		{
-			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(species);
+			IUnitFacade unit = _unitSpawner.SpawnEnemyUnit(species);
 			_fieldFacade.AddUnit(unit, position);
 
 			_unitSubscribes.Add(unit, default);

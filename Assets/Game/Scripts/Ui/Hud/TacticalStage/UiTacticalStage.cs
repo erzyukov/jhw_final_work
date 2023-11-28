@@ -24,7 +24,7 @@
 				.AddTo(this);
 
 			_hud.SummonButtonClicked
-				.Subscribe(_ => _heroUnitSummoner.Summon())
+				.Subscribe(_ => _heroUnitSummoner.TryBuy())
 				.AddTo(this);
 			_hud.SetSummonPrice(_currencyConfig.UnitSummonPrice);
 
