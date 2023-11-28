@@ -23,6 +23,8 @@
 
 		public void Initialize()
 		{
+			_selectedCell = new List<IFieldCell>();
+
 			_fieldHeroFacade.Events.UnitPointerDowned
 				.Subscribe(OnUnitPointerDownedHandler)
 				.AddTo(this);
@@ -58,6 +60,12 @@
 
 		private void OnUnitPointerDownedHandler(IUnitFacade unit)
 		{
+			if (_unitsConfig.Units.TryGetValue(unit.Species, out UnitConfig unitConfig) == false)
+				return;
+
+			if (unit.GradeIndex >= unitConfig.Grades.Length - 1)
+				return;
+
 			_mergeInitiatorUnit = unit;
 			_selectedCell = _fieldHeroFacade.FindSameUnitCells(unit);
 

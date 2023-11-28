@@ -14,7 +14,7 @@
 
 	public interface IHeroUnitSummoner
 	{
-		bool TryBuy();
+		bool TrySummonByCurrency();
 		void Summon(Species species, int gradeIndex, Vector2Int position);
 	}
 
@@ -31,7 +31,7 @@
 
 		#region IHeroUnitSummoner
 
-		public bool TryBuy()
+		public bool TrySummonByCurrency()
 		{
 			if (_fieldFacade.HasFreeSpace == false)
 			{

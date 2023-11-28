@@ -35,7 +35,7 @@ namespace Game.Field
 		public virtual Vector2Int AddUnit(IUnitFacade unit) => Field.AddUnit(unit);
 		public virtual Vector2Int AddUnit(IUnitFacade unit, Vector2Int position) => Field.AddUnit(unit, position);
 		public IFieldCell GetCell(IUnitFacade unit) => Field.GetCell(unit);
-		public void RemoveUnit(IUnitFacade unit) => Field.RemoveUnit(unit);
+		public virtual void RemoveUnit(IUnitFacade unit) => Field.RemoveUnit(unit);
 		public virtual void Clear() => Field.Clear();
 		public void SetFieldRenderEnabled(bool value) => Field.SetFieldRenderEnabled(value);
 		public List<IFieldCell> FindSameUnitCells(IUnitFacade unit) => Field.FindSameUnitCells(unit);

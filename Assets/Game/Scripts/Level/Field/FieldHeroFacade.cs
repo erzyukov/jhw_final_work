@@ -1,6 +1,8 @@
 namespace Game.Field
 {
 	using Game.Units;
+	using Game.Utilities;
+	using System;
 	using UniRx;
 	using UnityEngine;
 
@@ -13,6 +15,8 @@ namespace Game.Field
 
 	public class FieldHeroFacade : FieldFacade, IFieldHeroFacade
 	{
+		 DictionaryDisposable<IUnitFacade, IDisposable> _unitsDisposable = new DictionaryDisposable<IUnitFacade, IDisposable>();
+
 		#region IFieldHeroFacade
 		
 		public IntReactiveProperty AliveUnitsCount { get; } = new IntReactiveProperty();
@@ -39,6 +43,12 @@ namespace Game.Field
 			return base.AddUnit(unit, position);
 		}
 
+		public override void RemoveUnit(IUnitFacade unit)
+		{
+			AliveUnitsCount.Value -= 1;
+			base.RemoveUnit(unit);
+		}
+
 		public override void Clear()
 		{
 			AliveUnitsCount.Value = Units.Count;
@@ -49,8 +59,18 @@ namespace Game.Field
 
 		void RegisterUnit(IUnitFacade unit)
 		{
-			unit.Died.Subscribe(_ => AliveUnitsCount.Value -= 1).AddTo(this);
+			IDisposable unitDeath = unit.Died
+				.Subscribe(_ => UnitDiedHandler(unit))
+				.AddTo(this);
+			_unitsDisposable.Add(unit, unitDeath);
 			AliveUnitsCount.Value += 1;
+		}
+
+		void UnitDiedHandler(IUnitFacade unit)
+		{
+			_unitsDisposable[unit].Dispose();
+			_unitsDisposable.Remove(unit);
+			AliveUnitsCount.Value -= 1;
 		}
 	}
 }

@@ -41,7 +41,7 @@ namespace Game.Utilities
 
 		public void OnBeginDrag(PointerEventData eventData)
 		{
-			if (_isActive == false)
+			if (IsActionAvailable(eventData) == false)
 				return;
 
 			if (GroundRaycast(eventData.position, out Vector3 groundPosition))
@@ -53,7 +53,7 @@ namespace Game.Utilities
 
 		public void OnDrag(PointerEventData eventData)
 		{
-			if (_isActive == false)
+			if (IsActionAvailable(eventData) == false)
 				return;
 
 			if (GroundRaycast(eventData.position, out Vector3 groundPosition))
@@ -62,7 +62,7 @@ namespace Game.Utilities
 
 		public void OnEndDrag(PointerEventData eventData)
 		{
-			if (_isActive == false)
+			if (IsActionAvailable(eventData) == false)
 				return;
 
 			Dropped.Execute();
@@ -70,11 +70,17 @@ namespace Game.Utilities
 
 		public void OnPointerDown(PointerEventData eventData)
 		{
+			if (IsActionAvailable(eventData) == false)
+				return;
+
 			PointerDowned.Execute();
 		}
 
 		public void OnPointerUp(PointerEventData eventData)
 		{
+			if (IsActionAvailable(eventData) == false)
+				return;
+
 			PointerUped.Execute();
 		}
 
@@ -97,5 +103,11 @@ namespace Game.Utilities
 
 			return false;
 		}
+
+		private bool IsActionAvailable(PointerEventData eventData) =>
+			_isActive
+			&& eventData.button != PointerEventData.InputButton.Right
+			&& eventData.button != PointerEventData.InputButton.Middle;
+
 	}
 }
