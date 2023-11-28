@@ -1,0 +1,1495 @@
+﻿{
+  "Version": 1,
+  "Properties": {
+    "AreNodeDescriptionsVisible": "True"
+  },
+  "Nodes": [
+    {
+      "Id": "1",
+      "Name": "IUnitFacade",
+      "Stereotype": "Interface",
+      "CreatedAtUtc": "2023-11-28T09:15:04.9186477Z",
+      "AbsoluteTopLeft": "-222.2224,-15.2506",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "IUnitFacade",
+        "FullName": "interface Game.Units.IUnitFacade",
+        "Symbols": [
+          "Game.Units.IUnitFacade"
+        ],
+        "IsDescriptionVisible": true,
+        "IsAbstract": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "2",
+      "Name": "UnitFacade",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:15:05.0366490Z",
+      "AbsoluteTopLeft": "-258.9014,-117.2506",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "UnitFacade",
+        "FullName": "class Game.Units.UnitFacade",
+        "Symbols": [
+          "Game.Units.UnitFacade"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "3",
+      "Name": "IFieldCell",
+      "Stereotype": "Interface",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0430995Z",
+      "AbsoluteTopLeft": "6.4555,-408.5649",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "IFieldCell",
+        "FullName": "interface Game.Field.IFieldCell",
+        "Symbols": [
+          "Game.Field.IFieldCell"
+        ],
+        "IsDescriptionVisible": true,
+        "IsAbstract": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "4",
+      "Name": "FieldCell",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0450995Z",
+      "AbsoluteTopLeft": "-144.8347,-267.039",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "FieldCell",
+        "FullName": "class Game.Field.FieldCell",
+        "Symbols": [
+          "Game.Field.FieldCell"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "5",
+      "Name": "IFieldEnemyFacade",
+      "Stereotype": "Interface",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0461297Z",
+      "AbsoluteTopLeft": "-334.1045,311.642",
+      "HeaderContentSize": "117.57,52",
+      "NodeTotalSize": "117.57,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "IFieldEnemyFacade",
+        "FullName": "interface Game.Field.IFieldEnemyFacade",
+        "Symbols": [
+          "Game.Field.IFieldEnemyFacade"
+        ],
+        "IsDescriptionVisible": true,
+        "IsAbstract": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "6",
+      "Name": "FieldEnemyFacade",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0461297Z",
+      "AbsoluteTopLeft": "-144.2657,365.7593",
+      "HeaderContentSize": "113.0533,52",
+      "NodeTotalSize": "113.0533,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "FieldEnemyFacade",
+        "FullName": "class Game.Field.FieldEnemyFacade",
+        "Symbols": [
+          "Game.Field.FieldEnemyFacade"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "7",
+      "Name": "IFieldFacade",
+      "Stereotype": "Interface",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0480985Z",
+      "AbsoluteTopLeft": "-37.6474,263.7593",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "IFieldFacade",
+        "FullName": "interface Game.Field.IFieldFacade",
+        "Symbols": [
+          "Game.Field.IFieldFacade"
+        ],
+        "IsDescriptionVisible": true,
+        "IsAbstract": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "8",
+      "Name": "FieldFacade",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0490998Z",
+      "AbsoluteTopLeft": "-36.8101,69.6152",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "FieldFacade",
+        "FullName": "class Game.Field.FieldFacade",
+        "Symbols": [
+          "Game.Field.FieldFacade"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "9",
+      "Name": "IField<T>",
+      "Stereotype": "Interface",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0490998Z",
+      "AbsoluteTopLeft": "-469.5269,-114.8897",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "IField",
+        "FullName": "interface Game.Field.IField<T>",
+        "Symbols": [
+          "Game.Field.IField<T>"
+        ],
+        "IsDescriptionVisible": true,
+        "IsAbstract": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "10",
+      "Name": "Field<T>",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0501010Z",
+      "AbsoluteTopLeft": "-501.0777,1.2051",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "Field",
+        "FullName": "class Game.Field.Field<T> where T : Game.Field.FieldCell",
+        "Symbols": [
+          "Game.Field.Field<T>"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "11",
+      "Name": "FieldType",
+      "Stereotype": "Enum",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0511001Z",
+      "AbsoluteTopLeft": "-656.4555,-289.8056",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "FieldType",
+        "FullName": "enum Game.Field.FieldType",
+        "Symbols": [
+          "Game.Field.FieldType"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "12",
+      "Name": "IFieldEvents",
+      "Stereotype": "Interface",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0511001Z",
+      "AbsoluteTopLeft": "-311.456,179.409",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "IFieldEvents",
+        "FullName": "interface Game.Field.IFieldEvents",
+        "Symbols": [
+          "Game.Field.IFieldEvents"
+        ],
+        "IsDescriptionVisible": true,
+        "IsAbstract": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "13",
+      "Name": "FieldEvents",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0521008Z",
+      "AbsoluteTopLeft": "-474.9881,167.8322",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "FieldEvents",
+        "FullName": "class Game.Field.FieldEvents",
+        "Symbols": [
+          "Game.Field.FieldEvents"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode",
+        "IsDisposable": true
+      }
+    },
+    {
+      "Id": "14",
+      "Name": "IFieldView",
+      "Stereotype": "Interface",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0521008Z",
+      "AbsoluteTopLeft": "-486.5269,-393.8945",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "IFieldView",
+        "FullName": "interface Game.Field.IFieldView",
+        "Symbols": [
+          "Game.Field.IFieldView"
+        ],
+        "IsDescriptionVisible": true,
+        "IsAbstract": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "15",
+      "Name": "FieldView",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0530997Z",
+      "AbsoluteTopLeft": "-652.3261,-394.0406",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "FieldView",
+        "FullName": "class Game.Field.FieldView",
+        "Symbols": [
+          "Game.Field.FieldView"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "16",
+      "Name": "FieldBuilder",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0530997Z",
+      "AbsoluteTopLeft": "-478.6752,-285.0005",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "FieldBuilder",
+        "FullName": "class Game.Field.FieldBuilder",
+        "Symbols": [
+          "Game.Field.FieldBuilder"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "17",
+      "Name": "IFieldCellView",
+      "Stereotype": "Interface",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0540991Z",
+      "AbsoluteTopLeft": "-264.4369,-413.5875",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "IFieldCellView",
+        "FullName": "interface Game.Field.IFieldCellView",
+        "Symbols": [
+          "Game.Field.IFieldCellView"
+        ],
+        "IsDescriptionVisible": true,
+        "IsAbstract": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "18",
+      "Name": "FieldCellView",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0540991Z",
+      "AbsoluteTopLeft": "-310.8492,-281.5875",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "FieldCellView",
+        "FullName": "class Game.Field.FieldCellView",
+        "Symbols": [
+          "Game.Field.FieldCellView"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "19",
+      "Name": "IFieldHeroFacade",
+      "Stereotype": "Interface",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0550991Z",
+      "AbsoluteTopLeft": "231.093,323.7674",
+      "HeaderContentSize": "107.52,52",
+      "NodeTotalSize": "107.52,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "IFieldHeroFacade",
+        "FullName": "interface Game.Field.IFieldHeroFacade",
+        "Symbols": [
+          "Game.Field.IFieldHeroFacade"
+        ],
+        "IsDescriptionVisible": true,
+        "IsAbstract": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "20",
+      "Name": "FieldHeroFacade",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:15:32.0550991Z",
+      "AbsoluteTopLeft": "57.228,365.7593",
+      "HeaderContentSize": "103.2167,52",
+      "NodeTotalSize": "103.2167,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "FieldHeroFacade",
+        "FullName": "class Game.Field.FieldHeroFacade",
+        "Symbols": [
+          "Game.Field.FieldHeroFacade"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "21",
+      "Name": "UnitMerger",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:23:42.8722125Z",
+      "AbsoluteTopLeft": "399.6537,-321.4017",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "UnitMerger",
+        "FullName": "class Game.Gameplay.UnitMerger",
+        "Symbols": [
+          "Game.Gameplay.UnitMerger"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode",
+        "IsDisposable": true
+      }
+    },
+    {
+      "Id": "22",
+      "Name": "HeroSummonCurrency",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:23:42.8742136Z",
+      "AbsoluteTopLeft": "-689.4044,160.1684",
+      "HeaderContentSize": "138.5467,52",
+      "NodeTotalSize": "138.5467,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "HeroSummonCurrency",
+        "FullName": "class Game.Level.HeroSummonCurrency",
+        "Symbols": [
+          "Game.Level.HeroSummonCurrency"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode",
+        "IsDisposable": true
+      }
+    },
+    {
+      "Id": "23",
+      "Name": "BattleStageHandler",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:23:42.8762128Z",
+      "AbsoluteTopLeft": "-19.535,850.3444",
+      "HeaderContentSize": "119.89,52",
+      "NodeTotalSize": "119.89,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "BattleStageHandler",
+        "FullName": "class Game.Gameplay.BattleStageHandler",
+        "Symbols": [
+          "Game.Gameplay.BattleStageHandler"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode",
+        "IsDisposable": true
+      }
+    },
+    {
+      "Id": "24",
+      "Name": "IHeroUnitSummoner",
+      "Stereotype": "Interface",
+      "CreatedAtUtc": "2023-11-28T09:23:42.8772132Z",
+      "AbsoluteTopLeft": "574.4488,-99.3824",
+      "HeaderContentSize": "125.69,52",
+      "NodeTotalSize": "125.69,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "IHeroUnitSummoner",
+        "FullName": "interface Game.Level.IHeroUnitSummoner",
+        "Symbols": [
+          "Game.Level.IHeroUnitSummoner"
+        ],
+        "IsDescriptionVisible": true,
+        "IsAbstract": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "25",
+      "Name": "HeroUnitSummoner",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:23:42.8772132Z",
+      "AbsoluteTopLeft": "383.6248,552.5995",
+      "HeaderContentSize": "123.61,52",
+      "NodeTotalSize": "123.61,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "HeroUnitSummoner",
+        "FullName": "class Game.Level.HeroUnitSummoner",
+        "Symbols": [
+          "Game.Level.HeroUnitSummoner"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode",
+        "IsDisposable": true
+      }
+    },
+    {
+      "Id": "26",
+      "Name": "EnemyUnitSummoner",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:23:42.8782127Z",
+      "AbsoluteTopLeft": "-450.0055,558.9127",
+      "HeaderContentSize": "133.4467,52",
+      "NodeTotalSize": "133.4467,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "EnemyUnitSummoner",
+        "FullName": "class Game.Level.EnemyUnitSummoner",
+        "Symbols": [
+          "Game.Level.EnemyUnitSummoner"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode",
+        "IsDisposable": true
+      }
+    },
+    {
+      "Id": "27",
+      "Name": "IUnitSpawner",
+      "Stereotype": "Interface",
+      "CreatedAtUtc": "2023-11-28T09:23:42.8792128Z",
+      "AbsoluteTopLeft": "-18.3591,569.7593",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "IUnitSpawner",
+        "FullName": "interface Game.Level.IUnitSpawner",
+        "Symbols": [
+          "Game.Level.IUnitSpawner"
+        ],
+        "IsDescriptionVisible": true,
+        "IsAbstract": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "28",
+      "Name": "UnitSpawner",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:23:42.8802126Z",
+      "AbsoluteTopLeft": "-21.6173,467.7593",
+      "HeaderContentSize": "102,52",
+      "NodeTotalSize": "102,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "UnitSpawner",
+        "FullName": "class Game.Level.UnitSpawner",
+        "Symbols": [
+          "Game.Level.UnitSpawner"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode"
+      }
+    },
+    {
+      "Id": "29",
+      "Name": "TacticalStageHandler",
+      "Stereotype": "Class",
+      "CreatedAtUtc": "2023-11-28T09:23:42.8822130Z",
+      "AbsoluteTopLeft": "-22.0026,682.9959",
+      "HeaderContentSize": "128.4333,52",
+      "NodeTotalSize": "128.4333,52",
+      "ChildrenAreaTopLeft": "1,0",
+      "IsPinned": true,
+      "Payload": {
+        "Discriminator": "RoslynType",
+        "SymbolName": "TacticalStageHandler",
+        "FullName": "class Game.Gameplay.TacticalStageHandler",
+        "Symbols": [
+          "Game.Gameplay.TacticalStageHandler"
+        ],
+        "IsDescriptionVisible": true,
+        "Accessibility": "Public",
+        "Origin": "SourceCode",
+        "IsDisposable": true
+      }
+    }
+  ],
+  "Connectors": [
+    {
+      "Id": "1",
+      "SourceNodeId": "2",
+      "TargetNodeId": "1",
+      "Stereotype": "Implementation",
+      "Route": [
+        "-198.5519,-65.2506",
+        "-180.572,-15.2506"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Units.UnitFacade|Implementation|Game.Units.IUnitFacade"
+      }
+    },
+    {
+      "Id": "2",
+      "SourceNodeId": "3",
+      "TargetNodeId": "1",
+      "Stereotype": "Association",
+      "Route": [
+        "42.3387,-356.5649",
+        "-156.1057,-15.2506"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Field.IFieldCell|Association|Game.Units.IUnitFacade",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "Unit",
+              "Tooltip": "IUnitFacade Unit { get; }"
+            },
+            "Symbol": "Game.Field.IFieldCell.Unit"
+          }
+        ],
+        "TargetLabelCenter": "-143.5399,-36.8631"
+      }
+    },
+    {
+      "Id": "3",
+      "SourceNodeId": "4",
+      "TargetNodeId": "1",
+      "Stereotype": "Association",
+      "Route": [
+        "-101.8259,-215.039",
+        "-163.2313,-15.2506"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Field.FieldCell|Association|Game.Units.IUnitFacade",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_unit",
+              "Tooltip": "private IUnitFacade _unit"
+            },
+            "Symbol": "Game.Field.FieldCell._unit"
+          },
+          {
+            "Label": {
+              "Text2": "Unit",
+              "Tooltip": "public IUnitFacade Unit { get; }"
+            },
+            "Symbol": "Game.Field.FieldCell.Unit"
+          }
+        ],
+        "TargetLabelCenter": "-155.8866,-39.1473"
+      }
+    },
+    {
+      "Id": "4",
+      "SourceNodeId": "7",
+      "TargetNodeId": "1",
+      "Stereotype": "Association",
+      "Route": [
+        "-3.8473,263.7593",
+        "-154.0225,36.7494"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Field.IFieldFacade|Association|Game.Units.IUnitFacade",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text1": "*",
+              "Text2": "Units",
+              "Tooltip": "ReactiveCollection<IUnitFacade> Units { get; }"
+            },
+            "Symbol": "Game.Field.IFieldFacade.Units"
+          }
+        ],
+        "TargetLabelCenter": "-140.2292,57.5999"
+      }
+    },
+    {
+      "Id": "5",
+      "SourceNodeId": "8",
+      "TargetNodeId": "1",
+      "Stereotype": "Association",
+      "Route": [
+        "-36.8101,72.2718",
+        "-120.2224,34.0928"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Field.FieldFacade|Association|Game.Units.IUnitFacade",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text1": "*",
+              "Text2": "Units",
+              "Tooltip": "public ReactiveCollection<IUnitFacade> Units { get; }"
+            },
+            "Symbol": "Game.Field.FieldFacade.Units"
+          }
+        ],
+        "TargetLabelCenter": "-97.4905,44.4976"
+      }
+    },
+    {
+      "Id": "6",
+      "SourceNodeId": "9",
+      "TargetNodeId": "1",
+      "Stereotype": "Association",
+      "Route": [
+        "-367.5269,-68.3418",
+        "-222.2224,-9.7985"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Field.IField<T>|Association|Game.Units.IUnitFacade",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text1": "*",
+              "Text2": "Units",
+              "Tooltip": "ReactiveCollection<IUnitFacade> Units { get; }"
+            },
+            "Symbol": "Game.Field.IField<T>.Units"
+          }
+        ],
+        "TargetLabelCenter": "-245.4111,-19.1412"
+      }
+    },
+    {
+      "Id": "7",
+      "SourceNodeId": "10",
+      "TargetNodeId": "1",
+      "Stereotype": "Association",
+      "Route": [
+        "-399.0777,24.1955",
+        "-222.2224,13.759"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Field.Field<T>|Association|Game.Units.IUnitFacade",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text1": "*",
+              "Text2": "_units",
+              "Tooltip": "private ReactiveCollection<IUnitFacade> _units"
+            },
+            "Symbol": "Game.Field.Field<T>._units"
+          },
+          {
+            "Label": {
+              "Text1": "*",
+              "Text2": "Units",
+              "Tooltip": "public ReactiveCollection<IUnitFacade> Units { get; }"
+            },
+            "Symbol": "Game.Field.Field<T>.Units"
+          }
+        ],
+        "TargetLabelCenter": "-247.179,15.2317"
+      }
+    },
+    {
+      "Id": "8",
+      "SourceNodeId": "4",
+      "TargetNodeId": "17",
+      "Stereotype": "Association",
+      "Route": [
+        "-115.054,-267.039",
+        "-192.2176,-361.5875"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Field.FieldCell|Association|Game.Field.IFieldCellView",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_cellView",
+              "Tooltip": "private IFieldCellView _cellView"
+            },
+            "Symbol": "Game.Field.FieldCell._cellView"
+          }
+        ],
+        "TargetLabelCenter": "-176.4105,-342.219"
+      }
+    },
+    {
+      "Id": "9",
+      "SourceNodeId": "4",
+      "TargetNodeId": "3",
+      "Stereotype": "Implementation",
+      "Route": [
+        "-66.0409,-267.039",
+        "29.6616,-356.5649"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Field.FieldCell|Implementation|Game.Field.IFieldCell"
+      }
+    },
+    {
+      "Id": "10",
+      "SourceNodeId": "5",
+      "TargetNodeId": "7",
+      "Stereotype": "Inheritance",
+      "Route": [
+        "-216.5345,327.8912",
+        "-37.6474,298.2188"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Field.IFieldEnemyFacade|Inheritance|Game.Field.IFieldFacade"
+      }
+    },
+    {
+      "Id": "11",
+      "SourceNodeId": "6",
+      "TargetNodeId": "8",
+      "Stereotype": "Inheritance",
+      "Route": [
+        "-78.7902,365.7593",
+        "5.241,121.6152"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Field.FieldEnemyFacade|Inheritance|Game.Field.FieldFacade"
+      }
+    },
+    {
+      "Id": "12",
+      "SourceNodeId": "6",
+      "TargetNodeId": "5",
+      "Stereotype": "Implementation",
+      "Route": [
+        "-144.2657,375.4513",
+        "-216.5345,354.6016"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Field.FieldEnemyFacade|Implementation|Game.Field.IFieldEnemyFacade"
+      }
+    },
+    {
+      "Id": "13",
+      "SourceNodeId": "7",
+      "TargetNodeId": "12",
+      "Stereotype": "Association",
+      "Route": [
+        "-37.6474,274.0481",
+        "-209.456,221.1202"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Field.IFieldFacade|Association|Game.Field.IFieldEvents",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "Events",
+              "Tooltip": "IFieldEvents Events { get; }"
+            },
+            "Symbol": "Game.Field.IFieldFacade.Events"
+          }
+        ],
+        "TargetLabelCenter": "-185.5641,228.4804"
+      }
+    },
+    {
+      "Id": "14",
+      "SourceNodeId": "8",
+      "TargetNodeId": "12",
+      "Stereotype": "Association",
+      "Route": [
+        "-36.8101,116.0032",
+        "-209.456,185.021"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Field.FieldFacade|Association|Game.Field.IFieldEvents",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_events",
+              "Tooltip": "private IFieldEvents _events"
+            },
+            "Symbol": "Game.Field.FieldFacade._events"
+          },
+          {
+            "Label": {
+              "Text2": "Events",
+              "Tooltip": "public IFieldEvents Events { get; }"
+            },
+            "Symbol": "Game.Field.FieldFacade.Events"
+          }
+        ],
+        "TargetLabelCenter": "-186.2422,175.7409"
+      }
+    },
+    {
+      "Id": "15",
+      "SourceNodeId": "8",
+      "TargetNodeId": "7",
+      "Stereotype": "Implementation",
+      "Route": [
+        "14.0777,121.6152",
+        "13.4648,263.7593"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Field.FieldFacade|Implementation|Game.Field.IFieldFacade"
+      }
+    },
+    {
+      "Id": "16",
+      "SourceNodeId": "20",
+      "TargetNodeId": "8",
+      "Stereotype": "Inheritance",
+      "Route": [
+        "100.5268,365.7593",
+        "22.4994,121.6152"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Field.FieldHeroFacade|Inheritance|Game.Field.FieldFacade"
+      }
+    },
+    {
+      "Id": "17",
+      "SourceNodeId": "10",
+      "TargetNodeId": "9",
+      "Stereotype": "Implementation",
+      "Route": [
+        "-443.0117,1.2051",
+        "-425.5928,-62.8897"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Field.Field<T>|Implementation|Game.Field.IField<T>"
+      }
+    },
+    {
+      "Id": "18",
+      "SourceNodeId": "13",
+      "TargetNodeId": "12",
+      "Stereotype": "Implementation",
+      "Route": [
+        "-372.9881,197.4426",
+        "-311.456,201.7986"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Field.FieldEvents|Implementation|Game.Field.IFieldEvents"
+      }
+    },
+    {
+      "Id": "19",
+      "SourceNodeId": "15",
+      "TargetNodeId": "14",
+      "Stereotype": "Implementation",
+      "Route": [
+        "-550.3261,-367.9956",
+        "-486.5269,-367.9394"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Field.FieldView|Implementation|Game.Field.IFieldView"
+      }
+    },
+    {
+      "Id": "20",
+      "SourceNodeId": "16",
+      "TargetNodeId": "11",
+      "Stereotype": "Association",
+      "Route": [
+        "-478.6752,-260.379",
+        "-554.4555,-262.4272"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Field.FieldBuilder|Association|Game.Field.FieldType",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_fieldType",
+              "Tooltip": "private FieldType _fieldType",
+              "CanBeHidden": true
+            },
+            "Symbol": "Game.Field.FieldBuilder._fieldType"
+          }
+        ],
+        "TargetLabelCenter": "-529.4646,-261.7517"
+      }
+    },
+    {
+      "Id": "21",
+      "SourceNodeId": "16",
+      "TargetNodeId": "18",
+      "Stereotype": "Association",
+      "Route": [
+        "-376.6752,-257.9633",
+        "-310.8492,-256.6246"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Field.FieldBuilder|Association|Game.Field.FieldCellView",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_cellViewPrefab",
+              "Tooltip": "private FieldCellView _cellViewPrefab"
+            },
+            "Symbol": "Game.Field.FieldBuilder._cellViewPrefab"
+          }
+        ],
+        "TargetLabelCenter": "-335.844,-257.133"
+      }
+    },
+    {
+      "Id": "22",
+      "SourceNodeId": "16",
+      "TargetNodeId": "14",
+      "Stereotype": "Association",
+      "Route": [
+        "-429.5499,-285.0005",
+        "-433.6522,-341.8945"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Field.FieldBuilder|Association|Game.Field.IFieldView",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_view",
+              "Tooltip": "private IFieldView _view"
+            },
+            "Symbol": "Game.Field.FieldBuilder._view"
+          }
+        ],
+        "TargetLabelCenter": "-431.8542,-316.9592"
+      }
+    },
+    {
+      "Id": "23",
+      "SourceNodeId": "18",
+      "TargetNodeId": "17",
+      "Stereotype": "Implementation",
+      "Route": [
+        "-250.7073,-281.5875",
+        "-222.5787,-361.5875"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Field.FieldCellView|Implementation|Game.Field.IFieldCellView"
+      }
+    },
+    {
+      "Id": "24",
+      "SourceNodeId": "19",
+      "TargetNodeId": "7",
+      "Stereotype": "Inheritance",
+      "Route": [
+        "231.093,337.8851",
+        "64.3526,301.0315"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Field.IFieldHeroFacade|Inheritance|Game.Field.IFieldFacade"
+      }
+    },
+    {
+      "Id": "25",
+      "SourceNodeId": "20",
+      "TargetNodeId": "19",
+      "Stereotype": "Implementation",
+      "Route": [
+        "160.4447,379.4472",
+        "231.093,362.5928"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Field.FieldHeroFacade|Implementation|Game.Field.IFieldHeroFacade"
+      }
+    },
+    {
+      "Id": "26",
+      "SourceNodeId": "21",
+      "TargetNodeId": "1",
+      "Stereotype": "Association",
+      "Route": [
+        "399.6537,-270.2943",
+        "-120.2224,-14.358"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Gameplay.UnitMerger|Association|Game.Units.IUnitFacade",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_mergeAbsorbedUnit",
+              "Tooltip": "private IUnitFacade _mergeAbsorbedUnit"
+            },
+            "Symbol": "Game.Gameplay.UnitMerger._mergeAbsorbedUnit"
+          },
+          {
+            "Label": {
+              "Text2": "_mergeInitiatorUnit",
+              "Tooltip": "private IUnitFacade _mergeInitiatorUnit"
+            },
+            "Symbol": "Game.Gameplay.UnitMerger._mergeInitiatorUnit"
+          }
+        ],
+        "TargetLabelCenter": "-97.7931,-25.4"
+      }
+    },
+    {
+      "Id": "27",
+      "SourceNodeId": "21",
+      "TargetNodeId": "3",
+      "Stereotype": "Association",
+      "Route": [
+        "399.6537,-306.7073",
+        "108.4555,-371.2594"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Gameplay.UnitMerger|Association|Game.Field.IFieldCell",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text1": "*",
+              "Text2": "_selectedCell",
+              "Tooltip": "private List<IFieldCell> _selectedCell"
+            },
+            "Symbol": "Game.Gameplay.UnitMerger._selectedCell"
+          }
+        ],
+        "TargetLabelCenter": "132.8629,-365.8488"
+      }
+    },
+    {
+      "Id": "28",
+      "SourceNodeId": "21",
+      "TargetNodeId": "19",
+      "Stereotype": "Association",
+      "Route": [
+        "443.972,-269.4017",
+        "291.5347,323.7674"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Gameplay.UnitMerger|Association|Game.Field.IFieldHeroFacade",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_fieldHeroFacade",
+              "Tooltip": "private IFieldHeroFacade _fieldHeroFacade",
+              "CanBeHidden": true
+            },
+            "Symbol": "Game.Gameplay.UnitMerger._fieldHeroFacade"
+          }
+        ],
+        "TargetLabelCenter": "297.7572,299.5541"
+      }
+    },
+    {
+      "Id": "29",
+      "SourceNodeId": "23",
+      "TargetNodeId": "5",
+      "Stereotype": "Association",
+      "Route": [
+        "25.1716,850.3444",
+        "-260.0811,363.642"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Gameplay.BattleStageHandler|Association|Game.Field.IFieldEnemyFacade",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_fieldEnemyFacade",
+              "Tooltip": "private IFieldEnemyFacade _fieldEnemyFacade",
+              "CanBeHidden": true
+            },
+            "Symbol": "Game.Gameplay.BattleStageHandler._fieldEnemyFacade"
+          }
+        ],
+        "TargetLabelCenter": "-247.4399,385.2105"
+      }
+    },
+    {
+      "Id": "30",
+      "SourceNodeId": "23",
+      "TargetNodeId": "19",
+      "Stereotype": "Association",
+      "Route": [
+        "52.4795,850.3444",
+        "272.7835,375.7674"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Gameplay.BattleStageHandler|Association|Game.Field.IFieldHeroFacade",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_fieldHeroFacade",
+              "Tooltip": "private IFieldHeroFacade _fieldHeroFacade",
+              "CanBeHidden": true
+            },
+            "Symbol": "Game.Gameplay.BattleStageHandler._fieldHeroFacade"
+          }
+        ],
+        "TargetLabelCenter": "262.2571,398.4432"
+      }
+    },
+    {
+      "Id": "31",
+      "SourceNodeId": "25",
+      "TargetNodeId": "19",
+      "Stereotype": "Association",
+      "Route": [
+        "427.185,552.5995",
+        "303.0978,375.7674"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Level.HeroUnitSummoner|Association|Game.Field.IFieldHeroFacade",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_fieldFacade",
+              "Tooltip": "private IFieldHeroFacade _fieldFacade"
+            },
+            "Symbol": "Game.Level.HeroUnitSummoner._fieldFacade"
+          }
+        ],
+        "TargetLabelCenter": "317.458,396.2316"
+      }
+    },
+    {
+      "Id": "32",
+      "SourceNodeId": "26",
+      "TargetNodeId": "5",
+      "Stereotype": "Association",
+      "Route": [
+        "-371.9301,558.9127",
+        "-286.6715,363.642"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Level.EnemyUnitSummoner|Association|Game.Field.IFieldEnemyFacade",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_fieldFacade",
+              "Tooltip": "private IFieldEnemyFacade _fieldFacade"
+            },
+            "Symbol": "Game.Level.EnemyUnitSummoner._fieldFacade"
+          }
+        ],
+        "TargetLabelCenter": "-296.675,386.5533"
+      }
+    },
+    {
+      "Id": "33",
+      "SourceNodeId": "29",
+      "TargetNodeId": "5",
+      "Stereotype": "Association",
+      "Route": [
+        "19.9823,682.9959",
+        "-253.0877,363.642"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Gameplay.TacticalStageHandler|Association|Game.Field.IFieldEnemyFacade",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_fieldEnemyFacade",
+              "Tooltip": "private IFieldEnemyFacade _fieldEnemyFacade",
+              "CanBeHidden": true
+            },
+            "Symbol": "Game.Gameplay.TacticalStageHandler._fieldEnemyFacade"
+          }
+        ],
+        "TargetLabelCenter": "-236.8406,382.6428"
+      }
+    },
+    {
+      "Id": "34",
+      "SourceNodeId": "29",
+      "TargetNodeId": "19",
+      "Stereotype": "Association",
+      "Route": [
+        "59.7756,682.9959",
+        "267.2915,375.7674"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Gameplay.TacticalStageHandler|Association|Game.Field.IFieldHeroFacade",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_fieldHeroFacade",
+              "Tooltip": "private IFieldHeroFacade _fieldHeroFacade",
+              "CanBeHidden": true
+            },
+            "Symbol": "Game.Gameplay.TacticalStageHandler._fieldHeroFacade"
+          }
+        ],
+        "TargetLabelCenter": "253.2983,396.4843"
+      }
+    },
+    {
+      "Id": "35",
+      "SourceNodeId": "21",
+      "TargetNodeId": "24",
+      "Stereotype": "Association",
+      "Route": [
+        "472.5106,-269.4017",
+        "615.4369,-99.3824"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Gameplay.UnitMerger|Association|Game.Level.IHeroUnitSummoner",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_heroUnitSummoner",
+              "Tooltip": "private IHeroUnitSummoner _heroUnitSummoner",
+              "CanBeHidden": true
+            },
+            "Symbol": "Game.Gameplay.UnitMerger._heroUnitSummoner"
+          }
+        ],
+        "TargetLabelCenter": "599.3499,-118.519"
+      }
+    },
+    {
+      "Id": "36",
+      "SourceNodeId": "25",
+      "TargetNodeId": "27",
+      "Stereotype": "Association",
+      "Route": [
+        "383.6248,581.1688",
+        "83.6409,593.6392"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Level.HeroUnitSummoner|Association|Game.Level.IUnitSpawner",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_unitSpawner",
+              "Tooltip": "private IUnitSpawner _unitSpawner",
+              "CanBeHidden": true
+            },
+            "Symbol": "Game.Level.HeroUnitSummoner._unitSpawner"
+          }
+        ],
+        "TargetLabelCenter": "108.6194,592.6009"
+      }
+    },
+    {
+      "Id": "37",
+      "SourceNodeId": "25",
+      "TargetNodeId": "24",
+      "Stereotype": "Implementation",
+      "Route": [
+        "453.081,552.5995",
+        "629.6426,-47.3824"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Level.HeroUnitSummoner|Implementation|Game.Level.IHeroUnitSummoner"
+      }
+    },
+    {
+      "Id": "38",
+      "SourceNodeId": "26",
+      "TargetNodeId": "27",
+      "Stereotype": "Association",
+      "Route": [
+        "-316.5588,586.6527",
+        "-18.3591,594.4293"
+      ],
+      "Payload": {
+        "Discriminator": "Association",
+        "Relationship": "Game.Level.EnemyUnitSummoner|Association|Game.Level.IUnitSpawner",
+        "TargetLabels": [
+          {
+            "Label": {
+              "Text2": "_unitSpawner",
+              "Tooltip": "private IUnitSpawner _unitSpawner",
+              "CanBeHidden": true
+            },
+            "Symbol": "Game.Level.EnemyUnitSummoner._unitSpawner"
+          }
+        ],
+        "TargetLabelCenter": "-43.3506,593.7776"
+      }
+    },
+    {
+      "Id": "39",
+      "SourceNodeId": "28",
+      "TargetNodeId": "27",
+      "Stereotype": "Implementation",
+      "Route": [
+        "30.2132,519.7593",
+        "31.8104,569.7593"
+      ],
+      "Payload": {
+        "Discriminator": "Other",
+        "Relationship": "Game.Level.UnitSpawner|Implementation|Game.Level.IUnitSpawner"
+      }
+    }
+  ]
+}
