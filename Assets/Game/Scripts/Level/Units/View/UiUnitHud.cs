@@ -6,6 +6,7 @@ namespace Game
 	using Zenject;
 	using UniRx;
 	using Game.Core;
+	using Game.Utilities;
 
 	public class UiUnitHud : MonoBehaviour
     {
@@ -14,7 +15,7 @@ namespace Game
 		[Inject] IUnitHealth _health;
 		[Inject] IGameCycle _gameCycle;
 
-        void Start()
+		void Start()
         {
 			_gameCycle.State
 				.Select(state => state == GameState.BattleStage)

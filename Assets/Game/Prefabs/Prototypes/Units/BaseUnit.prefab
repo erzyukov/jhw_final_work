@@ -589,6 +589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _modelContainer: {fileID: 8113386733221058404}
+  _uiHealthCanvas: {fileID: 3352582900581580765}
   _navMeshAgent: {fileID: 1580601115508209611}
 --- !u!195 &1580601115508209611
 NavMeshAgent:

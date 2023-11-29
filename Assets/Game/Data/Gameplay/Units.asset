@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Units
   m_EditorClassIdentifier: 
   _unitPrefab: {fileID: 8733958787987239910, guid: 51826799d4a3bd54985dcaf25f6cd13e, type: 3}
+  _uiHealthIndent: 0.7
   _speed: 1.5
   _units:
   - Species: 1

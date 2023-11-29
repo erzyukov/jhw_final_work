@@ -8,13 +8,18 @@ namespace Game.Configs
 	[CreateAssetMenu(fileName = "Units", menuName = "Configs/Units", order = (int)Config.Units)]
 	public class UnitsConfig : ScriptableObject
 	{
+		[Header("Visual")]
 		[SerializeField] private GameObject _unitPrefab;
+		[SerializeField] private float _uiHealthIndent;
+
+		[Header("Gameplay")]
 		[SerializeField] private float _speed;
 		[SerializeField] private UnitData[] _units;
 
 		private Dictionary<Species, UnitConfig> _unitData;
 
 		public GameObject UnitPrefab => _unitPrefab;
+		public float UiHealthIndent => _uiHealthIndent;
 		public float Speed => _speed;
 		public Dictionary<Species, UnitConfig> Units => _unitData;
 		
