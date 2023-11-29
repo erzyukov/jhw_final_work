@@ -76,12 +76,25 @@ namespace Game.Installers
 					.BindInterfacesTo<UiCommonGameplayHud>()
 					.FromComponentInHierarchy()
 					.AsSingle();
+
+				Container
+					.BindInterfacesTo<UiWavesHud>()
+					.FromComponentInHierarchy()
+					.AsSingle();
+
+				Container
+					.BindInterfacesTo<UiWavesBuilder>()
+					.AsSingle();
 			}
 
 			if (_sceneContext == SceneContext.Level)
 			{
 				Container
 					.BindInterfacesTo<UiCommonGameplay>()
+					.AsSingle();
+
+				Container
+					.BindInterfacesTo<UiLevelWaves>()
 					.AsSingle();
 			}
 		}
