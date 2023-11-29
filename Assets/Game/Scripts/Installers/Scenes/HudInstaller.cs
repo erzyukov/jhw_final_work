@@ -28,6 +28,7 @@ namespace Game.Installers
 			}
 
 			TacticalStageInstall();
+			BattleStageInstall();
 			CommonGameplayInstall();
 		}
 
@@ -45,6 +46,24 @@ namespace Game.Installers
 			{
 				Container
 					.BindInterfacesTo<UiTacticalStage>()
+					.AsSingle();
+			}
+		}
+
+		private void BattleStageInstall()
+		{
+			if (_sceneContext == SceneContext.Main)
+			{
+				Container
+					.BindInterfacesTo<UiBattleStageHud>()
+					.FromComponentInHierarchy()
+					.AsSingle();
+			}
+
+			if (_sceneContext == SceneContext.Level)
+			{
+				Container
+					.BindInterfacesTo<UiBattleStage>()
 					.AsSingle();
 			}
 		}

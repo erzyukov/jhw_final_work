@@ -8,6 +8,7 @@
 	{
 		IntReactiveProperty AliveUnitsCount { get; }
 		void SetDraggableActive(bool value);
+		void ResetAlives();
 	}
 
 	public class FieldUnits : ControllerBase, IFieldUnits, IInitializable
@@ -19,9 +20,10 @@
 		{
 			Observable.Merge(
 					_events.UnitDied,
-					_events.UnitRemoved
+					_events.UnitRemoved.Where(unit => unit.IsDead == false)
 				)
-				.Subscribe(_ => AliveUnitsCount.Value -= 1);
+				.Subscribe(_ => AliveUnitsCount.Value -= 1)
+				.AddTo(this);
 
 			_events.UnitAdded
 				.Subscribe(_ => AliveUnitsCount.Value += 1)
@@ -40,6 +42,11 @@
 		{
 			foreach (var unit in Field.Units)
 				unit.SetDraggableActive(value);
+		}
+
+		public void ResetAlives()
+		{
+			AliveUnitsCount.Value = Field.Units.Count;
 		}
 
 		#endregion
