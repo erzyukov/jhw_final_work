@@ -40,6 +40,9 @@
 			_unitView.NavMeshAgent.speed = _unitsConfig.Speed;
 			_unitView.NavMeshAgent.stoppingDistance = _unitConfig.AttackRange;
 
+			float uiHealthHeight = _model.Renderer.bounds.size.y * _model.Renderer.transform.localScale.y + _unitsConfig.UiHealthIndent;
+			_unitView.SetModelHeight(uiHealthHeight);
+
 			#region Debug
 
 			_unitView.Transform.name += $" - {Random.Range(1000, 9999)}";

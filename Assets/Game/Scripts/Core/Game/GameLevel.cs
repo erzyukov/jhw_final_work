@@ -4,10 +4,8 @@
 	using Game.Profiles;
 	using Game.Ui;
 	using Game.Utilities;
-	using System;
 	using UniRx;
 	using UnityEngine;
-	using UnityEngine.Profiling;
 	using Zenject;
 
 	public interface IGameLevel
@@ -70,7 +68,8 @@
 			if (IsLevelLoaded.Value == false)
 				return;
 
-			int waveCount = _levelsConfig.Levels[_profile.LevelNumber.Value].Waves.Length;
+			int levelIndex = _profile.LevelNumber.Value - 1;
+			int waveCount = _levelsConfig.Levels[levelIndex].Waves.Length;
 			
 			if (_profile.WaveNumber.Value < waveCount)
 			{

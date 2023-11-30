@@ -28,6 +28,7 @@ namespace Game.Installers
 			}
 
 			TacticalStageInstall();
+			BattleStageInstall();
 			CommonGameplayInstall();
 		}
 
@@ -49,6 +50,24 @@ namespace Game.Installers
 			}
 		}
 
+		private void BattleStageInstall()
+		{
+			if (_sceneContext == SceneContext.Main)
+			{
+				Container
+					.BindInterfacesTo<UiBattleStageHud>()
+					.FromComponentInHierarchy()
+					.AsSingle();
+			}
+
+			if (_sceneContext == SceneContext.Level)
+			{
+				Container
+					.BindInterfacesTo<UiBattleStage>()
+					.AsSingle();
+			}
+		}
+
 		private void CommonGameplayInstall()
 		{
 			if (_sceneContext == SceneContext.Main)
@@ -57,12 +76,25 @@ namespace Game.Installers
 					.BindInterfacesTo<UiCommonGameplayHud>()
 					.FromComponentInHierarchy()
 					.AsSingle();
+
+				Container
+					.BindInterfacesTo<UiWavesHud>()
+					.FromComponentInHierarchy()
+					.AsSingle();
+
+				Container
+					.BindInterfacesTo<UiWavesBuilder>()
+					.AsSingle();
 			}
 
 			if (_sceneContext == SceneContext.Level)
 			{
 				Container
 					.BindInterfacesTo<UiCommonGameplay>()
+					.AsSingle();
+
+				Container
+					.BindInterfacesTo<UiLevelWaves>()
 					.AsSingle();
 			}
 		}

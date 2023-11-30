@@ -32,6 +32,7 @@
 		{
 			_fieldHeroFacade.SetFieldRenderEnabled(true);
 			_fieldHeroFacade.SetDraggableActive(true);
+			_fieldHeroFacade.ResetAlives();
 			_fieldEnemyFacade.SetFieldRenderEnabled(true);
 
 			foreach (var unit in _fieldHeroFacade.Units)

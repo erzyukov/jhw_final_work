@@ -1,8 +1,11 @@
 namespace Game.Units
 {
+	using Game.Configs;
+	using Game.Utilities;
 	using UniRx;
 	using UnityEngine;
 	using UnityEngine.AI;
+	using Zenject;
 
 	public interface IUnitView
 	{
@@ -15,14 +18,21 @@ namespace Game.Units
 
 		void SetParent(Transform parent);
 		void SetActive(bool value);
+		void SetModelHeight(float value);
 		void ResetPosition();
 		void Destroy();
 	}
 
     public class UnitView : MonoBehaviour, IUnitView
 	{
+		[Inject] private UnitsConfig _unitsConfig;
+		[Inject] private UnitConfig _unitConfig;
+
 		[SerializeField] private Transform _modelContainer;
+		[SerializeField] private Transform _uiHealthCanvas;
 		[SerializeField] private NavMeshAgent _navMeshAgent;
+
+		private float _modelHeigth;
 
 		private void OnTriggerEnter(Collider other) => 
 			MergeInitiated.Execute();
@@ -45,6 +55,9 @@ namespace Game.Units
 		public void SetParent(Transform parent) => transform.SetParent(parent, false);
 
 		public void SetActive(bool value) => gameObject.SetActive(value);
+
+		public void SetModelHeight(float value) =>
+			_uiHealthCanvas.localPosition = _uiHealthCanvas.localPosition.WithY(value);
 
 		public void ResetPosition()
 		{
