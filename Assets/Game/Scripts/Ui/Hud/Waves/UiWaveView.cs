@@ -6,6 +6,7 @@ namespace Game.Ui
 	public interface IUiWaveView
 	{
 		Transform Transform { get; }
+		RectTransform Ancor { get; }
 		void SetSelectionIconActive(bool value);
 		void SetNotAchievedIconActive(bool value);
 		void SetCurrentIconActive(bool value);
@@ -16,6 +17,7 @@ namespace Game.Ui
 
     public class UiWaveView : MonoBehaviour, IUiWaveView
 	{
+		[SerializeField] private RectTransform _ancor;
 		[SerializeField] private GameObject _selection;
 		[SerializeField] private GameObject _notAchievedIcon;
 		[SerializeField] private GameObject _currentIcon;
@@ -25,6 +27,8 @@ namespace Game.Ui
 		#region IUiWaveView
 
 		public Transform Transform => transform;
+
+		public RectTransform Ancor => _ancor;
 
 		public void SetSelectionIconActive(bool value) =>
 			_selection.SetActive(value);

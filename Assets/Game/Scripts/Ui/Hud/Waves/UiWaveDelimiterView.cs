@@ -14,17 +14,17 @@ namespace Game.Ui
 	public class UiWaveDelimiterView : MonoBehaviour, IUiWaveDelimiterView
 	{
 		[SerializeField] private GameObject _defaultIcon;
-		[SerializeField] private GameObject _activeIcon;
+		[SerializeField] private GameObject _currentIcon;
 
 		#region IUiWaveDelimiterView
 
 		public Transform Transform => transform;
 
 		public void SetCurrentIconActive(bool value) =>
-			_defaultIcon.SetActive(value);
+			_currentIcon.SetActive(value);
 
 		public void SetDefaultIconActive(bool value) =>
-			_activeIcon.SetActive(value);
+			_defaultIcon.SetActive(value);
 
 		public void SetActive(bool value) =>
 			gameObject.SetActive(value);
