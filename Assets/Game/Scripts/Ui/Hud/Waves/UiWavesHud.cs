@@ -7,6 +7,7 @@ namespace Game.Ui
 	public interface IUiWavesHud
 	{
 		UiWaveView WavePrefab { get; }
+		UiWaveView FinalWavePrefab { get; }
 		UiWaveDelimiterView DelimiterPrefab { get; }
 		void AddWave(Transform wave);
 		void AddDelimiter(Transform delimiter);
@@ -19,6 +20,7 @@ namespace Game.Ui
 	{
 		[SerializeField] private Transform _waveContainer;
 		[SerializeField] private UiWaveView _wavePrefab;
+		[SerializeField] private UiWaveView _finalWavePrefab;
 		[SerializeField] private UiWaveDelimiterView _delimiterPrefab;
 		[SerializeField] private Transform _wavesOffsetPrefab;
 		[SerializeField] private ScrollRect _scrollrect;
@@ -36,6 +38,8 @@ namespace Game.Ui
 		#region IUiWavesHud
 
 		public UiWaveView WavePrefab => _wavePrefab;
+
+		public UiWaveView FinalWavePrefab => _finalWavePrefab;
 
 		public UiWaveDelimiterView DelimiterPrefab => _delimiterPrefab;
 

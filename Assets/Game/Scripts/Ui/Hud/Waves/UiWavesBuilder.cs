@@ -14,7 +14,6 @@ namespace Game.Ui
 		[Inject] private IUiWavesHud _wavesHud;
 
 		private const int MaxWawes = 30;
-		private const string WaveTitlePrefix = "Волна";
 
 		private IUiWaveView[] _waves;
 		private IUiWaveDelimiterView[] _delimiters;
@@ -42,8 +41,8 @@ namespace Game.Ui
 
 			for (int i = 0; i < MaxWawes; i++)
 			{
-				_waves[i] = GameObject.Instantiate(_wavesHud.WavePrefab);
-				_waves[i].SetTitle($"{WaveTitlePrefix} {i + 1}");
+				UiWaveView wave = (i != MaxWawes - 1) ? _wavesHud.WavePrefab: _wavesHud.FinalWavePrefab;
+				_waves[i] = GameObject.Instantiate(wave);
 				_waves[i].SetActive(false);
 				_wavesHud.AddWave(_waves[i].Transform);
 

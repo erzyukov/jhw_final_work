@@ -3,6 +3,7 @@
 	using Game.Configs;
 	using Game.Profiles;
 	using Game.Utilities;
+	using System.Collections.Generic;
 	using System.Linq;
 	using UniRx;
 	using Zenject;
@@ -14,15 +15,15 @@
 		[Inject] private LevelConfig _levelConfig;
 		[Inject] private GameProfile _gameProfile;
 
+		private const string WaveTitlePrefix = "Волна";
+
+		private List<IUiWaveView> _levelWaves;
 		private int WavesCount => _levelConfig.Waves.Length;
 
 		public void Initialize()
 		{
 			InitWaves(WavesCount);
 			InitDelimiters(WavesCount - 1);
-
-			for (int i = 0; i < WavesCount; i++)
-				_builder.Waves[i].SetActive(true);
 
 			_gameProfile.WaveNumber
 				.Where(number => number > 0)
@@ -38,14 +39,14 @@
 			for (int i = 0; i < WavesCount - 1; i++)
 				ResetDelimiter(i);
 
-			_builder.Waves[index].SetSelectionIconActive(true);
-			_builder.Waves[index].SetCurrentIconActive(true);
+			_levelWaves[index].SetSelectionIconActive(true);
+			_levelWaves[index].SetCurrentIconActive(true);
 
 			for (int i = 0; i < index; i++)
-				_builder.Waves[i].SetCompleteIconActive(true);
+				_levelWaves[i].SetCompleteIconActive(true);
 
 			for (int i = index + 1; i < WavesCount; i++)
-				_builder.Waves[i].SetNotAchievedIconActive(true);
+				_levelWaves[i].SetNotAchievedIconActive(true);
 
 			if (index > 0)
 			{
@@ -53,16 +54,26 @@
 				_builder.Delimiters[index - 1].SetCurrentIconActive(true);
 			}
 
-			_wavesHud.ScrollToWave(_builder.Waves[index].Ancor);
+			_wavesHud.ScrollToWave(_levelWaves[index].Ancor);
 		}
 
 		private void InitWaves(int activeCount)
 		{
-			for (int i = 0; i < activeCount; i++)
-				_builder.Waves[i].SetActive(true);
+			_levelWaves = new List<IUiWaveView>();
 
-			for (int i = activeCount; i < _builder.Waves.Length; i++)
+			for (int i = 0; i < _builder.Waves.Length; i++)
 				_builder.Waves[i].SetActive(false);
+
+			for (int i = 0; i < activeCount - 1; i++)
+				_levelWaves.Add(_builder.Waves[i]);
+
+			_levelWaves.Add(_builder.Waves[_builder.Waves.Length - 1]);
+
+			for (int i = 0; i < _levelWaves.Count; i++)
+			{
+				_levelWaves[i].SetTitle($"{WaveTitlePrefix} {i + 1}");
+				_levelWaves[i].SetActive(true);
+			}
 		}
 
 		private void InitDelimiters(int activeCount)
@@ -76,10 +87,10 @@
 
 		private void ResetWave(int index)
 		{
-			_builder.Waves[index].SetSelectionIconActive(false);
-			_builder.Waves[index].SetCurrentIconActive(false);
-			_builder.Waves[index].SetCompleteIconActive(false);
-			_builder.Waves[index].SetNotAchievedIconActive(false);
+			_levelWaves[index].SetSelectionIconActive(false);
+			_levelWaves[index].SetCurrentIconActive(false);
+			_levelWaves[index].SetCompleteIconActive(false);
+			_levelWaves[index].SetNotAchievedIconActive(false);
 		}
 
 		private void ResetDelimiter(int index)

@@ -5914,6 +5914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waveContainer: {fileID: 1079291653}
   _wavePrefab: {fileID: 1156041074201931708, guid: 606acc5a8d502a14c977b532ad7f17a6, type: 3}
+  _finalWavePrefab: {fileID: 1156041074201931708, guid: f19087a0cc31b6649aabbd81cf384d95, type: 3}
   _delimiterPrefab: {fileID: 4602844561672872192, guid: b78ad5b46cbc9c14d9af8c4d953bcae3, type: 3}
   _wavesOffsetPrefab: {fileID: 3504906661496549752, guid: f3d9f547ce8b4734a882e97176e38091, type: 3}
   _scrollrect: {fileID: 85178897}
