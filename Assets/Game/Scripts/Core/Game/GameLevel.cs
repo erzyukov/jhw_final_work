@@ -91,6 +91,7 @@
 			_uiViel.SetActive(true, () =>
 			{
 				LevelFinished.Execute();
+				_profile.LevelNumber.Value = Mathf.Clamp(_profile.LevelNumber.Value + 1, 0, _levelsConfig.Levels.Length);
 				_profile.WaveNumber.Value = 0;
 				_scenesManager.UnloadLevel();
 				IsLevelLoaded.Value = false;
