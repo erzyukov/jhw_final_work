@@ -19,5 +19,6 @@
 		// Technical
 		Root = 300,
 		Scenes,
+		Localization,
 	}
 }
