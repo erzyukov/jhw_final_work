@@ -35,7 +35,7 @@ namespace Game.Ui
 
 		private void OnScreenClosedHandler()
 		{
-			_level.FinishLevel();
+			_level.FinishLevel(true);
 		}
 
 		private void AnimatieObtainedExperience()
