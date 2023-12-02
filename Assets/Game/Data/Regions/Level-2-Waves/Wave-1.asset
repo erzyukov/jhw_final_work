@@ -15,3 +15,5 @@ MonoBehaviour:
   _units:
   - Position: {x: 2, y: 0}
     Species: 5001
+  - Position: {x: 3, y: 1}
+    Species: 5001

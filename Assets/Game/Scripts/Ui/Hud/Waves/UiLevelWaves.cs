@@ -1,6 +1,7 @@
 ﻿namespace Game.Ui
 {
 	using Game.Configs;
+	using Game.Core;
 	using Game.Profiles;
 	using Game.Utilities;
 	using System.Collections.Generic;
@@ -14,14 +15,18 @@
 		[Inject] private IUiWavesHud _wavesHud;
 		[Inject] private LevelConfig _levelConfig;
 		[Inject] private GameProfile _gameProfile;
+		[Inject] private ILocalizator _localizator;
 
-		private const string WaveTitlePrefix = "Волна";
+		private const string WaveTitlePrefixKey = "wave";
 
+		private string _waveTitlePrefix;
 		private List<IUiWaveView> _levelWaves;
 		private int WavesCount => _levelConfig.Waves.Length;
 
 		public void Initialize()
 		{
+			_waveTitlePrefix = _localizator.GetString(WaveTitlePrefixKey);
+
 			InitWaves(WavesCount);
 			InitDelimiters(WavesCount - 1);
 
@@ -71,7 +76,7 @@
 
 			for (int i = 0; i < _levelWaves.Count; i++)
 			{
-				_levelWaves[i].SetTitle($"{WaveTitlePrefix} {i + 1}");
+				_levelWaves[i].SetTitle($"{_waveTitlePrefix} {i + 1}");
 				_levelWaves[i].SetActive(true);
 			}
 		}

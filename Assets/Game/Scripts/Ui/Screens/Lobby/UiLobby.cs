@@ -13,9 +13,16 @@
 		[Inject] private IGameLevel _level;
 		[Inject] private GameProfile _profile;
 		[Inject] private LevelsConfig _levelsConfig;
+		[Inject] private ILocalizator _localizator;
+
+		private const string LevelTitlePrefixKey = "level";
+
+		private string _levelTitlePrefix;
 
 		public void Initialize()
 		{
+			_levelTitlePrefix = _localizator.GetString(LevelTitlePrefixKey);
+
 			_lobbyScreen.Opening
 				.Subscribe(_ => OnScreenOpeningHandler())
 				.AddTo(this);
@@ -30,7 +37,7 @@
 			int levelIndex = _profile.LevelNumber.Value - 1;
 			LevelConfig levelConfig = _levelsConfig.Levels[levelIndex];
 
-			_lobbyScreen.SetTitle(levelConfig.Title);
+			_lobbyScreen.SetTitle($"{_levelTitlePrefix} {levelConfig.Title}");
 
 			_lobbyScreen.SetLastWaveActive(_profile.WaveNumber.Value != 0);
 			_lobbyScreen.SetLastWaveValue(_profile.WaveNumber.Value.ToString());

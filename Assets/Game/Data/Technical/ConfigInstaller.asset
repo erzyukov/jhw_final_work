@@ -19,3 +19,4 @@ MonoBehaviour:
   _levels: {fileID: 11400000, guid: 3db0c9857269dcb4292b0347aec55d42, type: 2}
   _currency: {fileID: 11400000, guid: efa57f5a6fe940f4b9e00a51738b1392, type: 2}
   _timings: {fileID: 11400000, guid: be15a0ff82e558f41b65c6872dd34e60, type: 2}
+  _localization: {fileID: 11400000, guid: c27340b364e2ca64b833e18a2898f644, type: 2}

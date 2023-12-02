@@ -24,6 +24,10 @@ namespace Game.Installers
 				.BindInterfacesTo<InputHandler>()
 				.AsSingle();
 
+			Container
+				.BindInterfacesTo<Localizator>()
+				.AsSingle();
+
 			InstallGameControllers();
 		}
 

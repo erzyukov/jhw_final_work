@@ -14,7 +14,7 @@
 		ReactiveCommand LevelFinished { get; }
 		void GoToLevel(int number);
 		void GoToNextWave();
-		void FinishLevel();
+		void FinishLevel(bool isLevelComplete);
 		int GetLevelExperience();
 		int GetLevelReward();
 	}
@@ -86,11 +86,13 @@
 			}
 		}
 
-		public void FinishLevel()
+		public void FinishLevel(bool isLevelComplete)
 		{
 			_uiViel.SetActive(true, () =>
 			{
 				LevelFinished.Execute();
+				if (isLevelComplete)
+					_profile.LevelNumber.Value = Mathf.Clamp(_profile.LevelNumber.Value + 1, 0, _levelsConfig.Levels.Length);
 				_profile.WaveNumber.Value = 0;
 				_scenesManager.UnloadLevel();
 				IsLevelLoaded.Value = false;

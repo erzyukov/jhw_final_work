@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: StringTableCollection_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 5f31ae77c27018a4d8effc3283048516, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 4015764443136
+    m_Localized: TOKEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3741385658368
+    m_Localized: 'HAVE NEED OF:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10854585503744
+    m_Localized: SUMMON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10973024260096
+    m_Localized: BATTLE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11563825532928
+    m_Localized: VERSUS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12019083677696
+    m_Localized: WAVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19023760101376
+    m_Localized: PLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19142035279872
+    m_Localized: LAST WAVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19351314272256
+    m_Localized: LEVEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59502782484480
+    m_Localized: VICTORY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59759893319680
+    m_Localized: TAP TO CONTINUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65332927959040
+    m_Localized: DEFEAT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65524175638528
+    m_Localized: 'NEVER GIVE UP!
+
+      UPGRADE YOUR TROOPS AND TRY AGAIN!'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
