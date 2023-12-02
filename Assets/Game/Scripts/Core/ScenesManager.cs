@@ -44,6 +44,11 @@ namespace Game.Core
 
 				SplashCompleted.Execute();
 			}
+			else
+			{
+				yield return _localizator.Preload();
+				SplashCompleted.Execute();
+			}
 
 			yield return wait;
 

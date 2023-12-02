@@ -17,7 +17,7 @@
 	{
 		[Inject] private List<IUiScreen> _screens;
 		[Inject] private IGameCycle _gameCycle;
-		[Inject] private IUiViel _uiViel;
+		[Inject] private IUiVeil _uiViel;
 
 		readonly ReactiveProperty<Screen> _screen;
 
@@ -65,14 +65,21 @@
 
 		public void Open(Screen screen)
 		{
+			if (Screen.Value == screen)
+				return;
+
 			_screen.Value = screen;
 			_screens.ForEach(s => s.SetActive(s.Screen == screen));
-			_uiViel.SetActive(false);
+			_uiViel.Fade();
 		}
 
 		public void CloseActive()
 		{
-			Open(Ui.Screen.None);
+			if (Screen.Value == Ui.Screen.None)
+				return;
+
+			_screen.Value = Ui.Screen.None;
+			_screens.ForEach(s => s.SetActive(false));
 		}
 
 		#endregion

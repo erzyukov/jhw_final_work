@@ -25,7 +25,7 @@
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] private IScenesManager _scenesManager;
 		[Inject] private IGameCycle _gameCycle;
-		[Inject] private IUiViel _uiViel;
+		[Inject] private IUiVeil _uiViel;
 
 		// TODO: realize level experience amout calculate
 		private const int ExperienceByLevel = 100;
@@ -49,7 +49,7 @@
 		{
 			_gameCycle.SetState(GameState.LoadingLevel);
 
-			_uiViel.SetActive(true, () =>
+			_uiViel.Appear(() =>
 			{
 				if (IsLevelLoaded.Value)
 				{
@@ -74,7 +74,7 @@
 			if (_profile.WaveNumber.Value < waveCount)
 			{
 				_gameCycle.SetState(GameState.LoadingWave);
-				_uiViel.SetActive(true, () =>
+				_uiViel.Appear(() =>
 				{
 					_profile.WaveNumber.Value++;
 					_gameCycle.SetState(GameState.TacticalStage);
@@ -88,7 +88,7 @@
 
 		public void FinishLevel(bool isLevelComplete)
 		{
-			_uiViel.SetActive(true, () =>
+			_uiViel.Appear(() =>
 			{
 				LevelFinished.Execute();
 				if (isLevelComplete)
@@ -126,7 +126,7 @@
 
 			_gameCycle.SetState(GameState.TacticalStage);
 
-			_uiViel.SetActive(false, () =>
+			_uiViel.Fade(() =>
 			{
 				IsLevelLoaded.Value = true;
 			});

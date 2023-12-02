@@ -67,6 +67,10 @@ MonoBehaviour:
     m_Key: 1 - Main/Canvas/Screens/LoseScreen/Hint
     m_Metadata:
       m_Items: []
+  - m_Id: 358944567889920
+    m_Key: 0 - Splash/Canvas/LoadingScreen/LoadingText
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
