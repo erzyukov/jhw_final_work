@@ -15,6 +15,10 @@ namespace Game.Installers
 			InstallGameProfile();
 
 			Container
+				.BindInterfacesTo<Localizator>()
+				.AsSingle();
+
+			Container
 				.BindInterfacesTo<ScenesManager>()
 				.FromNewComponentOnNewGameObject()
 				.AsSingle()
@@ -22,10 +26,6 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<InputHandler>()
-				.AsSingle();
-
-			Container
-				.BindInterfacesTo<Localizator>()
 				.AsSingle();
 
 			InstallGameControllers();
