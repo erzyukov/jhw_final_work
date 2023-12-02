@@ -27,6 +27,7 @@ namespace Game.Core
 	{
 		[Inject] private ScenesConfig _scenesConfig;
 		[Inject] private LevelsConfig _levelsConfig;
+		[Inject] private ILocalizator _localizator;
 		[Inject] private IGameProfileManager _profileManager;
 
 		private void Start() => StartCoroutine(LoadScenes());
@@ -37,6 +38,8 @@ namespace Game.Core
 
 			if (IsSceneLoaded(_scenesConfig.Splash))
 			{
+				yield return _localizator.Preload();
+
 				yield return null;
 
 				SplashCompleted.Execute();
