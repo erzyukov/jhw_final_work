@@ -84,6 +84,18 @@ MonoBehaviour:
     m_Localized: SUMMON ANOTHER UNIT!
     m_Metadata:
       m_Items: []
+  - m_Id: 730388798517248
+    m_Localized: MERGE UNITS TO ENHANCE THEM!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 730395614261248
+    m_Localized: MERGE UNITS TO CHANGE YOUR FORMATION!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 731561861459968
+    m_Localized: YOU ARE OUT OF SUMMON TOKENS. LET THE BATTLE BEGIN!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
