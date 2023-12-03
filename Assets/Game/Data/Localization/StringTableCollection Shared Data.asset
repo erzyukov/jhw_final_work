@@ -75,6 +75,10 @@ MonoBehaviour:
     m_Key: beginerTutorialFirstStep
     m_Metadata:
       m_Items: []
+  - m_Id: 508781783322624
+    m_Key: beginerTutorialSectondSummon
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

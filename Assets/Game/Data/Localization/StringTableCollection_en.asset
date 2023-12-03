@@ -80,6 +80,10 @@ MonoBehaviour:
     m_Localized: SUMMOON A RANDOM UNIT!
     m_Metadata:
       m_Items: []
+  - m_Id: 508781783322624
+    m_Localized: SUMMARY ANOTHER UNIT!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

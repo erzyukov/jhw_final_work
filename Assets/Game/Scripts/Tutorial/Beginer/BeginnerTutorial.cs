@@ -43,6 +43,10 @@
 					if (_fieldHeroFacade.Units.Count == 1)
 						_profile.Tutorial.BeginerStep.Value = BeginnerStep.SecondSummon;
 					break;
+				case BeginnerStep.SecondSummon:
+					if (_fieldHeroFacade.Units.Count == 2)
+						_profile.Tutorial.BeginerStep.Value = BeginnerStep.FirstBattle;
+					break;
 			}
 		}
 
@@ -50,9 +54,36 @@
 
 		protected override void OnEnterFirstSummon()
 		{
-			Vector3 fingerPosition = _uiTacticalStageHud.SummonButtonHintParameters.Point.position;
+			SetupSummonStep();
+		}
 
-			_fingerHint.SetPosition(fingerPosition);
+		protected override void OnExitFirstSummon()
+		{
+			_fingerHint.SetActive(false);
+			_dialogHint.SetActive(false);
+		}
+
+		#endregion
+
+		#region SecondSummon Step
+
+		protected override void OnEnterSecondSummon()
+		{
+			SetupSummonStep();
+		}
+
+		protected override void OnExitSecondSummon()
+		{
+			_fingerHint.SetActive(false);
+			_dialogHint.SetActive(false);
+			_uiTacticalStageHud.SetStartBattleButtonInteractable(true);
+		}
+
+		#endregion
+
+		private void SetupSummonStep()
+		{
+			_fingerHint.SetPosition(_uiTacticalStageHud.SummonButtonHintParameters.Point.position);
 			_fingerHint.SetActive(true);
 
 			if (_config.BeginerTutorialMessages.TryGetValue(State, out string key))
@@ -65,13 +96,5 @@
 			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
 		}
 
-		protected override void OnExitFirstSummon()
-		{
-			_fingerHint.SetActive(false);
-			_dialogHint.SetActive(false);
-		}
-
-
-		#endregion
 	}
 }
