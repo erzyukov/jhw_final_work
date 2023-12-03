@@ -15,10 +15,12 @@ namespace Game.Installers
 		[SerializeField] private CurrencyConfig _currency;
 		[SerializeField] private TimingsConfig _timings;
 		[SerializeField] private LocalizationConfig _localization;
+		[SerializeField] private TutorialConfig _tutorial;
 
 		public override void InstallBindings()
 		{
 			_units.Initialize();
+			_tutorial.Initialize();
 
 			Container.BindInstance(_scenes);
 			Container.BindInstance(_units);
@@ -28,6 +30,7 @@ namespace Game.Installers
 			Container.BindInstance(_currency);
 			Container.BindInstance(_timings);
 			Container.BindInstance(_localization);
+			Container.BindInstance(_tutorial);
 		}
 	}
 }

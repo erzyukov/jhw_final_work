@@ -21,6 +21,7 @@ MonoBehaviour:
     m_Address: Assets/Game/Data/Localization/StringTableCollection Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 4a4070c40d0d17b46ab2e9a899a0961d, type: 2}
   m_SchemaSet:

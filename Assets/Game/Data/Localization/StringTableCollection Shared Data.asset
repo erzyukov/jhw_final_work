@@ -71,6 +71,10 @@ MonoBehaviour:
     m_Key: 0 - Splash/Canvas/LoadingScreen/LoadingText
     m_Metadata:
       m_Items: []
+  - m_Id: 476285012185088
+    m_Key: beginerTutorialFirstStep
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -13,5 +13,6 @@ namespace Game.Profiles
 		public readonly IntReactiveProperty HeroLevel = new IntReactiveProperty(1);
 		public readonly IntReactiveProperty HeroLevelExperience = new IntReactiveProperty(30);
 
+		public TutorialProfile Tutorial = new TutorialProfile();
 	}
 }

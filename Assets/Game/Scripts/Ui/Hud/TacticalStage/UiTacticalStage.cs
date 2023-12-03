@@ -35,6 +35,13 @@
 				)
 				.Subscribe(SetUiActive)
 				.AddTo(this);
+
+			_fieldHeroFacade.Units.ObserveCountChanged()
+				.StartWith(0)
+				.Select(count => count != 0)
+				.Subscribe(_hud.SetStartBattleButtonInteractable)
+				.AddTo(this);
+				
 		}
 
 		private void SetUiActive(bool value)
