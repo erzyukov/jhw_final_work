@@ -27,6 +27,7 @@
 		[Inject] private IHeroUnitSummoner _heroUnitSummoner;
 
 		readonly private CompositeDisposable _disposable = new CompositeDisposable();
+		private IDisposable _summonInterruptDisposable;
 
 		public void Initialize()
 		{
@@ -35,13 +36,16 @@
 				.Subscribe(Transition)
 				.AddTo(_disposable);
 
-			_heroUnitSummoner.SummoningPaidUnit
+			_summonInterruptDisposable = _heroUnitSummoner.SummoningPaidUnit
 				.Where(_ => _profile.Tutorial.BeginerStep.Value != BeginnerStep.Complete)
-				.Subscribe(_ => OnSummoningPaidUnitHandler())
-				.AddTo(_disposable);
+				.Subscribe(_ => OnSummoningPaidUnitHandler());
 		}
 
-		public virtual void Dispose() => _disposable.Dispose();
+		public virtual void Dispose()
+		{
+			_summonInterruptDisposable?.Dispose();
+			_disposable.Dispose();
+		}
 
 		protected override void StateTransitions()
 		{
@@ -164,6 +168,7 @@
 		protected override void OnExitFourthSummon()
 		{
 			_fingerHint.SetActive(false);
+			_summonInterruptDisposable.Dispose();
 		}
 
 		#endregion
@@ -182,12 +187,12 @@
 			_uiTacticalStageHud.SetSummonButtonInteractable(false);
 			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
 
-			//_fieldHeroFacade.SetDraggableActive(false);
+			ActivateDialogMessege();
 		}
 
 		protected override void OnExitFirstMerge()
 		{
-
+			_dialogHint.SetActive(false);
 		}
 
 		#endregion
@@ -202,12 +207,13 @@
 				.FirstOrDefault();
 
 			unit.SetDraggableActive(true);
+
+			ActivateDialogMessege();
 		}
 
 		protected override void OnExitSecondMerge()
 		{
-			_uiTacticalStageHud.SetSummonButtonInteractable(true);
-			_uiTacticalStageHud.SetStartBattleButtonInteractable(true);
+			_dialogHint.SetActive(false);
 		}
 
 		#endregion
@@ -218,11 +224,8 @@
 			_fingerHint.SetLeft(_uiTacticalStageHud.SummonButtonHintParameters.IsLeft);
 			_fingerHint.SetActive(true);
 
-			if (withDialog && _config.BeginerTutorialMessages.TryGetValue(State, out string key))
-			{
-				_dialogHint.SetMessage(_localizator.GetString(key));
-				_dialogHint.SetActive(true);
-			}
+			if (withDialog)
+				ActivateDialogMessege();
 
 			_fieldHeroFacade.SetDraggableActive(false);
 			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
@@ -238,6 +241,15 @@
 			else
 			{
 				throw new Exception($"Define unit for summon in tutorial step: {State.GetType()}.{State}!");
+			}
+		}
+
+		private void ActivateDialogMessege()
+		{
+			if (_config.BeginerTutorialMessages.TryGetValue(State, out string key))
+			{
+				_dialogHint.SetMessage(_localizator.GetString(key));
+				_dialogHint.SetActive(true);
 			}
 		}
 	}

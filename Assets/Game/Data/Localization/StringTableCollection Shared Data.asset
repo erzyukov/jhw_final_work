@@ -79,6 +79,18 @@ MonoBehaviour:
     m_Key: beginerTutorialSectondSummon
     m_Metadata:
       m_Items: []
+  - m_Id: 730388798517248
+    m_Key: beginerTutorialFirstMerge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 730395614261248
+    m_Key: beginerTutorialSecondMerge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 731561861459968
+    m_Key: beginerTutorialThirdBattle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

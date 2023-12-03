@@ -17,6 +17,12 @@ MonoBehaviour:
     TranslationKey: beginerTutorialFirstStep
   - Step: 2
     TranslationKey: beginerTutorialSectondSummon
+  - Step: 7
+    TranslationKey: beginerTutorialFirstMerge
+  - Step: 8
+    TranslationKey: beginerTutorialSecondMerge
+  - Step: 13
+    TranslationKey: beginerTutorialThirdBattle
   _beginerTurorialSummons:
   - Step: 1
     Species: 1
