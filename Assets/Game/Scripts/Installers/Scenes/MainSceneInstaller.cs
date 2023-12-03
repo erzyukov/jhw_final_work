@@ -26,7 +26,7 @@ namespace Game.Installers
 		private void InstallUI()
 		{
 			Container
-				.BindInterfacesTo<UiViel>()
+				.BindInterfacesTo<UiVeil>()
 				.FromComponentInHierarchy()
 				.AsSingle();
 		}

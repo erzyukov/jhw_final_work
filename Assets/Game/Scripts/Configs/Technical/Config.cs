@@ -20,5 +20,8 @@
 		Root = 300,
 		Scenes,
 		Localization,
+
+		// Other
+		Tutorial = 400,
 	}
 }

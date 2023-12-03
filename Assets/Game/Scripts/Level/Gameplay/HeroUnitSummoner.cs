@@ -14,8 +14,10 @@
 
 	public interface IHeroUnitSummoner
 	{
+		ReactiveCommand SummoningPaidUnit { get; }
 		bool TrySummonByCurrency();
 		void Summon(Species species, int gradeIndex, Vector2Int position);
+		void InterruptPaidSummon();
 	}
 
 	public class HeroUnitSummoner : ControllerBase, IHeroUnitSummoner
@@ -28,8 +30,11 @@
 		[Inject] private IGameCycle _gameCycle;
 
 		Dictionary<IUnitFacade, IDisposable> _unitSubscribes = new Dictionary<IUnitFacade, IDisposable>();
+		bool _isPaidSummonInterrupted;
 
 		#region IHeroUnitSummoner
+
+		public ReactiveCommand SummoningPaidUnit { get; } = new ReactiveCommand();
 
 		public bool TrySummonByCurrency()
 		{
@@ -46,7 +51,12 @@
 				return false;
 			}
 
-			Summon();
+			SummoningPaidUnit.Execute();
+
+			if (_isPaidSummonInterrupted == false)
+				Summon();
+
+			_isPaidSummonInterrupted = false;
 
 			return true;
 		}
@@ -58,6 +68,9 @@
 
 			SubscribeToUnit(unit);
 		}
+
+		public void InterruptPaidSummon() => 
+			_isPaidSummonInterrupted = true;
 
 		#endregion
 

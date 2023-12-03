@@ -7,7 +7,6 @@
 	using Game.Configs;
 	using Game.Level;
 	using Game.Field;
-	using System;
 
 	public class UiTacticalStage : ControllerBase, IInitializable
 	{
@@ -35,6 +34,13 @@
 				)
 				.Subscribe(SetUiActive)
 				.AddTo(this);
+
+			_fieldHeroFacade.Units.ObserveCountChanged()
+				.StartWith(0)
+				.Select(count => count != 0)
+				.Subscribe(_hud.SetStartBattleButtonInteractable)
+				.AddTo(this);
+				
 		}
 
 		private void SetUiActive(bool value)

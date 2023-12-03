@@ -1,6 +1,8 @@
 ﻿namespace Game.Field
 {
+	using Game.Units;
 	using Game.Utilities;
+	using System;
 	using UniRx;
 	using Zenject;
 
@@ -16,6 +18,8 @@
 		[Inject] protected IField<FieldCell> Field;
 		[Inject] private IFieldEvents _events;
 
+		private bool _isDraggableActive = true;
+
 		public void Initialize()
 		{
 			Observable.Merge(
@@ -26,7 +30,7 @@
 				.AddTo(this);
 
 			_events.UnitAdded
-				.Subscribe(_ => AliveUnitsCount.Value += 1)
+				.Subscribe(OnUnitAddedHandler)
 				.AddTo(this);
 
 			_events.UnitsCleared
@@ -40,6 +44,8 @@
 
 		public void SetDraggableActive(bool value)
 		{
+			_isDraggableActive = value;
+
 			foreach (var unit in Field.Units)
 				unit.SetDraggableActive(value);
 		}
@@ -50,5 +56,11 @@
 		}
 
 		#endregion
+
+		private void OnUnitAddedHandler(IUnitFacade facade)
+		{
+			AliveUnitsCount.Value += 1;
+			facade.SetDraggableActive(_isDraggableActive);
+		}
 	}
 }

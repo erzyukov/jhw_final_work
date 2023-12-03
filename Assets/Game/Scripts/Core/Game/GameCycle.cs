@@ -24,6 +24,7 @@
 				.AddTo(this);
 
 			_scenesManager.MainLoaded
+				.Where(_ => State.Value == GameState.LoadingLobby)
 				.Subscribe(_ => SetState(GameState.Lobby))
 				.AddTo(this);
 
