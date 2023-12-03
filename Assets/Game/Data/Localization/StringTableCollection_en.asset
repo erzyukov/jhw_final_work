@@ -77,11 +77,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 476285012185088
-    m_Localized: SUMMOON A RANDOM UNIT!
+    m_Localized: SUMMON A RANDOM UNIT!
     m_Metadata:
       m_Items: []
   - m_Id: 508781783322624
-    m_Localized: SUMMARY ANOTHER UNIT!
+    m_Localized: SUMMON ANOTHER UNIT!
     m_Metadata:
       m_Items: []
   references:

@@ -10,6 +10,7 @@
 	using Game.Ui;
 	using Game.Field;
 	using Game.Configs;
+	using Game.Level;
 
 	public class BeginnerTutorial: BeginerTutorialFsmBase, IInitializable, IDisposable
 	{
@@ -22,6 +23,7 @@
 		[Inject] private IFieldHeroFacade _fieldHeroFacade;
 		[Inject] private TutorialConfig _config;
 		[Inject] private ILocalizator _localizator;
+		[Inject] private IHeroUnitSummoner _heroUnitSummoner;
 
 		readonly private CompositeDisposable _disposable = new CompositeDisposable();
 
@@ -30,6 +32,11 @@
 			_profile.Tutorial.BeginerStep
 				.Where(step => step != State)
 				.Subscribe(Transition)
+				.AddTo(_disposable);
+
+			_heroUnitSummoner.SummoningPaidUnit
+				.Where(_ => _profile.Tutorial.BeginerStep.Value != BeginnerStep.Complete)
+				.Subscribe(_ => OnSummoningPaidUnitHandler())
 				.AddTo(_disposable);
 		}
 
@@ -96,5 +103,17 @@
 			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
 		}
 
+		private void OnSummoningPaidUnitHandler()
+		{
+			if (_config.BeginerTurorialSummons.TryGetValue(State, out var data))
+			{
+				_heroUnitSummoner.InterruptPaidSummon();
+				_heroUnitSummoner.Summon(data.Species, data.GradeIndex, data.Position);
+			}
+			else
+			{
+				throw new Exception($"Define unit for summon in tutorial step: {State.GetType()}.{State}!");
+			}
+		}
 	}
 }

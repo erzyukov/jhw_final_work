@@ -17,3 +17,12 @@ MonoBehaviour:
     TranslationKey: beginerTutorialFirstStep
   - Step: 2
     TranslationKey: beginerTutorialSectondSummon
+  _beginerTurorialSummons:
+  - Step: 1
+    Species: 1
+    GradeIndex: 0
+    Position: {x: 1, y: 1}
+  - Step: 2
+    Species: 1
+    GradeIndex: 0
+    Position: {x: 2, y: 2}
