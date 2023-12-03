@@ -7,7 +7,6 @@
 	using Game.Configs;
 	using Game.Level;
 	using Game.Field;
-	using System;
 
 	public class UiTacticalStage : ControllerBase, IInitializable
 	{

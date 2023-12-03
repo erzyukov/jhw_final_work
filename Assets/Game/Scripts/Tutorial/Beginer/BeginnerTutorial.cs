@@ -6,7 +6,6 @@
 	using UniRx;
 	using System;
 	using Game.Core;
-	using UnityEngine;
 	using Game.Ui;
 	using Game.Field;
 	using Game.Configs;
@@ -15,8 +14,6 @@
 	public class BeginnerTutorial: BeginerTutorialFsmBase, IInitializable, IDisposable
 	{
 		[Inject] private GameProfile _profile;
-		[Inject] private IGameLevel _level;
-		[Inject] private IGameCycle _cycle;
 		[Inject] private IUiTacticalStageHud _uiTacticalStageHud;
 		[Inject] private IFingerHint _fingerHint;
 		[Inject] private IDialogHint _dialogHint;

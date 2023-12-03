@@ -37,6 +37,11 @@
 			_scenesManager.LevelLoaded
 				.Subscribe(_ => OnLevelLoaded())
 				.AddTo(this);
+
+			_gameCycle.State
+				.Where(state => state == GameState.TacticalStage)
+				.Subscribe(_ => _uiViel.Fade())
+				.AddTo(this);
 		}
 
 		#region IGameLevel
