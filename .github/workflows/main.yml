@@ -2,7 +2,7 @@ name: Actions
 #push, pull_request
 on: 
   pull_request: {}
-  push: { branches: [simplify] }
+#  push: { branches: [simplify] }
 
 jobs:
   testRunner:
