@@ -11,6 +11,8 @@
 			AddOnExitAction(BeginnerStep.FirstSummon, OnExitFirstSummon);
 			AddOnEnterAction(BeginnerStep.SecondSummon, OnEnterSecondSummon);
 			AddOnExitAction(BeginnerStep.SecondSummon, OnExitSecondSummon);
+			AddOnEnterAction(BeginnerStep.FirstBattle, OnEnterFirstBattle);
+			AddOnExitAction(BeginnerStep.FirstBattle, OnExitFirstBattle);
 		}
 
 		protected override BeginnerStep DefaultState => BeginnerStep.None;
@@ -19,5 +21,7 @@
 		protected abstract void OnExitFirstSummon();
 		protected abstract void OnEnterSecondSummon();
 		protected abstract void OnExitSecondSummon();
+		protected abstract void OnEnterFirstBattle();
+		protected abstract void OnExitFirstBattle();
 	}
 }

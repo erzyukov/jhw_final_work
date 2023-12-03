@@ -14,6 +14,7 @@
 	public class BeginnerTutorial: BeginerTutorialFsmBase, IInitializable, IDisposable
 	{
 		[Inject] private GameProfile _profile;
+		[Inject] private IGameCycle _cycle;
 		[Inject] private IUiTacticalStageHud _uiTacticalStageHud;
 		[Inject] private IFingerHint _fingerHint;
 		[Inject] private IDialogHint _dialogHint;
@@ -51,6 +52,10 @@
 					if (_fieldHeroFacade.Units.Count == 2)
 						_profile.Tutorial.BeginerStep.Value = BeginnerStep.FirstBattle;
 					break;
+				case BeginnerStep.FirstBattle:
+					if (_cycle.State.Value == GameState.BattleStage)
+						_profile.Tutorial.BeginerStep.Value = BeginnerStep.ThirdSummon;
+					break;
 			}
 		}
 
@@ -85,9 +90,29 @@
 
 		#endregion
 
+		#region FirstBattle Step
+
+		protected override void OnEnterFirstBattle()
+		{
+			_fingerHint.SetPosition(_uiTacticalStageHud.BattleButtonHintParameters.Point.position);
+			_fingerHint.SetLeft(_uiTacticalStageHud.BattleButtonHintParameters.IsLeft);
+			_fingerHint.SetActive(true);
+			_uiTacticalStageHud.SetStartBattleButtonInteractable(true);
+			_uiTacticalStageHud.SetSummonButtonInteractable(false);
+		}
+
+		protected override void OnExitFirstBattle()
+		{
+			_fingerHint.SetActive(false);
+			_uiTacticalStageHud.SetSummonButtonInteractable(true);
+		}
+
+		#endregion
+
 		private void SetupSummonStep()
 		{
 			_fingerHint.SetPosition(_uiTacticalStageHud.SummonButtonHintParameters.Point.position);
+			_fingerHint.SetLeft(_uiTacticalStageHud.SummonButtonHintParameters.IsLeft);
 			_fingerHint.SetActive(true);
 
 			if (_config.BeginerTutorialMessages.TryGetValue(State, out string key))

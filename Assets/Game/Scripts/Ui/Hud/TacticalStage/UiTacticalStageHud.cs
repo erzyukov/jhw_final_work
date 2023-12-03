@@ -12,6 +12,7 @@ namespace Game.Ui
 		IObservable<Unit> SummonButtonClicked { get; }
 		IObservable<Unit> StartBattleButtonClicked { get; }
 		HintedButton.Parameters SummonButtonHintParameters { get; }
+		HintedButton.Parameters BattleButtonHintParameters { get; }
 		void SetSummonPrice(int value);
 		void SetSummonButtonActive(bool value);
 		void SetStartBattleButtonActive(bool value);
@@ -23,8 +24,9 @@ namespace Game.Ui
 	{
 		[SerializeField] private TextMeshProUGUI _summonPrice;
 		[SerializeField] private Button _summonButton;
-		[SerializeField] private HintedButton _hintedButton;
+		[SerializeField] private HintedButton _hintedSummonButton;
 		[SerializeField] private Button _startBattleButton;
+		[SerializeField] private HintedButton _hintedBattleButton;
 
 		#region IUiTacticalStageHud
 
@@ -32,7 +34,9 @@ namespace Game.Ui
 
 		public IObservable<Unit> StartBattleButtonClicked => _startBattleButton.OnClickAsObservable();
 
-		public HintedButton.Parameters SummonButtonHintParameters => _hintedButton.HintParameters;
+		public HintedButton.Parameters SummonButtonHintParameters => _hintedSummonButton.HintParameters;
+		
+		public HintedButton.Parameters BattleButtonHintParameters => _hintedBattleButton.HintParameters;
 
 		public void SetSummonPrice(int value) => _summonPrice.text = value.ToString();
 
