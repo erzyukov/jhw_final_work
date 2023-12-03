@@ -14,7 +14,7 @@ namespace Game.Ui
 
     public class UiVeil : MonoBehaviour, IUiVeil
 	{
-		[SerializeField] private Image _veil;
+		[SerializeField] private CanvasGroup _veil;
 		[SerializeField] private float _duration;
 
 		#region IUiViel

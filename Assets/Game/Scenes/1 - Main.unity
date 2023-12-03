@@ -9848,6 +9848,7 @@ GameObject:
   - component: {fileID: 4701965884879959255}
   - component: {fileID: 4701965884879959254}
   - component: {fileID: 4701965884879959256}
+  - component: {fileID: 4701965884879959257}
   m_Layer: 5
   m_Name: Veil
   m_TagString: Untagged
@@ -9926,8 +9927,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9915bdb64db66024a83f314c24550c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _veil: {fileID: 4701965884879959254}
+  _veil: {fileID: 4701965884879959257}
   _duration: 0.5
+--- !u!225 &4701965884879959257
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4701965884879959248}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1001 &5921009056579855474
 PrefabInstance:
   m_ObjectHideFlags: 0
