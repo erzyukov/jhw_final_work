@@ -16,6 +16,7 @@
 		FifthSummon,
 		SixthSummon,
 		ThirdBattle,
+		PauseForThirdBattle,
 		Complete
 	}
 }
