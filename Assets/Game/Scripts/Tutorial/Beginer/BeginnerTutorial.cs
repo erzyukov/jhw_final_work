@@ -41,6 +41,11 @@
 			_summonInterruptDisposable = _heroUnitSummoner.SummoningPaidUnit
 				.Where(_ => _profile.Tutorial.BeginerStep.Value != BeginnerStep.Complete)
 				.Subscribe(_ => OnSummoningPaidUnitHandler());
+
+			_fieldHeroFacade.Units.ObserveCountChanged()
+				.Where(_ => State == BeginnerStep.LastSummon)
+				.Subscribe(_ => _uiTacticalStageHud.SetStartBattleButtonInteractable(false))
+				.AddTo(_disposable);
 		}
 
 		public virtual void Dispose()
@@ -112,18 +117,10 @@
 
 				case BeginnerStep.PauseForSecondBattle:
 					if (_cycle.State.Value == GameState.TacticalStage)
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.FifthSummon;
+						_profile.Tutorial.BeginerStep.Value = BeginnerStep.LastSummon;
 					break;
 
-				case BeginnerStep.FifthSummon:
-					if (_isUnitSummoned)
-					{
-						_isUnitSummoned = false;
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.SixthSummon;
-					}
-					break;
-
-				case BeginnerStep.SixthSummon:
+				case BeginnerStep.LastSummon:
 					_isUnitSummoned = false;
 
 					if (_profile.SummonCurrency.Value < _currencyConfig.UnitSummonPrice)
@@ -278,33 +275,17 @@
 
 		#endregion
 
-		#region FifthSummon Step
-
-		protected override void OnEnterFifthSummon()
-		{
-			SetupSummonStep(false);
-			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
-		}
-
-		protected override void OnExitFifthSummon()
-		{
-			_fingerHint.SetActive(false);
-		}
-
-		#endregion
-
-		#region SixthSummon Step
+		#region LastSummon Step
 
 		protected override void OnEnterSixthSummon()
 		{
 			SetupSummonStep(false);
-			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
+			_fieldHeroFacade.SetDraggableActive(true);
 		}
 
 		protected override void OnExitSixthSummon()
 		{
 			_fingerHint.SetActive(false);
-			_uiTacticalStageHud.SetStartBattleButtonInteractable(true);
 			_summonInterruptDisposable.Dispose();
 		}
 
@@ -314,7 +295,6 @@
 
 		protected override void OnEnterThirdBattle()
 		{
-			_uiTacticalStageHud.SetStartBattleButtonInteractable(true);
 			SetupBattleStep();
 			ActivateDialogMessege();
 		}
@@ -359,6 +339,8 @@
 				_heroUnitSummoner.InterruptPaidSummon();
 				_heroUnitSummoner.Summon(data.Species, data.GradeIndex, data.Position);
 			}
+
+			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
 		}
 
 		private void ActivateDialogMessege()

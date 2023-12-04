@@ -23,15 +23,10 @@
 			AddOnExitAction(BeginnerStep.SecondMerge, OnExitSecondMerge);
 			AddOnEnterAction(BeginnerStep.SecondBattle, OnEnterSecondBattle);
 			AddOnExitAction(BeginnerStep.SecondBattle, OnExitSecondBattle);
-			AddOnEnterAction(BeginnerStep.FifthSummon, OnEnterFifthSummon);
-			AddOnExitAction(BeginnerStep.FifthSummon, OnExitFifthSummon);
-			AddOnEnterAction(BeginnerStep.SixthSummon, OnEnterSixthSummon);
-			AddOnExitAction(BeginnerStep.SixthSummon, OnExitSixthSummon);
+			AddOnEnterAction(BeginnerStep.LastSummon, OnEnterSixthSummon);
+			AddOnExitAction(BeginnerStep.LastSummon, OnExitSixthSummon);
 			AddOnEnterAction(BeginnerStep.ThirdBattle, OnEnterThirdBattle);
 			AddOnExitAction(BeginnerStep.ThirdBattle, OnExitThirdBattle);
-
-			//,
-			//ThirdBattle,
 		}
 
 		protected override BeginnerStep DefaultState => BeginnerStep.None;
@@ -52,8 +47,6 @@
 		protected abstract void OnExitSecondMerge();
 		protected abstract void OnEnterSecondBattle();
 		protected abstract void OnExitSecondBattle();
-		protected abstract void OnEnterFifthSummon();
-		protected abstract void OnExitFifthSummon();
 		protected abstract void OnEnterSixthSummon();
 		protected abstract void OnExitSixthSummon();
 		protected abstract void OnEnterThirdBattle();

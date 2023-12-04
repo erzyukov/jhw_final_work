@@ -13,8 +13,7 @@
 		SecondMerge,
 		SecondBattle,
 		PauseForSecondBattle,
-		FifthSummon,
-		SixthSummon,
+		LastSummon,
 		ThirdBattle,
 		PauseForThirdBattle,
 		Complete
