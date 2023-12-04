@@ -15,6 +15,7 @@ namespace Game.Field
 		Vector2Int AddUnit(IUnitFacade unit);
 		Vector2Int AddUnit(IUnitFacade unit, Vector2Int position);
 		IFieldCell GetCell(IUnitFacade unit);
+		IFieldCell GetCell(Vector2Int position);
 		void RemoveUnit(IUnitFacade unit);
 		void Clear();
 		void SetFieldRenderEnabled(bool value);
@@ -35,6 +36,7 @@ namespace Game.Field
 		public virtual Vector2Int AddUnit(IUnitFacade unit) => Field.AddUnit(unit);
 		public virtual Vector2Int AddUnit(IUnitFacade unit, Vector2Int position) => Field.AddUnit(unit, position);
 		public IFieldCell GetCell(IUnitFacade unit) => Field.GetCell(unit);
+		public IFieldCell GetCell(Vector2Int position) => Field.GetCell(position);
 		public virtual void RemoveUnit(IUnitFacade unit) => Field.RemoveUnit(unit);
 		public virtual void Clear() => Field.Clear();
 		public void SetFieldRenderEnabled(bool value) => Field.SetFieldRenderEnabled(value);
