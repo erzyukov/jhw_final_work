@@ -11,12 +11,15 @@ namespace Game.Configs
 	{
 		[SerializeField] private List<BeginerTutorialMessage> _beginerTutorialMessages = new List<BeginerTutorialMessage>();
 		[SerializeField] private List<BeginerTurorialSummonData> _beginerTurorialSummons = new List<BeginerTurorialSummonData>();
+		[SerializeField] private List<BeginerTurorialMergeData> _beginerTurorialMerges = new List<BeginerTurorialMergeData>();
 
 		private Dictionary<BeginnerStep, string> _beginerMessages;
 		private Dictionary<BeginnerStep, BeginerTurorialSummonData> _beginerSummons;
+		private Dictionary<BeginnerStep, BeginerTurorialMergeData> _beginerMerges;
 		
 		public Dictionary<BeginnerStep, string> BeginerTutorialMessages => _beginerMessages;
 		public Dictionary<BeginnerStep, BeginerTurorialSummonData> BeginerTurorialSummons => _beginerSummons;
+		public Dictionary<BeginnerStep, BeginerTurorialMergeData> BeginerTurorialMerges => _beginerMerges;
 
 		public void Initialize()
 		{
@@ -27,6 +30,10 @@ namespace Game.Configs
 			_beginerSummons = new Dictionary<BeginnerStep, BeginerTurorialSummonData>();
 			foreach (var data in _beginerTurorialSummons)
 				_beginerSummons.Add(data.Step, data);
+
+			_beginerMerges = new Dictionary<BeginnerStep, BeginerTurorialMergeData>();
+			foreach (var data in _beginerTurorialMerges)
+				_beginerMerges.Add(data.Step, data);
 		}
 
 		[Serializable]
@@ -43,6 +50,14 @@ namespace Game.Configs
 			public Species Species;
 			public int GradeIndex;
 			public Vector2Int Position;
+		}
+
+		[Serializable]
+		public struct BeginerTurorialMergeData
+		{
+			public BeginnerStep Step;
+			public Vector2Int FromPosition;
+			public Vector2Int ToPosition;
 		}
 	}
 }

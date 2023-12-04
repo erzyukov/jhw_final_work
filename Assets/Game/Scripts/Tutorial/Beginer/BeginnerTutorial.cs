@@ -11,10 +11,9 @@
 	using Game.Configs;
 	using Game.Level;
 	using System.Linq;
-	using UnityEngine;
 	using Game.Units;
 
-	public class BeginnerTutorial: BeginerTutorialFsmBase, IInitializable, IDisposable
+	public class BeginnerTutorial : BeginerTutorialFsmBase, IInitializable, IDisposable
 	{
 		[Inject] private GameProfile _profile;
 		[Inject] private IGameCycle _cycle;
@@ -25,9 +24,11 @@
 		[Inject] private TutorialConfig _config;
 		[Inject] private ILocalizator _localizator;
 		[Inject] private IHeroUnitSummoner _heroUnitSummoner;
+		[Inject] private CurrencyConfig _currencyConfig;
 
 		readonly private CompositeDisposable _disposable = new CompositeDisposable();
 		private IDisposable _summonInterruptDisposable;
+		bool _isUnitSummoned;
 
 		public void Initialize()
 		{
@@ -39,6 +40,11 @@
 			_summonInterruptDisposable = _heroUnitSummoner.SummoningPaidUnit
 				.Where(_ => _profile.Tutorial.BeginerStep.Value != BeginnerStep.Complete)
 				.Subscribe(_ => OnSummoningPaidUnitHandler());
+
+			_fieldHeroFacade.Units.ObserveCountChanged()
+				.Where(_ => State == BeginnerStep.LastSummon)
+				.Subscribe(_ => _uiTacticalStageHud.SetStartBattleButtonInteractable(false))
+				.AddTo(_disposable);
 		}
 
 		public virtual void Dispose()
@@ -52,44 +58,82 @@
 			switch (State)
 			{
 				case BeginnerStep.FirstSummon:
-					if (_fieldHeroFacade.Units.Count == 1)
+					if (_isUnitSummoned)
+					{
+						_isUnitSummoned = false;
 						_profile.Tutorial.BeginerStep.Value = BeginnerStep.SecondSummon;
+					}
 					break;
+
 				case BeginnerStep.SecondSummon:
-					if (_fieldHeroFacade.Units.Count == 2)
+					if (_isUnitSummoned)
+					{
+						_isUnitSummoned = false;
 						_profile.Tutorial.BeginerStep.Value = BeginnerStep.FirstBattle;
+					}
 					break;
+
 				case BeginnerStep.FirstBattle:
 					if (_cycle.State.Value == GameState.BattleStage)
 						_profile.Tutorial.BeginerStep.Value = BeginnerStep.PauseForFirstBattle;
 					break;
+
 				case BeginnerStep.PauseForFirstBattle:
 					if (_cycle.State.Value == GameState.TacticalStage)
 						_profile.Tutorial.BeginerStep.Value = BeginnerStep.ThirdSummon;
 					break;
+
 				case BeginnerStep.ThirdSummon:
-					if (_fieldHeroFacade.Units.Count == 3)
+					if (_isUnitSummoned)
+					{
+						_isUnitSummoned = false;
 						_profile.Tutorial.BeginerStep.Value = BeginnerStep.FourthSummon;
+					}
 					break;
+
 				case BeginnerStep.FourthSummon:
-					if (_fieldHeroFacade.Units.Count == 4)
+					if (_isUnitSummoned)
+					{
+						_isUnitSummoned = false;
 						_profile.Tutorial.BeginerStep.Value = BeginnerStep.FirstMerge;
+					}
 					break;
+
 				case BeginnerStep.FirstMerge:
 					if (_fieldHeroFacade.Units.Count == 3)
 						_profile.Tutorial.BeginerStep.Value = BeginnerStep.SecondMerge;
 					break;
+
 				case BeginnerStep.SecondMerge:
 					if (_fieldHeroFacade.Units.Count == 2)
 						_profile.Tutorial.BeginerStep.Value = BeginnerStep.SecondBattle;
 					break;
+
 				case BeginnerStep.SecondBattle:
 					if (_cycle.State.Value == GameState.BattleStage)
 						_profile.Tutorial.BeginerStep.Value = BeginnerStep.PauseForSecondBattle;
 					break;
+
 				case BeginnerStep.PauseForSecondBattle:
 					if (_cycle.State.Value == GameState.TacticalStage)
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.FifthSummon;
+						_profile.Tutorial.BeginerStep.Value = BeginnerStep.LastSummon;
+					break;
+
+				case BeginnerStep.LastSummon:
+					_isUnitSummoned = false;
+
+					if (_profile.SummonCurrency.Value < _currencyConfig.UnitSummonPrice)
+						_profile.Tutorial.BeginerStep.Value = BeginnerStep.ThirdBattle;
+					break;
+
+				case BeginnerStep.ThirdBattle:
+					if (_cycle.State.Value == GameState.BattleStage)
+						_profile.Tutorial.BeginerStep.Value = BeginnerStep.PauseForThirdBattle;
+					break;
+
+				case BeginnerStep.PauseForThirdBattle:
+					if (_cycle.State.Value == GameState.WinBattle)
+						_profile.Tutorial.BeginerStep.Value = BeginnerStep.Complete;
 					break;
 			}
 		}
@@ -129,11 +173,7 @@
 
 		protected override void OnEnterFirstBattle()
 		{
-			_fingerHint.SetPosition(_uiTacticalStageHud.BattleButtonHintParameters.Point.position);
-			_fingerHint.SetLeft(_uiTacticalStageHud.BattleButtonHintParameters.IsLeft);
-			_fingerHint.SetActive(true);
-			_uiTacticalStageHud.SetStartBattleButtonInteractable(true);
-			_uiTacticalStageHud.SetSummonButtonInteractable(false);
+			SetupBattleStep();
 		}
 
 		protected override void OnExitFirstBattle()
@@ -168,7 +208,6 @@
 		protected override void OnExitFourthSummon()
 		{
 			_fingerHint.SetActive(false);
-			_summonInterruptDisposable.Dispose();
 		}
 
 		#endregion
@@ -177,17 +216,7 @@
 
 		protected override void OnEnterFirstMerge()
 		{
-			Vector2Int position = new Vector2Int(0, 1);
-			IUnitFacade unit = _fieldHeroFacade.Units
-				.Where(unit => _fieldHeroFacade.GetCell(unit).Position == position)
-				.FirstOrDefault();
-
-			unit.SetDraggableActive(true);
-
-			_uiTacticalStageHud.SetSummonButtonInteractable(false);
-			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
-
-			ActivateDialogMessege();
+			SetupMergetep();
 		}
 
 		protected override void OnExitFirstMerge()
@@ -201,14 +230,7 @@
 
 		protected override void OnEnterSecondMerge()
 		{
-			Vector2Int position = new Vector2Int(1, 0);
-			IUnitFacade unit = _fieldHeroFacade.Units
-				.Where(unit => _fieldHeroFacade.GetCell(unit).Position == position)
-				.FirstOrDefault();
-
-			unit.SetDraggableActive(true);
-
-			ActivateDialogMessege();
+			SetupMergetep();
 		}
 
 		protected override void OnExitSecondMerge()
@@ -217,6 +239,63 @@
 		}
 
 		#endregion
+
+		#region SecondBattle Step
+
+		protected override void OnEnterSecondBattle()
+		{
+			SetupBattleStep();
+		}
+
+		protected override void OnExitSecondBattle()
+		{
+			_fingerHint.SetActive(false);
+			_uiTacticalStageHud.SetSummonButtonInteractable(true);
+		}
+
+		#endregion
+
+		#region LastSummon Step
+
+		protected override void OnEnterSixthSummon()
+		{
+			SetupSummonStep(false);
+			_fieldHeroFacade.SetDraggableActive(true);
+		}
+
+		protected override void OnExitSixthSummon()
+		{
+			_fingerHint.SetActive(false);
+			_summonInterruptDisposable.Dispose();
+		}
+
+		#endregion
+
+		#region ThirdBattle
+
+		protected override void OnEnterThirdBattle()
+		{
+			SetupBattleStep();
+			ActivateDialogMessege();
+		}
+
+		protected override void OnExitThirdBattle()
+		{
+			_fingerHint.SetActive(false);
+			_uiTacticalStageHud.SetSummonButtonInteractable(true);
+			_dialogHint.SetActive(false);
+		}
+
+		#endregion
+
+		private void SetupBattleStep()
+		{
+			_fingerHint.SetPosition(_uiTacticalStageHud.BattleButtonHintParameters.Point.position);
+			_fingerHint.SetLeft(_uiTacticalStageHud.BattleButtonHintParameters.IsLeft);
+			_fingerHint.SetActive(true);
+			_uiTacticalStageHud.SetStartBattleButtonInteractable(true);
+			_uiTacticalStageHud.SetSummonButtonInteractable(false);
+		}
 
 		private void SetupSummonStep(bool withDialog = true)
 		{
@@ -231,17 +310,34 @@
 			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
 		}
 
+		private void SetupMergetep()
+		{
+			if (_config.BeginerTurorialMerges.TryGetValue(State, out var data) == false)
+				return;
+
+			IUnitFacade unit = _fieldHeroFacade.Units
+				.Where(unit => _fieldHeroFacade.GetCell(unit).Position == data.FromPosition)
+				.FirstOrDefault();
+
+			unit.SetDraggableActive(true);
+
+			_uiTacticalStageHud.SetSummonButtonInteractable(false);
+			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
+
+			ActivateDialogMessege();
+		}
+
 		private void OnSummoningPaidUnitHandler()
 		{
+			_isUnitSummoned = true;
+
 			if (_config.BeginerTurorialSummons.TryGetValue(State, out var data))
 			{
 				_heroUnitSummoner.InterruptPaidSummon();
 				_heroUnitSummoner.Summon(data.Species, data.GradeIndex, data.Position);
 			}
-			else
-			{
-				throw new Exception($"Define unit for summon in tutorial step: {State.GetType()}.{State}!");
-			}
+
+			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
 		}
 
 		private void ActivateDialogMessege()

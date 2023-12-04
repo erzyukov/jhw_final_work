@@ -27,7 +27,7 @@
 		{
 			_level.GoToLevel(_profile.LevelNumber.Value);
 			_level.IsLevelLoaded
-				.Where(v => v)
+				.Where(v => v && _profile.Tutorial.BeginerStep.Value != BeginnerStep.Complete)
 				.Subscribe(_ => _profile.Tutorial.BeginerStep.Value = BeginnerStep.FirstSummon)
 				.AddTo(this);
 		}
