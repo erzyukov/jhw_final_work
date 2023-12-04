@@ -11,7 +11,6 @@
 	using Game.Configs;
 	using Game.Level;
 	using System.Linq;
-	using UnityEngine;
 	using Game.Units;
 
 	public class BeginnerTutorial : BeginerTutorialFsmBase, IInitializable, IDisposable
@@ -217,17 +216,7 @@
 
 		protected override void OnEnterFirstMerge()
 		{
-			Vector2Int position = new Vector2Int(0, 1);
-			IUnitFacade unit = _fieldHeroFacade.Units
-				.Where(unit => _fieldHeroFacade.GetCell(unit).Position == position)
-				.FirstOrDefault();
-
-			unit.SetDraggableActive(true);
-
-			_uiTacticalStageHud.SetSummonButtonInteractable(false);
-			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
-
-			ActivateDialogMessege();
+			SetupMergetep();
 		}
 
 		protected override void OnExitFirstMerge()
@@ -241,16 +230,7 @@
 
 		protected override void OnEnterSecondMerge()
 		{
-			Vector2Int position = new Vector2Int(1, 0);
-			IUnitFacade unit = _fieldHeroFacade.Units
-				.Where(unit => _fieldHeroFacade.GetCell(unit).Position == position)
-				.FirstOrDefault();
-
-			unit.SetDraggableActive(true);
-			_uiTacticalStageHud.SetSummonButtonInteractable(false);
-			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
-
-			ActivateDialogMessege();
+			SetupMergetep();
 		}
 
 		protected override void OnExitSecondMerge()
@@ -328,6 +308,23 @@
 
 			_fieldHeroFacade.SetDraggableActive(false);
 			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
+		}
+
+		private void SetupMergetep()
+		{
+			if (_config.BeginerTurorialMerges.TryGetValue(State, out var data) == false)
+				return;
+
+			IUnitFacade unit = _fieldHeroFacade.Units
+				.Where(unit => _fieldHeroFacade.GetCell(unit).Position == data.FromPosition)
+				.FirstOrDefault();
+
+			unit.SetDraggableActive(true);
+
+			_uiTacticalStageHud.SetSummonButtonInteractable(false);
+			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
+
+			ActivateDialogMessege();
 		}
 
 		private void OnSummoningPaidUnitHandler()
