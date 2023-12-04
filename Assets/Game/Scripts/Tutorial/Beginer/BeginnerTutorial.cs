@@ -222,8 +222,7 @@
 
 		protected override void OnExitFirstMerge()
 		{
-			_fingerSlideHint.SetActive(false);
-			_dialogHint.SetActive(false);
+			SetupExitMergeStep();
 		}
 
 		#endregion
@@ -237,8 +236,7 @@
 
 		protected override void OnExitSecondMerge()
 		{
-			_fingerSlideHint.SetActive(false);
-			_dialogHint.SetActive(false);
+			SetupExitMergeStep();
 		}
 
 		#endregion
@@ -321,6 +319,9 @@
 			IFieldCell fromCell = _fieldHeroFacade.GetCell(data.FromPosition);
 			IFieldCell targetCell = _fieldHeroFacade.GetCell(data.ToPosition);
 
+			fromCell.Select();
+			targetCell.Select();
+
 			IUnitFacade unit = fromCell.Unit;
 
 			unit.SetDraggableActive(true);
@@ -333,6 +334,18 @@
 			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);
 
 			ActivateDialogMessege();
+		}
+
+		private void SetupExitMergeStep()
+		{
+			_fingerSlideHint.SetActive(false);
+			_dialogHint.SetActive(false);
+
+			if (_config.BeginerTurorialMerges.TryGetValue(State, out var data) == false)
+				return;
+
+			IFieldCell fromCell = _fieldHeroFacade.GetCell(data.FromPosition);
+			fromCell.Deselect();
 		}
 
 		private void OnSummoningPaidUnitHandler()
