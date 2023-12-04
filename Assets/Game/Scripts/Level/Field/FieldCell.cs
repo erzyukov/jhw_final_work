@@ -8,6 +8,7 @@
 		bool HasUnit { get; }
 		IUnitFacade Unit { get; }
 		Vector2Int Position { get; }
+		Vector3 WorldPosition { get; }
 		void SetUnit(IUnitFacade unit);
 		void Clear();
 		void SetFieldCellRenderEnabled(bool value);
@@ -28,6 +29,8 @@
 		public IUnitFacade Unit => _unit;
 
 		public Vector2Int Position => _position;
+
+		public Vector3 WorldPosition => _cellView.UnitPivot.position;
 
 		public FieldCell(IFieldCellView cellView, Vector2Int position)
 		{

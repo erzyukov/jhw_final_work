@@ -19,6 +19,7 @@
 		[Inject] private IGameCycle _cycle;
 		[Inject] private IUiTacticalStageHud _uiTacticalStageHud;
 		[Inject] private IFingerHint _fingerHint;
+		[Inject] private IFingerSlideHint _fingerSlideHint;
 		[Inject] private IDialogHint _dialogHint;
 		[Inject] private IFieldHeroFacade _fieldHeroFacade;
 		[Inject] private TutorialConfig _config;
@@ -221,6 +222,7 @@
 
 		protected override void OnExitFirstMerge()
 		{
+			_fingerSlideHint.SetActive(false);
 			_dialogHint.SetActive(false);
 		}
 
@@ -235,6 +237,7 @@
 
 		protected override void OnExitSecondMerge()
 		{
+			_fingerSlideHint.SetActive(false);
 			_dialogHint.SetActive(false);
 		}
 
@@ -315,11 +318,16 @@
 			if (_config.BeginerTurorialMerges.TryGetValue(State, out var data) == false)
 				return;
 
-			IUnitFacade unit = _fieldHeroFacade.Units
-				.Where(unit => _fieldHeroFacade.GetCell(unit).Position == data.FromPosition)
-				.FirstOrDefault();
+			IFieldCell fromCell = _fieldHeroFacade.GetCell(data.FromPosition);
+			IFieldCell targetCell = _fieldHeroFacade.GetCell(data.ToPosition);
+
+			IUnitFacade unit = fromCell.Unit;
 
 			unit.SetDraggableActive(true);
+
+			_fingerSlideHint.SetActive(true);
+			_fingerSlideHint.SetPositions(fromCell.WorldPosition, targetCell.WorldPosition);
+			_fingerSlideHint.PlayAnimation();
 
 			_uiTacticalStageHud.SetSummonButtonInteractable(false);
 			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);

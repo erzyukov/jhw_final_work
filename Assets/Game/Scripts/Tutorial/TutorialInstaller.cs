@@ -24,6 +24,11 @@ namespace Game.Installers
 					.AsSingle();
 
 				Container
+					.BindInterfacesTo<FingerSlideHint>()
+					.FromComponentInHierarchy()
+					.AsSingle();
+
+				Container
 					.BindInterfacesTo<DialogHint>()
 					.FromComponentInHierarchy()
 					.AsSingle();
