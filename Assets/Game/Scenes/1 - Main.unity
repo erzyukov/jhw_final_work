@@ -5815,6 +5815,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _yOffset: 0.8
+  _duration: 1
+  _ease: 3
 --- !u!1 &1171464008
 GameObject:
   m_ObjectHideFlags: 0

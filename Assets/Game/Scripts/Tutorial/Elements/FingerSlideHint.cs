@@ -13,6 +13,8 @@ namespace Game.Tutorial
 	public class FingerSlideHint : MonoBehaviour, IFingerSlideHint
 	{
 		[SerializeField] float _yOffset;
+		[SerializeField] float _duration;
+		[SerializeField] Ease _ease;
 
 		private Vector3 _target;
 		Camera _camera;
@@ -44,7 +46,7 @@ namespace Game.Tutorial
 
 		public void PlayAnimation()
 		{
-			_tween = transform.DOMove(_target, 1.2f).SetLoops(-1, LoopType.Restart).SetEase(Ease.OutCubic);
+			_tween = transform.DOMove(_target, _duration).SetLoops(-1, LoopType.Restart).SetEase(_ease);
 		}
 
 		#endregion
