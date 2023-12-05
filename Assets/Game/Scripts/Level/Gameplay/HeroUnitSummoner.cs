@@ -24,7 +24,7 @@
 	{
 		[Inject] private CurrencyConfig _currencyConfig;
 		[Inject] private IGameCurrency _gameCurrency;
-		[Inject] private IUiHaveNeedOfMessage _haveNeedOfMessage;
+		[Inject] private IUiMessage _haveNeedOfMessage;
 		[Inject] private IUnitSpawner _unitSpawner;
 		[Inject] private IFieldHeroFacade _fieldFacade;
 		[Inject] private IGameCycle _gameCycle;
@@ -40,14 +40,14 @@
 		{
 			if (_fieldFacade.HasFreeSpace == false)
 			{
-				// TODO: show message: out of free space
+				_haveNeedOfMessage.ShowMessage(UiMessage.NotEnoughFreeSpace);
 				return false;
 			}
 
 			int summonPrice = _currencyConfig.UnitSummonPrice;
 			if (_gameCurrency.TrySpendSummonCurrency(summonPrice) == false)
 			{
-				_haveNeedOfMessage.ShowMessage(NeedMessage.SummonCurrency);
+				_haveNeedOfMessage.ShowMessage(UiMessage.NotEnoughSummonCurrency);
 				return false;
 			}
 

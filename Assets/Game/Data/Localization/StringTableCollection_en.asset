@@ -96,6 +96,18 @@ MonoBehaviour:
     m_Localized: YOU ARE OUT OF SUMMON TOKENS. LET THE BATTLE BEGIN!
     m_Metadata:
       m_Items: []
+  - m_Id: 1431262374014976
+    m_Localized: 'HAVE NEED OF: <sprite=1>TOKEN'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1431849803067392
+    m_Localized: NOT ENOUGH SPACE!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433670948892672
+    m_Localized: 'HAVE NEED OF: CHEST KEY'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

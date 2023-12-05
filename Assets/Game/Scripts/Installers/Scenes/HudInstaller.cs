@@ -22,7 +22,7 @@ namespace Game.Installers
 					.AsSingle();
 
 				Container
-					.BindInterfacesTo<UiHaveNeedOfMessage>()
+					.BindInterfacesTo<UiTextMessage>()
 					.FromComponentInHierarchy()
 					.AsSingle();
 			}

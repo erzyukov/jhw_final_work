@@ -91,6 +91,18 @@ MonoBehaviour:
     m_Key: beginerTutorialThirdBattle
     m_Metadata:
       m_Items: []
+  - m_Id: 1431262374014976
+    m_Key: NotEnoughSummonCurrency
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1431849803067392
+    m_Key: NotEnoughFreeSpace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433670948892672
+    m_Key: NotEnoughChestKeys
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
