@@ -3,34 +3,39 @@ namespace Game.Ui
 	using System;
 	using UnityEngine;
 	using DG.Tweening;
+	using Game.Core;
+	using Zenject;
+	using TMPro;
 
-	public enum NeedMessage
+	public enum UiMessage
 	{
-		SummonCurrency,
-		ChestKeys
+		NotEnoughSummonCurrency,
+		NotEnoughFreeSpace,
+		NotEnoughChestKeys
 	}
 
-	public interface IUiHaveNeedOfMessage
+	public interface IUiMessage
 	{
-		void ShowMessage(NeedMessage type);
+		void ShowMessage(UiMessage type);
 	}
 
-	public class UiHaveNeedOfMessage : MonoBehaviour, IUiHaveNeedOfMessage
+	public class UiTextMessage : MonoBehaviour, IUiMessage
 	{
+		[Inject] private ILocalizator _localizator;
+
 		[SerializeField] private float _showDuration;
 		[SerializeField] private CanvasGroup _canvasGroup;
-		[SerializeField] private MessagePart[] _messageParts;
+		[SerializeField] private TextMeshProUGUI _message;
 
 		Sequence _sequence;
 
 		#region IHaveNeedOfMessage
 
-		public void ShowMessage(NeedMessage type)
+		public void ShowMessage(UiMessage type)
 		{
-			_sequence?.Kill();
+			_message.text = _localizator.GetString(type.ToString());
 
-			foreach (var part in _messageParts)
-                part.Part.SetActive(part.Type == type);
+			_sequence?.Kill();
 
             _canvasGroup.alpha = 0;
 			gameObject.SetActive(true);
@@ -49,7 +54,7 @@ namespace Game.Ui
 		[Serializable]
 		private struct MessagePart
 		{
-			public NeedMessage Type;
+			public UiMessage Type;
 			public GameObject Part;
 		}
 	}

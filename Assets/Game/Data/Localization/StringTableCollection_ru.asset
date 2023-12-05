@@ -104,6 +104,20 @@ MonoBehaviour:
       \u0414\u0410 \u041D\u0410\u0427\u041D\u0415\u0422\u0421\u042F \u0411\u0418\u0422\u0412\u0410!"
     m_Metadata:
       m_Items: []
+  - m_Id: 1431262374014976
+    m_Localized: "\u041D\u0415 \u0425\u0412\u0410\u0422\u0410\u0415\u0422: <sprite=1>\u0416\u0415\u0422\u041E\u041D"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1431849803067392
+    m_Localized: "\u041D\u0415 \u0414\u041E\u0421\u0422\u0410\u0422\u041E\u0427\u041D\u041E
+      \u041C\u0415\u0421\u0422\u0410!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433670948892672
+    m_Localized: "\u041D\u0415 \u0425\u0412\u0410\u0422\u0410\u0415\u0422: \u041A\u041B\u042E\u0427
+      \u041E\u0422 \u0421\u0423\u041D\u0414\u0423\u041A\u0410"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
