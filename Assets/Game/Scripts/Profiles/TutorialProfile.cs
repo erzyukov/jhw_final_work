@@ -7,7 +7,7 @@
 	[Serializable]
 	public class TutorialProfile
 	{
-		public ReactiveProperty<BeginnerStep> BeginerStep = new ReactiveProperty<BeginnerStep>();// BeginerTutorial.Step.Complete
+		public ReactiveProperty<BeginnerStep> BeginnerStep = new ReactiveProperty<BeginnerStep>();// BeginerTutorial.Step.Complete
 	}
 }
 
