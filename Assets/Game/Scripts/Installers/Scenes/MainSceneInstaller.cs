@@ -21,6 +21,7 @@ namespace Game.Installers
 			InstallUI();
 			InstallHero();
 			InstallDebugServicies();
+			WindowsInstall();
 		}
 
 		private void InstallUI()
@@ -57,6 +58,18 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<GameHero>()
+				.AsSingle();
+		}
+
+		private void WindowsInstall()
+		{
+			Container
+				.BindInterfacesTo<ContinueLevelWindow>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<ContinueLevelRequest>()
 				.AsSingle();
 		}
 	}

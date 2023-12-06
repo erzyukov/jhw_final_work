@@ -107,6 +107,20 @@ MonoBehaviour:
     m_Key: uiLastWave
     m_Metadata:
       m_Items: []
+  - m_Id: 1798343896477696
+    m_Key: 1 - Main/Canvas/Windows/ContinueLevelRequest/Window/MessageBg/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1802796930314240
+    m_Key: 1 - Main/Canvas/Windows/ContinueLevelRequest/Window/NewGameButton/Text
+      (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1804974357098496
+    m_Key: 1 - Main/Canvas/Windows/ContinueLevelRequest/Window/ContinueButton/Text
+      (TMP)
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

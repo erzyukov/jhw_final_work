@@ -112,6 +112,22 @@ MonoBehaviour:
     m_Localized: 'LAST WAVE:'
     m_Metadata:
       m_Items: []
+  - m_Id: 1798343896477696
+    m_Localized: 'CONTINUE FROM LAST
+
+      SESSION?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1802796930314240
+    m_Localized: 'NEW GAME
+
+      ? X5'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1804974357098496
+    m_Localized: CONTINUE
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

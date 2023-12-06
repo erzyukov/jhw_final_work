@@ -14,6 +14,7 @@
 		[Inject] private GameProfile _profile;
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] private ILocalizator _localizator;
+		[Inject] private IContinueLevelRequest _continueLevelRequest;
 
 		private const string LevelTitlePrefixKey = "level";
 		private const string lastWavePrefixKey = "uiLastWave";
@@ -29,7 +30,7 @@
 				.AddTo(this);
 
 			_lobbyScreen.PlayButtonClicked
-				.Subscribe(_ => _level.GoToLevel(_profile.LevelNumber.Value))
+				.Subscribe(_ => OnPlayButtonClickedHandler())
 				.AddTo(this);
 		}
 
@@ -43,6 +44,22 @@
 			_lobbyScreen.SetLastWaveActive(_profile.WaveNumber.Value != 0);
 			string waveInfo = $"{_localizator.GetString(lastWavePrefixKey)} {_profile.WaveNumber.Value}/{levelConfig.Waves.Length}";
 			_lobbyScreen.SetLastWaveValue(waveInfo);
+		}
+
+		private void OnPlayButtonClickedHandler()
+		{
+			if (_profile.WaveNumber.Value == 0)
+				GoToLevel();
+			else
+				_continueLevelRequest.ShowRequest(() => GoToLevel(true), () => GoToLevel());
+		}
+
+		private void GoToLevel(bool resetWave = false)
+		{
+			if (resetWave)
+				_profile.WaveNumber.Value = 0;
+
+			_level.GoToLevel(_profile.LevelNumber.Value);
 		}
 	}
 }
