@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=no"/>
     <link rel="stylesheet" href="./style.css">
 
     <!-- Additional head modules -->
@@ -329,6 +329,10 @@
         const script = document.createElement("script");
         script.src = loaderUrl;
         script.onload = () => {
+            
+            updateAspectRatio();
+            window.addEventListener("resize", updateAspectRatio);
+
             StartUnityInstance = function () {
                 createUnityInstance(canvas, config, (progress) => {
                     spinner.style.display = "none";
@@ -344,6 +348,28 @@
             if (LocalHost()) // Delete when setting up: Load Game Run
                 StartUnityInstance_IfUnloaded();
         };
+
+      // Фиксируем экран с игрой
+        function updateAspectRatio() {
+            var windowWidth = window.innerWidth;
+            var windowHeight = window.innerHeight;
+            var containerAspectRatio = {{{ WIDTH }}} / {{{ HEIGHT }}};
+        
+            if (windowWidth / windowHeight > containerAspectRatio) {
+                canvas.style.width = windowHeight * containerAspectRatio + "px";
+                canvas.style.height = "100vh";
+            } else {
+                canvas.style.width = "100vw";
+                canvas.style.height = windowWidth / containerAspectRatio + "px";
+            }
+
+            // Центрируем
+            canvas.style.margin = "auto";
+            canvas.style.top = "0";
+            canvas.style.left = "0";
+            canvas.style.bottom = "0";
+            canvas.style.right = "0";
+        }
 
         function StartUnityInstance_IfUnloaded() {
             if (spinner.style.display !== "none")
