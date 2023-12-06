@@ -36,6 +36,11 @@ namespace Game.Core
 		{
 			WaitForFixedUpdate wait = new WaitForFixedUpdate();
 
+#if UNITY_EDITOR
+			if (IsSceneLoaded(_scenesConfig.Main))
+				throw new Exception("Load from Splash scene!");
+#endif
+
 			if (IsSceneLoaded(_scenesConfig.Splash))
 			{
 				yield return _localizator.Preload();
@@ -49,6 +54,8 @@ namespace Game.Core
 				yield return _localizator.Preload();
 				SplashCompleted.Execute();
 			}
+
+			yield return new WaitUntil(() => _profileManager.IsReady.Value);
 
 			yield return wait;
 

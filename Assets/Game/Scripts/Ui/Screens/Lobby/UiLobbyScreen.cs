@@ -19,7 +19,6 @@
 		[SerializeField] private TextMeshProUGUI _levelTitle;
 		[SerializeField] private GameObject _lastWave;
 		[SerializeField] private TextMeshProUGUI _lastWaveValue;
-		[SerializeField] private string _lastWavePrefix;
 		[SerializeField] private Button _playButton;
 
 		public override Screen Screen => Screen.Lobby;
@@ -30,7 +29,7 @@
 		
 		public void SetTitle(string value) => _levelTitle.text = value;
 
-		public void SetLastWaveValue(string value) => _lastWaveValue.text = _lastWavePrefix + value;
+		public void SetLastWaveValue(string value) => _lastWaveValue.text = value;
 
 		public void SetLastWaveActive(bool value) => _lastWave.SetActive(value);
 

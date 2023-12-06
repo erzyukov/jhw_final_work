@@ -13,6 +13,7 @@ namespace Game.Core
 	public class GameHero : ControllerBase, IGameHero, IInitializable
 	{
 		[Inject] private GameProfile _profile;
+		[Inject] private IGameProfileManager _gameProfileManager;
 
 		private const int ExperienceToNextLevel = 40;
 
@@ -34,6 +35,8 @@ namespace Game.Core
 
 			_profile.HeroLevelExperience.Value = remainExperience;
 			_profile.HeroLevel.Value += obtainedLevels;
+
+			_gameProfileManager.Save();
 
 			return obtainedLevels;
 		}

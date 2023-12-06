@@ -8,7 +8,7 @@ namespace Game.Profiles
 
 	public interface IGameProfileManager
 	{
-		ReactiveCommand ProfileLoaded { get; }
+		BoolReactiveProperty IsReady { get; }
 		GameProfile GameProfile { get; }
 		void Save();
 	}
@@ -31,7 +31,7 @@ namespace Game.Profiles
 
 		#region IGameProfileManager
 
-		public ReactiveCommand ProfileLoaded { get; } = new ReactiveCommand();
+		public BoolReactiveProperty IsReady { get; } = new BoolReactiveProperty();
 
 		public GameProfile GameProfile => _gameProfile;
 
@@ -50,7 +50,7 @@ namespace Game.Profiles
 			else
 				_gameProfile = YandexGame.savesData.gameProfile;
 
-			ProfileLoaded.Execute();
+			IsReady.Value = true;
 		}
 
 #if UNITY_EDITOR

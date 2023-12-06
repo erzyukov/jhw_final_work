@@ -16,6 +16,7 @@
 		[Inject] private ILocalizator _localizator;
 
 		private const string LevelTitlePrefixKey = "level";
+		private const string lastWavePrefixKey = "uiLastWave";
 
 		private string _levelTitlePrefix;
 
@@ -40,7 +41,8 @@
 			_lobbyScreen.SetTitle($"{_levelTitlePrefix} {levelConfig.Title}");
 
 			_lobbyScreen.SetLastWaveActive(_profile.WaveNumber.Value != 0);
-			_lobbyScreen.SetLastWaveValue(_profile.WaveNumber.Value.ToString());
+			string waveInfo = $"{_localizator.GetString(lastWavePrefixKey)} {_profile.WaveNumber.Value}/{levelConfig.Waves.Length}";
+			_lobbyScreen.SetLastWaveValue(waveInfo);
 		}
 	}
 }
