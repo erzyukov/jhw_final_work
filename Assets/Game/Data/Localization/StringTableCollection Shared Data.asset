@@ -103,6 +103,10 @@ MonoBehaviour:
     m_Key: NotEnoughChestKeys
     m_Metadata:
       m_Items: []
+  - m_Id: 1688172746649600
+    m_Key: uiLastWave
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

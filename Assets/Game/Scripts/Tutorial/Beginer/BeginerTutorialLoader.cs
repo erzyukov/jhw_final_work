@@ -5,6 +5,7 @@
 	using Zenject;
 	using UniRx;
 	using Game.Profiles;
+	using UnityEngine;
 
 	public class BeginerTutorialLoader : ControllerBase, IInitializable
 	{

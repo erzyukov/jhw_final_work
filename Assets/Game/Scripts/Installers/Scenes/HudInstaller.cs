@@ -90,10 +90,6 @@ namespace Game.Installers
 			if (_sceneContext == SceneContext.Level)
 			{
 				Container
-					.BindInterfacesTo<UiCommonGameplay>()
-					.AsSingle();
-
-				Container
 					.BindInterfacesTo<UiLevelWaves>()
 					.AsSingle();
 			}

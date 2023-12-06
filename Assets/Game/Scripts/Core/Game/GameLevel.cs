@@ -21,6 +21,7 @@
 
 	public class GameLevel : ControllerBase, IGameLevel, IInitializable
 	{
+		[Inject] private IGameProfileManager _gameProfileManager;
 		[Inject] private GameProfile _profile;
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] private IScenesManager _scenesManager;
@@ -63,6 +64,7 @@
 				}
 
 				_profile.LevelNumber.Value = ClampLevelNumber(number);
+				_gameProfileManager.Save();
 
 				_scenesManager.LoadLevel();
 			});
@@ -82,6 +84,7 @@
 				_uiViel.Appear(() =>
 				{
 					_profile.WaveNumber.Value++;
+					_gameProfileManager.Save();
 					_gameCycle.SetState(GameState.TacticalStage);
 				});
 			}
@@ -100,6 +103,7 @@
 					_profile.LevelNumber.Value = Mathf.Clamp(_profile.LevelNumber.Value + 1, 0, _levelsConfig.Levels.Length);
 				_profile.WaveNumber.Value = 0;
 				_scenesManager.UnloadLevel();
+				_gameProfileManager.Save();
 				IsLevelLoaded.Value = false;
 				_gameCycle.SetState(GameState.Lobby);
 			});

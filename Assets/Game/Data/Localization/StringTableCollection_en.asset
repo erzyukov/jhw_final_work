@@ -108,6 +108,10 @@ MonoBehaviour:
     m_Localized: 'HAVE NEED OF: CHEST KEY'
     m_Metadata:
       m_Items: []
+  - m_Id: 1688172746649600
+    m_Localized: 'LAST WAVE:'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
