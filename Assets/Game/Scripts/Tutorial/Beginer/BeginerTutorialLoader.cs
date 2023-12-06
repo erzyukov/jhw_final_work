@@ -14,7 +14,7 @@
 
 		public void Initialize()
 		{
-			if (_profile.Tutorial.BeginerStep.Value == BeginnerStep.None)
+			if (_profile.Tutorial.BeginnerStep.Value != BeginnerStep.Complete)
 			{
 				_cycle.State
 					.Where(state => state == GameState.LoadingLobby)
@@ -27,8 +27,8 @@
 		{
 			_level.GoToLevel(_profile.LevelNumber.Value);
 			_level.IsLevelLoaded
-				.Where(v => v && _profile.Tutorial.BeginerStep.Value != BeginnerStep.Complete)
-				.Subscribe(_ => _profile.Tutorial.BeginerStep.Value = BeginnerStep.FirstSummon)
+				.Where(v => v && _profile.Tutorial.BeginnerStep.Value != BeginnerStep.Complete)
+				.Subscribe(_ => _profile.Tutorial.BeginnerStep.Value = BeginnerStep.FirstSummon)
 				.AddTo(this);
 		}
 	}

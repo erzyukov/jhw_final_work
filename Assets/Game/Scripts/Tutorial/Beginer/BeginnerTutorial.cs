@@ -26,6 +26,7 @@
 		[Inject] private ILocalizator _localizator;
 		[Inject] private IHeroUnitSummoner _heroUnitSummoner;
 		[Inject] private CurrencyConfig _currencyConfig;
+		[Inject] private IGameProfileManager _gameProfileManager;
 
 		readonly private CompositeDisposable _disposable = new CompositeDisposable();
 		private IDisposable _summonInterruptDisposable;
@@ -33,13 +34,13 @@
 
 		public void Initialize()
 		{
-			_profile.Tutorial.BeginerStep
+			_profile.Tutorial.BeginnerStep
 				.Where(step => step != State)
-				.Subscribe(Transition)
+				.Subscribe(OnBeginnerStepChanged)
 				.AddTo(_disposable);
 
 			_summonInterruptDisposable = _heroUnitSummoner.SummoningPaidUnit
-				.Where(_ => _profile.Tutorial.BeginerStep.Value != BeginnerStep.Complete)
+				.Where(_ => _profile.Tutorial.BeginnerStep.Value != BeginnerStep.Complete)
 				.Subscribe(_ => OnSummoningPaidUnitHandler());
 
 			_fieldHeroFacade.Units.ObserveCountChanged()
@@ -62,7 +63,7 @@
 					if (_isUnitSummoned)
 					{
 						_isUnitSummoned = false;
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.SecondSummon;
+						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.SecondSummon;
 					}
 					break;
 
@@ -70,25 +71,25 @@
 					if (_isUnitSummoned)
 					{
 						_isUnitSummoned = false;
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.FirstBattle;
+						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.FirstBattle;
 					}
 					break;
 
 				case BeginnerStep.FirstBattle:
 					if (_cycle.State.Value == GameState.BattleStage)
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.PauseForFirstBattle;
+						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.PauseForFirstBattle;
 					break;
 
 				case BeginnerStep.PauseForFirstBattle:
 					if (_cycle.State.Value == GameState.TacticalStage)
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.ThirdSummon;
+						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.ThirdSummon;
 					break;
 
 				case BeginnerStep.ThirdSummon:
 					if (_isUnitSummoned)
 					{
 						_isUnitSummoned = false;
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.FourthSummon;
+						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.FourthSummon;
 					}
 					break;
 
@@ -96,45 +97,45 @@
 					if (_isUnitSummoned)
 					{
 						_isUnitSummoned = false;
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.FirstMerge;
+						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.FirstMerge;
 					}
 					break;
 
 				case BeginnerStep.FirstMerge:
 					if (_fieldHeroFacade.Units.Count == 3)
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.SecondMerge;
+						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.SecondMerge;
 					break;
 
 				case BeginnerStep.SecondMerge:
 					if (_fieldHeroFacade.Units.Count == 2)
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.SecondBattle;
+						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.SecondBattle;
 					break;
 
 				case BeginnerStep.SecondBattle:
 					if (_cycle.State.Value == GameState.BattleStage)
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.PauseForSecondBattle;
+						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.PauseForSecondBattle;
 					break;
 
 				case BeginnerStep.PauseForSecondBattle:
 					if (_cycle.State.Value == GameState.TacticalStage)
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.LastSummon;
+						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.LastSummon;
 					break;
 
 				case BeginnerStep.LastSummon:
 					_isUnitSummoned = false;
 
 					if (_profile.SummonCurrency.Value < _currencyConfig.UnitSummonPrice)
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.ThirdBattle;
+						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.ThirdBattle;
 					break;
 
 				case BeginnerStep.ThirdBattle:
 					if (_cycle.State.Value == GameState.BattleStage)
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.PauseForThirdBattle;
+						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.PauseForThirdBattle;
 					break;
 
 				case BeginnerStep.PauseForThirdBattle:
 					if (_cycle.State.Value == GameState.WinBattle)
-						_profile.Tutorial.BeginerStep.Value = BeginnerStep.Complete;
+						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.Complete;
 					break;
 			}
 		}
@@ -288,6 +289,12 @@
 		}
 
 		#endregion
+
+		private void OnBeginnerStepChanged(BeginnerStep step)
+		{
+			_gameProfileManager.Save();
+			Transition(step);
+		}
 
 		private void SetupBattleStep()
 		{

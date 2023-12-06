@@ -439,6 +439,10 @@ PlayerSettings:
   openGLRequireES31AEP: 0
   openGLRequireES32: 0
   m_TemplateCustomTags:
+    BANNER_DYNAMIC_1: 
+    BANNER_DYNAMIC_2: 
+    BANNER_STATIC_1: 
+    BANNER_STATIC_2: 
     CHANGE_BAR_COLOR: 'background-image: linear-gradient(#2976fa, #6919c6);'
     CHANGE_LOADING_SCREEN_BACKGROUND: 'background-image: linear-gradient(#2976fa,
       #6919c6);'
@@ -715,7 +719,7 @@ PlayerSettings:
   webGLDebugSymbols: 2
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
-  webGLTemplate: PROJECT:AT_Standart
+  webGLTemplate: PROJECT:PluginYG
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
   webGLCompressionFormat: 0
@@ -724,7 +728,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 1
   scriptingDefineSymbols:
-    WebGL: ODIN_INSPECTOR;ODIN_INSPECTOR_3
+    WebGL: ODIN_INSPECTOR;ODIN_INSPECTOR_3;YG_PLUGIN_YANDEX_GAME;YG_NEWTONSOFT_FOR_SAVES
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
