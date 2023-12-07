@@ -18,6 +18,7 @@
 		[Inject] private IFieldHeroFacade _fieldHeroFacade;
 		[Inject] private IFieldEnemyFacade _fieldEnemyFacade;
 		[Inject] private GameProfile _gameProfile;
+		[Inject] private IGameProfileManager _gameProfileManager;
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private IUnitSpawner _unitSpawner;
 
@@ -88,6 +89,7 @@
 				Position = (SVector2Int)position
 			};
 			_gameProfile.HeroField.Units.Add(profileUnit);
+			_gameProfileManager.Save();
 		}
 
 		private void OnUnitRemovedHandler(IUnitFacade unit)
@@ -97,6 +99,7 @@
 				.Where(profileUnit => profileUnit.Position == position)
 				.First();
 			_gameProfile.HeroField.Units.Remove(unitToRemove);
+			_gameProfileManager.Save();
 		}
 	}
 }

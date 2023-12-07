@@ -46,9 +46,10 @@
 			_lobbyScreen.SetLastWaveValue(waveInfo);
 		}
 
+		// TODO: Ask only if we must spend enery, otherwise loading level from saved data
 		private void OnPlayButtonClickedHandler()
 		{
-			if (_profile.WaveNumber.Value == 0 || _profile.WaveNumber.Value == 1)
+			if (_profile.WaveNumber.Value == 0)
 				GoToLevel();
 			else
 				_continueLevelRequest.ShowRequest(() => GoToLevel(true), () => GoToLevel());
@@ -57,10 +58,7 @@
 		private void GoToLevel(bool resetWave = false)
 		{
 			if (resetWave)
-			{
 				_profile.WaveNumber.Value = 0;
-				_profile.HeroField.Units.Clear();
-			}
 
 			_level.GoToLevel(_profile.LevelNumber.Value);
 		}

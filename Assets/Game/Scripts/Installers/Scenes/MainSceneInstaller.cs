@@ -19,11 +19,10 @@ namespace Game.Installers
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<GameDataInitializator>()
+				.BindInterfacesTo<GameProfileHandler>()
 				.AsSingle();
 
 			InstallUI();
-			InstallHero();
 			InstallDebugServicies();
 			WindowsInstall();
 		}
@@ -33,13 +32,6 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<UiVeil>()
 				.FromComponentInHierarchy()
-				.AsSingle();
-		}
-
-		private void InstallHero()
-		{
-			Container
-				.BindInterfacesTo<HeroSummonCurrency>()
 				.AsSingle();
 		}
 
