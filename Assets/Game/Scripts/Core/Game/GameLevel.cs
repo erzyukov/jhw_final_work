@@ -12,6 +12,7 @@
 	{
 		BoolReactiveProperty IsLevelLoaded { get; }
 		ReactiveCommand LevelFinished { get; }
+		ReactiveCommand LevelLoading { get; }
 		void GoToLevel(int number);
 		void GoToNextWave();
 		void FinishLevel(bool isLevelComplete);
@@ -50,6 +51,8 @@
 		public BoolReactiveProperty IsLevelLoaded { get; } = new BoolReactiveProperty();
 		
 		public ReactiveCommand LevelFinished { get; } = new ReactiveCommand();
+
+		public ReactiveCommand LevelLoading { get; } = new ReactiveCommand();
 
 		public void GoToLevel(int number)
 		{
@@ -132,6 +135,8 @@
 		{
 			if (_profile.WaveNumber.Value == 0)
 				_profile.WaveNumber.Value++;
+
+			LevelLoading.Execute();
 
 			_gameCycle.SetState(GameState.TacticalStage);
 
