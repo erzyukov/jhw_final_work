@@ -16,6 +16,7 @@
 		[Inject] private LevelConfig _levelConfig;
 		[Inject] private GameProfile _gameProfile;
 		[Inject] private ILocalizator _localizator;
+		[Inject] private IGameLevel _gameLevel;
 
 		private const string WaveTitlePrefixKey = "wave";
 
@@ -30,9 +31,14 @@
 			InitWaves(WavesCount);
 			InitDelimiters(WavesCount - 1);
 
-			_gameProfile.WaveNumber
-				.Where(number => number > 0)
-				.Select(number => number - 1)
+			Observable.Merge(
+				_gameLevel.LevelLoading
+					.DelayFrame(1)
+					.Select(_ => _gameProfile.WaveNumber.Value - 1),
+				_gameProfile.WaveNumber
+					.Where(number => number > 0)
+					.Select(number => number - 1)
+			)
 				.Subscribe(OnWaveNumberChangedHandler)
 				.AddTo(this);
 		}
