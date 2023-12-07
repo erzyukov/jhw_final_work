@@ -48,7 +48,7 @@
 
 		private void OnPlayButtonClickedHandler()
 		{
-			if (_profile.WaveNumber.Value == 0)
+			if (_profile.WaveNumber.Value == 0 || _profile.WaveNumber.Value == 1)
 				GoToLevel();
 			else
 				_continueLevelRequest.ShowRequest(() => GoToLevel(true), () => GoToLevel());
@@ -57,7 +57,10 @@
 		private void GoToLevel(bool resetWave = false)
 		{
 			if (resetWave)
+			{
 				_profile.WaveNumber.Value = 0;
+				_profile.HeroField.Units.Clear();
+			}
 
 			_level.GoToLevel(_profile.LevelNumber.Value);
 		}

@@ -3,6 +3,7 @@
 	using Game.Configs;
 	using Game.Core;
 	using Game.Field;
+	using Game.Profiles;
 	using Game.Utilities;
 	using System;
 	using UniRx;
@@ -15,6 +16,7 @@
 		[Inject] private IFieldHeroFacade _fieldHeroFacade;
 		[Inject] private IFieldEnemyFacade _fieldEnemyFacade;
 		[Inject] private TimingsConfig _timingsConfig;
+		[Inject] private GameProfile _gameProfile;
 
 		public void Initialize()
 		{
@@ -30,6 +32,11 @@
 			_fieldHeroFacade.AliveUnitsCount
 				.Where(_ => _gameCycle.State.Value == GameState.BattleStage)
 				.Subscribe(OnHeroUnitsCountChanged)
+				.AddTo(this);
+
+			_gameCycle.State
+				.Where(state => state == GameState.WinBattle || state == GameState.LoseBattle)
+				.Subscribe(_ => OnBattleFinishHandler())
 				.AddTo(this);
 		}
 
@@ -64,6 +71,11 @@
 
 			foreach (var unit in _fieldEnemyFacade.Units)
 				unit.EnableAttack();
+		}
+
+		private void OnBattleFinishHandler()
+		{
+			_gameProfile.HeroField.Units.Clear();
 		}
 	}
 }

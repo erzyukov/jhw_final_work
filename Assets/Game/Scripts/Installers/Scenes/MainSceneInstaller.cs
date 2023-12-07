@@ -18,6 +18,10 @@ namespace Game.Installers
 				.FromComponentInHierarchy()
 				.AsSingle();
 
+			Container
+				.BindInterfacesTo<GameDataInitializator>()
+				.AsSingle();
+
 			InstallUI();
 			InstallHero();
 			InstallDebugServicies();
