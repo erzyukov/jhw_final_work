@@ -67,8 +67,8 @@
 			if (fieldCell.HasUnit)
 				throw new Exception($"Field with position {fieldCell.Position} is buisy!");
 
-			_units.Add(unit);
 			fieldCell.SetUnit(unit);
+			_units.Add(unit);
 
 			return fieldCell.Position;
 		}

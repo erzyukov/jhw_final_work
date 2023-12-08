@@ -46,6 +46,7 @@
 			_lobbyScreen.SetLastWaveValue(waveInfo);
 		}
 
+		// TODO: Ask only if we must spend enery, otherwise loading level from saved data
 		private void OnPlayButtonClickedHandler()
 		{
 			if (_profile.WaveNumber.Value == 0)

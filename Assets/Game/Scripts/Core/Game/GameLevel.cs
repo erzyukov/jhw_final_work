@@ -133,10 +133,10 @@
 
 		void OnLevelLoaded()
 		{
+			LevelLoading.Execute();
+			
 			if (_profile.WaveNumber.Value == 0)
 				_profile.WaveNumber.Value++;
-
-			LevelLoading.Execute();
 
 			_gameCycle.SetState(GameState.TacticalStage);
 

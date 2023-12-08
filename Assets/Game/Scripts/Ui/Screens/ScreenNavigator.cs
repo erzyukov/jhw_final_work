@@ -31,6 +31,7 @@
 		{
 			foreach (var screen in _screens)
 			{
+				screen.SetActive(false);
 				screen.Closed
 					.Subscribe(_ => _screen.Value = Ui.Screen.None)
 					.AddTo(this);

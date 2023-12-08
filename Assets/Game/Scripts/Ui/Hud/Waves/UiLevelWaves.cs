@@ -7,6 +7,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using UniRx;
+	using UnityEngine;
 	using Zenject;
 
 	public class UiLevelWaves : ControllerBase, IInitializable
@@ -34,7 +35,7 @@
 			Observable.Merge(
 				_gameLevel.LevelLoading
 					.DelayFrame(1)
-					.Select(_ => _gameProfile.WaveNumber.Value - 1),
+					.Select(_ => Mathf.Max(0, _gameProfile.WaveNumber.Value - 1)),
 				_gameProfile.WaveNumber
 					.Where(number => number > 0)
 					.Select(number => number - 1)

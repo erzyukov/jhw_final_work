@@ -12,11 +12,13 @@
 	using Game.Level;
 	using System.Linq;
 	using Game.Units;
+	using UnityEngine;
 
 	public class BeginnerTutorial : BeginerTutorialFsmBase, IInitializable, IDisposable
 	{
 		[Inject] private GameProfile _profile;
 		[Inject] private IGameCycle _cycle;
+		[Inject] private IGameLevel _gameLevel;
 		[Inject] private IUiTacticalStageHud _uiTacticalStageHud;
 		[Inject] private IFingerHint _fingerHint;
 		[Inject] private IFingerSlideHint _fingerSlideHint;
@@ -34,9 +36,13 @@
 
 		public void Initialize()
 		{
-			_profile.Tutorial.BeginnerStep
-				.Where(step => step != State)
-				.Subscribe(OnBeginnerStepChanged)
+			Observable.CombineLatest(
+					_profile.Tutorial.BeginnerStep,
+					_gameLevel.LevelLoading,
+					(step, _) => (step, _)
+				)
+				.Where(v => v.step != State)
+				.Subscribe(v => OnBeginnerStepChanged(v.step))
 				.AddTo(_disposable);
 
 			_summonInterruptDisposable = _heroUnitSummoner.SummoningPaidUnit
@@ -294,6 +300,9 @@
 		{
 			_gameProfileManager.Save();
 			Transition(step);
+
+			if (step == BeginnerStep.Complete)
+				Dispose();
 		}
 
 		private void SetupBattleStep()

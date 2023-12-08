@@ -15,9 +15,6 @@ namespace Game.Ui
 
 		public void Initialize()
 		{
-			//_hud.SetHeroUnitsCount(_fieldHeroFacade.Units.Count);
-			//_hud.SetEnemyUnitsCount(_fieldEnemyFacade.Units.Count);
-
 			_fieldHeroFacade.AliveUnitsCount
 				.Subscribe(count => _hud.SetHeroUnitsCount(count))
 				.AddTo(this);
