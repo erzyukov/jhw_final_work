@@ -5,7 +5,6 @@
 	using Zenject;
 	using UniRx;
 	using Game.Profiles;
-	using UnityEngine;
 
 	public class BeginerTutorialLoader : ControllerBase, IInitializable
 	{
@@ -26,11 +25,14 @@
 
 		private void OnLoadingLobbyHandler()
 		{
-			_level.GoToLevel(_profile.LevelNumber.Value);
-			_level.IsLevelLoaded
-				.Where(v => v && _profile.Tutorial.BeginnerStep.Value != BeginnerStep.Complete)
-				.Subscribe(_ => _profile.Tutorial.BeginnerStep.Value = BeginnerStep.FirstSummon)
+			BeginnerStep currentStep = _profile.Tutorial.BeginnerStep.Value;
+
+			_level.LevelLoading
+				.Where(v => currentStep != BeginnerStep.Complete)
+				.Subscribe(_ => _profile.Tutorial.BeginnerStep.SetValueAndForceNotify(currentStep))
 				.AddTo(this);
+
+			_level.GoToLevel(_profile.LevelNumber.Value);
 		}
 	}
 }

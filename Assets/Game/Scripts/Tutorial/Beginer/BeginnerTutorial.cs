@@ -17,6 +17,7 @@
 	{
 		[Inject] private GameProfile _profile;
 		[Inject] private IGameCycle _cycle;
+		[Inject] private IGameLevel _gameLevel;
 		[Inject] private IUiTacticalStageHud _uiTacticalStageHud;
 		[Inject] private IFingerHint _fingerHint;
 		[Inject] private IFingerSlideHint _fingerSlideHint;
@@ -34,9 +35,13 @@
 
 		public void Initialize()
 		{
-			_profile.Tutorial.BeginnerStep
-				.Where(step => step != State)
-				.Subscribe(OnBeginnerStepChanged)
+			Observable.CombineLatest(
+					_profile.Tutorial.BeginnerStep,
+					_gameLevel.LevelLoading,
+					(step, _) => (step, _)
+				)
+				.Where(v => v.step != State)
+				.Subscribe(v => OnBeginnerStepChanged(v.step))
 				.AddTo(_disposable);
 
 			_summonInterruptDisposable = _heroUnitSummoner.SummoningPaidUnit
