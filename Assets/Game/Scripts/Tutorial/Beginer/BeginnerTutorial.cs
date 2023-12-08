@@ -12,6 +12,7 @@
 	using Game.Level;
 	using System.Linq;
 	using Game.Units;
+	using UnityEngine;
 
 	public class BeginnerTutorial : BeginerTutorialFsmBase, IInitializable, IDisposable
 	{
@@ -299,6 +300,9 @@
 		{
 			_gameProfileManager.Save();
 			Transition(step);
+
+			if (step == BeginnerStep.Complete)
+				Dispose();
 		}
 
 		private void SetupBattleStep()

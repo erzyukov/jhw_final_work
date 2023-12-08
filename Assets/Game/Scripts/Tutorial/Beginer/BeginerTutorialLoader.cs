@@ -11,16 +11,21 @@
 		[Inject] private GameProfile _profile;
 		[Inject] private IGameCycle _cycle;
 		[Inject] private IGameLevel _level;
-
+			
 		public void Initialize()
 		{
-			if (_profile.Tutorial.BeginnerStep.Value != BeginnerStep.Complete)
-			{
-				_cycle.State
-					.Where(state => state == GameState.LoadingLobby)
-					.Subscribe(_ => OnLoadingLobbyHandler())
-					.AddTo(this);
-			}
+			if (IsTutorialComplete)
+				return;
+
+			_cycle.State
+				.Where(state => state == GameState.LoadingLobby && IsTutorialComplete == false)
+				.Subscribe(_ => OnLoadingLobbyHandler())
+				.AddTo(this);
+
+			_profile.Tutorial.BeginnerStep
+				.Where(_ => IsTutorialComplete)
+				.Subscribe(_ => Dispose())
+				.AddTo(this);
 		}
 
 		private void OnLoadingLobbyHandler()
@@ -34,5 +39,7 @@
 
 			_level.GoToLevel(_profile.LevelNumber.Value);
 		}
+
+		private bool IsTutorialComplete => _profile.Tutorial.BeginnerStep.Value == BeginnerStep.Complete;
 	}
 }
