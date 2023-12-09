@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "RemoveGameSaves",
+                    "type": "PassThrough",
+                    "id": "15c0bd2a-951c-4e6d-9089-6a185961b91e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -126,6 +135,39 @@
                     "action": "AddSummonCurrency",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "R [Keyboard]",
+                    "id": "04dbef62-1695-4d9d-9547-c5b4dccff747",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RemoveGameSaves",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "e72a1967-b063-428d-ae2e-81601a190881",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RemoveGameSaves",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "26cfb299-a213-42d9-bd35-7c2054fc3332",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RemoveGameSaves",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

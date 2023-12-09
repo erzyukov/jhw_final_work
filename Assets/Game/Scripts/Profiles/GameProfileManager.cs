@@ -11,6 +11,7 @@ namespace Game.Profiles
 		BoolReactiveProperty IsReady { get; }
 		GameProfile GameProfile { get; }
 		void Save();
+		void Reset();
 	}
 
 	public class GameProfileManager : ControllerBase, IGameProfileManager
@@ -40,7 +41,13 @@ namespace Game.Profiles
 			YandexGame.savesData.gameProfile = _gameProfile;
 			YandexGame.SaveProgress();
 		}
-		
+
+		public void Reset()
+		{
+			_gameProfile = new GameProfile();
+			Save();
+		}
+
 		#endregion
 
 		private void OnYandexGameGetData()

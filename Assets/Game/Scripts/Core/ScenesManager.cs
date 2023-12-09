@@ -21,6 +21,7 @@ namespace Game.Core
 
 		void LoadLevel();
 		void UnloadLevel();
+		void ReloadGame(Action scenesUnloadedCalback);
 	}
 
 	public class ScenesManager : MonoBehaviour, IScenesManager
@@ -97,7 +98,38 @@ namespace Game.Core
 
 		public void UnloadLevel() => UnloadScene(GetLevelSceneName());
 
+		public void ReloadGame(Action scenesUnloadedCalback)
+		{
+			StartCoroutine(ReloadScenes(scenesUnloadedCalback));
+		}
+
 		#endregion
+
+		private IEnumerator ReloadScenes(Action scenesUnloadedCalback)
+		{
+			if (!IsSceneLoaded(_scenesConfig.Splash))
+			{
+				LoadScene(_scenesConfig.Splash);
+
+				yield return null;
+			}
+
+			SceneManager.SetActiveScene(SceneManager.GetSceneByName(_scenesConfig.Splash));
+
+			scenesUnloadedCalback.Invoke();
+
+			if (IsSceneLoaded(GetLevelSceneName()))
+				UnloadScene(GetLevelSceneName());
+
+			yield return null;
+
+			if (IsSceneLoaded(_scenesConfig.Main))
+				UnloadScene(_scenesConfig.Main);
+
+			yield return null;
+
+			yield return LoadScenes();
+		}
 
 		private void SetIslandActiveScene() => SceneManager.SetActiveScene(SceneManager.GetSceneByName(GetLevelSceneName()));
 		private bool IsSceneLoaded(string sceneName) => SceneManager.GetSceneByName(sceneName).isLoaded;
