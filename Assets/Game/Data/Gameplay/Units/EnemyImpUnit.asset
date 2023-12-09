@@ -21,23 +21,23 @@ MonoBehaviour:
     Damage: 8
     Health: 40
     SoftCurrencyReward: 5
-    ExperienceReward: 2
+    ExperienceReward: 3
   - Prefab: {fileID: 1503547998484457933, guid: 300101dba81de064a8cd0c201c9268d4, type: 3}
     AttackDelay: 0.94
     Damage: 10
     Health: 50
     SoftCurrencyReward: 11
-    ExperienceReward: 5
+    ExperienceReward: 4
   - Prefab: {fileID: 1503547998484457933, guid: 300101dba81de064a8cd0c201c9268d4, type: 3}
     AttackDelay: 0.93
     Damage: 14
     Health: 60
     SoftCurrencyReward: 17
-    ExperienceReward: 12
+    ExperienceReward: 5
   - Prefab: {fileID: 1503547998484457933, guid: 300101dba81de064a8cd0c201c9268d4, type: 3}
     AttackDelay: 0.92
     Damage: 18
     Health: 70
     SoftCurrencyReward: 25
-    ExperienceReward: 25
+    ExperienceReward: 6
   _isDebug: 0

@@ -8,6 +8,9 @@ namespace Game.Core
 	{
 		float GetExperienceRatio();
 		int AddExperience(int amount);
+		void AddLevelHeroExperience(int value);
+		void ResetLevelHeroExperience();
+		void ConsumeLevelHeroExperience();
 	}
 
 	public class GameHero : ControllerBase, IGameHero, IInitializable
@@ -24,16 +27,28 @@ namespace Game.Core
 		#region IGameHero
 
 		public float GetExperienceRatio() =>
-			(float)_profile.HeroLevelExperience.Value / ExperienceToNextLevel;
+			(float)_profile.HeroExperience.Value / ExperienceToNextLevel;
+
+		public void AddLevelHeroExperience(int value) => 
+			_profile.LevelHeroExperience.Value =+ value;
+
+		public void ResetLevelHeroExperience() =>
+			_profile.LevelHeroExperience.Value = 0;
+
+		public void ConsumeLevelHeroExperience()
+		{
+			AddExperience(_profile.LevelHeroExperience.Value);
+			ResetLevelHeroExperience();
+		}
 
 		public int AddExperience(int amount)
 		{
-			int totalExperience = _profile.HeroLevelExperience.Value + amount;
+			int totalExperience = _profile.HeroExperience.Value + amount;
 
 			int remainExperience = totalExperience % ExperienceToNextLevel;
 			int obtainedLevels = totalExperience / ExperienceToNextLevel;
 
-			_profile.HeroLevelExperience.Value = remainExperience;
+			_profile.HeroExperience.Value = remainExperience;
 			_profile.HeroLevel.Value += obtainedLevels;
 
 			_gameProfileManager.Save();

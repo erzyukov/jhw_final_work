@@ -5316,6 +5316,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 957624372}
+  - component: {fileID: 957624373}
   m_Layer: 5
   m_Name: LevelReward
   m_TagString: Untagged
@@ -5345,6 +5346,19 @@ RectTransform:
   m_AnchoredPosition: {x: 101.66964, y: 104.130005}
   m_SizeDelta: {x: 317.1394, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &957624373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957624371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f271a3a22329ec48a802ade3931641b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: {fileID: 404787516}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -6056,7 +6070,7 @@ MonoBehaviour:
           value: 872
         - localeIdentifier:
             m_Code: ru
-          value: 0
+          value: 872
 --- !u!224 &1083987800 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3048508145832356184, guid: d70f3a7462287194283f9a64b8dbc272, type: 3}
@@ -8413,7 +8427,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1774551334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dddf3625194f964e85dcc8005113b3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f271a3a22329ec48a802ade3931641b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _value: {fileID: 1965892837}
@@ -8457,7 +8471,7 @@ MonoBehaviour:
           value: 1
         - localeIdentifier:
             m_Code: ru
-          value: 0
+          value: 1
     - rid: 9072703802301743155
       type: {class: FloatTrackedProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
       data:
@@ -8468,7 +8482,7 @@ MonoBehaviour:
           value: 1
         - localeIdentifier:
             m_Code: ru
-          value: 0
+          value: 1
 --- !u!1 &1800673868
 GameObject:
   m_ObjectHideFlags: 0
@@ -10970,6 +10984,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8813110848917550905}
+  - component: {fileID: 8813110848917550906}
   m_Layer: 5
   m_Name: LevelReward
   m_TagString: Untagged
@@ -10999,6 +11014,19 @@ RectTransform:
   m_AnchoredPosition: {x: 101.66964, y: 104.130005}
   m_SizeDelta: {x: 317.1394, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8813110848917550906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8813110848917550854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f271a3a22329ec48a802ade3931641b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _value: {fileID: 8813110850557557156}
 --- !u!1001 &8813110849071493545
 PrefabInstance:
   m_ObjectHideFlags: 0

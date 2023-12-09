@@ -33,6 +33,11 @@
 				.Where(state => state == GameState.WinBattle || state == GameState.LoseBattle)
 				.Subscribe(_ => OnBattleFinishHandler())
 				.AddTo(this);
+
+			_gameCycle.State
+				.Where(state => state == GameState.Lobby)
+				.Subscribe(_ => OnLobbyLoadedHandler())
+				.AddTo(this);
 		}
 
 		private void OnLevelLoadingHandler()
@@ -68,7 +73,17 @@
 		{
 			_gameProfile.WaveNumber.Value = 0;
 			_gameProfile.HeroField.Units.Clear();
+			_gameProfile.IsReturnFromBattle = true;
 			_gameProfileManager.Save();
+		}
+
+		private void OnLobbyLoadedHandler()
+		{
+			if (_gameProfile.IsReturnFromBattle)
+			{
+				_gameProfile.IsReturnFromBattle = false;
+				_gameCurrency.ConsumeLevelSoftCurrency();
+			}
 		}
 	}
 }

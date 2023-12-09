@@ -18,7 +18,7 @@ namespace Game.Ui
 				.Subscribe(SetValue)
 				.AddTo(this);
 
-			Profile.HeroLevelExperience
+			Profile.HeroExperience
 				.Subscribe(_ => _expirience.value = _gameHero.GetExperienceRatio())
 				.AddTo(this);
 		}
