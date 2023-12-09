@@ -13,9 +13,10 @@
 		[Inject] private IGameCycle _gameCycle;
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private IGameCurrency _gameCurrency;
-		[Inject] private CurrencyConfig _currencyConfig;
+		[Inject] private LevelsConfig _levelsConfig;
 
 		private bool _isWaveFirstInBattle;
+		private LevelConfig _levelConfig;
 
 		public void Initialize()
 		{
@@ -36,12 +37,15 @@
 
 		private void OnLevelLoadingHandler()
 		{
+			_levelConfig = _levelsConfig.Levels[_gameProfile.LevelNumber.Value - 1];
 			_isWaveFirstInBattle = true;
 
 			if (_gameProfile.WaveNumber.Value == 0)
 			{
+				int waveIndex = _gameProfile.WaveNumber.Value;
+				WaveConfig waveConfig = _levelConfig.Waves[waveIndex];
 				_gameProfile.HeroField.Units.Clear();
-				_gameCurrency.SetSummonCurrency(_currencyConfig.SummonCurrencyAtWaveStart);
+				_gameCurrency.SetSummonCurrency(waveConfig.SummonCurrencyAmount);
 				_gameProfileManager.Save();
 			}
 		}
@@ -49,9 +53,15 @@
 		private void OnTacticalStageBeginHandler()
 		{
 			if (_isWaveFirstInBattle)
+			{
 				_isWaveFirstInBattle = false;
+			}
 			else
-				_gameCurrency.AddSummonCurrency(_currencyConfig.SummonCurrencyAtWaveStart);
+			{
+				int waveIndex = _gameProfile.WaveNumber.Value - 1;
+				WaveConfig waveConfig = _levelConfig.Waves[waveIndex];
+				_gameCurrency.AddSummonCurrency(waveConfig.SummonCurrencyAmount);
+			}
 		}
 
 		private void OnBattleFinishHandler()

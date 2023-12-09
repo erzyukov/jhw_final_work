@@ -1,11 +1,9 @@
 namespace Game.Installers
 {
 	using Game.Core;
-	using Game.Dev;
 	using UnityEngine;
 	using Zenject;
 	using Game.Ui;
-	using Game.Level;
 
 	public class MainSceneInstaller : MonoInstaller
 	{

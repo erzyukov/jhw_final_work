@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d68cc372aab589a4cb6bfeaf145f3682, type: 3}
   m_Name: Wave-1
   m_EditorClassIdentifier: 
+  _summonCurrencyAmount: 6
   _units:
   - Species: 5001
     GradeIndex: 0
     Position: {x: 2, y: 0}
-  _unitsConfig: {fileID: 11400000, guid: c879d22ebd0222d4f96b291f8c5290d9, type: 2}

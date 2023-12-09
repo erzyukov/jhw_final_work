@@ -7,9 +7,7 @@ namespace Game.Configs
 	{
 		[Header("Tactical Stage")]
 		[SerializeField] private int _unitSummonPrice;
-		[SerializeField] private int _summonCurrencyAtWaveStart;
 
 		public int UnitSummonPrice => _unitSummonPrice;
-		public int SummonCurrencyAtWaveStart => _summonCurrencyAtWaveStart;
 	}
 }
