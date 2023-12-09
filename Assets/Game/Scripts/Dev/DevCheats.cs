@@ -4,20 +4,22 @@
 	using Game.Utilities;
 	using Game.Input;
 	using Game.Profiles;
-	using Game.Units;
 	using UniRx;
 	using UnityEngine.InputSystem;
 	using System;
 	using Zenject;
-	using UnityEngine;
+	using Game.Configs;
+	using static UnityEngine.InputSystem.InputAction;
 
 	public class DevCheats : ControllerBase, IInitializable
 	{
 		[Inject] private IInputHandler _inputManager;
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private GameProfile _profile;
-		//[Inject] private UnitFacade.Factory _unitFactory;
 		[Inject] private IGameCurrency _gameCurrency;
+		[Inject] private DevConfig _devConfig;
+		[Inject] private IScenesManager _scenesManager;
+		[Inject] private IGameProfileManager _gameProfileManager;
 
 		const int SoftCurrencyCheatAmount = 10000;
 		const int SummonCurrencyCheatAmount = 10;
@@ -26,29 +28,32 @@
 
 		public void Initialize()
 		{
-			Subscribe(Cheats.NextWave, () => _gameLevel.GoToNextWave());
+			if (_devConfig.Build == DevConfig.BuildType.Debug)
+				Cheats.Enable();
+			else
+				Cheats.Disable();
 
-			Subscribe(Cheats.NextLevel, () => _gameLevel.GoToLevel(_profile.LevelNumber.Value + 1));
+			Subscribe(Cheats.NextWave, (_) => _gameLevel.GoToNextWave());
 
-			Subscribe(Cheats.PrevLevel, () => _gameLevel.GoToLevel(_profile.LevelNumber.Value - 1));
+			Subscribe(Cheats.NextLevel, (_) => _gameLevel.GoToLevel(_profile.LevelNumber.Value + 1));
 
-			/*
-			Subscribe(Cheats.BuyUnit, () =>
-			{
-				IUnitFacade unit = _unitFactory.Create(Species.HeroInfantryman);
-				Debug.LogWarning($"Unit {unit.Species} bought!");
-			});
-			*/
+			Subscribe(Cheats.PrevLevel, (_) => _gameLevel.GoToLevel(_profile.LevelNumber.Value - 1));
 
-			Subscribe(Cheats.AddSoftCurrency, () => _gameCurrency.AddSoftCurrency(SoftCurrencyCheatAmount));
+			Subscribe(Cheats.AddSoftCurrency, (_) => _gameCurrency.AddSoftCurrency(SoftCurrencyCheatAmount));
 			
-			Subscribe(Cheats.AddSummonCurrency, () => _gameCurrency.AddSummonCurrency(SummonCurrencyCheatAmount));
+			Subscribe(Cheats.AddSummonCurrency, (_) => _gameCurrency.AddSummonCurrency(SummonCurrencyCheatAmount));
+			
+			Subscribe(Cheats.RemoveGameSaves, (context) =>
+			{
+				if (context.performed && context.ReadValueAsButton())
+					_scenesManager.ReloadGame(() => _gameProfileManager.Reset());
+			});
 		}
 
-		void Subscribe(InputAction inputAction, Action action)
+		void Subscribe(InputAction inputAction, Action<CallbackContext> action)
 		=>
 			inputAction.PerformedAsObservable()
-				.Subscribe(_ => action())
+				.Subscribe(context => action(context))
 				.AddTo(this);
 	}
 }

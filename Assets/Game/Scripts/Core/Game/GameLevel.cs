@@ -129,9 +129,9 @@
 			GoToLevel(_profile.LevelNumber.Value + 1);
 		}
 
-		int ClampLevelNumber(int number) => Mathf.Clamp(number, 1, _levelsConfig.Levels.Length);
+		private int ClampLevelNumber(int number) => Mathf.Clamp(number, 1, _levelsConfig.Levels.Length);
 
-		void OnLevelLoaded()
+		private void OnLevelLoaded()
 		{
 			LevelLoading.Execute();
 			

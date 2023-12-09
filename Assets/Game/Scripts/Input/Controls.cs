@@ -82,6 +82,15 @@ namespace Game.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RemoveGameSaves"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""15c0bd2a-951c-4e6d-9089-6a185961b91e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -150,6 +159,39 @@ namespace Game.Input
                     ""action"": ""AddSummonCurrency"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""R [Keyboard]"",
+                    ""id"": ""04dbef62-1695-4d9d-9547-c5b4dccff747"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RemoveGameSaves"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""e72a1967-b063-428d-ae2e-81601a190881"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RemoveGameSaves"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""26cfb299-a213-42d9-bd35-7c2054fc3332"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RemoveGameSaves"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -164,6 +206,7 @@ namespace Game.Input
             m_DevCheats_BuyUnit = m_DevCheats.FindAction("BuyUnit", throwIfNotFound: true);
             m_DevCheats_AddSoftCurrency = m_DevCheats.FindAction("AddSoftCurrency", throwIfNotFound: true);
             m_DevCheats_AddSummonCurrency = m_DevCheats.FindAction("AddSummonCurrency", throwIfNotFound: true);
+            m_DevCheats_RemoveGameSaves = m_DevCheats.FindAction("RemoveGameSaves", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -229,6 +272,7 @@ namespace Game.Input
         private readonly InputAction m_DevCheats_BuyUnit;
         private readonly InputAction m_DevCheats_AddSoftCurrency;
         private readonly InputAction m_DevCheats_AddSummonCurrency;
+        private readonly InputAction m_DevCheats_RemoveGameSaves;
         public struct DevCheatsActions
         {
             private @Controls m_Wrapper;
@@ -239,6 +283,7 @@ namespace Game.Input
             public InputAction @BuyUnit => m_Wrapper.m_DevCheats_BuyUnit;
             public InputAction @AddSoftCurrency => m_Wrapper.m_DevCheats_AddSoftCurrency;
             public InputAction @AddSummonCurrency => m_Wrapper.m_DevCheats_AddSummonCurrency;
+            public InputAction @RemoveGameSaves => m_Wrapper.m_DevCheats_RemoveGameSaves;
             public InputActionMap Get() { return m_Wrapper.m_DevCheats; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -266,6 +311,9 @@ namespace Game.Input
                     @AddSummonCurrency.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnAddSummonCurrency;
                     @AddSummonCurrency.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnAddSummonCurrency;
                     @AddSummonCurrency.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnAddSummonCurrency;
+                    @RemoveGameSaves.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnRemoveGameSaves;
+                    @RemoveGameSaves.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnRemoveGameSaves;
+                    @RemoveGameSaves.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnRemoveGameSaves;
                 }
                 m_Wrapper.m_DevCheatsActionsCallbackInterface = instance;
                 if (instance != null)
@@ -288,6 +336,9 @@ namespace Game.Input
                     @AddSummonCurrency.started += instance.OnAddSummonCurrency;
                     @AddSummonCurrency.performed += instance.OnAddSummonCurrency;
                     @AddSummonCurrency.canceled += instance.OnAddSummonCurrency;
+                    @RemoveGameSaves.started += instance.OnRemoveGameSaves;
+                    @RemoveGameSaves.performed += instance.OnRemoveGameSaves;
+                    @RemoveGameSaves.canceled += instance.OnRemoveGameSaves;
                 }
             }
         }
@@ -300,6 +351,7 @@ namespace Game.Input
             void OnBuyUnit(InputAction.CallbackContext context);
             void OnAddSoftCurrency(InputAction.CallbackContext context);
             void OnAddSummonCurrency(InputAction.CallbackContext context);
+            void OnRemoveGameSaves(InputAction.CallbackContext context);
         }
     }
 }

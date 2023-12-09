@@ -20,6 +20,7 @@
 		Root = 300,
 		Scenes,
 		Localization,
+		Dev,
 
 		// Other
 		Tutorial = 400,
