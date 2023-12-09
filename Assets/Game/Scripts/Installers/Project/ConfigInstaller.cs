@@ -16,6 +16,7 @@ namespace Game.Installers
 		[SerializeField] private TimingsConfig _timings;
 		[SerializeField] private LocalizationConfig _localization;
 		[SerializeField] private TutorialConfig _tutorial;
+		[SerializeField] private DevConfig _dev;
 
 		public override void InstallBindings()
 		{
@@ -31,6 +32,7 @@ namespace Game.Installers
 			Container.BindInstance(_timings);
 			Container.BindInstance(_localization);
 			Container.BindInstance(_tutorial);
+			Container.BindInstance(_dev);
 		}
 	}
 }

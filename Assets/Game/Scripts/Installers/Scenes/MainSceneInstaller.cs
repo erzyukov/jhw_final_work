@@ -23,7 +23,6 @@ namespace Game.Installers
 				.AsSingle();
 
 			InstallUI();
-			InstallDebugServicies();
 			WindowsInstall();
 		}
 
@@ -32,17 +31,6 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<UiVeil>()
 				.FromComponentInHierarchy()
-				.AsSingle();
-		}
-
-		private void InstallDebugServicies()
-		{
-			Container
-				.BindInterfacesTo<DevCheats>()
-				.AsSingle();
-
-			Container
-				.BindInterfacesTo<CoreTests>()
 				.AsSingle();
 		}
 

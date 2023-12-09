@@ -4,20 +4,19 @@
 	using Game.Utilities;
 	using Game.Input;
 	using Game.Profiles;
-	using Game.Units;
 	using UniRx;
 	using UnityEngine.InputSystem;
 	using System;
 	using Zenject;
-	using UnityEngine;
+	using Game.Configs;
 
 	public class DevCheats : ControllerBase, IInitializable
 	{
 		[Inject] private IInputHandler _inputManager;
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private GameProfile _profile;
-		//[Inject] private UnitFacade.Factory _unitFactory;
 		[Inject] private IGameCurrency _gameCurrency;
+		[Inject] DevConfig _devConfig;
 
 		const int SoftCurrencyCheatAmount = 10000;
 		const int SummonCurrencyCheatAmount = 10;
@@ -26,19 +25,16 @@
 
 		public void Initialize()
 		{
+			if (_devConfig.Build == DevConfig.BuildType.Debug)
+				Cheats.Enable();
+			else
+				Cheats.Disable();
+
 			Subscribe(Cheats.NextWave, () => _gameLevel.GoToNextWave());
 
 			Subscribe(Cheats.NextLevel, () => _gameLevel.GoToLevel(_profile.LevelNumber.Value + 1));
 
 			Subscribe(Cheats.PrevLevel, () => _gameLevel.GoToLevel(_profile.LevelNumber.Value - 1));
-
-			/*
-			Subscribe(Cheats.BuyUnit, () =>
-			{
-				IUnitFacade unit = _unitFactory.Create(Species.HeroInfantryman);
-				Debug.LogWarning($"Unit {unit.Species} bought!");
-			});
-			*/
 
 			Subscribe(Cheats.AddSoftCurrency, () => _gameCurrency.AddSoftCurrency(SoftCurrencyCheatAmount));
 			
