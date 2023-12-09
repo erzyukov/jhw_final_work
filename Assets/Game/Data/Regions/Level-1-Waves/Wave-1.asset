@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Wave-1
   m_EditorClassIdentifier: 
   _units:
-  - Position: {x: 2, y: 0}
-    Species: 5001
+  - Species: 5001
+    GradeIndex: 0
+    Position: {x: 2, y: 0}
+  _unitsConfig: {fileID: 11400000, guid: c879d22ebd0222d4f96b291f8c5290d9, type: 2}

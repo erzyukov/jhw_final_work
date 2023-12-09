@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Currency
   m_EditorClassIdentifier: 
   _unitSummonPrice: 3
-  _summonCurrencyAtWaveStart: 8
+  _summonCurrencyAtWaveStart: 6
