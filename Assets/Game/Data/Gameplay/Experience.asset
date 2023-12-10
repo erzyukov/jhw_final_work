@@ -16,7 +16,7 @@ MonoBehaviour:
   - ExperienceToLevel: 0
     SoftCurrencyReward: 0
     HardCurrencyReward: 0
-  - ExperienceToLevel: 15
+  - ExperienceToLevel: 20
     SoftCurrencyReward: 30
     HardCurrencyReward: 3
   - ExperienceToLevel: 45

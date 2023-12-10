@@ -26,8 +26,8 @@ namespace Game.Core
 
 		public void Initialize()
 		{
-			AnimatedLevelNumber.Value = _profile.LevelNumber.Value;
-			ExperienceRatio.Value = (float)_profile.HeroExperience.Value / GetExperienceToLevel(_profile.LevelNumber.Value);
+			AnimatedLevelNumber.Value = _profile.HeroLevel.Value;
+			ExperienceRatio.Value = (float)_profile.HeroExperience.Value / GetExperienceToLevel(_profile.HeroLevel.Value);
 		}
 
 		#region IGameHero
@@ -65,8 +65,8 @@ namespace Game.Core
 			Sequence sequence = DOTween.Sequence();
 			int experienceAmount = _profile.LevelHeroExperience.Value;
 			int animationFormValue = _profile.HeroExperience.Value;
-			int experienceToLevel = GetExperienceToLevel(_profile.LevelNumber.Value);
-			int experienceInNextLevel = GetExperienceInNextLevel(_profile.LevelNumber.Value);
+			int experienceToLevel = GetExperienceToLevel(_profile.HeroLevel.Value);
+			int experienceInNextLevel = GetExperienceInNextLevel(_profile.HeroLevel.Value);
 
 			while (experienceAmount >= experienceToLevel)
 			{
@@ -77,10 +77,10 @@ namespace Game.Core
 				experienceAmount -= experienceToLevel;
 				animationFormValue += experienceInNextLevel - animationFormValue;
 				
-				_profile.LevelNumber.Value++;
+				_profile.HeroLevel.Value++;
 
-				experienceToLevel = GetExperienceToLevel(_profile.LevelNumber.Value);
-				experienceInNextLevel = GetExperienceInNextLevel(_profile.LevelNumber.Value);
+				experienceToLevel = GetExperienceToLevel(_profile.HeroLevel.Value);
+				experienceInNextLevel = GetExperienceInNextLevel(_profile.HeroLevel.Value);
 			}
 
 			AppendExperienceAnimationStep(sequence, animationFormValue, animationFormValue + experienceAmount, Ease.OutSine);
@@ -92,7 +92,7 @@ namespace Game.Core
 
 		private void AppendExperienceAnimationStep(Sequence sequence, int from, int to, Ease ease)
 		{
-			int level = _profile.LevelNumber.Value;
+			int level = _profile.HeroLevel.Value;
 			int experienceInPreviousLevel = GetExperienceInNextLevel(level - 1);
 			int experienceToLevel = GetExperienceToLevel(level);
 			float fromRatio = (float)(from - experienceInPreviousLevel) / experienceToLevel;

@@ -15,7 +15,7 @@
 		ReactiveCommand LevelLoading { get; }
 		void GoToLevel(int number);
 		void GoToNextWave();
-		void FinishLevel(bool isLevelComplete);
+		void FinishLevel();
 	}
 
 	public class GameLevel : ControllerBase, IGameLevel, IInitializable
@@ -27,8 +27,13 @@
 		[Inject] private IGameCycle _gameCycle;
 		[Inject] private IUiVeil _uiViel;
 
+		private int _heroLastLevel;
+		private bool _isLevelWon;
+
 		public void Initialize()
 		{
+			_heroLastLevel = _profile.HeroLevel.Value;
+
 			_scenesManager.LevelLoaded
 				.Subscribe(_ => OnLevelLoaded())
 				.AddTo(this);
@@ -36,6 +41,11 @@
 			_gameCycle.State
 				.Where(state => state == GameState.TacticalStage)
 				.Subscribe(_ => _uiViel.Fade())
+				.AddTo(this);
+
+			_gameCycle.State
+				.Where(state => state == GameState.WinBattle)
+				.Subscribe(_ => _isLevelWon = true)
 				.AddTo(this);
 		}
 
@@ -90,17 +100,25 @@
 			}
 		}
 
-		public void FinishLevel(bool isLevelComplete)
+		public void FinishLevel()
 		{
+			if (_profile.HeroLevel.Value > _heroLastLevel)
+			{
+				_gameCycle.SetState(GameState.HeroLevelReward);
+				_heroLastLevel = _profile.HeroLevel.Value;
+				return;
+			}
+
 			_uiViel.Appear(() =>
 			{
 				LevelFinished.Execute();
-				if (isLevelComplete)
+				if (_isLevelWon)
 					_profile.LevelNumber.Value = Mathf.Clamp(_profile.LevelNumber.Value + 1, 0, _levelsConfig.Levels.Length);
 				_profile.WaveNumber.Value = 0;
 				_scenesManager.UnloadLevel();
 				_gameProfileManager.Save();
 				IsLevelLoaded.Value = false;
+				_isLevelWon = false;
 				_gameCycle.SetState(GameState.Lobby);
 			});
 		}

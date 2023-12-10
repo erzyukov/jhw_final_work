@@ -18,9 +18,10 @@ namespace Game.Ui
 				.Subscribe(SetValue)
 				.AddTo(this);
 
-			_gameHero.ExperienceRatio
-				.Subscribe(value => _expirience.value = value)
-				.AddTo(this);
+			if (_expirience != null )
+				_gameHero.ExperienceRatio
+					.Subscribe(value => _expirience.value = value)
+					.AddTo(this);
 		}
 	}
 }

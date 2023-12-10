@@ -48,5 +48,6 @@
 		LoadingWave,
 		WinBattle,
 		LoseBattle,
+		HeroLevelReward,
 	}
 }

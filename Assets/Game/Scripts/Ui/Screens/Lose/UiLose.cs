@@ -9,7 +9,7 @@ namespace Game.Ui
 	{
 		[Inject] private IUiLoseScreen _screen;
 		[Inject] private IGameHero _hero;
-		[Inject] private IGameLevel _level;
+		[Inject] private IGameLevel _gameLevel;
 
 		public void Initialize()
 		{
@@ -29,7 +29,7 @@ namespace Game.Ui
 
 		private void OnScreenClosedHandler()
 		{
-			_level.FinishLevel(false);
+			_gameLevel.FinishLevel();
 		}
 	}
 }

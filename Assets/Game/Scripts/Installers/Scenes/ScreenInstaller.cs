@@ -37,6 +37,15 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<UiLose>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiLevelRewardScreen>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiLevelReward>()
+				.AsSingle();
 		}
 	}
 }
