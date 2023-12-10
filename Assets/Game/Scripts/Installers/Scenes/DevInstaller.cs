@@ -17,7 +17,7 @@
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<DevHud>()
+				.Bind<DevHud>()
 				.FromComponentInHierarchy()
 				.AsSingle();
 		}

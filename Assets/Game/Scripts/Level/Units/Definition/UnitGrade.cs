@@ -10,5 +10,7 @@
 		public float AttackDelay;
 		public float Damage;
 		public float Health;
+		public int SoftCurrencyReward;
+		public int ExperienceReward;
 	}
 }

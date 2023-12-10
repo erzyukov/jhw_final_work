@@ -57,6 +57,9 @@
 				case GameState.LoseBattle:
 					Open(Ui.Screen.Lose);
 					break;
+				case GameState.HeroLevelReward:
+					Open(Ui.Screen.LevelReward);
+					break;
 			}
 		}
 

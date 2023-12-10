@@ -121,6 +121,18 @@ MonoBehaviour:
       (TMP)
     m_Metadata:
       m_Items: []
+  - m_Id: 3040516373622784
+    m_Key: 1 - Main/Canvas/Screens/LevelUpRewardScreen/Congratulation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3040879600349184
+    m_Key: 1 - Main/Canvas/Screens/LevelUpRewardScreen/RewardTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3045861565280256
+    m_Key: 1 - Main/Canvas/Screens/LevelUpRewardScreen/Title
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

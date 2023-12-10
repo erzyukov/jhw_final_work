@@ -15,10 +15,10 @@ MonoBehaviour:
   _scenes: {fileID: 11400000, guid: 473ad5fc18b696845914808028cf1fd8, type: 2}
   _units: {fileID: 11400000, guid: c879d22ebd0222d4f96b291f8c5290d9, type: 2}
   _battleField: {fileID: 11400000, guid: 67d76da5b9bc6f646a94e824fa96aa81, type: 2}
-  _enemy: {fileID: 11400000, guid: c3a21572df3c6104a9a0fbbe69a11295, type: 2}
   _levels: {fileID: 11400000, guid: 3db0c9857269dcb4292b0347aec55d42, type: 2}
   _currency: {fileID: 11400000, guid: efa57f5a6fe940f4b9e00a51738b1392, type: 2}
   _timings: {fileID: 11400000, guid: be15a0ff82e558f41b65c6872dd34e60, type: 2}
   _localization: {fileID: 11400000, guid: c27340b364e2ca64b833e18a2898f644, type: 2}
   _tutorial: {fileID: 11400000, guid: 1445287be641a974d906770af3a42d6e, type: 2}
   _dev: {fileID: 11400000, guid: 88e4ba0cd92b607418186893c2a4c08d, type: 2}
+  _experience: {fileID: 11400000, guid: 9181088ac5f005046b70ff064d1945e5, type: 2}

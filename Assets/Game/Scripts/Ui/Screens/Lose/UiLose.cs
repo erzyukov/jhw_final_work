@@ -4,14 +4,12 @@ namespace Game.Ui
 	using Zenject;
 	using UniRx;
 	using Game.Core;
-	using Game.Profiles;
 
 	public class UiLose : ControllerBase, IInitializable
 	{
 		[Inject] private IUiLoseScreen _screen;
 		[Inject] private IGameHero _hero;
-		[Inject] private IGameLevel _level;
-		[Inject] private GameProfile _profile;
+		[Inject] private IGameLevel _gameLevel;
 
 		public void Initialize()
 		{
@@ -26,14 +24,12 @@ namespace Game.Ui
 
 		private void OnScreenOpeningHandler()
 		{
-			_screen.SetHeroLevel(_profile.HeroLevel.Value);
-			_screen.SetExperienceRatio(_hero.GetExperienceRatio());
-			_screen.SetLevelReward(0);
+			_hero.ConsumeLevelHeroExperience();
 		}
 
 		private void OnScreenClosedHandler()
 		{
-			_level.FinishLevel(false);
+			_gameLevel.FinishLevel();
 		}
 	}
 }

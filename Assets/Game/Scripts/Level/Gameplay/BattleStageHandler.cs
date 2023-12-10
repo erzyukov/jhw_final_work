@@ -3,6 +3,7 @@
 	using Game.Configs;
 	using Game.Core;
 	using Game.Field;
+	using Game.Units;
 	using Game.Utilities;
 	using System;
 	using UniRx;
@@ -12,9 +13,12 @@
 	{
 		[Inject] private IGameCycle _gameCycle;
 		[Inject] private IGameLevel _gameLevel;
+		[Inject] private IGameCurrency _gameCurrency;
+		[Inject] private IGameHero _gameHero;
 		[Inject] private IFieldHeroFacade _fieldHeroFacade;
 		[Inject] private IFieldEnemyFacade _fieldEnemyFacade;
 		[Inject] private TimingsConfig _timingsConfig;
+		[Inject] private UnitsConfig _unitsConfig;
 
 		public void Initialize()
 		{
@@ -31,6 +35,19 @@
 				.Where(_ => _gameCycle.State.Value == GameState.BattleStage)
 				.Subscribe(OnHeroUnitsCountChanged)
 				.AddTo(this);
+
+			_fieldEnemyFacade.Events.UnitDied
+				.Subscribe(OnEnemyUnitDiedHandler)
+				.AddTo(this);
+		}
+
+		private void OnEnemyUnitDiedHandler(IUnitFacade unit)
+		{
+			if (_unitsConfig.Units.TryGetValue(unit.Species, out UnitConfig unitConfig) == false)
+				return;
+
+			_gameCurrency.AddLevelSoftCurrency(unitConfig.Grades[unit.GradeIndex].SoftCurrencyReward);
+			_gameHero.AddLevelHeroExperience(unitConfig.Grades[unit.GradeIndex].ExperienceReward);
 		}
 
 		private void OnHeroUnitsCountChanged(int count)

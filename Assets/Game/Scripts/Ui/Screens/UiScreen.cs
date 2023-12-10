@@ -11,6 +11,7 @@ namespace Game.Ui
 		Lobby,
 		Win,
 		Lose,
+		LevelReward,
 	}
 
 	public interface IUiScreen

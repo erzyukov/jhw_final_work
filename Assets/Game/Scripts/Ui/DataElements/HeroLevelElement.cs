@@ -14,13 +14,14 @@ namespace Game.Ui
 
 		protected override void Subscribes()
 		{
-			Profile.HeroLevel
+			_gameHero.AnimatedLevelNumber
 				.Subscribe(SetValue)
 				.AddTo(this);
 
-			Profile.HeroLevelExperience
-				.Subscribe(_ => _expirience.value = _gameHero.GetExperienceRatio())
-				.AddTo(this);
+			if (_expirience != null )
+				_gameHero.ExperienceRatio
+					.Subscribe(value => _expirience.value = value)
+					.AddTo(this);
 		}
 	}
 }

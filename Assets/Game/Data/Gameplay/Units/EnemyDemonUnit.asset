@@ -17,19 +17,27 @@ MonoBehaviour:
   _attackRange: 0.7
   _grades:
   - Prefab: {fileID: 1503547998484457933, guid: 2409fbd3b3ba81a4286813ce3d283d39, type: 3}
-    AttackDelay: 0.1
-    Damage: 4
+    AttackDelay: 0.5
+    Damage: 6
     Health: 50
+    SoftCurrencyReward: 12
+    ExperienceReward: 5
   - Prefab: {fileID: 1503547998484457933, guid: 2409fbd3b3ba81a4286813ce3d283d39, type: 3}
     AttackDelay: 0.94
-    Damage: 18
+    Damage: 10
     Health: 80
+    SoftCurrencyReward: 21
+    ExperienceReward: 6
   - Prefab: {fileID: 1503547998484457933, guid: 2409fbd3b3ba81a4286813ce3d283d39, type: 3}
     AttackDelay: 0.93
-    Damage: 32
+    Damage: 15
     Health: 120
+    SoftCurrencyReward: 35
+    ExperienceReward: 7
   - Prefab: {fileID: 1503547998484457933, guid: 2409fbd3b3ba81a4286813ce3d283d39, type: 3}
     AttackDelay: 0.92
-    Damage: 60
+    Damage: 21
     Health: 200
+    SoftCurrencyReward: 63
+    ExperienceReward: 8
   _isDebug: 0

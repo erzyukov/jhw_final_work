@@ -14,6 +14,9 @@
 		void SetSummonCurrency(int value);
 		void AddSummonCurrency(int value);
 		bool TrySpendSummonCurrency(int amount);
+		void AddLevelSoftCurrency(int value);
+		void ResetLevelSoftCurrency();
+		void ConsumeLevelSoftCurrency();
 	}
 
 	public class GameCurrency : IGameCurrency
@@ -24,12 +27,33 @@
 
 		#region IGameCurrency
 
-		public void AddSoftCurrency(int value) => AddCurrency(GameProfile.SoftCurrency, value);
-		public bool TrySpendSoftCurrency(int value) => TrySpendCurrency(GameProfile.SoftCurrency, value);
+		public void AddSoftCurrency(int value) => 
+			AddCurrency(GameProfile.SoftCurrency, value);
 
-		public void SetSummonCurrency(int value) => GameProfile.SummonCurrency.Value = value;
-		public void AddSummonCurrency(int value) => AddCurrency(GameProfile.SummonCurrency, value);
-		public bool TrySpendSummonCurrency(int value) => TrySpendCurrency(GameProfile.SummonCurrency, value);
+		public bool TrySpendSoftCurrency(int value) => 
+			TrySpendCurrency(GameProfile.SoftCurrency, value);
+
+		public void SetSummonCurrency(int value) => 
+			GameProfile.SummonCurrency.Value = value;
+
+		public void AddSummonCurrency(int value) => 
+			AddCurrency(GameProfile.SummonCurrency, value);
+
+		public bool TrySpendSummonCurrency(int value) => 
+			TrySpendCurrency(GameProfile.SummonCurrency, value);
+
+		public void AddLevelSoftCurrency(int value) =>
+			AddCurrency(GameProfile.LevelSoftCurrency, value);
+
+		public void ResetLevelSoftCurrency() =>
+			GameProfile.LevelSoftCurrency.Value = 0;
+
+		public void ConsumeLevelSoftCurrency()
+		{
+			AddSoftCurrency(GameProfile.LevelSoftCurrency.Value);
+			ResetLevelSoftCurrency();
+			Save();
+		}
 
 		#endregion
 

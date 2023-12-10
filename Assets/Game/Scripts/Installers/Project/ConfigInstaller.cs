@@ -10,13 +10,13 @@ namespace Game.Installers
 		[SerializeField] private ScenesConfig _scenes;
 		[SerializeField] private UnitsConfig _units;
 		[SerializeField] private BattleFieldConfig _battleField;
-		[SerializeField] private EnemyConfig _enemy;
 		[SerializeField] private LevelsConfig _levels;
 		[SerializeField] private CurrencyConfig _currency;
 		[SerializeField] private TimingsConfig _timings;
 		[SerializeField] private LocalizationConfig _localization;
 		[SerializeField] private TutorialConfig _tutorial;
 		[SerializeField] private DevConfig _dev;
+		[SerializeField] private ExperienceConfig _experience;
 
 		public override void InstallBindings()
 		{
@@ -26,13 +26,13 @@ namespace Game.Installers
 			Container.BindInstance(_scenes);
 			Container.BindInstance(_units);
 			Container.BindInstance(_battleField);
-			Container.BindInstance(_enemy);
 			Container.BindInstance(_levels);
 			Container.BindInstance(_currency);
 			Container.BindInstance(_timings);
 			Container.BindInstance(_localization);
 			Container.BindInstance(_tutorial);
 			Container.BindInstance(_dev);
+			Container.BindInstance(_experience);
 		}
 	}
 }

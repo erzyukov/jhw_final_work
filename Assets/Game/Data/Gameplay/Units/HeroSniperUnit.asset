@@ -20,16 +20,24 @@ MonoBehaviour:
     AttackDelay: 0.95
     Damage: 10
     Health: 50
+    SoftCurrencyReward: 0
+    ExperienceReward: 0
   - Prefab: {fileID: 1503547998484457933, guid: a0f4aabc7aa04924da02d26ef02ca42d, type: 3}
     AttackDelay: 0.94
     Damage: 18
     Health: 80
+    SoftCurrencyReward: 0
+    ExperienceReward: 0
   - Prefab: {fileID: 1503547998484457933, guid: 0c8bdaef1be77e4498a53fe4ae5314e9, type: 3}
     AttackDelay: 0.93
     Damage: 32
     Health: 120
+    SoftCurrencyReward: 0
+    ExperienceReward: 0
   - Prefab: {fileID: 1503547998484457933, guid: 670c9b373ddfb2742a8e9b9c9d1d17cf, type: 3}
     AttackDelay: 0.92
     Damage: 60
     Health: 200
+    SoftCurrencyReward: 0
+    ExperienceReward: 0
   _isDebug: 0

@@ -13,9 +13,10 @@
 		[Inject] private IGameCycle _gameCycle;
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private IGameCurrency _gameCurrency;
-		[Inject] private CurrencyConfig _currencyConfig;
+		[Inject] private LevelsConfig _levelsConfig;
 
 		private bool _isWaveFirstInBattle;
+		private LevelConfig _levelConfig;
 
 		public void Initialize()
 		{
@@ -32,16 +33,24 @@
 				.Where(state => state == GameState.WinBattle || state == GameState.LoseBattle)
 				.Subscribe(_ => OnBattleFinishHandler())
 				.AddTo(this);
+
+			_gameCycle.State
+				.Where(state => state == GameState.Lobby)
+				.Subscribe(_ => OnLobbyLoadedHandler())
+				.AddTo(this);
 		}
 
 		private void OnLevelLoadingHandler()
 		{
+			_levelConfig = _levelsConfig.Levels[_gameProfile.LevelNumber.Value - 1];
 			_isWaveFirstInBattle = true;
 
 			if (_gameProfile.WaveNumber.Value == 0)
 			{
+				int waveIndex = _gameProfile.WaveNumber.Value;
+				WaveConfig waveConfig = _levelConfig.Waves[waveIndex];
 				_gameProfile.HeroField.Units.Clear();
-				_gameCurrency.SetSummonCurrency(_currencyConfig.SummonCurrencyAtWaveStart);
+				_gameCurrency.SetSummonCurrency(waveConfig.SummonCurrencyAmount);
 				_gameProfileManager.Save();
 			}
 		}
@@ -49,16 +58,32 @@
 		private void OnTacticalStageBeginHandler()
 		{
 			if (_isWaveFirstInBattle)
+			{
 				_isWaveFirstInBattle = false;
+			}
 			else
-				_gameCurrency.AddSummonCurrency(_currencyConfig.SummonCurrencyAtWaveStart);
+			{
+				int waveIndex = _gameProfile.WaveNumber.Value - 1;
+				WaveConfig waveConfig = _levelConfig.Waves[waveIndex];
+				_gameCurrency.AddSummonCurrency(waveConfig.SummonCurrencyAmount);
+			}
 		}
 
 		private void OnBattleFinishHandler()
 		{
 			_gameProfile.WaveNumber.Value = 0;
 			_gameProfile.HeroField.Units.Clear();
+			_gameProfile.IsReturnFromBattle = true;
 			_gameProfileManager.Save();
+		}
+
+		private void OnLobbyLoadedHandler()
+		{
+			if (_gameProfile.IsReturnFromBattle)
+			{
+				_gameProfile.IsReturnFromBattle = false;
+				_gameCurrency.ConsumeLevelSoftCurrency();
+			}
 		}
 	}
 }
