@@ -1,8 +1,10 @@
 namespace Game.Configs
 {
 	using System.Linq;
-	using UnityEditor;
 	using UnityEngine;
+#if UNITY_EDITOR
+	using UnityEditor;
+#endif
 
 	[CreateAssetMenu(fileName = "Level", menuName = "Configs/Level", order = (int)Config.Level)]
 	public class LevelConfig : ScriptableObject
@@ -18,6 +20,7 @@ namespace Game.Configs
 		public int SoftCurrencyReward => _softCurrencyReward;
 	}
 
+#if UNITY_EDITOR
 	[CustomEditor(typeof(LevelConfig)), CanEditMultipleObjects]
 	public class LevelConfigEditor : ConfigEditor
 	{
@@ -48,4 +51,5 @@ namespace Game.Configs
 			}
 		}
 	}
+#endif
 }
