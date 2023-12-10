@@ -1,5 +1,6 @@
 ﻿namespace Game.Configs
 {
+#if UNITY_EDITOR
 	using System.Linq;
 	using UnityEditor;
 
@@ -21,4 +22,5 @@
 			return unitsConfig;
 		}
 	}
+#endif
 }

@@ -2,8 +2,10 @@ namespace Game.Configs
 {
 	using System;
 	using System.Linq;
-	using UnityEditor;
 	using UnityEngine;
+#if UNITY_EDITOR
+	using UnityEditor;
+#endif
 
 	[CreateAssetMenu(fileName = "Experience", menuName = "Configs/Experience", order = (int)Config.Experience)]
 	public class ExperienceConfig : ScriptableObject
@@ -21,6 +23,7 @@ namespace Game.Configs
 		}
 	}
 
+#if UNITY_EDITOR
 	[CustomEditor(typeof(ExperienceConfig)), CanEditMultipleObjects]
 	public class ExperienceConfigEditor : ConfigEditor
 	{
@@ -42,4 +45,5 @@ namespace Game.Configs
 			EditorGUILayout.LabelField("Total hard: ", totalHardCurrency.ToString());
 		}
 	}
+#endif
 }

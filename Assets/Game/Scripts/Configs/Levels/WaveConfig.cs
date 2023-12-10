@@ -3,8 +3,10 @@ namespace Game.Configs
 	using Game.Units;
 	using System;
 	using System.Linq;
-	using UnityEditor;
 	using UnityEngine;
+#if UNITY_EDITOR
+	using UnityEditor;
+#endif
 
 	[CreateAssetMenu(fileName = "Wave", menuName = "Configs/Wave", order = (int)Config.Wave)]
 	public class WaveConfig : ScriptableObject
@@ -25,6 +27,7 @@ namespace Game.Configs
 		}
 	}
 
+#if UNITY_EDITOR
 	[CustomEditor(typeof(WaveConfig)), CanEditMultipleObjects]
 	public class WaveConfigEditor : ConfigEditor
 	{
@@ -53,4 +56,5 @@ namespace Game.Configs
 			}
 		}
 	}
+#endif
 }
