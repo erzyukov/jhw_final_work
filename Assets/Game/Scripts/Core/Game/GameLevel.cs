@@ -16,8 +16,6 @@
 		void GoToLevel(int number);
 		void GoToNextWave();
 		void FinishLevel(bool isLevelComplete);
-		int GetLevelExperience();
-		int GetLevelReward();
 	}
 
 	public class GameLevel : ControllerBase, IGameLevel, IInitializable
@@ -28,11 +26,6 @@
 		[Inject] private IScenesManager _scenesManager;
 		[Inject] private IGameCycle _gameCycle;
 		[Inject] private IUiVeil _uiViel;
-
-		// TODO: realize level experience amout calculate
-		private const int ExperienceByLevel = 100;
-		// TODO: realize level soft currency amout calculate
-		private const int SoftCurrencyByLevel = 35;
 
 		public void Initialize()
 		{
@@ -110,16 +103,6 @@
 				IsLevelLoaded.Value = false;
 				_gameCycle.SetState(GameState.Lobby);
 			});
-		}
-
-		public int GetLevelExperience()
-		{
-			return ExperienceByLevel;
-		}
-
-		public int GetLevelReward()
-		{
-			return SoftCurrencyByLevel;
 		}
 
 		#endregion

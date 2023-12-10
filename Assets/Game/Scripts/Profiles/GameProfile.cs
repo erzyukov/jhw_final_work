@@ -11,7 +11,7 @@ namespace Game.Profiles
 		public readonly IntReactiveProperty SoftCurrency = new IntReactiveProperty(0);
 		public readonly IntReactiveProperty SummonCurrency = new IntReactiveProperty(0);
 		public readonly IntReactiveProperty HeroLevel = new IntReactiveProperty(1);
-		public readonly IntReactiveProperty HeroExperience = new IntReactiveProperty(0);
+		public readonly IntReactiveProperty HeroExperience = new IntReactiveProperty(7);
 		
 		public readonly IntReactiveProperty LevelSoftCurrency = new IntReactiveProperty(0);
 		public readonly IntReactiveProperty LevelHeroExperience = new IntReactiveProperty(0);

@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: 1-1
   _region: 0
+  _softCurrencyReward: 20
   _waves:
   - {fileID: 11400000, guid: eb70dbcf054063a4ea4b5cc80f381853, type: 2}
   - {fileID: 11400000, guid: 675617f2b98525a47a04c52f5ced0431, type: 2}
   - {fileID: 11400000, guid: 5e71272a77be1d74ea9228e8b104c989, type: 2}
-  _softCurrencyReward: 20
-  _experienceReward: 10

@@ -5128,6 +5128,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeroLevel
       objectReference: {fileID: 0}
+    - target: {fileID: 5921009056939318665, guid: adcd8a0afe9fc244d9fc0b143a4b5a68, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5921009056939318670, guid: adcd8a0afe9fc244d9fc0b143a4b5a68, type: 3}
       propertyPath: m_Pivot.x
       value: 0

@@ -16,6 +16,7 @@ namespace Game.Installers
 		[SerializeField] private LocalizationConfig _localization;
 		[SerializeField] private TutorialConfig _tutorial;
 		[SerializeField] private DevConfig _dev;
+		[SerializeField] private ExperienceConfig _experience;
 
 		public override void InstallBindings()
 		{
@@ -31,6 +32,7 @@ namespace Game.Installers
 			Container.BindInstance(_localization);
 			Container.BindInstance(_tutorial);
 			Container.BindInstance(_dev);
+			Container.BindInstance(_experience);
 		}
 	}
 }

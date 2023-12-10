@@ -4,17 +4,14 @@ namespace Game.Ui
 	using Zenject;
 	using UniRx;
 	using Game.Core;
-	using Game.Profiles;
-	using DG.Tweening;
-	using Game.Configs;
+//	using Game.Profiles;
+//	using Game.Configs;
 
 	public class UiWin : ControllerBase, IInitializable
 	{
 		[Inject] private IUiWinScreen _screen;
 		[Inject] private IGameHero _hero;
-		[Inject] private IGameLevel _level;
-		[Inject] private GameProfile _profile;
-		[Inject] private TimingsConfig _timingsConfig;
+		[Inject] private IGameLevel _gameLevel;
 
 		public void Initialize()
 		{
@@ -29,22 +26,25 @@ namespace Game.Ui
 
 		private void OnScreenOpeningHandler()
 		{
-			AnimatieObtainedExperience();
-			_screen.SetLevelReward(_level.GetLevelReward());
+			//AnimatieObtainedExperience();
+			_hero.ConsumeLevelHeroExperience();
 		}
 
 		private void OnScreenClosedHandler()
 		{
-			_level.FinishLevel(true);
+			_gameLevel.FinishLevel(true);
 		}
 
+		/*
 		private void AnimatieObtainedExperience()
 		{
 			Sequence sequence = DOTween.Sequence();
 			_screen.SetExperienceRatio(_hero.GetExperienceRatio());
 			int initialLevel = _profile.HeroLevel.Value;
 			float initialExperienceRatio = _hero.GetExperienceRatio();
-			int experienceAmount = _level.GetLevelExperience();
+			
+			
+			int experienceAmount = _gameLevel.GetLevelExperience();
 			int obtainedLevels = _hero.AddExperience(experienceAmount);
 
 			for (int i = 0; i < obtainedLevels; i++)
@@ -63,5 +63,6 @@ namespace Game.Ui
 			sequence.Append(DOVirtual.Float(startRatio, _hero.GetExperienceRatio(), duration, (ratio) => _screen.SetExperienceRatio(ratio))
 				.SetEase(Ease.OutSine));
 		}
+		*/
 	}
 }
