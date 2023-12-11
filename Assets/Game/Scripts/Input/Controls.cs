@@ -91,6 +91,15 @@ namespace Game.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""0a458f3c-c094-4f2c-b8f7-5cbd1cc53765"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -185,13 +194,24 @@ namespace Game.Input
                 {
                     ""name"": ""binding"",
                     ""id"": ""26cfb299-a213-42d9-bd35-7c2054fc3332"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""path"": ""<Keyboard>/m"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RemoveGameSaves"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14f40531-8320-4bcf-b17a-9a5ee5a87994"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -207,6 +227,7 @@ namespace Game.Input
             m_DevCheats_AddSoftCurrency = m_DevCheats.FindAction("AddSoftCurrency", throwIfNotFound: true);
             m_DevCheats_AddSummonCurrency = m_DevCheats.FindAction("AddSummonCurrency", throwIfNotFound: true);
             m_DevCheats_RemoveGameSaves = m_DevCheats.FindAction("RemoveGameSaves", throwIfNotFound: true);
+            m_DevCheats_Shoot = m_DevCheats.FindAction("Shoot", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -273,6 +294,7 @@ namespace Game.Input
         private readonly InputAction m_DevCheats_AddSoftCurrency;
         private readonly InputAction m_DevCheats_AddSummonCurrency;
         private readonly InputAction m_DevCheats_RemoveGameSaves;
+        private readonly InputAction m_DevCheats_Shoot;
         public struct DevCheatsActions
         {
             private @Controls m_Wrapper;
@@ -284,6 +306,7 @@ namespace Game.Input
             public InputAction @AddSoftCurrency => m_Wrapper.m_DevCheats_AddSoftCurrency;
             public InputAction @AddSummonCurrency => m_Wrapper.m_DevCheats_AddSummonCurrency;
             public InputAction @RemoveGameSaves => m_Wrapper.m_DevCheats_RemoveGameSaves;
+            public InputAction @Shoot => m_Wrapper.m_DevCheats_Shoot;
             public InputActionMap Get() { return m_Wrapper.m_DevCheats; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -314,6 +337,9 @@ namespace Game.Input
                     @RemoveGameSaves.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnRemoveGameSaves;
                     @RemoveGameSaves.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnRemoveGameSaves;
                     @RemoveGameSaves.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnRemoveGameSaves;
+                    @Shoot.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnShoot;
+                    @Shoot.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnShoot;
+                    @Shoot.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnShoot;
                 }
                 m_Wrapper.m_DevCheatsActionsCallbackInterface = instance;
                 if (instance != null)
@@ -339,6 +365,9 @@ namespace Game.Input
                     @RemoveGameSaves.started += instance.OnRemoveGameSaves;
                     @RemoveGameSaves.performed += instance.OnRemoveGameSaves;
                     @RemoveGameSaves.canceled += instance.OnRemoveGameSaves;
+                    @Shoot.started += instance.OnShoot;
+                    @Shoot.performed += instance.OnShoot;
+                    @Shoot.canceled += instance.OnShoot;
                 }
             }
         }
@@ -352,6 +381,7 @@ namespace Game.Input
             void OnAddSoftCurrency(InputAction.CallbackContext context);
             void OnAddSummonCurrency(InputAction.CallbackContext context);
             void OnRemoveGameSaves(InputAction.CallbackContext context);
+            void OnShoot(InputAction.CallbackContext context);
         }
     }
 }
