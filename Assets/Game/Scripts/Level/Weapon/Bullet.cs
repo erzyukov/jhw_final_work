@@ -33,7 +33,7 @@ namespace Game.Weapon
 		
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.transform != _target.Transform)
+			if (_target.IsDead || other.transform != _target.Transform)
 				return;
 
 			_target.TakeDamage(_damage);
