@@ -27,7 +27,7 @@ namespace Game.Core
 		public void Initialize()
 		{
 			AnimatedLevelNumber.Value = _profile.HeroLevel.Value;
-			ExperienceRatio.Value = (float)_profile.HeroExperience.Value / GetExperienceToLevel(_profile.HeroLevel.Value);
+			ExperienceRatio.Value = (float)_profile.HeroExperience.Value / GetExperienceInNextLevel(_profile.HeroLevel.Value);
 		}
 
 		#region IGameHero
