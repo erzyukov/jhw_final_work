@@ -42,6 +42,7 @@
 
 			float uiHealthHeight = _model.Renderer.bounds.size.y * _model.Renderer.transform.localScale.y + _unitsConfig.UiHealthIndent;
 			_unitView.SetModelHeight(uiHealthHeight);
+			_unitView.SetModelRendererTransform(_model.RendererTransform);
 
 			#region Debug
 

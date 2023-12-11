@@ -54,5 +54,9 @@ namespace Game.Installers
 				.BindInterfacesTo<ContinueLevelRequest>()
 				.AsSingle();
 		}
+
+		private void InstallPools()
+		{
+		}
 	}
 }

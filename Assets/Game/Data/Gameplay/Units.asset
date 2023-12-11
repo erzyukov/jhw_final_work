@@ -24,3 +24,4 @@ MonoBehaviour:
     Config: {fileID: 11400000, guid: 9529a9b3c43cdbb4d82e0eb5fb404753, type: 2}
   - Species: 2
     Config: {fileID: 11400000, guid: fcc59ef5ca78eb94a865703689810490, type: 2}
+  _heroDefaultSquad: 0100000002000000

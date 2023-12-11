@@ -19,6 +19,7 @@
 		Species Species { get; }
 		int GradeIndex { get; }
 		Transform Transform { get; }
+		Transform ModelRendererTransform { get; }
 		bool IsDead { get; }
 
 		void SetViewParent(Transform parent);
@@ -63,6 +64,8 @@
 		public int GradeIndex => _gradeIndex;
 
 		public Transform Transform => _view.Transform;
+
+		public Transform ModelRendererTransform => _view.ModelRendererTransform;
 
 		public bool IsDead => _health.IsDead;
 

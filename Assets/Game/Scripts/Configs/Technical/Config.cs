@@ -10,6 +10,7 @@
 		Currency,
 		Timings,
 		Experience,
+		Weapons,
 
 		// Levels
 		Regions = 250,

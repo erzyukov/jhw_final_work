@@ -4,11 +4,11 @@
 	using Game.Utilities;
 	using Game.Input;
 	using Game.Profiles;
+	using Game.Configs;
 	using UniRx;
 	using UnityEngine.InputSystem;
 	using System;
 	using Zenject;
-	using Game.Configs;
 	using static UnityEngine.InputSystem.InputAction;
 
 	public class DevCheats : ControllerBase, IInitializable

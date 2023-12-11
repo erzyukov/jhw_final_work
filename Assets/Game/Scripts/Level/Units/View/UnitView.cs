@@ -15,24 +15,22 @@ namespace Game.Units
 		Transform Transform { get; }
 		Transform ModelContainer { get; }
 		NavMeshAgent NavMeshAgent { get; }
+		Transform ModelRendererTransform { get; }
 
 		void SetParent(Transform parent);
 		void SetActive(bool value);
 		void SetModelHeight(float value);
+		void SetModelRendererTransform(Transform transform);
 		void ResetPosition();
 		void Destroy();
 	}
 
+	[SelectionBase]
     public class UnitView : MonoBehaviour, IUnitView
 	{
-		[Inject] private UnitsConfig _unitsConfig;
-		[Inject] private UnitConfig _unitConfig;
-
 		[SerializeField] private Transform _modelContainer;
 		[SerializeField] private Transform _uiHealthCanvas;
 		[SerializeField] private NavMeshAgent _navMeshAgent;
-
-		private float _modelHeigth;
 
 		private void OnTriggerEnter(Collider other) => 
 			MergeInitiated.Execute();
@@ -45,6 +43,8 @@ namespace Game.Units
 		public ReactiveCommand MergeInitiated { get; } = new ReactiveCommand();
 		
 		public ReactiveCommand MergeCanceled { get; } = new ReactiveCommand();
+		
+		public Transform ModelRendererTransform { get; private set; }
 
 		public Transform Transform => transform;
 
@@ -58,6 +58,9 @@ namespace Game.Units
 
 		public void SetModelHeight(float value) =>
 			_uiHealthCanvas.localPosition = _uiHealthCanvas.localPosition.WithY(value);
+
+		public void SetModelRendererTransform(Transform transform) =>
+			ModelRendererTransform = transform;
 
 		public void ResetPosition()
 		{

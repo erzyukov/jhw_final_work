@@ -7,6 +7,7 @@ namespace Game
 	using UniRx;
 	using Game.Core;
 	using Game.Utilities;
+	using Game.Ui;
 
 	public class UiUnitHud : MonoBehaviour
     {
@@ -22,9 +23,15 @@ namespace Game
 				.Subscribe(isBattleStage => _slider.gameObject.SetActive(isBattleStage))
 				.AddTo(this);
 
-			_health.HealthRate
-				.Subscribe(rate => _slider.value = rate)
+			_health.HealthRatio
+				.Subscribe(OnHealthRatioChangeHandler)
 				.AddTo(this);
 		}
-    }
+
+		private void OnHealthRatioChangeHandler(float ratio)
+		{
+			_slider.value = ratio;
+			_slider.gameObject.SetActive(ratio != 0);
+		}
+	}
 }
