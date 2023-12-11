@@ -23,6 +23,7 @@
 	public class HeroUnitSummoner : ControllerBase, IHeroUnitSummoner
 	{
 		[Inject] private CurrencyConfig _currencyConfig;
+		[Inject] private UnitsConfig _unitsConfig;
 		[Inject] private IGameCurrency _gameCurrency;
 		[Inject] private IUiMessage _haveNeedOfMessage;
 		[Inject] private IUnitSpawner _unitSpawner;
@@ -75,10 +76,9 @@
 
 		private void Summon()
 		{
-			//Species defaultSpecies = Species.HeroInfantryman;
-			Species defaultSpecies = Species.HeroSniper;
+			Species summonSpecies = _unitsConfig.HeroDefaultSquad[UnityEngine.Random.Range(0, _unitsConfig.HeroDefaultSquad.Count)];
 			int defaultGradeIndex = 0;
-			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(defaultSpecies, defaultGradeIndex);
+			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(summonSpecies, defaultGradeIndex);
 			_fieldFacade.AddUnit(unit);
 
 			SubscribeToUnit(unit);

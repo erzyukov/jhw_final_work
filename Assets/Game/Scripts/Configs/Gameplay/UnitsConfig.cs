@@ -16,13 +16,17 @@ namespace Game.Configs
 		[SerializeField] private float _speed;
 		[SerializeField] private UnitData[] _units;
 
+		[Header("Dev")]
+		[SerializeField] private List<Species> _heroDefaultSquad;
+
 		private Dictionary<Species, UnitConfig> _unitData;
 
 		public GameObject UnitPrefab => _unitPrefab;
 		public float UiHealthIndent => _uiHealthIndent;
 		public float Speed => _speed;
 		public Dictionary<Species, UnitConfig> Units => _unitData;
-		
+		public List<Species> HeroDefaultSquad => _heroDefaultSquad;
+
 		public void Initialize()
 		{
 			_unitData = new Dictionary<Species, UnitConfig>();
