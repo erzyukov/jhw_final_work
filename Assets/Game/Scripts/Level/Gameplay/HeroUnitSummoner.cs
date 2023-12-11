@@ -27,7 +27,6 @@
 		[Inject] private IUiMessage _haveNeedOfMessage;
 		[Inject] private IUnitSpawner _unitSpawner;
 		[Inject] private IFieldHeroFacade _fieldFacade;
-		[Inject] private IGameCycle _gameCycle;
 
 		Dictionary<IUnitFacade, IDisposable> _unitSubscribes = new Dictionary<IUnitFacade, IDisposable>();
 		bool _isPaidSummonInterrupted;
@@ -76,7 +75,8 @@
 
 		private void Summon()
 		{
-			Species defaultSpecies = Species.HeroInfantryman;
+			//Species defaultSpecies = Species.HeroInfantryman;
+			Species defaultSpecies = Species.HeroSniper;
 			int defaultGradeIndex = 0;
 			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(defaultSpecies, defaultGradeIndex);
 			_fieldFacade.AddUnit(unit);

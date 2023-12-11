@@ -78,11 +78,27 @@ namespace Game.Units
 				.BindInterfacesTo<UnitHealth>()
 				.AsSingle();
 
-			Container
-				.BindInterfacesTo<UnitAttacker>()
-				.AsSingle();
+			InstallAttacker(unitConfig.Class);
 			
 			#endregion
+		}
+
+		private void InstallAttacker(Class unitClass)
+		{
+			switch (unitClass)
+			{
+				case Class.Melee:
+					Container
+						.BindInterfacesTo<UnitAttacker>()
+						.AsSingle();
+					break;
+
+				case Class.Range:
+					Container
+						.BindInterfacesTo<UnitRangeAttacker>()
+						.AsSingle();
+					break;
+			}
 		}
 	}
 }

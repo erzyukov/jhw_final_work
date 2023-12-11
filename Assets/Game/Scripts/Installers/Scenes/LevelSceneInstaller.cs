@@ -7,6 +7,7 @@ namespace Game.Installers
 	using Game.Level;
 	using Game.Profiles;
 	using Game.Units;
+	using Game.Weapon;
 	using Zenject;
 
     public class LevelSceneInstaller : MonoInstaller
@@ -14,6 +15,7 @@ namespace Game.Installers
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] private GameProfile _gameProfile;
 		[Inject] private UnitsConfig _unitsConfig;
+		[Inject] private WeaponsConfig _weaponsConfig;
 
 		public override void InstallBindings()
 		{
@@ -58,7 +60,22 @@ namespace Game.Installers
 				.BindInterfacesTo<BattleStageHandler>()
 				.AsSingle();
 
+			InstallWeapons();
 			InstallUnits();
+		}
+
+		private void InstallWeapons()
+		{
+			Container.BindFactory<ProjectileData, Bullet, Bullet.Factory>()
+				.FromMonoPoolableMemoryPool(x =>
+					x.WithInitialSize(_weaponsConfig.BulletPoolSize)
+						.FromComponentInNewPrefab(_weaponsConfig.BulletPrefab)
+						.UnderTransformGroup("Bullets")
+				);
+
+			Container
+				.BindInterfacesTo<ProjectileSpawner>()
+				.AsSingle();
 		}
 
 		private void InstallUnits()

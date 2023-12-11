@@ -22,3 +22,4 @@ MonoBehaviour:
   _tutorial: {fileID: 11400000, guid: 1445287be641a974d906770af3a42d6e, type: 2}
   _dev: {fileID: 11400000, guid: 88e4ba0cd92b607418186893c2a4c08d, type: 2}
   _experience: {fileID: 11400000, guid: 9181088ac5f005046b70ff064d1945e5, type: 2}
+  _weapons: {fileID: 11400000, guid: 0b043dcfb24e6934eb2b9946cf2541f9, type: 2}
