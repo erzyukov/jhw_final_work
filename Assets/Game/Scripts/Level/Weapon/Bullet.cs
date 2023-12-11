@@ -28,7 +28,10 @@ namespace Game.Weapon
 			_rigidbody.MovePosition(newPosition);
 
 			if (transform.position == _targetPosition)
+			{
+				_target.TakeDamage(_damage);
 				Dispose();
+			}
 		}
 		
 		private void OnTriggerEnter(Collider other)
@@ -37,7 +40,6 @@ namespace Game.Weapon
 				return;
 
 			_target.TakeDamage(_damage);
-
 			Dispose();
 		}
 
