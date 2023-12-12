@@ -133,6 +133,14 @@ MonoBehaviour:
     m_Key: 1 - Main/Canvas/Screens/LevelUpRewardScreen/Title
     m_Metadata:
       m_Items: []
+  - m_Id: 3995855386456064
+    m_Key: 1 - Main/Canvas/MainMenu/BaseButton/Content/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3997344985133056
+    m_Key: 1 - Main/Canvas/MainMenu/UpgradesButton/Content/Title
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
