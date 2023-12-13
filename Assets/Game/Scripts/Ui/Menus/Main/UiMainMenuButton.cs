@@ -31,6 +31,8 @@ namespace Game.Ui
 		public void SetBackgroundColor(Color value) => _buttonBackground.color = value;
 
 		public void SetIcon(Sprite lockedIcon) => _icon.sprite = lockedIcon;
+
+		public void SetIconColor(Color value) => _icon.color = value;
 		
 		public void SetDefaultIcon() => _icon.sprite = _defaultIcon;
 

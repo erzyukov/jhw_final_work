@@ -58,15 +58,11 @@ namespace Game.Profiles
 		private void OnYandexGameGetData()
 		{
 			if (YandexGame.savesData.gameProfile == null)
-			{
 				YandexGame.savesData.gameProfile = _gameProfile;
-			}
 			else
-			{
 				_gameProfile = YandexGame.savesData.gameProfile;
-				AddMissing();
-			}
 
+			AddMissing();
 			IsReady.Value = true;
 		}
 
@@ -84,13 +80,9 @@ namespace Game.Profiles
 
 			while (_gameProfile.Levels.Count < _levelsConfig.Levels.Length)
 			{
-				_gameProfile.Levels.Add(
-					_gameProfile.Levels.Count switch
-					{
-						0 => new LevelProfile(true),
-						_ => new LevelProfile(_gameProfile.Levels.Count < _gameProfile.LevelNumber.Value)
-					}
-				);
+				bool isUnlocked = _gameProfile.Levels.Count < _gameProfile.LevelNumber.Value;
+				_gameProfile.Levels.Add(new LevelProfile());
+				_gameProfile.Levels[_gameProfile.Levels.Count-1].Unlocked.Value = isUnlocked;
 			}
 		}
 

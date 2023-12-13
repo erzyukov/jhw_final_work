@@ -6617,6 +6617,9 @@ MonoBehaviour:
   _lockedButtonColor: {r: 0.6184363, g: 0.598599, b: 0.681, a: 1}
   _activeButtonColor: {r: 0.58459026, g: 0.46487844, b: 0.9372549, a: 1}
   _selectedButtonColor: {r: 0.4117647, g: 0.23529412, b: 0.9372549, a: 1}
+  _lockedIconColor: {r: 0.6862745, g: 0.6862745, b: 0.6862745, a: 1}
+  _activeIconColor: {r: 0.9098039, g: 0.83137256, b: 0.3019608, a: 1}
+  _selectedIconColor: {r: 1, g: 0.8745098, b: 0, a: 1}
   _defaultButtonHeight: 180
   _selectedButtonHeight: 210
 --- !u!1 &1006621325

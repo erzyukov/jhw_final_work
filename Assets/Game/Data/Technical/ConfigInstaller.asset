@@ -23,3 +23,4 @@ MonoBehaviour:
   _dev: {fileID: 11400000, guid: 88e4ba0cd92b607418186893c2a4c08d, type: 2}
   _experience: {fileID: 11400000, guid: 9181088ac5f005046b70ff064d1945e5, type: 2}
   _weapons: {fileID: 11400000, guid: 0b043dcfb24e6934eb2b9946cf2541f9, type: 2}
+  _menu: {fileID: 11400000, guid: 19a8caa98b8753a498fc1061fa3d43b0, type: 2}

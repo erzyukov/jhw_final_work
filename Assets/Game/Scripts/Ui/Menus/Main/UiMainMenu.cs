@@ -4,11 +4,16 @@
 	using Zenject;
 	using UniRx;
 	using Game.Core;
+	using Game.Configs;
+	using System.Linq;
+	using Game.Profiles;
 
 	public class UiMainMenu : ControllerBase, IInitializable
 	{
 		[Inject] private IUiMainMenuView _view;
 		[Inject] private IGameCycle _gameCycle;
+		[Inject] private MenuConfig _menuConfig;
+		[Inject] private GameProfile _gameProfile;
 
 		public void Initialize()
 		{
@@ -30,11 +35,21 @@
 			_view.SetActive(_view.ActiveOnGameState.Contains(state));
 
             foreach (var button in _view.Buttons)
-				_view.SetButtonLocked(button.TargetGameState);
+			{
+				int availableLevelIndex = _menuConfig.AccessFromLevel
+					.Where(data => data.GameState == button.TargetGameState)
+					.Select(data => data.LevelNumber - 1)
+					.FirstOrDefault();
 
-			// TODO: refact [hardcode]: take out to configs
-			_view.SetButtonActive(GameState.Lobby);
-			_view.SetButtonActive(GameState.Upgrades);
+				bool isAvailable = 
+					availableLevelIndex < _gameProfile.Levels.Count && 
+					_gameProfile.Levels[availableLevelIndex].Unlocked.Value;
+
+				if (isAvailable)
+					_view.SetButtonActive(button.TargetGameState);
+				else
+					_view.SetButtonLocked(button.TargetGameState);
+			}
 			
 			_view.SetButtonSelected(state);
 		}

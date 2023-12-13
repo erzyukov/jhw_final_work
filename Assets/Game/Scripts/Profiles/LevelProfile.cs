@@ -6,11 +6,6 @@
 	[Serializable]
 	public class LevelProfile
 	{
-		public BoolReactiveProperty Unlocked = new BoolReactiveProperty();
-
-		public LevelProfile(bool unlocked)
-		{
-			Unlocked.Value = unlocked;
-		}
+		public readonly ReactiveProperty<bool> Unlocked = new ReactiveProperty<bool>(true);
 	}
 }

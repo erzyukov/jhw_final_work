@@ -32,7 +32,7 @@
 
 		public void Initialize()
 		{
-			_heroLastLevel = _profile.HeroLevel.Value;
+            _heroLastLevel = _profile.HeroLevel.Value;
 
 			_scenesManager.LevelLoaded
 				.Subscribe(_ => OnLevelLoaded())

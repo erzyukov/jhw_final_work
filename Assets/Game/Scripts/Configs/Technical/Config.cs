@@ -26,5 +26,6 @@
 
 		// Other
 		Tutorial = 400,
+		Menu,
 	}
 }
