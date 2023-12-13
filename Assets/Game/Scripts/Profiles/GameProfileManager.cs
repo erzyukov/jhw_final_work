@@ -1,10 +1,13 @@
 namespace Game.Profiles
 {
+	using Game.Configs;
 	using Game.Utilities;
+	using System.Collections.Generic;
 	using System.IO;
 	using UniRx;
 	using UnityEngine;
 	using YG;
+	using Zenject;
 
 	public interface IGameProfileManager
 	{
@@ -16,6 +19,8 @@ namespace Game.Profiles
 
 	public class GameProfileManager : ControllerBase, IGameProfileManager
 	{
+		[Inject] private LevelsConfig _levelsConfig;
+
 		private GameProfile _gameProfile;
 
 		public void OnInstantiated()
@@ -53,11 +58,40 @@ namespace Game.Profiles
 		private void OnYandexGameGetData()
 		{
 			if (YandexGame.savesData.gameProfile == null)
+			{
 				YandexGame.savesData.gameProfile = _gameProfile;
+			}
 			else
+			{
 				_gameProfile = YandexGame.savesData.gameProfile;
+				AddMissing();
+			}
 
 			IsReady.Value = true;
+		}
+
+		private void AddMissing()
+		{
+			AddMissingLevels();
+
+			Save();
+		}
+
+		void AddMissingLevels()
+		{
+			if (_gameProfile.Levels == null)
+				_gameProfile.Levels = new List<LevelProfile>();
+
+			while (_gameProfile.Levels.Count < _levelsConfig.Levels.Length)
+			{
+				_gameProfile.Levels.Add(
+					_gameProfile.Levels.Count switch
+					{
+						0 => new LevelProfile(true),
+						_ => new LevelProfile(_gameProfile.Levels.Count < _gameProfile.LevelNumber.Value)
+					}
+				);
+			}
 		}
 
 #if UNITY_EDITOR
