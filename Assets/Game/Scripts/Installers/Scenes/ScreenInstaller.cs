@@ -46,6 +46,11 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<UiLevelReward>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiUpgradesScreen>()
+				.FromComponentInHierarchy()
+				.AsSingle();
 		}
 	}
 }

@@ -253,7 +253,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c9f9d65d8a9294b9b4db5abdae0e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetScreen: 0
+  _defaultIcon: {fileID: 21300000, guid: 7a7afb34bc0884044bea8429eee944e3, type: 3}
+  _icon: {fileID: 6730756673738564211}
+  _targetGameState: 0
+  _buttonBackground: {fileID: 5213765245204909185}
+  _title: {fileID: 8269841270408612803}
 --- !u!1 &5529191302704615322
 GameObject:
   m_ObjectHideFlags: 0

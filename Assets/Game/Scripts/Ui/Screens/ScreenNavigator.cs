@@ -60,6 +60,9 @@
 				case GameState.HeroLevelReward:
 					Open(Ui.Screen.LevelReward);
 					break;
+				case GameState.Upgrades:
+					Open(Ui.Screen.Upgrades);
+					break;
 			}
 		}
 

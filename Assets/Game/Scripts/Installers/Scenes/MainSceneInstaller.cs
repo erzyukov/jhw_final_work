@@ -30,6 +30,15 @@ namespace Game.Installers
 				.BindInterfacesTo<UiVeil>()
 				.FromComponentInHierarchy()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiMainMenuView>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiMainMenu>()
+				.AsSingle();
 		}
 
 		private void InstallGameControllers()
