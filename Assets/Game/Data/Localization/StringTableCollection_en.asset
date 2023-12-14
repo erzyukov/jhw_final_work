@@ -148,6 +148,30 @@ MonoBehaviour:
     m_Localized: UPGRADE
     m_Metadata:
       m_Items: []
+  - m_Id: 4396387498340352
+    m_Localized: HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396521988698112
+    m_Localized: DAMAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396777035935744
+    m_Localized: SPEED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396879217569792
+    m_Localized: RANGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4399172084183040
+    m_Localized: LEVEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4412267393331200
+    m_Localized: UPGRADE
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
