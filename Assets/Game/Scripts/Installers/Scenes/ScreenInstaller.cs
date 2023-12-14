@@ -51,6 +51,10 @@ namespace Game.Installers
 				.BindInterfacesTo<UiUpgradesScreen>()
 				.FromComponentInHierarchy()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiUpgrades>()
+				.AsSingle();
 		}
 	}
 }

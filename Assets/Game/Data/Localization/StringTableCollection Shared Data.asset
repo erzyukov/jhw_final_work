@@ -166,6 +166,15 @@ MonoBehaviour:
       (TMP)
     m_Metadata:
       m_Items: []
+  - m_Id: 4558519665831936
+    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/Scroll View/Viewport/Content/UnitElementUnavailable/UpgradeButton/Text
+      (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4566552647184384
+    m_Key: lvl
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

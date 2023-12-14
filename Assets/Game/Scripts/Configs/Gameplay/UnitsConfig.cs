@@ -16,6 +16,9 @@ namespace Game.Configs
 		[SerializeField] private float _speed;
 		[SerializeField] private UnitData[] _units;
 
+		[Header("Hero")]
+		[SerializeField] private List<Species> _heroUnits;
+
 		[Header("Dev")]
 		[SerializeField] private List<Species> _heroDefaultSquad;
 
@@ -26,6 +29,7 @@ namespace Game.Configs
 		public float Speed => _speed;
 		public Dictionary<Species, UnitConfig> Units => _unitData;
 		public List<Species> HeroDefaultSquad => _heroDefaultSquad;
+		public List<Species> HeroUnits => _heroUnits;
 
 		public void Initialize()
 		{
