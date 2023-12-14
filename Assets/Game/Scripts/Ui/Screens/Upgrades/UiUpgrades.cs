@@ -2,6 +2,7 @@
 {
 	using Game.Configs;
 	using Game.Core;
+	using Game.Profiles;
 	using Game.Units;
 	using Game.Utilities;
 	using System.Collections.Generic;
@@ -14,13 +15,11 @@
 		[Inject] private IUiUpgradesScreen _screen;
 		[Inject] private UnitsConfig _unitsConfig;
 		[Inject] private ILocalizator _localizator;
+		[Inject] private GameProfile _gameProfile;
 
 		private const string LevelTitleKey = "unitLevel";
 		private const string LevelShortTitleKey = "lvl";
 		private const int DummyElementsCount = 3;
-
-		// TODO: replace value from upgrade profile
-		private const string UnitLevel = "4";
 
 		private Species _firstElement;
 		private List<UiUnitUpgradeElement> _unitElements = new List<UiUnitUpgradeElement>();
@@ -40,10 +39,11 @@
 				return;
 
 			UnitGrade grade = unit.Grades[0];
+			int unitLevel = _gameProfile.Units.Upgrades[species];
 
 			_screen.SetIcon(unit.Icon);
 			_screen.SetName(unit.Title);
-			_screen.SetLevel($"{_localizator.GetString(LevelTitleKey)} {UnitLevel}");
+			_screen.SetLevel($"{_localizator.GetString(LevelTitleKey)} {unitLevel}");
 			_screen.SetHealthValue($"{grade.Health}");
 			_screen.SetDamageValue($"{grade.Damage}");
 			_screen.SetSpeedValue($"{grade.AttackDelay}s");
@@ -60,9 +60,11 @@
 				if (_unitElements.Count == 0)
 					_firstElement = species;
 
+				int unitLevel = _gameProfile.Units.Upgrades[species];
+
 				UiUnitUpgradeElement element = GameObject.Instantiate(_screen.UnitElementPrefab);
 				element.SetIcon(unit.Icon);
-				element.SetLevel($"{_localizator.GetString(LevelShortTitleKey)} {UnitLevel}");
+				element.SetLevel($"{_localizator.GetString(LevelShortTitleKey)} {unitLevel}");
 				element.SetParent(_screen.UnitsContainer);
 				_unitElements.Add(element);
 

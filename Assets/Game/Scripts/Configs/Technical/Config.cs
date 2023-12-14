@@ -11,6 +11,8 @@
 		Timings,
 		Experience,
 		Weapons,
+		Upgrades,
+		UnitUpgrades,
 
 		// Levels
 		Regions = 250,
