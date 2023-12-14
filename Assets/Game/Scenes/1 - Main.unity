@@ -12465,6 +12465,7 @@ MonoBehaviour:
   _unitsContainer: {fileID: 318515151}
   _unitUpgradeElementPrefab: {fileID: 2496306605114100192, guid: edc072fd63518ab4a969b864fd230748, type: 3}
   _unitUnavailableDummyPrefab: {fileID: 3784895138836894734, guid: c62b80ba453588f42b0cee07cda98e83, type: 3}
+  _parameterDeltaColor: {r: 0, g: 0.99215686, b: 0, a: 1}
 --- !u!1 &1564474085
 GameObject:
   m_ObjectHideFlags: 0

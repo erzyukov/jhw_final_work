@@ -3,6 +3,7 @@ namespace Game.Ui
 	using UnityEngine;
 	using UnityEngine.UI;
 	using TMPro;
+	using Game.Units;
 
 	public interface IUiUpgradesScreen : IUiScreen
 	{
@@ -12,8 +13,8 @@ namespace Game.Ui
 		void SetIcon(Sprite value);
 		void SetName(string value);
 		void SetLevel(string value);
-		void SetHealthValue(string value);
-		void SetDamageValue(string value);
+		void SetHealthValue(string value, string delta);
+		void SetDamageValue(string value, string delta);
 		void SetSpeedValue(string value);
 		void SetRangeValue(string value);
 	}
@@ -30,6 +31,7 @@ namespace Game.Ui
 		[SerializeField] private Transform _unitsContainer;
 		[SerializeField] private UiUnitUpgradeElement _unitUpgradeElementPrefab;
 		[SerializeField] private GameObject _unitUnavailableDummyPrefab;
+		[SerializeField] private Color _parameterDeltaColor;
 
 		public override Screen Screen => Screen.Upgrades;
 
@@ -50,11 +52,11 @@ namespace Game.Ui
 		public void SetLevel(string value) =>
 			_unitLevel.text = value;
 
-		public void SetHealthValue(string value) =>
-			_unitHealthValue.text = value;
+		public void SetHealthValue(string value, string delta) =>
+		_unitHealthValue.text = $"{value} <color=#{ColorUtility.ToHtmlStringRGB(_parameterDeltaColor)}>+ {delta}</color>";
 
-		public void SetDamageValue(string value) =>
-			_unitDamageValue.text = value;
+		public void SetDamageValue(string value, string delta) =>
+		_unitDamageValue.text = $"{value} <color=#{ColorUtility.ToHtmlStringRGB(_parameterDeltaColor)}>+ {delta}</color>";
 
 		public void SetSpeedValue(string value) =>
 			_unitSpeedValue.text = value;

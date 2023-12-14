@@ -16,6 +16,7 @@
 		[Inject] private UnitsConfig _unitsConfig;
 		[Inject] private ILocalizator _localizator;
 		[Inject] private GameProfile _gameProfile;
+		[Inject] private IGameUpgrades _gameUpgrades;
 
 		private const string LevelTitleKey = "unitLevel";
 		private const string LevelShortTitleKey = "lvl";
@@ -44,8 +45,14 @@
 			_screen.SetIcon(unit.Icon);
 			_screen.SetName(unit.Title);
 			_screen.SetLevel($"{_localizator.GetString(LevelTitleKey)} {unitLevel}");
-			_screen.SetHealthValue($"{grade.Health}");
-			_screen.SetDamageValue($"{grade.Damage}");
+			_screen.SetHealthValue(
+				_gameUpgrades.GetUnitHealth(species).ToString(), 
+				_gameUpgrades.GetUnitHealthUpgradeDelta(species).ToString()
+			);
+			_screen.SetDamageValue(
+				_gameUpgrades.GetUnitDamage(species).ToString(),
+				_gameUpgrades.GetUnitDamageUpgradeDelta(species).ToString()
+			);
 			_screen.SetSpeedValue($"{grade.AttackDelay}s");
 			_screen.SetRangeValue($"{unit.AttackRange}");
 		}

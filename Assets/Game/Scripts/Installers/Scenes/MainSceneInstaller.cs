@@ -50,6 +50,10 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<GameHero>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<GameUpgrades>()
+				.AsSingle();
 		}
 
 		private void WindowsInstall()
