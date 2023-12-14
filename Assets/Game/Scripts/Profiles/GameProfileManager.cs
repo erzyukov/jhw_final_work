@@ -20,6 +20,7 @@ namespace Game.Profiles
 	public class GameProfileManager : ControllerBase, IGameProfileManager
 	{
 		[Inject] private LevelsConfig _levelsConfig;
+		[Inject] private UnitsConfig _unitsConfig;
 
 		private GameProfile _gameProfile;
 
@@ -69,11 +70,12 @@ namespace Game.Profiles
 		private void AddMissing()
 		{
 			AddMissingLevels();
+			AddMissingUnits();
 
 			Save();
 		}
 
-		void AddMissingLevels()
+		private void AddMissingLevels()
 		{
 			if (_gameProfile.Levels == null)
 				_gameProfile.Levels = new List<LevelProfile>();
@@ -85,6 +87,16 @@ namespace Game.Profiles
 				_gameProfile.Levels[_gameProfile.Levels.Count-1].Unlocked.Value = isUnlocked;
 			}
 		}
+
+		private void AddMissingUnits()
+		{
+			if (_gameProfile.Units == null)
+				_gameProfile.Units = new UnitsProfile();
+
+            foreach (var species in _unitsConfig.HeroUnits)
+				if (_gameProfile.Units.Upgrades.ContainsKey(species) == false)
+					_gameProfile.Units.Upgrades.Add(species, 1);
+        }
 
 #if UNITY_EDITOR
 		private const string PathSavesEditor = "/YandexGame/WorkingData/Editor/SavesEditorYG.json";
