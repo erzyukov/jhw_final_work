@@ -15,6 +15,7 @@
 		[Inject] private UnitsConfig _unitsConfig;
 		[Inject] private ILocalizator _localizator;
 
+		private const string LevelTitleKey = "unitLevel";
 		private const string LevelShortTitleKey = "lvl";
 		private const int DummyElementsCount = 3;
 
@@ -35,7 +36,18 @@
 
 		private void FillUnitInfo(Species species)
 		{
-			
+			if (_unitsConfig.Units.TryGetValue(species, out var unit) == false)
+				return;
+
+			UnitGrade grade = unit.Grades[0];
+
+			_screen.SetIcon(unit.Icon);
+			_screen.SetName(unit.Title);
+			_screen.SetLevel($"{_localizator.GetString(LevelTitleKey)} {UnitLevel}");
+			_screen.SetHealthValue($"{grade.Health}");
+			_screen.SetDamageValue($"{grade.Damage}");
+			_screen.SetSpeedValue($"{grade.AttackDelay}s");
+			_screen.SetRangeValue($"{unit.AttackRange}");
 		}
 
 		private void CreateUnitList()

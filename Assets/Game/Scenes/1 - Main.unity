@@ -12455,6 +12455,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _closeButton: {fileID: 0}
+  _unitIcon: {fileID: 414529068}
+  _unitName: {fileID: 1192046501}
+  _unitLevel: {fileID: 68158008}
+  _unitHealthValue: {fileID: 1767473839}
+  _unitDamageValue: {fileID: 46077659}
+  _unitSpeedValue: {fileID: 715203090}
+  _unitRangeValue: {fileID: 1017521672}
   _unitsContainer: {fileID: 318515151}
   _unitUpgradeElementPrefab: {fileID: 2496306605114100192, guid: edc072fd63518ab4a969b864fd230748, type: 3}
   _unitUnavailableDummyPrefab: {fileID: 3784895138836894734, guid: c62b80ba453588f42b0cee07cda98e83, type: 3}
