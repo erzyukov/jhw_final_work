@@ -57,13 +57,13 @@
 
 		#endregion
 
-		void AddCurrency(IntReactiveProperty currency, int value)
+		private void AddCurrency(IntReactiveProperty currency, int value)
 		{
 			currency.Value += value;
 			Save();
 		}
 
-		bool TrySpendCurrency(IntReactiveProperty currency, int value)
+		private bool TrySpendCurrency(IntReactiveProperty currency, int value)
 		{
 			if (value > currency.Value)
 				return false;
@@ -74,6 +74,6 @@
 			return true;
 		}
 
-		void Save() => _gameProfileManager.Save();
+		private void Save() => _gameProfileManager.Save();
 	}
 }

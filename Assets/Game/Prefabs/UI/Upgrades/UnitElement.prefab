@@ -56,6 +56,7 @@ MonoBehaviour:
   _level: {fileID: 2496306606107528598}
   _selectButton: {fileID: 2496306606219739118}
   _upgradeButton: {fileID: 2496306606274422422}
+  _upgradePrice: {fileID: 2496306605929681156}
 --- !u!114 &2496306605114100193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,7 +88,6 @@ GameObject:
   - component: {fileID: 2496306605929681157}
   - component: {fileID: 2496306605929681155}
   - component: {fileID: 2496306605929681156}
-  - component: {fileID: 2496306605929681154}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0423\u0421\u0418\u041B\u0418\u0422\u042C"
+  m_text: <sprite=0> 15000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a2e2bf5711521e541b9a019d528130ec, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 936c88cd9a1830d42900827016449615, type: 2}
@@ -170,8 +170,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46
-  m_fontSizeBase: 46
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -212,44 +212,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &2496306605929681154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2496306605929681158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TrackedObjects:
-  - rid: 9072704078124154880
-  references:
-    version: 2
-    RefIds:
-    - rid: 9072704078124154880
-      type: {class: TrackedUGuiGraphic, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects, asm: Unity.Localization}
-      data:
-        m_Target: {fileID: 2496306605929681156}
-        m_TrackedProperties:
-          items:
-          - rid: 9072704078124154881
-        m_UpdateType: 0
-    - rid: 9072704078124154881
-      type: {class: LocalizedStringProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
-      data:
-        m_Localized:
-          m_TableReference:
-            m_TableCollectionName: GUID:5f31ae77c27018a4d8effc3283048516
-          m_TableEntryReference:
-            m_KeyId: 4412267393331200
-            m_Key: 
-          m_FallbackState: 0
-          m_WaitForCompletion: 0
-          m_LocalVariables: []
-        m_PropertyPath: m_text
 --- !u!1 &2496306606107528584
 GameObject:
   m_ObjectHideFlags: 0

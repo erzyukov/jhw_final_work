@@ -10,13 +10,16 @@ namespace Game.Core
 	using Game.Configs;
 	using Game.Profiles;
 	using UpgradeData = Game.Configs.UnitUpgradesConfig.UpgradeData;
+	using System.Collections.Generic;
 
 	public interface IGameUpgrades
 	{
-		float GetUnitHealth(Species species, int grade = 0);
-		float GetUnitDamage(Species species, int grade = 0);
-		float GetUnitHealthUpgradeDelta(Species species, int grade = 0);
-		float GetUnitDamageUpgradeDelta(Species species, int grade = 0);
+		float GetUnitHealth(Species species);
+		float GetUnitDamage(Species species);
+		float GetUnitHealthUpgradeDelta(Species species);
+		float GetUnitDamageUpgradeDelta(Species species);
+		int GetUpgradePrice(Species species);
+		bool TryBuyUpgrade(Species species);
 	}
 
 	public class GameUpgrades : ControllerBase, IGameUpgrades, IInitializable
@@ -25,57 +28,112 @@ namespace Game.Core
 		[Inject] UnitsConfig _unitsConfig;
 		[Inject] GameProfile _gameProfile;
 		[Inject] IGameProfileManager _gameProfileManager;
+		[Inject] IGameCurrency _gameCurrency;
+
+		private Dictionary<Species, float> _currentHealth = new Dictionary<Species, float>();
+		private Dictionary<Species, float> _currentDamage = new Dictionary<Species, float>();
 
 		public void Initialize()
 		{
+            foreach (var upgrade in _gameProfile.Units.Upgrades)
+            {
+				upgrade.Value
+					.Subscribe(level => OnUnitUpgradedHandler(upgrade.Key, level))
+					.AddTo(this);
+			}
 		}
 
 		#region IGameUpgrades
 
-		public float GetUnitHealth(Species species, int grade = 0)
-		{
-			float defaultHealth = _unitsConfig.Units[species].Grades[grade].Health;
+		public float GetUnitHealth(Species species) =>
+			_currentHealth[species];
 
-			return defaultHealth + Mathf.Ceil(defaultHealth * GetUpgradeData(species).Health);
-		}
+		public float GetUnitDamage(Species species) =>
+			_currentDamage[species];
 
-		public float GetUnitDamage(Species species, int grade = 0)
-		{
-			float defaultDamage = _unitsConfig.Units[species].Grades[grade].Damage;
-
-			return defaultDamage + Mathf.Ceil(defaultDamage * GetUpgradeData(species).Damage);
-		}
-
-		public float GetUnitHealthUpgradeDelta(Species species, int grade = 0)
+		public float GetUnitHealthUpgradeDelta(Species species)
 		{
 			float defaultHealth = _unitsConfig.Units[species].Grades[0].Health;
-			int level = _gameProfile.Units.Upgrades[species];
 
-			return Mathf.Ceil(defaultHealth * GetUpgradeData(species, level + 1).Health);
+			return Mathf.Ceil(defaultHealth * GetNextUpgradeData(species).Health);
 		}
 
-		public float GetUnitDamageUpgradeDelta(Species species, int grade = 0)
+		public float GetUnitDamageUpgradeDelta(Species species)
 		{
 			float defaultDamage = _unitsConfig.Units[species].Grades[0].Damage;
-			int level = _gameProfile.Units.Upgrades[species];
 
-			return Mathf.Ceil(defaultDamage * GetUpgradeData(species, level + 1).Damage);
+			return Mathf.Ceil(defaultDamage * GetNextUpgradeData(species).Damage);
+		}
+
+		public int GetUpgradePrice(Species species) =>
+			GetNextUpgradeData(species).Price;
+
+		public bool TryBuyUpgrade(Species species)
+		{
+			int price = GetUpgradePrice(species);
+			
+			if (_gameCurrency.TrySpendSoftCurrency(price) == false)
+				return false;
+
+			_gameProfile.Units.Upgrades[species].Value++;
+			Save();
+			
+			return true;
 		}
 
 		#endregion
 
+		private void OnUnitUpgradedHandler(Species species, int level)
+		{
+			SetupCurrenUpgradeValues(species, level);
+		}
+
+		private void SetupCurrenUpgradeValues()
+		{
+			foreach (var upgrade in _gameProfile.Units.Upgrades)
+				SetupCurrenUpgradeValues(upgrade.Key, upgrade.Value.Value);
+		}
+
+		private void SetupCurrenUpgradeValues(Species species, int level)
+		{
+			UnitGrade defaultGrade = _unitsConfig.Units[species].Grades[0];
+			
+			_currentHealth[species] = defaultGrade.Health;
+			_currentDamage[species] = defaultGrade.Damage;
+
+			for (int i = 1; i <= level; i++)
+			{
+				UpgradeData data = GetUpgradeData(species, i);
+
+				_currentHealth[species] += Mathf.Ceil(data.Health * defaultGrade.Health);
+				_currentDamage[species] += Mathf.Ceil(data.Damage * defaultGrade.Damage);
+			}
+		}
+
 		private UpgradeData GetUpgradeData(Species species)
 		{
-			int level = _gameProfile.Units.Upgrades[species];
+			int level = _gameProfile.Units.Upgrades[species].Value;
 
 			return GetUpgradeData(species, level);
 		}
 
-		private UpgradeData GetUpgradeData(Species species, int level)
+		private UpgradeData GetNextUpgradeData(Species species)
+		{
+			int level = _gameProfile.Units.Upgrades[species].Value;
+
+			return GetUpgradeData(species, level + 1);
+		}
+
+		private UpgradeData GetUpgradeData(Species species, int levelNumber)
 		{
 			UnitUpgradesConfig upgrade = _upgradesConfig.UnitsUpgrades[species];
 
-			return upgrade.Upgrades[level];
+			if (levelNumber < upgrade.Upgrades.Length)
+				return upgrade.Upgrades[levelNumber - 1];
+			else
+				return upgrade.Upgrades[0];
 		}
+
+		private void Save() => _gameProfileManager.Save();
 	}
 }

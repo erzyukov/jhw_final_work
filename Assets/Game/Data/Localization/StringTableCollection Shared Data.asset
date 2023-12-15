@@ -175,6 +175,10 @@ MonoBehaviour:
     m_Key: lvl
     m_Metadata:
       m_Items: []
+  - m_Id: 5066819859787776
+    m_Key: NotEnoughSoftCurrency
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -180,6 +180,10 @@ MonoBehaviour:
     m_Localized: LV.
     m_Metadata:
       m_Items: []
+  - m_Id: 5066819859787776
+    m_Localized: 'HAVE NEED OF: <sprite=0>MONEY'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

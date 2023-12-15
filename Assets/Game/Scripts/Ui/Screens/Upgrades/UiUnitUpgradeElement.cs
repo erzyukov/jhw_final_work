@@ -12,6 +12,7 @@ namespace Game.Ui
 		[SerializeField] private TextMeshProUGUI _level;
 		[SerializeField] private Button _selectButton;
 		[SerializeField] private Button _upgradeButton;
+		[SerializeField] private TextMeshProUGUI _upgradePrice;
 
 		public void SetIcon(Sprite value) => 
 			_icon.sprite = value;
@@ -21,6 +22,9 @@ namespace Game.Ui
 
 		public void SetParent(Transform parent) =>
 			transform.SetParent(parent);
+
+		public void SetPrice(string value) =>
+			_upgradePrice.text = $"<sprite=0> {value}";
 
 		public IObservable<Unit> SelectButtonClicked => 
 			_selectButton.OnClickAsObservable();

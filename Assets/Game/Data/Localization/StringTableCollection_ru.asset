@@ -188,6 +188,10 @@ MonoBehaviour:
     m_Localized: "\u0423\u0420."
     m_Metadata:
       m_Items: []
+  - m_Id: 5066819859787776
+    m_Localized: "\u041D\u0415 \u0425\u0412\u0410\u0422\u0410\u0415\u0422: <sprite=0>\u0414\u0415\u041D\u0415\u0413"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

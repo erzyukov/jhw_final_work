@@ -95,7 +95,7 @@ namespace Game.Profiles
 
             foreach (var species in _unitsConfig.HeroUnits)
 				if (_gameProfile.Units.Upgrades.ContainsKey(species) == false)
-					_gameProfile.Units.Upgrades.Add(species, 1);
+					_gameProfile.Units.Upgrades.Add(species, new IntReactiveProperty(1));
         }
 
 #if UNITY_EDITOR

@@ -3,10 +3,11 @@
 	using System;
 	using System.Collections.Generic;
 	using Game.Units;
+	using UniRx;
 
 	[Serializable]
 	public class UnitsProfile
 	{
-		public Dictionary<Species, int> Upgrades = new Dictionary<Species, int>();
+		public Dictionary<Species, IntReactiveProperty> Upgrades = new Dictionary<Species, IntReactiveProperty>();
 	}
 }
