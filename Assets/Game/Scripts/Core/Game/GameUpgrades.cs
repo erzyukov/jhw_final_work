@@ -11,6 +11,7 @@ namespace Game.Core
 	using Game.Profiles;
 	using UpgradeData = Game.Configs.UnitUpgradesConfig.UpgradeData;
 	using System.Collections.Generic;
+	using System.Linq;
 
 	public interface IGameUpgrades
 	{
@@ -41,6 +42,8 @@ namespace Game.Core
 					.Subscribe(level => OnUnitUpgradedHandler(upgrade.Key, level))
 					.AddTo(this);
 			}
+
+			SetupEnemyUnits();
 		}
 
 		#region IGameUpgrades
@@ -53,14 +56,14 @@ namespace Game.Core
 
 		public float GetUnitHealthUpgradeDelta(Species species)
 		{
-			float defaultHealth = _unitsConfig.Units[species].Grades[0].Health;
+			float defaultHealth = _unitsConfig.Units[species].Health;
 
 			return Mathf.Ceil(defaultHealth * GetNextUpgradeData(species).Health);
 		}
 
 		public float GetUnitDamageUpgradeDelta(Species species)
 		{
-			float defaultDamage = _unitsConfig.Units[species].Grades[0].Damage;
+			float defaultDamage = _unitsConfig.Units[species].Damage;
 
 			return Mathf.Ceil(defaultDamage * GetNextUpgradeData(species).Damage);
 		}
@@ -88,25 +91,31 @@ namespace Game.Core
 			SetupCurrenUpgradeValues(species, level);
 		}
 
-		private void SetupCurrenUpgradeValues()
+		private void SetupEnemyUnits()
 		{
-			foreach (var upgrade in _gameProfile.Units.Upgrades)
-				SetupCurrenUpgradeValues(upgrade.Key, upgrade.Value.Value);
+			List<Species> enemyUnits = _unitsConfig.Units
+				.Where(upgrade => _unitsConfig.HeroUnits.Contains(upgrade.Key) == false)
+				.Select(upgrade => upgrade.Key)
+				.ToList();
+			
+			foreach (var species in enemyUnits)
+			{
+				_currentHealth[species] = _unitsConfig.Units[species].Health;
+				_currentDamage[species] = _unitsConfig.Units[species].Damage;
+			}
 		}
 
 		private void SetupCurrenUpgradeValues(Species species, int level)
 		{
-			UnitGrade defaultGrade = _unitsConfig.Units[species].Grades[0];
-			
-			_currentHealth[species] = defaultGrade.Health;
-			_currentDamage[species] = defaultGrade.Damage;
+			_currentHealth[species] = _unitsConfig.Units[species].Health;
+			_currentDamage[species] = _unitsConfig.Units[species].Damage;
 
 			for (int i = 1; i <= level; i++)
 			{
 				UpgradeData data = GetUpgradeData(species, i);
 
-				_currentHealth[species] += Mathf.Ceil(data.Health * defaultGrade.Health);
-				_currentDamage[species] += Mathf.Ceil(data.Damage * defaultGrade.Damage);
+				_currentHealth[species] += Mathf.Ceil(data.Health * _unitsConfig.Units[species].Health);
+				_currentDamage[species] += Mathf.Ceil(data.Damage * _unitsConfig.Units[species].Damage);
 			}
 		}
 

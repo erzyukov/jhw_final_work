@@ -8,8 +8,8 @@
 	{
 		public GameObject Prefab;
 		public float AttackDelay;
-		public float Damage;
-		public float Health;
+		public float HealthMultiplier;
+		public float DamageMultiplier;
 		public int SoftCurrencyReward;
 		public int ExperienceReward;
 	}

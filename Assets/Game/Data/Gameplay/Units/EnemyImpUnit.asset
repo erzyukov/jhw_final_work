@@ -13,31 +13,34 @@ MonoBehaviour:
   m_Name: EnemyImpUnit
   m_EditorClassIdentifier: 
   _title: "\u0411\u0435\u0441"
+  _icon: {fileID: 0}
   _class: 0
   _attackRange: 0.7
+  _health: 40
+  _damage: 8
   _grades:
   - Prefab: {fileID: 1503547998484457933, guid: 300101dba81de064a8cd0c201c9268d4, type: 3}
     AttackDelay: 0.95
-    Damage: 8
-    Health: 40
+    HealthMultiplier: 1
+    DamageMultiplier: 1
     SoftCurrencyReward: 5
     ExperienceReward: 3
   - Prefab: {fileID: 1503547998484457933, guid: 300101dba81de064a8cd0c201c9268d4, type: 3}
     AttackDelay: 0.94
-    Damage: 10
-    Health: 50
+    HealthMultiplier: 1.5
+    DamageMultiplier: 1.5
     SoftCurrencyReward: 11
     ExperienceReward: 4
   - Prefab: {fileID: 1503547998484457933, guid: 300101dba81de064a8cd0c201c9268d4, type: 3}
     AttackDelay: 0.93
-    Damage: 14
-    Health: 60
+    HealthMultiplier: 2.25
+    DamageMultiplier: 2.25
     SoftCurrencyReward: 17
     ExperienceReward: 5
   - Prefab: {fileID: 1503547998484457933, guid: 300101dba81de064a8cd0c201c9268d4, type: 3}
     AttackDelay: 0.92
-    Damage: 18
-    Health: 70
+    HealthMultiplier: 3.375
+    DamageMultiplier: 3.375
     SoftCurrencyReward: 25
     ExperienceReward: 6
   _isDebug: 0

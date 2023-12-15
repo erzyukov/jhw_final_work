@@ -4,6 +4,7 @@
 	using Zenject;
 	using UniRx;
 	using UnityEngine;
+	using Game.Core;
 
 	public interface IUnitHealth
 	{
@@ -18,6 +19,8 @@
 
 	public class UnitHealth : ControllerBase, IUnitHealth
 	{
+		[Inject] private Species _species;
+		[Inject] private IGameUpgrades _gameUpgrades;
 		[Inject] private UnitGrade _unitGrade;
 
 		private float _baseHealth;
@@ -46,8 +49,8 @@
 
 		public void Reset()
 		{
-			_baseHealth = _unitGrade.Health;
-			_health = _unitGrade.Health;
+			_baseHealth = _gameUpgrades.GetUnitHealth(_species) * _unitGrade.HealthMultiplier;
+			_health = _baseHealth;
 			HealthRatio.Value = 1;
 		}
 

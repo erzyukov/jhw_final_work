@@ -10,6 +10,8 @@
 		[SerializeField] private Sprite _icon;
 		[SerializeField] private Class _class;
 		[SerializeField] private float _attackRange;
+		[SerializeField] private float _health;
+		[SerializeField] private float _damage;
 		[SerializeField] private UnitGrade[] _grades;
 		[SerializeField] private bool _isDebug;
 
@@ -17,6 +19,8 @@
 		public Sprite Icon => _icon;
 		public Class Class => _class;
 		public float AttackRange => _attackRange;
+		public float Health => _health;
+		public float Damage => _damage;
 		public UnitGrade[] Grades => _grades;
 		public bool IsDebug => _isDebug;
 	}
