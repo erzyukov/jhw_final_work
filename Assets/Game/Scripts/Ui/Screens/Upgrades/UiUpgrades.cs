@@ -6,7 +6,6 @@
 	using Game.Units;
 	using Game.Utilities;
 	using System.Collections.Generic;
-	using System.Xml.Linq;
 	using UniRx;
 	using UnityEngine;
 	using Zenject;
@@ -31,9 +30,7 @@
 		public void Initialize()
 		{
 			_screen.UnitsContainer.DestroyChildren();
-
 			CreateUnitList();
-
 			FillUnitInfo(_firstElement);
 		}
 
@@ -72,10 +69,9 @@
 
 				int unitLevel = _gameProfile.Units.Upgrades[species].Value;
 
-				UiUnitUpgradeElement element = GameObject.Instantiate(_screen.UnitElementPrefab);
+				UiUnitUpgradeElement element = GameObject.Instantiate(_screen.UnitElementPrefab, _screen.UnitsContainer);
 				element.SetIcon(unit.Icon);
 				element.SetLevel($"{_localizator.GetString(LevelShortTitleKey)} {unitLevel}");
-				element.SetParent(_screen.UnitsContainer);
 				element.SetPrice(_gameUpgrades.GetUpgradePrice(species).ToString());
 				_unitElements.Add(species, element);
 
@@ -89,10 +85,7 @@
 			}
 
 			for (int i = 0; i < DummyElementsCount; i++)
-			{
-				GameObject.Instantiate(_screen.UnitUnavailableDummyPrefab).transform
-					.SetParent(_screen.UnitsContainer);
-			}
+				GameObject.Instantiate(_screen.UnitUnavailableDummyPrefab, _screen.UnitsContainer);
 		}
 
 		private void UpdateUnitElement(Species species)

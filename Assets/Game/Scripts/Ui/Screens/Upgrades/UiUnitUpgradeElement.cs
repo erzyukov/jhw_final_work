@@ -20,9 +20,6 @@ namespace Game.Ui
 		public void SetLevel(string value) =>
 			_level.text = value;
 
-		public void SetParent(Transform parent) =>
-			transform.SetParent(parent);
-
 		public void SetPrice(string value) =>
 			_upgradePrice.text = $"<sprite=0> {value}";
 
@@ -31,6 +28,5 @@ namespace Game.Ui
 
 		public IObservable<Unit> UpgradeButtonClicked => 
 			_upgradeButton.OnClickAsObservable();
-
 	}
 }
