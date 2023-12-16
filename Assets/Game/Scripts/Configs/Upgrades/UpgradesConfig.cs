@@ -4,6 +4,10 @@
 	using System;
 	using System.Collections.Generic;
 	using UnityEngine;
+#if UNITY_EDITOR
+	using UnityEditor;
+	using System.Linq;
+#endif
 
 	[CreateAssetMenu(fileName = "Upgrades", menuName = "Configs/Upgrades", order = (int)Config.Upgrades)]
 	public class UpgradesConfig : ScriptableObject
@@ -29,4 +33,24 @@
 			public UnitUpgradesConfig Upgrades;
 		}
 	}
+
+#if UNITY_EDITOR
+	[CustomEditor(typeof(UpgradesConfig)), CanEditMultipleObjects]
+	public class UpgradesConfigEditor : ConfigEditor
+	{
+		public override void OnInspectorGUI()
+		{
+			base.OnInspectorGUI();
+
+			EditorGUILayout.Space();
+			EditorGUILayout.LabelField("Game Balance", EditorStyles.boldLabel);
+
+			UpgradesConfig config = (UpgradesConfig)target;
+			config.Initialize();
+			int cost = config.UnitsUpgrades.Sum(u => u.Value.Upgrades.Sum(upgrade => upgrade.Price));
+
+			EditorGUILayout.LabelField("Total upgrades cost: ", cost.ToString());
+		}
+	}
+#endif
 }
