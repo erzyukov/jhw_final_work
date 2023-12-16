@@ -13,9 +13,10 @@
 		Weapons,
 		Upgrades,
 		UnitUpgrades,
+        Energy,
 
-		// Levels
-		Regions = 250,
+        // Levels
+        Regions = 250,
 		Levels,
 		Level,
 		Wave,
