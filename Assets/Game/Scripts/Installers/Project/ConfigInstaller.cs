@@ -18,11 +18,14 @@ namespace Game.Installers
 		[SerializeField] private DevConfig _dev;
 		[SerializeField] private ExperienceConfig _experience;
 		[SerializeField] private WeaponsConfig _weapons;
+		[SerializeField] private MenuConfig _menu;
+		[SerializeField] private UpgradesConfig _upgrades;
 
 		public override void InstallBindings()
 		{
 			_units.Initialize();
 			_tutorial.Initialize();
+			_upgrades.Initialize();
 
 			Container.BindInstance(_scenes);
 			Container.BindInstance(_units);
@@ -35,6 +38,8 @@ namespace Game.Installers
 			Container.BindInstance(_dev);
 			Container.BindInstance(_experience);
 			Container.BindInstance(_weapons);
+			Container.BindInstance(_menu);
+			Container.BindInstance(_upgrades);
 		}
 	}
 }

@@ -32,7 +32,7 @@
 
 		public void Initialize()
 		{
-			_heroLastLevel = _profile.HeroLevel.Value;
+            _heroLastLevel = _profile.HeroLevel.Value;
 
 			_scenesManager.LevelLoaded
 				.Subscribe(_ => OnLevelLoaded())
@@ -106,14 +106,22 @@
 			{
 				_gameCycle.SetState(GameState.HeroLevelReward);
 				_heroLastLevel = _profile.HeroLevel.Value;
+				
 				return;
 			}
 
 			_uiViel.Appear(() =>
 			{
 				LevelFinished.Execute();
+				
 				if (_isLevelWon)
+				{
 					_profile.LevelNumber.Value = Mathf.Clamp(_profile.LevelNumber.Value + 1, 0, _levelsConfig.Levels.Length);
+
+					if (_profile.Levels.Count <= _profile.LevelNumber.Value)
+						_profile.Levels[_profile.LevelNumber.Value - 1].Unlocked.Value = true;
+				}
+
 				_profile.WaveNumber.Value = 0;
 				_scenesManager.UnloadLevel();
 				_gameProfileManager.Save();

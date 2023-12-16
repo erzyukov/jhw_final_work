@@ -7,18 +7,20 @@
 	using UnityEngine;
 	using Game.Weapon;
 	using System;
-	using System.Collections.Generic;
+	using Game.Core;
 
 	public class UnitRangeAttacker : ControllerBase, IInitializable, IUnitAttacker
 	{
 		[Inject] private IUnitView _view;
+		[Inject] private Species _species;
+		[Inject] private IGameUpgrades _gameUpgrades;
 		[Inject] private UnitGrade _grade;
 		[Inject] private UnitConfig _config;
 		[Inject] private IProjectileSpawner _projectileSpawner;
 
 		private ITimer _atackTimer;
 		private Transform _shootPoint;
-		private float _damage;
+		private float _currentDamage;
 
 		public void Initialize()
 		{
@@ -29,8 +31,7 @@
 			else
 				throw new Exception("Can't found component ShootPoint in UnitView object!");
 
-			// TODO: Calculate damage
-			_damage = _grade.Damage;
+			_currentDamage = _gameUpgrades.GetUnitDamage(_species) * _grade.DamageMultiplier;
 			_atackTimer = new Timer();
 		}
 
@@ -43,13 +44,14 @@
 			if (IsTargetClose(target) == false)
 			{
 				AttackRangeBroken.Execute();
+
 				return;
 			}
 
 			if (_atackTimer.IsReady == false)
 				return;
 
-			_projectileSpawner.SpawnBullet(_shootPoint.transform.position, target, _damage);
+			_projectileSpawner.SpawnBullet(_shootPoint.transform.position, target, _currentDamage);
 			_atackTimer.Set(_grade.AttackDelay);
 		}
 

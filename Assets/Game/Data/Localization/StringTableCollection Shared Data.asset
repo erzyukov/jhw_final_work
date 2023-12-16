@@ -133,6 +133,52 @@ MonoBehaviour:
     m_Key: 1 - Main/Canvas/Screens/LevelUpRewardScreen/Title
     m_Metadata:
       m_Items: []
+  - m_Id: 3995855386456064
+    m_Key: 1 - Main/Canvas/MainMenu/BaseButton/Content/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3997344985133056
+    m_Key: 1 - Main/Canvas/MainMenu/UpgradesButton/Content/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396387498340352
+    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/SelectedUnit/Content/HealthParameter/ValueBg/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396521988698112
+    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/SelectedUnit/Content/DamageParameter/ValueBg/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396777035935744
+    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/SelectedUnit/Content/MoveSpeedParameter/ValueBg/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396879217569792
+    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/SelectedUnit/Content/RangeParameter/ValueBg/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4399172084183040
+    m_Key: unitLevel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4412267393331200
+    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/Scroll View/Viewport/Content/UnitElement/UpgradeButton/Text
+      (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4558519665831936
+    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/Scroll View/Viewport/Content/UnitElementUnavailable/UpgradeButton/Text
+      (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4566552647184384
+    m_Key: lvl
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5066819859787776
+    m_Key: NotEnoughSoftCurrency
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

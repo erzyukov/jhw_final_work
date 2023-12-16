@@ -11,6 +11,8 @@
 		Timings,
 		Experience,
 		Weapons,
+		Upgrades,
+		UnitUpgrades,
 
 		// Levels
 		Regions = 250,
@@ -26,5 +28,6 @@
 
 		// Other
 		Tutorial = 400,
+		Menu,
 	}
 }

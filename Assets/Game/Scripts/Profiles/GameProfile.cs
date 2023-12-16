@@ -1,6 +1,7 @@
 namespace Game.Profiles
 {
 	using System;
+	using System.Collections.Generic;
 	using UniRx;
 
 	[Serializable]
@@ -17,8 +18,10 @@ namespace Game.Profiles
 		public readonly IntReactiveProperty LevelHeroExperience = new IntReactiveProperty(0);
 		public bool IsReturnFromBattle;
 
-		public TutorialProfile Tutorial = new TutorialProfile();
+		public List<LevelProfile> Levels = new List<LevelProfile>();
 
+		public TutorialProfile Tutorial = new TutorialProfile();
 		public HeroFieldProfile HeroField = new HeroFieldProfile();
+		public UnitsProfile Units = new UnitsProfile();
 	}
 }

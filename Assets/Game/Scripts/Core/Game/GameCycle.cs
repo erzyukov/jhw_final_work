@@ -49,5 +49,9 @@
 		WinBattle,
 		LoseBattle,
 		HeroLevelReward,
+		Upgrades,
+		IapShop,
+		Talents,
+		GuildLobby,
 	}
 }

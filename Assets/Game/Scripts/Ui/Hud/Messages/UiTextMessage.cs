@@ -11,7 +11,8 @@ namespace Game.Ui
 	{
 		NotEnoughSummonCurrency,
 		NotEnoughFreeSpace,
-		NotEnoughChestKeys
+		NotEnoughChestKeys,
+		NotEnoughSoftCurrency,
 	}
 
 	public interface IUiMessage

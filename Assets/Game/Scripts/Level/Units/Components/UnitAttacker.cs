@@ -5,6 +5,7 @@
 	using UniRx;
 	using Game.Configs;
 	using UnityEngine;
+	using Game.Core;
 
 	public interface IUnitAttacker
 	{
@@ -15,14 +16,18 @@
 	public class UnitAttacker : ControllerBase, IInitializable, IUnitAttacker
 	{
 		[Inject] IUnitView _view;
+		[Inject] private Species _species;
+		[Inject] private IGameUpgrades _gameUpgrades;
 		[Inject] UnitGrade _grade;
 		[Inject] UnitConfig _config;
 
 		private ITimer _atackTimer;
+		private float _currentDamage;
 
 		public void Initialize()
 		{
 			_atackTimer = new Timer();
+			_currentDamage = _gameUpgrades.GetUnitDamage(_species) * _grade.DamageMultiplier;
 		}
 
 		#region IUnitAttacker
@@ -34,13 +39,14 @@
 			if (IsTargetClose(target) == false)
 			{
 				AttackRangeBroken.Execute();
+
 				return;
 			}
 
 			if (_atackTimer.IsReady == false)
 				return;
 
-			target.TakeDamage(_grade.Damage);
+			target.TakeDamage(_currentDamage);
 			_atackTimer.Set(_grade.AttackDelay);
 		}
 

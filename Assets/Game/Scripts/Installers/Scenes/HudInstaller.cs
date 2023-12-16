@@ -1,6 +1,7 @@
 namespace Game.Installers
 {
 	using Game.Ui;
+	using System;
 	using UnityEngine;
 	using Zenject;
 
@@ -30,6 +31,18 @@ namespace Game.Installers
 			TacticalStageInstall();
 			BattleStageInstall();
 			CommonGameplayInstall();
+			ResourcesInstall();
+		}
+
+		private void ResourcesInstall()
+		{
+			if (_sceneContext == SceneContext.Main)
+			{
+				Container
+					.BindInterfacesTo<UiResourcesHud>()
+					.FromComponentInHierarchy()
+					.AsSingle();
+			}
 		}
 
 		private void TacticalStageInstall()
