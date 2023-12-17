@@ -6,9 +6,11 @@
     public class EnergyConfig : ScriptableObject
     {
         [SerializeField] private int _maxEnery;
-        [SerializeField] private float _secondsToRestoreEnergyPoint;
+        [SerializeField] private int _levelPrice;
+        [SerializeField] private int _secondsToRestoreOnePoint;
 
         public int MaxEnery => _maxEnery;
-        public  float SecondsToRestoreEnergyPoint => _secondsToRestoreEnergyPoint;
+        public int LevelPrice => _levelPrice;
+        public int SecondsToRestoreOnePoint => _secondsToRestoreOnePoint;
     }
 }

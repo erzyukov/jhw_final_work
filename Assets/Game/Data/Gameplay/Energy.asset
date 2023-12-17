@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Energy
   m_EditorClassIdentifier: 
   _maxEnery: 20
-  _secondsToRestoreEnergyPoint: 360
+  _levelPrice: 5
+  _secondsToRestoreOnePoint: 360

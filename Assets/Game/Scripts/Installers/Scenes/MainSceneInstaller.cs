@@ -54,9 +54,13 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<GameUpgrades>()
 				.AsSingle();
-		}
 
-		private void WindowsInstall()
+            Container
+                .BindInterfacesTo<GameEnergy>()
+                .AsSingle();
+        }
+
+        private void WindowsInstall()
 		{
 			Container
 				.BindInterfacesTo<ContinueLevelWindow>()
