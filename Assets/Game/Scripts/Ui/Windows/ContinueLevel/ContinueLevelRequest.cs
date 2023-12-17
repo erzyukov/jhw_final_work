@@ -1,9 +1,12 @@
 ﻿namespace Game.Ui
 {
-	using Game.Utilities;
-	using System;
+    using Game.Configs;
+    using Game.Core;
+    using Game.Utilities;
+    using System;
 	using UniRx;
-	using Zenject;
+    using UnityEngine;
+    using Zenject;
 
 	public interface IContinueLevelRequest
 	{
@@ -13,8 +16,13 @@
 	public class ContinueLevelRequest : ControllerBase, IContinueLevelRequest, IInitializable
 	{
 		[Inject] private IContinueLevelWindow _window;
+        [Inject] private EnergyConfig _energyConfig;
+        [Inject] private ILocalizator _localizator;
 
-		private Action _currentNewGameAction;
+        private const string newGameKey = "newGame";
+        private const string pricePrefixKey = "pricePrefix";
+
+        private Action _currentNewGameAction;
 		private Action _currentContinueAction;
 
 		public void Initialize()
@@ -38,7 +46,12 @@
 		{
 			_currentNewGameAction = newGameCallback;
 			_currentContinueAction = continueCallback;
-			_window.SetActive(true);
+
+            string newGameButtonTitle = _localizator.GetString(newGameKey)
+                + $"\n{_localizator.GetString(pricePrefixKey)}{_energyConfig.LevelPrice}";
+            _window.SetNewGameButtonText(newGameButtonTitle);
+
+            _window.SetActive(true);
 		}
 
 		#endregion

@@ -119,9 +119,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1802796930314240
-    m_Localized: 'NEW GAME
-
-      <sprite=2> X5'
+    m_Localized: NEW GAME
     m_Metadata:
       m_Items: []
   - m_Id: 1804974357098496
@@ -182,6 +180,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 5066819859787776
     m_Localized: 'HAVE NEED OF: <sprite=0>MONEY'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5791061190520832
+    m_Localized: <sprite=2>X
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5799258752167936
+    m_Localized: 'HAVE NEED OF: <sprite=2>ENERGY'
     m_Metadata:
       m_Items: []
   references:

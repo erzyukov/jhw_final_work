@@ -13,6 +13,7 @@ namespace Game.Ui
 		NotEnoughFreeSpace,
 		NotEnoughChestKeys,
 		NotEnoughSoftCurrency,
+		NotEnoughEnergy,
 	}
 
 	public interface IUiMessage
