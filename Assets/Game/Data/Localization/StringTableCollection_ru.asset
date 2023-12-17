@@ -128,7 +128,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1802796930314240
-    m_Localized: "\u041D\u041E\u0412\u0410\u042F \u0418\u0413\u0420\u0410\n? X5"
+    m_Localized: "\u041D\u041E\u0412\u0410\u042F \u0418\u0413\u0420\u0410\n<sprite=2>
+      X5"
     m_Metadata:
       m_Items: []
   - m_Id: 1804974357098496
