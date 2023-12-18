@@ -21,12 +21,13 @@ namespace Game.Profiles
 	{
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] private UnitsConfig _unitsConfig;
+		[Inject] private EnergyConfig _energyConfig;
 
 		private GameProfile _gameProfile;
 
 		public void OnInstantiated()
 		{
-			_gameProfile = new GameProfile();
+            CreateGameProfile();
 
 			Observable.FromEvent(
 					x => YandexGame.GetDataEvent += x,
@@ -50,13 +51,19 @@ namespace Game.Profiles
 
 		public void Reset()
 		{
-			_gameProfile = new GameProfile();
+            CreateGameProfile();
 			Save();
 		}
 
 		#endregion
 
-		private void OnYandexGameGetData()
+        private void CreateGameProfile()
+        {
+            _gameProfile = new GameProfile();
+            _gameProfile.Energy.Value = _energyConfig.MaxEnery;
+        }
+
+        private void OnYandexGameGetData()
 		{
 			if (YandexGame.savesData.gameProfile == null)
 				YandexGame.savesData.gameProfile = _gameProfile;
@@ -99,7 +106,7 @@ namespace Game.Profiles
         }
 
 #if UNITY_EDITOR
-		private const string PathSavesEditor = "/YandexGame/WorkingData/Editor/SavesEditorYG.json";
+        private const string PathSavesEditor = "/YandexGame/WorkingData/Editor/SavesEditorYG.json";
 
 		[UnityEditor.MenuItem("Game/Delete saved game")]
 		public static void DeleteSaveFile()

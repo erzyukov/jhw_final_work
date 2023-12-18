@@ -10,14 +10,16 @@
 	using System;
 	using Zenject;
 	using static UnityEngine.InputSystem.InputAction;
+    using UnityEngine;
 
-	public class DevCheats : ControllerBase, IInitializable
+    public class DevCheats : ControllerBase, IInitializable
 	{
 		[Inject] private IInputHandler _inputManager;
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private GameProfile _profile;
 		[Inject] private IGameCurrency _gameCurrency;
 		[Inject] private DevConfig _devConfig;
+		[Inject] private EnergyConfig _energyConfig;
 		[Inject] private IScenesManager _scenesManager;
 		[Inject] private IGameProfileManager _gameProfileManager;
 
@@ -48,9 +50,12 @@
 				if (context.performed && context.ReadValueAsButton())
 					_scenesManager.ReloadGame(() => _gameProfileManager.Reset());
 			});
-		}
 
-		void Subscribe(InputAction inputAction, Action<CallbackContext> action)
+            Subscribe(Cheats.SpentEnergy, (_) => _profile.Energy.Value = Mathf.Max(_profile.Energy.Value - _energyConfig.LevelPrice, 0));
+            Subscribe(Cheats.RestoreEnergy, (_) => _profile.Energy.Value = Mathf.Min(_profile.Energy.Value + _energyConfig.LevelPrice, _energyConfig.MaxEnery));
+        }
+
+        void Subscribe(InputAction inputAction, Action<CallbackContext> action)
 		=>
 			inputAction.PerformedAsObservable()
 				.Subscribe(context => action(context))

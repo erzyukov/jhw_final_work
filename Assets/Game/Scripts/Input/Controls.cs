@@ -100,6 +100,24 @@ namespace Game.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpentEnergy"",
+                    ""type"": ""Button"",
+                    ""id"": ""7600a3d9-e583-4394-9331-ae340f885e1b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RestoreEnergy"",
+                    ""type"": ""Button"",
+                    ""id"": ""6eb7adc7-ad1b-49c1-afeb-be3e222e3d13"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -212,6 +230,28 @@ namespace Game.Input
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cda2c59e-b66f-438f-8482-d6bf7c103568"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpentEnergy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3aca406b-6310-4571-8a40-202b6c314661"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RestoreEnergy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -228,6 +268,8 @@ namespace Game.Input
             m_DevCheats_AddSummonCurrency = m_DevCheats.FindAction("AddSummonCurrency", throwIfNotFound: true);
             m_DevCheats_RemoveGameSaves = m_DevCheats.FindAction("RemoveGameSaves", throwIfNotFound: true);
             m_DevCheats_Shoot = m_DevCheats.FindAction("Shoot", throwIfNotFound: true);
+            m_DevCheats_SpentEnergy = m_DevCheats.FindAction("SpentEnergy", throwIfNotFound: true);
+            m_DevCheats_RestoreEnergy = m_DevCheats.FindAction("RestoreEnergy", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -295,6 +337,8 @@ namespace Game.Input
         private readonly InputAction m_DevCheats_AddSummonCurrency;
         private readonly InputAction m_DevCheats_RemoveGameSaves;
         private readonly InputAction m_DevCheats_Shoot;
+        private readonly InputAction m_DevCheats_SpentEnergy;
+        private readonly InputAction m_DevCheats_RestoreEnergy;
         public struct DevCheatsActions
         {
             private @Controls m_Wrapper;
@@ -307,6 +351,8 @@ namespace Game.Input
             public InputAction @AddSummonCurrency => m_Wrapper.m_DevCheats_AddSummonCurrency;
             public InputAction @RemoveGameSaves => m_Wrapper.m_DevCheats_RemoveGameSaves;
             public InputAction @Shoot => m_Wrapper.m_DevCheats_Shoot;
+            public InputAction @SpentEnergy => m_Wrapper.m_DevCheats_SpentEnergy;
+            public InputAction @RestoreEnergy => m_Wrapper.m_DevCheats_RestoreEnergy;
             public InputActionMap Get() { return m_Wrapper.m_DevCheats; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -340,6 +386,12 @@ namespace Game.Input
                     @Shoot.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnShoot;
                     @Shoot.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnShoot;
                     @Shoot.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnShoot;
+                    @SpentEnergy.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnSpentEnergy;
+                    @SpentEnergy.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnSpentEnergy;
+                    @SpentEnergy.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnSpentEnergy;
+                    @RestoreEnergy.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnRestoreEnergy;
+                    @RestoreEnergy.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnRestoreEnergy;
+                    @RestoreEnergy.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnRestoreEnergy;
                 }
                 m_Wrapper.m_DevCheatsActionsCallbackInterface = instance;
                 if (instance != null)
@@ -368,6 +420,12 @@ namespace Game.Input
                     @Shoot.started += instance.OnShoot;
                     @Shoot.performed += instance.OnShoot;
                     @Shoot.canceled += instance.OnShoot;
+                    @SpentEnergy.started += instance.OnSpentEnergy;
+                    @SpentEnergy.performed += instance.OnSpentEnergy;
+                    @SpentEnergy.canceled += instance.OnSpentEnergy;
+                    @RestoreEnergy.started += instance.OnRestoreEnergy;
+                    @RestoreEnergy.performed += instance.OnRestoreEnergy;
+                    @RestoreEnergy.canceled += instance.OnRestoreEnergy;
                 }
             }
         }
@@ -382,6 +440,8 @@ namespace Game.Input
             void OnAddSummonCurrency(InputAction.CallbackContext context);
             void OnRemoveGameSaves(InputAction.CallbackContext context);
             void OnShoot(InputAction.CallbackContext context);
+            void OnSpentEnergy(InputAction.CallbackContext context);
+            void OnRestoreEnergy(InputAction.CallbackContext context);
         }
     }
 }

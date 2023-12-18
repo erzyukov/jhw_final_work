@@ -40,7 +40,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 19023760101376
-    m_Key: 1 - Main/Canvas/Screens/LobbyScreen/PlayButton/Text (TMP)
+    m_Key: play
     m_Metadata:
       m_Items: []
   - m_Id: 19142035279872
@@ -112,8 +112,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1802796930314240
-    m_Key: 1 - Main/Canvas/Windows/ContinueLevelRequest/Window/NewGameButton/Text
-      (TMP)
+    m_Key: newGame
     m_Metadata:
       m_Items: []
   - m_Id: 1804974357098496
@@ -177,6 +176,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 5066819859787776
     m_Key: NotEnoughSoftCurrency
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5791061190520832
+    m_Key: pricePrefix
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5799258752167936
+    m_Key: NotEnoughEnergy
     m_Metadata:
       m_Items: []
   m_Metadata:

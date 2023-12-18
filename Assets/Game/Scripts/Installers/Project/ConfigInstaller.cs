@@ -20,6 +20,7 @@ namespace Game.Installers
 		[SerializeField] private WeaponsConfig _weapons;
 		[SerializeField] private MenuConfig _menu;
 		[SerializeField] private UpgradesConfig _upgrades;
+		[SerializeField] private EnergyConfig _energy;
 
 		public override void InstallBindings()
 		{
@@ -40,6 +41,7 @@ namespace Game.Installers
 			Container.BindInstance(_weapons);
 			Container.BindInstance(_menu);
 			Container.BindInstance(_upgrades);
+			Container.BindInstance(_energy);
 		}
 	}
 }

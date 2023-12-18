@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 908d2cce60667fb459b5ac9275a0f121, type: 3}
+  m_Name: Energy
+  m_EditorClassIdentifier: 
+  _maxEnery: 20
+  _levelPrice: 5
+  _secondsToRestoreOnePoint: 360
+  _freeLevelTo: 3

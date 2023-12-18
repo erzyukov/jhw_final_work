@@ -12,6 +12,7 @@
 		void SetTitle(string value);
 		void SetLastWaveValue(string value);
 		void SetLastWaveActive(bool value);
+        void SetPlayButtonText(string value);
 	}
 
 	public class UiLobbyScreen : UiScreen, IUiLobbyScreen
@@ -20,6 +21,7 @@
 		[SerializeField] private GameObject _lastWave;
 		[SerializeField] private TextMeshProUGUI _lastWaveValue;
 		[SerializeField] private Button _playButton;
+		[SerializeField] private TextMeshProUGUI _playButtonText;
 
 		public override Screen Screen => Screen.Lobby;
 
@@ -33,6 +35,8 @@
 
 		public void SetLastWaveActive(bool value) => _lastWave.SetActive(value);
 
-		#endregion
-	}
+        public void SetPlayButtonText(string value) => _playButtonText.text = value;
+
+        #endregion
+    }
 }

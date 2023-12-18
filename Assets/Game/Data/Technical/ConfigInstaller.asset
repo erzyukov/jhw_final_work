@@ -25,3 +25,4 @@ MonoBehaviour:
   _weapons: {fileID: 11400000, guid: 0b043dcfb24e6934eb2b9946cf2541f9, type: 2}
   _menu: {fileID: 11400000, guid: 19a8caa98b8753a498fc1061fa3d43b0, type: 2}
   _upgrades: {fileID: 11400000, guid: c3137a23aa7499a47b42bb96df16a498, type: 2}
+  _energy: {fileID: 11400000, guid: 2ce110f22b6bc8b489f370d56aec4792, type: 2}

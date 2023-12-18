@@ -22,6 +22,9 @@
 
 		public void MoveTo(IUnitFacade target)
 		{
+            if (target == null)
+                return;
+
 			_unitView.NavMeshAgent.isStopped = false;
 
 			_unitView.NavMeshAgent.SetDestination(target.Transform.position);

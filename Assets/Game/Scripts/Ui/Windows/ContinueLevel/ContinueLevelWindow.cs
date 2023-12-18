@@ -4,6 +4,7 @@ namespace Game
 	using UniRx;
 	using UnityEngine;
 	using UnityEngine.UI;
+    using TMPro;
 	
 	public interface IContinueLevelWindow
 	{
@@ -11,6 +12,7 @@ namespace Game
 		IObservable<Unit> ContinueButtonClicked { get; }
 		IObservable<Unit> CancelButtonClicked { get; }
 		void SetActive(bool value);
+        void SetNewGameButtonText(string value);
 	}
 
 	public class ContinueLevelWindow : MonoBehaviour, IContinueLevelWindow
@@ -18,6 +20,7 @@ namespace Game
 		[SerializeField] private Button _newGameButton;
 		[SerializeField] private Button _continueButton;
 		[SerializeField] private Button _cancelButton;
+		[SerializeField] private TextMeshProUGUI _newGameButtonText;
 
 		#region IContinueLevelWindow
 
@@ -26,7 +29,8 @@ namespace Game
 		public IObservable<Unit> CancelButtonClicked => _cancelButton.OnClickAsObservable();
 
 		public void SetActive(bool value) => gameObject.SetActive(value);
+        public void SetNewGameButtonText(string value) => _newGameButtonText.text = value;
 
-		#endregion
-	}
+        #endregion
+    }
 }

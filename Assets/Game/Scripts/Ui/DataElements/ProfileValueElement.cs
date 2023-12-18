@@ -19,5 +19,10 @@ namespace Game.Ui
 		{
 			_value.text = value.ToString();
 		}
-	}
+    
+        protected void SetValue(string value)
+        {
+            _value.text = value;
+        }
+    }
 }
