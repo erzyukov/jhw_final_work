@@ -15,3 +15,4 @@ MonoBehaviour:
   _maxEnery: 20
   _levelPrice: 5
   _secondsToRestoreOnePoint: 360
+  _freeLevelTo: 3

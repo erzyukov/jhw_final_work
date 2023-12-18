@@ -6,6 +6,7 @@
     using Game.Core;
     using Game.Profiles;
     using Game.Configs;
+    using UnityEngine;
 
     public class UiLobby : ControllerBase, IInitializable
     {
@@ -25,6 +26,8 @@
         private const string pricePrefixKey = "pricePrefix";
 
         private string _levelTitlePrefix;
+
+        private bool IsPlayEnergyFree => _profile.WaveNumber.Value != 0 || _profile.LevelNumber.Value < _energyConfig.FreeLevelTo;
 
         public void Initialize()
         {
@@ -50,8 +53,10 @@
             string waveInfo = $"{_localizator.GetString(lastWavePrefixKey)} {_profile.WaveNumber.Value}/{levelConfig.Waves.Length}";
             _lobbyScreen.SetLastWaveValue(waveInfo);
 
+            Debug.LogWarning(IsPlayEnergyFree);
+
             string playButtonTitle = _localizator.GetString(playKey)
-                + ((_profile.WaveNumber.Value == 0) ? $"\n{_localizator.GetString(pricePrefixKey)}{_energyConfig.LevelPrice}" : "");
+                + (IsPlayEnergyFree == false ? $"\n{_localizator.GetString(pricePrefixKey)}{_energyConfig.LevelPrice}" : "");
             _lobbyScreen.SetPlayButtonText(playButtonTitle);
         }
 
@@ -68,7 +73,7 @@
             if (resetWave)
                 _profile.WaveNumber.Value = 0;
 
-            if (_profile.WaveNumber.Value == 0)
+            if (IsPlayEnergyFree == false)
             {
                 if (_gameEnergy.TryPayLevel())
                     _gameLevel.GoToLevel(_profile.LevelNumber.Value);
