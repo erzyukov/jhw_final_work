@@ -1,22 +1,23 @@
 namespace Game.Ui
 {
 	using Game.Core;
-	using System.Collections.Generic;
-	using System.Linq;
+    using Game.Tutorial;
+    using System.Collections.Generic;
+    using System.Linq;
 	using UnityEngine;
-	using UnityEngine.UI;
 
 	public interface IUiMainMenuView
 	{
 		List<GameState> ActiveOnGameState { get; }
 		List<UiMainMenuButton> Buttons { get; }
+        HintedButton.Parameters UpgradeButtonHintParameters { get; }
 		void SetActive(bool value);
 		void SetButtonLocked(GameState screen);
 		void SetButtonActive(GameState screen);
 		void SetButtonSelected(GameState screen);
-	}
+    }
 
-	public class UiMainMenuView : MonoBehaviour, IUiMainMenuView
+    public class UiMainMenuView : MonoBehaviour, IUiMainMenuView
 	{
 		[SerializeField] private Sprite _lockedIcon;
 		[SerializeField] private List<GameState> _activeOnGameState;
@@ -30,13 +31,19 @@ namespace Game.Ui
 		[SerializeField] private float _defaultButtonHeight;
 		[SerializeField] private float _selectedButtonHeight;
 
-		#region IUiMainMenuView
+        [Header("Tutorial")]
+        [SerializeField] private HintedButton _hintedUpgradesButton;
 
-		public List<GameState> ActiveOnGameState => _activeOnGameState;
+        #region IUiMainMenuView
+
+        public List<GameState> ActiveOnGameState => _activeOnGameState;
 
 		public List<UiMainMenuButton> Buttons => _buttons;
 
-		public void SetActive(bool value) => gameObject.SetActive(value);
+        public HintedButton.Parameters UpgradeButtonHintParameters => _hintedUpgradesButton.HintParameters;
+
+
+        public void SetActive(bool value) => gameObject.SetActive(value);
 
 		public void SetButtonLocked(GameState state)
 		{
