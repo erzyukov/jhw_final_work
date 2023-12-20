@@ -20,7 +20,8 @@
 		[Inject] private LevelConfig _levelConfig;
 		[Inject] private GameProfile _gameProfile;
 
-		Dictionary<IUnitFacade, IDisposable> _unitSubscribes = new Dictionary<IUnitFacade, IDisposable>();
+		Dictionary<IUnitFacade, IDisposable> _unitDyingSubscribes = new Dictionary<IUnitFacade, IDisposable>();
+		Dictionary<IUnitFacade, IDisposable> _unitDiedSubscribes = new Dictionary<IUnitFacade, IDisposable>();
 
 		public void Initialize()
 		{
@@ -52,22 +53,35 @@
 			IUnitFacade unit = _unitSpawner.SpawnEnemyUnit(species);
 			_fieldFacade.AddUnit(unit, position);
 
-			_unitSubscribes.Add(unit, default);
-			SubscribeToUnit(unit);
+			_unitDyingSubscribes.Add(unit, default);
+            _unitDiedSubscribes.Add(unit, default);
+
+            SubscribeToUnit(unit);
 		}
 
 
 		private void SubscribeToUnit(IUnitFacade unit)
 		{
-			_unitSubscribes[unit] = unit.Died
-				.Subscribe(_ => UnitDiedHandler(unit));
-		}
+			_unitDyingSubscribes[unit] = unit.Dying
+				.Subscribe(_ => OnUnitDying(unit));
 
-		private void UnitDiedHandler(IUnitFacade unit)
+            _unitDiedSubscribes[unit] = unit.Died
+                .Subscribe(_ => OnUnitDied(unit));
+
+        }
+
+        private void OnUnitDying(IUnitFacade unit)
 		{
 			_fieldFacade.RemoveUnit(unit);
-			_unitSubscribes[unit].Dispose();
-			_unitSubscribes.Remove(unit);
+			_unitDyingSubscribes[unit].Dispose();
+			_unitDyingSubscribes.Remove(unit);
 		}
-	}
+
+        private void OnUnitDied(IUnitFacade unit)
+        {
+            unit.Destroy();
+            _unitDiedSubscribes[unit].Dispose();
+            _unitDiedSubscribes.Remove(unit);
+        }
+    }
 }

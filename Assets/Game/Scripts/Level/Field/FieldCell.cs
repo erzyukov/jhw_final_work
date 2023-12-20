@@ -46,7 +46,7 @@
 
 		public void Clear()
 		{
-			_unit.SetViewParent(null);
+			_unit.SetViewParent(null, true);
 			_unit = null;
 		}
 

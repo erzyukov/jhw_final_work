@@ -1,141 +1,241 @@
 ﻿namespace Game.Units
 {
-	using Game.Configs;
-	using Game.Utilities;
-	using System;
-	using UniRx;
-	using UnityEngine;
-	using Zenject;
+    using Game.Configs;
+    using Game.Utilities;
+    using System;
+    using UniRx;
+    using UnityEngine;
+    using Zenject;
 
-	public interface IUnitFsm
-	{
-		void Transition(UnitState state);
-	}
+    public interface IUnitFsm
+    {
+        ReactiveCommand<UnitState> StateChanged { get; }
+        void Transition(UnitState state);
+        void Reset();
+    }
 
-	public class UnitFsm : UnitFsmBase, IUnitFsm, IInitializable, IDisposable
-	{
-		[Inject] private IUnitTargetFinder _targetFinder;
-		[Inject] private IUnitHealth _health;
-		[Inject] private IUnitMover _mover;
-		[Inject] private IUnitAttacker _attacker;
-		[Inject] private IUnitView _view;
-		[Inject] private UnitConfig _config;
+    public class UnitFsm : UnitFsmBase, IUnitFsm, IInitializable, IDisposable
+    {
+        [Inject] private IUnitTargetFinder _targetFinder;
+        [Inject] private IUnitHealth _health;
+        [Inject] private IUnitMover _mover;
+        [Inject] private IUnitAttacker _attacker;
+        [Inject] private IUnitView _view;
+        [Inject] private IUnitBuilder _builder;
+        [Inject] private UnitConfig _config;
+        [Inject] private TimingsConfig _timingsConfig;
 
-		readonly private CompositeDisposable _disposable = new CompositeDisposable();
+        readonly private CompositeDisposable _disposable = new CompositeDisposable();
 
-		private IUnitFacade _target;
+        private IUnitFacade _target;
+        private UnitState _hitTargetWithAnimationState;
+        private UnitState _finishAttackWithAnimationState;
 
-		public void Initialize()
-		{
-			_targetFinder.TargetFound
-				.Subscribe(target =>
-				{
-					_target = target;
-					Transition(UnitState.TargetFound);
-				})
-				.AddTo(_disposable);
+        private int AttackTrigger => Animator.StringToHash("Attack");
+        private int IsMoveParameter => Animator.StringToHash("IsMove");
+        private int DieTrigger => Animator.StringToHash("Die");
+        private Animator Animator => _builder.Model.Animator;
 
-			_mover.ReachedDestination
-				.Subscribe(_ => Transition(UnitState.Attack))
-				.AddTo(_disposable);
+        public void Initialize()
+        {
+            _hitTargetWithAnimationState = (Animator != null) ? UnitState.StartAttack : UnitState.HitTarget;
+            _finishAttackWithAnimationState = (Animator != null) ? UnitState.FinishAttack : UnitState.PrepareAttack;
 
-			_attacker.AttackRangeBroken
-				.Subscribe(_ => Transition(UnitState.MoveToTarget))
-				.AddTo(_disposable);
+            InitializeSubscribes();
+        }
 
-			_health.Died
-				.Subscribe(_ => Transition(UnitState.Died))
-				.AddTo(_disposable);
-		}
+        public virtual void Dispose() => _disposable.Dispose();
 
-		public virtual void Dispose() => _disposable.Dispose();
+        private void InitializeSubscribes()
+        {
+            _targetFinder.TargetFound
+                .Subscribe(target =>
+                {
+                    _target = target;
+                    Transition(UnitState.TargetFound);
+                })
+                .AddTo(_disposable);
 
-		#region SimpleFsmBase
+            _mover.ReachedDestination
+                .Where(_ => State != UnitState.PrepareAttack)
+                .Subscribe(_ => Transition(UnitState.PrepareAttack))
+                .AddTo(_disposable);
 
-		public override void Transition(UnitState state)
-		{
-			#region Debug
+            if (_builder.Model.AnimationEventsCatcher != null)
+            {
+                _builder.Model.AnimationEventsCatcher.Hited
+                    .Where(_ => State == UnitState.StartAttack)
+                    .Subscribe(_ => Transition(UnitState.HitTarget))
+                    .AddTo(_disposable);
 
-			if (_config.IsDebug)
-			{
-				string target = (_target == null) ? "none" : _target.Transform.name;
-				Debug.LogWarning($"State changed: {state} | target = {target}");
-			}
+                _builder.Model.AnimationEventsCatcher.AttackAnimationCompleted
+                    .Where(_ => State == UnitState.FinishAttack)
+                    .Subscribe(_ => Transition(UnitState.PrepareAttack))
+                    .AddTo(_disposable);
 
-			#endregion
+                _builder.Model.AnimationEventsCatcher.DeathAnimationCompleted
+                    .Where(_ => State == UnitState.Dying)
+                    .Subscribe(_ => Transition(UnitState.Dead))
+                    .AddTo(_disposable);
+            }
 
-			base.Transition(state);
-		}
+            _attacker.AttackRangeBroken
+                .Subscribe(_ => Transition(UnitState.MoveToTarget))
+                .AddTo(_disposable);
 
-		protected override void StateTransitions()
-		{
-			switch (State)
-			{
-				case UnitState.None:
-					Transition(UnitState.Idle);
-					break;
+            _health.Died
+                .Subscribe(_ => Transition(UnitState.Dying))
+                .AddTo(_disposable);
+        }
 
-				case UnitState.TargetLost:
-					Transition(UnitState.SearchTarget);
-					break;
+        #region SimpleFsmBase
 
-				case UnitState.TargetFound:
-					Transition(UnitState.MoveToTarget);
-					break;
+        public ReactiveCommand<UnitState> StateChanged { get; } = new ReactiveCommand<UnitState>();
 
-				case UnitState.MoveToTarget:
-				case UnitState.Attack:
-					if (_targetFinder.HasTarget == false)
-						Transition(UnitState.TargetLost);
-					break;
-			}
-		}
+        public override void Transition(UnitState state)
+        {
+            #region Debug
 
-		protected override void StateTick()
-		{
-			switch (State)
-			{
-				case UnitState.MoveToTarget:
-					_mover.MoveTo(_targetFinder.Target);
-					break;
+            if (_config.IsDebug)
+            {
+                string target = "none";
+                try { target = _target.Transform.name; }
+                catch { }
+                Debug.LogWarning($"State changed: {state} | target = {target}");
+            }
 
-				case UnitState.Attack:
-					_attacker.TryAttack(_targetFinder.Target);
-					break;
-			}
-		}
+            #endregion
 
-		#endregion
+            base.Transition(state);
+            StateChanged.Execute(state);
+        }
 
-		#region UnitFsmBase
+        public void Reset()
+        {
+            Transition(UnitState.Idle);
+        }
 
-		protected override void OnEnterIdleHandler()
-		{
-			_health.Reset();
-			_targetFinder.Reset();
-			_mover.Stop();
-			_view.ResetPosition();
-			_view.SetActive(true);
-			_view.NavMeshAgent.enabled = false;
-		}
+        protected override void StateTransitions()
+        {
+            switch (State)
+            {
+                case UnitState.None:
+                    Transition(UnitState.Idle);
+                    break;
 
-		protected override void OnEnterSearchTargetHandler()
-		{
-			_view.NavMeshAgent.enabled = true;
-			_targetFinder.SearchTarget();
-		}
+                case UnitState.TargetLost:
+                    Transition(UnitState.SearchTarget);
+                    break;
 
-		protected override void OnEnterTargetLostHandler()
-		{
-			_mover.Stop();
-		}
+                case UnitState.TargetFound:
+                    Transition(UnitState.MoveToTarget);
+                    break;
 
-		protected override void OnEnterDiedHandler()
-		{
-			_mover.Stop();
-			_view.SetActive(false);
-		}
+                case UnitState.PrepareAttack:
+                    if (_attacker.CanAttack(_targetFinder.Target))
+                        Transition(_hitTargetWithAnimationState);
 
-		#endregion
-	}
+                    break;
+
+                case UnitState.MoveToTarget:
+                    if (_targetFinder.HasTarget == false)
+                        Transition(UnitState.TargetLost);
+
+                    break;
+
+                case UnitState.Dying:
+                    if (Animator == null)
+                        Transition(UnitState.Dead);
+
+                    break;
+            }
+        }
+
+        protected override void StateTick()
+        {
+            switch (State)
+            {
+                case UnitState.MoveToTarget:
+                    _mover.MoveTo(_targetFinder.Target);
+                    break;
+
+                case UnitState.PrepareAttack:
+                case UnitState.StartAttack:
+                case UnitState.HitTarget:
+                case UnitState.FinishAttack:
+                    _attacker.ProcessTargetTracking(_targetFinder.Target);
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region UnitFsmBase
+
+        protected override void OnEnteredIdle()
+        {
+            _health.Reset();
+            _targetFinder.Reset();
+            _mover.Stop();
+            _view.ResetPosition();
+            _view.SetActive(true);
+            _view.NavMeshAgent.enabled = false;
+        }
+
+        protected override void OnEnteredSearchTarget()
+        {
+            _view.NavMeshAgent.enabled = true;
+            _targetFinder.SearchTarget();
+        }
+
+        protected override void OnEnteredMoveToTarget()
+        {
+            if (Animator != null)
+                Animator.SetBool(IsMoveParameter, true);
+        }
+
+        protected override void OnExitedMoveToTarget()
+        {
+            if (Animator != null)
+                Animator.SetBool(IsMoveParameter, false);
+        }
+
+        protected override void OnEnteredPrepareAttack()
+        {
+            _mover.LookAt(_targetFinder.Target);
+        }
+
+        protected override void OnEnteredStartAttack()
+        {
+            Animator.SetTrigger(AttackTrigger);
+        }
+
+        protected override void OnEnteredHitTarget()
+        {
+            _attacker.Attack(_targetFinder.Target);
+            Transition(_finishAttackWithAnimationState);
+        }
+
+        protected override void OnEnteredTargetLost()
+        {
+            _mover.Stop();
+        }
+
+        protected override void OnEnteredDying()
+        {
+            _mover.Stop();
+
+            if (Animator != null)
+                Animator.SetTrigger(DieTrigger);
+        }
+
+        protected override void OnEnteredDead()
+        {
+            Observable.Timer(TimeSpan.FromSeconds(_timingsConfig.UnitDeathVanishDelay))
+                .Subscribe(_ => _view.SetActive(false))
+                .AddTo(_disposable);
+        }
+
+        #endregion
+    }
 }

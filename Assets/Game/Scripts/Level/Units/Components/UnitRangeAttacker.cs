@@ -39,7 +39,25 @@
 
 		public ReactiveCommand AttackRangeBroken { get; } = new ReactiveCommand();
 
-		public void TryAttack(IUnitFacade target)
+        public bool CanAttack(IUnitFacade target) =>
+            target != null && target.IsDead == false && _atackTimer.IsReady && IsTargetClose(target);
+
+        public void Attack(IUnitFacade target)
+        {
+            if (CanAttack(target) == false)
+                return;
+
+            target.TakeDamage(_currentDamage);
+            _atackTimer.Set(_grade.AttackDelay);
+        }
+
+        public void ProcessTargetTracking(IUnitFacade target)
+        {
+            if (IsTargetClose(target) == false)
+                AttackRangeBroken.Execute();
+        }
+
+        public void TryAttack(IUnitFacade target)
 		{
 			if (IsTargetClose(target) == false)
 			{
@@ -55,10 +73,12 @@
 			_atackTimer.Set(_grade.AttackDelay);
 		}
 
-		#endregion
+        #endregion
 
-		private bool IsTargetClose(IUnitFacade target) =>
-			(_view.Transform.position - target.Transform.position).sqrMagnitude
-			< _config.AttackRange * _config.AttackRange + Mathf.Epsilon;
-	}
+        private bool IsTargetClose(IUnitFacade target) =>
+            target != null &&
+            target.IsDead != true &&
+            (_view.Transform.position - target.Transform.position).sqrMagnitude
+            < _config.AttackRange * _config.AttackRange + Mathf.Epsilon;
+    }
 }
