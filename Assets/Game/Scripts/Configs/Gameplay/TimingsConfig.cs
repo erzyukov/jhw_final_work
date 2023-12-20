@@ -11,7 +11,12 @@ namespace Game.Configs
 		[Header("Levels")]
 		[SerializeField] private float _waveTransitionDelay;
 
+		[Header("Units")]
+		[SerializeField] private float _unitDeathVanishDelay;
+
+
 		public float ExperienceAnimationDuration => _experienceAnimationDuration;
 		public float WaveTransitionDelay => _waveTransitionDelay;
+		public float UnitDeathVanishDelay => _unitDeathVanishDelay;
 	}
 }

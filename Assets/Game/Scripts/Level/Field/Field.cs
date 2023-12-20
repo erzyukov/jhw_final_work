@@ -82,7 +82,6 @@
 		{
 			_units.Remove(unit);
 			GetCell(unit)?.Clear();
-			unit.Destroy();
 		}
 
 		public void Clear()

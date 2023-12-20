@@ -86,7 +86,7 @@
 			unit.PointerUped.Subscribe(_ => UnitPointerUped.Execute(unit)).AddTo(disposable);
 			unit.MergeInitiated.Subscribe(_ => UnitMergeInitiated.Execute(unit)).AddTo(disposable);
 			unit.MergeCanceled.Subscribe(_ => UnitMergeCanceled.Execute(unit)).AddTo(disposable);
-			unit.Died.Subscribe(_ => UnitDied.Execute(unit)).AddTo(disposable);
+			unit.Dying.Subscribe(_ => UnitDied.Execute(unit)).AddTo(disposable);
 		}
 
 		private void OnUnitRemovedHandler(IUnitFacade unit)

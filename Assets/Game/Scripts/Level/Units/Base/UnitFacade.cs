@@ -14,15 +14,17 @@
 		ReactiveCommand PointerUped { get; }
 		ReactiveCommand MergeInitiated { get; }
 		ReactiveCommand MergeCanceled { get; }
-		ReactiveCommand Died { get; }
-		string Name { get; }
+		ReactiveCommand Dying { get; }
+        ReactiveCommand Died { get; }
+
+        string Name { get; }
 		Species Species { get; }
 		int GradeIndex { get; }
 		Transform Transform { get; }
 		Transform ModelRendererTransform { get; }
 		bool IsDead { get; }
 
-		void SetViewParent(Transform parent);
+		void SetViewParent(Transform parent, bool worldPositionStays = false);
 		void SetDraggableActive(bool value);
 		void TakeDamage(float damage);
 		void EnableAttack();
@@ -38,6 +40,7 @@
 		[Inject] private UnitConfig _config;
 		[Inject] private IUnitHealth _health;
 		[Inject] private IUnitFsm _fsm;
+		[Inject] private IUnitEvents _events;
 		[Inject] private IDraggable _draggable;
 		[Inject] private int _gradeIndex;
 
@@ -55,7 +58,9 @@
 
 		public ReactiveCommand MergeCanceled => _view.MergeCanceled;
 
-		public ReactiveCommand Died => _health.Died;
+        public ReactiveCommand Dying => _events.Dying;
+        
+        public ReactiveCommand Died => _events.Died;
 
 		public string Name => _config.Title;
 
@@ -63,23 +68,24 @@
 
 		public int GradeIndex => _gradeIndex;
 
-		public Transform Transform => _view.Transform;
+		public Transform Transform => (_view != null) ? _view.Transform : null;
 
 		public Transform ModelRendererTransform => _view.ModelRendererTransform;
 
 		public bool IsDead => _health.IsDead;
 
-		public void SetViewParent(Transform parent) => _view.SetParent(parent);
+		public void SetViewParent(Transform parent, bool worldPositionStays = false) => _view.SetParent(parent, worldPositionStays);
 
 		public void SetDraggableActive(bool value) => _draggable.SetActive(value);
 
 		public void TakeDamage(float damage) => _health.TakeDamage(damage);
 
+        // TODO: refact: incapsulate transition
 		public void EnableAttack() => _fsm.Transition(UnitState.SearchTarget);
 
 		public void ResetPosition() => _view.ResetPosition();
 
-		public void Reset() => _fsm.Transition(UnitState.Idle);
+		public void Reset() => _fsm.Reset();
 
 		public void Destroy() => _view.Destroy();
 
