@@ -10,7 +10,10 @@
 		SearchTarget,
 		TargetFound,
 		MoveToTarget,
-		Attack,
+        PrepareAttack,
+        StartAttack,
+		HitTarget,
+		FinishAttack,
 		TargetLost,
 		Died,
 	}

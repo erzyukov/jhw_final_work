@@ -15,7 +15,7 @@ MonoBehaviour:
   _title: "\u0411\u0435\u0441"
   _icon: {fileID: 0}
   _class: 0
-  _attackRange: 0.7
+  _attackRange: 1
   _health: 40
   _damage: 8
   _grades:

@@ -15,12 +15,12 @@ MonoBehaviour:
   _title: "\u0414\u0435\u043C\u043E\u043D"
   _icon: {fileID: 0}
   _class: 0
-  _attackRange: 0.7
+  _attackRange: 1
   _health: 50
   _damage: 6
   _grades:
   - Prefab: {fileID: 1503547998484457933, guid: 2409fbd3b3ba81a4286813ce3d283d39, type: 3}
-    AttackDelay: 0.5
+    AttackDelay: 0.95
     HealthMultiplier: 1
     DamageMultiplier: 1
     SoftCurrencyReward: 12

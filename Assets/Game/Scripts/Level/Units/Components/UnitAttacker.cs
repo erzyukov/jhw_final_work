@@ -10,8 +10,13 @@
 	public interface IUnitAttacker
 	{
 		ReactiveCommand AttackRangeBroken { get; }
-		void TryAttack(IUnitFacade target);
+        bool CanAttack(IUnitFacade target);
+        void Attack(IUnitFacade target);
+        void TryAttack(IUnitFacade target);
+        void ProcessTargetTracking(IUnitFacade target);
 	}
+
+    // TODO: Add base attacker class
 
 	public class UnitAttacker : ControllerBase, IInitializable, IUnitAttacker
 	{
@@ -34,7 +39,25 @@
 
 		public ReactiveCommand AttackRangeBroken { get; } = new ReactiveCommand();
 
-		public void TryAttack(IUnitFacade target)
+        public bool CanAttack(IUnitFacade target) =>
+            target != null && target.IsDead == false && _atackTimer.IsReady && IsTargetClose(target);
+
+        public void Attack(IUnitFacade target)
+        {
+            if (CanAttack(target) == false)
+                return;
+
+            target.TakeDamage(_currentDamage);
+            _atackTimer.Set(_grade.AttackDelay);
+        }
+
+        public void ProcessTargetTracking(IUnitFacade target)
+        {
+			if (IsTargetClose(target) == false)
+				AttackRangeBroken.Execute();
+        }
+
+        public void TryAttack(IUnitFacade target)
 		{
 			if (IsTargetClose(target) == false)
 			{
@@ -53,7 +76,9 @@
 		#endregion
 
 		private bool IsTargetClose(IUnitFacade target) =>
-			(_view.Transform.position - target.Transform.position).sqrMagnitude 
+            target != null && 
+            target.IsDead != true &&
+            (_view.Transform.position - target.Transform.position).sqrMagnitude 
 			< _config.AttackRange * _config.AttackRange + Mathf.Epsilon;
 	}
 }

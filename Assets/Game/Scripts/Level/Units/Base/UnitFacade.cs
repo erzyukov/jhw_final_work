@@ -63,7 +63,7 @@
 
 		public int GradeIndex => _gradeIndex;
 
-		public Transform Transform => _view.Transform;
+		public Transform Transform => (_view != null) ? _view.Transform : null;
 
 		public Transform ModelRendererTransform => _view.ModelRendererTransform;
 
@@ -75,11 +75,12 @@
 
 		public void TakeDamage(float damage) => _health.TakeDamage(damage);
 
+        // TODO: refact: incapsulate transition
 		public void EnableAttack() => _fsm.Transition(UnitState.SearchTarget);
 
 		public void ResetPosition() => _view.ResetPosition();
 
-		public void Reset() => _fsm.Transition(UnitState.Idle);
+		public void Reset() => _fsm.Reset();
 
 		public void Destroy() => _view.Destroy();
 

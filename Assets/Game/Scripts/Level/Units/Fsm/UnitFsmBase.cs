@@ -7,17 +7,27 @@ namespace Game.Units
 	{
 		protected UnitFsmBase()
 		{
-			AddOnEnterAction(UnitState.Idle, OnEnterIdleHandler);
-			AddOnEnterAction(UnitState.SearchTarget, OnEnterSearchTargetHandler);
-			AddOnEnterAction(UnitState.TargetLost, OnEnterTargetLostHandler);
-			AddOnEnterAction(UnitState.Died, OnEnterDiedHandler);
+			AddOnEnterAction(UnitState.Idle, OnEnteredIdle);
+			AddOnEnterAction(UnitState.SearchTarget, OnEnteredSearchTarget);
+			AddOnEnterAction(UnitState.MoveToTarget, OnEnteredMoveToTarget);
+			AddOnExitAction(UnitState.MoveToTarget, OnExitedMoveToTarget);
+			AddOnEnterAction(UnitState.PrepareAttack, OnEnteredPrepareAttack);
+			AddOnEnterAction(UnitState.StartAttack, OnEnteredStartAttack);
+			AddOnEnterAction(UnitState.HitTarget, OnEnteredHitTarget);
+			AddOnEnterAction(UnitState.TargetLost, OnEnteredTargetLost);
+			AddOnEnterAction(UnitState.Died, OnEnteredDied);
 		}
 
 		protected override UnitState DefaultState => UnitState.None;
 
-		protected abstract void OnEnterIdleHandler();
-		protected abstract void OnEnterSearchTargetHandler();
-		protected abstract void OnEnterTargetLostHandler();
-		protected abstract void OnEnterDiedHandler();
+		protected abstract void OnEnteredIdle();
+		protected abstract void OnEnteredSearchTarget();
+		protected abstract void OnEnteredMoveToTarget();
+		protected abstract void OnExitedMoveToTarget();
+		protected abstract void OnEnteredPrepareAttack();
+		protected abstract void OnEnteredStartAttack();
+		protected abstract void OnEnteredHitTarget();
+		protected abstract void OnEnteredTargetLost();
+		protected abstract void OnEnteredDied();
 	}
 }

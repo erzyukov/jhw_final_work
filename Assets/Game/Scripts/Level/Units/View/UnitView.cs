@@ -1,11 +1,9 @@
 namespace Game.Units
 {
-	using Game.Configs;
 	using Game.Utilities;
 	using UniRx;
 	using UnityEngine;
 	using UnityEngine.AI;
-	using Zenject;
 
 	public interface IUnitView
 	{

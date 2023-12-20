@@ -56,7 +56,7 @@
 
 		private void SelectTarget()
 		{
-			if (_enemyField == null || _enemyField.Units.Count == 0)
+            if (_enemyField == null || _enemyField.Units.Count == 0)
 				return;
 
 			_target = _enemyField.Units
@@ -64,7 +64,7 @@
 				.OrderBy(u => (_unitFacade.Transform.position - u.Transform.position).sqrMagnitude)
 				.FirstOrDefault();
 
-			if (_target != null)
+            if (_target != null)
 			{
 				TargetFound.Execute(_target);
 

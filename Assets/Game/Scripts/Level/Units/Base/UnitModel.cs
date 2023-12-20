@@ -8,11 +8,15 @@ namespace Game.Units
 		Transform Transform { get; }
 		Renderer Renderer { get; }
 		Transform RendererTransform { get; }
-	}
+        Animator Animator { get; }
+        AnimationEventsCatcher AnimationEventsCatcher { get; }
+    }
 
 	public class UnitModel : MonoBehaviour, IUnitModel
 	{
 		[SerializeField] Renderer _renderer;
+		[SerializeField] Animator _animator;
+		[SerializeField] AnimationEventsCatcher _animationEventsCatcher;
 
 		private void Awake()
 		{
@@ -27,9 +31,13 @@ namespace Game.Units
 
 		public Transform RendererTransform { get; private set; }
 
-		#endregion
+        public Animator Animator => _animator;
 
-		public class Factory : PlaceholderFactory<Object, IUnitModel>
+        public AnimationEventsCatcher AnimationEventsCatcher => _animationEventsCatcher;
+
+        #endregion
+
+        public class Factory : PlaceholderFactory<Object, IUnitModel>
 		{
 		}
 	}
