@@ -15,7 +15,8 @@ namespace Game.Units
 			AddOnEnterAction(UnitState.StartAttack, OnEnteredStartAttack);
 			AddOnEnterAction(UnitState.HitTarget, OnEnteredHitTarget);
 			AddOnEnterAction(UnitState.TargetLost, OnEnteredTargetLost);
-			AddOnEnterAction(UnitState.Died, OnEnteredDied);
+			AddOnEnterAction(UnitState.Dying, OnEnteredDying);
+			AddOnEnterAction(UnitState.Dead, OnEnteredDead);
 		}
 
 		protected override UnitState DefaultState => UnitState.None;
@@ -28,6 +29,7 @@ namespace Game.Units
 		protected abstract void OnEnteredStartAttack();
 		protected abstract void OnEnteredHitTarget();
 		protected abstract void OnEnteredTargetLost();
-		protected abstract void OnEnteredDied();
+		protected abstract void OnEnteredDying();
+		protected abstract void OnEnteredDead();
 	}
 }

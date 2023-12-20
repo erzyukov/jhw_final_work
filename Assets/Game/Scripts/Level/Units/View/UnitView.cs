@@ -1,77 +1,77 @@
 namespace Game.Units
 {
-	using Game.Utilities;
-	using UniRx;
-	using UnityEngine;
-	using UnityEngine.AI;
+    using Game.Utilities;
+    using UniRx;
+    using UnityEngine;
+    using UnityEngine.AI;
 
-	public interface IUnitView
-	{
-		ReactiveCommand MergeInitiated { get; }
-		ReactiveCommand MergeCanceled { get; }
+    public interface IUnitView
+    {
+        ReactiveCommand MergeInitiated { get; }
+        ReactiveCommand MergeCanceled { get; }
 
-		Transform Transform { get; }
-		Transform ModelContainer { get; }
-		NavMeshAgent NavMeshAgent { get; }
-		Transform ModelRendererTransform { get; }
+        Transform Transform { get; }
+        Transform ModelContainer { get; }
+        NavMeshAgent NavMeshAgent { get; }
+        Transform ModelRendererTransform { get; }
 
-		void SetParent(Transform parent);
-		void SetActive(bool value);
-		void SetModelHeight(float value);
-		void SetModelRendererTransform(Transform transform);
-		void ResetPosition();
-		void Destroy();
-	}
+        void SetParent(Transform parent, bool worldPositionStays = false);
+        void SetActive(bool value);
+        void SetModelHeight(float value);
+        void SetModelRendererTransform(Transform transform);
+        void ResetPosition();
+        void Destroy();
+    }
 
-	[SelectionBase]
+    [SelectionBase]
     public class UnitView : MonoBehaviour, IUnitView
-	{
-		[SerializeField] private Transform _modelContainer;
-		[SerializeField] private Transform _uiHealthCanvas;
-		[SerializeField] private NavMeshAgent _navMeshAgent;
+    {
+        [SerializeField] private Transform _modelContainer;
+        [SerializeField] private Transform _uiHealthCanvas;
+        [SerializeField] private NavMeshAgent _navMeshAgent;
 
-		private void OnTriggerEnter(Collider other) => 
-			MergeInitiated.Execute();
+        private void OnTriggerEnter(Collider other) =>
+            MergeInitiated.Execute();
 
-		private void OnTriggerExit(Collider other) =>
-			MergeCanceled.Execute();
+        private void OnTriggerExit(Collider other) =>
+            MergeCanceled.Execute();
 
-		#region IUnitView
+        #region IUnitView
 
-		public ReactiveCommand MergeInitiated { get; } = new ReactiveCommand();
-		
-		public ReactiveCommand MergeCanceled { get; } = new ReactiveCommand();
-		
-		public Transform ModelRendererTransform { get; private set; }
+        public ReactiveCommand MergeInitiated { get; } = new ReactiveCommand();
 
-		public Transform Transform => transform;
+        public ReactiveCommand MergeCanceled { get; } = new ReactiveCommand();
 
-		public Transform ModelContainer => _modelContainer;
+        public Transform ModelRendererTransform { get; private set; }
 
-		public NavMeshAgent NavMeshAgent => _navMeshAgent;
+        public Transform Transform => transform;
 
-		public void SetParent(Transform parent) => transform.SetParent(parent, false);
+        public Transform ModelContainer => _modelContainer;
 
-		public void SetActive(bool value) => gameObject.SetActive(value);
+        public NavMeshAgent NavMeshAgent => _navMeshAgent;
 
-		public void SetModelHeight(float value) =>
-			_uiHealthCanvas.localPosition = _uiHealthCanvas.localPosition.WithY(value);
+        public void SetParent(Transform parent, bool worldPositionStays = false) => transform.SetParent(parent, worldPositionStays);
 
-		public void SetModelRendererTransform(Transform transform) =>
-			ModelRendererTransform = transform;
+        public void SetActive(bool value) => gameObject.SetActive(value);
 
-		public void ResetPosition()
-		{
-			transform.localPosition = Vector3.zero;
-			transform.localRotation = Quaternion.identity;
-		}
+        public void SetModelHeight(float value) =>
+            _uiHealthCanvas.localPosition = _uiHealthCanvas.localPosition.WithY(value);
 
-		public void Destroy()
-		{
-			SetActive(false);
-			Object.Destroy(gameObject);
-		}
+        public void SetModelRendererTransform(Transform transform) =>
+            ModelRendererTransform = transform;
 
-		#endregion
-	}
+        public void ResetPosition()
+        {
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+        }
+
+        public void Destroy()
+        {
+            SetActive(false);
+            Object.Destroy(gameObject);
+        }
+
+        #endregion
+    }
 }

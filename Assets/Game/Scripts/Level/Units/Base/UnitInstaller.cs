@@ -62,12 +62,16 @@ namespace Game.Units
 				.BindInterfacesTo<UnitFsm>()
 				.AsSingle();
 
-			#endregion
+            Container
+                .BindInterfacesTo<UnitEvents>()
+                .AsSingle();
 
-			#region Components
+            #endregion
 
-			Container
-				.BindInterfacesTo<UnitTargetFinder>()
+            #region Components
+
+            Container
+                .BindInterfacesTo<UnitTargetFinder>()
 				.AsSingle();
 
 			Container

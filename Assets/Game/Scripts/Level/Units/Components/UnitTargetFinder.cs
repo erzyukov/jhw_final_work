@@ -68,7 +68,7 @@
 			{
 				TargetFound.Execute(_target);
 
-				_targetDisposable = _target.Died
+				_targetDisposable = _target.Dying
 					.Subscribe(_ => OnTargetDiedHandler());
 			}
 		}

@@ -9,6 +9,7 @@
 
     public interface IUnitFsm
     {
+        ReactiveCommand<UnitState> StateChanged { get; }
         void Transition(UnitState state);
         void Reset();
     }
@@ -22,6 +23,7 @@
         [Inject] private IUnitView _view;
         [Inject] private IUnitBuilder _builder;
         [Inject] private UnitConfig _config;
+        [Inject] private TimingsConfig _timingsConfig;
 
         readonly private CompositeDisposable _disposable = new CompositeDisposable();
 
@@ -31,11 +33,13 @@
 
         private int AttackTrigger => Animator.StringToHash("Attack");
         private int IsMoveParameter => Animator.StringToHash("IsMove");
+        private int DieTrigger => Animator.StringToHash("Die");
+        private Animator Animator => _builder.Model.Animator;
 
         public void Initialize()
         {
-            _hitTargetWithAnimationState = (_builder.Model.Animator != null) ? UnitState.StartAttack : UnitState.HitTarget;
-            _finishAttackWithAnimationState = (_builder.Model.Animator != null) ? UnitState.FinishAttack : UnitState.PrepareAttack;
+            _hitTargetWithAnimationState = (Animator != null) ? UnitState.StartAttack : UnitState.HitTarget;
+            _finishAttackWithAnimationState = (Animator != null) ? UnitState.FinishAttack : UnitState.PrepareAttack;
 
             InitializeSubscribes();
         }
@@ -60,13 +64,18 @@
             if (_builder.Model.AnimationEventsCatcher != null)
             {
                 _builder.Model.AnimationEventsCatcher.Hited
-                    .Where(_ => State != UnitState.HitTarget)
+                    .Where(_ => State == UnitState.StartAttack)
                     .Subscribe(_ => Transition(UnitState.HitTarget))
                     .AddTo(_disposable);
 
                 _builder.Model.AnimationEventsCatcher.AttackAnimationCompleted
-                    .Where(_ => State != UnitState.PrepareAttack)
+                    .Where(_ => State == UnitState.FinishAttack)
                     .Subscribe(_ => Transition(UnitState.PrepareAttack))
+                    .AddTo(_disposable);
+
+                _builder.Model.AnimationEventsCatcher.DeathAnimationCompleted
+                    .Where(_ => State == UnitState.Dying)
+                    .Subscribe(_ => Transition(UnitState.Dead))
                     .AddTo(_disposable);
             }
 
@@ -75,11 +84,13 @@
                 .AddTo(_disposable);
 
             _health.Died
-                .Subscribe(_ => Transition(UnitState.Died))
+                .Subscribe(_ => Transition(UnitState.Dying))
                 .AddTo(_disposable);
         }
 
         #region SimpleFsmBase
+
+        public ReactiveCommand<UnitState> StateChanged { get; } = new ReactiveCommand<UnitState>();
 
         public override void Transition(UnitState state)
         {
@@ -96,12 +107,11 @@
             #endregion
 
             base.Transition(state);
+            StateChanged.Execute(state);
         }
 
         public void Reset()
         {
-            _disposable.Clear();
-            InitializeSubscribes();
             Transition(UnitState.Idle);
         }
 
@@ -130,6 +140,12 @@
                 case UnitState.MoveToTarget:
                     if (_targetFinder.HasTarget == false)
                         Transition(UnitState.TargetLost);
+
+                    break;
+
+                case UnitState.Dying:
+                    if (Animator == null)
+                        Transition(UnitState.Dead);
 
                     break;
             }
@@ -174,14 +190,14 @@
 
         protected override void OnEnteredMoveToTarget()
         {
-            if (_builder.Model.Animator != null)
-                _builder.Model.Animator.SetBool(IsMoveParameter, true);
+            if (Animator != null)
+                Animator.SetBool(IsMoveParameter, true);
         }
 
         protected override void OnExitedMoveToTarget()
         {
-            if (_builder.Model.Animator != null)
-                _builder.Model.Animator.SetBool(IsMoveParameter, false);
+            if (Animator != null)
+                Animator.SetBool(IsMoveParameter, false);
         }
 
         protected override void OnEnteredPrepareAttack()
@@ -191,7 +207,7 @@
 
         protected override void OnEnteredStartAttack()
         {
-            _builder.Model.Animator.SetTrigger(AttackTrigger);
+            Animator.SetTrigger(AttackTrigger);
         }
 
         protected override void OnEnteredHitTarget()
@@ -205,10 +221,19 @@
             _mover.Stop();
         }
 
-        protected override void OnEnteredDied()
+        protected override void OnEnteredDying()
         {
             _mover.Stop();
-            _view.SetActive(false);
+
+            if (Animator != null)
+                Animator.SetTrigger(DieTrigger);
+        }
+
+        protected override void OnEnteredDead()
+        {
+            Observable.Timer(TimeSpan.FromSeconds(_timingsConfig.UnitDeathVanishDelay))
+                .Subscribe(_ => _view.SetActive(false))
+                .AddTo(_disposable);
         }
 
         #endregion

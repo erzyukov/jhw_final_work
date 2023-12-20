@@ -15,6 +15,7 @@
 		HitTarget,
 		FinishAttack,
 		TargetLost,
-		Died,
+		Dying,
+        Dead,
 	}
 }

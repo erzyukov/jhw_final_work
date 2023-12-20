@@ -87,7 +87,7 @@
 		private void SubscribeToUnit(IUnitFacade unit)
 		{
 			_unitSubscribes.Add(unit, default);
-			_unitSubscribes[unit] = unit.Died
+			_unitSubscribes[unit] = unit.Dying
 				.Subscribe(_ => UnitDiedHandler(unit));
 		}
 
