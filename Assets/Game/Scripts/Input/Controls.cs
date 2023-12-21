@@ -118,6 +118,24 @@ namespace Game.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""KillEnemyUnit"",
+                    ""type"": ""Button"",
+                    ""id"": ""49eb447b-0c83-4a9c-9828-a993f1db8094"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""KillAllEnemies"",
+                    ""type"": ""Button"",
+                    ""id"": ""66e95f12-601e-46e9-b619-fa526cb9bfe7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -252,6 +270,61 @@ namespace Game.Input
                     ""action"": ""RestoreEnergy"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4e8c816-2234-44d2-b38e-bf2b4e97c193"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KillEnemyUnit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Two Modifiers"",
+                    ""id"": ""ff1f5bbb-d4f7-40fc-8894-dda2eb8b35b2"",
+                    ""path"": ""TwoModifiers"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KillAllEnemies"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier1"",
+                    ""id"": ""9709ec45-e63c-45fc-8110-bf4877af7948"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KillAllEnemies"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""modifier2"",
+                    ""id"": ""f15ac7ce-f028-472a-92c8-af7e9e2eea06"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KillAllEnemies"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""801d7421-024a-42fc-92b0-781770182a90"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KillAllEnemies"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -270,6 +343,8 @@ namespace Game.Input
             m_DevCheats_Shoot = m_DevCheats.FindAction("Shoot", throwIfNotFound: true);
             m_DevCheats_SpentEnergy = m_DevCheats.FindAction("SpentEnergy", throwIfNotFound: true);
             m_DevCheats_RestoreEnergy = m_DevCheats.FindAction("RestoreEnergy", throwIfNotFound: true);
+            m_DevCheats_KillEnemyUnit = m_DevCheats.FindAction("KillEnemyUnit", throwIfNotFound: true);
+            m_DevCheats_KillAllEnemies = m_DevCheats.FindAction("KillAllEnemies", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -339,6 +414,8 @@ namespace Game.Input
         private readonly InputAction m_DevCheats_Shoot;
         private readonly InputAction m_DevCheats_SpentEnergy;
         private readonly InputAction m_DevCheats_RestoreEnergy;
+        private readonly InputAction m_DevCheats_KillEnemyUnit;
+        private readonly InputAction m_DevCheats_KillAllEnemies;
         public struct DevCheatsActions
         {
             private @Controls m_Wrapper;
@@ -353,6 +430,8 @@ namespace Game.Input
             public InputAction @Shoot => m_Wrapper.m_DevCheats_Shoot;
             public InputAction @SpentEnergy => m_Wrapper.m_DevCheats_SpentEnergy;
             public InputAction @RestoreEnergy => m_Wrapper.m_DevCheats_RestoreEnergy;
+            public InputAction @KillEnemyUnit => m_Wrapper.m_DevCheats_KillEnemyUnit;
+            public InputAction @KillAllEnemies => m_Wrapper.m_DevCheats_KillAllEnemies;
             public InputActionMap Get() { return m_Wrapper.m_DevCheats; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -392,6 +471,12 @@ namespace Game.Input
                     @RestoreEnergy.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnRestoreEnergy;
                     @RestoreEnergy.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnRestoreEnergy;
                     @RestoreEnergy.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnRestoreEnergy;
+                    @KillEnemyUnit.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnKillEnemyUnit;
+                    @KillEnemyUnit.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnKillEnemyUnit;
+                    @KillEnemyUnit.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnKillEnemyUnit;
+                    @KillAllEnemies.started -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnKillAllEnemies;
+                    @KillAllEnemies.performed -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnKillAllEnemies;
+                    @KillAllEnemies.canceled -= m_Wrapper.m_DevCheatsActionsCallbackInterface.OnKillAllEnemies;
                 }
                 m_Wrapper.m_DevCheatsActionsCallbackInterface = instance;
                 if (instance != null)
@@ -426,6 +511,12 @@ namespace Game.Input
                     @RestoreEnergy.started += instance.OnRestoreEnergy;
                     @RestoreEnergy.performed += instance.OnRestoreEnergy;
                     @RestoreEnergy.canceled += instance.OnRestoreEnergy;
+                    @KillEnemyUnit.started += instance.OnKillEnemyUnit;
+                    @KillEnemyUnit.performed += instance.OnKillEnemyUnit;
+                    @KillEnemyUnit.canceled += instance.OnKillEnemyUnit;
+                    @KillAllEnemies.started += instance.OnKillAllEnemies;
+                    @KillAllEnemies.performed += instance.OnKillAllEnemies;
+                    @KillAllEnemies.canceled += instance.OnKillAllEnemies;
                 }
             }
         }
@@ -442,6 +533,8 @@ namespace Game.Input
             void OnShoot(InputAction.CallbackContext context);
             void OnSpentEnergy(InputAction.CallbackContext context);
             void OnRestoreEnergy(InputAction.CallbackContext context);
+            void OnKillEnemyUnit(InputAction.CallbackContext context);
+            void OnKillAllEnemies(InputAction.CallbackContext context);
         }
     }
 }
