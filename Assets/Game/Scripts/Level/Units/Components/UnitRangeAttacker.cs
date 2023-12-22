@@ -47,8 +47,8 @@
             if (CanAttack(target) == false)
                 return;
 
-            target.TakeDamage(_currentDamage);
-            _atackTimer.Set(_grade.AttackDelay);
+			_projectileSpawner.SpawnBullet(_shootPoint.transform.position, target, _currentDamage);
+			_atackTimer.Set(_grade.AttackDelay);
         }
 
         public void ProcessTargetTracking(IUnitFacade target)
