@@ -36,7 +36,7 @@
 
 		public void TakeDamage(float damage)
 		{
-			if (_health <= 0)
+			if (IsDead)
 				return;
 
 			_health = Mathf.Clamp(_health - damage, 0, _baseHealth);
