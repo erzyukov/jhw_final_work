@@ -8,8 +8,6 @@
     using Game.Core;
     using Game.Configs;
     using System.Linq;
-    using UnityEngine;
-    using UnityEngine.InputSystem;
     using Game.Ui;
 
     public class UpgradesTutorial : UpgradesTutorialFsmBase, IInitializable, IDisposable
@@ -45,17 +43,6 @@
                 .Where(step => step != State)
                 .Subscribe(OnUpgradesStepChanged)
                 .AddTo(_disposable);
-
-            /*
-            _summonInterruptDisposable = _heroUnitSummoner.SummoningPaidUnit
-                .Where(_ => _profile.Tutorial.BeginnerStep.Value != BeginnerStep.Complete)
-                .Subscribe(_ => OnSummoningPaidUnitHandler());
-
-            _fieldHeroFacade.Units.ObserveCountChanged()
-                .Where(_ => State == BeginnerStep.LastSummon)
-                .Subscribe(_ => _uiTacticalStageHud.SetStartBattleButtonInteractable(false))
-                .AddTo(_disposable);
-            */
         }
 
         public virtual void Dispose()
@@ -69,11 +56,6 @@
             switch (State)
             {
                 case UpgradesStep.MenuButton:
-                    //if (_isUnitSummoned)
-                    //{
-                        //_isUnitSummoned = false;
-                        //_profile.Tutorial.BeginnerStep.Value = BeginnerStep.SecondSummon;
-                    //}
                     break;
 
             }
@@ -83,10 +65,7 @@
 
         protected override void OnEnterMenuButton()
         {
-            Debug.LogWarning("OnEnterMenuButton");
-
-            // TODO: local position of hint point to world canvas position (Transform -> RectTransform)
-            _fingerHint.SetPosition(_uiMainMenuView.UpgradeButtonHintParameters.Point.position);
+			_fingerHint.SetPosition(_uiMainMenuView.UpgradeButtonHintParameters.Point);
             _fingerHint.SetLeft(_uiMainMenuView.UpgradeButtonHintParameters.IsLeft);
             _fingerHint.SetActive(true);
 

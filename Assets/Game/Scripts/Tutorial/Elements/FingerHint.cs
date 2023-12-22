@@ -6,6 +6,7 @@ namespace Game.Tutorial
 	public interface IFingerHint
 	{
 		void SetPosition(Vector3 value);
+		void SetPosition(Transform value);
 		void SetActive(bool value);
 		void SetLeft(bool value);
 	}
@@ -20,7 +21,12 @@ namespace Game.Tutorial
 		public void SetPosition(Vector3 value) =>
 			transform.position = value;
 
-		public void SetLeft(bool value) =>
+        public void SetPosition(Transform value)
+        {
+            transform.SetParent(value, false);
+        }
+
+        public void SetLeft(bool value) =>
 			transform.localScale = (value)? Vector3.one.WithX(-1): Vector3.one;
 
 		#endregion
