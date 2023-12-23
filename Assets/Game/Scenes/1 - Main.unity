@@ -5935,6 +5935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ce9f58b5a9c5b4197a52a1c0097497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _place: 1
   _hintPoint: {fileID: 1108943351}
   _isLeft: 0
 --- !u!1 &703503226
@@ -7823,6 +7824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ce9f58b5a9c5b4197a52a1c0097497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _place: 0
   _hintPoint: {fileID: 1501817818}
   _isLeft: 1
 --- !u!1 &829653984 stripped
@@ -16315,6 +16317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ce9f58b5a9c5b4197a52a1c0097497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _place: 2
   _hintPoint: {fileID: 230259886}
   _isLeft: 1
 --- !u!1 &2103448282

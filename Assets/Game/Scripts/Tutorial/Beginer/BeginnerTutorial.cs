@@ -155,7 +155,7 @@
 
 		protected override void OnExitFirstSummon()
 		{
-			_fingerHint.SetActive(false);
+			_fingerHint.Hide();
 			_dialogHint.SetActive(false);
 		}
 
@@ -170,7 +170,7 @@
 
 		protected override void OnExitSecondSummon()
 		{
-			_fingerHint.SetActive(false);
+			_fingerHint.Hide();
 			_dialogHint.SetActive(false);
 			_uiTacticalStageHud.SetStartBattleButtonInteractable(true);
 		}
@@ -186,7 +186,7 @@
 
 		protected override void OnExitFirstBattle()
 		{
-			_fingerHint.SetActive(false);
+			_fingerHint.Hide();
 			_uiTacticalStageHud.SetSummonButtonInteractable(true);
 		}
 
@@ -201,7 +201,7 @@
 
 		protected override void OnExitThirdSummon()
 		{
-			_fingerHint.SetActive(false);
+			_fingerHint.Hide();
 		}
 
 		#endregion
@@ -215,7 +215,7 @@
 
 		protected override void OnExitFourthSummon()
 		{
-			_fingerHint.SetActive(false);
+			_fingerHint.Hide();
 		}
 
 		#endregion
@@ -257,7 +257,7 @@
 
 		protected override void OnExitSecondBattle()
 		{
-			_fingerHint.SetActive(false);
+			_fingerHint.Hide();
 			_uiTacticalStageHud.SetSummonButtonInteractable(true);
 		}
 
@@ -273,7 +273,7 @@
 
 		protected override void OnExitSixthSummon()
 		{
-			_fingerHint.SetActive(false);
+			_fingerHint.Hide();
 			_summonInterruptDisposable.Dispose();
 		}
 
@@ -289,7 +289,7 @@
 
 		protected override void OnExitThirdBattle()
 		{
-			_fingerHint.SetActive(false);
+			_fingerHint.Hide();
 			_uiTacticalStageHud.SetSummonButtonInteractable(true);
 			_dialogHint.SetActive(false);
 		}
@@ -307,18 +307,14 @@
 
 		private void SetupBattleStep()
 		{
-			_fingerHint.SetPosition(_uiTacticalStageHud.BattleButtonHintParameters.Point.position);
-			_fingerHint.SetLeft(_uiTacticalStageHud.BattleButtonHintParameters.IsLeft);
-			_fingerHint.SetActive(true);
+			_fingerHint.Show(FingerPlace.TacticalStageStart);
 			_uiTacticalStageHud.SetStartBattleButtonInteractable(true);
 			_uiTacticalStageHud.SetSummonButtonInteractable(false);
 		}
 
 		private void SetupSummonStep(bool withDialog = true)
 		{
-			_fingerHint.SetPosition(_uiTacticalStageHud.SummonButtonHintParameters.Point.position);
-			_fingerHint.SetLeft(_uiTacticalStageHud.SummonButtonHintParameters.IsLeft);
-			_fingerHint.SetActive(true);
+			_fingerHint.Show(FingerPlace.TacticalStageSummon);
 
 			if (withDialog)
 				ActivateDialogMessege();

@@ -9,8 +9,9 @@
     using Game.Configs;
     using System.Linq;
     using Game.Ui;
+	using System.Collections.Generic;
 
-    public class UpgradesTutorial : UpgradesTutorialFsmBase, IInitializable, IDisposable
+	public class UpgradesTutorial : UpgradesTutorialFsmBase, IInitializable, IDisposable
     {
         [Inject] private GameProfile _profile;
         [Inject] private IGameProfileManager _gameProfileManager;
@@ -19,8 +20,8 @@
         [Inject] private MenuConfig _menuConfig;
         [Inject] private TutorialConfig _config;
         [Inject] private IFingerHint _fingerHint;
-        [Inject] private IDialogHint _dialogHint;
-        [Inject] private IUiMainMenuView _uiMainMenuView;
+		[Inject] private IDialogHint _dialogHint;
+        //[Inject] private IUiMainMenuView _uiMainMenuView;
 
         readonly private CompositeDisposable _disposable = new CompositeDisposable();
         private IDisposable _summonInterruptDisposable;
@@ -65,16 +66,14 @@
 
         protected override void OnEnterMenuButton()
         {
-			_fingerHint.SetPosition(_uiMainMenuView.UpgradeButtonHintParameters.Point);
-            _fingerHint.SetLeft(_uiMainMenuView.UpgradeButtonHintParameters.IsLeft);
-            _fingerHint.SetActive(true);
+			_fingerHint.Show(FingerPlace.MainMenuUpgrade);
 
             ActivateDialogMessege();
         }
 
         protected override void OnExitMenuButton()
         {
-            _fingerHint.SetActive(false);
+            _fingerHint.Hide();
             _dialogHint.SetActive(false);
         }
 

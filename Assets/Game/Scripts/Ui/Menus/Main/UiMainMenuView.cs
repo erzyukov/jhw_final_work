@@ -1,7 +1,6 @@
 namespace Game.Ui
 {
 	using Game.Core;
-    using Game.Tutorial;
     using System.Collections.Generic;
     using System.Linq;
 	using UnityEngine;
@@ -10,7 +9,6 @@ namespace Game.Ui
 	{
 		List<GameState> ActiveOnGameState { get; }
 		List<UiMainMenuButton> Buttons { get; }
-        HintedButton.Parameters UpgradeButtonHintParameters { get; }
 		void SetActive(bool value);
 		void SetButtonLocked(GameState screen);
 		void SetButtonActive(GameState screen);
@@ -31,16 +29,11 @@ namespace Game.Ui
 		[SerializeField] private float _defaultButtonHeight;
 		[SerializeField] private float _selectedButtonHeight;
 
-        [Header("Tutorial")]
-        [SerializeField] private HintedButton _hintedUpgradesButton;
-
         #region IUiMainMenuView
 
         public List<GameState> ActiveOnGameState => _activeOnGameState;
 
 		public List<UiMainMenuButton> Buttons => _buttons;
-
-        public HintedButton.Parameters UpgradeButtonHintParameters => _hintedUpgradesButton.HintParameters;
 
 
         public void SetActive(bool value) => gameObject.SetActive(value);
