@@ -96,6 +96,8 @@
 
 			_fieldHeroFacade.RemoveUnit(_mergeInitiatorUnit);
 			_fieldHeroFacade.RemoveUnit(_mergeAbsorbedUnit);
+			_mergeInitiatorUnit.Destroy();
+			_mergeAbsorbedUnit.Destroy();
 			_mergeInitiatorUnit = null;
 			_mergeAbsorbedUnit = null;
 
