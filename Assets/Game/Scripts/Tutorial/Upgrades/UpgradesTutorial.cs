@@ -41,6 +41,14 @@
 			if (isComplete)
 				return;
 
+			SetProfileStepValue(UpgradesStep.None);
+			//Transition(UpgradesStep.None);
+
+			_profile.Tutorial.UpgradesStep
+				.Where(step => step != State)
+				.Subscribe(OnUpgradesStepChanged)
+				.AddTo(_disposable);
+
 			_gameCycle.State
 				.Where(gameState =>
 					gameState == GameState.Lobby &&
@@ -48,18 +56,21 @@
 					isComplete == false &&
 					_profile.LevelNumber.Value >= startLevel
 				)
-				.Subscribe(_ => _profile.Tutorial.UpgradesStep.Value = UpgradesStep.MenuButton)
+				.Subscribe(_ => SetProfileStepValue(UpgradesStep.MenuButton))
 				.AddTo(_disposable);
 
 			UiMainMenuButton upgradeButton = _uiMainMenuView.GetButton(GameState.Upgrades);
 			upgradeButton.ButtonClicked
 				.Where(_ => State == UpgradesStep.MenuButton)
-				.Subscribe(_ => SetProfileStepValue(UpgradesStep.FirstUpgrade))
-				.AddTo(_disposable);
-
-			_profile.Tutorial.UpgradesStep
-				.Where(step => step != State)
-				.Subscribe(OnUpgradesStepChanged)
+				.Subscribe(_ =>
+				{
+					int infantryLevel = _gameUpgrades.GetUnitLevel(Species.HeroInfantryman);
+					int sniperLevel = _gameUpgrades.GetUnitLevel(Species.HeroSniper);
+					UpgradesStep nextStep = (infantryLevel == 1) 
+						? UpgradesStep.FirstUpgrade 
+						: (sniperLevel == 1) ? UpgradesStep.SelectNextUnit: UpgradesStep.UpgradeHint;
+					SetProfileStepValue(nextStep);
+				})
 				.AddTo(_disposable);
 
 			_gameUpgrades.Upgraded
@@ -170,6 +181,9 @@
 
 		protected override void OnEnterUpgradeHint()
 		{
+			_uiUpgradesScreen.UnitElements[Species.HeroInfantryman].SetSelectInteractable(false);
+			_uiUpgradesScreen.UnitElements[Species.HeroInfantryman].SetUpgradeInteractable(false);
+			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetSelectInteractable(false);
 			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetUpgradeInteractable(false);
 			_fingerHint.Hide();
 			ActivateDialogMessege();

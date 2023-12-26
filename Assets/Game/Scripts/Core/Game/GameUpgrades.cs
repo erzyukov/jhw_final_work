@@ -16,6 +16,7 @@ namespace Game.Core
 	public interface IGameUpgrades
 	{
 		ReactiveCommand<Species> Upgraded { get; }
+		int GetUnitLevel(Species species);
 		float GetUnitHealth(Species species);
 		float GetUnitDamage(Species species);
 		float GetUnitHealthUpgradeDelta(Species species);
@@ -50,6 +51,9 @@ namespace Game.Core
 		#region IGameUpgrades
 
 		public ReactiveCommand<Species> Upgraded { get; } = new ReactiveCommand<Species>();
+
+		public int GetUnitLevel(Species species) =>
+			_gameProfile.Units.Upgrades[species].Value;
 
 		public float GetUnitHealth(Species species) =>
 			_currentHealth[species];
