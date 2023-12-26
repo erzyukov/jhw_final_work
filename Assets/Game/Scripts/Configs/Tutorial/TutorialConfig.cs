@@ -9,19 +9,27 @@ namespace Game.Configs
 	[CreateAssetMenu(fileName = "Tutorial", menuName = "Configs/Tutorial", order = (int)Config.Tutorial)]
 	public class TutorialConfig : ScriptableObject
 	{
+        // TODO: refact: BeginerTutorialMessage >> TutorialMessage<BeginnerStep>
+        [Header("Beginer Tutorial")]
 		[SerializeField] private List<BeginerTutorialMessage> _beginerTutorialMessages = new List<BeginerTutorialMessage>();
 		[SerializeField] private List<BeginerTurorialSummonData> _beginerTurorialSummons = new List<BeginerTurorialSummonData>();
 		[SerializeField] private List<BeginerTurorialMergeData> _beginerTurorialMerges = new List<BeginerTurorialMergeData>();
 
-		private Dictionary<BeginnerStep, string> _beginerMessages;
+        [Header("Upgrades Tutorial")]
+        [SerializeField] private List<TutorialMessage<UpgradesStep>> _upgradesTutorialMessages = new List<TutorialMessage<UpgradesStep>>();
+
+        private Dictionary<BeginnerStep, string> _beginerMessages;
 		private Dictionary<BeginnerStep, BeginerTurorialSummonData> _beginerSummons;
 		private Dictionary<BeginnerStep, BeginerTurorialMergeData> _beginerMerges;
+        private Dictionary<UpgradesStep, TutorialMessage<UpgradesStep>> _upgradesMessages;
 		
 		public Dictionary<BeginnerStep, string> BeginerTutorialMessages => _beginerMessages;
 		public Dictionary<BeginnerStep, BeginerTurorialSummonData> BeginerTurorialSummons => _beginerSummons;
 		public Dictionary<BeginnerStep, BeginerTurorialMergeData> BeginerTurorialMerges => _beginerMerges;
+        public Dictionary<UpgradesStep, TutorialMessage<UpgradesStep>> UpgradesTutorialMessages => _upgradesMessages;
 
-		public void Initialize()
+
+        public void Initialize()
 		{
 			_beginerMessages = new Dictionary<BeginnerStep, string>();
 			foreach (var message in _beginerTutorialMessages)
@@ -34,8 +42,13 @@ namespace Game.Configs
 			_beginerMerges = new Dictionary<BeginnerStep, BeginerTurorialMergeData>();
 			foreach (var data in _beginerTurorialMerges)
 				_beginerMerges.Add(data.Step, data);
-		}
 
+            _upgradesMessages = new Dictionary<UpgradesStep, TutorialMessage<UpgradesStep>>();
+            foreach (var message in _upgradesTutorialMessages)
+                _upgradesMessages.Add(message.Step, message);
+        }
+
+		// TODO: switch to TutorialMessage<T>
 		[Serializable]
 		public struct BeginerTutorialMessage
 		{
@@ -59,5 +72,13 @@ namespace Game.Configs
 			public Vector2Int FromPosition;
 			public Vector2Int ToPosition;
 		}
-	}
+
+        [Serializable]
+        public struct TutorialMessage<T> where T : Enum
+        {
+            public T Step;
+            public string TranslationKey;
+			public DialogHintPlace Place;
+		}
+    }
 }

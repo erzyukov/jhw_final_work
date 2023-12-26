@@ -36,10 +36,7 @@
 
             foreach (var button in _view.Buttons)
 			{
-				int availableLevelIndex = _menuConfig.AccessFromLevel
-					.Where(data => data.GameState == button.TargetGameState)
-					.Select(data => data.LevelNumber - 1)
-					.FirstOrDefault();
+                int availableLevelIndex = _menuConfig.GetAccessLevel(button.TargetGameState) - 1;
 
 				bool isAvailable = 
 					availableLevelIndex < _gameProfile.Levels.Count && 

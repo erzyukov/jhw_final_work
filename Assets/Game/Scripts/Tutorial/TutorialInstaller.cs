@@ -32,18 +32,37 @@ namespace Game.Installers
 					.BindInterfacesTo<DialogHint>()
 					.FromComponentInHierarchy()
 					.AsSingle();
+			}
 
+            BeginnerInstall();
+            UpgradesInstall();
+        }
+
+        private void BeginnerInstall()
+        {
+            if (_sceneContext == SceneContext.Main)
+            {
 				Container
 					.BindInterfacesTo<BeginerTutorialLoader>()
 					.AsSingle();
-			}
+            }
 
-			if (_sceneContext == SceneContext.Level)
+            if (_sceneContext == SceneContext.Level)
 			{
 				Container
 					.BindInterfacesTo<BeginnerTutorial>()
 					.AsSingle();
 			}
-		}
-	}
+        }
+
+        private void UpgradesInstall()
+        {
+            if (_sceneContext == SceneContext.Main)
+            {
+                Container
+                    .BindInterfacesTo<UpgradesTutorial>()
+                    .AsSingle();
+            }
+        }
+    }
 }

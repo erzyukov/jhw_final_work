@@ -4,6 +4,7 @@ namespace Game.Installers
 	using UnityEngine;
 	using Zenject;
 	using Game.Ui;
+	using Game.Tutorial;
 
 	public class MainSceneInstaller : MonoInstaller
 	{
@@ -38,6 +39,11 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<UiMainMenu>()
+				.AsSingle();
+
+			Container
+				.Bind<HintedButton>()
+				.FromComponentsInHierarchy()
 				.AsSingle();
 		}
 

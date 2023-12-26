@@ -13,6 +13,7 @@
 		void SetLastWaveValue(string value);
 		void SetLastWaveActive(bool value);
         void SetPlayButtonText(string value);
+		void SetPlayButtonEnabled(bool value);
 	}
 
 	public class UiLobbyScreen : UiScreen, IUiLobbyScreen
@@ -37,6 +38,8 @@
 
         public void SetPlayButtonText(string value) => _playButtonText.text = value;
 
-        #endregion
-    }
+		public void SetPlayButtonEnabled(bool value) => _playButton.interactable = value;
+
+		#endregion
+	}
 }

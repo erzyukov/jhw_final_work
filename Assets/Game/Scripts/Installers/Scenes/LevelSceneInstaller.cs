@@ -8,7 +8,8 @@ namespace Game.Installers
 	using Game.Profiles;
 	using Game.Units;
 	using Game.Weapon;
-	using Zenject;
+    using System;
+    using Zenject;
 
     public class LevelSceneInstaller : MonoInstaller
 	{
@@ -62,9 +63,10 @@ namespace Game.Installers
 
 			InstallWeapons();
 			InstallUnits();
+            InstallDev();
 		}
 
-		private void InstallWeapons()
+        private void InstallWeapons()
 		{
 			Container.BindFactory<ProjectileData, Bullet, Bullet.Factory>()
 				.FromMonoPoolableMemoryPool(x =>
@@ -90,5 +92,11 @@ namespace Game.Installers
 				.FromFactory<PrefabFactory<IUnitModel>>();
 		}
 
-	}
+        private void InstallDev()
+        {
+            Container
+                .BindInterfacesTo<LevelDevCheats>()
+                .AsSingle();
+        }
+    }
 }

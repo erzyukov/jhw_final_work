@@ -1,22 +1,23 @@
 namespace Game.Ui
 {
 	using Game.Core;
-	using System.Collections.Generic;
-	using System.Linq;
+    using System.Collections.Generic;
+    using System.Linq;
 	using UnityEngine;
-	using UnityEngine.UI;
 
 	public interface IUiMainMenuView
 	{
 		List<GameState> ActiveOnGameState { get; }
 		List<UiMainMenuButton> Buttons { get; }
+		UiMainMenuButton GetButton(GameState gameState);
 		void SetActive(bool value);
-		void SetButtonLocked(GameState screen);
-		void SetButtonActive(GameState screen);
-		void SetButtonSelected(GameState screen);
-	}
+		void SetButtonLocked(GameState gameState);
+		void SetButtonActive(GameState gameState);
+		void SetButtonSelected(GameState gameState);
+		void SetButtonInteractable(GameState gameState, bool value);
+    }
 
-	public class UiMainMenuView : MonoBehaviour, IUiMainMenuView
+    public class UiMainMenuView : MonoBehaviour, IUiMainMenuView
 	{
 		[SerializeField] private Sprite _lockedIcon;
 		[SerializeField] private List<GameState> _activeOnGameState;
@@ -30,17 +31,20 @@ namespace Game.Ui
 		[SerializeField] private float _defaultButtonHeight;
 		[SerializeField] private float _selectedButtonHeight;
 
-		#region IUiMainMenuView
+        #region IUiMainMenuView
 
-		public List<GameState> ActiveOnGameState => _activeOnGameState;
+        public List<GameState> ActiveOnGameState => _activeOnGameState;
 
 		public List<UiMainMenuButton> Buttons => _buttons;
 
+		public UiMainMenuButton GetButton(GameState gameState) =>
+			Buttons.Where(button => button.TargetGameState == gameState).FirstOrDefault();
+
 		public void SetActive(bool value) => gameObject.SetActive(value);
 
-		public void SetButtonLocked(GameState state)
+		public void SetButtonLocked(GameState gameState)
 		{
-			UiMainMenuButton button = _buttons.Where(button => button.TargetGameState == state).First();
+			UiMainMenuButton button = GetButton(gameState);
 
 			if (button == null)
 				return;
@@ -53,9 +57,9 @@ namespace Game.Ui
 			button.SetHeight(_defaultButtonHeight);
 		}
 
-		public void SetButtonActive(GameState state)
+		public void SetButtonActive(GameState gameState)
 		{
-			UiMainMenuButton button = _buttons.Where(button => button.TargetGameState == state).First();
+			UiMainMenuButton button = GetButton(gameState);
 
 			if (button == null)
 				return;
@@ -68,10 +72,10 @@ namespace Game.Ui
 			button.SetHeight(_defaultButtonHeight);
 		}
 
-		public void SetButtonSelected(GameState state)
+		public void SetButtonSelected(GameState gameState)
 		{
-			UiMainMenuButton button = _buttons.Where(button => button.TargetGameState == state).FirstOrDefault();
-			
+			UiMainMenuButton button = GetButton(gameState);
+
 			if (button == null)
 				return;
 
@@ -80,6 +84,16 @@ namespace Game.Ui
 			button.SetTitleActive(true);
 			button.SetInteractable(false);
 			button.SetHeight(_selectedButtonHeight);
+		}
+
+		public void SetButtonInteractable(GameState gameState, bool value)
+		{
+			UiMainMenuButton button = GetButton(gameState);
+
+			if (button == null)
+				return;
+
+			button.SetInteractable(value);
 		}
 
 		#endregion

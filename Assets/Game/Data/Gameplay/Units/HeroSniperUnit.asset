@@ -25,19 +25,19 @@ MonoBehaviour:
     DamageMultiplier: 1
     SoftCurrencyReward: 0
     ExperienceReward: 0
-  - Prefab: {fileID: 1503547998484457933, guid: a0f4aabc7aa04924da02d26ef02ca42d, type: 3}
+  - Prefab: {fileID: 1503547998484457933, guid: 992ae7a59c6d00046b0beb844810dafc, type: 3}
     AttackDelay: 1.3
     HealthMultiplier: 1.5
     DamageMultiplier: 1.5
     SoftCurrencyReward: 0
     ExperienceReward: 0
-  - Prefab: {fileID: 1503547998484457933, guid: 0c8bdaef1be77e4498a53fe4ae5314e9, type: 3}
+  - Prefab: {fileID: 1503547998484457933, guid: 992ae7a59c6d00046b0beb844810dafc, type: 3}
     AttackDelay: 1.2
     HealthMultiplier: 2.25
     DamageMultiplier: 2.25
     SoftCurrencyReward: 0
     ExperienceReward: 0
-  - Prefab: {fileID: 1503547998484457933, guid: 670c9b373ddfb2742a8e9b9c9d1d17cf, type: 3}
+  - Prefab: {fileID: 1503547998484457933, guid: 992ae7a59c6d00046b0beb844810dafc, type: 3}
     AttackDelay: 1.2
     HealthMultiplier: 3.375
     DamageMultiplier: 3.375
