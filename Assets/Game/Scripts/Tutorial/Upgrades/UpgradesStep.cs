@@ -4,9 +4,12 @@
     {
         None,
         MenuButton,
-        SelectUnit,
-        UpgradeButton,
+		FirstUpgrade,
+        SelectNextUnit,
+		SecondUpgrade,
         UpgradeHint,
+        GoToLobby,
+		GoToBattle,
         Complete
     }
 }

@@ -21,12 +21,12 @@ namespace Game.Configs
         private Dictionary<BeginnerStep, string> _beginerMessages;
 		private Dictionary<BeginnerStep, BeginerTurorialSummonData> _beginerSummons;
 		private Dictionary<BeginnerStep, BeginerTurorialMergeData> _beginerMerges;
-        private Dictionary<UpgradesStep, string> _upgradesMessages;
+        private Dictionary<UpgradesStep, TutorialMessage<UpgradesStep>> _upgradesMessages;
 		
 		public Dictionary<BeginnerStep, string> BeginerTutorialMessages => _beginerMessages;
 		public Dictionary<BeginnerStep, BeginerTurorialSummonData> BeginerTurorialSummons => _beginerSummons;
 		public Dictionary<BeginnerStep, BeginerTurorialMergeData> BeginerTurorialMerges => _beginerMerges;
-        public Dictionary<UpgradesStep, string> UpgradesTutorialMessages => _upgradesMessages;
+        public Dictionary<UpgradesStep, TutorialMessage<UpgradesStep>> UpgradesTutorialMessages => _upgradesMessages;
 
 
         public void Initialize()
@@ -43,12 +43,13 @@ namespace Game.Configs
 			foreach (var data in _beginerTurorialMerges)
 				_beginerMerges.Add(data.Step, data);
 
-            _upgradesMessages = new Dictionary<UpgradesStep, string>();
+            _upgradesMessages = new Dictionary<UpgradesStep, TutorialMessage<UpgradesStep>>();
             foreach (var message in _upgradesTutorialMessages)
-                _upgradesMessages.Add(message.Step, message.TranslationKey);
+                _upgradesMessages.Add(message.Step, message);
         }
 
-        [Serializable]
+		// TODO: switch to TutorialMessage<T>
+		[Serializable]
 		public struct BeginerTutorialMessage
 		{
 			public BeginnerStep Step;
@@ -77,6 +78,7 @@ namespace Game.Configs
         {
             public T Step;
             public string TranslationKey;
-        }
+			public DialogHintPlace Place;
+		}
     }
 }

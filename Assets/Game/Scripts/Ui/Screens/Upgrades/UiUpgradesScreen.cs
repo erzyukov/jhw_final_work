@@ -1,15 +1,17 @@
 namespace Game.Ui
 {
+	using Game.Units;
+	using System.Collections.Generic;
 	using UnityEngine;
 	using UnityEngine.UI;
 	using TMPro;
-	using Game.Units;
 
 	public interface IUiUpgradesScreen : IUiScreen
 	{
 		Transform UnitsContainer { get; }
 		UiUnitUpgradeElement UnitElementPrefab { get; }
 		GameObject UnitUnavailableDummyPrefab { get; }
+		Dictionary<Species, UiUnitUpgradeElement> UnitElements { get; }
 		void SetIcon(Sprite value);
 		void SetName(string value);
 		void SetLevel(string value);
@@ -33,6 +35,8 @@ namespace Game.Ui
 		[SerializeField] private GameObject _unitUnavailableDummyPrefab;
 		[SerializeField] private Color _parameterDeltaColor;
 
+		private Dictionary<Species, UiUnitUpgradeElement> _unitElements = new Dictionary<Species, UiUnitUpgradeElement>();
+
 		public override Screen Screen => Screen.Upgrades;
 
 		#region IUiLobbyScreen
@@ -42,6 +46,8 @@ namespace Game.Ui
 		public UiUnitUpgradeElement UnitElementPrefab => _unitUpgradeElementPrefab;
 
 		public GameObject UnitUnavailableDummyPrefab => _unitUnavailableDummyPrefab;
+
+		public Dictionary<Species, UiUnitUpgradeElement> UnitElements => _unitElements;
 
 		public void SetIcon(Sprite value) =>
 			_unitIcon.sprite = value;

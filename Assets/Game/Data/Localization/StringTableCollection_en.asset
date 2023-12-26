@@ -190,6 +190,30 @@ MonoBehaviour:
     m_Localized: 'HAVE NEED OF: <sprite=2>ENERGY'
     m_Metadata:
       m_Items: []
+  - m_Id: 7758452608110592
+    m_Localized: IT'S TIME TO UPGRADE YOUR UNITS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8677005616123904
+    m_Localized: SELECT SNIPER UNIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8679098993250304
+    m_Localized: BUY UPGRADE FOR INFANTRYMAN TO MAKE YOUR UNIT MORE POWERFUL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9035584596512768
+    m_Localized: BUY THE SNIPER UPGRADE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9035602543939584
+    m_Localized: ALWAYS UPGRADE YOUR UNITS TO OVERCOME YOUR ENEMY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9035616703909888
+    m_Localized: CHECK YOUR UPGRADED UNITS IN BATTLE
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

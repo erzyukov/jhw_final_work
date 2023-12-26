@@ -47,3 +47,22 @@ MonoBehaviour:
   - Step: 8
     FromPosition: {x: 1, y: 0}
     ToPosition: {x: 2, y: 2}
+  _upgradesTutorialMessages:
+  - Step: 1
+    TranslationKey: upgradeTutorialMenuButton
+    Place: 0
+  - Step: 2
+    TranslationKey: upgradeTutorialFirstUpgrade
+    Place: 2
+  - Step: 3
+    TranslationKey: upgradeTutorialSelectNextUnit
+    Place: 2
+  - Step: 4
+    TranslationKey: upgradeTutorialSecondUpgrade
+    Place: 2
+  - Step: 5
+    TranslationKey: upgradeTutorialUpgradeHint
+    Place: 0
+  - Step: 7
+    TranslationKey: upgradeTutorialGoToBattle
+    Place: 0

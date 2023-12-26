@@ -12,7 +12,6 @@
 	using Game.Level;
 	using System.Linq;
 	using Game.Units;
-	using UnityEngine;
 
 	public class BeginnerTutorial : BeginerTutorialFsmBase, IInitializable, IDisposable
 	{

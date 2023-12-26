@@ -5,7 +5,7 @@
 	using Game.Profiles;
 	using Game.Units;
 	using Game.Utilities;
-	using System.Collections.Generic;
+	using System.Linq;
 	using UniRx;
 	using UnityEngine;
 	using Zenject;
@@ -25,7 +25,6 @@
 		private const int DummyElementsCount = 3;
 
 		private Species _firstElement;
-		private Dictionary<Species, UiUnitUpgradeElement> _unitElements = new Dictionary<Species, UiUnitUpgradeElement>();
 
 		public void Initialize()
 		{
@@ -59,12 +58,17 @@
 
 		private void CreateUnitList()
 		{
-			foreach (Species species in _unitsConfig.HeroUnits)
-			{
+			for (int i = 0; i < DummyElementsCount; i++)
+				GameObject.Instantiate(_screen.UnitUnavailableDummyPrefab, _screen.UnitsContainer);
+
+            for (int i = _unitsConfig.HeroUnits.Count - 1; i >= 0; i--)
+            {
+				Species species = _unitsConfig.HeroUnits[i];
+
 				if (_unitsConfig.Units.TryGetValue(species, out var unit) == false)
 					continue;
 
-				if (_unitElements.Count == 0)
+				if (_screen.UnitElements.Count == 0)
 					_firstElement = species;
 
 				int unitLevel = _gameProfile.Units.Upgrades[species].Value;
@@ -73,7 +77,7 @@
 				element.SetIcon(unit.Icon);
 				element.SetLevel($"{_localizator.GetString(LevelShortTitleKey)} {unitLevel}");
 				element.SetPrice(_gameUpgrades.GetUpgradePrice(species).ToString());
-				_unitElements.Add(species, element);
+				_screen.UnitElements.Add(species, element);
 
 				element.SelectButtonClicked
 					.Subscribe(_ => FillUnitInfo(species))
@@ -83,14 +87,11 @@
 					.Subscribe(_ => OnUpgradeButtonClickedHandler(species))
 					.AddTo(this);
 			}
-
-			for (int i = 0; i < DummyElementsCount; i++)
-				GameObject.Instantiate(_screen.UnitUnavailableDummyPrefab, _screen.UnitsContainer);
 		}
 
 		private void UpdateUnitElement(Species species)
 		{
-			UiUnitUpgradeElement element = _unitElements[species];
+			UiUnitUpgradeElement element = _screen.UnitElements[species];
 			int unitLevel = _gameProfile.Units.Upgrades[species].Value;
 			element.SetLevel($"{_localizator.GetString(LevelShortTitleKey)} {unitLevel}");
 			element.SetPrice(_gameUpgrades.GetUpgradePrice(species).ToString());

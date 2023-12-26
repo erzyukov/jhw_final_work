@@ -186,6 +186,30 @@ MonoBehaviour:
     m_Key: NotEnoughEnergy
     m_Metadata:
       m_Items: []
+  - m_Id: 7758452608110592
+    m_Key: upgradeTutorialMenuButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8677005616123904
+    m_Key: upgradeTutorialSelectNextUnit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8679098993250304
+    m_Key: upgradeTutorialFirstUpgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9035584596512768
+    m_Key: upgradeTutorialSecondUpgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9035602543939584
+    m_Key: upgradeTutorialUpgradeHint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9035616703909888
+    m_Key: upgradeTutorialGoToBattle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

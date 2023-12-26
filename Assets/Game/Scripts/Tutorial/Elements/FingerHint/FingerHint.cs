@@ -10,6 +10,8 @@ namespace Game.Tutorial
 	{
 		void Show(FingerPlace place);
 		void Hide();
+		void SetPosition(Transform value);
+		void SetLeft(bool value);
 	}
 
 	public class FingerHint : MonoBehaviour, IFingerHint
@@ -21,13 +23,24 @@ namespace Game.Tutorial
 		public void Show(FingerPlace place)
 		{
 			HintedButton hintedButton = _hintedButtons.Where(b => b.Place == place).FirstOrDefault();
-			SetPosition(hintedButton.HintParameters.Point);
-			SetLeft(hintedButton.HintParameters.IsLeft);
+			
+			if (hintedButton != null)
+			{
+				SetPosition(hintedButton.HintParameters.Point);
+				SetLeft(hintedButton.HintParameters.IsLeft);
+			}
+
 			SetActive(true);
 		}
 
 		public void Hide() =>
 			SetActive(false);
+
+		public void SetPosition(Transform value) =>
+            transform.SetParent(value, false);
+
+		public void SetLeft(bool value) =>
+			transform.localScale = (value)? Vector3.one.WithX(-1): Vector3.one;
 
 		#endregion
 
@@ -36,11 +49,5 @@ namespace Game.Tutorial
 
 		private void SetPosition(Vector3 value) =>
 			transform.position = value;
-
-		private void SetPosition(Transform value) =>
-            transform.SetParent(value, false);
-
-		private void SetLeft(bool value) =>
-			transform.localScale = (value)? Vector3.one.WithX(-1): Vector3.one;
 	}
 }
