@@ -210,6 +210,10 @@ MonoBehaviour:
     m_Key: upgradeTutorialGoToBattle
     m_Metadata:
       m_Items: []
+  - m_Id: 9428361570324480
+    m_Key: battleHintGoToSecondBattle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -5,6 +5,7 @@ namespace Game.Installers
 	using Zenject;
 	using Game.Ui;
 	using Game.Tutorial;
+	using System;
 
 	public class MainSceneInstaller : MonoInstaller
 	{
@@ -23,6 +24,7 @@ namespace Game.Installers
 
 			InstallUI();
 			WindowsInstall();
+			TutorialInstall();
 		}
 
 		private void InstallUI()
@@ -75,6 +77,13 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<ContinueLevelRequest>()
+				.AsSingle();
+		}
+
+		private void TutorialInstall()
+		{
+			Container
+				.BindInterfacesTo<MainSceneTutorial>()
 				.AsSingle();
 		}
 

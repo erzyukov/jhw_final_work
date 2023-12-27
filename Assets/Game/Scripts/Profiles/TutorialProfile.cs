@@ -9,6 +9,8 @@
 	{
 		public ReactiveProperty<BeginnerStep> BeginnerStep = new ReactiveProperty<BeginnerStep>();// Game.Tutorial.BeginnerStep.Complete
 		public ReactiveProperty<UpgradesStep> UpgradesStep = new ReactiveProperty<UpgradesStep>();// Game.Tutorial.UpgradesStep.Complete
+
+		public BoolReactiveProperty IsBattleHintComplete = new BoolReactiveProperty();
     }
 }
 

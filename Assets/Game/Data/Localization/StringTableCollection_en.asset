@@ -214,6 +214,10 @@ MonoBehaviour:
     m_Localized: CHECK YOUR UPGRADED UNITS IN BATTLE
     m_Metadata:
       m_Items: []
+  - m_Id: 9428361570324480
+    m_Localized: CONTINUE TO DESTROY YOUR ENEMY!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
