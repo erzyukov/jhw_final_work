@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
   m_Name: EnemyImpUnit
   m_EditorClassIdentifier: 
-  _title: "\u0411\u0435\u0441"
+  _titleKey: ImpTitle
   _icon: {fileID: 0}
   _class: 0
   _attackRange: 1

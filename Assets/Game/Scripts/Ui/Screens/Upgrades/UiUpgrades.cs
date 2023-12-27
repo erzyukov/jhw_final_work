@@ -42,7 +42,7 @@
 			int unitLevel = _gameProfile.Units.Upgrades[species].Value;
 
 			_screen.SetIcon(unit.Icon);
-			_screen.SetName(unit.Title);
+			_screen.SetName(_localizator.GetString(unit.TitleKey));
 			_screen.SetLevel($"{_localizator.GetString(LevelTitleKey)} {unitLevel}");
 			_screen.SetHealthValue(
 				_gameUpgrades.GetUnitHealth(species).ToString(),
@@ -68,7 +68,7 @@
 				if (_unitsConfig.Units.TryGetValue(species, out var unit) == false)
 					continue;
 
-				if (_screen.UnitElements.Count == 0)
+				if (_screen.UnitElements.Count == _unitsConfig.HeroUnits.Count - 1)
 					_firstElement = species;
 
 				int unitLevel = _gameProfile.Units.Upgrades[species].Value;

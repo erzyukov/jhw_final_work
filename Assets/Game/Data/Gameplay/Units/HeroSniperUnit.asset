@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
   m_Name: HeroSniperUnit
   m_EditorClassIdentifier: 
-  _title: "\u0421\u043D\u0430\u0439\u043F\u0435\u0440"
+  _titleKey: SniperTitle
   _icon: {fileID: 21300000, guid: 201eaf3b4a578b340ac9dfd4b8837c41, type: 3}
   _class: 1
   _attackRange: 4.2
