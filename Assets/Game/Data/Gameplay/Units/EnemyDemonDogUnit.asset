@@ -17,10 +17,10 @@ MonoBehaviour:
   _class: 0
   _attackRange: 1
   _health: 50
-  _damage: 6
+  _damage: 8
   _grades:
   - Prefab: {fileID: 1503547998484457933, guid: 468d4ce87b5b58e43a0e26ba6ddb855c, type: 3}
-    AttackDelay: 0.95
+    AttackDelay: 0.8
     HealthMultiplier: 1
     DamageMultiplier: 1
     SoftCurrencyReward: 12
