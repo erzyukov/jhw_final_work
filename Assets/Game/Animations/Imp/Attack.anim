@@ -63962,24 +63962,3 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.3333335
-    functionName: OnAttackAnimationCompleted
-    data: Attack
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 1.3333335
-    functionName: OnAttackAnimationCompleted
-    data: Attack
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 1.3333335
-    functionName: OnAttackAnimationCompleted
-    data: Attack
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0

@@ -8,7 +8,8 @@
 	public interface IUnitMover
 	{
 		ReactiveCommand ReachedDestination { get; }
-		void MoveTo(IUnitFacade target);
+		bool IsMoving { get; }
+		void ProcessMoveTo(IUnitFacade target);
         void LookAt(IUnitFacade target);
         void Stop();
 	}
@@ -21,17 +22,26 @@
 
         public ReactiveCommand ReachedDestination { get; } = new ReactiveCommand();
 
-		public void MoveTo(IUnitFacade target)
+		public bool IsMoving { get; private set; }
+
+		public void ProcessMoveTo(IUnitFacade target)
 		{
             if (target == null)
-                return;
+			{
+				//IsInProcess = false;
+				return;
+			}
 
-            _unitView.NavMeshAgent.updateRotation = true;
+			_unitView.NavMeshAgent.updateRotation = true;
             _unitView.NavMeshAgent.isStopped = false;
 			_unitView.NavMeshAgent.SetDestination(target.Transform.position);
+			IsMoving = true;
 
 			if (_unitView.NavMeshAgent.hasPath && _unitView.NavMeshAgent.remainingDistance <= _unitView.NavMeshAgent.stoppingDistance + Mathf.Epsilon)
+			{
+				IsMoving = false;
 				ReachedDestination.Execute();
+			}
 		}
 
         public void LookAt(IUnitFacade target)

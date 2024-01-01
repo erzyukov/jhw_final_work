@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _experienceAnimationDuration: 1
   _waveTransitionDelay: 0.8
+  _unitDeathVanishDelay: 5

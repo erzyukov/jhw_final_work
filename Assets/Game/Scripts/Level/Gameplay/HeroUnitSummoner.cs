@@ -11,6 +11,7 @@
 	using Zenject;
 	using UniRx;
 	using UnityEngine;
+	using System.Linq;
 
 	public interface IHeroUnitSummoner
 	{
@@ -20,7 +21,7 @@
 		void InterruptPaidSummon();
 	}
 
-	public class HeroUnitSummoner : ControllerBase, IHeroUnitSummoner
+	public class HeroUnitSummoner : ControllerBase, IHeroUnitSummoner, IInitializable
 	{
 		[Inject] private CurrencyConfig _currencyConfig;
 		[Inject] private UnitsConfig _unitsConfig;
@@ -28,9 +29,28 @@
 		[Inject] private IUiMessage _haveNeedOfMessage;
 		[Inject] private IUnitSpawner _unitSpawner;
 		[Inject] private IFieldHeroFacade _fieldFacade;
+		[Inject] private TimingsConfig _timingsConfig;
+		[Inject] private IGameCycle _gameCycle;
 
-		Dictionary<IUnitFacade, IDisposable> _unitSubscribes = new Dictionary<IUnitFacade, IDisposable>();
+		Dictionary<IUnitFacade, IDisposable> _unitDiedSubscribes = new Dictionary<IUnitFacade, IDisposable>();
+		Dictionary<IUnitFacade, IDisposable> _vanishSubscribes = new Dictionary<IUnitFacade, IDisposable>();
+
 		bool _isPaidSummonInterrupted;
+
+		public void Initialize()
+		{
+			_gameCycle.State
+				.Where(state => state == GameState.CompleteWave)
+				.Subscribe(_ => OnCompleteWave())
+				.AddTo(this);
+		}
+
+		private void OnCompleteWave()
+		{
+			var units = _vanishSubscribes.Keys.ToList();
+			for (var i = 0; i < units.Count; i++)
+				RemoveDeadUnit(units[i]);
+		}
 
 		#region IHeroUnitSummoner
 
@@ -86,11 +106,26 @@
 
 		private void SubscribeToUnit(IUnitFacade unit)
 		{
-			_unitSubscribes.Add(unit, default);
-			_unitSubscribes[unit] = unit.Dying
-				.Subscribe(_ => UnitDiedHandler(unit));
+			_unitDiedSubscribes.Add(unit, default);
+			_unitDiedSubscribes[unit] = unit.Died
+				.Subscribe(_ => OnUnitDied(unit));
 		}
 
-		private void UnitDiedHandler(IUnitFacade unit) {}
+		private void OnUnitDied(IUnitFacade unit)
+		{
+			IDisposable vanish = Observable.Timer(TimeSpan.FromSeconds(_timingsConfig.UnitDeathVanishDelay))
+				.Subscribe(_ => RemoveDeadUnit(unit))
+				.AddTo(this);
+
+			_vanishSubscribes.Add(unit, vanish);
+		}
+
+		private void RemoveDeadUnit(IUnitFacade unit)
+		{
+			_vanishSubscribes[unit]?.Dispose();
+			_vanishSubscribes.Remove(unit);
+
+			unit.SetActive(false);
+		}
 	}
 }
