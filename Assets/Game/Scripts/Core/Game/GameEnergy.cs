@@ -22,14 +22,16 @@
         [Inject] private IGameProfileManager _gameProfileManager;
         [Inject] private EnergyConfig _config;
 
-        private float _startRestoreTime;
+		private EnergyProfile Energy => _profile.Energy;
+
+		private float _startRestoreTime;
         private int _secondsToOnePointPassed;
 
         public void Initialize()
         {
             SecondsToRestoreOnePoint.Value = _config.SecondsToRestoreOnePoint;
 
-            _profile.Energy
+            Energy.Amount
                 .Subscribe(OnEnergyValueChanged)
                 .AddTo(this);
 
@@ -43,9 +45,9 @@
                 .Subscribe(_ => Save())
                 .AddTo(this);
 
-            if (_profile.Energy.Value < _config.MaxEnery)
+            if (Energy.Amount.Value < _config.MaxEnery)
             {
-                TimeSpan passedFromLastSave = DateTime.Now.Subtract(_profile.LastEnergyChange);
+                TimeSpan passedFromLastSave = DateTime.Now.Subtract(Energy.LastEnergyChange);
                 int passedSectondsFromLastSave = Mathf.FloorToInt((float)passedFromLastSave.TotalSeconds);
                 _startRestoreTime = Time.unscaledTime - passedSectondsFromLastSave;
             }
@@ -53,7 +55,7 @@
 
         public void Tick()
         {
-            if (_profile.Energy.Value >= _config.MaxEnery)
+            if (Energy.Amount.Value >= _config.MaxEnery)
                 return;
 
             float passedTime = Time.unscaledTime - _startRestoreTime;
@@ -65,10 +67,10 @@
 
             if (restoredPoints > 0)
             {
-                _profile.Energy.Value = Mathf.Min(_profile.Energy.Value + restoredPoints, _config.MaxEnery);
+                Energy.Amount.Value = Mathf.Min(Energy.Amount.Value + restoredPoints, _config.MaxEnery);
                 Save();
 
-                if (_profile.Energy.Value >= _config.MaxEnery)
+                if (Energy.Amount.Value >= _config.MaxEnery)
                 {
                     _startRestoreTime = 0;
                     _secondsToOnePointPassed = 0;
@@ -87,10 +89,10 @@
 
         public bool TryPayLevel()
         {
-            if (_profile.Energy.Value < _config.LevelPrice)
+            if (Energy.Amount.Value < _config.LevelPrice)
                 return false;
 
-            _profile.Energy.Value -= _config.LevelPrice;
+            Energy.Amount.Value -= _config.LevelPrice;
             Save();
 
             return true;
@@ -102,7 +104,7 @@
         {
             UpdateRatio();
 
-            if (_profile.Energy.Value < _config.MaxEnery)
+            if (Energy.Amount.Value < _config.MaxEnery)
                 StartEnergyRestore();
         }
 
@@ -113,11 +115,11 @@
         }
 
         void UpdateRatio() =>
-            EnergyRatio.SetValueAndForceNotify((float)_profile.Energy.Value / _config.MaxEnery);
+            EnergyRatio.SetValueAndForceNotify((float)Energy.Amount.Value / _config.MaxEnery);
 
         void Save()
         {
-            _profile.LastEnergyChange = DateTime.Now;
+			Energy.LastEnergyChange = DateTime.Now;
             _gameProfileManager.Save();
         }
     }

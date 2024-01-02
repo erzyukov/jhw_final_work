@@ -234,6 +234,10 @@ MonoBehaviour:
     m_Localized: DEMON
     m_Metadata:
       m_Items: []
+  - m_Id: 11415812669083648
+    m_Localized: MAIN MENU
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

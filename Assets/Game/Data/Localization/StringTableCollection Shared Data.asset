@@ -230,6 +230,10 @@ MonoBehaviour:
     m_Key: DemonTitle
     m_Metadata:
       m_Items: []
+  - m_Id: 11415812669083648
+    m_Key: 1 - Main/Canvas/Windows/LevelMenu/Window/NewGameButton/Text (TMP)
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
