@@ -16,31 +16,31 @@ MonoBehaviour:
   - ExperienceToLevel: 0
     SoftCurrencyReward: 0
     HardCurrencyReward: 0
-  - ExperienceToLevel: 17
+  - ExperienceToLevel: 18
     SoftCurrencyReward: 30
     HardCurrencyReward: 3
-  - ExperienceToLevel: 40
+  - ExperienceToLevel: 45
     SoftCurrencyReward: 50
     HardCurrencyReward: 5
   - ExperienceToLevel: 100
     SoftCurrencyReward: 80
     HardCurrencyReward: 5
-  - ExperienceToLevel: 130
+  - ExperienceToLevel: 150
     SoftCurrencyReward: 120
     HardCurrencyReward: 5
-  - ExperienceToLevel: 175
+  - ExperienceToLevel: 150
     SoftCurrencyReward: 200
     HardCurrencyReward: 8
-  - ExperienceToLevel: 325
+  - ExperienceToLevel: 150
     SoftCurrencyReward: 200
     HardCurrencyReward: 8
-  - ExperienceToLevel: 475
+  - ExperienceToLevel: 150
     SoftCurrencyReward: 200
     HardCurrencyReward: 8
-  - ExperienceToLevel: 625
+  - ExperienceToLevel: 150
     SoftCurrencyReward: 200
     HardCurrencyReward: 8
-  - ExperienceToLevel: 775
+  - ExperienceToLevel: 150
     SoftCurrencyReward: 200
     HardCurrencyReward: 8
   - ExperienceToLevel: 1750000
