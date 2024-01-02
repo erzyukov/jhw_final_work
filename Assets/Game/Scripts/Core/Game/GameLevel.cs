@@ -31,7 +31,7 @@
 
 		public void Initialize()
 		{
-            _heroLastLevel = _profile.HeroLevel.Value;
+			_heroLastLevel = _profile.HeroLevel.Value;
 
 			_scenesManager.LevelLoaded
 				.Subscribe(_ => OnLevelLoaded())
@@ -106,6 +106,8 @@
 				if (_profile.Levels.Count <= _profile.LevelNumber.Value)
 					_profile.Levels[_profile.LevelNumber.Value - 1].Unlocked.Value = true;
 
+				_isLevelWon = false;
+
 				Save();
 			}
 
@@ -123,7 +125,6 @@
 				_scenesManager.UnloadLevel();
 				Save();
 				IsLevelLoaded.Value = false;
-				_isLevelWon = false;
 				_gameCycle.SetState(GameState.Lobby);
 			});
 		}
