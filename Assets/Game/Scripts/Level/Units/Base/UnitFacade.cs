@@ -25,9 +25,10 @@
 		bool IsDead { get; }
 
 		void SetViewParent(Transform parent, bool worldPositionStays = false);
+		void SetActive(bool value);
 		void SetDraggableActive(bool value);
 		void TakeDamage(float damage);
-		void EnableAttack();
+		void EnterBattle();
 		void ResetPosition();
 		void Reset();
 		void Destroy();
@@ -74,20 +75,29 @@
 
 		public bool IsDead => _health.IsDead;
 
-		public void SetViewParent(Transform parent, bool worldPositionStays = false) => _view.SetParent(parent, worldPositionStays);
+		public void SetViewParent(Transform parent, bool worldPositionStays = false) => 
+			_view.SetParent(parent, worldPositionStays);
 
-		public void SetDraggableActive(bool value) => _draggable.SetActive(value);
+		public void SetActive(bool value) =>
+			_view.SetActive(value);
 
-		public void TakeDamage(float damage) => _health.TakeDamage(damage);
+		public void SetDraggableActive(bool value) => 
+			_draggable.SetActive(value);
 
-        // TODO: refact: incapsulate transition
-		public void EnableAttack() => _fsm.Transition(UnitState.SearchTarget);
+		public void TakeDamage(float damage) => 
+			_health.TakeDamage(damage);
 
-		public void ResetPosition() => _view.ResetPosition();
+		public void EnterBattle() =>
+			_fsm.EnterBattle();
 
-		public void Reset() => _fsm.Reset();
+		public void ResetPosition() => 
+			_view.ResetPosition();
 
-		public void Destroy() => _view.Destroy();
+		public void Reset() => 
+			_fsm.Reset();
+
+		public void Destroy() => 
+			_view.Destroy();
 
 		#endregion
 

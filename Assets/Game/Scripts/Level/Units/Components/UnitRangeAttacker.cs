@@ -2,7 +2,6 @@
 {
 	using Game.Utilities;
 	using Zenject;
-	using UniRx;
 	using Game.Configs;
 	using UnityEngine;
 	using Game.Weapon;
@@ -37,48 +36,20 @@
 
 		#region IUnitAttacker
 
-		public ReactiveCommand AttackRangeBroken { get; } = new ReactiveCommand();
+		public bool IsReadyToAttack => _atackTimer.IsReady;
 
-        public bool CanAttack(IUnitFacade target) =>
-            target != null && target.IsDead == false && _atackTimer.IsReady && IsTargetClose(target);
-
-        public void Attack(IUnitFacade target)
+		public void Attack(IUnitFacade target)
         {
-            if (CanAttack(target) == false)
-                return;
-
 			_projectileSpawner.SpawnBullet(_shootPoint.transform.position, target, _currentDamage);
 			_atackTimer.Set(_grade.AttackDelay);
         }
 
-        public void ProcessTargetTracking(IUnitFacade target)
-        {
-            if (IsTargetClose(target) == false)
-                AttackRangeBroken.Execute();
-        }
-
-        public void TryAttack(IUnitFacade target)
-		{
-			if (IsTargetClose(target) == false)
-			{
-				AttackRangeBroken.Execute();
-
-				return;
-			}
-
-			if (_atackTimer.IsReady == false)
-				return;
-
-			_projectileSpawner.SpawnBullet(_shootPoint.transform.position, target, _currentDamage);
-			_atackTimer.Set(_grade.AttackDelay);
-		}
-
-        #endregion
-
-        private bool IsTargetClose(IUnitFacade target) =>
+        public bool IsTargetClose(IUnitFacade target) =>
             target != null &&
             target.IsDead != true &&
             (_view.Transform.position - target.Transform.position).sqrMagnitude
             < _config.AttackRange * _config.AttackRange + Mathf.Epsilon;
+
+        #endregion
     }
 }

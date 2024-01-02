@@ -17,7 +17,7 @@ MonoBehaviour:
   _class: 1
   _attackRange: 4.2
   _health: 35
-  _damage: 13
+  _damage: 9
   _grades:
   - Prefab: {fileID: 1503547998484457933, guid: 992ae7a59c6d00046b0beb844810dafc, type: 3}
     AttackDelay: 1.3

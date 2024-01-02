@@ -2,18 +2,15 @@
 {
 	using Game.Utilities;
 	using Zenject;
-	using UniRx;
 	using Game.Configs;
 	using UnityEngine;
 	using Game.Core;
 
 	public interface IUnitAttacker
 	{
-		ReactiveCommand AttackRangeBroken { get; }
-        bool CanAttack(IUnitFacade target);
+		bool IsReadyToAttack { get; }
+		bool IsTargetClose(IUnitFacade target);
         void Attack(IUnitFacade target);
-        void TryAttack(IUnitFacade target);
-        void ProcessTargetTracking(IUnitFacade target);
 	}
 
     // TODO: Add base attacker class
@@ -37,48 +34,20 @@
 
 		#region IUnitAttacker
 
-		public ReactiveCommand AttackRangeBroken { get; } = new ReactiveCommand();
-
-        public bool CanAttack(IUnitFacade target) =>
-            target != null && target.IsDead == false && _atackTimer.IsReady && IsTargetClose(target);
+		public bool IsReadyToAttack => _atackTimer.IsReady;
 
         public void Attack(IUnitFacade target)
         {
-            if (CanAttack(target) == false)
-                return;
-
-            target.TakeDamage(_currentDamage);
+			target.TakeDamage(_currentDamage);
             _atackTimer.Set(_grade.AttackDelay);
         }
 
-        public void ProcessTargetTracking(IUnitFacade target)
-        {
-			if (IsTargetClose(target) == false)
-				AttackRangeBroken.Execute();
-        }
-
-        public void TryAttack(IUnitFacade target)
-		{
-			if (IsTargetClose(target) == false)
-			{
-				AttackRangeBroken.Execute();
-
-				return;
-			}
-
-			if (_atackTimer.IsReady == false)
-				return;
-
-			target.TakeDamage(_currentDamage);
-			_atackTimer.Set(_grade.AttackDelay);
-		}
+		public bool IsTargetClose(IUnitFacade target) =>
+            target != null && 
+            target.IsDead == false &&
+            (_view.Transform.position - target.Transform.position).sqrMagnitude < 
+			_config.AttackRange * _config.AttackRange + Mathf.Epsilon;
 
 		#endregion
-
-		private bool IsTargetClose(IUnitFacade target) =>
-            target != null && 
-            target.IsDead != true &&
-            (_view.Transform.position - target.Transform.position).sqrMagnitude 
-			< _config.AttackRange * _config.AttackRange + Mathf.Epsilon;
 	}
 }

@@ -11,5 +11,6 @@
 		EnemyImp = 5001,
 		EnemySuccubus,
 		EnemyDemon,
+		EnemyDemonDog,
 	}
 }
