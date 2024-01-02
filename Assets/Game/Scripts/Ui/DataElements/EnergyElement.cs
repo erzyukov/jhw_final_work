@@ -26,7 +26,7 @@ namespace Game.Ui
                 .Subscribe(OnEnergyRatioChanged)
                 .AddTo(this);
 
-            _gameProfile.Energy
+            _gameProfile.Energy.Amount
                 .Subscribe(value => SetValue($"{value}/{_energyConfig.MaxEnery}"))
                 .AddTo(this);
 

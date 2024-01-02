@@ -60,7 +60,7 @@ namespace Game.Profiles
         private void CreateGameProfile()
         {
             _gameProfile = new GameProfile();
-            _gameProfile.Energy.Value = _energyConfig.MaxEnery;
+            _gameProfile.Energy.Amount.Value = _energyConfig.MaxEnery;
         }
 
         private void OnYandexGameGetData()
@@ -78,6 +78,7 @@ namespace Game.Profiles
 		{
 			AddMissingLevels();
 			AddMissingUnits();
+			AddMissingEnergy();
 
 			Save();
 		}
@@ -105,8 +106,14 @@ namespace Game.Profiles
 					_gameProfile.Units.Upgrades.Add(species, new IntReactiveProperty(1));
         }
 
+		private void AddMissingEnergy()
+		{
+			if (_gameProfile.Energy == null)
+				_gameProfile.Energy = new EnergyProfile();
+		}
+
 #if UNITY_EDITOR
-        private const string PathSavesEditor = "/YandexGame/WorkingData/Editor/SavesEditorYG.json";
+		private const string PathSavesEditor = "/YandexGame/WorkingData/Editor/SavesEditorYG.json";
 
 		[UnityEditor.MenuItem("Game/Delete saved game")]
 		public static void DeleteSaveFile()

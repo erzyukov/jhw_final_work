@@ -13,18 +13,15 @@ namespace Game.Profiles
 		public readonly IntReactiveProperty SummonCurrency = new IntReactiveProperty(0);
 		public readonly IntReactiveProperty HeroLevel = new IntReactiveProperty(1);
 		public readonly IntReactiveProperty HeroExperience = new IntReactiveProperty(0);
-        
-        public readonly IntReactiveProperty Energy = new IntReactiveProperty();
-        public DateTime LastEnergyChange = new DateTime();
 
-        public readonly IntReactiveProperty LevelSoftCurrency = new IntReactiveProperty(0);
+		public readonly IntReactiveProperty LevelSoftCurrency = new IntReactiveProperty(0);
 		public readonly IntReactiveProperty LevelHeroExperience = new IntReactiveProperty(0);
 		public bool IsReturnFromBattle;
 
 		public List<LevelProfile> Levels = new List<LevelProfile>();
-
 		public TutorialProfile Tutorial = new TutorialProfile();
 		public HeroFieldProfile HeroField = new HeroFieldProfile();
 		public UnitsProfile Units = new UnitsProfile();
+		public EnergyProfile Energy = new EnergyProfile();
 	}
 }

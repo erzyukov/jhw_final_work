@@ -51,8 +51,8 @@
 					_scenesManager.ReloadGame(() => _gameProfileManager.Reset());
 			});
 
-            Subscribe(Cheats.SpentEnergy, (_) => _profile.Energy.Value = Mathf.Max(_profile.Energy.Value - _energyConfig.LevelPrice, 0));
-            Subscribe(Cheats.RestoreEnergy, (_) => _profile.Energy.Value = Mathf.Min(_profile.Energy.Value + _energyConfig.LevelPrice, _energyConfig.MaxEnery));
+            Subscribe(Cheats.SpentEnergy, (_) => _profile.Energy.Amount.Value = Mathf.Max(_profile.Energy.Amount.Value - _energyConfig.LevelPrice, 0));
+            Subscribe(Cheats.RestoreEnergy, (_) => _profile.Energy.Amount.Value = Mathf.Min(_profile.Energy.Amount.Value + _energyConfig.LevelPrice, _energyConfig.MaxEnery));
         }
 
         void Subscribe(InputAction inputAction, Action<CallbackContext> action)
