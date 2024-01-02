@@ -53,7 +53,7 @@
 
 		private void OnHeroUnitsCountChanged(int count)
 		{
-			if (count == 0)
+			if (count == 0 && _gameCycle.State.Value == GameState.BattleStage)
 				_gameCycle.SetState(GameState.LoseBattle);
 		}
 

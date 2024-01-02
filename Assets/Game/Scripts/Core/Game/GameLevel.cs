@@ -91,7 +91,7 @@
 					_gameCycle.SetState(GameState.TacticalStage);
 				});
 			}
-			else
+			else if (_gameCycle.State.Value == GameState.CompleteWave)
 			{
 				_gameCycle.SetState(GameState.WinBattle);
 			}
