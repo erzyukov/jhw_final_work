@@ -63,7 +63,7 @@
         
         public ReactiveCommand Died => _events.Died;
 
-		public string Name => _config.Title;
+		public string Name => _config.TitleKey;
 
 		public Species Species => _species;
 

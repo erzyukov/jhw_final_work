@@ -11,7 +11,6 @@
 	public interface IGameLevel
 	{
 		BoolReactiveProperty IsLevelLoaded { get; }
-		ReactiveCommand LevelFinished { get; }
 		ReactiveCommand LevelLoading { get; }
 		void GoToLevel(int number);
 		void GoToNextWave();
@@ -53,8 +52,6 @@
 
 		public BoolReactiveProperty IsLevelLoaded { get; } = new BoolReactiveProperty();
 		
-		public ReactiveCommand LevelFinished { get; } = new ReactiveCommand();
-
 		public ReactiveCommand LevelLoading { get; } = new ReactiveCommand();
 
 		public void GoToLevel(int number)
@@ -70,7 +67,7 @@
 				}
 
 				_profile.LevelNumber.Value = ClampLevelNumber(number);
-				_gameProfileManager.Save();
+				Save();
 
 				_scenesManager.LoadLevel();
 			});
@@ -90,11 +87,11 @@
 				_uiViel.Appear(() =>
 				{
 					_profile.WaveNumber.Value++;
-					_gameProfileManager.Save();
+					Save();
 					_gameCycle.SetState(GameState.TacticalStage);
 				});
 			}
-			else
+			else if (_gameCycle.State.Value == GameState.CompleteWave)
 			{
 				_gameCycle.SetState(GameState.WinBattle);
 			}
@@ -102,6 +99,16 @@
 
 		public void FinishLevel()
 		{
+			if (_isLevelWon)
+			{
+				_profile.LevelNumber.Value = Mathf.Clamp(_profile.LevelNumber.Value + 1, 0, _levelsConfig.Levels.Length);
+
+				if (_profile.Levels.Count <= _profile.LevelNumber.Value)
+					_profile.Levels[_profile.LevelNumber.Value - 1].Unlocked.Value = true;
+
+				Save();
+			}
+
 			if (_profile.HeroLevel.Value > _heroLastLevel)
 			{
 				_gameCycle.SetState(GameState.HeroLevelReward);
@@ -112,19 +119,9 @@
 
 			_uiViel.Appear(() =>
 			{
-				LevelFinished.Execute();
-				
-				if (_isLevelWon)
-				{
-					_profile.LevelNumber.Value = Mathf.Clamp(_profile.LevelNumber.Value + 1, 0, _levelsConfig.Levels.Length);
-
-					if (_profile.Levels.Count <= _profile.LevelNumber.Value)
-						_profile.Levels[_profile.LevelNumber.Value - 1].Unlocked.Value = true;
-				}
-
 				_profile.WaveNumber.Value = 0;
 				_scenesManager.UnloadLevel();
-				_gameProfileManager.Save();
+				Save();
 				IsLevelLoaded.Value = false;
 				_isLevelWon = false;
 				_gameCycle.SetState(GameState.Lobby);
@@ -154,5 +151,8 @@
 				IsLevelLoaded.Value = true;
 			});
 		}
+
+		private void Save() =>
+			_gameProfileManager.Save();
 	}
 }

@@ -27,7 +27,7 @@ namespace Game.Core
 		public void Initialize()
 		{
 			AnimatedLevelNumber.Value = _profile.HeroLevel.Value;
-			ExperienceRatio.Value = (float)_profile.HeroExperience.Value / GetExperienceInNextLevel(_profile.HeroLevel.Value);
+			ExperienceRatio.Value = (float)_profile.HeroExperience.Value / _experienceConfig.GetLevelExperience(_profile.HeroLevel.Value + 1);
 		}
 
 		#region IGameHero
@@ -50,42 +50,32 @@ namespace Game.Core
 
 		#endregion
 
-		private int GetExperienceToLevel(int levelNumber) =>
-			_experienceConfig.HeroLevels[levelNumber].ExperienceToLevel;
-
-		private int GetExperienceInNextLevel(int levelNumber)
-		{
-			return _experienceConfig.HeroLevels
-				.Where((_, index) => index <= levelNumber)
-				.Sum(data => data.ExperienceToLevel);
-		}
-
 		private void AnimatieObtainedExperience()
 		{
 			Sequence sequence = DOTween.Sequence();
 			int experienceAmount = _profile.LevelHeroExperience.Value;
 			int animationFormValue = _profile.HeroExperience.Value;
-			int experienceToLevel = GetExperienceToLevel(_profile.HeroLevel.Value);
-			int experienceInNextLevel = GetExperienceInNextLevel(_profile.HeroLevel.Value);
+			int nextLevelExperience = _experienceConfig.GetLevelExperience(_profile.HeroLevel.Value + 1) - _profile.HeroExperience.Value;
+			int experienceInNextLevel = _experienceConfig.GetExperienceToLevel(_profile.HeroLevel.Value + 1);
 
-			while (experienceAmount >= experienceToLevel)
+			while (experienceAmount >= nextLevelExperience)
 			{
 				AppendExperienceAnimationStep(sequence, animationFormValue, experienceInNextLevel, Ease.Linear);
 
 				sequence.AppendCallback(() => AnimatedLevelNumber.Value++);
 
-				experienceAmount -= experienceToLevel;
+				experienceAmount -= nextLevelExperience;
 				animationFormValue += experienceInNextLevel - animationFormValue;
 				
 				_profile.HeroLevel.Value++;
 
-				experienceToLevel = GetExperienceToLevel(_profile.HeroLevel.Value);
-				experienceInNextLevel = GetExperienceInNextLevel(_profile.HeroLevel.Value);
+				nextLevelExperience = _experienceConfig.GetLevelExperience(_profile.HeroLevel.Value + 1);
+				experienceInNextLevel = _experienceConfig.GetExperienceToLevel(_profile.HeroLevel.Value + 1);
 			}
 
 			AppendExperienceAnimationStep(sequence, animationFormValue, animationFormValue + experienceAmount, Ease.OutSine);
 
-			sequence.AppendCallback(() => _profile.HeroExperience.Value += experienceAmount);
+			sequence.AppendCallback(() => _profile.HeroExperience.Value = experienceAmount);
 
 			_gameProfileManager.Save();
 		}
@@ -93,10 +83,10 @@ namespace Game.Core
 		private void AppendExperienceAnimationStep(Sequence sequence, int from, int to, Ease ease)
 		{
 			int level = _profile.HeroLevel.Value;
-			int experienceInPreviousLevel = GetExperienceInNextLevel(level - 1);
-			int experienceToLevel = GetExperienceToLevel(level);
-			float fromRatio = (float)(from - experienceInPreviousLevel) / experienceToLevel;
-			float toRatio = (float)(to - experienceInPreviousLevel) / experienceToLevel;
+			int experienceInCurrentLevel = _experienceConfig.GetExperienceToLevel(level);
+			int experienceToLevel = _experienceConfig.GetLevelExperience(level + 1);
+			float fromRatio = (float)(from - experienceInCurrentLevel) / experienceToLevel;
+			float toRatio = (float)(to - experienceInCurrentLevel) / experienceToLevel;
 			float duration = _timingsConfig.ExperienceAnimationDuration * (toRatio - fromRatio);
 
 			sequence.Append(DOVirtual.Float(fromRatio, toRatio, duration, (value) => ExperienceRatio.Value = value).SetEase(ease));

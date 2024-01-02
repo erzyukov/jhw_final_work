@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
   m_Name: EnemyDemonUnit
   m_EditorClassIdentifier: 
-  _title: "\u0414\u0435\u043C\u043E\u043D"
+  _titleKey: DemonTitle
   _icon: {fileID: 0}
   _class: 0
   _attackRange: 1

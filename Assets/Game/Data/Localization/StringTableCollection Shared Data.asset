@@ -210,6 +210,26 @@ MonoBehaviour:
     m_Key: upgradeTutorialGoToBattle
     m_Metadata:
       m_Items: []
+  - m_Id: 9428361570324480
+    m_Key: battleHintGoToSecondBattle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458325862649856
+    m_Key: SniperTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458497627787264
+    m_Key: InfantrymanTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458633628094464
+    m_Key: ImpTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458713282121728
+    m_Key: DemonTitle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

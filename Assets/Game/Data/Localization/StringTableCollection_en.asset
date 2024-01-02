@@ -214,6 +214,26 @@ MonoBehaviour:
     m_Localized: CHECK YOUR UPGRADED UNITS IN BATTLE
     m_Metadata:
       m_Items: []
+  - m_Id: 9428361570324480
+    m_Localized: CONTINUE TO DESTROY YOUR ENEMY!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458325862649856
+    m_Localized: SNIPER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458497627787264
+    m_Localized: INFANTRYMAN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458633628094464
+    m_Localized: IMP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458713282121728
+    m_Localized: DEMON
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
