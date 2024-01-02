@@ -164,7 +164,7 @@
 			_view.ResetPosition();
 			_view.SetActive(true);
 			_view.NavMeshAgent.enabled = false;
-			Animator.CrossFade(IdleAnimation, NormalizedTransitionDuration);
+			Animator.Play(IdleAnimation);
 		}
 
 		#endregion
