@@ -7,7 +7,6 @@ namespace Game.Core
 	using DG.Tweening;
 	using UniRx;
 	using System.Linq;
-	using UnityEngine;
 
 	public interface IGameHero
 	{
@@ -27,14 +26,7 @@ namespace Game.Core
 
 		public void Initialize()
 		{
-			_profile.HeroExperience
-				.Subscribe(v => Debug.LogWarning($"--------> {v}"))
-				.AddTo(this);
-
-			Debug.LogWarning($"L: {_profile.HeroLevel.Value} | {_experienceConfig.GetExperienceToLevel(_profile.HeroLevel.Value + 1)} | {_profile.HeroExperience.Value} | {_experienceConfig.GetLevelExperience(_profile.HeroLevel.Value + 1)}");
-
 			AnimatedLevelNumber.Value = _profile.HeroLevel.Value;
-			//ExperienceRatio.Value = (float)_profile.HeroExperience.Value / GetExperienceInNextLevel(_profile.HeroLevel.Value);
 			ExperienceRatio.Value = (float)_profile.HeroExperience.Value / _experienceConfig.GetLevelExperience(_profile.HeroLevel.Value + 1);
 		}
 
@@ -57,24 +49,7 @@ namespace Game.Core
 		}
 
 		#endregion
-		/*
-		private int GetExperienceToLevel(int levelNumber)
-		{
-			return _experienceConfig.HeroLevels
-				.Where((_, index) => index < levelNumber)
-				.Sum(data => data.ExperienceToLevel);
-		}
 
-		//private int GetExperienceToLevel(int levelNumber) =>
-		//	_experienceConfig.HeroLevels[levelNumber].ExperienceToLevel;
-
-		private int GetExperienceInNextLevel(int levelNumber)
-		{
-			return _experienceConfig.HeroLevels
-				.Where((_, index) => index <= levelNumber)
-				.Sum(data => data.ExperienceToLevel);
-		}
-		*/
 		private void AnimatieObtainedExperience()
 		{
 			Sequence sequence = DOTween.Sequence();
@@ -108,9 +83,8 @@ namespace Game.Core
 		private void AppendExperienceAnimationStep(Sequence sequence, int from, int to, Ease ease)
 		{
 			int level = _profile.HeroLevel.Value;
-			int experienceInCurrentLevel = _experienceConfig.GetExperienceToLevel(level);  //GetExperienceInNextLevel(level - 1);
+			int experienceInCurrentLevel = _experienceConfig.GetExperienceToLevel(level);
 			int experienceToLevel = _experienceConfig.GetLevelExperience(level + 1);
-			//int experienceToLevel = GetExperienceToLevel(level);
 			float fromRatio = (float)(from - experienceInCurrentLevel) / experienceToLevel;
 			float toRatio = (float)(to - experienceInCurrentLevel) / experienceToLevel;
 			float duration = _timingsConfig.ExperienceAnimationDuration * (toRatio - fromRatio);
