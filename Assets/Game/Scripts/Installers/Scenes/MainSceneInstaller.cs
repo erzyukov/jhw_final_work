@@ -78,6 +78,15 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<ContinueLevelRequest>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiBattleMenuWindow>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiBattleMenu>()
+				.AsSingle();
 		}
 
 		private void TutorialInstall()

@@ -15,6 +15,7 @@
 		void GoToLevel(int number);
 		void GoToNextWave();
 		void FinishLevel();
+		void LeaveBattle();
 	}
 
 	public class GameLevel : ControllerBase, IGameLevel, IInitializable
@@ -124,6 +125,16 @@
 				_profile.WaveNumber.Value = 0;
 				_scenesManager.UnloadLevel();
 				Save();
+				IsLevelLoaded.Value = false;
+				_gameCycle.SetState(GameState.Lobby);
+			});
+		}
+
+		public void LeaveBattle()
+		{
+			_uiViel.Appear(() =>
+			{
+				_scenesManager.UnloadLevel();
 				IsLevelLoaded.Value = false;
 				_gameCycle.SetState(GameState.Lobby);
 			});
