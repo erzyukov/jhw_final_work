@@ -8,8 +8,10 @@
     using Zenject;
     using static UnityEngine.InputSystem.InputAction;
     using Game.Field;
+	using System.Linq;
+	using Game.Units;
 
-    public class LevelDevCheats : ControllerBase, IInitializable
+	public class LevelDevCheats : ControllerBase, IInitializable
     {
         [Inject] private IInputHandler _inputManager;
         [Inject] private IFieldEnemyFacade _fieldEnemyFacade;
@@ -20,8 +22,9 @@
         {
             Subscribe(Cheats.KillEnemyUnit, (_) =>
             {
-                if (_fieldEnemyFacade.Units.Count > 0)
-                    _fieldEnemyFacade.Units[0].TakeDamage(9999999);
+				IUnitFacade unit = _fieldEnemyFacade.Units.Where(unit => unit.IsDead == false).FirstOrDefault();
+				if (unit != null)
+					unit.TakeDamage(9999999);
             });
 
             Subscribe(Cheats.KillAllEnemies, (_) =>
