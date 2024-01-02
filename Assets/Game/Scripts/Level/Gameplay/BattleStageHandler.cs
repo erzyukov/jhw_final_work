@@ -7,6 +7,7 @@
 	using Game.Utilities;
 	using System;
 	using UniRx;
+	using UnityEngine;
 	using Zenject;
 
 	public class BattleStageHandler : ControllerBase, IInitializable
@@ -77,10 +78,10 @@
 			_fieldEnemyFacade.SetFieldRenderEnabled(false);
 
 			foreach (var unit in _fieldHeroFacade.Units)
-				unit.EnableAttack();
+				unit.EnterBattle();
 
 			foreach (var unit in _fieldEnemyFacade.Units)
-				unit.EnableAttack();
+				unit.EnterBattle();
 		}
 	}
 }

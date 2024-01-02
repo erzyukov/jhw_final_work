@@ -28,7 +28,7 @@
 			StateFixedTick();
 		}
 
-		public virtual void Transition(T state)
+		protected virtual void Transition(T state)
 		{
 			if (State.Equals(state))
 				throw new Exception($"FSM is already in state: {State}");

@@ -26,9 +26,11 @@ namespace Game.Units
 
         public void Hit() => Hited.Execute();
 
-        public void OnAttackAnimationCompleted() => AttackAnimationCompleted.Execute();
+        public void OnAttackAnimationCompleted() => 
+			AttackAnimationCompleted.Execute();
         
-        public void OnDeathAnimationCompleted() => DeathAnimationCompleted.Execute();
+        public void OnDeathAnimationCompleted() =>
+			DeathAnimationCompleted.Execute();
 
         private void AddCompleteAnimation(string clipName, string handlerName)
         {
