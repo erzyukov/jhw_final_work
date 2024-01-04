@@ -3,7 +3,7 @@ namespace Game.Units
 	using UnityEngine;
 	using Zenject;
 
-	public interface IUnitModel
+	public interface IUnitRenderer
 	{
 		Transform Transform { get; }
 		Renderer Renderer { get; }
@@ -12,7 +12,7 @@ namespace Game.Units
         AnimationEventsCatcher AnimationEventsCatcher { get; }
     }
 
-	public class UnitModel : MonoBehaviour, IUnitModel
+	public class UnitRenderer : MonoBehaviour, IUnitRenderer
 	{
 		[SerializeField] Renderer _renderer;
 		[SerializeField] Animator _animator;
@@ -37,7 +37,7 @@ namespace Game.Units
 
         #endregion
 
-        public class Factory : PlaceholderFactory<Object, IUnitModel>
+        public class Factory : PlaceholderFactory<Object, IUnitRenderer>
 		{
 		}
 	}

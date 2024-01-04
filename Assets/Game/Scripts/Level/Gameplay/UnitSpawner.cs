@@ -5,8 +5,8 @@
 
 	public interface IUnitSpawner
 	{
-		IUnitFacade SpawnEnemyUnit(Species species);
-		IUnitFacade SpawnHeroUnit(Species species, int gradeIndex);
+		IUnitFacade SpawnEnemyUnit(Species species, int gradeIndex, int power);
+		IUnitFacade SpawnHeroUnit(Species species, int gradeIndex, int power);
 	}
 
 	public class UnitSpawner : IUnitSpawner
@@ -15,16 +15,14 @@
 
 		#region IUnitSpawner
 
-		public IUnitFacade SpawnEnemyUnit(Species species)
+		public IUnitFacade SpawnEnemyUnit(Species species, int gradeIndex, int power)
 		{
-			return _unitFactory.Create(species, 0);
+			return _unitFactory.Create(new UnitData { GradeIndex = gradeIndex, Power = power, Species = species});
 		}
 
-		public IUnitFacade SpawnHeroUnit(Species species, int gradeIndex)
+		public IUnitFacade SpawnHeroUnit(Species species, int gradeIndex, int power)
 		{
-			IUnitFacade unit = _unitFactory.Create(species, gradeIndex);
-
-			return unit;
+			return _unitFactory.Create(new UnitData { GradeIndex = gradeIndex, Power = power, Species = species });
 		}
 
 		#endregion

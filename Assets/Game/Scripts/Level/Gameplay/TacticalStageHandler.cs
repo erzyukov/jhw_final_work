@@ -61,7 +61,7 @@
 
 			foreach (var savedUnit in savedUnits)
 			{
-				IUnitFacade unit = _unitSpawner.SpawnHeroUnit(savedUnit.Species, savedUnit.GradeIndex);
+				IUnitFacade unit = _unitSpawner.SpawnHeroUnit(savedUnit.Species, savedUnit.GradeIndex, savedUnit.Power);
 				_fieldHeroFacade.AddUnit(unit, savedUnit.Position);
 			}
 		}

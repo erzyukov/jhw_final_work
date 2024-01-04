@@ -16,13 +16,13 @@ MonoBehaviour:
   - Price: 0
     Health: 0
     Damage: 0
-  - Price: 50
+  - Price: 30
     Health: 0.01
     Damage: 0.01
-  - Price: 200
+  - Price: 60
     Health: 0.01
     Damage: 0.01
-  - Price: 400
+  - Price: 100
     Health: 0.01
     Damage: 0.01
   - Price: 700

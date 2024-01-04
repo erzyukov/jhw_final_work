@@ -6,8 +6,7 @@ namespace Game.Units
 
 	public class UnitInstaller : Installer<UnitInstaller>
 	{
-		[Inject] private Species _species;
-		[Inject] private int _gradeIndex;
+		[Inject] private UnitData _unitData;
 		[Inject] private UnitsConfig _unitsConfig;
 
 		public override void InstallBindings()
@@ -15,18 +14,11 @@ namespace Game.Units
 			#region Instances
 
 			Container
-				.BindInstance(_species);
+				.BindInstance(_unitData);
 
-			UnitConfig unitConfig = _unitsConfig.Units[_species];
+			UnitConfig unitConfig = _unitsConfig.Units[_unitData.Species];
 			Container
 				.BindInstance(unitConfig);
-
-			Container
-				.BindInstance(_gradeIndex);
-
-			UnitGrade unitGrade = unitConfig.Grades[_gradeIndex];
-			Container
-				.BindInstance(unitGrade);
 
 			#endregion
 
@@ -46,10 +38,6 @@ namespace Game.Units
 
 			Container
 				.Bind<UnitFacade>()
-				.AsSingle();
-
-			Container
-				.BindInterfacesTo<Unit>()
 				.AsSingle();
 
 			Container

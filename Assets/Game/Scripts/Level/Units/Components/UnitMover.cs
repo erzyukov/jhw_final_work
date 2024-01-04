@@ -27,10 +27,7 @@
 		public void ProcessMoveTo(IUnitFacade target)
 		{
             if (target == null)
-			{
-				//IsInProcess = false;
 				return;
-			}
 
 			_unitView.NavMeshAgent.updateRotation = true;
             _unitView.NavMeshAgent.isStopped = false;

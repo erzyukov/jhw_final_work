@@ -4,11 +4,12 @@
 	using UnityEngine;
 	using Game.Weapon;
 	using System;
+	using Game.Configs;
 
 	public class UnitRangeAttacker : UnitAttackerBase, IInitializable, IUnitAttacker
 	{
 		[Inject] private IUnitView _view;
-		[Inject] private UnitGrade _grade;
+		[Inject] UnitConfig _unitConfig;
 		[Inject] private IProjectileSpawner _projectileSpawner;
 
 		private Transform _shootPoint;
@@ -30,7 +31,7 @@
 		public override void Attack(IUnitFacade target)
         {
 			_projectileSpawner.SpawnBullet(_shootPoint.transform.position, target, CurrentDamage);
-			AtackTimer.Set(_grade.AttackDelay);
+			AtackTimer.Set(_unitConfig.AttackDelay);
         }
 
         #endregion

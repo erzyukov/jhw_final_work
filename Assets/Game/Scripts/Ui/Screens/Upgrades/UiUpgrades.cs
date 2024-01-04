@@ -5,7 +5,6 @@
 	using Game.Profiles;
 	using Game.Units;
 	using Game.Utilities;
-	using System.Linq;
 	using UniRx;
 	using UnityEngine;
 	using Zenject;
@@ -38,7 +37,6 @@
 			if (_unitsConfig.Units.TryGetValue(species, out var unit) == false)
 				return;
 
-			UnitGrade grade = unit.Grades[0];
 			int unitLevel = _gameProfile.Units.Upgrades[species].Value;
 
 			_screen.SetIcon(unit.Icon);
@@ -52,7 +50,7 @@
 				_gameUpgrades.GetUnitDamage(species).ToString(),
 				_gameUpgrades.GetUnitDamageUpgradeDelta(species).ToString()
 			);
-			_screen.SetSpeedValue($"{grade.AttackDelay}s");
+			_screen.SetSpeedValue($"{unit.AttackDelay}s");
 			_screen.SetRangeValue($"{unit.AttackRange}");
 		}
 

@@ -34,16 +34,16 @@
 		private int DieTrigger => Animator.StringToHash("Die");
 		private int IsAimingParameter => Animator.StringToHash("IsAiming");
 		private int AimParameter => Animator.StringToHash("Aim");
-		private Animator Animator => _builder.Model.Animator;
+		private Animator Animator => _builder.UnitRenderer.Animator;
 
 		public void Initialize()
 		{
-			_builder.Model.AnimationEventsCatcher.Hited
+			_builder.UnitRenderer.AnimationEventsCatcher.Hited
 				.Where(_ => State == UnitState.StartAttack)
 				.Subscribe(_ => Transition(UnitState.HitTarget))
 				.AddTo(_disposable);
 
-			_builder.Model.AnimationEventsCatcher.AttackAnimationCompleted
+			_builder.UnitRenderer.AnimationEventsCatcher.AttackAnimationCompleted
 				.Where(_ => State == UnitState.FinishAttack)
 				.Subscribe(_ => Transition(UnitState.PrepareAttack))
 				.AddTo(_disposable);
@@ -52,7 +52,7 @@
 				.Subscribe(_ => Transition(UnitState.Dying))
 				.AddTo(_disposable);
 
-			_builder.Model.AnimationEventsCatcher.DeathAnimationCompleted
+			_builder.UnitRenderer.AnimationEventsCatcher.DeathAnimationCompleted
 				.Where(_ => State == UnitState.Dying)
 				.Subscribe(_ => Transition(UnitState.Dead))
 				.AddTo(_disposable);

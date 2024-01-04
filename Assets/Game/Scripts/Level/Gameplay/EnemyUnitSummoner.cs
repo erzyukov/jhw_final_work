@@ -52,7 +52,7 @@
 		{
 			var waveUnits = _levelConfig.Waves[_gameProfile.WaveNumber.Value - 1].Units;
 			for (int i = 0; i < waveUnits.Length; i++)
-				Summon(waveUnits[i].Species, waveUnits[i].Position);
+				Summon(waveUnits[i].Species, waveUnits[i].Position, waveUnits[i].GradeIndex, waveUnits[i].Power);
 		}
 
 		private void OnCompleteWave()
@@ -62,9 +62,9 @@
 				RemoveDeadUnit(units[i]);
 		}
 
-		private void Summon(Species species, Vector2Int position)
+		private void Summon(Species species, Vector2Int position, int gradeIndex, int power)
 		{
-			IUnitFacade unit = _unitSpawner.SpawnEnemyUnit(species);
+			IUnitFacade unit = _unitSpawner.SpawnEnemyUnit(species, gradeIndex, power);
 			_fieldFacade.AddUnit(unit, position);
 
             _unitDiedSubscribes.Add(unit, default);

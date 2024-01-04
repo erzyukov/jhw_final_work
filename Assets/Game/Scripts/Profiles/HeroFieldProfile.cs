@@ -14,6 +14,7 @@
 		{
 			public Species Species;
 			public int GradeIndex;
+			public int Power;
 			public SVector2Int Position;
 		}
 	}

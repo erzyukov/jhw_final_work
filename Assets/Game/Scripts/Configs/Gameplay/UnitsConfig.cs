@@ -19,6 +19,9 @@ namespace Game.Configs
 		[Header("Hero")]
 		[SerializeField] private List<Species> _heroUnits;
 
+		[Header("Merge")]
+		[SerializeField] private int[] _additionalMergeGradePower;
+
 		[Header("Dev")]
 		[SerializeField] private List<Species> _heroDefaultSquad;
 
@@ -38,6 +41,14 @@ namespace Game.Configs
 				_unitData.Add(unit.Species, unit.Config);
 		}
 		
+		public int GetAdditionalPower(int gradeIndex)
+		{
+			if (gradeIndex >= _additionalMergeGradePower.Length)
+				return 0;
+
+			return _additionalMergeGradePower[gradeIndex];
+		}
+
 		[Serializable]
 		public struct UnitData
 		{

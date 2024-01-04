@@ -47,8 +47,11 @@
 			if (_unitsConfig.Units.TryGetValue(unit.Species, out UnitConfig unitConfig) == false)
 				return;
 
-			_gameCurrency.AddLevelSoftCurrency(unitConfig.Grades[unit.GradeIndex].SoftCurrencyReward);
-			_gameHero.AddLevelHeroExperience(unitConfig.Grades[unit.GradeIndex].ExperienceReward);
+			int reward = Mathf.CeilToInt(unitConfig.SoftReward + unitConfig.SoftRewardPowerMultiplier * unit.Power);
+			_gameCurrency.AddLevelSoftCurrency(reward);
+
+			int experience = Mathf.CeilToInt(unitConfig.Experience + unitConfig.ExperiencePowerMultiplier * unit.Power);
+			_gameHero.AddLevelHeroExperience(experience);
 		}
 
 		private void OnHeroUnitsCountChanged(int count)
