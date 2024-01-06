@@ -15,6 +15,6 @@ MonoBehaviour:
   _summonCurrencyAmount: 6
   _units:
   - Species: 5001
-    GradeIndex: 0
-    Power: 0
+    Power: 6
     Position: {x: 2, y: 0}
+    GradeIndex: 0

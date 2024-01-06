@@ -11,6 +11,7 @@
 	using System.Linq;
 	using System.Collections.Generic;
 	using Game.Level;
+	using static Game.Configs.WaveConfig;
 
 	public class TacticalStageHandler : ControllerBase, IInitializable
 	{
@@ -80,12 +81,12 @@
 		private void OnUnitAddedHandler(IUnitFacade unit)
 		{
 			unit.SetDraggableActive(true);
-
 			Vector2Int position = _fieldHeroFacade.GetCell(unit).Position;
 			HeroFieldProfile.Unit profileUnit = new HeroFieldProfile.Unit()
 			{
 				Species = unit.Species,
 				GradeIndex = unit.GradeIndex,
+				Power = unit.Power,
 				Position = (SVector2Int)position
 			};
 			_gameProfile.HeroField.Units.Add(profileUnit);

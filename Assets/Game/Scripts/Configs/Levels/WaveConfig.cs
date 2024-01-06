@@ -22,9 +22,9 @@ namespace Game.Configs
 		public struct WaveUnit
 		{
 			public Species Species;
-			public int GradeIndex;
 			public int Power;
 			public Vector2Int Position;
+			public int GradeIndex;
 		}
 	}
 
@@ -58,8 +58,27 @@ namespace Game.Configs
 					)
 				);
 
+				int totalHealth = waveConfig.Units.Sum(unit =>
+					Mathf.CeilToInt(
+						unitsConfig.Units[unit.Species].Health +
+						unitsConfig.Units[unit.Species].HealthPowerMultiplier * unit.Power
+					)
+				);
+
+				float totalAvrDamage = waveConfig.Units.Sum(unit =>
+					Mathf.Round(
+						(unitsConfig.Units[unit.Species].Damage +
+						unitsConfig.Units[unit.Species].DamagePowerMultiplier * unit.Power) /
+						unitsConfig.Units[unit.Species].AttackDelay *
+						100
+					) / 100
+				);
+
 				EditorGUILayout.LabelField("Total reward: ", totalReward.ToString());
 				EditorGUILayout.LabelField("Total experience: ", totalExperience.ToString());
+
+				EditorGUILayout.LabelField("Total health: ", totalHealth.ToString());
+				EditorGUILayout.LabelField("Total avr damage: ", totalAvrDamage.ToString());
 			}
 			else
 			{

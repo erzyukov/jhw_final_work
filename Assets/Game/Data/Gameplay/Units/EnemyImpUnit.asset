@@ -16,15 +16,15 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _class: 0
   _attackRange: 1
-  _attackDelay: 2.5
-  _health: 160
-  _damage: 30
-  _healthPowerMultiplier: 22
-  _damagePowerMultiplier: 4
+  _attackDelay: 2
+  _health: 125
+  _damage: 12
+  _healthPowerMultiplier: 15
+  _damagePowerMultiplier: 6
   _softReward: 5
   _experience: 3
-  _softRewardPowerMultiplier: 2
-  _experiencePowerMultiplier: 2
+  _softRewardPowerMultiplier: 1
+  _experiencePowerMultiplier: 1
   _gradePrefabs:
   - {fileID: 1503547998484457933, guid: 2e9f0ab90493d694c94d83b818dbab0c, type: 3}
   - {fileID: 1503547998484457933, guid: 2e9f0ab90493d694c94d83b818dbab0c, type: 3}

@@ -30,6 +30,9 @@
 
 		public override void Attack(IUnitFacade target)
         {
+			if (target == null)
+				return;
+
 			_projectileSpawner.SpawnBullet(_shootPoint.transform.position, target, CurrentDamage);
 			AtackTimer.Set(_unitConfig.AttackDelay);
         }

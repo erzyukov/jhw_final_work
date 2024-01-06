@@ -13,9 +13,12 @@ namespace Game.Core
 	using System.Collections.Generic;
 	using System.Linq;
 
+
+	// TODO: Update logic with new calc health & damage
 	public interface IGameUpgrades
 	{
 		ReactiveCommand<Species> Upgraded { get; }
+		int GetUnitPower(Species species);
 		int GetUnitLevel(Species species);
 		float GetUnitHealth(Species species);
 		float GetUnitDamage(Species species);
@@ -51,6 +54,9 @@ namespace Game.Core
 		#region IGameUpgrades
 
 		public ReactiveCommand<Species> Upgraded { get; } = new ReactiveCommand<Species>();
+
+		public int GetUnitPower(Species species) => 
+			_gameProfile.Units.Upgrades[species].Value - 1;
 
 		public int GetUnitLevel(Species species) =>
 			_gameProfile.Units.Upgrades[species].Value;

@@ -15,12 +15,12 @@ MonoBehaviour:
   _titleKey: SniperTitle
   _icon: {fileID: 21300000, guid: 201eaf3b4a578b340ac9dfd4b8837c41, type: 3}
   _class: 1
-  _attackRange: 6
-  _attackDelay: 0.92
+  _attackRange: 5
+  _attackDelay: 1.4
   _health: 90
   _damage: 35
-  _healthPowerMultiplier: 4
-  _damagePowerMultiplier: 3.5
+  _healthPowerMultiplier: 11
+  _damagePowerMultiplier: 4
   _softReward: 0
   _experience: 0
   _softRewardPowerMultiplier: 0
@@ -30,9 +30,4 @@ MonoBehaviour:
   - {fileID: 1503547998484457933, guid: 992ae7a59c6d00046b0beb844810dafc, type: 3}
   - {fileID: 1503547998484457933, guid: 992ae7a59c6d00046b0beb844810dafc, type: 3}
   - {fileID: 1503547998484457933, guid: 992ae7a59c6d00046b0beb844810dafc, type: 3}
-  _grades:
-  - Prefab: {fileID: 1503547998484457933, guid: 992ae7a59c6d00046b0beb844810dafc, type: 3}
-  - Prefab: {fileID: 1503547998484457933, guid: 992ae7a59c6d00046b0beb844810dafc, type: 3}
-  - Prefab: {fileID: 1503547998484457933, guid: 992ae7a59c6d00046b0beb844810dafc, type: 3}
-  - Prefab: {fileID: 1503547998484457933, guid: 992ae7a59c6d00046b0beb844810dafc, type: 3}
   _isDebug: 0

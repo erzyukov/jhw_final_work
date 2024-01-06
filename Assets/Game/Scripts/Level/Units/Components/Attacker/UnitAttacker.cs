@@ -11,6 +11,9 @@
 
         public override void Attack(IUnitFacade target)
         {
+			if (target == null)
+				return;
+
 			target.TakeDamage(CurrentDamage);
             AtackTimer.Set(_unitConfig.AttackDelay);
         }

@@ -16,10 +16,10 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 5119c0e68643d004c977aabc5ca1ae20, type: 3}
   _class: 0
   _attackRange: 1
-  _attackDelay: 1.5
+  _attackDelay: 1.1
   _health: 150
-  _damage: 20
-  _healthPowerMultiplier: 10
+  _damage: 22
+  _healthPowerMultiplier: 18
   _damagePowerMultiplier: 2
   _softReward: 0
   _experience: 0
@@ -30,9 +30,4 @@ MonoBehaviour:
   - {fileID: 1503547998484457933, guid: 1c5130c2171c89d42860bf9737e7e61e, type: 3}
   - {fileID: 1503547998484457933, guid: 1c5130c2171c89d42860bf9737e7e61e, type: 3}
   - {fileID: 1503547998484457933, guid: 1c5130c2171c89d42860bf9737e7e61e, type: 3}
-  _grades:
-  - Prefab: {fileID: 1503547998484457933, guid: 1c5130c2171c89d42860bf9737e7e61e, type: 3}
-  - Prefab: {fileID: 1503547998484457933, guid: 1c5130c2171c89d42860bf9737e7e61e, type: 3}
-  - Prefab: {fileID: 1503547998484457933, guid: 1c5130c2171c89d42860bf9737e7e61e, type: 3}
-  - Prefab: {fileID: 1503547998484457933, guid: 1c5130c2171c89d42860bf9737e7e61e, type: 3}
   _isDebug: 0

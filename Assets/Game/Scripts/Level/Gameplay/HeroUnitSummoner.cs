@@ -31,6 +31,7 @@
 		[Inject] private IFieldHeroFacade _fieldFacade;
 		[Inject] private TimingsConfig _timingsConfig;
 		[Inject] private IGameCycle _gameCycle;
+		[Inject] private IGameUpgrades _gameUpgrades;
 
 		Dictionary<IUnitFacade, IDisposable> _unitDiedSubscribes = new Dictionary<IUnitFacade, IDisposable>();
 		Dictionary<IUnitFacade, IDisposable> _vanishSubscribes = new Dictionary<IUnitFacade, IDisposable>();
@@ -98,7 +99,7 @@
 		{
 			Species summonSpecies = _unitsConfig.HeroDefaultSquad[UnityEngine.Random.Range(0, _unitsConfig.HeroDefaultSquad.Count)];
 			int defaultGradeIndex = 0;
-			int defaultPower = 0;
+			int defaultPower = _gameUpgrades.GetUnitPower(summonSpecies);
 			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(summonSpecies, defaultGradeIndex, defaultPower);
 			_fieldFacade.AddUnit(unit);
 
