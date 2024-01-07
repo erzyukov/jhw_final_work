@@ -242,6 +242,7 @@
 		protected override void OnEnteredDying()
 		{
 			_mover.Stop();
+			Animator.StopPlayback();
 			Animator.SetTrigger(DieTrigger);
 			Animator.SetBool(IsAimingParameter, false);
 		}

@@ -4,6 +4,7 @@ namespace Game.Installers
 	using Game.Dev;
 	using Game.Input;
 	using Game.Profiles;
+	using UnityEngine;
 	using Zenject;
 
 	public class ProjectInstaller : MonoInstaller
@@ -11,6 +12,7 @@ namespace Game.Installers
 		public override void InstallBindings()
 		{
 			WebGLDebug.Log("[Project] ProjectInstaller: Configure");
+			Time.timeScale = 3.0f;
 
 			InstallGameProfile();
 

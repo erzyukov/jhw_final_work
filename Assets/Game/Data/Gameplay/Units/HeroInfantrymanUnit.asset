@@ -20,7 +20,7 @@ MonoBehaviour:
   _health: 150
   _damage: 22
   _healthPowerMultiplier: 18
-  _damagePowerMultiplier: 2
+  _damagePowerMultiplier: 3
   _softReward: 0
   _experience: 0
   _softRewardPowerMultiplier: 0

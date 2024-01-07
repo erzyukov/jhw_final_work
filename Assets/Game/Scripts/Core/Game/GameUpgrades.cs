@@ -56,7 +56,7 @@ namespace Game.Core
 		public ReactiveCommand<Species> Upgraded { get; } = new ReactiveCommand<Species>();
 
 		public int GetUnitPower(Species species) => 
-			_gameProfile.Units.Upgrades[species].Value - 1;
+			(_gameProfile.Units.Upgrades[species].Value - 1) * _upgradesConfig.UpgradePowerBonus;
 
 		public int GetUnitLevel(Species species) =>
 			_gameProfile.Units.Upgrades[species].Value;

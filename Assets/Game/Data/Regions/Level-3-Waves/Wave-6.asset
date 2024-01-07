@@ -15,22 +15,22 @@ MonoBehaviour:
   _summonCurrencyAmount: 6
   _units:
   - Species: 5001
-    Power: 12
+    Power: 8
     Position: {x: 1, y: 0}
     GradeIndex: 0
-  - Species: 5002
-    Power: 6
-    Position: {x: 3, y: 2}
+  - Species: 5001
+    Power: 8
+    Position: {x: 1, y: 2}
     GradeIndex: 0
   - Species: 5004
-    Power: 9
+    Power: 6
     Position: {x: 2, y: 1}
     GradeIndex: 0
   - Species: 5004
-    Power: 8
+    Power: 6
     Position: {x: 3, y: 0}
     GradeIndex: 0
-  - Species: 5001
-    Power: 12
-    Position: {x: 1, y: 2}
+  - Species: 5002
+    Power: 5
+    Position: {x: 3, y: 2}
     GradeIndex: 0
