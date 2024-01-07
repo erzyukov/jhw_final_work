@@ -83,13 +83,13 @@ namespace Game.Installers
 		private void InstallUnits()
 		{
 			Container
-				.BindFactory<Species, int, UnitFacade, UnitFacade.Factory>()
+				.BindFactory<UnitData, UnitFacade, UnitFacade.Factory>()
 				.FromSubContainerResolve()
 				.ByNewPrefabInstaller<UnitInstaller>(_unitsConfig.UnitPrefab);
 
 			Container
-				.BindFactory<UnityEngine.Object, IUnitModel, UnitModel.Factory>()
-				.FromFactory<PrefabFactory<IUnitModel>>();
+				.BindFactory<UnityEngine.Object, IUnitRenderer, UnitRenderer.Factory>()
+				.FromFactory<PrefabFactory<IUnitRenderer>>();
 		}
 
         private void InstallDev()

@@ -4,6 +4,7 @@ namespace Game.Installers
 	using Game.Dev;
 	using Game.Input;
 	using Game.Profiles;
+	using UnityEngine;
 	using Zenject;
 
 	public class ProjectInstaller : MonoInstaller

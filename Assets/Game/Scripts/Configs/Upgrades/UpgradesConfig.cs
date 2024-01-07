@@ -12,9 +12,12 @@
 	[CreateAssetMenu(fileName = "Upgrades", menuName = "Configs/Upgrades", order = (int)Config.Upgrades)]
 	public class UpgradesConfig : ScriptableObject
 	{
+		[SerializeField] private int _upgradePowerBonus;
 		[SerializeField] private UnitUpgrades[] _unitsUpgrades;
 
 		private Dictionary<Species, UnitUpgradesConfig> _unitData;
+
+		public int UpgradePowerBonus => _upgradePowerBonus;
 
 		public Dictionary<Species, UnitUpgradesConfig> UnitsUpgrades => _unitData;
 
@@ -47,7 +50,7 @@
 
 			UpgradesConfig config = (UpgradesConfig)target;
 			config.Initialize();
-			int cost = config.UnitsUpgrades.Sum(u => u.Value.Upgrades.Sum(upgrade => upgrade.Price));
+			int cost = config.UnitsUpgrades.Sum(u => u.Value.Price.Sum());
 
 			EditorGUILayout.LabelField("Total upgrades cost: ", cost.ToString());
 		}

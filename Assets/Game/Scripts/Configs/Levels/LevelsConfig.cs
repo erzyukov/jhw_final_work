@@ -34,8 +34,18 @@ namespace Game.Configs
 			{
 				foreach (var levelConfig in config.Levels)
 				{
-					totalReward += levelConfig.Waves.Sum(w => w.Units.Sum(unit => unitsConfig.Units[unit.Species].Grades[unit.GradeIndex].SoftCurrencyReward));
-					totalExperience += levelConfig.Waves.Sum(w => w.Units.Sum(unit => unitsConfig.Units[unit.Species].Grades[unit.GradeIndex].ExperienceReward));
+					totalReward += levelConfig.Waves.Sum(w => w.Units.Sum(unit =>
+						Mathf.CeilToInt(
+							unitsConfig.Units[unit.Species].SoftReward +
+							unitsConfig.Units[unit.Species].SoftRewardPowerMultiplier * unit.Power
+						))
+					);
+					totalExperience += levelConfig.Waves.Sum(w => w.Units.Sum(unit =>
+						Mathf.CeilToInt(
+							unitsConfig.Units[unit.Species].Experience +
+							unitsConfig.Units[unit.Species].ExperiencePowerMultiplier * unit.Power
+						))
+					);
 				}
 
 				EditorGUILayout.LabelField("Total reward: ", totalReward.ToString());

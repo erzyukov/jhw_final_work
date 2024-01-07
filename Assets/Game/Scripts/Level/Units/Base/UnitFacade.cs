@@ -23,6 +23,7 @@
 		Transform Transform { get; }
 		Transform ModelRendererTransform { get; }
 		bool IsDead { get; }
+		int Power { get; }
 
 		void SetViewParent(Transform parent, bool worldPositionStays = false);
 		void SetActive(bool value);
@@ -36,14 +37,13 @@
 
 	public class UnitFacade : IUnitFacade
 	{
-		[Inject] private Species _species;
+		[Inject] private UnitData _unitData;
 		[Inject] private IUnitView _view;
 		[Inject] private UnitConfig _config;
 		[Inject] private IUnitHealth _health;
 		[Inject] private IUnitFsm _fsm;
 		[Inject] private IUnitEvents _events;
 		[Inject] private IDraggable _draggable;
-		[Inject] private int _gradeIndex;
 
 		#region IUnitFacade
 
@@ -65,9 +65,11 @@
 
 		public string Name => _config.TitleKey;
 
-		public Species Species => _species;
+		public Species Species => _unitData.Species;
 
-		public int GradeIndex => _gradeIndex;
+		public int GradeIndex => _unitData.GradeIndex;
+		
+		public int Power => _unitData.Power;
 
 		public Transform Transform => (_view != null) ? _view.Transform : null;
 
@@ -101,6 +103,6 @@
 
 		#endregion
 
-		public class Factory : PlaceholderFactory<Species, int, UnitFacade> {}
+		public class Factory : PlaceholderFactory<UnitData, UnitFacade> {}
 	}
 }

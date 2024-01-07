@@ -366,7 +366,7 @@
 			if (_config.BeginerTurorialSummons.TryGetValue(State, out var data))
 			{
 				_heroUnitSummoner.InterruptPaidSummon();
-				_heroUnitSummoner.Summon(data.Species, data.GradeIndex, data.Position);
+				_heroUnitSummoner.Summon(data.Species, data.GradeIndex, data.Power, data.Position);
 			}
 
 			_uiTacticalStageHud.SetStartBattleButtonInteractable(false);

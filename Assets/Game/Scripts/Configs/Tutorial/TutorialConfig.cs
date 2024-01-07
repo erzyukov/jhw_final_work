@@ -62,6 +62,7 @@ namespace Game.Configs
 			public BeginnerStep Step;
 			public Species Species;
 			public int GradeIndex;
+			public int Power;
 			public Vector2Int Position;
 		}
 

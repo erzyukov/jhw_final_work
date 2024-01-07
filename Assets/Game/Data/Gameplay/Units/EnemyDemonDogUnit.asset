@@ -12,35 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
   m_Name: EnemyDemonDogUnit
   m_EditorClassIdentifier: 
-  _title: "\u041F\u0435\u0441 \u0414\u0435\u043C\u043E\u043D\u0430"
+  _titleKey: DemonDogTitle
   _icon: {fileID: 0}
   _class: 0
   _attackRange: 1
-  _health: 50
-  _damage: 8
-  _grades:
-  - Prefab: {fileID: 1503547998484457933, guid: 468d4ce87b5b58e43a0e26ba6ddb855c, type: 3}
-    AttackDelay: 0.8
-    HealthMultiplier: 1
-    DamageMultiplier: 1
-    SoftCurrencyReward: 12
-    ExperienceReward: 5
-  - Prefab: {fileID: 1503547998484457933, guid: 468d4ce87b5b58e43a0e26ba6ddb855c, type: 3}
-    AttackDelay: 0.94
-    HealthMultiplier: 1.5
-    DamageMultiplier: 1.5
-    SoftCurrencyReward: 21
-    ExperienceReward: 6
-  - Prefab: {fileID: 1503547998484457933, guid: 468d4ce87b5b58e43a0e26ba6ddb855c, type: 3}
-    AttackDelay: 0.93
-    HealthMultiplier: 2.25
-    DamageMultiplier: 2.25
-    SoftCurrencyReward: 35
-    ExperienceReward: 7
-  - Prefab: {fileID: 1503547998484457933, guid: 468d4ce87b5b58e43a0e26ba6ddb855c, type: 3}
-    AttackDelay: 0.92
-    HealthMultiplier: 3.375
-    DamageMultiplier: 3.375
-    SoftCurrencyReward: 63
-    ExperienceReward: 8
+  _attackDelay: 1.8
+  _health: 210
+  _damage: 29
+  _healthPowerMultiplier: 64
+  _damagePowerMultiplier: 17
+  _softReward: 12
+  _experience: 5
+  _softRewardPowerMultiplier: 2
+  _experiencePowerMultiplier: 2
+  _gradePrefabs:
+  - {fileID: 1503547998484457933, guid: 468d4ce87b5b58e43a0e26ba6ddb855c, type: 3}
+  - {fileID: 1503547998484457933, guid: 468d4ce87b5b58e43a0e26ba6ddb855c, type: 3}
+  - {fileID: 1503547998484457933, guid: 468d4ce87b5b58e43a0e26ba6ddb855c, type: 3}
+  - {fileID: 1503547998484457933, guid: 468d4ce87b5b58e43a0e26ba6ddb855c, type: 3}
   _isDebug: 0

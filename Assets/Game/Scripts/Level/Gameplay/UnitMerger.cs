@@ -63,7 +63,7 @@
 			if (_unitsConfig.Units.TryGetValue(unit.Species, out UnitConfig unitConfig) == false)
 				return;
 
-			if (unit.GradeIndex >= unitConfig.Grades.Length - 1)
+			if (unit.GradeIndex >= unitConfig.GradePrefabs.Length - 1)
 				return;
 
 			_mergeInitiatorUnit = unit;
@@ -87,12 +87,15 @@
 			if (_unitsConfig.Units.TryGetValue(_mergeInitiatorUnit.Species, out UnitConfig unitConfig) == false)
 				return;
 
-			if (_mergeInitiatorUnit.GradeIndex >= unitConfig.Grades.Length - 1)
+			if (_mergeInitiatorUnit.GradeIndex >= unitConfig.GradePrefabs.Length - 1)
 				return;
 
 			Vector2Int cellPosition = _fieldHeroFacade.GetCell(_mergeAbsorbedUnit).Position;
 			Species species = _mergeAbsorbedUnit.Species;
 			int gradeIndex = _mergeAbsorbedUnit.GradeIndex + 1;
+			int power = _unitsConfig.GetAdditionalPower(_mergeAbsorbedUnit.GradeIndex) + 
+				_mergeAbsorbedUnit.Power + 
+				_mergeInitiatorUnit.Power;
 
 			_fieldHeroFacade.RemoveUnit(_mergeInitiatorUnit);
 			_fieldHeroFacade.RemoveUnit(_mergeAbsorbedUnit);
@@ -101,7 +104,7 @@
 			_mergeInitiatorUnit = null;
 			_mergeAbsorbedUnit = null;
 
-			_heroUnitSummoner.Summon(species, gradeIndex, cellPosition);
+			_heroUnitSummoner.Summon(species, gradeIndex, power, cellPosition);
 		}
 	}
 }

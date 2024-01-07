@@ -7,9 +7,7 @@
 
 	public interface IUnitBuilder
 	{
-		IUnitModel Model { get; }
-
-		void SetupUnitView(int index);
+		IUnitRenderer UnitRenderer { get; }
 	}
 
 	public class UnitBuilder : IUnitBuilder
@@ -17,34 +15,31 @@
 		[Inject] private IUnitView _unitView;
 		[Inject] private UnitsConfig _unitsConfig;
 		[Inject] private UnitConfig _unitConfig;
-		[Inject] private UnitGrade _unitGrade;
-		[Inject] private UnitModel.Factory _unitModelFactory;
+		[Inject] private UnitData _unitData;
+		[Inject] private UnitRenderer.Factory _unitRendererFactory;
 
-		private IUnitModel _model;
+		private IUnitRenderer _unitRenderer;
 
 		public void OnInstantiated()
 		{
-			SetupUnitView(0);
+			SetupUnit();
 		}
 
-		#region IUnitBuilder
-
-		public IUnitModel Model => _model;
-
-		public void SetupUnitView(int index)
+		void SetupUnit()
 		{
-			_model = _unitModelFactory.Create(_unitGrade.Prefab);
+			GameObject prefab = _unitConfig.GradePrefabs[_unitData.GradeIndex];
+			_unitRenderer = _unitRendererFactory.Create(prefab);
 			_unitView.ModelContainer.DestroyChildren();
-			_model.Transform.SetParent(_unitView.ModelContainer, false);
+			_unitRenderer.Transform.SetParent(_unitView.ModelContainer, false);
 
 			_unitView.NavMeshAgent.speed = _unitsConfig.Speed;
 			_unitView.NavMeshAgent.stoppingDistance = _unitConfig.AttackRange;
 
-			float uiHealthHeight = 
-                _model.Renderer.bounds.size.y * _model.Renderer.transform.localScale.y * _model.Renderer.transform.parent.localScale.y + 
-                _unitsConfig.UiHealthIndent;
+			float uiHealthHeight =
+				_unitRenderer.Renderer.bounds.size.y * _unitRenderer.Renderer.transform.localScale.y * _unitRenderer.Renderer.transform.parent.localScale.y +
+				_unitsConfig.UiHealthIndent;
 			_unitView.SetModelHeight(uiHealthHeight);
-			_unitView.SetModelRendererTransform(_model.RendererTransform);
+			_unitView.SetModelRendererTransform(_unitRenderer.RendererTransform);
 
 			#region Debug
 
@@ -52,6 +47,10 @@
 
 			#endregion
 		}
+
+		#region IUnitBuilder
+
+		public IUnitRenderer UnitRenderer => _unitRenderer;
 
 		#endregion
 	}

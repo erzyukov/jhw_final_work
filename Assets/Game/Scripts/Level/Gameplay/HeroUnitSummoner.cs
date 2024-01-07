@@ -17,7 +17,7 @@
 	{
 		ReactiveCommand SummoningPaidUnit { get; }
 		bool TrySummonByCurrency();
-		void Summon(Species species, int gradeIndex, Vector2Int position);
+		void Summon(Species species, int gradeIndex, int power, Vector2Int position);
 		void InterruptPaidSummon();
 	}
 
@@ -31,6 +31,7 @@
 		[Inject] private IFieldHeroFacade _fieldFacade;
 		[Inject] private TimingsConfig _timingsConfig;
 		[Inject] private IGameCycle _gameCycle;
+		[Inject] private IGameUpgrades _gameUpgrades;
 
 		Dictionary<IUnitFacade, IDisposable> _unitDiedSubscribes = new Dictionary<IUnitFacade, IDisposable>();
 		Dictionary<IUnitFacade, IDisposable> _vanishSubscribes = new Dictionary<IUnitFacade, IDisposable>();
@@ -81,11 +82,10 @@
 			return true;
 		}
 
-		public void Summon(Species species, int gradeIndex, Vector2Int position)
+		public void Summon(Species species, int gradeIndex, int power, Vector2Int position)
 		{
-			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(species, gradeIndex);
+			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(species, gradeIndex, power);
 			_fieldFacade.AddUnit(unit, position);
-
 			SubscribeToUnit(unit);
 		}
 
@@ -98,7 +98,9 @@
 		{
 			Species summonSpecies = _unitsConfig.HeroDefaultSquad[UnityEngine.Random.Range(0, _unitsConfig.HeroDefaultSquad.Count)];
 			int defaultGradeIndex = 0;
-			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(summonSpecies, defaultGradeIndex);
+			int defaultPower = _gameUpgrades.GetUnitPower(summonSpecies);
+
+			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(summonSpecies, defaultGradeIndex, defaultPower);
 			_fieldFacade.AddUnit(unit);
 
 			SubscribeToUnit(unit);

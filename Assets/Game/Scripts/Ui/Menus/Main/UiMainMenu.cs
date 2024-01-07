@@ -7,6 +7,7 @@
 	using Game.Configs;
 	using System.Linq;
 	using Game.Profiles;
+	using UnityEngine;
 
 	public class UiMainMenu : ControllerBase, IInitializable
 	{

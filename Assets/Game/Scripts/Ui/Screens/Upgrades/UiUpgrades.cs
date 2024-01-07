@@ -5,15 +5,16 @@
 	using Game.Profiles;
 	using Game.Units;
 	using Game.Utilities;
-	using System.Linq;
 	using UniRx;
 	using UnityEngine;
 	using Zenject;
+	using static Game.Configs.UnitsConfig;
 
 	public class UiUpgrades : ControllerBase, IInitializable
 	{
 		[Inject] private IUiUpgradesScreen _screen;
 		[Inject] private UnitsConfig _unitsConfig;
+		[Inject] private UpgradesConfig _upgradesConfig;
 		[Inject] private ILocalizator _localizator;
 		[Inject] private GameProfile _gameProfile;
 		[Inject] private IGameUpgrades _gameUpgrades;
@@ -38,21 +39,26 @@
 			if (_unitsConfig.Units.TryGetValue(species, out var unit) == false)
 				return;
 
-			UnitGrade grade = unit.Grades[0];
 			int unitLevel = _gameProfile.Units.Upgrades[species].Value;
+
+			int power = _gameUpgrades.GetUnitPower(species);
+			int health = Mathf.CeilToInt(unit.Health + unit.HealthPowerMultiplier * power);
+			int healthUpgradeDelta = Mathf.CeilToInt(unit.HealthPowerMultiplier * _upgradesConfig.UpgradePowerBonus);
+			int damage = Mathf.CeilToInt(unit.Damage + unit.DamagePowerMultiplier * power);
+			int damageUpgradeDelta = Mathf.CeilToInt(unit.DamagePowerMultiplier * _upgradesConfig.UpgradePowerBonus);
 
 			_screen.SetIcon(unit.Icon);
 			_screen.SetName(_localizator.GetString(unit.TitleKey));
 			_screen.SetLevel($"{_localizator.GetString(LevelTitleKey)} {unitLevel}");
 			_screen.SetHealthValue(
-				_gameUpgrades.GetUnitHealth(species).ToString(),
-				_gameUpgrades.GetUnitHealthUpgradeDelta(species).ToString()
+				health.ToString(),
+				healthUpgradeDelta.ToString()
 			);
 			_screen.SetDamageValue(
-				_gameUpgrades.GetUnitDamage(species).ToString(),
-				_gameUpgrades.GetUnitDamageUpgradeDelta(species).ToString()
+				damage.ToString(),
+				damageUpgradeDelta.ToString()
 			);
-			_screen.SetSpeedValue($"{grade.AttackDelay}s");
+			_screen.SetSpeedValue($"{unit.AttackDelay}s");
 			_screen.SetRangeValue($"{unit.AttackRange}");
 		}
 

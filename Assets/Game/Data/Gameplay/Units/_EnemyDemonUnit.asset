@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
-  m_Name: EnemyDemonUnit
+  m_Name: _EnemyDemonUnit
   m_EditorClassIdentifier: 
   _titleKey: DemonTitle
   _icon: {fileID: 0}
