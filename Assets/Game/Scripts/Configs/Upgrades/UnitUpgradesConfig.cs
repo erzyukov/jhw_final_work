@@ -1,6 +1,5 @@
 ﻿namespace Game.Configs
 {
-	using System;
 	using UnityEngine;
 #if UNITY_EDITOR
 	using UnityEditor;
@@ -10,17 +9,9 @@
 	[CreateAssetMenu(fileName = "UnitUpgrades", menuName = "Configs/UnitUpgrades", order = (int)Config.UnitUpgrades)]
 	public class UnitUpgradesConfig : ScriptableObject
 	{
-		[SerializeField] private UpgradeData[] _upgrades;
+		[SerializeField] private int[] _price;
 
-		public UpgradeData[] Upgrades => _upgrades;
-
-		[Serializable]
-		public struct UpgradeData
-		{
-			public int Price;
-			public float Health;
-			public float Damage;
-		}
+		public int[] Price => _price;
 	}
 
 #if UNITY_EDITOR
@@ -36,7 +27,7 @@
 
 			UnitUpgradesConfig config = (UnitUpgradesConfig)target;
 
-			int cost = config.Upgrades.Sum(upgrade => upgrade.Price);
+			int cost = config.Price.Sum();
 
 			EditorGUILayout.LabelField("Total upgrades cost: ", cost.ToString());
 		}

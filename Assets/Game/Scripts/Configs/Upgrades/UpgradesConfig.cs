@@ -50,7 +50,7 @@
 
 			UpgradesConfig config = (UpgradesConfig)target;
 			config.Initialize();
-			int cost = config.UnitsUpgrades.Sum(u => u.Value.Upgrades.Sum(upgrade => upgrade.Price));
+			int cost = config.UnitsUpgrades.Sum(u => u.Value.Price.Sum());
 
 			EditorGUILayout.LabelField("Total upgrades cost: ", cost.ToString());
 		}

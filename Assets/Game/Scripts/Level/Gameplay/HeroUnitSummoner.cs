@@ -86,9 +86,6 @@
 		{
 			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(species, gradeIndex, power);
 			_fieldFacade.AddUnit(unit, position);
-
-			Debug.LogWarning($">>> {unit.Power}");
-
 			SubscribeToUnit(unit);
 		}
 
@@ -102,8 +99,6 @@
 			Species summonSpecies = _unitsConfig.HeroDefaultSquad[UnityEngine.Random.Range(0, _unitsConfig.HeroDefaultSquad.Count)];
 			int defaultGradeIndex = 0;
 			int defaultPower = _gameUpgrades.GetUnitPower(summonSpecies);
-			
-			Debug.LogWarning($">>> {defaultPower}");
 
 			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(summonSpecies, defaultGradeIndex, defaultPower);
 			_fieldFacade.AddUnit(unit);
