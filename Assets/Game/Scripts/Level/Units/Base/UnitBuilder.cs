@@ -15,7 +15,7 @@
 		[Inject] private IUnitView _unitView;
 		[Inject] private UnitsConfig _unitsConfig;
 		[Inject] private UnitConfig _unitConfig;
-		[Inject] private UnitData _unitData;
+		[Inject] private UnitCreateData _unitCreateData;
 		[Inject] private UnitRenderer.Factory _unitRendererFactory;
 
 		private IUnitRenderer _unitRenderer;
@@ -27,7 +27,7 @@
 
 		void SetupUnit()
 		{
-			GameObject prefab = _unitConfig.GradePrefabs[_unitData.GradeIndex];
+			GameObject prefab = _unitConfig.GradePrefabs[_unitCreateData.GradeIndex];
 			_unitRenderer = _unitRendererFactory.Create(prefab);
 			_unitView.ModelContainer.DestroyChildren();
 			_unitRenderer.Transform.SetParent(_unitView.ModelContainer, false);

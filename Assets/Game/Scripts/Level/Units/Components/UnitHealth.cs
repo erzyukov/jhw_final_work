@@ -4,7 +4,6 @@
 	using Zenject;
 	using UniRx;
 	using UnityEngine;
-	using Game.Core;
 	using Game.Configs;
 
 	public interface IUnitHealth
@@ -20,9 +19,8 @@
 
 	public class UnitHealth : ControllerBase, IUnitHealth
 	{
-		[Inject] private UnitData _unitData;
+		[Inject] private UnitCreateData _unitCreateData;
 		[Inject] private UnitConfig _unitConfig;
-		[Inject] private IGameUpgrades _gameUpgrades;
 
 		private float _baseHealth;
 		private float _health;
@@ -50,7 +48,7 @@
 
 		public void Reset()
 		{
-			_baseHealth = _unitConfig.Health + _unitConfig.HealthPowerMultiplier * _unitData.Power;
+			_baseHealth = _unitConfig.Health + _unitConfig.HealthPowerMultiplier * _unitCreateData.Power;
 			_health = _baseHealth;
 			HealthRatio.Value = 1;
 		}

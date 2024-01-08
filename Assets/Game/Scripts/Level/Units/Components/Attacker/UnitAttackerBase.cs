@@ -15,7 +15,7 @@
 	public abstract class UnitAttackerBase : ControllerBase, IInitializable, IUnitAttacker
 	{
 		[Inject] IUnitView _view;
-		[Inject] private UnitData _unitData;
+		[Inject] private UnitCreateData _unitCreateData;
 		[Inject] UnitConfig _unitConfig;
 
 		protected ITimer AtackTimer;
@@ -24,7 +24,7 @@
 		public virtual void Initialize()
 		{
 			AtackTimer = new Timer();
-			CurrentDamage = _unitConfig.Damage + _unitConfig.DamagePowerMultiplier * _unitData.Power;
+			CurrentDamage = _unitConfig.Damage + _unitConfig.DamagePowerMultiplier * _unitCreateData.Power;
 		}
 
 		#region IUnitAttacker

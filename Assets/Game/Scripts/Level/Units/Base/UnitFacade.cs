@@ -37,7 +37,7 @@
 
 	public class UnitFacade : IUnitFacade
 	{
-		[Inject] private UnitData _unitData;
+		[Inject] private UnitCreateData _unitCreateData;
 		[Inject] private IUnitView _view;
 		[Inject] private UnitConfig _config;
 		[Inject] private IUnitHealth _health;
@@ -65,11 +65,11 @@
 
 		public string Name => _config.TitleKey;
 
-		public Species Species => _unitData.Species;
+		public Species Species => _unitCreateData.Species;
 
-		public int GradeIndex => _unitData.GradeIndex;
+		public int GradeIndex => _unitCreateData.GradeIndex;
 		
-		public int Power => _unitData.Power;
+		public int Power => _unitCreateData.Power;
 
 		public Transform Transform => (_view != null) ? _view.Transform : null;
 
@@ -103,6 +103,6 @@
 
 		#endregion
 
-		public class Factory : PlaceholderFactory<UnitData, UnitFacade> {}
+		public class Factory : PlaceholderFactory<UnitCreateData, UnitFacade> {}
 	}
 }
