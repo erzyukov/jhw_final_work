@@ -44,6 +44,7 @@
 		[Inject] private IUnitFsm _fsm;
 		[Inject] private IUnitEvents _events;
 		[Inject] private IDraggable _draggable;
+		[Inject] private IUnitPosition _unitPosition;
 
 		#region IUnitFacade
 
@@ -92,8 +93,8 @@
 		public void EnterBattle() =>
 			_fsm.EnterBattle();
 
-		public void ResetPosition() => 
-			_view.ResetPosition();
+		public void ResetPosition() =>
+			_unitPosition.ResetPosition();
 
 		public void Reset() => 
 			_fsm.Reset();

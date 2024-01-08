@@ -19,7 +19,6 @@ namespace Game.Units
         void SetActive(bool value);
         void SetModelHeight(float value);
         void SetModelRendererTransform(Transform transform);
-        void ResetPosition();
         void Destroy();
     }
 
@@ -59,12 +58,6 @@ namespace Game.Units
 
         public void SetModelRendererTransform(Transform transform) =>
             ModelRendererTransform = transform;
-
-        public void ResetPosition()
-        {
-            transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.identity;
-        }
 
         public void Destroy()
         {

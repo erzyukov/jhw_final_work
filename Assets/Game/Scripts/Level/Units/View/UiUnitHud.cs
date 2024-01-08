@@ -1,6 +1,5 @@
-namespace Game
+namespace Game.Units
 {
-	using Game.Units;
 	using UnityEngine;
 	using UnityEngine.UI;
 	using Zenject;
@@ -12,8 +11,8 @@ namespace Game
     {
 		[SerializeField] Slider _slider;
 
-		[Inject] IUnitHealth _health;
-		[Inject] IGameCycle _gameCycle;
+		[Inject] private IUnitHealth _health;
+		[Inject] private IGameCycle _gameCycle;
 
 		void Start()
         {
@@ -24,6 +23,8 @@ namespace Game
 			_health.HealthRatio
 				.Subscribe(OnHealthRatioChangeHandler)
 				.AddTo(this);
+
+			//_slider.transform.localPosition = _slider.transform.localPosition.WithZ(_unitData.RendererHeight);
 		}
 
 		private void OnHealthRatioChangeHandler(float ratio)

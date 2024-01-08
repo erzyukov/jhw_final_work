@@ -41,6 +41,10 @@ namespace Game.Units
 				.AsSingle();
 
 			Container
+				.BindInterfacesTo<UnitPosition>()
+				.AsSingle();
+
+			Container
 				.BindInterfacesTo<UnitBuilder>()
 				.AsSingle()
 				.OnInstantiated<UnitBuilder>((ic, o) => o.OnInstantiated())
