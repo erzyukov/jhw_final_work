@@ -10,9 +10,11 @@ namespace Game.Units
 	public class UiUnitHud : MonoBehaviour
     {
 		[SerializeField] Slider _slider;
+		[SerializeField] private Transform _uiHealthCanvas;
 
 		[Inject] private IUnitHealth _health;
 		[Inject] private IGameCycle _gameCycle;
+		[Inject] private IUnitData _unitData;
 
 		void Start()
         {
@@ -22,9 +24,9 @@ namespace Game.Units
 
 			_health.HealthRatio
 				.Subscribe(OnHealthRatioChangeHandler)
-				.AddTo(this);
+			.AddTo(this);
 
-			//_slider.transform.localPosition = _slider.transform.localPosition.WithZ(_unitData.RendererHeight);
+			_uiHealthCanvas.localPosition = _uiHealthCanvas.localPosition.WithY(_unitData.RendererHeight);
 		}
 
 		private void OnHealthRatioChangeHandler(float ratio)

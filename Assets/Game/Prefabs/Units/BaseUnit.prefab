@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 7955640127201513164}
   - component: {fileID: 7860499573378617379}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: HealthCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 993251496544853905}
   - component: {fileID: 3847620993083703425}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: ValueSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -590,7 +590,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _modelContainer: {fileID: 8113386733221058404}
-  _uiHealthCanvas: {fileID: 3352582900581580765}
   _navMeshAgent: {fileID: 1580601115508209611}
 --- !u!195 &1580601115508209611
 NavMeshAgent:
@@ -656,6 +655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slider: {fileID: 3847620993083703425}
+  _uiHealthCanvas: {fileID: 3352582900581580765}
 --- !u!114 &5478022101498021966
 MonoBehaviour:
   m_ObjectHideFlags: 0

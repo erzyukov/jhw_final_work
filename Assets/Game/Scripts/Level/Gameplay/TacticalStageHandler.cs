@@ -11,7 +11,6 @@
 	using System.Linq;
 	using System.Collections.Generic;
 	using Game.Level;
-	using static Game.Configs.WaveConfig;
 
 	public class TacticalStageHandler : ControllerBase, IInitializable
 	{

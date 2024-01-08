@@ -37,6 +37,10 @@ namespace Game.Units
 			#region Base
 
 			Container
+				.BindInterfacesTo<UnitData>()
+				.AsSingle();
+
+			Container
 				.Bind<UnitFacade>()
 				.AsSingle();
 
@@ -47,7 +51,7 @@ namespace Game.Units
 			Container
 				.BindInterfacesTo<UnitBuilder>()
 				.AsSingle()
-				.OnInstantiated<UnitBuilder>((ic, o) => o.OnInstantiated())
+				.OnInstantiated<UnitBuilder>((ic, o) => o.OnInstantiated(_unitCreateData))
 				.NonLazy();
 
 			Container

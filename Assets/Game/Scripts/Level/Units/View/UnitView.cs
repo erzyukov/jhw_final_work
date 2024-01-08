@@ -1,6 +1,5 @@
 namespace Game.Units
 {
-    using Game.Utilities;
     using UniRx;
     using UnityEngine;
     using UnityEngine.AI;
@@ -11,13 +10,12 @@ namespace Game.Units
         ReactiveCommand MergeCanceled { get; }
 
         Transform Transform { get; }
-        Transform ModelContainer { get; }
+        Transform RendererContainer { get; }
         NavMeshAgent NavMeshAgent { get; }
         Transform ModelRendererTransform { get; }
 
         void SetParent(Transform parent, bool worldPositionStays = false);
         void SetActive(bool value);
-        void SetModelHeight(float value);
         void SetModelRendererTransform(Transform transform);
         void Destroy();
     }
@@ -26,7 +24,6 @@ namespace Game.Units
     public class UnitView : MonoBehaviour, IUnitView
     {
         [SerializeField] private Transform _modelContainer;
-        [SerializeField] private Transform _uiHealthCanvas;
         [SerializeField] private NavMeshAgent _navMeshAgent;
 
         private void OnTriggerEnter(Collider other) =>
@@ -45,16 +42,13 @@ namespace Game.Units
 
         public Transform Transform => transform;
 
-        public Transform ModelContainer => _modelContainer;
+        public Transform RendererContainer => _modelContainer;
 
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
 
         public void SetParent(Transform parent, bool worldPositionStays = false) => transform.SetParent(parent, worldPositionStays);
 
         public void SetActive(bool value) => gameObject.SetActive(value);
-
-        public void SetModelHeight(float value) =>
-            _uiHealthCanvas.localPosition = _uiHealthCanvas.localPosition.WithY(value);
 
         public void SetModelRendererTransform(Transform transform) =>
             ModelRendererTransform = transform;
