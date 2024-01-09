@@ -4,7 +4,7 @@ namespace Game.Units
 {
 	public interface IUnitData
 	{
-		FloatReactiveProperty Power { get; }
+		IntReactiveProperty Power { get; }
 		float RendererHeight { get; }
 		void SetRendererHeight(float value);
 	}
@@ -13,7 +13,7 @@ namespace Game.Units
 	{
 		#region IUnitData
 
-		public FloatReactiveProperty Power { get; } = new FloatReactiveProperty();
+		public IntReactiveProperty Power { get; } = new IntReactiveProperty();
 
 		public float RendererHeight { get; private set; }
 

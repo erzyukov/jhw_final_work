@@ -2,6 +2,8 @@
 {
 	using System;
 
+	// TODO: refact: use this struct only for build unit, otherwise use UnitData
+
 	[Serializable]
 	public struct UnitCreateData
 	{

@@ -38,6 +38,7 @@
 	public class UnitFacade : IUnitFacade
 	{
 		[Inject] private UnitCreateData _unitCreateData;
+		[Inject] private IUnitData _unitData;
 		[Inject] private IUnitView _view;
 		[Inject] private UnitConfig _config;
 		[Inject] private IUnitHealth _health;
@@ -70,7 +71,7 @@
 
 		public int GradeIndex => _unitCreateData.GradeIndex;
 		
-		public int Power => _unitCreateData.Power;
+		public int Power => _unitData.Power.Value;
 
 		public Transform Transform => (_view != null) ? _view.Transform : null;
 

@@ -19,7 +19,7 @@
 
 	public class UnitHealth : ControllerBase, IUnitHealth
 	{
-		[Inject] private UnitCreateData _unitCreateData;
+		[Inject] private IUnitData _unitData;
 		[Inject] private UnitConfig _unitConfig;
 
 		private float _baseHealth;
@@ -48,7 +48,7 @@
 
 		public void Reset()
 		{
-			_baseHealth = _unitConfig.Health + _unitConfig.HealthPowerMultiplier * _unitCreateData.Power;
+			_baseHealth = _unitConfig.Health + _unitConfig.HealthPowerMultiplier * _unitData.Power.Value;
 			_health = _baseHealth;
 			HealthRatio.Value = 1;
 		}
