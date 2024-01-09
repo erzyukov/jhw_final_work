@@ -6,11 +6,13 @@ namespace Game.Units
 	using UniRx;
 	using Game.Core;
 	using Game.Utilities;
+	using TMPro;
 
 	public class UiUnitHud : MonoBehaviour
     {
 		[SerializeField] Slider _slider;
 		[SerializeField] private Transform _uiHealthCanvas;
+		[SerializeField] private TextMeshProUGUI _power;
 
 		[Inject] private IUnitHealth _health;
 		[Inject] private IGameCycle _gameCycle;
@@ -27,6 +29,10 @@ namespace Game.Units
 			.AddTo(this);
 
 			_uiHealthCanvas.localPosition = _uiHealthCanvas.localPosition.WithY(_unitData.RendererHeight);
+
+			_unitData.Power
+				.Subscribe(value => _power.text = value.ToString())
+				.AddTo(this);
 		}
 
 		private void OnHealthRatioChangeHandler(float ratio)
