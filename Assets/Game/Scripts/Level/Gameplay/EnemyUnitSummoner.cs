@@ -22,7 +22,7 @@
 		[Inject] private GameProfile _gameProfile;
 		[Inject] private TimingsConfig _timingsConfig;
 
-		Dictionary<IUnitFacade, IDisposable> _unitDiedSubscribes = new Dictionary<IUnitFacade, IDisposable>();
+		Dictionary<IUnitFacade, IDisposable> _unitDyingSubscribes = new Dictionary<IUnitFacade, IDisposable>();
 		Dictionary<IUnitFacade, IDisposable> _vanishSubscribes = new Dictionary<IUnitFacade, IDisposable>();
 
 		public void Initialize()
@@ -67,7 +67,7 @@
 			IUnitFacade unit = _unitSpawner.SpawnEnemyUnit(species, gradeIndex, power);
 			_fieldFacade.AddUnit(unit, position);
 
-            _unitDiedSubscribes.Add(unit, default);
+            _unitDyingSubscribes.Add(unit, default);
 
             SubscribeToUnit(unit);
 		}
@@ -75,15 +75,15 @@
 
 		private void SubscribeToUnit(IUnitFacade unit)
 		{
-            _unitDiedSubscribes[unit] = unit.Died
-                .Subscribe(_ => OnUnitDied(unit));
+            _unitDyingSubscribes[unit] = unit.Dying
+                .Subscribe(_ => OnUnitDying(unit));
 
         }
 
-        private void OnUnitDied(IUnitFacade unit)
+        private void OnUnitDying(IUnitFacade unit)
         {
-            _unitDiedSubscribes[unit].Dispose();
-            _unitDiedSubscribes.Remove(unit);
+            _unitDyingSubscribes[unit].Dispose();
+            _unitDyingSubscribes.Remove(unit);
 
 			IDisposable vanish = Observable.Timer(TimeSpan.FromSeconds(_timingsConfig.UnitDeathVanishDelay))
 				.Subscribe(_ => RemoveDeadUnit(unit))
