@@ -2,6 +2,7 @@
 {
 	using Game.Configs;
 	using Game.Utilities;
+	using Newtonsoft.Json.Linq;
 	using UniRx;
 	using UnityEngine;
 	using Zenject;
@@ -29,6 +30,8 @@
 		void SetActive(bool value);
 		void SetDraggableActive(bool value);
 		void TakeDamage(float damage);
+		void SetSupposedPower(int value);
+		void ResetSupposedPower();
 		void EnterBattle();
 		void ResetPosition();
 		void Reset();
@@ -37,13 +40,15 @@
 
 	public class UnitFacade : IUnitFacade
 	{
-		[Inject] private UnitData _unitData;
+		[Inject] private UnitCreateData _unitCreateData;
+		[Inject] private IUnitData _unitData;
 		[Inject] private IUnitView _view;
 		[Inject] private UnitConfig _config;
 		[Inject] private IUnitHealth _health;
 		[Inject] private IUnitFsm _fsm;
 		[Inject] private IUnitEvents _events;
 		[Inject] private IDraggable _draggable;
+		[Inject] private IUnitPosition _unitPosition;
 
 		#region IUnitFacade
 
@@ -65,11 +70,11 @@
 
 		public string Name => _config.TitleKey;
 
-		public Species Species => _unitData.Species;
+		public Species Species => _unitCreateData.Species;
 
 		public int GradeIndex => _unitData.GradeIndex;
 		
-		public int Power => _unitData.Power;
+		public int Power => _unitData.Power.Value;
 
 		public Transform Transform => (_view != null) ? _view.Transform : null;
 
@@ -89,20 +94,32 @@
 		public void TakeDamage(float damage) => 
 			_health.TakeDamage(damage);
 
-		public void EnterBattle() =>
+		public void SetSupposedPower(int value) =>
+			_unitData.SupposedPower.Value = value;
+
+		public void ResetSupposedPower() =>
+			_unitData.SupposedPower.Value = 0;
+
+		public void EnterBattle()
+		{
 			_fsm.EnterBattle();
+			_view.SetMergeActive(false);
+		}
 
-		public void ResetPosition() => 
-			_view.ResetPosition();
+		public void ResetPosition() =>
+			_unitPosition.ResetPosition();
 
-		public void Reset() => 
+		public void Reset()
+		{
 			_fsm.Reset();
+			_view.SetMergeActive(true);
+		}
 
 		public void Destroy() => 
 			_view.Destroy();
 
 		#endregion
 
-		public class Factory : PlaceholderFactory<UnitData, UnitFacade> {}
+		public class Factory : PlaceholderFactory<UnitCreateData, UnitFacade> {}
 	}
 }

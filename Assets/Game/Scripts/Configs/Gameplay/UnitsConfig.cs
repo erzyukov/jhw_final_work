@@ -11,6 +11,7 @@ namespace Game.Configs
 		[Header("Visual")]
 		[SerializeField] private GameObject _unitPrefab;
 		[SerializeField] private float _uiHealthIndent;
+		[SerializeField] private Sprite[] _gradeSprites;
 
 		[Header("Gameplay")]
 		[SerializeField] private float _speed;
@@ -29,6 +30,7 @@ namespace Game.Configs
 
 		public GameObject UnitPrefab => _unitPrefab;
 		public float UiHealthIndent => _uiHealthIndent;
+		public Sprite[] GradeSprites => _gradeSprites;
 		public float Speed => _speed;
 		public Dictionary<Species, UnitConfig> Units => _unitData;
 		public List<Species> HeroDefaultSquad => _heroDefaultSquad;

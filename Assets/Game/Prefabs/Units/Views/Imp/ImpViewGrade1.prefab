@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4979439236031808108}
   - component: {fileID: -3272273062254429049}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: ImpViewGrade1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,20 +131,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2399c0c32c196fc45b691fdfe50402cd, type: 3}
   m_PrefabInstance: {fileID: 3423797598971505728}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &8582068286082363511
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2540782355942281489}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!95 &537508136098112967
 Animator:
   serializedVersion: 4

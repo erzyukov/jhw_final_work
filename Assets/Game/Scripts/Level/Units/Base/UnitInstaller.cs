@@ -6,7 +6,7 @@ namespace Game.Units
 
 	public class UnitInstaller : Installer<UnitInstaller>
 	{
-		[Inject] private UnitData _unitData;
+		[Inject] private UnitCreateData _unitCreateData;
 		[Inject] private UnitsConfig _unitsConfig;
 
 		public override void InstallBindings()
@@ -14,9 +14,9 @@ namespace Game.Units
 			#region Instances
 
 			Container
-				.BindInstance(_unitData);
+				.BindInstance(_unitCreateData);
 
-			UnitConfig unitConfig = _unitsConfig.Units[_unitData.Species];
+			UnitConfig unitConfig = _unitsConfig.Units[_unitCreateData.Species];
 			Container
 				.BindInstance(unitConfig);
 
@@ -37,13 +37,21 @@ namespace Game.Units
 			#region Base
 
 			Container
+				.BindInterfacesTo<UnitData>()
+				.AsSingle();
+
+			Container
 				.Bind<UnitFacade>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UnitPosition>()
 				.AsSingle();
 
 			Container
 				.BindInterfacesTo<UnitBuilder>()
 				.AsSingle()
-				.OnInstantiated<UnitBuilder>((ic, o) => o.OnInstantiated())
+				.OnInstantiated<UnitBuilder>((ic, o) => o.OnInstantiated(_unitCreateData))
 				.NonLazy();
 
 			Container

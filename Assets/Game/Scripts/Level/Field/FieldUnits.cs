@@ -23,7 +23,7 @@
 		public void Initialize()
 		{
 			Observable.Merge(
-					_events.UnitDied,
+					_events.UnitDying,
 					_events.UnitRemoved.Where(unit => unit.IsDead == false)
 				)
 				.Subscribe(_ => AliveUnitsCount.Value -= 1)

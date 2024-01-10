@@ -39,12 +39,31 @@
 
 			_fieldHeroFacade.Events.UnitMergeInitiated
 				.Where(unit => unit != _mergeInitiatorUnit)
-				.Subscribe(unit => _mergeAbsorbedUnit = unit)
+				.Subscribe(OnUnitMergeInitiated)
 				.AddTo(this);
 
 			_fieldHeroFacade.Events.UnitMergeCanceled
-				.Subscribe(_ => _mergeAbsorbedUnit = null)
+				.Subscribe(OnUnitMergeCanceled)
 				.AddTo(this);
+		}
+
+		private void OnUnitMergeInitiated(IUnitFacade unit)
+		{
+			if (
+				_mergeInitiatorUnit == null ||
+				_mergeInitiatorUnit.GradeIndex != unit.GradeIndex || 
+				_mergeInitiatorUnit.Species != unit.Species
+			)
+				return;
+
+			_mergeAbsorbedUnit = unit;
+			unit.SetSupposedPower(GetMergingUnitPower());
+		}
+
+		private void OnUnitMergeCanceled(IUnitFacade unit)
+		{
+			_mergeAbsorbedUnit = null;
+			unit.SetSupposedPower(0);
 		}
 
 		private void OnUnitPointerUpedHandler()
@@ -93,9 +112,7 @@
 			Vector2Int cellPosition = _fieldHeroFacade.GetCell(_mergeAbsorbedUnit).Position;
 			Species species = _mergeAbsorbedUnit.Species;
 			int gradeIndex = _mergeAbsorbedUnit.GradeIndex + 1;
-			int power = _unitsConfig.GetAdditionalPower(_mergeAbsorbedUnit.GradeIndex) + 
-				_mergeAbsorbedUnit.Power + 
-				_mergeInitiatorUnit.Power;
+			int power = GetMergingUnitPower();
 
 			_fieldHeroFacade.RemoveUnit(_mergeInitiatorUnit);
 			_fieldHeroFacade.RemoveUnit(_mergeAbsorbedUnit);
@@ -106,5 +123,10 @@
 
 			_heroUnitSummoner.Summon(species, gradeIndex, power, cellPosition);
 		}
+
+		private int GetMergingUnitPower() =>
+			_unitsConfig.GetAdditionalPower(_mergeAbsorbedUnit.GradeIndex) +
+			_mergeAbsorbedUnit.Power +
+			_mergeInitiatorUnit.Power;
 	}
 }

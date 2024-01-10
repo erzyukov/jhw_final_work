@@ -17,12 +17,12 @@
 
 		public IUnitFacade SpawnEnemyUnit(Species species, int gradeIndex, int power)
 		{
-			return _unitFactory.Create(new UnitData { GradeIndex = gradeIndex, Power = power, Species = species});
+			return _unitFactory.Create(new UnitCreateData { GradeIndex = gradeIndex, Power = power, Species = species, IsHero = false});
 		}
 
 		public IUnitFacade SpawnHeroUnit(Species species, int gradeIndex, int power)
 		{
-			return _unitFactory.Create(new UnitData { GradeIndex = gradeIndex, Power = power, Species = species });
+			return _unitFactory.Create(new UnitCreateData { GradeIndex = gradeIndex, Power = power, Species = species, IsHero = true });
 		}
 
 		#endregion

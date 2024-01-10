@@ -22,6 +22,7 @@
 		[Inject] private IUnitAttacker _attacker;
 		[Inject] private IUnitView _view;
 		[Inject] private IUnitBuilder _builder;
+		[Inject] private IUnitPosition _unitPosition;
 		[Inject] private UnitConfig _config;
 
 		protected const float NormalizedTransitionDuration = 0.5f;
@@ -161,7 +162,7 @@
 			_health.Reset();
 			_targetFinder.Reset();
 			_mover.Stop();
-			_view.ResetPosition();
+			_unitPosition.ResetPosition();
 			_view.SetActive(true);
 			_view.NavMeshAgent.enabled = false;
 			Animator.Play(IdleAnimation);

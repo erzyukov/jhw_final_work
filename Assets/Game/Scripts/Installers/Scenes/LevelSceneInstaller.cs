@@ -83,7 +83,7 @@ namespace Game.Installers
 		private void InstallUnits()
 		{
 			Container
-				.BindFactory<UnitData, UnitFacade, UnitFacade.Factory>()
+				.BindFactory<UnitCreateData, UnitFacade, UnitFacade.Factory>()
 				.FromSubContainerResolve()
 				.ByNewPrefabInstaller<UnitInstaller>(_unitsConfig.UnitPrefab);
 

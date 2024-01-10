@@ -1,6 +1,5 @@
 namespace Game.Units
 {
-    using Game.Utilities;
     using UniRx;
     using UnityEngine;
     using UnityEngine.AI;
@@ -11,15 +10,14 @@ namespace Game.Units
         ReactiveCommand MergeCanceled { get; }
 
         Transform Transform { get; }
-        Transform ModelContainer { get; }
+        Transform RendererContainer { get; }
         NavMeshAgent NavMeshAgent { get; }
         Transform ModelRendererTransform { get; }
 
         void SetParent(Transform parent, bool worldPositionStays = false);
         void SetActive(bool value);
-        void SetModelHeight(float value);
         void SetModelRendererTransform(Transform transform);
-        void ResetPosition();
+		void SetMergeActive(bool value);
         void Destroy();
     }
 
@@ -27,14 +25,21 @@ namespace Game.Units
     public class UnitView : MonoBehaviour, IUnitView
     {
         [SerializeField] private Transform _modelContainer;
-        [SerializeField] private Transform _uiHealthCanvas;
         [SerializeField] private NavMeshAgent _navMeshAgent;
 
-        private void OnTriggerEnter(Collider other) =>
-            MergeInitiated.Execute();
+		private bool _isMergeActive = true;
 
-        private void OnTriggerExit(Collider other) =>
-            MergeCanceled.Execute();
+        private void OnTriggerEnter(Collider other)
+		{
+			if (_isMergeActive)
+				MergeInitiated.Execute();
+		}
+
+        private void OnTriggerExit(Collider other)
+		{
+			if (_isMergeActive)
+				MergeCanceled.Execute();
+		}
 
         #region IUnitView
 
@@ -46,7 +51,7 @@ namespace Game.Units
 
         public Transform Transform => transform;
 
-        public Transform ModelContainer => _modelContainer;
+        public Transform RendererContainer => _modelContainer;
 
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
 
@@ -54,19 +59,13 @@ namespace Game.Units
 
         public void SetActive(bool value) => gameObject.SetActive(value);
 
-        public void SetModelHeight(float value) =>
-            _uiHealthCanvas.localPosition = _uiHealthCanvas.localPosition.WithY(value);
-
         public void SetModelRendererTransform(Transform transform) =>
             ModelRendererTransform = transform;
 
-        public void ResetPosition()
-        {
-            transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.identity;
-        }
+		public void SetMergeActive(bool value)
+			=> _isMergeActive = value;
 
-        public void Destroy()
+		public void Destroy()
         {
             SetActive(false);
             Object.Destroy(gameObject);

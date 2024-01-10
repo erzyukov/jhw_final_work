@@ -13,33 +13,35 @@
 	public class UnitBuilder : IUnitBuilder
 	{
 		[Inject] private IUnitView _unitView;
+		[Inject] private IUnitData _unitData;
 		[Inject] private UnitsConfig _unitsConfig;
 		[Inject] private UnitConfig _unitConfig;
-		[Inject] private UnitData _unitData;
 		[Inject] private UnitRenderer.Factory _unitRendererFactory;
 
 		private IUnitRenderer _unitRenderer;
 
-		public void OnInstantiated()
+		public void OnInstantiated(UnitCreateData unitCreateData)
 		{
-			SetupUnit();
+			SetupUnit(unitCreateData);
 		}
 
-		void SetupUnit()
+		void SetupUnit(UnitCreateData unitCreateData)
 		{
-			GameObject prefab = _unitConfig.GradePrefabs[_unitData.GradeIndex];
+			GameObject prefab = _unitConfig.GradePrefabs[unitCreateData.GradeIndex];
 			_unitRenderer = _unitRendererFactory.Create(prefab);
-			_unitView.ModelContainer.DestroyChildren();
-			_unitRenderer.Transform.SetParent(_unitView.ModelContainer, false);
+			_unitView.RendererContainer.DestroyChildren();
+			_unitRenderer.Transform.SetParent(_unitView.RendererContainer, false);
 
 			_unitView.NavMeshAgent.speed = _unitsConfig.Speed;
 			_unitView.NavMeshAgent.stoppingDistance = _unitConfig.AttackRange;
-
+			_unitView.SetModelRendererTransform(_unitRenderer.RendererTransform);
+			
 			float uiHealthHeight =
 				_unitRenderer.Renderer.bounds.size.y * _unitRenderer.Renderer.transform.localScale.y * _unitRenderer.Renderer.transform.parent.localScale.y +
 				_unitsConfig.UiHealthIndent;
-			_unitView.SetModelHeight(uiHealthHeight);
-			_unitView.SetModelRendererTransform(_unitRenderer.RendererTransform);
+
+			_unitData.Init(unitCreateData.GradeIndex, unitCreateData.IsHero, uiHealthHeight);
+			_unitData.Power.Value = unitCreateData.Power;
 
 			#region Debug
 
