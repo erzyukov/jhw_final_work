@@ -37,12 +37,12 @@
 				.Subscribe(OnHeroUnitsCountChanged)
 				.AddTo(this);
 
-			_fieldEnemyFacade.Events.UnitDied
-				.Subscribe(OnEnemyUnitDiedHandler)
+			_fieldEnemyFacade.Events.UnitDying
+				.Subscribe(OnEnemyUnitDyingHandler)
 				.AddTo(this);
 		}
 
-		private void OnEnemyUnitDiedHandler(IUnitFacade unit)
+		private void OnEnemyUnitDyingHandler(IUnitFacade unit)
 		{
 			if (_unitsConfig.Units.TryGetValue(unit.Species, out UnitConfig unitConfig) == false)
 				return;
