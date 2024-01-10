@@ -40,7 +40,7 @@
 				_unitRenderer.Renderer.bounds.size.y * _unitRenderer.Renderer.transform.localScale.y * _unitRenderer.Renderer.transform.parent.localScale.y +
 				_unitsConfig.UiHealthIndent;
 
-			_unitData.SetRendererHeight(uiHealthHeight);
+			_unitData.Init(unitCreateData.GradeIndex, unitCreateData.IsHero, uiHealthHeight);
 			_unitData.Power.Value = unitCreateData.Power;
 
 			#region Debug

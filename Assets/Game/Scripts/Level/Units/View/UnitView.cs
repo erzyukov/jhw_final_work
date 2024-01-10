@@ -17,6 +17,7 @@ namespace Game.Units
         void SetParent(Transform parent, bool worldPositionStays = false);
         void SetActive(bool value);
         void SetModelRendererTransform(Transform transform);
+		void SetMergeActive(bool value);
         void Destroy();
     }
 
@@ -26,11 +27,19 @@ namespace Game.Units
         [SerializeField] private Transform _modelContainer;
         [SerializeField] private NavMeshAgent _navMeshAgent;
 
-        private void OnTriggerEnter(Collider other) =>
-            MergeInitiated.Execute();
+		private bool _isMergeActive = true;
 
-        private void OnTriggerExit(Collider other) =>
-            MergeCanceled.Execute();
+        private void OnTriggerEnter(Collider other)
+		{
+			if (_isMergeActive)
+				MergeInitiated.Execute();
+		}
+
+        private void OnTriggerExit(Collider other)
+		{
+			if (_isMergeActive)
+				MergeCanceled.Execute();
+		}
 
         #region IUnitView
 
@@ -53,7 +62,10 @@ namespace Game.Units
         public void SetModelRendererTransform(Transform transform) =>
             ModelRendererTransform = transform;
 
-        public void Destroy()
+		public void SetMergeActive(bool value)
+			=> _isMergeActive = value;
+
+		public void Destroy()
         {
             SetActive(false);
             Object.Destroy(gameObject);

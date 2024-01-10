@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4979439236031808108}
   - component: {fileID: -3272273062254429049}
-  - component: {fileID: 8651541446873713735}
-  m_Layer: 0
+  - component: {fileID: 5761576077250550149}
+  m_Layer: 7
   m_Name: GradeView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
   _renderer: {fileID: 0}
   _animator: {fileID: 0}
   _animationEventsCatcher: {fileID: 0}
---- !u!65 &8651541446873713735
+--- !u!65 &5761576077250550149
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -2,6 +2,7 @@
 {
 	using Game.Configs;
 	using Game.Utilities;
+	using Newtonsoft.Json.Linq;
 	using UniRx;
 	using UnityEngine;
 	using Zenject;
@@ -29,6 +30,8 @@
 		void SetActive(bool value);
 		void SetDraggableActive(bool value);
 		void TakeDamage(float damage);
+		void SetSupposedPower(int value);
+		void ResetSupposedPower();
 		void EnterBattle();
 		void ResetPosition();
 		void Reset();
@@ -69,7 +72,7 @@
 
 		public Species Species => _unitCreateData.Species;
 
-		public int GradeIndex => _unitCreateData.GradeIndex;
+		public int GradeIndex => _unitData.GradeIndex;
 		
 		public int Power => _unitData.Power.Value;
 
@@ -91,14 +94,26 @@
 		public void TakeDamage(float damage) => 
 			_health.TakeDamage(damage);
 
-		public void EnterBattle() =>
+		public void SetSupposedPower(int value) =>
+			_unitData.SupposedPower.Value = value;
+
+		public void ResetSupposedPower() =>
+			_unitData.SupposedPower.Value = 0;
+
+		public void EnterBattle()
+		{
 			_fsm.EnterBattle();
+			_view.SetMergeActive(false);
+		}
 
 		public void ResetPosition() =>
 			_unitPosition.ResetPosition();
 
-		public void Reset() => 
+		public void Reset()
+		{
 			_fsm.Reset();
+			_view.SetMergeActive(true);
+		}
 
 		public void Destroy() => 
 			_view.Destroy();
