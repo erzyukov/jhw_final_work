@@ -34,6 +34,7 @@
 
 			_gameCycle.State
 				.Where(state => state == GameState.TacticalStage)
+				.DelayFrame(1)
 				.Subscribe(_ => OnTacticalStage())
 				.AddTo(this);
 
