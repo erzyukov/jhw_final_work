@@ -8,10 +8,6 @@ namespace Game.Units
 	using Game.Utilities;
 	using TMPro;
 	using Game.Configs;
-	using System;
-	using Game.Ui;
-	using Newtonsoft.Json.Linq;
-	using static Game.Configs.UnitsConfig;
 
 	public class UiUnitHud : MonoBehaviour
     {
@@ -32,6 +28,8 @@ namespace Game.Units
 
 		void Start()
         {
+			SetPowerActive(_unitData.Power.Value != 0);
+
 			_gameCycle.State
 				.Subscribe(OnGameStateChange)
 				.AddTo(this);
@@ -43,7 +41,7 @@ namespace Game.Units
 			_uiHealthCanvas.localPosition = _uiHealthCanvas.localPosition.WithY(_unitData.RendererHeight);
 
 			_unitData.Power
-				.Subscribe(SetPowerValue)
+				.Subscribe(OnPowerChanged)
 				.AddTo(this);
 
 			Observable.Merge(
@@ -60,6 +58,12 @@ namespace Game.Units
 			_grade.sprite = _unitsConfig.GradeSprites[_unitData.GradeIndex];
 		}
 
+		private void OnPowerChanged(int value)
+		{
+			SetPowerValue(value);
+			SetPowerActive(value != 0);
+		}
+
 		private void SetDraggingState(bool value)
 		{
 			SetPowerActive(value);
@@ -68,6 +72,7 @@ namespace Game.Units
 
 		private void OnSupposedPowerChanged(int value)
 		{
+			SetPowerActive(value != 0);
 			SetPowerValue((value != 0) ? value: _unitData.Power.Value);
 			_power.color = (value != 0) ? _supposedPowerColor: _defaultPowerColor;
 		}
@@ -88,8 +93,11 @@ namespace Game.Units
 			SetGradeActive(_unitData.IsHero && isTacticalStage);
 		}
 
-		private void SetPowerActive(bool value) =>
-			_power.transform.parent.gameObject.SetActive(value);
+		private void SetPowerActive(bool value)
+		{
+			bool isActive = value && (_unitData.Power.Value != 0 || _unitData.SupposedPower.Value != 0);
+			_power.transform.parent.gameObject.SetActive(isActive);
+		}
 
 		private void SetGradeActive(bool value) =>
 			_grade.gameObject.SetActive(value);
