@@ -6,6 +6,7 @@
 	public class DevConfig : ScriptableObject
 	{
 		[SerializeField] private BuildType _buildType = BuildType.Debug;
+		[SerializeField] private float _timeScale = 1;
 
 		public enum BuildType
 		{
@@ -14,5 +15,7 @@
 		}
 
 		public BuildType Build => _buildType;
+
+		public float TimeScale => _timeScale;
 	}
 }

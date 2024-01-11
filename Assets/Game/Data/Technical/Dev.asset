@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Dev
   m_EditorClassIdentifier: 
   _buildType: 1
+  _timeScale: 1
