@@ -21,6 +21,7 @@ namespace Game.Installers
 		[SerializeField] private MenuConfig _menu;
 		[SerializeField] private UpgradesConfig _upgrades;
 		[SerializeField] private EnergyConfig _energy;
+		[SerializeField] private AudioConfig _audio;
 
 		public override void InstallBindings()
 		{
@@ -42,6 +43,7 @@ namespace Game.Installers
 			Container.BindInstance(_menu);
 			Container.BindInstance(_upgrades);
 			Container.BindInstance(_energy);
+			Container.BindInstance(_audio);
 		}
 	}
 }

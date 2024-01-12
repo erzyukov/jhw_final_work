@@ -11,6 +11,8 @@
 
         public override void Attack(IUnitFacade target)
         {
+			base.Attack(target);
+
 			if (target == null)
 				return;
 

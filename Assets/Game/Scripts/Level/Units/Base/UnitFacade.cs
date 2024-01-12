@@ -2,7 +2,6 @@
 {
 	using Game.Configs;
 	using Game.Utilities;
-	using Newtonsoft.Json.Linq;
 	using UniRx;
 	using UnityEngine;
 	using Zenject;
@@ -15,6 +14,7 @@
 		ReactiveCommand PointerUped { get; }
 		ReactiveCommand MergeInitiated { get; }
 		ReactiveCommand MergeCanceled { get; }
+		ReactiveCommand Attacking { get; }
 		ReactiveCommand Dying { get; }
         ReactiveCommand Died { get; }
 
@@ -49,6 +49,7 @@
 		[Inject] private IUnitEvents _events;
 		[Inject] private IDraggable _draggable;
 		[Inject] private IUnitPosition _unitPosition;
+		[Inject] private IUnitAttacker _attacker;
 
 		#region IUnitFacade
 
@@ -64,7 +65,9 @@
 
 		public ReactiveCommand MergeCanceled => _view.MergeCanceled;
 
-        public ReactiveCommand Dying => _events.Dying;
+		public ReactiveCommand Attacking => _attacker.Attacking;
+
+		public ReactiveCommand Dying => _events.Dying;
         
         public ReactiveCommand Died => _events.Died;
 

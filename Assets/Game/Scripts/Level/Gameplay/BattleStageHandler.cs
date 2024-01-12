@@ -5,6 +5,7 @@
 	using Game.Field;
 	using Game.Units;
 	using Game.Utilities;
+	using Sirenix.Utilities;
 	using System;
 	using UniRx;
 	using UnityEngine;
@@ -20,6 +21,8 @@
 		[Inject] private IFieldEnemyFacade _fieldEnemyFacade;
 		[Inject] private TimingsConfig _timingsConfig;
 		[Inject] private UnitsConfig _unitsConfig;
+		[Inject] private IFieldFacade[] _fields;
+		[Inject] private IGameAudio _gameAudio;
 
 		public void Initialize()
 		{
@@ -40,6 +43,8 @@
 			_fieldEnemyFacade.Events.UnitDying
 				.Subscribe(OnEnemyUnitDyingHandler)
 				.AddTo(this);
+
+			_fields.ForEach(field => field.Events.UnitAttacking.Subscribe(unit => _gameAudio.PlayUnitShoot(unit.Species)).AddTo(this));
 		}
 
 		private void OnEnemyUnitDyingHandler(IUnitFacade unit)

@@ -11,6 +11,11 @@ namespace Game.Installers
 	{
 		public override void InstallBindings()
 		{
+			Container
+				.BindInterfacesTo<AudioSources>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
 			InstallGameControllers();
 
 			Container
@@ -66,9 +71,13 @@ namespace Game.Installers
             Container
                 .BindInterfacesTo<GameEnergy>()
                 .AsSingle();
-        }
 
-        private void WindowsInstall()
+			Container
+				.BindInterfacesTo<GameAudio>()
+				.AsSingle();
+		}
+
+		private void WindowsInstall()
 		{
 			Container
 				.BindInterfacesTo<ContinueLevelWindow>()
