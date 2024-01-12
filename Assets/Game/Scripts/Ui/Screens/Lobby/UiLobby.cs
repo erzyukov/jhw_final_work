@@ -60,7 +60,7 @@
 
         private void OnPlayButtonClickedHandler()
         {
-            if (_profile.WaveNumber.Value == 0)
+            if (_profile.WaveNumber.Value == 0 || _profile.LevelNumber.Value < _energyConfig.FreeLevelTo)
                 GoToLevel();
             else
                 _continueLevelRequest.ShowRequest(() => GoToLevel(true), () => GoToLevel());

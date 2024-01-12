@@ -34,6 +34,7 @@
 		private int IsMoveParameter => Animator.StringToHash("IsMove");
 		private int DieTrigger => Animator.StringToHash("Die");
 		private int IsAimingParameter => Animator.StringToHash("IsAiming");
+		private int IsDeadParameter => Animator.StringToHash("IsDead");
 		private int AimParameter => Animator.StringToHash("Aim");
 		private Animator Animator => _builder.UnitRenderer.Animator;
 
@@ -243,8 +244,9 @@
 		protected override void OnEnteredDying()
 		{
 			_mover.Stop();
-			Animator.StopPlayback();
+			
 			Animator.SetTrigger(DieTrigger);
+			Animator.SetBool(IsDeadParameter, true);
 			Animator.SetBool(IsAimingParameter, false);
 		}
 

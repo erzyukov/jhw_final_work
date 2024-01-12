@@ -15,6 +15,8 @@ namespace Game.Configs
 
 		[Header("Gameplay")]
 		[SerializeField] private float _speed;
+		[Tooltip("Seconds to full rotate (360gr)")]
+		[SerializeField] private float _rotationSpeed;
 		[SerializeField] private UnitData[] _units;
 
 		[Header("Hero")]
@@ -32,6 +34,7 @@ namespace Game.Configs
 		public float UiHealthIndent => _uiHealthIndent;
 		public Sprite[] GradeSprites => _gradeSprites;
 		public float Speed => _speed;
+		public float RotationSpeed => _rotationSpeed;
 		public Dictionary<Species, UnitConfig> Units => _unitData;
 		public List<Species> HeroDefaultSquad => _heroDefaultSquad;
 		public List<Species> HeroUnits => _heroUnits;

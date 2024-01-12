@@ -4,6 +4,8 @@
 	using Zenject;
 	using UniRx;
 	using UnityEngine;
+	using DG.Tweening;
+	using Game.Configs;
 
 	public interface IUnitMover
 	{
@@ -17,6 +19,7 @@
 	public class UnitMover : ControllerBase, IUnitMover
 	{
 		[Inject] private IUnitView _unitView;
+		[Inject] private UnitsConfig _unitsConfig;
 
         #region IUnitMover
 
@@ -46,9 +49,21 @@
             if (target == null)
                 return;
 
-            _unitView.NavMeshAgent.updateRotation = false;
+			const float FullAngle = 360;
+			const float HalfFullAngle = 180;
+
+			_unitView.NavMeshAgent.updateRotation = false;
             Vector3 lookPosition = target.Transform.position - _unitView.NavMeshAgent.transform.position;
-            _unitView.NavMeshAgent.transform.rotation = Quaternion.LookRotation(lookPosition.WithY(0));
+			Quaternion startRotation = _unitView.NavMeshAgent.transform.rotation;
+			Quaternion targetRotation = Quaternion.LookRotation(lookPosition.WithY(0));
+			float deltaAngle = Mathf.Abs(targetRotation.eulerAngles.y - startRotation.eulerAngles.y);
+			deltaAngle = (deltaAngle > HalfFullAngle) ? FullAngle - deltaAngle : deltaAngle;
+			float time = deltaAngle * _unitsConfig.RotationSpeed / FullAngle;
+
+			DOVirtual.Float(0, 1, time, t =>
+			{
+				_unitView.NavMeshAgent.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, t);
+			});
         }
 
         public void Stop()

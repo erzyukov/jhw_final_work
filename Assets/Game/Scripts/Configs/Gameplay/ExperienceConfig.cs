@@ -17,7 +17,7 @@ namespace Game.Configs
 		public int GetLevelExperience(int levelNumber) => 
 			_heroLevels[levelNumber - 1].ExperienceToLevel;
 
-		public int GetExperienceToLevel(int levelNumber) =>
+		public int GetSummaryExperienceToLevel(int levelNumber) =>
 			_heroLevels.Where((_, index) => index < levelNumber).Sum(data => data.ExperienceToLevel);
 
 		[Serializable]
