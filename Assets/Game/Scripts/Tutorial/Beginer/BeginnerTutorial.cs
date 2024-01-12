@@ -12,6 +12,7 @@
 	using Game.Level;
 	using System.Linq;
 	using Game.Units;
+	using UnityEngine;
 
 	public class BeginnerTutorial : BeginerTutorialFsmBase, IInitializable, IDisposable
 	{
@@ -81,7 +82,7 @@
 					break;
 
 				case BeginnerStep.FirstBattle:
-					if (_cycle.State.Value == GameState.BattleStage)
+					if (_cycle.State.Value == GameState.LoadingWave)
 						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.PauseForFirstBattle;
 					break;
 
@@ -117,7 +118,7 @@
 					break;
 
 				case BeginnerStep.SecondBattle:
-					if (_cycle.State.Value == GameState.BattleStage)
+					if (_cycle.State.Value == GameState.LoadingWave)
 						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.PauseForSecondBattle;
 					break;
 
