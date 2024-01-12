@@ -12,8 +12,6 @@
 		MoveToTarget,
         PrepareAttack,
         StartAttack,
-		HitTarget,
-		FinishAttack,
 		TargetLost,
 		Dying,
         Dead,

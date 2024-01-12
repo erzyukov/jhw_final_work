@@ -42,11 +42,11 @@
 		{
 			_builder.UnitRenderer.AnimationEventsCatcher.Hited
 				.Where(_ => State == UnitState.StartAttack)
-				.Subscribe(_ => Transition(UnitState.HitTarget))
+				.Subscribe(_ => HitTarget())
 				.AddTo(_disposable);
 
 			_builder.UnitRenderer.AnimationEventsCatcher.AttackAnimationCompleted
-				.Where(_ => State == UnitState.FinishAttack)
+				.Where(_ => State == UnitState.StartAttack)
 				.Subscribe(_ => Transition(UnitState.PrepareAttack))
 				.AddTo(_disposable);
 
@@ -133,8 +133,6 @@
 					break;
 
 				case UnitState.StartAttack:
-				case UnitState.HitTarget:
-				case UnitState.FinishAttack:
 					if (_attacker.IsTargetClose(_targetFinder.Target) == false)
 						Transition(UnitState.MoveToTarget);
 
@@ -221,10 +219,9 @@
 
 		#region HitTarget State
 
-		protected override void OnEnteredHitTarget()
+		private void HitTarget()
 		{
 			_attacker.Attack(_targetFinder.Target);
-			Transition(UnitState.FinishAttack);
 		}
 
 		#endregion

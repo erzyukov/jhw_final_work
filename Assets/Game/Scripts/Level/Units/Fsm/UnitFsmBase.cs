@@ -13,7 +13,6 @@ namespace Game.Units
 			AddOnExitAction(UnitState.MoveToTarget, OnExitedMoveToTarget);
 			AddOnEnterAction(UnitState.PrepareAttack, OnEnteredPrepareAttack);
 			AddOnEnterAction(UnitState.StartAttack, OnEnteredStartAttack);
-			AddOnEnterAction(UnitState.HitTarget, OnEnteredHitTarget);
 			AddOnEnterAction(UnitState.TargetLost, OnEnteredTargetLost);
 			AddOnEnterAction(UnitState.Dying, OnEnteredDying);
 			AddOnEnterAction(UnitState.Dead, OnEnteredDead);
@@ -27,7 +26,6 @@ namespace Game.Units
 		protected abstract void OnExitedMoveToTarget();
 		protected abstract void OnEnteredPrepareAttack();
 		protected abstract void OnEnteredStartAttack();
-		protected abstract void OnEnteredHitTarget();
 		protected abstract void OnEnteredTargetLost();
 		protected abstract void OnEnteredDying();
 		protected abstract void OnEnteredDead();
