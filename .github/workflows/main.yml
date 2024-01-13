@@ -29,7 +29,7 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
       # Upload
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v3
         with:
           name: Test results (${{ matrix.testMode }})
           path: ${{ steps.testRunner.outputs.artifactsPath }}
@@ -48,7 +48,7 @@ jobs:
           lfs: false
 
       # Cache
-      - uses: actions/cache@v4
+      - uses: actions/cache@v3
         with:
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
@@ -68,7 +68,7 @@ jobs:
           allowDirtyBuild: true
 
       # Output
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v3
         with:
           name: build-WebGL
           path: build/WebGL
@@ -82,7 +82,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       # Download
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v3
         with:
           name: build-WebGL
           path: build
