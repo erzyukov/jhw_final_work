@@ -224,6 +224,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  _defaultUiVolume: 0.5
+  _uiButtonClick: {fileID: 8300000, guid: 7aa41b4c4305ae14b8778ef8f26bda12, type: 3}
   _defaultMusicVolume: 0.1
   _fadeDuration: 1
   _defaultSoundVolume: 0.2

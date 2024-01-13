@@ -10,6 +10,10 @@ namespace Game.Configs
 	[CreateAssetMenu(fileName = "Audio", menuName = "Configs/Audio", order = (int)Config.Audio)]
 	public class AudioConfig : SerializedScriptableObject
 	{
+		[Header("UI")]
+		[SerializeField] private float _defaultUiVolume;
+		[SerializeField] private AudioClip _uiButtonClick;
+
 		[Header("Music")]
 		[SerializeField] private float _defaultMusicVolume;
 		[SerializeField] private float _fadeDuration;
@@ -23,6 +27,8 @@ namespace Game.Configs
 		[Header("Game")]
 		[SerializeField] private Dictionary<GameState, GameStateAudioClip> _gameStateThemes = new Dictionary<GameState, GameStateAudioClip>();
 
+		public float DefaultUiVolume => _defaultUiVolume;
+		public AudioClip UiButtonClick => _uiButtonClick;
 		public float DefaultSoundVolume => _defaultSoundVolume;
 		public float DefaultMusicVolume => _defaultMusicVolume;
 		public float FadeDuration => _fadeDuration;

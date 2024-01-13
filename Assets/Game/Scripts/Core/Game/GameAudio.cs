@@ -7,10 +7,13 @@ namespace Game.Core
 	using Zenject;
 	using UniRx;
 	using DG.Tweening;
+	using UnityEngine.UI;
+	using System.Collections.Generic;
 
 	public interface IGameAudio
 	{
 		void PlayUnitShoot(Species species);
+		void PlayUiClick();
 	}
 
 	public class GameAudio : ControllerBase, IGameAudio, IInitializable
@@ -18,15 +21,19 @@ namespace Game.Core
 		[Inject] private IAudioSources _audioSources;
 		[Inject] private AudioConfig _audioConfig;
 		[Inject] private IGameCycle _gameCycle;
+		[Inject] private List<Button> _uiButtons;
 
 		public void Initialize()
 		{
 			_audioSources.Sound.volume = _audioConfig.DefaultSoundVolume;
 			_audioSources.Music.volume = _audioConfig.DefaultMusicVolume;
+			_audioSources.Ui.volume = _audioConfig.DefaultUiVolume;
 
 			_gameCycle.State
 				.Subscribe(PlayGameStateTheme)
 				.AddTo(this);
+
+			_uiButtons.ForEach(button => button.OnClickAsObservable().Subscribe(_ => PlayUiClick()));
 		}
 
 		private void PlayGameStateTheme(GameState state)
@@ -73,6 +80,9 @@ namespace Game.Core
 			if (clip != null)
 				_audioSources.Sound.PlayOneShot(clip);
 		}
+
+		public void PlayUiClick() =>
+			_audioSources.Ui.PlayOneShot(_audioConfig.UiButtonClick);
 
 		#endregion
 	}

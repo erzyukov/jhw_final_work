@@ -6,6 +6,7 @@ namespace Game.Installers
 	using Game.Ui;
 	using Game.Tutorial;
 	using System;
+	using UnityEngine.UI;
 
 	public class MainSceneInstaller : MonoInstaller
 	{
@@ -50,6 +51,11 @@ namespace Game.Installers
 
 			Container
 				.Bind<HintedButton>()
+				.FromComponentsInHierarchy()
+				.AsSingle();
+
+			Container
+				.Bind<Button>()
 				.FromComponentsInHierarchy()
 				.AsSingle();
 		}
