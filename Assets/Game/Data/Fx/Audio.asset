@@ -21,6 +21,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: aff4897d7c75130409ad26c26615be21, type: 3}
     - {fileID: 8300000, guid: 4936f5c211978b842b4f1d435264427e, type: 3}
     - {fileID: 8300000, guid: ebc5dad25f142c140b922d74b52e4cd2, type: 3}
+    - {fileID: 8300000, guid: c49af4887c9499147b6eb78b6ef99fe0, type: 3}
+    - {fileID: 8300000, guid: 6e8a4b48754083b4a90ee54a4a20443d, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -112,4 +114,116 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  _defaultSoundVolume: 0.1
+    - Name: _gameStateThemes
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[Game.Core.GameState, Assembly-CSharp],[Game.Configs.AudioConfig+GameStateAudioClip,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[Game.Core.GameState,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 7
+      Data: Game.Configs.AudioConfig+GameStateAudioClip, Assembly-CSharp
+    - Name: Volume
+      Entry: 4
+      Data: 0.1
+    - Name: AudioClip
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 4
+    - Name: $v
+      Entry: 7
+      Data: Game.Configs.AudioConfig+GameStateAudioClip, Assembly-CSharp
+    - Name: Volume
+      Entry: 4
+      Data: 0.1
+    - Name: AudioClip
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 5
+    - Name: $v
+      Entry: 7
+      Data: Game.Configs.AudioConfig+GameStateAudioClip, Assembly-CSharp
+    - Name: Volume
+      Entry: 4
+      Data: 0.2
+    - Name: AudioClip
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 6
+    - Name: $v
+      Entry: 7
+      Data: Game.Configs.AudioConfig+GameStateAudioClip, Assembly-CSharp
+    - Name: Volume
+      Entry: 4
+      Data: 0.1
+    - Name: AudioClip
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  _defaultMusicVolume: 0.1
+  _fadeDuration: 1
+  _defaultSoundVolume: 0.2
