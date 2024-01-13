@@ -3,6 +3,7 @@ namespace Game.Units
 	using Game.Configs;
 	using Game.Utilities;
 	using Zenject;
+	using static Zenject.CheatSheet;
 
 	public class UnitInstaller : Installer<UnitInstaller>
 	{

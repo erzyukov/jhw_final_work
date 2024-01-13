@@ -84,15 +84,15 @@
 			CompositeDisposable disposable = new CompositeDisposable();
 			_unitsLifetime.Add(unit, disposable);
 
-			unit.Dragging.Subscribe(_ => UnitDragging.Execute(unit)).AddTo(disposable);
-			unit.Dropped.Subscribe(_ => UnitDropped.Execute(unit)).AddTo(disposable);
-			unit.PointerDowned.Subscribe(_ => UnitPointerDowned.Execute(unit)).AddTo(disposable);
-			unit.PointerUped.Subscribe(_ => UnitPointerUped.Execute(unit)).AddTo(disposable);
-			unit.MergeInitiated.Subscribe(_ => UnitMergeInitiated.Execute(unit)).AddTo(disposable);
-			unit.MergeCanceled.Subscribe(_ => UnitMergeCanceled.Execute(unit)).AddTo(disposable);
-			unit.Attacking.Subscribe(_ => UnitAttacking.Execute(unit)).AddTo(disposable);
-			unit.Dying.Subscribe(_ => UnitDying.Execute(unit)).AddTo(disposable);
-			unit.Died.Subscribe(_ => UnitDied.Execute(unit)).AddTo(disposable);
+			unit.Events.Dragging.Subscribe(_ => UnitDragging.Execute(unit)).AddTo(disposable);
+			unit.Events.Dropped.Subscribe(_ => UnitDropped.Execute(unit)).AddTo(disposable);
+			unit.Events.PointerDowned.Subscribe(_ => UnitPointerDowned.Execute(unit)).AddTo(disposable);
+			unit.Events.PointerUped.Subscribe(_ => UnitPointerUped.Execute(unit)).AddTo(disposable);
+			unit.Events.MergeInitiated.Subscribe(_ => UnitMergeInitiated.Execute(unit)).AddTo(disposable);
+			unit.Events.MergeCanceled.Subscribe(_ => UnitMergeCanceled.Execute(unit)).AddTo(disposable);
+			unit.Events.Attacking.Subscribe(_ => UnitAttacking.Execute(unit)).AddTo(disposable);
+			unit.Events.Dying.Subscribe(_ => UnitDying.Execute(unit)).AddTo(disposable);
+			unit.Events.Died.Subscribe(_ => UnitDied.Execute(unit)).AddTo(disposable);
 		}
 
 		private void OnUnitRemovedHandler(IUnitFacade unit)
