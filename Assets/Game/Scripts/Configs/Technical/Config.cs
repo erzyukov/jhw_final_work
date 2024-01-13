@@ -26,6 +26,7 @@
 		Scenes,
 		Localization,
 		Dev,
+		Audio,
 
 		// Other
 		Tutorial = 400,

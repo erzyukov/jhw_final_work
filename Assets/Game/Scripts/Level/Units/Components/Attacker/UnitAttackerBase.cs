@@ -4,9 +4,11 @@
 	using Zenject;
 	using Game.Configs;
 	using UnityEngine;
+	using UniRx;
 
 	public interface IUnitAttacker
 	{
+		ReactiveCommand Attacking { get; }
 		bool IsReadyToAttack { get; }
 		bool IsTargetClose(IUnitFacade target);
 		void Attack(IUnitFacade target);
@@ -29,9 +31,12 @@
 
 		#region IUnitAttacker
 
+		public ReactiveCommand Attacking { get; } = new ReactiveCommand();
+
 		public bool IsReadyToAttack => AtackTimer.IsReady;
 
-		public abstract void Attack(IUnitFacade target);
+		public virtual void Attack(IUnitFacade target) =>
+			Attacking.Execute();
 
 		public bool IsTargetClose(IUnitFacade target) =>
 			target != null &&

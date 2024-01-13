@@ -26,3 +26,4 @@ MonoBehaviour:
   _menu: {fileID: 11400000, guid: 19a8caa98b8753a498fc1061fa3d43b0, type: 2}
   _upgrades: {fileID: 11400000, guid: c3137a23aa7499a47b42bb96df16a498, type: 2}
   _energy: {fileID: 11400000, guid: 2ce110f22b6bc8b489f370d56aec4792, type: 2}
+  _audio: {fileID: 11400000, guid: 9aa5e61089e8fb843b8fa5d1c54854cb, type: 2}

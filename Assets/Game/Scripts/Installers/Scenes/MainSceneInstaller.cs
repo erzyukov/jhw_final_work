@@ -6,11 +6,17 @@ namespace Game.Installers
 	using Game.Ui;
 	using Game.Tutorial;
 	using System;
+	using UnityEngine.UI;
 
 	public class MainSceneInstaller : MonoInstaller
 	{
 		public override void InstallBindings()
 		{
+			Container
+				.BindInterfacesTo<AudioSources>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
 			InstallGameControllers();
 
 			Container
@@ -47,6 +53,11 @@ namespace Game.Installers
 				.Bind<HintedButton>()
 				.FromComponentsInHierarchy()
 				.AsSingle();
+
+			Container
+				.Bind<Button>()
+				.FromComponentsInHierarchy()
+				.AsSingle();
 		}
 
 		private void InstallGameControllers()
@@ -66,9 +77,13 @@ namespace Game.Installers
             Container
                 .BindInterfacesTo<GameEnergy>()
                 .AsSingle();
-        }
 
-        private void WindowsInstall()
+			Container
+				.BindInterfacesTo<GameAudio>()
+				.AsSingle();
+		}
+
+		private void WindowsInstall()
 		{
 			Container
 				.BindInterfacesTo<ContinueLevelWindow>()

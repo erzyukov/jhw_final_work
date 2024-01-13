@@ -1,6 +1,7 @@
 ﻿namespace Game.Gameplay
 {
 	using Game.Configs;
+	using Game.Core;
 	using Game.Field;
 	using Game.Level;
 	using Game.Units;
@@ -16,6 +17,7 @@
 		[Inject] private IFieldHeroFacade _fieldHeroFacade;
 		[Inject] private IHeroUnitSummoner _heroUnitSummoner;
 		[Inject] private UnitsConfig _unitsConfig;
+		[Inject] private IGameAudio _gameAudio;
 
 		private List<IFieldCell> _selectedCell;
 		private IUnitFacade _mergeInitiatorUnit;
@@ -121,6 +123,7 @@
 			_mergeInitiatorUnit = null;
 			_mergeAbsorbedUnit = null;
 
+			_gameAudio.PlayUnitMerge();
 			_heroUnitSummoner.Summon(species, gradeIndex, power, cellPosition);
 		}
 

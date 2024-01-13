@@ -5,6 +5,7 @@
 	using Game.Profiles;
 	using Game.Units;
 	using Game.Utilities;
+	using System;
 	using UniRx;
 	using UnityEngine;
 	using Zenject;
@@ -19,7 +20,7 @@
 		[Inject] private GameProfile _gameProfile;
 		[Inject] private IGameUpgrades _gameUpgrades;
 		[Inject] private IUiMessage _uiMessage;
-
+		[Inject] private IGameAudio _gameAudio;
 
 		private const string LevelTitleKey = "unitLevel";
 		private const string LevelShortTitleKey = "lvl";
@@ -86,7 +87,7 @@
 				_screen.UnitElements.Add(species, element);
 
 				element.SelectButtonClicked
-					.Subscribe(_ => FillUnitInfo(species))
+					.Subscribe(_ => OnSelectButtonClicked(species))
 					.AddTo(this);
 
 				element.UpgradeButtonClicked
@@ -103,6 +104,12 @@
 			element.SetPrice(_gameUpgrades.GetUpgradePrice(species).ToString());
 		}
 
+		private void OnSelectButtonClicked(Species species)
+		{
+			_gameAudio.PlayUiClick();
+			FillUnitInfo(species);
+		}
+
 		private void OnUpgradeButtonClickedHandler(Species species)
 		{
 			if (_gameUpgrades.TryBuyUpgrade(species) == false)
@@ -115,6 +122,7 @@
 					UpdateUnitElement(unitSpecies);
 			}
 
+			_gameAudio.PlayUiClick();
 			FillUnitInfo(species);
 		}
 	}
