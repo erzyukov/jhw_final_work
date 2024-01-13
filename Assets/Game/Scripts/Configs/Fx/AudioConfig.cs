@@ -22,6 +22,7 @@ namespace Game.Configs
 		[SerializeField] private float _defaultSoundVolume;
 
 		[Header("Units")]
+		[SerializeField] private AudioClip _unitMerge;
 		[SerializeField] private Dictionary<Species, AudioClip> _shoot = new Dictionary<Species, AudioClip>();
 		
 		[Header("Game")]
@@ -32,6 +33,7 @@ namespace Game.Configs
 		public float DefaultSoundVolume => _defaultSoundVolume;
 		public float DefaultMusicVolume => _defaultMusicVolume;
 		public float FadeDuration => _fadeDuration;
+		public AudioClip UnitMerge => _unitMerge;
 
 		public AudioClip GetShootClip(Species species)
 		{

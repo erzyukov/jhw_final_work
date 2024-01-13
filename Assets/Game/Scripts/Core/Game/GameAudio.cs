@@ -14,6 +14,7 @@ namespace Game.Core
 	{
 		void PlayUnitShoot(Species species);
 		void PlayUiClick();
+		void PlayUnitMerge();
 	}
 
 	public class GameAudio : ControllerBase, IGameAudio, IInitializable
@@ -83,6 +84,9 @@ namespace Game.Core
 
 		public void PlayUiClick() =>
 			_audioSources.Ui.PlayOneShot(_audioConfig.UiButtonClick);
+
+		public void PlayUnitMerge() =>
+			_audioSources.Ui.PlayOneShot(_audioConfig.UnitMerge, 1);
 
 		#endregion
 	}

@@ -229,3 +229,4 @@ MonoBehaviour:
   _defaultMusicVolume: 0.1
   _fadeDuration: 1
   _defaultSoundVolume: 0.2
+  _unitMerge: {fileID: 8300000, guid: 4c8aa0952b61ae44bbb4b37aaf78e9a7, type: 3}
