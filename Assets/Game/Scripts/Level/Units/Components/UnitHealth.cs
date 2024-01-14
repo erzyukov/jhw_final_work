@@ -8,6 +8,7 @@
 
 	public interface IUnitHealth
 	{
+		ReactiveCommand<float> DamageReceived { get; }
 		FloatReactiveProperty HealthRatio { get; }
 		ReactiveCommand Died { get; }
 
@@ -27,6 +28,8 @@
 
 		#region IUnitHealth
 
+		public ReactiveCommand<float> DamageReceived { get; } = new ReactiveCommand<float>();
+
 		public FloatReactiveProperty HealthRatio { get; } = new FloatReactiveProperty();
 
 		public ReactiveCommand Died { get; } = new ReactiveCommand();
@@ -37,6 +40,8 @@
 		{
 			if (IsDead)
 				return;
+
+			DamageReceived.Execute(damage);
 
 			_health = Mathf.Clamp(_health - damage, 0, _baseHealth);
 

@@ -9,7 +9,8 @@ namespace Game.Installers
 	using Game.Units;
 	using Game.Weapon;
     using System;
-    using Zenject;
+	using UnityEngine;
+	using Zenject;
 
     public class LevelSceneInstaller : MonoInstaller
 	{
@@ -63,10 +64,11 @@ namespace Game.Installers
 
 			InstallWeapons();
 			InstallUnits();
+			InstallFx();
             InstallDev();
 		}
 
-        private void InstallWeapons()
+		private void InstallWeapons()
 		{
 			Container.BindFactory<ProjectileData, Bullet, Bullet.Factory>()
 				.FromMonoPoolableMemoryPool(x =>
@@ -92,7 +94,17 @@ namespace Game.Installers
 				.FromFactory<PrefabFactory<IUnitRenderer>>();
 		}
 
-        private void InstallDev()
+		private void InstallFx()
+		{
+			Container.BindFactory<Vector3, int, Color, DamageNumberFx, DamageNumberFx.Factory>()
+				.FromMonoPoolableMemoryPool(x =>
+					x.WithInitialSize(_unitsConfig.DamageFxPoolSize)
+						.FromComponentInNewPrefab(_unitsConfig.DamageFxPrefab)
+						.UnderTransformGroup("DamageFx")
+				);
+		}
+
+		private void InstallDev()
         {
             Container
                 .BindInterfacesTo<LevelDevCheats>()

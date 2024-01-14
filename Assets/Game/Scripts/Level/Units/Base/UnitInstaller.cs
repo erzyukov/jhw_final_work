@@ -79,7 +79,11 @@ namespace Game.Units
 				.AsSingle();
 
 			InstallAttacker(unitConfig.Class);
-			
+
+			Container
+				.BindInterfacesTo<UnitFx>()
+				.AsSingle();
+
 			#endregion
 		}
 

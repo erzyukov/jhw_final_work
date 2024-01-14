@@ -19,7 +19,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: acb271cd53cd7ba41b1d0c34ae394ee6, type: 3}
   - {fileID: 21300000, guid: 92f7b1aa3959f5644a8d89ece20380d9, type: 3}
   - {fileID: 21300000, guid: e36a8eec3eaef6040afb8097612431bd, type: 3}
+  _damageFxPrefab: {fileID: -7729824606463882939, guid: 455ec93ad64d09c409e1d9528e562899, type: 3}
+  _damageFxPoolSize: 20
+  _damageFxHeroUnitColor: {r: 1, g: 0.2971698, b: 0.2971698, a: 1}
+  _damageFxEnemyUnitColor: {r: 1, g: 1, b: 1, a: 1}
+  _damageFxSpawnOffset: 0.1
+  _damageFxHeight: 0.8
+  _damageFxDuration: 1
+  _damageFxEase: 9
+  _damageFxMaterialColor: {r: 1, g: 0.5424528, b: 0.5424528, a: 1}
   _speed: 1.5
+  _rotationSpeed: 0
   _units:
   - Species: 1
     Config: {fileID: 11400000, guid: afafe5346bf1e544daa470fd14b26621, type: 2}

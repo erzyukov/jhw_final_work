@@ -2,21 +2,12 @@
 {
 	using Game.Configs;
 	using Game.Utilities;
-	using UniRx;
 	using UnityEngine;
 	using Zenject;
 
 	public interface IUnitFacade
 	{
-		ReactiveCommand Dragging { get; }
-		ReactiveCommand Dropped { get; }
-		ReactiveCommand PointerDowned { get; }
-		ReactiveCommand PointerUped { get; }
-		ReactiveCommand MergeInitiated { get; }
-		ReactiveCommand MergeCanceled { get; }
-		ReactiveCommand Attacking { get; }
-		ReactiveCommand Dying { get; }
-        ReactiveCommand Died { get; }
+		IUnitEvents Events { get; }
 
         string Name { get; }
 		Species Species { get; }
@@ -47,29 +38,12 @@
 		[Inject] private IUnitHealth _health;
 		[Inject] private IUnitFsm _fsm;
 		[Inject] private IUnitEvents _events;
-		[Inject] private IDraggable _draggable;
 		[Inject] private IUnitPosition _unitPosition;
-		[Inject] private IUnitAttacker _attacker;
+		[Inject] private IDraggable _draggable;
 
 		#region IUnitFacade
 
-		public ReactiveCommand Dragging => _draggable.Dragging;
-		
-		public ReactiveCommand Dropped => _draggable.Dropped;
-
-		public ReactiveCommand PointerDowned => _draggable.PointerDowned;
-
-		public ReactiveCommand PointerUped => _draggable.PointerUped;
-
-		public ReactiveCommand MergeInitiated => _view.MergeInitiated;
-
-		public ReactiveCommand MergeCanceled => _view.MergeCanceled;
-
-		public ReactiveCommand Attacking => _attacker.Attacking;
-
-		public ReactiveCommand Dying => _events.Dying;
-        
-        public ReactiveCommand Died => _events.Died;
+		public IUnitEvents Events => _events;
 
 		public string Name => _config.TitleKey;
 

@@ -109,7 +109,7 @@
 		private void SubscribeToUnit(IUnitFacade unit)
 		{
 			_unitDiedSubscribes.Add(unit, default);
-			_unitDiedSubscribes[unit] = unit.Died
+			_unitDiedSubscribes[unit] = unit.Events.Died
 				.Subscribe(_ => OnUnitDied(unit));
 		}
 

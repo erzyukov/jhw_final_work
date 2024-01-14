@@ -76,7 +76,7 @@
 
 		private void SubscribeToUnit(IUnitFacade unit)
 		{
-            _unitDyingSubscribes[unit] = unit.Dying
+            _unitDyingSubscribes[unit] = unit.Events.Dying
                 .Subscribe(_ => OnUnitDying(unit));
 
         }
