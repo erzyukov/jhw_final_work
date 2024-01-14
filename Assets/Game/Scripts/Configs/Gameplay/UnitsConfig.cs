@@ -30,6 +30,8 @@ namespace Game.Configs
 		[SerializeField] private float _damageFxDuration;
 		[FoldoutGroup("Damage Fx")]
 		[SerializeField] private Ease _damageFxEase;
+		[FoldoutGroup("Damage Fx")]
+		[SerializeField] private Color _damageFxMaterialColor;
 
 		[Header("Gameplay")]
 		[SerializeField] private float _speed;
@@ -60,6 +62,7 @@ namespace Game.Configs
 		public float DamageFxHeight => _damageFxHeight;
 		public float DamageFxDuration => _damageFxDuration;
 		public Ease DamageFxEase => _damageFxEase;
+		public Color DamageFxMaterialColor => _damageFxMaterialColor;
 
 		public float Speed => _speed;
 		public float RotationSpeed => _rotationSpeed;
