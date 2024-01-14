@@ -23,6 +23,10 @@ MonoBehaviour:
   _damageFxPoolSize: 20
   _damageFxHeroUnitColor: {r: 1, g: 0.2971698, b: 0.2971698, a: 1}
   _damageFxEnemyUnitColor: {r: 1, g: 1, b: 1, a: 1}
+  _damageFxSpawnOffset: 0.1
+  _damageFxHeight: 0.8
+  _damageFxDuration: 1
+  _damageFxEase: 9
   _speed: 1.5
   _rotationSpeed: 0
   _units:

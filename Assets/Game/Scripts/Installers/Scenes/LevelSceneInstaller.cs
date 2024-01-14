@@ -96,7 +96,7 @@ namespace Game.Installers
 
 		private void InstallFx()
 		{
-			Container.BindFactory<Vector3, int, Color, DamageFx, DamageFx.Factory>()
+			Container.BindFactory<Vector3, int, Color, DamageNumberFx, DamageNumberFx.Factory>()
 				.FromMonoPoolableMemoryPool(x =>
 					x.WithInitialSize(_unitsConfig.DamageFxPoolSize)
 						.FromComponentInNewPrefab(_unitsConfig.DamageFxPrefab)

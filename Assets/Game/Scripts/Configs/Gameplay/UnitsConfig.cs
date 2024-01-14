@@ -4,6 +4,8 @@ namespace Game.Configs
 	using System;
 	using UnityEngine;
 	using System.Collections.Generic;
+	using DG.Tweening;
+	using Sirenix.OdinInspector;
 
 	[CreateAssetMenu(fileName = "Units", menuName = "Configs/Units", order = (int)Config.Units)]
 	public class UnitsConfig : ScriptableObject
@@ -12,10 +14,22 @@ namespace Game.Configs
 		[SerializeField] private GameObject _unitPrefab;
 		[SerializeField] private float _uiHealthIndent;
 		[SerializeField] private Sprite[] _gradeSprites;
-		[SerializeField] private DamageFx _damageFxPrefab;
+		[FoldoutGroup("Damage Fx")]
+		[SerializeField] private DamageNumberFx _damageFxPrefab;
+		[FoldoutGroup("Damage Fx")]
 		[SerializeField] private int _damageFxPoolSize;
+		[FoldoutGroup("Damage Fx")]
 		[SerializeField] private Color _damageFxHeroUnitColor;
+		[FoldoutGroup("Damage Fx")]
 		[SerializeField] private Color _damageFxEnemyUnitColor;
+		[FoldoutGroup("Damage Fx")]
+		[SerializeField] private float _damageFxSpawnOffset;
+		[FoldoutGroup("Damage Fx")]
+		[SerializeField] private float _damageFxHeight;
+		[FoldoutGroup("Damage Fx")]
+		[SerializeField] private float _damageFxDuration;
+		[FoldoutGroup("Damage Fx")]
+		[SerializeField] private Ease _damageFxEase;
 
 		[Header("Gameplay")]
 		[SerializeField] private float _speed;
@@ -37,10 +51,16 @@ namespace Game.Configs
 		public GameObject UnitPrefab => _unitPrefab;
 		public float UiHealthIndent => _uiHealthIndent;
 		public Sprite[] GradeSprites => _gradeSprites;
-		public DamageFx DamageFxPrefab => _damageFxPrefab;
+
+		public DamageNumberFx DamageFxPrefab => _damageFxPrefab;
 		public int DamageFxPoolSize => _damageFxPoolSize;
 		public Color DamageFxHeroUnitColor => _damageFxHeroUnitColor;
 		public Color DamageFxEnemyUnitColor => _damageFxEnemyUnitColor;
+		public float DamageFxSpawnOffset => _damageFxSpawnOffset;
+		public float DamageFxHeight => _damageFxHeight;
+		public float DamageFxDuration => _damageFxDuration;
+		public Ease DamageFxEase => _damageFxEase;
+
 		public float Speed => _speed;
 		public float RotationSpeed => _rotationSpeed;
 		public Dictionary<Species, UnitConfig> Units => _unitData;

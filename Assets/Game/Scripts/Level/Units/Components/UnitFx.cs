@@ -11,7 +11,7 @@
 		[Inject] private IUnitEvents _events;
 		[Inject] private IUnitData _unitData;
 		[Inject] private IUnitView _unitView;
-		[Inject] private DamageFx.Factory _damageFxFactory;
+		[Inject] private DamageNumberFx.Factory _damageFxFactory;
 		[Inject] private UnitsConfig _unitsConfig;
 
 		public void Initialize()
