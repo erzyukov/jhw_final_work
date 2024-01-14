@@ -20,6 +20,14 @@
 
 		public void Initialize()
 		{
+			ShootFx shootFx = _unitView.Transform.GetComponentInChildren<ShootFx>();
+			if (shootFx != null)
+			{
+				_events.Attacking
+					.Subscribe(_ => shootFx.Play())
+					.AddTo(this);
+			}
+
 			_events.DamageReceived
 				.Subscribe(OnDamageReceived)
 				.AddTo(this);

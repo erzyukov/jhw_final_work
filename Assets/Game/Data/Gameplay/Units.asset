@@ -27,6 +27,7 @@ MonoBehaviour:
   _damageFxHeight: 0.8
   _damageFxDuration: 1
   _damageFxEase: 9
+  _damageFxMaterialColor: {r: 1, g: 0.5424528, b: 0.5424528, a: 1}
   _speed: 1.5
   _rotationSpeed: 0
   _units:
