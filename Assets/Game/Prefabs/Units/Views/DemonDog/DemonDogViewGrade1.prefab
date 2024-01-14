@@ -24,6 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503547998484457933}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,7 +32,6 @@ Transform:
   m_Children:
   - {fileID: 5561717081036362414}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-3272273062254429049
 MonoBehaviour:
@@ -53,6 +53,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 4979439236031808108}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 6e10f37d48c04bf4daa5a123f1af1469, type: 3}
@@ -120,10 +121,23 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6804880249585438465, guid: 6e10f37d48c04bf4daa5a123f1af1469, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6804880249585438465, guid: 6e10f37d48c04bf4daa5a123f1af1469, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d02d6b0be43122a4cadc140db554e7dd, type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6e10f37d48c04bf4daa5a123f1af1469, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7877851593403587480}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6e10f37d48c04bf4daa5a123f1af1469, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8506452034118222779}
   m_SourcePrefab: {fileID: 100100000, guid: 6e10f37d48c04bf4daa5a123f1af1469, type: 3}
 --- !u!137 &1498084330000677444 stripped
 SkinnedMeshRenderer:
@@ -137,7 +151,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &7877851593403587480
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -154,7 +168,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &8506452034118222779
 MonoBehaviour:
   m_ObjectHideFlags: 0

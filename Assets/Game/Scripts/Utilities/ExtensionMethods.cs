@@ -49,6 +49,11 @@
 			return v;
 		}
 
+		public static Vector3 x0y(this Vector2 v)
+		{
+			return new Vector3(v.x, 0, v.y);
+		}
+
 		public static void DestroyChildren(this Transform transform)
 		{
 			for (int i = transform.childCount - 1; i >= 0; i--)

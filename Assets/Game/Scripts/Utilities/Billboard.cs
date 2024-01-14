@@ -12,7 +12,8 @@
 		private void Start()
 		{
 			_mainCamera = Camera.main;
-			_canvas.worldCamera = _mainCamera;
+			if (_canvas != null )
+				_canvas.worldCamera = _mainCamera;
 		}
 
 		private void LateUpdate()

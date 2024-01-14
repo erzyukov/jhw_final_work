@@ -12,6 +12,10 @@ namespace Game.Configs
 		[SerializeField] private GameObject _unitPrefab;
 		[SerializeField] private float _uiHealthIndent;
 		[SerializeField] private Sprite[] _gradeSprites;
+		[SerializeField] private DamageFx _damageFxPrefab;
+		[SerializeField] private int _damageFxPoolSize;
+		[SerializeField] private Color _damageFxHeroUnitColor;
+		[SerializeField] private Color _damageFxEnemyUnitColor;
 
 		[Header("Gameplay")]
 		[SerializeField] private float _speed;
@@ -33,6 +37,10 @@ namespace Game.Configs
 		public GameObject UnitPrefab => _unitPrefab;
 		public float UiHealthIndent => _uiHealthIndent;
 		public Sprite[] GradeSprites => _gradeSprites;
+		public DamageFx DamageFxPrefab => _damageFxPrefab;
+		public int DamageFxPoolSize => _damageFxPoolSize;
+		public Color DamageFxHeroUnitColor => _damageFxHeroUnitColor;
+		public Color DamageFxEnemyUnitColor => _damageFxEnemyUnitColor;
 		public float Speed => _speed;
 		public float RotationSpeed => _rotationSpeed;
 		public Dictionary<Species, UnitConfig> Units => _unitData;

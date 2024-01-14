@@ -15,6 +15,7 @@
 		ReactiveCommand MergeInitiated { get; }
 		ReactiveCommand MergeCanceled { get; }
 		ReactiveCommand Attacking { get; }
+		ReactiveCommand<float> DamageReceived { get; }
 	}
 
 	public class UnitEvents : ControllerBase, IUnitEvents, IInitializable
@@ -23,6 +24,7 @@
 		[Inject] private IDraggable _draggable;
 		[Inject] private IUnitView _view;
 		[Inject] private IUnitAttacker _attacker;
+		[Inject] private IUnitHealth _unitHealth;
 
 		public void Initialize()
         {
@@ -55,6 +57,7 @@
 		public ReactiveCommand MergeInitiated => _view.MergeInitiated;
 		public ReactiveCommand MergeCanceled => _view.MergeCanceled;
 		public ReactiveCommand Attacking => _attacker.Attacking;
+		public ReactiveCommand<float> DamageReceived => _unitHealth.DamageReceived;
 		#endregion
 	}
 }

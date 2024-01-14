@@ -3,7 +3,6 @@ namespace Game.Units
 	using Game.Configs;
 	using Game.Utilities;
 	using Zenject;
-	using static Zenject.CheatSheet;
 
 	public class UnitInstaller : Installer<UnitInstaller>
 	{
@@ -80,7 +79,11 @@ namespace Game.Units
 				.AsSingle();
 
 			InstallAttacker(unitConfig.Class);
-			
+
+			Container
+				.BindInterfacesTo<UnitFx>()
+				.AsSingle();
+
 			#endregion
 		}
 
