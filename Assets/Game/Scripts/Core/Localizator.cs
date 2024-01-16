@@ -2,9 +2,10 @@ namespace Game.Core
 {
 	using Game.Configs;
 	using UnityEngine.Localization.Settings;
-	using UnityEngine.ResourceManagement.AsyncOperations;
+	//using UnityEngine.ResourceManagement.AsyncOperations;
 	using Zenject;
 	using System.Collections;
+	using UnityEngine;
 
 	public interface ILocalizator
 	{
@@ -20,6 +21,9 @@ namespace Game.Core
 
 		public IEnumerator Preload()
 		{
+			yield return LocalizationSettings.InitializationOperation;
+			yield return new WaitForFixedUpdate();
+			/*
 			var loadingOperation = LocalizationSettings.InitializationOperation;
 			
 			while (loadingOperation.IsDone == false)
@@ -31,10 +35,15 @@ namespace Game.Core
 			{
 				throw new System.Exception("Can't load locale!");
 			}
+			*/
+			Debug.Log($"------------- LocalizationSettings.InitializationOperation complete ({Time.time})");
 
 			LocalizationSettings.SelectedLocale = _config.DefaultLocale;
 
-			yield return null;
+			yield return LocalizationSettings.InitializationOperation;
+			yield return new WaitForFixedUpdate();
+
+			Debug.Log($"------------- LocalizationSettings.InitializationOperation complete ({Time.time})");
 		}
 
 		public string GetString(string key) => 
