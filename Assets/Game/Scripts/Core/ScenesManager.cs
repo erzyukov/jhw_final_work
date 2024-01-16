@@ -11,6 +11,7 @@ namespace Game.Core
 	using UnityEngine;
 	using UnityEngine.SceneManagement;
 	using Zenject;
+	using UnityEngine.Localization.Settings;
 
 	public interface IScenesManager
 	{
@@ -36,6 +37,8 @@ namespace Game.Core
 		private IEnumerator LoadScenes()
 		{
 			WaitForFixedUpdate wait = new WaitForFixedUpdate();
+
+			yield return LocalizationSettings.InitializationOperation;
 
 #if UNITY_EDITOR
 			if (IsSceneLoaded(_scenesConfig.Main))
