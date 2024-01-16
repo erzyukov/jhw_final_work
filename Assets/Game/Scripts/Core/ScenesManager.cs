@@ -39,31 +39,23 @@ namespace Game.Core
 			WaitForFixedUpdate wait = new WaitForFixedUpdate();
 
 			Debug.Log($"------------- Start LoadScenes ({Time.time})");
-
+/*
 			yield return LocalizationSettings.InitializationOperation;
-
-			Debug.Log($"------------- LocalizationSettings.InitializationOperation complete ({Time.time})");
+			yield return wait;
+*/
 
 #if UNITY_EDITOR
 			if (IsSceneLoaded(_scenesConfig.Main))
 				throw new Exception("Load from Splash scene!");
 #endif
 
-			if (IsSceneLoaded(_scenesConfig.Splash))
-			{
-				yield return _localizator.Preload();
+			yield return _localizator.Preload();
 
-				yield return null;
-
-				SplashCompleted.Execute();
-			}
-			else
-			{
-				yield return _localizator.Preload();
-				SplashCompleted.Execute();
-			}
+			SplashCompleted.Execute();
 
 			yield return new WaitUntil(() => _profileManager.IsReady.Value);
+
+			Debug.Log($"------------- ProfileManager Ready ({Time.time})");
 
 			yield return wait;
 
