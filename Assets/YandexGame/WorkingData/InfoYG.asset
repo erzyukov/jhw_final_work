@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scopes: 1
   playerPhotoSize: 0
-  autoGameReadyAPI: 1
+  autoGameReadyAPI: 0
   playerInfoSimulation:
-    authorized: 1
+    authorized: 0
     isMobile: 0
     language: ru
     name: Player this
@@ -24,16 +24,16 @@ MonoBehaviour:
     photo: https://justplaygames.ru/public/icon_player.png
   AdWhenLoadingScene: 0
   showFirstAd: 0
-  rewardedAfterClosing: 1
+  rewardedAfterClosing: 0
   adDisplayCalls: 0
   fullscreenAdInterval: 60
   durationOfAdSimulation: 0.5
   loadAdWithDelaySimulation: 3
   testErrorOfRewardedAdsInEditor: 0
-  saveCloud: 0
+  saveCloud: 1
   flush: 0
   localSaveSync: 1
-  saveCloudInterval: 5
+  saveCloudInterval: 3
   saveOnQuitGame: 0
   quitGameParameters:
     objectName: YandexGame
