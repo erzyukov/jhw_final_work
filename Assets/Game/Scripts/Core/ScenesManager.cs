@@ -38,7 +38,11 @@ namespace Game.Core
 		{
 			WaitForFixedUpdate wait = new WaitForFixedUpdate();
 
+			Debug.Log($"------------- Start LoadScenes ({Time.time})");
+
 			yield return LocalizationSettings.InitializationOperation;
+
+			Debug.Log($"------------- LocalizationSettings.InitializationOperation complete ({Time.time})");
 
 #if UNITY_EDITOR
 			if (IsSceneLoaded(_scenesConfig.Main))
