@@ -11,7 +11,6 @@ namespace Game.Core
 	using UnityEngine;
 	using UnityEngine.SceneManagement;
 	using Zenject;
-	using UnityEngine.Localization.Settings;
 
 	public interface IScenesManager
 	{
@@ -38,12 +37,6 @@ namespace Game.Core
 		{
 			WaitForFixedUpdate wait = new WaitForFixedUpdate();
 
-			Debug.Log($"------------- Start LoadScenes ({Time.time})");
-/*
-			yield return LocalizationSettings.InitializationOperation;
-			yield return wait;
-*/
-
 #if UNITY_EDITOR
 			if (IsSceneLoaded(_scenesConfig.Main))
 				throw new Exception("Load from Splash scene!");
@@ -54,8 +47,6 @@ namespace Game.Core
 			SplashCompleted.Execute();
 
 			yield return new WaitUntil(() => _profileManager.IsReady.Value);
-
-			Debug.Log($"------------- ProfileManager Ready ({Time.time})");
 
 			yield return wait;
 
@@ -72,8 +63,6 @@ namespace Game.Core
 
 			if (IsSceneLoaded(_scenesConfig.Splash))
 				UnloadScene(_scenesConfig.Splash);
-
-			//LoadLevel();
 
 			yield return null;
 		}
