@@ -7,6 +7,7 @@ namespace Game.Installers
 	using Game.Tutorial;
 	using System;
 	using UnityEngine.UI;
+	using Game.Analytics;
 
 	public class MainSceneInstaller : MonoInstaller
 	{

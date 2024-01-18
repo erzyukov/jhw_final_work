@@ -1,5 +1,6 @@
 namespace Game.Installers
 {
+	using Game.Analytics;
 	using Game.Configs;
 	using Game.Core;
 	using Game.Dev;
@@ -34,6 +35,14 @@ namespace Game.Installers
 				.BindInterfacesTo<InputHandler>()
 				.AsSingle();
 
+			// IApplicationPaused
+			Container
+				.BindInterfacesTo<WebGLEvents>()
+				//.FromNewComponentOnNewPrefab
+				.FromComponentInHierarchy()
+				.AsSingle();
+
+			InstallAnalytics();
 			InstallGameControllers();
 		}
 
@@ -59,6 +68,17 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<GameCurrency>()
+				.AsSingle();
+		}
+
+		private void InstallAnalytics()
+		{
+			Container
+				.BindInterfacesTo<AnalyticEventSender>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<TechnicalAnalytics>()
 				.AsSingle();
 		}
 	}

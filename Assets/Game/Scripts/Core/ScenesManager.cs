@@ -14,7 +14,8 @@ namespace Game.Core
 
 	public interface IScenesManager
 	{
-		ReactiveCommand SplashCompleted { get; }
+		ReactiveCommand ResourceLoading { get; }
+		ReactiveCommand MainLoading { get; }
 		ReactiveCommand MainLoaded { get; }
 		ReactiveCommand LevelLoaded { get; }
 		ReactiveProperty<float> SceneLoadProgress { get; }
@@ -37,6 +38,8 @@ namespace Game.Core
 		{
 			WaitForFixedUpdate wait = new WaitForFixedUpdate();
 
+			ResourceLoading.Execute();
+
 #if UNITY_EDITOR
 			if (IsSceneLoaded(_scenesConfig.Main))
 				throw new Exception("Load from Splash scene!");
@@ -44,11 +47,11 @@ namespace Game.Core
 
 			yield return _localizator.Preload();
 
-			SplashCompleted.Execute();
-
 			yield return new WaitUntil(() => _profileManager.IsReady.Value);
 
 			yield return wait;
+
+			MainLoading.Execute();
 
 			if (!IsSceneLoaded(_scenesConfig.Main))
 			{
@@ -69,7 +72,8 @@ namespace Game.Core
 
 		#region IScenesManager
 
-		public ReactiveCommand SplashCompleted { get; } = new ReactiveCommand();
+		public ReactiveCommand ResourceLoading { get; } = new ReactiveCommand();
+		public ReactiveCommand MainLoading { get; } = new ReactiveCommand();
 		public ReactiveCommand MainLoaded { get; } = new ReactiveCommand();
 		public ReactiveCommand LevelLoaded { get; } = new ReactiveCommand();
 

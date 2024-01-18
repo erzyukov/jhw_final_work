@@ -23,5 +23,7 @@ namespace Game.Profiles
 		public HeroFieldProfile HeroField = new HeroFieldProfile();
 		public UnitsProfile Units = new UnitsProfile();
 		public EnergyProfile Energy = new EnergyProfile();
+
+		public AnalyticsProfile Analytics = new AnalyticsProfile();
 	}
 }

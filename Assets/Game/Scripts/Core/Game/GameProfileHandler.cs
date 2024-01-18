@@ -53,6 +53,8 @@
 				_gameCurrency.SetSummonCurrency(waveConfig.SummonCurrencyAmount);
 				_gameProfileManager.Save();
 			}
+
+			ResetFirstAppRun();
 		}
 
 		private void OnTacticalStageBeginHandler()
@@ -83,6 +85,17 @@
 			{
 				_gameProfile.IsReturnFromBattle = false;
 				_gameCurrency.ConsumeLevelSoftCurrency();
+			}
+
+			ResetFirstAppRun();
+		}
+
+		private void ResetFirstAppRun()
+		{
+			if (_gameProfile.Analytics.IsFirstRunApp)
+			{
+				_gameProfile.Analytics.IsFirstRunApp = false;
+				_gameProfileManager.Save();
 			}
 		}
 	}
