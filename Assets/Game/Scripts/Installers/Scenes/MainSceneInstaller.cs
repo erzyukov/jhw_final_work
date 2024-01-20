@@ -118,6 +118,10 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<TutorialAnalytics>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<GameplayAnalytics>()
+				.AsSingle();
 		}
 	}
 }
