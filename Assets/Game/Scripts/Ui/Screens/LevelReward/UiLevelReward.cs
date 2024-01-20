@@ -5,9 +5,7 @@
 	using UniRx;
 	using Game.Core;
 	using Game.Profiles;
-	using UnityEngine;
 	using Game.Configs;
-	using TMPro;
 
 	public class UiLevelReward : ControllerBase, IInitializable
 	{

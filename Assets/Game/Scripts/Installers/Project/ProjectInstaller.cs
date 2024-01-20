@@ -38,7 +38,6 @@ namespace Game.Installers
 			// IApplicationPaused
 			Container
 				.BindInterfacesTo<WebGLEvents>()
-				//.FromNewComponentOnNewPrefab
 				.FromComponentInHierarchy()
 				.AsSingle();
 
