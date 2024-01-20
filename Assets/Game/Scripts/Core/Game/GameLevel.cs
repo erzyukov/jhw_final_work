@@ -14,6 +14,7 @@
 		ReactiveCommand LevelLoading { get; }
 		ReactiveCommand<bool> LevelLoaded { get; }
 		ReactiveCommand<GameLevel.LevelResult> LevelFinished { get; }
+		ReactiveCommand<int> WaveStarted { get; }
 		void GoToLevel(int number);
 		void GoToNextWave();
 		void FinishLevel();
@@ -72,6 +73,8 @@
 
 		public ReactiveCommand<LevelResult> LevelFinished { get; } = new ReactiveCommand<LevelResult>();
 
+		public ReactiveCommand<int> WaveStarted { get; } = new ReactiveCommand<int>();
+
 		public void GoToLevel(int number)
 		{
 			_gameCycle.SetState(GameState.LoadingLevel);
@@ -107,6 +110,7 @@
 					_profile.WaveNumber.Value++;
 					Save();
 					_gameCycle.SetState(GameState.TacticalStage);
+					WaveStarted.Execute(_profile.WaveNumber.Value);
 				});
 			}
 			else if (_gameCycle.State.Value == GameState.CompleteWave)
@@ -174,8 +178,6 @@
 
 			bool isNewLevel = _profile.WaveNumber.Value == 0;
 
-			Debug.LogWarning($"------------> {_profile.WaveNumber.Value}");
-
 			if (isNewLevel)
 				_profile.WaveNumber.Value++;
 
@@ -185,6 +187,7 @@
 			{
 				IsLevelLoaded.Value = true;
 				LevelLoaded.Execute(isNewLevel);
+				WaveStarted.Execute(_profile.WaveNumber.Value);
 			});
 		}
 

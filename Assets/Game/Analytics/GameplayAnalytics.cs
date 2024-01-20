@@ -37,6 +37,12 @@
 
 		public void Initialize()
 		{
+			EventsSubscribes();
+			AuxiliarySubscribes();
+		}
+
+		private void EventsSubscribes()
+		{
 			_gameLevel.LevelLoaded
 				.Subscribe(OnLevelLoaded)
 				.AddTo(this);
@@ -45,20 +51,19 @@
 				.Subscribe(OnLevelFinished)
 				.AddTo(this);
 
+			_gameLevel.WaveStarted
+				.Subscribe(OnWaveStarted)
+				.AddTo(this);
+		}
+
+		private void AuxiliarySubscribes()
+		{
 			_gameplayEvents.UnitSummoned
-				.Subscribe(v =>
-				{
-					_gameProfile.Analytics.SummonTokenSpent += v;
-					Save();
-				})
+				.Subscribe(v => IncrementProfileProperty(ref _gameProfile.Analytics.SummonTokenSpent, v))
 				.AddTo(this);
 
 			_gameplayEvents.UnitsMerged
-				.Subscribe(_ =>
-				{
-					_gameProfile.Analytics.UnitLevelMergedCount++;
-					Save();
-				})
+				.Subscribe(_ => IncrementProfileProperty(ref _gameProfile.Analytics.UnitLevelMergedCount, 1))
 				.AddTo(this);
 		}
 
@@ -122,6 +127,25 @@
 				{ "coins_amount", _gameProfile.LevelSoftCurrency.Value },
 			};
 			_eventSender.SendMessage(LevelFinishEventKey, properties, true);
+		}
+
+		private void OnWaveStarted(int waveNumber)
+		{
+			var properties = new Dictionary<string, object>
+			{
+				{ "level_number", _gameProfile.LevelNumber.Value },
+				{ "level_count", _gameProfile.Analytics.LevelStartsCount },
+				{ "wave_amount", WavesCount },
+				{ "try_number", _gameProfile.Analytics.LevelTryCount },
+				{ "wave_number", waveNumber },
+			};
+			_eventSender.SendMessage(WaveStartEventKey, properties, true);
+		}
+
+		private void IncrementProfileProperty(ref int property, int increment)
+		{
+			property += increment;
+			Save();
 		}
 
 		private void Save() => _gameProfileManager.Save();
