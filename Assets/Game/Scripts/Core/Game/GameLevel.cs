@@ -13,8 +13,9 @@
 		BoolReactiveProperty IsLevelLoaded { get; }
 		ReactiveCommand LevelLoading { get; }
 		ReactiveCommand<bool> LevelLoaded { get; }
-		ReactiveCommand<GameLevel.LevelResult> LevelFinished { get; }
+		ReactiveCommand<GameLevel.Result> LevelFinished { get; }
 		ReactiveCommand<int> WaveStarted { get; }
+		ReactiveCommand<GameLevel.Result> WaveFinished { get; }
 		void GoToLevel(int number);
 		void GoToNextWave();
 		void FinishLevel();
@@ -32,7 +33,7 @@
 
 		private int _heroLastLevel;
 
-		public enum LevelResult
+		public enum Result
 		{
 			Win,
 			Fail,
@@ -71,9 +72,11 @@
 
 		public ReactiveCommand<bool> LevelLoaded { get; } = new ReactiveCommand<bool>();
 
-		public ReactiveCommand<LevelResult> LevelFinished { get; } = new ReactiveCommand<LevelResult>();
+		public ReactiveCommand<Result> LevelFinished { get; } = new ReactiveCommand<Result>();
 
 		public ReactiveCommand<int> WaveStarted { get; } = new ReactiveCommand<int>();
+
+		public ReactiveCommand<Result> WaveFinished { get; } = new ReactiveCommand<Result>();
 
 		public void GoToLevel(int number)
 		{
@@ -105,9 +108,10 @@
 			if (_profile.WaveNumber.Value < waveCount)
 			{
 				_gameCycle.SetState(GameState.LoadingWave);
+				WaveFinished.Execute(Result.Win);
+				_profile.WaveNumber.Value++;
 				_uiViel.Appear(() =>
 				{
-					_profile.WaveNumber.Value++;
 					Save();
 					_gameCycle.SetState(GameState.TacticalStage);
 					WaveStarted.Execute(_profile.WaveNumber.Value);
@@ -141,7 +145,8 @@
 
 		public void LeaveBattle()
 		{
-			LevelFinished.Execute(LevelResult.Leave);
+			WaveFinished.Execute(Result.Leave);
+			LevelFinished.Execute(Result.Leave);
 
 			_uiViel.Appear(() =>
 			{
@@ -155,7 +160,8 @@
 
 		private void OnStateLevelWon()
 		{
-			LevelFinished.Execute(LevelResult.Win);
+			WaveFinished.Execute(Result.Win);
+			LevelFinished.Execute(Result.Win);
 
 			_profile.LevelNumber.Value = Mathf.Clamp(_profile.LevelNumber.Value + 1, 0, _levelsConfig.Levels.Length);
 
@@ -167,7 +173,8 @@
 
 		private void OnStateLevelFailed()
 		{
-			LevelFinished.Execute(LevelResult.Fail);
+			WaveFinished.Execute(Result.Fail);
+			LevelFinished.Execute(Result.Fail);
 		}
 
 		private int ClampLevelNumber(int number) => Mathf.Clamp(number, 1, _levelsConfig.Levels.Length);
