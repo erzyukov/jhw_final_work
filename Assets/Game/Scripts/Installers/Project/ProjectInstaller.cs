@@ -41,6 +41,10 @@ namespace Game.Installers
 				.FromComponentInHierarchy()
 				.AsSingle();
 
+			Container
+				.BindInterfacesTo<GameplayEvents>()
+				.AsSingle();
+
 			InstallAnalytics();
 			InstallGameControllers();
 		}

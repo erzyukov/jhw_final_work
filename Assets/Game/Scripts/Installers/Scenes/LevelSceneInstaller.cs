@@ -1,6 +1,7 @@
 namespace Game.Installers
 {
 	using Game.Configs;
+	using Game.Core;
 	using Game.Dev;
 	using Game.Field;
 	using Game.Gameplay;
@@ -60,6 +61,10 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<BattleStageHandler>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<LevelEventsHandler>()
 				.AsSingle();
 
 			InstallWeapons();

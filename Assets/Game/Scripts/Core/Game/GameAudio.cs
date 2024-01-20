@@ -9,12 +9,12 @@ namespace Game.Core
 	using DG.Tweening;
 	using UnityEngine.UI;
 	using System.Collections.Generic;
+	using Game.Field;
 
 	public interface IGameAudio
 	{
 		void PlayUnitShoot(Species species);
 		void PlayUiClick();
-		void PlayUnitMerge();
 	}
 
 	public class GameAudio : ControllerBase, IGameAudio, IInitializable
@@ -23,6 +23,7 @@ namespace Game.Core
 		[Inject] private AudioConfig _audioConfig;
 		[Inject] private IGameCycle _gameCycle;
 		[Inject] private List<Button> _uiButtons;
+		[Inject] private IGameplayEvents _gameplayEvents;
 
 		public void Initialize()
 		{
@@ -32,6 +33,10 @@ namespace Game.Core
 
 			_gameCycle.State
 				.Subscribe(PlayGameStateTheme)
+				.AddTo(this);
+
+			_gameplayEvents.UnitsMerged
+				.Subscribe(_ => PlayUnitMerge())
 				.AddTo(this);
 
 			_uiButtons.ForEach(button => button.OnClickAsObservable().Subscribe(_ => PlayUiClick()));
@@ -72,6 +77,9 @@ namespace Game.Core
 			_audioSources.Music.DOFade(volume, _audioConfig.FadeDuration);
 		}
 
+		private void PlayUnitMerge() =>
+			_audioSources.Ui.PlayOneShot(_audioConfig.UnitMerge, 1);
+
 		#region IGameAudio
 
 		public void PlayUnitShoot(Species species)
@@ -84,9 +92,6 @@ namespace Game.Core
 
 		public void PlayUiClick() =>
 			_audioSources.Ui.PlayOneShot(_audioConfig.UiButtonClick);
-
-		public void PlayUnitMerge() =>
-			_audioSources.Ui.PlayOneShot(_audioConfig.UnitMerge, 1);
 
 		#endregion
 	}

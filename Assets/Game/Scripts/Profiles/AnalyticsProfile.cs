@@ -7,7 +7,10 @@
 		public int TutorialStep = 0;
 
 		public int LevelStartsCount = 0;
-		//public int LastLevelNumberStart = 0;
+		public int LastLevelNumber = 0;
 		public int LevelTryCount = 0;
+		public float LevelSpentTime = 0;
+		public int SummonTokenSpent = 0;
+		public int UnitLevelMergedCount = 0;
 	}
 }

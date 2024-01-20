@@ -13,6 +13,7 @@
 		BoolReactiveProperty IsLevelLoaded { get; }
 		ReactiveCommand LevelLoading { get; }
 		ReactiveCommand<bool> LevelLoaded { get; }
+		ReactiveCommand<GameLevel.LevelResult> LevelFinished { get; }
 		void GoToLevel(int number);
 		void GoToNextWave();
 		void FinishLevel();
@@ -29,6 +30,13 @@
 		[Inject] private IUiVeil _uiViel;
 
 		private int _heroLastLevel;
+
+		public enum LevelResult
+		{
+			Win,
+			Fail,
+			Leave
+		}
 
 		public void Initialize()
 		{
@@ -47,6 +55,11 @@
 				.Where(state => state == GameState.WinBattle)
 				.Subscribe(_ => OnStateLevelWon())
 				.AddTo(this);
+
+			_gameCycle.State
+				.Where(state => state == GameState.LoseBattle)
+				.Subscribe(_ => OnStateLevelFailed())
+				.AddTo(this);
 		}
 
 		#region IGameLevel
@@ -56,6 +69,8 @@
 		public ReactiveCommand LevelLoading { get; } = new ReactiveCommand();
 
 		public ReactiveCommand<bool> LevelLoaded { get; } = new ReactiveCommand<bool>();
+
+		public ReactiveCommand<LevelResult> LevelFinished { get; } = new ReactiveCommand<LevelResult>();
 
 		public void GoToLevel(int number)
 		{
@@ -122,6 +137,8 @@
 
 		public void LeaveBattle()
 		{
+			LevelFinished.Execute(LevelResult.Leave);
+
 			_uiViel.Appear(() =>
 			{
 				_scenesManager.UnloadLevel();
@@ -134,12 +151,19 @@
 
 		private void OnStateLevelWon()
 		{
+			LevelFinished.Execute(LevelResult.Win);
+
 			_profile.LevelNumber.Value = Mathf.Clamp(_profile.LevelNumber.Value + 1, 0, _levelsConfig.Levels.Length);
 
 			if (_profile.LevelNumber.Value <= _profile.Levels.Count)
 				_profile.Levels[_profile.LevelNumber.Value - 1].Unlocked.Value = true;
 
 			Save();
+		}
+
+		private void OnStateLevelFailed()
+		{
+			LevelFinished.Execute(LevelResult.Fail);
 		}
 
 		private int ClampLevelNumber(int number) => Mathf.Clamp(number, 1, _levelsConfig.Levels.Length);
@@ -149,6 +173,8 @@
 			LevelLoading.Execute();
 
 			bool isNewLevel = _profile.WaveNumber.Value == 0;
+
+			Debug.LogWarning($"------------> {_profile.WaveNumber.Value}");
 
 			if (isNewLevel)
 				_profile.WaveNumber.Value++;

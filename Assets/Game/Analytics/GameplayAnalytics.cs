@@ -7,6 +7,7 @@
 	using UniRx;
 	using Game.Core;
 	using Game.Configs;
+	using UnityEngine;
 
 	public class GameplayAnalytics : ControllerBase, IInitializable
 	{
@@ -15,6 +16,8 @@
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private IGameProfileManager _gameProfileManager;
 		[Inject] private IScenesManager _scenesManager;
+		[Inject] private IGameplayEvents _gameplayEvents;
+		[Inject] private IGameHero _gameHero;
 		[Inject] private GameProfile _gameProfile;
 		[Inject] private LevelsConfig _levelsConfig;
 
@@ -28,7 +31,7 @@
 		private const string UnitMergeEventKey = "unit_merge";
 		private const string UnitUpgradeEventKey = "unit_upgrade";
 
-		private int _lastLevelNumber;
+		private float _levelStartTime;
 
 		private int WavesCount => _levelsConfig.Levels[_gameProfile.LevelNumber.Value - 1].Waves.Length;
 
@@ -38,23 +41,46 @@
 				.Subscribe(OnLevelLoaded)
 				.AddTo(this);
 
-			_gameProfile.LevelNumber
-				.Subscribe(OnLevelNumberChanged)
+			_gameLevel.LevelFinished
+				.Subscribe(OnLevelFinished)
 				.AddTo(this);
-		}
 
-		private void OnLevelNumberChanged(int value)
-		{
-			_lastLevelNumber = value;
-			Save();
+			_gameplayEvents.UnitSummoned
+				.Subscribe(v =>
+				{
+					_gameProfile.Analytics.SummonTokenSpent += v;
+					Save();
+				})
+				.AddTo(this);
+
+			_gameplayEvents.UnitsMerged
+				.Subscribe(_ =>
+				{
+					_gameProfile.Analytics.UnitLevelMergedCount++;
+					Save();
+				})
+				.AddTo(this);
 		}
 
 		private void OnLevelLoaded(bool isNewLevel)
 		{
+			if (isNewLevel)
+			{
+				_gameProfile.Analytics.SummonTokenSpent = 0;
+				_gameProfile.Analytics.UnitLevelMergedCount = 0;
+				_gameProfile.Analytics.LevelSpentTime = 0;
+			}
+
+			_levelStartTime = Time.time;
 			_gameProfile.Analytics.LevelStartsCount++;
-			_gameProfile.Analytics.LevelTryCount = (_lastLevelNumber == _gameProfile.LevelNumber.Value || _lastLevelNumber == 0)
+			_gameProfile.Analytics.LevelTryCount = 
+				(
+					_gameProfile.Analytics.LastLevelNumber == _gameProfile.LevelNumber.Value || 
+					_gameProfile.Analytics.LastLevelNumber == 0
+				)
 				? (isNewLevel) ? _gameProfile.Analytics.LevelTryCount + 1 : _gameProfile.Analytics.LevelTryCount
 				: 1;
+			_gameProfile.Analytics.LastLevelNumber = _gameProfile.LevelNumber.Value;
 			Save();
 
 			var properties = new Dictionary<string, object>
@@ -66,7 +92,36 @@
 				{ "try_number", _gameProfile.Analytics.LevelTryCount },
 				{ "continue_level", isNewLevel?0:1 },
 			};
-			_eventSender.SendMessage(LevelStartEventKey, properties);
+			_eventSender.SendMessage(LevelStartEventKey, properties, true);
+		}
+
+		private void OnLevelFinished(GameLevel.LevelResult result)
+		{
+			int wavesFinished = result == GameLevel.LevelResult.Win 
+				? _gameProfile.WaveNumber.Value 
+				: _gameProfile.WaveNumber.Value - 1;
+			_gameProfile.Analytics.LevelSpentTime += Mathf.RoundToInt(Time.time - _levelStartTime);
+
+			int heroLevel = (_gameProfile.LevelHeroExperience.Value > _gameHero.GetExperienceToLevel)
+				? _gameProfile.HeroLevel.Value + 1
+				: _gameProfile.HeroLevel.Value;
+
+			var properties = new Dictionary<string, object>
+			{
+				{ "player_level_number", heroLevel },
+				{ "level_number", _gameProfile.LevelNumber.Value },
+				{ "level_count", _gameProfile.Analytics.LevelStartsCount },
+				{ "wave_amount", WavesCount },
+				{ "try_number", _gameProfile.Analytics.LevelTryCount },
+				{ "waves_finished", wavesFinished },
+				{ "time", _gameProfile.Analytics.LevelSpentTime },
+				{ "result", result },
+				{ "summon_coins_used", _gameProfile.Analytics.SummonTokenSpent },
+				{ "merge_amount", _gameProfile.Analytics.UnitLevelMergedCount },
+				{ "xp_amount", _gameProfile.LevelHeroExperience.Value },
+				{ "coins_amount", _gameProfile.LevelSoftCurrency.Value },
+			};
+			_eventSender.SendMessage(LevelFinishEventKey, properties, true);
 		}
 
 		private void Save() => _gameProfileManager.Save();

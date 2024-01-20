@@ -15,7 +15,7 @@
 
 	public interface IHeroUnitSummoner
 	{
-		ReactiveCommand SummoningPaidUnit { get; }
+		ReactiveCommand<int> SummoningPaidUnit { get; }
 		bool TrySummonByCurrency();
 		void Summon(Species species, int gradeIndex, int power, Vector2Int position);
 		void InterruptPaidSummon();
@@ -55,7 +55,7 @@
 
 		#region IHeroUnitSummoner
 
-		public ReactiveCommand SummoningPaidUnit { get; } = new ReactiveCommand();
+		public ReactiveCommand<int> SummoningPaidUnit { get; } = new ReactiveCommand<int>();
 
 		public bool TrySummonByCurrency()
 		{
@@ -72,7 +72,7 @@
 				return false;
 			}
 
-			SummoningPaidUnit.Execute();
+			SummoningPaidUnit.Execute(summonPrice);
 
 			if (_isPaidSummonInterrupted == false)
 				Summon();

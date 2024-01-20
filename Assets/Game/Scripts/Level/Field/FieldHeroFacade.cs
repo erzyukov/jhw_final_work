@@ -6,6 +6,7 @@ namespace Game.Field
 	public interface IFieldHeroFacade : IFieldFacade
 	{
 		IntReactiveProperty AliveUnitsCount { get; }
+		ReactiveCommand UnitsMerged { get; }
 		void SetDraggableActive(bool value);
 		void ResetAlives();
 	}
@@ -17,6 +18,8 @@ namespace Game.Field
 		#region IFieldHeroFacade
 
 		public IntReactiveProperty AliveUnitsCount => _fieldUnits.AliveUnitsCount;
+
+		public ReactiveCommand UnitsMerged { get; } = new ReactiveCommand();
 
 		public void SetDraggableActive(bool value) => _fieldUnits.SetDraggableActive(value);
 

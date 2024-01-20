@@ -7,12 +7,12 @@ namespace Game.Core
 	using DG.Tweening;
 	using UniRx;
 	using System.Linq;
-	using UnityEngine;
 
 	public interface IGameHero
 	{
 		IntReactiveProperty AnimatedLevelNumber { get; }
 		FloatReactiveProperty ExperienceRatio { get; }
+		int GetExperienceToLevel { get; }
 		void AddLevelHeroExperience(int value);
 		void ResetLevelHeroExperience();
 		void ConsumeLevelHeroExperience();
@@ -36,6 +36,9 @@ namespace Game.Core
 		public FloatReactiveProperty ExperienceRatio { get; } = new FloatReactiveProperty();
 
 		public IntReactiveProperty AnimatedLevelNumber { get; } = new IntReactiveProperty();
+
+		public int GetExperienceToLevel =>
+			_experienceConfig.GetLevelExperience(_profile.HeroLevel.Value + 1) - _profile.HeroExperience.Value;
 
 		public void AddLevelHeroExperience(int value) =>
 			_profile.LevelHeroExperience.Value += value;
