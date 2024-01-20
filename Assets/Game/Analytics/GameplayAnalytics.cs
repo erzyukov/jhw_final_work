@@ -8,6 +8,8 @@
 	using Game.Core;
 	using Game.Configs;
 	using UnityEngine;
+	using System;
+	using Game.Gameplay;
 
 	public class GameplayAnalytics : ControllerBase, IInitializable
 	{
@@ -60,6 +62,10 @@
 
 			_gameLevel.WaveFinished
 				.Subscribe(OnWaveFinished)
+				.AddTo(this);
+
+			_gameplayEvents.BattleStarted
+				.Subscribe(OnBattleStarted)
 				.AddTo(this);
 		}
 
@@ -169,6 +175,25 @@
 				{ "merge_amount", _gameProfile.Analytics.UnitLevelMergedCount - _mergedAtWaveStart },
 			};
 			_eventSender.SendMessage(WaveFinishEventKey, properties, true);
+		}
+
+		private void OnBattleStarted(BattlefieldData data)
+		{
+			var properties = new Dictionary<string, object>
+			{
+				{ "player_level_number", _gameProfile.HeroLevel.Value },
+				{ "level_number", _gameProfile.LevelNumber.Value },
+				{ "level_count", _gameProfile.Analytics.LevelStartsCount },
+				{ "wave_amount", WavesCount },
+				{ "try_number", _gameProfile.Analytics.LevelTryCount },
+				{ "wave_number", _gameProfile.WaveNumber.Value },
+				{ "time", Mathf.RoundToInt(Time.time - _waveStartTime) },
+				{ "enemy_numbers", data.EnemyField.Units.Count },
+				{ "unit_numbers", data.HeroField.Units.Count },
+				{ "enemy_json", "" },
+				{ "unit_json", "" },
+			};
+			_eventSender.SendMessage(BattleStartEventKey, properties, true);
 		}
 
 		private void IncrementProfileProperty(ref int property, int increment)

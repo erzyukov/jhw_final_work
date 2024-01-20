@@ -23,6 +23,7 @@
 		[Inject] private UnitsConfig _unitsConfig;
 		[Inject] private IFieldFacade[] _fields;
 		[Inject] private IGameAudio _gameAudio;
+		[Inject] private IGameplayEvents _gameplayEvents;
 
 		public void Initialize()
 		{
@@ -90,6 +91,11 @@
 
 			foreach (var unit in _fieldEnemyFacade.Units)
 				unit.EnterBattle();
+
+			_gameplayEvents.BattleStarted.Execute(new BattlefieldData{
+				HeroField = _fieldHeroFacade,
+				EnemyField = _fieldEnemyFacade
+			});
 		}
 	}
 }
