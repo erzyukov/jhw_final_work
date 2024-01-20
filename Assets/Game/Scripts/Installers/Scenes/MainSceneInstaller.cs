@@ -32,6 +32,7 @@ namespace Game.Installers
 			InstallUI();
 			WindowsInstall();
 			TutorialInstall();
+			InstallAnalytics();
 		}
 
 		private void InstallUI()
@@ -112,8 +113,11 @@ namespace Game.Installers
 				.AsSingle();
 		}
 
-		private void InstallPools()
+		private void InstallAnalytics()
 		{
+			Container
+				.BindInterfacesTo<TutorialAnalytics>()
+				.AsSingle();
 		}
 	}
 }
