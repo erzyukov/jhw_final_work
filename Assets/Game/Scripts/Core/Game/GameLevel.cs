@@ -12,6 +12,7 @@
 	{
 		BoolReactiveProperty IsLevelLoaded { get; }
 		ReactiveCommand LevelLoading { get; }
+		ReactiveCommand<bool> LevelLoaded { get; }
 		void GoToLevel(int number);
 		void GoToNextWave();
 		void FinishLevel();
@@ -53,6 +54,8 @@
 		public BoolReactiveProperty IsLevelLoaded { get; } = new BoolReactiveProperty();
 		
 		public ReactiveCommand LevelLoading { get; } = new ReactiveCommand();
+
+		public ReactiveCommand<bool> LevelLoaded { get; } = new ReactiveCommand<bool>();
 
 		public void GoToLevel(int number)
 		{
@@ -139,18 +142,15 @@
 			Save();
 		}
 
-		private void LoadNextLevel()
-		{
-			GoToLevel(_profile.LevelNumber.Value + 1);
-		}
-
 		private int ClampLevelNumber(int number) => Mathf.Clamp(number, 1, _levelsConfig.Levels.Length);
 
 		private void OnLevelLoaded()
 		{
 			LevelLoading.Execute();
-			
-			if (_profile.WaveNumber.Value == 0)
+
+			bool isNewLevel = _profile.WaveNumber.Value == 0;
+
+			if (isNewLevel)
 				_profile.WaveNumber.Value++;
 
 			_gameCycle.SetState(GameState.TacticalStage);
@@ -158,6 +158,7 @@
 			_uiViel.Fade(() =>
 			{
 				IsLevelLoaded.Value = true;
+				LevelLoaded.Execute(isNewLevel);
 			});
 		}
 
