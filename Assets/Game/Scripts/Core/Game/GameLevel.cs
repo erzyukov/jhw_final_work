@@ -28,7 +28,6 @@
 		[Inject] private IUiVeil _uiViel;
 
 		private int _heroLastLevel;
-		private bool _isLevelWon;
 
 		public void Initialize()
 		{
@@ -45,7 +44,7 @@
 
 			_gameCycle.State
 				.Where(state => state == GameState.WinBattle)
-				.Subscribe(_ => _isLevelWon = true)
+				.Subscribe(_ => OnStateLevelWon())
 				.AddTo(this);
 		}
 
@@ -100,18 +99,6 @@
 
 		public void FinishLevel()
 		{
-			if (_isLevelWon)
-			{
-				_profile.LevelNumber.Value = Mathf.Clamp(_profile.LevelNumber.Value + 1, 0, _levelsConfig.Levels.Length);
-
-				if (_profile.LevelNumber.Value <= _profile.Levels.Count)
-					_profile.Levels[_profile.LevelNumber.Value - 1].Unlocked.Value = true;
-
-				_isLevelWon = false;
-
-				Save();
-			}
-
 			if (_profile.HeroLevel.Value > _heroLastLevel)
 			{
 				_gameCycle.SetState(GameState.HeroLevelReward);
@@ -141,6 +128,16 @@
 		}
 
 		#endregion
+
+		private void OnStateLevelWon()
+		{
+			_profile.LevelNumber.Value = Mathf.Clamp(_profile.LevelNumber.Value + 1, 0, _levelsConfig.Levels.Length);
+
+			if (_profile.LevelNumber.Value <= _profile.Levels.Count)
+				_profile.Levels[_profile.LevelNumber.Value - 1].Unlocked.Value = true;
+
+			Save();
+		}
 
 		private void LoadNextLevel()
 		{

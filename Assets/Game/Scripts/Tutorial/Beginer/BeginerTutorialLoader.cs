@@ -30,7 +30,15 @@
 
 		private void OnLoadingLobbyHandler()
 		{
-			BeginnerStep currentStep = (_profile.Tutorial.BeginnerStep.Value == BeginnerStep.None) ? BeginnerStep.FirstSummon : _profile.Tutorial.BeginnerStep.Value;
+			//BeginnerStep currentStep = (_profile.Tutorial.BeginnerStep.Value == BeginnerStep.None) ? BeginnerStep.FirstSummon : _profile.Tutorial.BeginnerStep.Value;
+
+			BeginnerStep currentStep = _profile.Tutorial.BeginnerStep.Value switch
+			{
+				BeginnerStep.None => BeginnerStep.FirstSummon,
+				BeginnerStep.PauseForFirstBattle => BeginnerStep.FirstBattle,
+				BeginnerStep.PauseForSecondBattle => BeginnerStep.SecondBattle,
+				_ => _profile.Tutorial.BeginnerStep.Value,
+			};
 
 			_level.LevelLoading
 				.Where(v => currentStep != BeginnerStep.Complete)
