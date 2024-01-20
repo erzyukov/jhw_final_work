@@ -1,6 +1,5 @@
-namespace Game
+namespace Game.Analytics
 {
-	using Game.Analytics;
 	using Game.Profiles;
 	using Game.Tutorial;
 	using Game.Utilities;
@@ -114,7 +113,7 @@ namespace Game
 			{
 				{ "step"   , step },
 			};
-			_eventSender.SendMessage(TutorialEventKey, properties);
+			_eventSender.SendMessage(TutorialEventKey, properties, true);
 		}
 	}
 }

@@ -77,7 +77,7 @@ namespace Game.Analytics
 				{ "step_name"   , step },
 				{ "first_start" , _gameProfileManager.GameProfile.Analytics.IsFirstRunApp}
 			};
-			_eventSender.SendMessage(TechnicalEventKey, properties);
+			_eventSender.SendMessage(TechnicalEventKey, properties, true);
 		}
 	}
 }
