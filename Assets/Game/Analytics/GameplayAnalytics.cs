@@ -10,21 +10,20 @@
 	using UnityEngine;
 	using Game.Gameplay;
 	using Game.Units;
-	using System;
+	using System.Linq;
 
 	public class GameplayAnalytics : ControllerBase, IInitializable
 	{
 		[Inject] private IAnalyticEventSender _eventSender;
-		[Inject] private IGameCycle _gameCycle;
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private IGameProfileManager _gameProfileManager;
-		[Inject] private IScenesManager _scenesManager;
 		[Inject] private IGameplayEvents _gameplayEvents;
 		[Inject] private IGameHero _gameHero;
 		[Inject] private IGameUpgrades _gameUpgrades;
 		[Inject] private GameProfile _gameProfile;
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] private CurrencyConfig _currencyConfig;
+		[Inject] private UpgradesConfig _upgradesConfig;
 
 		private const string LevelStartEventKey = "level_start";
 		private const string LevelFinishEventKey = "level_finish";
@@ -86,6 +85,10 @@
 
 			_gameplayEvents.UnitsMerged
 				.Subscribe(OnUnitsMerged)
+				.AddTo(this);
+
+			_gameUpgrades.Upgraded
+				.Subscribe(OnUnitUpgraded)
 				.AddTo(this);
 		}
 
@@ -254,7 +257,7 @@
 				{ "power", unit.Power },
 				{ "summon_coins_used", summonPrice },
 			};
-			_eventSender.SendMessage(UnitSummonEventKey, properties, true);
+			_eventSender.SendMessage(UnitSummonEventKey, properties);
 		}
 
 		private void OnUnitsMerged(IUnitFacade unit)
@@ -270,7 +273,26 @@
 				{ "unit_merge_level", unit.GradeIndex + 1 },
 				{ "power", unit.Power },
 			};
-			_eventSender.SendMessage(UnitMergeEventKey, properties, true);
+			_eventSender.SendMessage(UnitMergeEventKey, properties);
+		}
+
+		private void OnUnitUpgraded(Species species)
+		{
+			int upgradeLevel = _gameUpgrades.GetUnitLevel(species);
+			int maxLevelUnlocked = _gameProfile.Levels.Where(l => l.Unlocked.Value).Select((l, i) => i).LastOrDefault() + 1;
+			UnitUpgradesConfig upgrade = _upgradesConfig.UnitsUpgrades[species];
+			int maxPriceLevel = Mathf.Clamp(upgradeLevel, 1, upgrade.Price.Length + 1);
+			int previousUpgradePrice = upgrade.Price[maxPriceLevel - 2];
+
+			var properties = new Dictionary<string, object>
+			{
+				{ "player_level_number", _gameProfile.HeroLevel.Value },
+				{ "level_number", maxLevelUnlocked },
+				{ "unit_level_number", upgradeLevel },
+				{ "unit_id", (int)species },
+				{ "coins_used", previousUpgradePrice },
+			};
+			_eventSender.SendMessage(UnitUpgradeEventKey, properties);
 		}
 
 		private void IncrementProfileProperty(ref int property, int increment)
