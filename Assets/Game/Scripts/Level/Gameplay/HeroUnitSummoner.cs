@@ -15,7 +15,8 @@
 
 	public interface IHeroUnitSummoner
 	{
-		ReactiveCommand<IUnitFacade> SummoningPaidUnit { get; }
+		ReactiveCommand SummoningPaidUnit { get; }
+		ReactiveCommand<IUnitFacade> SummonedPaidUnit { get; }
 		bool TrySummonByCurrency();
 		IUnitFacade Summon(Species species, int gradeIndex, int power, Vector2Int position);
 		void InterruptPaidSummon();
@@ -55,7 +56,8 @@
 
 		#region IHeroUnitSummoner
 
-		public ReactiveCommand<IUnitFacade> SummoningPaidUnit { get; } = new ReactiveCommand<IUnitFacade>();
+		public ReactiveCommand SummoningPaidUnit { get; } = new ReactiveCommand();
+		public ReactiveCommand<IUnitFacade> SummonedPaidUnit { get; } = new ReactiveCommand<IUnitFacade>();
 
 		public bool TrySummonByCurrency()
 		{
@@ -72,6 +74,8 @@
 				return false;
 			}
 
+			SummoningPaidUnit.Execute();
+
 			if (_isPaidSummonInterrupted == false)
 				Summon();
 
@@ -86,7 +90,7 @@
 			_fieldFacade.AddUnit(unit, position);
 
 			if (_isPaidSummonInterrupted)
-				SummoningPaidUnit.Execute(unit);
+				SummonedPaidUnit.Execute(unit);
 
 			SubscribeToUnit(unit);
 
@@ -107,7 +111,7 @@
 			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(summonSpecies, defaultGradeIndex, defaultPower);
 			_fieldFacade.AddUnit(unit);
 
-			SummoningPaidUnit.Execute(unit);
+			SummonedPaidUnit.Execute(unit);
 
 			SubscribeToUnit(unit);
 		}

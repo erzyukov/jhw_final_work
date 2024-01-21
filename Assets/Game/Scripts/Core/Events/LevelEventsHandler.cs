@@ -18,7 +18,7 @@
 				.Subscribe(unit => _gameplayEvents.UnitsMerged.Execute(unit))
 				.AddTo(this);
 
-			_heroUnitSummoner.SummoningPaidUnit
+			_heroUnitSummoner.SummonedPaidUnit
 				.Subscribe(v => _gameplayEvents.UnitSummoned.Execute(v))
 				.AddTo(this);
 		}

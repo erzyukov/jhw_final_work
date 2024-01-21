@@ -13,7 +13,7 @@ namespace Game.Ui
 
 		public void Initialize()
 		{
-			_screen.Opening
+			_screen.Opened
 				.Subscribe(_ => OnScreenOpeningHandler())
 				.AddTo(this);
 

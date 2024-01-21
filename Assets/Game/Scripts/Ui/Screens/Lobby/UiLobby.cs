@@ -33,7 +33,7 @@
         {
             _levelTitlePrefix = _localizator.GetString(LevelTitlePrefixKey);
 
-            _lobbyScreen.Opening
+            _lobbyScreen.Opened
                 .Subscribe(_ => OnScreenOpeningHandler())
                 .AddTo(this);
 
