@@ -15,7 +15,7 @@
 		public void Initialize()
 		{
 			_fieldHeroFacade.UnitsMerged
-				.Subscribe(v => _gameplayEvents.UnitsMerged.Execute())
+				.Subscribe(unit => _gameplayEvents.UnitsMerged.Execute(unit))
 				.AddTo(this);
 
 			_heroUnitSummoner.SummoningPaidUnit

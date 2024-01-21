@@ -17,7 +17,7 @@
 	{
 		ReactiveCommand<IUnitFacade> SummoningPaidUnit { get; }
 		bool TrySummonByCurrency();
-		void Summon(Species species, int gradeIndex, int power, Vector2Int position);
+		IUnitFacade Summon(Species species, int gradeIndex, int power, Vector2Int position);
 		void InterruptPaidSummon();
 	}
 
@@ -80,14 +80,17 @@
 			return true;
 		}
 
-		public void Summon(Species species, int gradeIndex, int power, Vector2Int position)
+		public IUnitFacade Summon(Species species, int gradeIndex, int power, Vector2Int position)
 		{
 			IUnitFacade unit = _unitSpawner.SpawnHeroUnit(species, gradeIndex, power);
 			_fieldFacade.AddUnit(unit, position);
 
-			SummoningPaidUnit.Execute(unit);
+			if (_isPaidSummonInterrupted)
+				SummoningPaidUnit.Execute(unit);
 
 			SubscribeToUnit(unit);
+
+			return unit;
 		}
 
 		public void InterruptPaidSummon() => 

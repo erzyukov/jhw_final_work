@@ -83,6 +83,10 @@
 			_gameplayEvents.UnitSummoned
 				.Subscribe(OnUnitSummoned)
 				.AddTo(this);
+
+			_gameplayEvents.UnitsMerged
+				.Subscribe(OnUnitsMerged)
+				.AddTo(this);
 		}
 
 		private void AuxiliarySubscribes()
@@ -251,6 +255,22 @@
 				{ "summon_coins_used", summonPrice },
 			};
 			_eventSender.SendMessage(UnitSummonEventKey, properties, true);
+		}
+
+		private void OnUnitsMerged(IUnitFacade unit)
+		{
+			int upgradeLevel = _gameUpgrades.GetUnitLevel(unit.Species);
+
+			var properties = new Dictionary<string, object>
+			{
+				{ "player_level_number", _gameProfile.HeroLevel.Value },
+				{ "level_number", _gameProfile.LevelNumber.Value },
+				{ "unit_level_number", upgradeLevel },
+				{ "unit_id", (int)unit.Species },
+				{ "unit_merge_level", unit.GradeIndex + 1 },
+				{ "power", unit.Power },
+			};
+			_eventSender.SendMessage(UnitMergeEventKey, properties, true);
 		}
 
 		private void IncrementProfileProperty(ref int property, int increment)

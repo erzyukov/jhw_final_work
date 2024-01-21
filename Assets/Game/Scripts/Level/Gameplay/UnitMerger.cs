@@ -122,7 +122,7 @@
 
 			IUnitFacade unit = _heroUnitSummoner.Summon(species, gradeIndex, power, cellPosition);
 			
-			_fieldHeroFacade.UnitsMerged.Execute();
+			_fieldHeroFacade.UnitsMerged.Execute(unit);
 		}
 
 		private int GetMergingUnitPower() =>

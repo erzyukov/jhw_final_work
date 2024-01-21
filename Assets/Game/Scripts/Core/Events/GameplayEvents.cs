@@ -6,7 +6,7 @@
 
 	public interface IGameplayEvents
 	{
-		ReactiveCommand UnitsMerged { get; }
+		ReactiveCommand<IUnitFacade> UnitsMerged { get; }
 		ReactiveCommand<IUnitFacade> UnitSummoned { get; }
 		ReactiveCommand<BattlefieldData> BattleStarted { get; }
 		ReactiveCommand<BattlefieldData> BattleWon { get; }
@@ -17,7 +17,7 @@
 	{
 		#region IGameplayEvents
 
-		public ReactiveCommand UnitsMerged { get; } = new ReactiveCommand();
+		public ReactiveCommand<IUnitFacade> UnitsMerged { get; } = new ReactiveCommand<IUnitFacade>();
 		public ReactiveCommand<IUnitFacade> UnitSummoned { get; } = new ReactiveCommand<IUnitFacade>();
 		public ReactiveCommand<BattlefieldData> BattleStarted { get; } = new ReactiveCommand<BattlefieldData>();
 		public ReactiveCommand<BattlefieldData> BattleWon { get; } = new ReactiveCommand<BattlefieldData>();
