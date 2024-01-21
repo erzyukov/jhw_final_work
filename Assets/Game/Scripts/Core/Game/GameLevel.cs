@@ -160,6 +160,8 @@
 
 		private void OnStateLevelWon()
 		{
+			_profile.IsWonLastBattle = true;
+
 			WaveFinished.Execute(Result.Win);
 			LevelFinished.Execute(Result.Win);
 
@@ -173,6 +175,8 @@
 
 		private void OnStateLevelFailed()
 		{
+			_profile.IsWonLastBattle = false;
+
 			WaveFinished.Execute(Result.Fail);
 			LevelFinished.Execute(Result.Fail);
 		}

@@ -3,14 +3,16 @@
 	using Game.Profiles;
 	using UniRx;
 	using Zenject;
+	using static GameCurrency;
 
 	// TODO: Add summon currency message
 	// TODO: Add summon currency animate
 
 	public interface IGameCurrency
 	{
-		void AddSoftCurrency(int value);
-		bool TrySpendSoftCurrency(int amount);
+		ReactiveCommand<CurrencyMovement<Soft>> SoftCurrencyMoved { get; }
+		void AddSoftCurrency(int value, Soft type, string id);
+		bool TrySpendSoftCurrency(int amount, Soft type, string id);
 		void SetSummonCurrency(int value);
 		void AddSummonCurrency(int value);
 		bool TrySpendSummonCurrency(int amount);
@@ -23,15 +25,48 @@
 	{
 		[Inject] private IGameProfileManager _gameProfileManager;
 
+		public enum Soft
+		{
+			None,
+			Upgrade,
+			LevelFinishReward,
+			HeroLevelReward,
+		}
+
 		private GameProfile GameProfile => _gameProfileManager.GameProfile;
 
 		#region IGameCurrency
 
-		public void AddSoftCurrency(int value) => 
+		public ReactiveCommand<CurrencyMovement<Soft>> SoftCurrencyMoved { get; } = new ReactiveCommand<CurrencyMovement<Soft>>();
+
+		public void AddSoftCurrency(int value, Soft type, string id)
+		{
 			AddCurrency(GameProfile.SoftCurrency, value);
 
-		public bool TrySpendSoftCurrency(int value) => 
-			TrySpendCurrency(GameProfile.SoftCurrency, value);
+			SoftCurrencyMoved.Execute(new CurrencyMovement<Soft>
+			{
+				Type = type,
+				Id = id,
+				Amount = value
+			});
+		}
+
+		public bool TrySpendSoftCurrency(int value, Soft type, string id)
+		{
+			bool canSpend = TrySpendCurrency(GameProfile.SoftCurrency, value);
+
+			if (canSpend)
+			{
+				SoftCurrencyMoved.Execute(new CurrencyMovement<Soft>
+				{
+					Type = type,
+					Id = id,
+					Amount = -value
+				});
+			}
+
+			return canSpend;
+		}
 
 		public void SetSummonCurrency(int value) => 
 			GameProfile.SummonCurrency.Value = value;
@@ -50,7 +85,7 @@
 
 		public void ConsumeLevelSoftCurrency()
 		{
-			AddSoftCurrency(GameProfile.LevelSoftCurrency.Value);
+			AddSoftCurrency(GameProfile.LevelSoftCurrency.Value, Soft.LevelFinishReward, GameProfile.IsWonLastBattle ? "win": "fail");
 			ResetLevelSoftCurrency();
 			Save();
 		}
@@ -75,5 +110,12 @@
 		}
 
 		private void Save() => _gameProfileManager.Save();
+
+		public struct CurrencyMovement<T> where T : System.Enum
+		{
+			public T Type;
+			public string Id;
+			public int Amount;
+		}
 	}
 }

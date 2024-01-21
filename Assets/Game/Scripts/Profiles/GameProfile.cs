@@ -17,6 +17,7 @@ namespace Game.Profiles
 		public readonly IntReactiveProperty LevelSoftCurrency = new IntReactiveProperty(0);
 		public readonly IntReactiveProperty LevelHeroExperience = new IntReactiveProperty(0);
 		public bool IsReturnFromBattle;
+		public bool IsWonLastBattle;
 
 		public List<LevelProfile> Levels = new List<LevelProfile>();
 		public TutorialProfile Tutorial = new TutorialProfile();
