@@ -63,13 +63,19 @@
 		private void OnHeroUnitsCountChanged(int count)
 		{
 			if (count == 0 && _gameCycle.State.Value == GameState.BattleStage)
-				_gameCycle.SetState(GameState.LoseBattle);
+			{
+				_gameplayEvents.BattleLost.Execute(CreateBattlefieldData());
+				Observable.Timer(TimeSpan.FromSeconds(_timingsConfig.WaveTransitionDelay))
+					.Subscribe(_ => _gameCycle.SetState(GameState.LoseBattle))
+					.AddTo(this);
+			}
 		}
 
 		private void OnEnemyUnitsCountChanged(int count)
 		{
 			if (count == 0)
 			{
+				_gameplayEvents.BattleWon.Execute(CreateBattlefieldData());
 				Observable.Timer(TimeSpan.FromSeconds(_timingsConfig.WaveTransitionDelay))
 					.Subscribe(_ =>
 					{
@@ -92,10 +98,13 @@
 			foreach (var unit in _fieldEnemyFacade.Units)
 				unit.EnterBattle();
 
-			_gameplayEvents.BattleStarted.Execute(new BattlefieldData{
-				HeroField = _fieldHeroFacade,
-				EnemyField = _fieldEnemyFacade
-			});
+			_gameplayEvents.BattleStarted.Execute(CreateBattlefieldData());
 		}
+
+		private BattlefieldData CreateBattlefieldData() => new BattlefieldData
+		{
+			HeroField = _fieldHeroFacade,
+			EnemyField = _fieldEnemyFacade
+		};
 	}
 }

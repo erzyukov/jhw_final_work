@@ -8,7 +8,6 @@
 	using Game.Core;
 	using Game.Configs;
 	using UnityEngine;
-	using System;
 	using Game.Gameplay;
 
 	public class GameplayAnalytics : ControllerBase, IInitializable
@@ -37,6 +36,7 @@
 		private float _waveStartTime;
 		private float _mergedAtWaveStart;
 		private float _spentTokensAtWaveStart;
+		private float _battleStartTime;
 
 		private int WavesCount => _levelsConfig.Levels[_gameProfile.LevelNumber.Value - 1].Waves.Length;
 
@@ -66,6 +66,14 @@
 
 			_gameplayEvents.BattleStarted
 				.Subscribe(OnBattleStarted)
+				.AddTo(this);
+
+			_gameplayEvents.BattleWon
+				.Subscribe(data => OnBattleFinished(data, GameLevel.Result.Win))
+				.AddTo(this);
+
+			_gameplayEvents.BattleLost
+				.Subscribe(data => OnBattleFinished(data, GameLevel.Result.Fail))
 				.AddTo(this);
 		}
 
@@ -179,6 +187,8 @@
 
 		private void OnBattleStarted(BattlefieldData data)
 		{
+			_battleStartTime = Time.time;
+
 			var properties = new Dictionary<string, object>
 			{
 				{ "player_level_number", _gameProfile.HeroLevel.Value },
@@ -189,11 +199,32 @@
 				{ "wave_number", _gameProfile.WaveNumber.Value },
 				{ "time", Mathf.RoundToInt(Time.time - _waveStartTime) },
 				{ "enemy_numbers", data.EnemyField.Units.Count },
-				{ "unit_numbers", data.HeroField.Units.Count },
+				{ "unit_numbers", data.HeroField.AliveUnitsCount },
 				{ "enemy_json", "" },
 				{ "unit_json", "" },
 			};
 			_eventSender.SendMessage(BattleStartEventKey, properties, true);
+		}
+
+		private void OnBattleFinished(BattlefieldData data, GameLevel.Result result)
+		{
+			var properties = new Dictionary<string, object>
+			{
+				{ "player_level_number", _gameProfile.HeroLevel.Value },
+				{ "level_number", _gameProfile.LevelNumber.Value },
+				{ "level_count", _gameProfile.Analytics.LevelStartsCount },
+				{ "wave_amount", WavesCount },
+				{ "try_number", _gameProfile.Analytics.LevelTryCount },
+				{ "wave_number", _gameProfile.WaveNumber.Value },
+				{ "time", Mathf.RoundToInt(Time.time - _waveStartTime) },
+				{ "enemy_numbers", data.EnemyField.Units.Count },
+				{ "unit_numbers", data.HeroField.AliveUnitsCount },
+				{ "enemy_json", "" },
+				{ "unit_json", "" },
+				{ "battle_time", Mathf.RoundToInt(Time.time - _battleStartTime) },
+				{ "result", result },
+			};
+			_eventSender.SendMessage(BattleFinishEventKey, properties, true);
 		}
 
 		private void IncrementProfileProperty(ref int property, int increment)

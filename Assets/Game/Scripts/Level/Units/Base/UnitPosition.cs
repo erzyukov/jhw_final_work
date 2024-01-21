@@ -26,9 +26,9 @@
 			_defaultRotation = Quaternion.identity;
 
 			_gameCycle.State
+				.Where(s => s == GameState.TacticalStage)
 				.Subscribe(OnGameStateChange)
 				.AddTo(this);
-
 		}
 
 		private void OnGameStateChange(GameState state)
