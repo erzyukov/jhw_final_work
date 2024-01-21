@@ -9,6 +9,8 @@
 	using Game.Configs;
 	using UnityEngine;
 	using Game.Gameplay;
+	using Game.Units;
+	using System;
 
 	public class GameplayAnalytics : ControllerBase, IInitializable
 	{
@@ -19,8 +21,10 @@
 		[Inject] private IScenesManager _scenesManager;
 		[Inject] private IGameplayEvents _gameplayEvents;
 		[Inject] private IGameHero _gameHero;
+		[Inject] private IGameUpgrades _gameUpgrades;
 		[Inject] private GameProfile _gameProfile;
 		[Inject] private LevelsConfig _levelsConfig;
+		[Inject] private CurrencyConfig _currencyConfig;
 
 		private const string LevelStartEventKey = "level_start";
 		private const string LevelFinishEventKey = "level_finish";
@@ -75,12 +79,16 @@
 			_gameplayEvents.BattleLost
 				.Subscribe(data => OnBattleFinished(data, GameLevel.Result.Fail))
 				.AddTo(this);
+
+			_gameplayEvents.UnitSummoned
+				.Subscribe(OnUnitSummoned)
+				.AddTo(this);
 		}
 
 		private void AuxiliarySubscribes()
 		{
 			_gameplayEvents.UnitSummoned
-				.Subscribe(v => IncrementProfileProperty(ref _gameProfile.Analytics.SummonTokenSpent, v))
+				.Subscribe(_ => IncrementProfileProperty(ref _gameProfile.Analytics.SummonTokenSpent, _currencyConfig.UnitSummonPrice))
 				.AddTo(this);
 
 			_gameplayEvents.UnitsMerged
@@ -225,6 +233,24 @@
 				{ "result", result },
 			};
 			_eventSender.SendMessage(BattleFinishEventKey, properties, true);
+		}
+
+		private void OnUnitSummoned(IUnitFacade unit)
+		{
+			int summonPrice = _currencyConfig.UnitSummonPrice;
+			int upgradeLevel = _gameUpgrades.GetUnitLevel(unit.Species);
+
+			var properties = new Dictionary<string, object>
+			{
+				{ "player_level_number", _gameProfile.HeroLevel.Value },
+				{ "level_number", _gameProfile.LevelNumber.Value },
+				{ "unit_level_number", upgradeLevel },
+				{ "unit_id", (int)unit.Species },
+				{ "unit_merge_level", unit.GradeIndex + 1 },
+				{ "power", unit.Power },
+				{ "summon_coins_used", summonPrice },
+			};
+			_eventSender.SendMessage(UnitSummonEventKey, properties, true);
 		}
 
 		private void IncrementProfileProperty(ref int property, int increment)

@@ -120,7 +120,7 @@
 			_mergeInitiatorUnit = null;
 			_mergeAbsorbedUnit = null;
 
-			_heroUnitSummoner.Summon(species, gradeIndex, power, cellPosition);
+			IUnitFacade unit = _heroUnitSummoner.Summon(species, gradeIndex, power, cellPosition);
 			
 			_fieldHeroFacade.UnitsMerged.Execute();
 		}
