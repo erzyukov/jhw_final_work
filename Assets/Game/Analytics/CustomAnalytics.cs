@@ -13,7 +13,7 @@
 		[Inject] private IGameEnergy _gameEnergy;
 		[Inject] private IGameLevel _gameLevel;
 
-		private const int MinuteStatInterval = 20;
+		private const int MinuteStatInterval = 60;
 		private const string MinuteStatEventKey = "1_minute_stat";
 
 		private int _minuteEventCount = 0;
