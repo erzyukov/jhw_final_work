@@ -126,6 +126,10 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<ResourcesAnalytics>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<CustomAnalytics>()
+				.AsSingle();
 		}
 	}
 }

@@ -5,15 +5,12 @@
 	using Zenject;
 	using UniRx;
 	using System.Collections.Generic;
-	using Game.Profiles;
 
 	public class ResourcesAnalytics : AnalyticsBase, IInitializable
 	{
-		[Inject] private IAnalyticEventSender _eventSender;
 		[Inject] private IGameCurrency _gameCurrency;
 		[Inject] private IGameHero _gameHero;
 		[Inject] private IGameEnergy _gameEnergy;
-		[Inject] private GameProfile _gameProfile;
 
 		private const string SoftCurrencyEventKey = "soft_currency";
 		private const string PlayerExperienceEventKey = "player_xp";

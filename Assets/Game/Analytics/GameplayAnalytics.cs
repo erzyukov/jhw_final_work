@@ -17,7 +17,6 @@
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private IGameProfileManager _gameProfileManager;
 		[Inject] private IGameplayEvents _gameplayEvents;
-		[Inject] private IGameHero _gameHero;
 		[Inject] private IGameUpgrades _gameUpgrades;
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] private CurrencyConfig _currencyConfig;

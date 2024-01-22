@@ -3,6 +3,7 @@
 	public class AnalyticsProfile
 	{
 		public bool IsFirstRunApp = true;
+		public int SessionNumber = 0;
 
 		public int TutorialStep = 0;
 
