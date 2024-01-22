@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 921ed839c3799b544a81f4e6ef6ad0e7, type: 3}
   m_Name: Timings
   m_EditorClassIdentifier: 
-  _experienceAnimationDuration: 0
-  _waveTransitionDelay: 0
-  _unitDeathVanishDelay: 0
+  _experienceAnimationDuration: 1
+  _waveTransitionDelay: 1.5
+  _unitDeathVanishDelay: 5
