@@ -8,12 +8,10 @@ namespace Game.Analytics
 	using UnityEngine;
 	using Game.Profiles;
 
-	public class TechnicalAnalytics : ControllerBase, IInitializable
+	public class TechnicalAnalytics : AnalyticsBase, IInitializable
 	{
 		[Inject] private IScenesManager _scenesManager;
 		[Inject] private IApplicationPaused _applicationPaused;
-		[Inject] private IAnalyticEventSender _eventSender;
-		[Inject] private IGameProfileManager _gameProfileManager;
 
 		private const string AppPauseEventKey = "app_pause";
 		private const string AppResumeEventKey = "app_resume";
@@ -56,7 +54,7 @@ namespace Game.Analytics
 				{ "session_time"   , Time.time },
 				{ "time"    , Time.time - _lastPauseEventTime}
 			};
-			_eventSender.SendMessage(key, properties);
+			SendMessage(key, properties);
 
 			_lastPauseEventTime = Time.time;
 		}
@@ -75,9 +73,9 @@ namespace Game.Analytics
 			var properties = new Dictionary<string, object>
 			{
 				{ "step_name"   , step },
-				{ "first_start" , _gameProfileManager.GameProfile.Analytics.IsFirstRunApp}
+				{ "first_start" , GameProfile.Analytics.IsFirstRunApp}
 			};
-			_eventSender.SendMessage(TechnicalEventKey, properties, true);
+			SendMessage(TechnicalEventKey, properties, true);
 		}
 	}
 }

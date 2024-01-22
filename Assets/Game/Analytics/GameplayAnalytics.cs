@@ -12,15 +12,13 @@
 	using Game.Units;
 	using System.Linq;
 
-	public class GameplayAnalytics : ControllerBase, IInitializable
+	public class GameplayAnalytics : AnalyticsBase, IInitializable
 	{
-		[Inject] private IAnalyticEventSender _eventSender;
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private IGameProfileManager _gameProfileManager;
 		[Inject] private IGameplayEvents _gameplayEvents;
 		[Inject] private IGameHero _gameHero;
 		[Inject] private IGameUpgrades _gameUpgrades;
-		[Inject] private GameProfile _gameProfile;
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] private CurrencyConfig _currencyConfig;
 		[Inject] private UpgradesConfig _upgradesConfig;
@@ -41,7 +39,7 @@
 		private float _spentTokensAtWaveStart;
 		private float _battleStartTime;
 
-		private int WavesCount => _levelsConfig.Levels[_gameProfile.LevelNumber.Value - 1].Waves.Length;
+		private int WavesCount => _levelsConfig.Levels[GameProfile.LevelNumber.Value - 1].Waves.Length;
 
 		public void Initialize()
 		{
@@ -95,11 +93,11 @@
 		private void AuxiliarySubscribes()
 		{
 			_gameplayEvents.UnitSummoned
-				.Subscribe(_ => IncrementProfileProperty(ref _gameProfile.Analytics.SummonTokenSpent, _currencyConfig.UnitSummonPrice))
+				.Subscribe(_ => IncrementProfileProperty(ref GameProfile.Analytics.SummonTokenSpent, _currencyConfig.UnitSummonPrice))
 				.AddTo(this);
 
 			_gameplayEvents.UnitsMerged
-				.Subscribe(_ => IncrementProfileProperty(ref _gameProfile.Analytics.UnitLevelMergedCount, 1))
+				.Subscribe(_ => IncrementProfileProperty(ref GameProfile.Analytics.UnitLevelMergedCount, 1))
 				.AddTo(this);
 		}
 
@@ -107,97 +105,82 @@
 		{
 			if (isNewLevel)
 			{
-				_gameProfile.Analytics.SummonTokenSpent = 0;
-				_gameProfile.Analytics.UnitLevelMergedCount = 0;
-				_gameProfile.Analytics.LevelSpentTime = 0;
+				GameProfile.Analytics.SummonTokenSpent = 0;
+				GameProfile.Analytics.UnitLevelMergedCount = 0;
+				GameProfile.Analytics.LevelSpentTime = 0;
 			}
 
 			_levelStartTime = Time.time;
-			_gameProfile.Analytics.LevelStartsCount++;
-			_gameProfile.Analytics.LevelTryCount = 
+			GameProfile.Analytics.LevelStartsCount++;
+			GameProfile.Analytics.LevelTryCount = 
 				(
-					_gameProfile.Analytics.LastLevelNumber == _gameProfile.LevelNumber.Value || 
-					_gameProfile.Analytics.LastLevelNumber == 0
+					GameProfile.Analytics.LastLevelNumber == GameProfile.LevelNumber.Value || 
+					GameProfile.Analytics.LastLevelNumber == 0
 				)
-				? (isNewLevel) ? _gameProfile.Analytics.LevelTryCount + 1 : _gameProfile.Analytics.LevelTryCount
+				? (isNewLevel) ? GameProfile.Analytics.LevelTryCount + 1 : GameProfile.Analytics.LevelTryCount
 				: 1;
-			_gameProfile.Analytics.LastLevelNumber = _gameProfile.LevelNumber.Value;
+			GameProfile.Analytics.LastLevelNumber = GameProfile.LevelNumber.Value;
 			Save();
 
 			var properties = new Dictionary<string, object>
 			{
-				{ "player_level_number", _gameProfile.HeroLevel.Value },
-				{ "level_number", _gameProfile.LevelNumber.Value },
-				{ "level_count", _gameProfile.Analytics.LevelStartsCount },
 				{ "wave_amount", WavesCount },
-				{ "try_number", _gameProfile.Analytics.LevelTryCount },
+				{ "try_number", GameProfile.Analytics.LevelTryCount },
 				{ "continue_level", isNewLevel?0:1 },
 			};
-			_eventSender.SendMessage(LevelStartEventKey, properties, true);
+			SendMessage(LevelStartEventKey, properties, true);
 		}
 
 		private void OnLevelFinished(GameLevel.Result result)
 		{
 			int wavesFinished = result == GameLevel.Result.Win 
-				? _gameProfile.WaveNumber.Value 
-				: _gameProfile.WaveNumber.Value - 1;
-			_gameProfile.Analytics.LevelSpentTime += Mathf.RoundToInt(Time.time - _levelStartTime);
-
-			int heroLevel = (_gameProfile.LevelHeroExperience.Value > _gameHero.GetExperienceToLevel)
-				? _gameProfile.HeroLevel.Value + 1
-				: _gameProfile.HeroLevel.Value;
+				? GameProfile.WaveNumber.Value 
+				: GameProfile.WaveNumber.Value - 1;
+			GameProfile.Analytics.LevelSpentTime += Mathf.RoundToInt(Time.time - _levelStartTime);
 
 			var properties = new Dictionary<string, object>
 			{
-				{ "player_level_number", heroLevel },
-				{ "level_number", _gameProfile.LevelNumber.Value },
-				{ "level_count", _gameProfile.Analytics.LevelStartsCount },
 				{ "wave_amount", WavesCount },
-				{ "try_number", _gameProfile.Analytics.LevelTryCount },
+				{ "try_number", GameProfile.Analytics.LevelTryCount },
 				{ "waves_finished", wavesFinished },
-				{ "time", _gameProfile.Analytics.LevelSpentTime },
+				{ "time", GameProfile.Analytics.LevelSpentTime },
 				{ "result", result },
-				{ "summon_coins_used", _gameProfile.Analytics.SummonTokenSpent },
-				{ "merge_amount", _gameProfile.Analytics.UnitLevelMergedCount },
-				{ "xp_amount", _gameProfile.LevelHeroExperience.Value },
-				{ "coins_amount", _gameProfile.LevelSoftCurrency.Value },
+				{ "summon_coins_used", GameProfile.Analytics.SummonTokenSpent },
+				{ "merge_amount", GameProfile.Analytics.UnitLevelMergedCount },
+				{ "xp_amount", GameProfile.LevelHeroExperience.Value },
+				{ "coins_amount", GameProfile.LevelSoftCurrency.Value },
 			};
-			_eventSender.SendMessage(LevelFinishEventKey, properties, true);
+			SendMessage(LevelFinishEventKey, properties, true);
 		}
 
 		private void OnWaveStarted(int waveNumber)
 		{
 			_waveStartTime = Time.time;
-			_mergedAtWaveStart = _gameProfile.Analytics.UnitLevelMergedCount;
-			_spentTokensAtWaveStart = _gameProfile.Analytics.SummonTokenSpent;
+			_mergedAtWaveStart = GameProfile.Analytics.UnitLevelMergedCount;
+			_spentTokensAtWaveStart = GameProfile.Analytics.SummonTokenSpent;
 
 			var properties = new Dictionary<string, object>
 			{
-				{ "level_number", _gameProfile.LevelNumber.Value },
-				{ "level_count", _gameProfile.Analytics.LevelStartsCount },
 				{ "wave_amount", WavesCount },
-				{ "try_number", _gameProfile.Analytics.LevelTryCount },
+				{ "try_number", GameProfile.Analytics.LevelTryCount },
 				{ "wave_number", waveNumber },
 			};
-			_eventSender.SendMessage(WaveStartEventKey, properties, true);
+			SendMessage(WaveStartEventKey, properties, true);
 		}
 
 		private void OnWaveFinished(GameLevel.Result result)
 		{
 			var properties = new Dictionary<string, object>
 			{
-				{ "player_level_number", _gameProfile.HeroLevel.Value },
-				{ "level_number", _gameProfile.LevelNumber.Value },
-				{ "level_count", _gameProfile.Analytics.LevelStartsCount },
 				{ "wave_amount", WavesCount },
-				{ "try_number", _gameProfile.Analytics.LevelTryCount },
-				{ "wave_number", _gameProfile.WaveNumber.Value },
+				{ "try_number", GameProfile.Analytics.LevelTryCount },
+				{ "wave_number", GameProfile.WaveNumber.Value },
 				{ "time", Mathf.RoundToInt(Time.time - _waveStartTime) },
 				{ "result", result },
-				{ "summon_coins_used", _gameProfile.Analytics.SummonTokenSpent - _spentTokensAtWaveStart },
-				{ "merge_amount", _gameProfile.Analytics.UnitLevelMergedCount - _mergedAtWaveStart },
+				{ "summon_coins_used", GameProfile.Analytics.SummonTokenSpent - _spentTokensAtWaveStart },
+				{ "merge_amount", GameProfile.Analytics.UnitLevelMergedCount - _mergedAtWaveStart },
 			};
-			_eventSender.SendMessage(WaveFinishEventKey, properties, true);
+			SendMessage(WaveFinishEventKey, properties, true);
 		}
 
 		private void OnBattleStarted(BattlefieldData data)
@@ -206,31 +189,25 @@
 
 			var properties = new Dictionary<string, object>
 			{
-				{ "player_level_number", _gameProfile.HeroLevel.Value },
-				{ "level_number", _gameProfile.LevelNumber.Value },
-				{ "level_count", _gameProfile.Analytics.LevelStartsCount },
 				{ "wave_amount", WavesCount },
-				{ "try_number", _gameProfile.Analytics.LevelTryCount },
-				{ "wave_number", _gameProfile.WaveNumber.Value },
+				{ "try_number", GameProfile.Analytics.LevelTryCount },
+				{ "wave_number", GameProfile.WaveNumber.Value },
 				{ "time", Mathf.RoundToInt(Time.time - _waveStartTime) },
 				{ "enemy_numbers", data.EnemyField.Units.Count },
 				{ "unit_numbers", data.HeroField.AliveUnitsCount },
 				{ "enemy_json", "" },
 				{ "unit_json", "" },
 			};
-			_eventSender.SendMessage(BattleStartEventKey, properties, true);
+			SendMessage(BattleStartEventKey, properties, true);
 		}
 
 		private void OnBattleFinished(BattlefieldData data, GameLevel.Result result)
 		{
 			var properties = new Dictionary<string, object>
 			{
-				{ "player_level_number", _gameProfile.HeroLevel.Value },
-				{ "level_number", _gameProfile.LevelNumber.Value },
-				{ "level_count", _gameProfile.Analytics.LevelStartsCount },
 				{ "wave_amount", WavesCount },
-				{ "try_number", _gameProfile.Analytics.LevelTryCount },
-				{ "wave_number", _gameProfile.WaveNumber.Value },
+				{ "try_number", GameProfile.Analytics.LevelTryCount },
+				{ "wave_number", GameProfile.WaveNumber.Value },
 				{ "time", Mathf.RoundToInt(Time.time - _waveStartTime) },
 				{ "enemy_numbers", data.EnemyField.Units.Count },
 				{ "unit_numbers", data.HeroField.AliveUnitsCount },
@@ -239,7 +216,7 @@
 				{ "battle_time", Mathf.RoundToInt(Time.time - _battleStartTime) },
 				{ "result", result },
 			};
-			_eventSender.SendMessage(BattleFinishEventKey, properties, true);
+			SendMessage(BattleFinishEventKey, properties, true);
 		}
 
 		private void OnUnitSummoned(IUnitFacade unit)
@@ -249,15 +226,13 @@
 
 			var properties = new Dictionary<string, object>
 			{
-				{ "player_level_number", _gameProfile.HeroLevel.Value },
-				{ "level_number", _gameProfile.LevelNumber.Value },
 				{ "unit_level_number", upgradeLevel },
 				{ "unit_id", (int)unit.Species },
 				{ "unit_merge_level", unit.GradeIndex + 1 },
 				{ "power", unit.Power },
 				{ "summon_coins_used", summonPrice },
 			};
-			_eventSender.SendMessage(UnitSummonEventKey, properties);
+			SendMessage(UnitSummonEventKey, properties);
 		}
 
 		private void OnUnitsMerged(IUnitFacade unit)
@@ -266,33 +241,29 @@
 
 			var properties = new Dictionary<string, object>
 			{
-				{ "player_level_number", _gameProfile.HeroLevel.Value },
-				{ "level_number", _gameProfile.LevelNumber.Value },
 				{ "unit_level_number", upgradeLevel },
 				{ "unit_id", (int)unit.Species },
 				{ "unit_merge_level", unit.GradeIndex + 1 },
 				{ "power", unit.Power },
 			};
-			_eventSender.SendMessage(UnitMergeEventKey, properties);
+			SendMessage(UnitMergeEventKey, properties);
 		}
 
 		private void OnUnitUpgraded(Species species)
 		{
 			int upgradeLevel = _gameUpgrades.GetUnitLevel(species);
-			int maxLevelUnlocked = _gameProfile.Levels.Where(l => l.Unlocked.Value).Select((l, i) => i).LastOrDefault() + 1;
+			int maxLevelUnlocked = GameProfile.Levels.Where(l => l.Unlocked.Value).Select((l, i) => i).LastOrDefault() + 1;
 			UnitUpgradesConfig upgrade = _upgradesConfig.UnitsUpgrades[species];
 			int maxPriceLevel = Mathf.Clamp(upgradeLevel, 1, upgrade.Price.Length + 1);
 			int previousUpgradePrice = upgrade.Price[maxPriceLevel - 2];
 
 			var properties = new Dictionary<string, object>
 			{
-				{ "player_level_number", _gameProfile.HeroLevel.Value },
-				{ "level_number", maxLevelUnlocked },
 				{ "unit_level_number", upgradeLevel },
 				{ "unit_id", (int)species },
 				{ "coins_used", previousUpgradePrice },
 			};
-			_eventSender.SendMessage(UnitUpgradeEventKey, properties);
+			SendMessage(UnitUpgradeEventKey, properties);
 		}
 
 		private void IncrementProfileProperty(ref int property, int increment)

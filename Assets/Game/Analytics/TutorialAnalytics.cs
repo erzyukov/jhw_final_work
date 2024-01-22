@@ -10,13 +10,10 @@ namespace Game.Analytics
 	using System;
 	using Game.Ui;
 
-	public class TutorialAnalytics : ControllerBase, IInitializable
+	public class TutorialAnalytics : AnalyticsBase, IInitializable
 	{
-		[Inject] private IAnalyticEventSender _eventSender;
 		[Inject] private IGameCycle _gameCycle;
-		[Inject] private IGameProfileManager _gameProfileManager;
 		[Inject] private IUiLevelRewardScreen _uiLevelRewardScreen;
-		[Inject] private GameProfile _gameProfile;
 
 		private const string TutorialEventKey = "tutorial";
 
@@ -29,7 +26,7 @@ namespace Game.Analytics
 		private const int StepUpgradeTutorialComplete = 28;
 		private const int StepThirdLevelComplete = 29;
 
-		private int Step => _gameProfile.Analytics.TutorialStep;
+		private int Step => GameProfile.Analytics.TutorialStep;
 
 		public void Initialize()
 		{
@@ -40,9 +37,9 @@ namespace Game.Analytics
 			int upgradeTutorialStepCount = Enum.GetNames(typeof(UpgradesStep)).Length - 1;
 
 			// Begginer Tutorial - 1-14
-			if (_gameProfile.Tutorial.BeginnerStep.Value != BeginnerStep.Complete)
+			if (GameProfile.Tutorial.BeginnerStep.Value != BeginnerStep.Complete)
 			{
-				_gameProfile.Tutorial.BeginnerStep
+				GameProfile.Tutorial.BeginnerStep
 					.Skip(1)
 					.Where(v => v != BeginnerStep.None)
 					.Subscribe(v => SendTutorialStep((int)v))
@@ -63,7 +60,7 @@ namespace Game.Analytics
 
 			// Play Hint Tutorial - 17
 			_gameCycle.State
-				.Where(s => s == GameState.Lobby && _gameProfile.Tutorial.IsBattleHintComplete.Value == false)
+				.Where(s => s == GameState.Lobby && GameProfile.Tutorial.IsBattleHintComplete.Value == false)
 				.Subscribe(_ => SendTutorialStep(StepPlayHint))
 				.AddTo(this);
 
@@ -86,9 +83,9 @@ namespace Game.Analytics
 				.AddTo(this);
 
 			// Begginer Tutorial - 21-28
-			if (_gameProfile.Tutorial.UpgradesStep.Value != UpgradesStep.Complete)
+			if (GameProfile.Tutorial.UpgradesStep.Value != UpgradesStep.Complete)
 			{
-				_gameProfile.Tutorial.UpgradesStep
+				GameProfile.Tutorial.UpgradesStep
 					.Skip(1)
 					.Where(v => v != UpgradesStep.None)
 					.Select(v => StepGoToLevelThreeLobby + (int)v)
@@ -106,14 +103,14 @@ namespace Game.Analytics
 
 		private void SendTutorialStep(int step)
 		{
-			_gameProfile.Analytics.TutorialStep = step;
-			_gameProfileManager.Save();
+			GameProfile.Analytics.TutorialStep = step;
+			GameProfileManager.Save();
 
 			var properties = new Dictionary<string, object>
 			{
 				{ "step"   , step },
 			};
-			_eventSender.SendMessage(TutorialEventKey, properties, true);
+			SendMessage(TutorialEventKey, properties, true);
 		}
 	}
 }

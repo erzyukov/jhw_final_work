@@ -7,7 +7,7 @@
 	using System.Collections.Generic;
 	using Game.Profiles;
 
-	public class ResourcesAnalytics : ControllerBase, IInitializable
+	public class ResourcesAnalytics : AnalyticsBase, IInitializable
 	{
 		[Inject] private IAnalyticEventSender _eventSender;
 		[Inject] private IGameCurrency _gameCurrency;
@@ -41,35 +41,28 @@
 				{ "category", data.Type },
 				{ "item_id", $"{data.Type}_{data.Detail}" },
 				{ "value", data.Amount.ToString() },
-				{ "soft_balance", _gameProfile.SoftCurrency.Value },
-				{ "level_number", _gameProfile.LevelNumber.Value },
 			};
-			_eventSender.SendMessage(SoftCurrencyEventKey, properties);
+			SendMessage(SoftCurrencyEventKey, properties);
 		}
 
 		private void OnExperienceTransacted(ExperienceTransactionData data)
 		{
 			var properties = new Dictionary<string, object>
 			{
-				{ "level_number", _gameProfile.LevelNumber.Value },
-				{ "player_level_number", _gameProfile.HeroLevel.Value },
 				{ "source", data.Type },
 				{ "amount", data.Amount },
 				{ "player_xp_left", data.ToNextLevel },
 			};
-			_eventSender.SendMessage(PlayerExperienceEventKey, properties);
+			SendMessage(PlayerExperienceEventKey, properties);
 		}
 
 		private void OnEnergySpent(int spentAmount)
 		{
 			var properties = new Dictionary<string, object>
 			{
-				{ "level_number", _gameProfile.LevelNumber.Value },
-				{ "player_level_number", _gameProfile.HeroLevel.Value },
-				{ "total", _gameProfile.Energy.Amount },
 				{ "amount", spentAmount },
 			};
-			_eventSender.SendMessage(EnergyEventKey, properties);
+			SendMessage(EnergyEventKey, properties);
 		}
 	}
 }
