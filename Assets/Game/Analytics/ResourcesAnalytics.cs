@@ -6,7 +6,6 @@
 	using UniRx;
 	using System.Collections.Generic;
 	using Game.Profiles;
-	using static Core.GameCurrency;
 
 	public class ResourcesAnalytics : ControllerBase, IInitializable
 	{
@@ -20,18 +19,18 @@
 
 		public void Initialize()
 		{
-			_gameCurrency.SoftCurrencyMoved
+			_gameCurrency.SoftCurrencyTransacted
 				.Subscribe(OnSoftCurrencyMoved)
 				.AddTo(this);
 		}
 
-		private void OnSoftCurrencyMoved(CurrencyMovement<Soft> movement)
+		private void OnSoftCurrencyMoved(CurrencyTransactionData<SoftTransaction> data)
 		{
 			var properties = new Dictionary<string, object>
 			{
-				{ "category", movement.Type },
-				{ "item_id", $"{movement.Type}_{movement.Id}" },
-				{ "value", movement.Amount.ToString() },
+				{ "category", data.Type },
+				{ "item_id", $"{data.Type}_{data.Detail}" },
+				{ "value", data.Amount.ToString() },
 				{ "soft_balance", _gameProfile.SoftCurrency.Value },
 				{ "level_number", _gameProfile.LevelNumber.Value },
 			};

@@ -30,7 +30,7 @@
 		{
 			int softReward = _experienceConfig.HeroLevels[_profile.HeroLevel.Value - 1].SoftCurrencyReward;
 			_screen.SetSoftRewardAmount(softReward);
-			_gameCurrency.AddSoftCurrency(softReward, GameCurrency.Soft.HeroLevelReward, _profile.HeroLevel.Value.ToString());
+			_gameCurrency.AddSoftCurrency(softReward, SoftTransaction.HeroLevelReward, _profile.HeroLevel.Value.ToString());
 		}
 
 		private void OnScreenClosedHandler()

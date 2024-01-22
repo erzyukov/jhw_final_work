@@ -6,6 +6,7 @@ namespace Game.Installers
 	using Game.Dev;
 	using Game.Input;
 	using Game.Profiles;
+	using System;
 	using UnityEngine;
 	using Zenject;
 
@@ -41,10 +42,7 @@ namespace Game.Installers
 				.FromComponentInHierarchy()
 				.AsSingle();
 
-			Container
-				.BindInterfacesTo<GameplayEvents>()
-				.AsSingle();
-
+			InstallEvents();
 			InstallAnalytics();
 			InstallGameControllers();
 		}
@@ -63,14 +61,10 @@ namespace Game.Installers
 				.MoveIntoAllSubContainers();
 		}
 
-		private void InstallGameControllers()
+		private void InstallEvents()
 		{
 			Container
-				.BindInterfacesTo<GameCycle>()
-				.AsSingle();
-
-			Container
-				.BindInterfacesTo<GameCurrency>()
+				.BindInterfacesTo<GameplayEvents>()
 				.AsSingle();
 		}
 
@@ -82,6 +76,17 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<TechnicalAnalytics>()
+				.AsSingle();
+		}
+
+		private void InstallGameControllers()
+		{
+			Container
+				.BindInterfacesTo<GameCycle>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<GameCurrency>()
 				.AsSingle();
 		}
 	}

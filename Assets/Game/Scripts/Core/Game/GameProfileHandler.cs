@@ -84,7 +84,8 @@
 			if (_gameProfile.IsReturnFromBattle)
 			{
 				_gameProfile.IsReturnFromBattle = false;
-				_gameCurrency.ConsumeLevelSoftCurrency();
+
+				_gameCurrency.ConsumeLevelSoftCurrency(_gameProfile.IsWonLastBattle ? "win" : "fail");
 			}
 
 			ResetFirstAppRun();

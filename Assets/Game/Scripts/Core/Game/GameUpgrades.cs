@@ -47,8 +47,8 @@ namespace Game.Core
 			int price = GetUpgradePrice(species);
 			
 			if (_gameCurrency.TrySpendSoftCurrency(
-					price, 
-					GameCurrency.Soft.Upgrade,
+					price,
+					SoftTransaction.Upgrade,
 					$"{(int)species}_lvl_{_gameProfile.Units.Upgrades[species].Value + 1}"
 					) == false
 				)

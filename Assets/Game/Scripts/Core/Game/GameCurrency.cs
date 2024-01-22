@@ -3,69 +3,61 @@
 	using Game.Profiles;
 	using UniRx;
 	using Zenject;
-	using static GameCurrency;
 
 	// TODO: Add summon currency message
 	// TODO: Add summon currency animate
+	public enum SoftTransaction
+	{
+		None,
+		Upgrade,
+		LevelFinishReward,
+		HeroLevelReward,
+	}
+
+	public struct CurrencyTransactionData<T> where T : System.Enum
+	{
+		public T Type;
+		public string Detail;
+		public int Amount;
+	}
 
 	public interface IGameCurrency
 	{
-		ReactiveCommand<CurrencyMovement<Soft>> SoftCurrencyMoved { get; }
-		void AddSoftCurrency(int value, Soft type, string id);
-		bool TrySpendSoftCurrency(int amount, Soft type, string id);
+		ReactiveCommand<CurrencyTransactionData<SoftTransaction>> SoftCurrencyTransacted { get; }
+		void AddSoftCurrency(int value, SoftTransaction type, string detail);
+		bool TrySpendSoftCurrency(int amount, SoftTransaction type, string detail);
 		void SetSummonCurrency(int value);
 		void AddSummonCurrency(int value);
 		bool TrySpendSummonCurrency(int amount);
 		void AddLevelSoftCurrency(int value);
 		void ResetLevelSoftCurrency();
-		void ConsumeLevelSoftCurrency();
+		void ConsumeLevelSoftCurrency(string detail);
 	}
 
 	public class GameCurrency : IGameCurrency
 	{
 		[Inject] private IGameProfileManager _gameProfileManager;
 
-		public enum Soft
-		{
-			None,
-			Upgrade,
-			LevelFinishReward,
-			HeroLevelReward,
-		}
-
 		private GameProfile GameProfile => _gameProfileManager.GameProfile;
 
 		#region IGameCurrency
 
-		public ReactiveCommand<CurrencyMovement<Soft>> SoftCurrencyMoved { get; } = new ReactiveCommand<CurrencyMovement<Soft>>();
+		public ReactiveCommand<CurrencyTransactionData<SoftTransaction>> SoftCurrencyTransacted { get; } = new ReactiveCommand<CurrencyTransactionData<SoftTransaction>>();
 
-		public void AddSoftCurrency(int value, Soft type, string id)
+		public void AddSoftCurrency(int value, SoftTransaction type, string detail)
 		{
 			AddCurrency(GameProfile.SoftCurrency, value);
-
-			SoftCurrencyMoved.Execute(new CurrencyMovement<Soft>
-			{
-				Type = type,
-				Id = id,
-				Amount = value
-			});
+			RegisterTransaction(value, type, detail);
 		}
 
-		public bool TrySpendSoftCurrency(int value, Soft type, string id)
+		public bool TrySpendSoftCurrency(int value, SoftTransaction type, string detail)
 		{
-			bool canSpend = TrySpendCurrency(GameProfile.SoftCurrency, value);
+			bool result = TrySpendCurrency(GameProfile.SoftCurrency, value);
 
-			if (canSpend)
-			{
-				SoftCurrencyMoved.Execute(new CurrencyMovement<Soft>
-				{
-					Type = type,
-					Id = id,
-					Amount = -value
-				});
-			}
+			if (result)
+				RegisterTransaction(-value, type, detail);
 
-			return canSpend;
+			return result;
 		}
 
 		public void SetSummonCurrency(int value) => 
@@ -83,9 +75,9 @@
 		public void ResetLevelSoftCurrency() =>
 			GameProfile.LevelSoftCurrency.Value = 0;
 
-		public void ConsumeLevelSoftCurrency()
+		public void ConsumeLevelSoftCurrency(string detail)
 		{
-			AddSoftCurrency(GameProfile.LevelSoftCurrency.Value, Soft.LevelFinishReward, GameProfile.IsWonLastBattle ? "win": "fail");
+			AddSoftCurrency(GameProfile.LevelSoftCurrency.Value, SoftTransaction.LevelFinishReward, detail.ToString());
 			ResetLevelSoftCurrency();
 			Save();
 		}
@@ -111,11 +103,17 @@
 
 		private void Save() => _gameProfileManager.Save();
 
-		public struct CurrencyMovement<T> where T : System.Enum
+		public void RegisterTransaction(int amount, SoftTransaction type, string detail)
 		{
-			public T Type;
-			public string Id;
-			public int Amount;
+			var data = new CurrencyTransactionData<SoftTransaction>
+			{
+				Type = type,
+				Detail = detail,
+				Amount = amount
+			};
+
+			SoftCurrencyTransacted.Execute(data);
 		}
+
 	}
 }
