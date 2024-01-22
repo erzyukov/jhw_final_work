@@ -8,6 +8,7 @@
 	using Game.Profiles;
 	using Game.Ui;
 	using Game.Configs;
+	using UnityEngine;
 
 	public class UiAnalytics : AnalyticsBase, IInitializable
 	{
@@ -20,7 +21,8 @@
 		private const string CloseFinishScreenEventKey = "level_finish_close";
 
 		private int _newLevel;
-		
+		private float _showingTime;
+
 		private int WavesCount => _levelsConfig.Levels[GameProfile.LevelNumber.Value - 1].Waves.Length;
 
 		public void Initialize()
@@ -44,6 +46,7 @@
 
 		private void OnLevelFinishScreenOpened(GameLevel.Result result)
 		{
+			_showingTime = Time.time;
 			_newLevel = (GameProfile.LevelHeroExperience.Value > _gameHero.GetExperienceToLevel)
 				? GameProfile.HeroLevel.Value + 1
 				: 0;
@@ -65,6 +68,7 @@
 				{ "wave_amount", WavesCount },
 				{ "try_number", GameProfile.Analytics.LevelTryCount },
 				{ "is_new_level_reached", _newLevel },
+				{ "time", Mathf.RoundToInt(Time.time - _showingTime) },
 				{ "type", result },
 			};
 			SendMessage(CloseFinishScreenEventKey, properties);
