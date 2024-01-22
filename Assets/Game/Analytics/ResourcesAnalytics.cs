@@ -12,6 +12,7 @@
 		[Inject] private IAnalyticEventSender _eventSender;
 		[Inject] private IGameCurrency _gameCurrency;
 		[Inject] private IGameHero _gameHero;
+		[Inject] private IGameEnergy _gameEnergy;
 		[Inject] private GameProfile _gameProfile;
 
 		private const string SoftCurrencyEventKey = "soft_currency";
@@ -26,6 +27,10 @@
 
 			_gameHero.ExperienceTransacted
 				.Subscribe(OnExperienceTransacted)
+				.AddTo(this);
+
+			_gameEnergy.EnergySpent
+				.Subscribe(OnEnergySpent)
 				.AddTo(this);
 		}
 
@@ -53,6 +58,18 @@
 				{ "player_xp_left", data.ToNextLevel },
 			};
 			_eventSender.SendMessage(PlayerExperienceEventKey, properties);
+		}
+
+		private void OnEnergySpent(int spentAmount)
+		{
+			var properties = new Dictionary<string, object>
+			{
+				{ "level_number", _gameProfile.LevelNumber.Value },
+				{ "player_level_number", _gameProfile.HeroLevel.Value },
+				{ "total", _gameProfile.Energy.Amount },
+				{ "amount", spentAmount },
+			};
+			_eventSender.SendMessage(EnergyEventKey, properties);
 		}
 	}
 }

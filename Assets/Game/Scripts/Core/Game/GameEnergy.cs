@@ -12,6 +12,7 @@
     {
         FloatReactiveProperty EnergyRatio { get; }
         IntReactiveProperty SecondsToRestoreOnePoint { get; }
+		ReactiveCommand<int> EnergySpent { get; }
         bool TryPayLevel();
     }
 
@@ -87,7 +88,9 @@
 
         public IntReactiveProperty SecondsToRestoreOnePoint { get; } = new IntReactiveProperty();
 
-        public bool TryPayLevel()
+		public ReactiveCommand<int> EnergySpent { get; } = new ReactiveCommand<int>();
+
+		public bool TryPayLevel()
         {
             if (Energy.Amount.Value < _config.LevelPrice)
                 return false;
@@ -95,7 +98,9 @@
             Energy.Amount.Value -= _config.LevelPrice;
             Save();
 
-            return true;
+			EnergySpent.Execute(_config.LevelPrice);
+
+			return true;
         }
 
         #endregion
