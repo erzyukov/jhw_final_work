@@ -1,6 +1,9 @@
 ﻿namespace Game.Utilities
 {
+	using System.Collections.Generic;
+	using System;
 	using UnityEngine;
+	using System.Linq;
 
 	public static class ExtensionMethods
 	{
@@ -58,6 +61,17 @@
 		{
 			for (int i = transform.childCount - 1; i >= 0; i--)
 				GameObject.Destroy(transform.GetChild(i).gameObject);
+		}
+
+		public static string ToString<TKey, TValue>(this IDictionary<TKey, TValue> dictionary)
+		{
+			if (dictionary == null)
+				throw new ArgumentNullException("dictionary");
+
+			var items = from kvp in dictionary
+						select kvp.Key + "=" + kvp.Value;
+
+			return "{" + string.Join(",", items) + "}";
 		}
 	}
 }

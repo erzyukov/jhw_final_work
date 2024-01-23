@@ -1,6 +1,8 @@
 namespace Game.Installers
 {
+	using Game.Analytics;
 	using Game.Configs;
+	using Game.Core;
 	using Game.Dev;
 	using Game.Field;
 	using Game.Gameplay;
@@ -62,10 +64,15 @@ namespace Game.Installers
 				.BindInterfacesTo<BattleStageHandler>()
 				.AsSingle();
 
+			Container
+				.BindInterfacesTo<LevelEventsHandler>()
+				.AsSingle();
+
 			InstallWeapons();
 			InstallUnits();
 			InstallFx();
             InstallDev();
+			InstallAnalytics();
 		}
 
 		private void InstallWeapons()
@@ -110,5 +117,12 @@ namespace Game.Installers
                 .BindInterfacesTo<LevelDevCheats>()
                 .AsSingle();
         }
-    }
+
+		private void InstallAnalytics()
+		{
+			Container
+				.BindInterfacesTo<UiAnalytics>()
+				.AsSingle();
+		}
+	}
 }

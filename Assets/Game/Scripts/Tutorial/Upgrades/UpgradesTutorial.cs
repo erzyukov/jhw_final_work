@@ -10,8 +10,6 @@
     using System.Linq;
     using Game.Ui;
 	using Game.Units;
-	using static Game.Configs.TutorialConfig;
-	using UnityEngine;
 
 	public class UpgradesTutorial : UpgradesTutorialFsmBase, IInitializable, IDisposable
 	{
@@ -28,26 +26,41 @@
 		[Inject] private IUiMainMenuView _uiMainMenuView;
 		[Inject] private IUiLobbyScreen _uiLobbyScreen;
 		[Inject] private IUiUpgradesScreen _uiUpgradesScreen;
-
+		[Inject] private IScenesManager _scenesManager;
 
 		readonly private CompositeDisposable _disposable = new CompositeDisposable();
-		private IDisposable _summonInterruptDisposable;
 
 		public void Initialize()
 		{
-			bool isComplete = _profile.Tutorial.UpgradesStep.Value == UpgradesStep.Complete;
-			int startLevel = _menuConfig.GetAccessLevel(GameState.Upgrades);
-
-			if (isComplete)
+			if (_profile.Tutorial.UpgradesStep.Value == UpgradesStep.Complete)
 				return;
 
-			SetProfileStepValue(UpgradesStep.None);
-			//Transition(UpgradesStep.None);
+			InitTutorial();
+			StepSubscribes();
+		}
+
+		private void InitTutorial()
+		{
+			if (_profile.Tutorial.UpgradesStep.Value >= UpgradesStep.UpgradeHint)
+				SetProfileStepValue(UpgradesStep.GoToBattle);
+			else if (_profile.Tutorial.UpgradesStep.Value != UpgradesStep.None)
+				SetProfileStepValue(UpgradesStep.None);
 
 			_profile.Tutorial.UpgradesStep
 				.Where(step => step != State)
 				.Subscribe(OnUpgradesStepChanged)
 				.AddTo(_disposable);
+
+			_scenesManager.MainLoaded
+				.Where(_ => _profile.Tutorial.UpgradesStep.Value == UpgradesStep.GoToBattle)
+				.Subscribe(_ => _uiMainMenuView.SetButtonInteractable(GameState.Upgrades, false))
+				.AddTo(_disposable);
+		}
+
+		private void StepSubscribes()
+		{
+			bool isComplete = _profile.Tutorial.UpgradesStep.Value == UpgradesStep.Complete;
+			int startLevel = _menuConfig.GetAccessLevel(GameState.Upgrades);
 
 			_gameCycle.State
 				.Where(gameState =>
@@ -66,9 +79,9 @@
 				{
 					int infantryLevel = _gameUpgrades.GetUnitLevel(Species.HeroInfantryman);
 					int sniperLevel = _gameUpgrades.GetUnitLevel(Species.HeroSniper);
-					UpgradesStep nextStep = (infantryLevel == 1) 
-						? UpgradesStep.FirstUpgrade 
-						: (sniperLevel == 1) ? UpgradesStep.SelectNextUnit: UpgradesStep.UpgradeHint;
+					UpgradesStep nextStep = (infantryLevel == 1)
+						? UpgradesStep.FirstUpgrade
+						: (sniperLevel == 1) ? UpgradesStep.SelectNextUnit : UpgradesStep.UpgradeHint;
 					SetProfileStepValue(nextStep);
 				})
 				.AddTo(_disposable);
@@ -101,17 +114,17 @@
 				.Subscribe(_ => SetProfileStepValue(UpgradesStep.GoToBattle))
 				.AddTo(_disposable);
 
-			_gameLevel.LevelLoading
-				.Where(_ => State == UpgradesStep.GoToBattle)
+			_gameCycle.State
+				.Where(state =>
+					state == GameState.LoadingLevel &&
+					State == UpgradesStep.GoToBattle
+				)
 				.Subscribe(_ => SetProfileStepValue(UpgradesStep.Complete))
 				.AddTo(_disposable);
 		}
 
-		public virtual void Dispose()
-		{
-			_summonInterruptDisposable?.Dispose();
+		public virtual void Dispose() =>
 			_disposable.Dispose();
-		}
 
 		protected override void StateTransitions()
 		{
@@ -153,6 +166,7 @@
 
 		protected override void OnEnterSelectNextUnit()
 		{
+			_uiMainMenuView.SetButtonInteractable(GameState.Lobby, false);
 			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetSelectInteractable(true);
 			_uiUpgradesScreen.UnitElements[Species.HeroInfantryman].SetUpgradeInteractable(false);
 
@@ -254,7 +268,7 @@
 
         private void ActivateDialogMessege()
         {
-            if (_config.UpgradesTutorialMessages.TryGetValue(State, out TutorialMessage<UpgradesStep> data))
+            if (_config.UpgradesTutorialMessages.TryGetValue(State, out TutorialConfig.TutorialMessage<UpgradesStep> data))
             {
                 _dialogHint.SetMessage(_localizator.GetString(data.TranslationKey));
 				_dialogHint.SetPlace(data.Place);

@@ -41,7 +41,7 @@
 
 			Subscribe(Cheats.PrevLevel, (_) => _gameLevel.GoToLevel(_profile.LevelNumber.Value - 1));
 
-			Subscribe(Cheats.AddSoftCurrency, (_) => _gameCurrency.AddSoftCurrency(SoftCurrencyCheatAmount));
+			Subscribe(Cheats.AddSoftCurrency, (_) => _gameCurrency.AddSoftCurrency(SoftCurrencyCheatAmount, SoftTransaction.None, "cheat"));
 			
 			Subscribe(Cheats.AddSummonCurrency, (_) => _gameCurrency.AddSummonCurrency(SummonCurrencyCheatAmount));
 			

@@ -19,7 +19,7 @@
 
 		public void Initialize()
 		{
-			_scenesManager.SplashCompleted
+			_scenesManager.MainLoading
 				.Subscribe(_ => SetState(GameState.LoadingLobby))
 				.AddTo(this);
 

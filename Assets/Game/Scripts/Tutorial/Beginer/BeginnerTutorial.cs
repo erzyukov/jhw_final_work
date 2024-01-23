@@ -82,7 +82,7 @@
 					break;
 
 				case BeginnerStep.FirstBattle:
-					if (_cycle.State.Value == GameState.LoadingWave)
+					if (_cycle.State.Value == GameState.BattleStage)
 						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.PauseForFirstBattle;
 					break;
 
@@ -118,7 +118,7 @@
 					break;
 
 				case BeginnerStep.SecondBattle:
-					if (_cycle.State.Value == GameState.LoadingWave)
+					if (_cycle.State.Value == GameState.BattleStage)
 						_profile.Tutorial.BeginnerStep.Value = BeginnerStep.PauseForSecondBattle;
 					break;
 

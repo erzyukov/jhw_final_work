@@ -33,4 +33,13 @@ mergeInto(LibraryManager.library, {
 		GLctx.bindTexture(GLctx.TEXTURE_2D, GL.textures[texture]);
 	},
 
+	RegisterVisibilityChangeEvent: function () {
+
+		document.addEventListener("visibilitychange", function () {
+			SendMessage("WebGL", "OnVisibilityChange", document.visibilityState);
+		});
+
+		if (document.visibilityState != "visible")
+			SendMessage("WebGL", "OnVisibilityChange", document.visibilityState);
+	},
 });

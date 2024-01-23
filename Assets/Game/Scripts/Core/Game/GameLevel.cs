@@ -12,6 +12,10 @@
 	{
 		BoolReactiveProperty IsLevelLoaded { get; }
 		ReactiveCommand LevelLoading { get; }
+		ReactiveCommand<bool> LevelLoaded { get; }
+		ReactiveCommand<GameLevel.Result> LevelFinished { get; }
+		ReactiveCommand<int> WaveStarted { get; }
+		ReactiveCommand<GameLevel.Result> WaveFinished { get; }
 		void GoToLevel(int number);
 		void GoToNextWave();
 		void FinishLevel();
@@ -28,7 +32,13 @@
 		[Inject] private IUiVeil _uiViel;
 
 		private int _heroLastLevel;
-		private bool _isLevelWon;
+
+		public enum Result
+		{
+			Win,
+			Fail,
+			Leave
+		}
 
 		public void Initialize()
 		{
@@ -45,7 +55,12 @@
 
 			_gameCycle.State
 				.Where(state => state == GameState.WinBattle)
-				.Subscribe(_ => _isLevelWon = true)
+				.Subscribe(_ => OnStateLevelWon())
+				.AddTo(this);
+
+			_gameCycle.State
+				.Where(state => state == GameState.LoseBattle)
+				.Subscribe(_ => OnStateLevelFailed())
 				.AddTo(this);
 		}
 
@@ -54,6 +69,14 @@
 		public BoolReactiveProperty IsLevelLoaded { get; } = new BoolReactiveProperty();
 		
 		public ReactiveCommand LevelLoading { get; } = new ReactiveCommand();
+
+		public ReactiveCommand<bool> LevelLoaded { get; } = new ReactiveCommand<bool>();
+
+		public ReactiveCommand<Result> LevelFinished { get; } = new ReactiveCommand<Result>();
+
+		public ReactiveCommand<int> WaveStarted { get; } = new ReactiveCommand<int>();
+
+		public ReactiveCommand<Result> WaveFinished { get; } = new ReactiveCommand<Result>();
 
 		public void GoToLevel(int number)
 		{
@@ -85,11 +108,13 @@
 			if (_profile.WaveNumber.Value < waveCount)
 			{
 				_gameCycle.SetState(GameState.LoadingWave);
+				WaveFinished.Execute(Result.Win);
+				_profile.WaveNumber.Value++;
 				_uiViel.Appear(() =>
 				{
-					_profile.WaveNumber.Value++;
 					Save();
 					_gameCycle.SetState(GameState.TacticalStage);
+					WaveStarted.Execute(_profile.WaveNumber.Value);
 				});
 			}
 			else if (_gameCycle.State.Value == GameState.CompleteWave)
@@ -100,18 +125,6 @@
 
 		public void FinishLevel()
 		{
-			if (_isLevelWon)
-			{
-				_profile.LevelNumber.Value = Mathf.Clamp(_profile.LevelNumber.Value + 1, 0, _levelsConfig.Levels.Length);
-
-				if (_profile.LevelNumber.Value <= _profile.Levels.Count)
-					_profile.Levels[_profile.LevelNumber.Value - 1].Unlocked.Value = true;
-
-				_isLevelWon = false;
-
-				Save();
-			}
-
 			if (_profile.HeroLevel.Value > _heroLastLevel)
 			{
 				_gameCycle.SetState(GameState.HeroLevelReward);
@@ -132,6 +145,9 @@
 
 		public void LeaveBattle()
 		{
+			WaveFinished.Execute(Result.Leave);
+			LevelFinished.Execute(Result.Leave);
+
 			_uiViel.Appear(() =>
 			{
 				_scenesManager.UnloadLevel();
@@ -142,9 +158,27 @@
 
 		#endregion
 
-		private void LoadNextLevel()
+		private void OnStateLevelWon()
 		{
-			GoToLevel(_profile.LevelNumber.Value + 1);
+			_profile.IsWonLastBattle = true;
+
+			WaveFinished.Execute(Result.Win);
+			LevelFinished.Execute(Result.Win);
+
+			_profile.LevelNumber.Value = Mathf.Clamp(_profile.LevelNumber.Value + 1, 0, _levelsConfig.Levels.Length);
+
+			if (_profile.LevelNumber.Value <= _profile.Levels.Count)
+				_profile.Levels[_profile.LevelNumber.Value - 1].Unlocked.Value = true;
+
+			Save();
+		}
+
+		private void OnStateLevelFailed()
+		{
+			_profile.IsWonLastBattle = false;
+
+			WaveFinished.Execute(Result.Fail);
+			LevelFinished.Execute(Result.Fail);
 		}
 
 		private int ClampLevelNumber(int number) => Mathf.Clamp(number, 1, _levelsConfig.Levels.Length);
@@ -152,8 +186,10 @@
 		private void OnLevelLoaded()
 		{
 			LevelLoading.Execute();
-			
-			if (_profile.WaveNumber.Value == 0)
+
+			bool isNewLevel = _profile.WaveNumber.Value == 0;
+
+			if (isNewLevel)
 				_profile.WaveNumber.Value++;
 
 			_gameCycle.SetState(GameState.TacticalStage);
@@ -161,6 +197,8 @@
 			_uiViel.Fade(() =>
 			{
 				IsLevelLoaded.Value = true;
+				LevelLoaded.Execute(isNewLevel);
+				WaveStarted.Execute(_profile.WaveNumber.Value);
 			});
 		}
 

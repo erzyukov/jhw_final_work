@@ -18,6 +18,7 @@ namespace Game.Ui
 	public interface IUiScreen
 	{
 		ReactiveCommand Opening { get; }
+		ReactiveCommand Opened { get; }
 		ReactiveCommand Closed { get; }
 		Screen Screen { get; }
 		void SetActive(bool value);
@@ -49,6 +50,7 @@ namespace Game.Ui
 		#region IUiScreen implementation
 
 		public ReactiveCommand Opening { get; } = new ReactiveCommand();
+		public ReactiveCommand Opened { get; } = new ReactiveCommand();
 		public ReactiveCommand Closed { get; } = new ReactiveCommand();
 
 		public abstract Screen Screen { get; }
@@ -59,6 +61,9 @@ namespace Game.Ui
 				Opening.Execute();
 
 			gameObject.SetActive(value);
+
+			if (value)
+				Opened.Execute();
 		}
 
 		#endregion

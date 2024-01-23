@@ -1,10 +1,12 @@
 namespace Game.Installers
 {
+	using Game.Analytics;
 	using Game.Configs;
 	using Game.Core;
 	using Game.Dev;
 	using Game.Input;
 	using Game.Profiles;
+	using System;
 	using UnityEngine;
 	using Zenject;
 
@@ -34,6 +36,14 @@ namespace Game.Installers
 				.BindInterfacesTo<InputHandler>()
 				.AsSingle();
 
+			// IApplicationPaused
+			Container
+				.BindInterfacesTo<WebGLEvents>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
+			InstallEvents();
+			InstallAnalytics();
 			InstallGameControllers();
 		}
 
@@ -49,6 +59,24 @@ namespace Game.Installers
 				.FromResolveGetter<IGameProfileManager>(gameProfileManager => gameProfileManager.GameProfile)
 				.AsSingle()
 				.MoveIntoAllSubContainers();
+		}
+
+		private void InstallEvents()
+		{
+			Container
+				.BindInterfacesTo<GameplayEvents>()
+				.AsSingle();
+		}
+
+		private void InstallAnalytics()
+		{
+			Container
+				.BindInterfacesTo<AnalyticEventSender>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<TechnicalAnalytics>()
+				.AsSingle();
 		}
 
 		private void InstallGameControllers()

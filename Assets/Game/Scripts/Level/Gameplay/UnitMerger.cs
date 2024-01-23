@@ -1,12 +1,10 @@
 ﻿namespace Game.Gameplay
 {
 	using Game.Configs;
-	using Game.Core;
 	using Game.Field;
 	using Game.Level;
 	using Game.Units;
 	using Game.Utilities;
-	using System;
 	using System.Collections.Generic;
 	using UniRx;
 	using UnityEngine;
@@ -17,7 +15,6 @@
 		[Inject] private IFieldHeroFacade _fieldHeroFacade;
 		[Inject] private IHeroUnitSummoner _heroUnitSummoner;
 		[Inject] private UnitsConfig _unitsConfig;
-		[Inject] private IGameAudio _gameAudio;
 
 		private List<IFieldCell> _selectedCell;
 		private IUnitFacade _mergeInitiatorUnit;
@@ -123,8 +120,9 @@
 			_mergeInitiatorUnit = null;
 			_mergeAbsorbedUnit = null;
 
-			_gameAudio.PlayUnitMerge();
-			_heroUnitSummoner.Summon(species, gradeIndex, power, cellPosition);
+			IUnitFacade unit = _heroUnitSummoner.Summon(species, gradeIndex, power, cellPosition);
+			
+			_fieldHeroFacade.UnitsMerged.Execute(unit);
 		}
 
 		private int GetMergingUnitPower() =>

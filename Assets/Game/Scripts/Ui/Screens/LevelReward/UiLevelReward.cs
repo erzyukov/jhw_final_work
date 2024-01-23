@@ -5,9 +5,7 @@
 	using UniRx;
 	using Game.Core;
 	using Game.Profiles;
-	using UnityEngine;
 	using Game.Configs;
-	using TMPro;
 
 	public class UiLevelReward : ControllerBase, IInitializable
 	{
@@ -19,7 +17,7 @@
 
 		public void Initialize()
 		{
-			_screen.Opening
+			_screen.Opened
 				.Subscribe(_ => OnScreenOpeningHandler())
 				.AddTo(this);
 
@@ -32,7 +30,7 @@
 		{
 			int softReward = _experienceConfig.HeroLevels[_profile.HeroLevel.Value - 1].SoftCurrencyReward;
 			_screen.SetSoftRewardAmount(softReward);
-			_gameCurrency.AddLevelSoftCurrency(softReward);
+			_gameCurrency.AddSoftCurrency(softReward, SoftTransaction.HeroLevelReward, _profile.HeroLevel.Value.ToString());
 		}
 
 		private void OnScreenClosedHandler()

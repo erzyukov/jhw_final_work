@@ -6,17 +6,32 @@
 
 	// TODO: Add summon currency message
 	// TODO: Add summon currency animate
+	public enum SoftTransaction
+	{
+		None,
+		Upgrade,
+		LevelFinishReward,
+		HeroLevelReward,
+	}
+
+	public struct CurrencyTransactionData<T> where T : System.Enum
+	{
+		public T Type;
+		public string Detail;
+		public int Amount;
+	}
 
 	public interface IGameCurrency
 	{
-		void AddSoftCurrency(int value);
-		bool TrySpendSoftCurrency(int amount);
+		ReactiveCommand<CurrencyTransactionData<SoftTransaction>> SoftCurrencyTransacted { get; }
+		void AddSoftCurrency(int value, SoftTransaction type, string detail);
+		bool TrySpendSoftCurrency(int amount, SoftTransaction type, string detail);
 		void SetSummonCurrency(int value);
 		void AddSummonCurrency(int value);
 		bool TrySpendSummonCurrency(int amount);
 		void AddLevelSoftCurrency(int value);
 		void ResetLevelSoftCurrency();
-		void ConsumeLevelSoftCurrency();
+		void ConsumeLevelSoftCurrency(string detail);
 	}
 
 	public class GameCurrency : IGameCurrency
@@ -27,11 +42,23 @@
 
 		#region IGameCurrency
 
-		public void AddSoftCurrency(int value) => 
-			AddCurrency(GameProfile.SoftCurrency, value);
+		public ReactiveCommand<CurrencyTransactionData<SoftTransaction>> SoftCurrencyTransacted { get; } = new ReactiveCommand<CurrencyTransactionData<SoftTransaction>>();
 
-		public bool TrySpendSoftCurrency(int value) => 
-			TrySpendCurrency(GameProfile.SoftCurrency, value);
+		public void AddSoftCurrency(int value, SoftTransaction type, string detail)
+		{
+			AddCurrency(GameProfile.SoftCurrency, value);
+			RegisterTransaction(value, type, detail);
+		}
+
+		public bool TrySpendSoftCurrency(int value, SoftTransaction type, string detail)
+		{
+			bool result = TrySpendCurrency(GameProfile.SoftCurrency, value);
+
+			if (result)
+				RegisterTransaction(-value, type, detail);
+
+			return result;
+		}
 
 		public void SetSummonCurrency(int value) => 
 			GameProfile.SummonCurrency.Value = value;
@@ -48,9 +75,9 @@
 		public void ResetLevelSoftCurrency() =>
 			GameProfile.LevelSoftCurrency.Value = 0;
 
-		public void ConsumeLevelSoftCurrency()
+		public void ConsumeLevelSoftCurrency(string detail)
 		{
-			AddSoftCurrency(GameProfile.LevelSoftCurrency.Value);
+			AddSoftCurrency(GameProfile.LevelSoftCurrency.Value, SoftTransaction.LevelFinishReward, detail.ToString());
 			ResetLevelSoftCurrency();
 			Save();
 		}
@@ -75,5 +102,18 @@
 		}
 
 		private void Save() => _gameProfileManager.Save();
+
+		public void RegisterTransaction(int amount, SoftTransaction type, string detail)
+		{
+			var data = new CurrencyTransactionData<SoftTransaction>
+			{
+				Type = type,
+				Detail = detail,
+				Amount = amount
+			};
+
+			SoftCurrencyTransacted.Execute(data);
+		}
+
 	}
 }

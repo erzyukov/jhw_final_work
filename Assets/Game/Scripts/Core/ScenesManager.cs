@@ -11,11 +11,11 @@ namespace Game.Core
 	using UnityEngine;
 	using UnityEngine.SceneManagement;
 	using Zenject;
-	using UnityEngine.Localization.Settings;
 
 	public interface IScenesManager
 	{
-		ReactiveCommand SplashCompleted { get; }
+		ReactiveCommand ResourceLoading { get; }
+		ReactiveCommand MainLoading { get; }
 		ReactiveCommand MainLoaded { get; }
 		ReactiveCommand LevelLoaded { get; }
 		ReactiveProperty<float> SceneLoadProgress { get; }
@@ -38,11 +38,7 @@ namespace Game.Core
 		{
 			WaitForFixedUpdate wait = new WaitForFixedUpdate();
 
-			Debug.Log($"------------- Start LoadScenes ({Time.time})");
-/*
-			yield return LocalizationSettings.InitializationOperation;
-			yield return wait;
-*/
+			ResourceLoading.Execute();
 
 #if UNITY_EDITOR
 			if (IsSceneLoaded(_scenesConfig.Main))
@@ -51,13 +47,11 @@ namespace Game.Core
 
 			yield return _localizator.Preload();
 
-			SplashCompleted.Execute();
-
 			yield return new WaitUntil(() => _profileManager.IsReady.Value);
 
-			Debug.Log($"------------- ProfileManager Ready ({Time.time})");
-
 			yield return wait;
+
+			MainLoading.Execute();
 
 			if (!IsSceneLoaded(_scenesConfig.Main))
 			{
@@ -73,14 +67,13 @@ namespace Game.Core
 			if (IsSceneLoaded(_scenesConfig.Splash))
 				UnloadScene(_scenesConfig.Splash);
 
-			//LoadLevel();
-
 			yield return null;
 		}
 
 		#region IScenesManager
 
-		public ReactiveCommand SplashCompleted { get; } = new ReactiveCommand();
+		public ReactiveCommand ResourceLoading { get; } = new ReactiveCommand();
+		public ReactiveCommand MainLoading { get; } = new ReactiveCommand();
 		public ReactiveCommand MainLoaded { get; } = new ReactiveCommand();
 		public ReactiveCommand LevelLoaded { get; } = new ReactiveCommand();
 

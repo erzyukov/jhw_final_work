@@ -7,6 +7,7 @@ namespace Game.Installers
 	using Game.Tutorial;
 	using System;
 	using UnityEngine.UI;
+	using Game.Analytics;
 
 	public class MainSceneInstaller : MonoInstaller
 	{
@@ -31,6 +32,7 @@ namespace Game.Installers
 			InstallUI();
 			WindowsInstall();
 			TutorialInstall();
+			InstallAnalytics();
 		}
 
 		private void InstallUI()
@@ -111,8 +113,23 @@ namespace Game.Installers
 				.AsSingle();
 		}
 
-		private void InstallPools()
+		private void InstallAnalytics()
 		{
+			Container
+				.BindInterfacesTo<TutorialAnalytics>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<GameplayAnalytics>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<ResourcesAnalytics>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<CustomAnalytics>()
+				.AsSingle();
 		}
 	}
 }

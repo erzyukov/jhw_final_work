@@ -19,10 +19,10 @@ namespace Game.Core
 
 	public class GameUpgrades : ControllerBase, IGameUpgrades
 	{
-		[Inject] UpgradesConfig _upgradesConfig;
-		[Inject] GameProfile _gameProfile;
-		[Inject] IGameProfileManager _gameProfileManager;
-		[Inject] IGameCurrency _gameCurrency;
+		[Inject] private UpgradesConfig _upgradesConfig;
+		[Inject] private GameProfile _gameProfile;
+		[Inject] private IGameProfileManager _gameProfileManager;
+		[Inject] private IGameCurrency _gameCurrency;
 
 		#region IGameUpgrades
 
@@ -46,7 +46,12 @@ namespace Game.Core
 		{
 			int price = GetUpgradePrice(species);
 			
-			if (_gameCurrency.TrySpendSoftCurrency(price) == false)
+			if (_gameCurrency.TrySpendSoftCurrency(
+					price,
+					SoftTransaction.Upgrade,
+					$"{(int)species}_lvl_{_gameProfile.Units.Upgrades[species].Value + 1}"
+					) == false
+				)
 				return false;
 
 			_gameProfile.Units.Upgrades[species].Value++;

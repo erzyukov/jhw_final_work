@@ -79,6 +79,7 @@ namespace Game.Profiles
 			AddMissingLevels();
 			AddMissingUnits();
 			AddMissingEnergy();
+			AddMissingAnalytics();
 
 			Save();
 		}
@@ -110,6 +111,12 @@ namespace Game.Profiles
 		{
 			if (_gameProfile.Energy == null)
 				_gameProfile.Energy = new EnergyProfile();
+		}
+
+		private void AddMissingAnalytics()
+		{
+			if (_gameProfile.Analytics == null)
+				_gameProfile.Analytics = new AnalyticsProfile();
 		}
 
 #if UNITY_EDITOR
