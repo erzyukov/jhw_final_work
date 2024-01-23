@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sniper
+  m_Name: Sniper-2
   m_Shader: {fileID: 4800000, guid: de9082207784c4f4d823b900babcbc1f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8fea9ea49f99629449f286a786aaa416, type: 3}
+        m_Texture: {fileID: 2800000, guid: 40c2a738d122de145a90af3529747f8f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
