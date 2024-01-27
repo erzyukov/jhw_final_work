@@ -7,17 +7,18 @@
 
 	public interface IProjectileSpawner
 	{
-		public Bullet SpawnBullet(Vector3 position, IUnitFacade target, float damage);
+		Projectile Spawn(Vector3 position, ProjectileType type, IUnitFacade target, float damage);
 	}
 
 	public class ProjectileSpawner : IProjectileSpawner
 	{
 		[Inject] private Bullet.Factory _bulletFactory;
+		[Inject] private Fireball.Factory _fireballFactory;
 		[Inject] private WeaponsConfig _weaponsConfig;
 
 		#region IProjectileSpawner
 
-		public Bullet SpawnBullet(Vector3 position, IUnitFacade target, float damage)
+		public Projectile Spawn(Vector3 position, ProjectileType type, IUnitFacade target, float damage)
 		{
 			ProjectileData data = new ProjectileData()
 			{
@@ -27,9 +28,16 @@
 				Damage = damage
 			};
 
-			return _bulletFactory.Create(data);
+			return Create(type, data);
 		}
-		
+
 		#endregion
+
+		private Projectile Create(ProjectileType type, ProjectileData data) => type switch
+		{
+			ProjectileType.SniperBullet => _bulletFactory.Create(data),
+			ProjectileType.Fireball => _fireballFactory.Create(data),
+			_ => null
+		};
 	}
 }

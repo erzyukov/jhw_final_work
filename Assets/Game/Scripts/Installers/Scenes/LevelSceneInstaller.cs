@@ -80,8 +80,15 @@ namespace Game.Installers
 			Container.BindFactory<ProjectileData, Bullet, Bullet.Factory>()
 				.FromMonoPoolableMemoryPool(x =>
 					x.WithInitialSize(_weaponsConfig.BulletPoolSize)
-						.FromComponentInNewPrefab(_weaponsConfig.BulletPrefab)
-						.UnderTransformGroup("Bullets")
+						.FromComponentInNewPrefab(_weaponsConfig.GetProjectile(ProjectileType.SniperBullet))
+						.UnderTransformGroup(ProjectileType.SniperBullet.ToString())
+				);
+
+			Container.BindFactory<ProjectileData, Fireball, Fireball.Factory>()
+				.FromMonoPoolableMemoryPool(x =>
+					x.WithInitialSize(_weaponsConfig.BulletPoolSize)
+						.FromComponentInNewPrefab(_weaponsConfig.GetProjectile(ProjectileType.Fireball))
+						.UnderTransformGroup(ProjectileType.Fireball.ToString())
 				);
 
 			Container

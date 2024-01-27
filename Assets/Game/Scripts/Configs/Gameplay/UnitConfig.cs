@@ -1,6 +1,7 @@
 ﻿namespace Game.Configs
 {
 	using Game.Units;
+	using Game.Weapon;
 	using UnityEngine;
 
 	[CreateAssetMenu(fileName = "Unit", menuName = "Configs/Unit", order = (int)Config.Unit)]
@@ -13,6 +14,7 @@
 		[SerializeField] private Class _class;
 		[SerializeField] private float _attackRange;
 		[SerializeField] private float _attackDelay;
+		[SerializeField] private ProjectileType _projectileType;
 		[Space]
 		[SerializeField] private float _health;
 		[SerializeField] private float _damage;
@@ -36,6 +38,7 @@
 		public Class Class => _class;
 		public float AttackRange => _attackRange;
 		public float AttackDelay => _attackDelay;
+		public ProjectileType ProjectileType => _projectileType;
 		public float Health => _health;
 		public float Damage => _damage;
 		public float HealthPowerMultiplier => _healthPowerMultiplier;
