@@ -17,6 +17,7 @@ MonoBehaviour:
   _class: 0
   _attackRange: 1
   _attackDelay: 1.5
+  _projectileType: 0
   _health: 150
   _damage: 10
   _healthPowerMultiplier: 26
@@ -26,8 +27,5 @@ MonoBehaviour:
   _softRewardPowerMultiplier: 0.5
   _experiencePowerMultiplier: 1
   _gradePrefabs:
-  - {fileID: 1503547998484457933, guid: 2e9f0ab90493d694c94d83b818dbab0c, type: 3}
-  - {fileID: 1503547998484457933, guid: 2e9f0ab90493d694c94d83b818dbab0c, type: 3}
-  - {fileID: 1503547998484457933, guid: 2e9f0ab90493d694c94d83b818dbab0c, type: 3}
   - {fileID: 1503547998484457933, guid: 2e9f0ab90493d694c94d83b818dbab0c, type: 3}
   _isDebug: 0
