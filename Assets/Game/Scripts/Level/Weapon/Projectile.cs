@@ -1,5 +1,6 @@
 namespace Game.Weapon
 {
+	using Game.Fx;
 	using Game.Units;
 	using System;
 	using UnityEngine;
@@ -16,6 +17,8 @@ namespace Game.Weapon
 	[RequireComponent(typeof(Rigidbody))]
     public class Projectile : MonoBehaviour, IPoolable<ProjectileData, IMemoryPool>, IDisposable
 	{
+		[SerializeField] private ParticleFx _particles;
+
 		private IMemoryPool _pool;
 		private IUnitFacade _target;
 		private float _speed;
@@ -53,6 +56,7 @@ namespace Game.Weapon
 
 		public void Dispose()
 		{
+			_particles?.Pause();
 			_pool.Despawn(this);
 		}
 
@@ -70,6 +74,7 @@ namespace Game.Weapon
 			_target = data.Target;
 			_speed = data.Speed;
 			_damage = data.Damage;
+			_particles?.Play();
 		}
 	}
 }
