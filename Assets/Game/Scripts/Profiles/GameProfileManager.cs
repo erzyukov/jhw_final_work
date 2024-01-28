@@ -1,14 +1,12 @@
 namespace Game.Profiles
 {
 	using Game.Configs;
-	using Game.Ui;
 	using Game.Units;
 	using Game.Utilities;
 	using System.Collections.Generic;
 	using System.IO;
 	using UniRx;
 	using UnityEngine;
-	using YG;
 	using Zenject;
 
 	public interface IGameProfileManager
@@ -24,6 +22,7 @@ namespace Game.Profiles
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] private UnitsConfig _unitsConfig;
 		[Inject] private EnergyConfig _energyConfig;
+		[Inject] private IProfileSaver _profileSaver;
 
 		private GameProfile _gameProfile;
 
@@ -31,11 +30,8 @@ namespace Game.Profiles
 		{
             CreateGameProfile();
 
-			Observable.FromEvent(
-					x => YandexGame.GetDataEvent += x,
-					x => YandexGame.GetDataEvent -= x
-				)
-				.Subscribe(_ => OnYandexGameGetData())
+			_profileSaver.SaveSystemReady
+				.Subscribe(_ => OnSaveSystemReady())
 				.AddTo(this);
 		}
 
@@ -47,8 +43,7 @@ namespace Game.Profiles
 
 		public void Save()
 		{
-			YandexGame.savesData.gameProfile = _gameProfile;
-			YandexGame.SaveProgress();
+			_profileSaver.Save(_gameProfile);
 		}
 
 		public void Reset()
@@ -66,12 +61,10 @@ namespace Game.Profiles
 			_gameProfile.Energy.Amount.Value = _energyConfig.MaxEnery;
         }
 
-        private void OnYandexGameGetData()
+		private void OnSaveSystemReady()
 		{
-			if (YandexGame.savesData.gameProfile == null)
-				YandexGame.savesData.gameProfile = _gameProfile;
-			else
-				_gameProfile = YandexGame.savesData.gameProfile;
+			if (_profileSaver.Load(out GameProfile loadedProfile))
+				_gameProfile = loadedProfile;
 
 			AddMissing();
 			IsReady.Value = true;
@@ -133,7 +126,7 @@ namespace Game.Profiles
 #if UNITY_EDITOR
 		private const string PathSavesEditor = "/YandexGame/WorkingData/Editor/SavesEditorYG.json";
 
-		[UnityEditor.MenuItem("Game/Delete saved game")]
+		[UnityEditor.MenuItem("Game/Delete Yandex saved game")]
 		public static void DeleteSaveFile()
 		{
 			string path = Application.dataPath + PathSavesEditor;
