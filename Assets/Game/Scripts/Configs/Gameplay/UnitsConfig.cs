@@ -7,6 +7,8 @@ namespace Game.Configs
 	using DG.Tweening;
 	using Sirenix.OdinInspector;
 
+	// TODO: Refact: HeroDefaultSquad - Move to profile - user can edit battle squad
+
 	[CreateAssetMenu(fileName = "Units", menuName = "Configs/Units", order = (int)Config.Units)]
 	public class UnitsConfig : ScriptableObject
 	{
@@ -39,6 +41,9 @@ namespace Game.Configs
 		[SerializeField] private float _rotationSpeed;
 		[SerializeField] private UnitData[] _units;
 
+		[Header("Summon")]
+		[SerializeField] private float _summonCountRatioLimit;
+
 		[Header("Hero")]
 		[SerializeField] private List<Species> _heroUnits;
 
@@ -63,6 +68,8 @@ namespace Game.Configs
 		public float DamageFxDuration => _damageFxDuration;
 		public Ease DamageFxEase => _damageFxEase;
 		public Color DamageFxMaterialColor => _damageFxMaterialColor;
+
+		public float SummonCountRatioLimit => _summonCountRatioLimit;
 
 		public float Speed => _speed;
 		public float RotationSpeed => _rotationSpeed;
