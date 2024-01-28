@@ -1,6 +1,8 @@
 namespace Game.Ui
 {
+	using Game.Configs;
 	using Game.Core;
+	using Game.Profiles;
 	using UniRx;
 	using UnityEngine;
 	using UnityEngine.UI;
@@ -12,6 +14,8 @@ namespace Game.Ui
 
 		[Inject] IUiBattleMenuWindow _window;
 		[Inject] IGameCycle _gameCycle;
+		[Inject] GameProfile _gameProfile;
+		[Inject] MenuConfig _menuConfig;
 
 		private void Awake()
 		{
@@ -21,7 +25,12 @@ namespace Game.Ui
 
 			_gameCycle.State
 				.Select(state => state == GameState.TacticalStage)
-				.Subscribe(isButtonActive => _button.interactable = isButtonActive)
+				.Subscribe(isButtonInteractiable => _button.interactable = isButtonInteractiable)
+				.AddTo(this);
+
+			_gameProfile.LevelNumber
+				.Select(v => v >= _menuConfig.TacticalMenuActiveFromLevel)
+				.Subscribe(isButtonActive => _button.gameObject.SetActive(isButtonActive))
 				.AddTo(this);
 		}
 	}

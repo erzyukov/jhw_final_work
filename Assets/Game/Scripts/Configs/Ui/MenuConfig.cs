@@ -8,9 +8,15 @@
     [CreateAssetMenu(fileName = "Menu", menuName = "Configs/Menu", order = (int)Config.Menu)]
 	public class MenuConfig : ScriptableObject
 	{
+		[Header("Lobby")]
 		[SerializeField] private MenuLevelAccess[] _accessFromLevel;
+		
+		[Header("Tactical")]
+		[SerializeField] private int _tacticalMenuActiveFromLevel;
 
-        public int GetAccessLevel(GameState state) => _accessFromLevel
+		public int TacticalMenuActiveFromLevel => _tacticalMenuActiveFromLevel;
+
+		public int GetAccessLevel(GameState state) => _accessFromLevel
                 .Where(p => p.GameState == state)
                 .Select(p => p.LevelNumber)
                 .FirstOrDefault();
