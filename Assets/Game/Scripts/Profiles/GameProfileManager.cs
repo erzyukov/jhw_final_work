@@ -1,6 +1,8 @@
 namespace Game.Profiles
 {
 	using Game.Configs;
+	using Game.Ui;
+	using Game.Units;
 	using Game.Utilities;
 	using System.Collections.Generic;
 	using System.IO;
@@ -60,7 +62,8 @@ namespace Game.Profiles
         private void CreateGameProfile()
         {
             _gameProfile = new GameProfile();
-            _gameProfile.Energy.Amount.Value = _energyConfig.MaxEnery;
+			FillUnits();
+			_gameProfile.Energy.Amount.Value = _energyConfig.MaxEnery;
         }
 
         private void OnYandexGameGetData()
@@ -102,10 +105,18 @@ namespace Game.Profiles
 			if (_gameProfile.Units == null)
 				_gameProfile.Units = new UnitsProfile();
 
-            foreach (var species in _unitsConfig.HeroUnits)
+			if (_gameProfile.Units.Upgrades == null)
+				_gameProfile.Units.Upgrades = new Dictionary<Species, IntReactiveProperty>();
+
+			FillUnits();
+        }
+
+		private void FillUnits()
+		{
+			foreach (var species in _unitsConfig.HeroUnits)
 				if (_gameProfile.Units.Upgrades.ContainsKey(species) == false)
 					_gameProfile.Units.Upgrades.Add(species, new IntReactiveProperty(1));
-        }
+		}
 
 		private void AddMissingEnergy()
 		{
