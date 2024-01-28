@@ -28,20 +28,21 @@ namespace Game.Units
 
 		void Start()
         {
-			SetPowerActive(_unitData.Power.Value != 0);
-
 			_gameCycle.State
 				.Subscribe(OnGameStateChange)
 				.AddTo(this);
 
 			_health.HealthRatio
 				.Subscribe(OnHealthRatioChangeHandler)
-			.AddTo(this);
+				.AddTo(this);
 
 			_uiHealthCanvas.localPosition = _uiHealthCanvas.localPosition.WithY(_unitData.RendererHeight);
 
-			_unitData.Power
-				.Subscribe(OnPowerChanged)
+			Observable.Merge(
+				_unitData.SupposedPower,
+				_unitData.Power
+			)
+				.Subscribe(_ => UpdatePowerValue())
 				.AddTo(this);
 
 			Observable.Merge(
@@ -51,17 +52,17 @@ namespace Game.Units
 				.Subscribe(SetDraggingState)
 				.AddTo(this);
 
-			_unitData.SupposedPower
-				.Subscribe(OnSupposedPowerChanged)
-				.AddTo(this);
-
 			_grade.sprite = _unitsConfig.GradeSprites[_unitData.GradeIndex];
 		}
 
-		private void OnPowerChanged(int value)
+		private void UpdatePowerValue()
 		{
+			int supposedPower = _unitData.SupposedPower.Value;
+			int actualPower = _unitData.Power.Value;
+			bool isSupposed = supposedPower != 0;
+			int value = isSupposed ? supposedPower : actualPower;
+			_power.color = (isSupposed) ? _supposedPowerColor : _defaultPowerColor;
 			SetPowerValue(value);
-			SetPowerActive(value != 0);
 		}
 
 		private void SetDraggingState(bool value)
@@ -70,27 +71,25 @@ namespace Game.Units
 			SetGradeActive(value);
 		}
 
-		private void OnSupposedPowerChanged(int value)
-		{
-			SetPowerActive(value != 0);
-			SetPowerValue((value != 0) ? value: _unitData.Power.Value);
-			_power.color = (value != 0) ? _supposedPowerColor: _defaultPowerColor;
-		}
-
 		private void OnHealthRatioChangeHandler(float ratio)
 		{
 			_slider.value = ratio;
-			OnGameStateChange(_gameCycle.State.Value);
+			UpdateSliderActive();
 		}
 
 		private void OnGameStateChange(GameState gameState)
 		{
-			bool isSliderActive = _slider.value != 0 && gameState == GameState.BattleStage;
-			_slider.gameObject.SetActive(isSliderActive);
+			UpdateSliderActive();
 
 			bool isTacticalStage = gameState == GameState.TacticalStage;
 			SetPowerActive(isTacticalStage);
 			SetGradeActive(_unitData.IsHero && isTacticalStage);
+		}
+
+		private void UpdateSliderActive()
+		{
+			bool isSliderActive = _slider.value != 0 && _gameCycle.State.Value == GameState.BattleStage;
+			_slider.gameObject.SetActive(isSliderActive);
 		}
 
 		private void SetPowerActive(bool value)
