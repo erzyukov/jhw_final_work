@@ -23,6 +23,7 @@ namespace Game.Units
 		[Inject] private IUnitData _unitData;
 		[Inject] private IDraggable _draggable;
 		[Inject] private UnitsConfig _unitsConfig;
+		[Inject] private UnitConfig _unitConfig;
 
 		// TODO: Refact: redo to passive view
 
@@ -52,6 +53,17 @@ namespace Game.Units
 				.Subscribe(SetDraggingState)
 				.AddTo(this);
 
+			if (_unitConfig.IsDebug)
+			{
+				_unitData.SupposedPower
+					.Subscribe(v => Debug.LogWarning($"==> SupposedPower: {v}"))
+					.AddTo(this);
+
+				_unitData.Power
+					.Subscribe(v => Debug.LogWarning($"==> Power: {v}"))
+					.AddTo(this);
+			}
+
 			_grade.sprite = _unitsConfig.GradeSprites[_unitData.GradeIndex];
 		}
 
@@ -63,6 +75,7 @@ namespace Game.Units
 			int value = isSupposed ? supposedPower : actualPower;
 			_power.color = (isSupposed) ? _supposedPowerColor : _defaultPowerColor;
 			SetPowerValue(value);
+			SetPowerActive(value != 0);
 		}
 
 		private void SetDraggingState(bool value)
