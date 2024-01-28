@@ -3,6 +3,7 @@ namespace Game.Profiles
 	using Game.Configs;
 	using Game.Units;
 	using Game.Utilities;
+	using System;
 	using System.Collections.Generic;
 	using System.IO;
 	using UniRx;
@@ -13,7 +14,7 @@ namespace Game.Profiles
 	{
 		BoolReactiveProperty IsReady { get; }
 		GameProfile GameProfile { get; }
-		void Save();
+		void Save(bool forceInstant = false);
 		void Reset();
 	}
 
@@ -24,7 +25,11 @@ namespace Game.Profiles
 		[Inject] private EnergyConfig _energyConfig;
 		[Inject] private IProfileSaver _profileSaver;
 
+		private const float SaveDelay = 2;
+
 		private GameProfile _gameProfile;
+		private ITimer _timer = new Timer(true);
+		private bool _delayedSave;
 
 		public void OnInstantiated()
 		{
@@ -41,9 +46,28 @@ namespace Game.Profiles
 
 		public GameProfile GameProfile => _gameProfile;
 
-		public void Save()
+		public void Save(bool forceInstant = false)
 		{
-			_profileSaver.Save(_gameProfile);
+			if (forceInstant)
+			{
+				_profileSaver.Save(_gameProfile);
+				_timer.Set(SaveDelay);
+				return;
+			}
+
+			if (_delayedSave)
+				return;
+
+			_delayedSave = true;
+
+			Observable
+				.Timer(TimeSpan.FromSeconds(_timer.Remained))
+				.Subscribe(_ => {
+					_profileSaver.Save(_gameProfile);
+					_timer.Set(SaveDelay);
+					_delayedSave = false;
+				})
+				.AddTo(this);
 		}
 
 		public void Reset()
