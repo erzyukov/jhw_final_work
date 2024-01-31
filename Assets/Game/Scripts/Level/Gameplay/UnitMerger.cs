@@ -62,7 +62,7 @@
 		private void OnUnitMergeCanceled(IUnitFacade unit)
 		{
 			_mergeAbsorbedUnit = null;
-			unit.SetSupposedPower(0);
+			unit.ResetSupposedPower();
 		}
 
 		private void OnUnitPointerUpedHandler()

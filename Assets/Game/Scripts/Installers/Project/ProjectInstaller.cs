@@ -50,6 +50,10 @@ namespace Game.Installers
 		private void InstallGameProfile()
 		{
 			Container
+				.BindInterfacesTo<YandexProfileSaver>()
+				.AsSingle();
+
+			Container
 				.BindInterfacesTo<GameProfileManager>()
 				.AsSingle()
 				.OnInstantiated<GameProfileManager>((ic, o) => o.OnInstantiated());

@@ -14,7 +14,7 @@
 		void Reset();
 	}
 
-	public class UnitFsm : UnitFsmBase, IUnitFsm, IInitializable, IDisposable
+	public class UnitFsm : UnitFsmBase, IUnitFsm, IInitializable, IDisposable, IFixedTickable
 	{
 		[Inject] private IUnitTargetFinder _targetFinder;
 		[Inject] private IUnitHealth _health;
@@ -146,6 +146,16 @@
 			{
 				case UnitState.MoveToTarget:
 					_mover.ProcessMoveTo(_targetFinder.Target);
+					break;
+			}
+		}
+
+		protected override void StateFixedTick()
+		{
+			switch (State)
+			{
+				case UnitState.MoveToTarget:
+					_targetFinder.ActualizeTarget();
 					break;
 			}
 		}

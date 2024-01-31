@@ -32,6 +32,14 @@ namespace Game.Units
 				.BindInterfacesTo<Draggable>()
 				.FromComponentOnRoot();
 
+			Container
+				.BindInterfacesTo<UiUnitHud>()
+				.FromComponentOnRoot();
+
+			Container
+				.BindInterfacesTo<UnitHud>()
+				.AsSingle();
+
 			#endregion
 
 			#region Base

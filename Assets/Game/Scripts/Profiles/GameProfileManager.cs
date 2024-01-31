@@ -1,19 +1,20 @@
 namespace Game.Profiles
 {
 	using Game.Configs;
+	using Game.Units;
 	using Game.Utilities;
+	using System;
 	using System.Collections.Generic;
 	using System.IO;
 	using UniRx;
 	using UnityEngine;
-	using YG;
 	using Zenject;
 
 	public interface IGameProfileManager
 	{
 		BoolReactiveProperty IsReady { get; }
 		GameProfile GameProfile { get; }
-		void Save();
+		void Save(bool forceInstant = false);
 		void Reset();
 	}
 
@@ -22,18 +23,20 @@ namespace Game.Profiles
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] private UnitsConfig _unitsConfig;
 		[Inject] private EnergyConfig _energyConfig;
+		[Inject] private IProfileSaver _profileSaver;
+
+		private const float SaveDelay = 2;
 
 		private GameProfile _gameProfile;
+		private ITimer _timer = new Timer(true);
+		private bool _delayedSave;
 
 		public void OnInstantiated()
 		{
             CreateGameProfile();
 
-			Observable.FromEvent(
-					x => YandexGame.GetDataEvent += x,
-					x => YandexGame.GetDataEvent -= x
-				)
-				.Subscribe(_ => OnYandexGameGetData())
+			_profileSaver.SaveSystemReady
+				.Subscribe(_ => OnSaveSystemReady())
 				.AddTo(this);
 		}
 
@@ -43,10 +46,28 @@ namespace Game.Profiles
 
 		public GameProfile GameProfile => _gameProfile;
 
-		public void Save()
+		public void Save(bool forceInstant = false)
 		{
-			YandexGame.savesData.gameProfile = _gameProfile;
-			YandexGame.SaveProgress();
+			if (forceInstant)
+			{
+				_profileSaver.Save(_gameProfile);
+				_timer.Set(SaveDelay);
+				return;
+			}
+
+			if (_delayedSave)
+				return;
+
+			_delayedSave = true;
+
+			Observable
+				.Timer(TimeSpan.FromSeconds(_timer.Remained))
+				.Subscribe(_ => {
+					_profileSaver.Save(_gameProfile);
+					_timer.Set(SaveDelay);
+					_delayedSave = false;
+				})
+				.AddTo(this);
 		}
 
 		public void Reset()
@@ -60,15 +81,14 @@ namespace Game.Profiles
         private void CreateGameProfile()
         {
             _gameProfile = new GameProfile();
-            _gameProfile.Energy.Amount.Value = _energyConfig.MaxEnery;
+			FillUnits();
+			_gameProfile.Energy.Amount.Value = _energyConfig.MaxEnery;
         }
 
-        private void OnYandexGameGetData()
+		private void OnSaveSystemReady()
 		{
-			if (YandexGame.savesData.gameProfile == null)
-				YandexGame.savesData.gameProfile = _gameProfile;
-			else
-				_gameProfile = YandexGame.savesData.gameProfile;
+			if (_profileSaver.Load(out GameProfile loadedProfile))
+				_gameProfile = loadedProfile;
 
 			AddMissing();
 			IsReady.Value = true;
@@ -102,10 +122,18 @@ namespace Game.Profiles
 			if (_gameProfile.Units == null)
 				_gameProfile.Units = new UnitsProfile();
 
-            foreach (var species in _unitsConfig.HeroUnits)
+			if (_gameProfile.Units.Upgrades == null)
+				_gameProfile.Units.Upgrades = new Dictionary<Species, IntReactiveProperty>();
+
+			FillUnits();
+        }
+
+		private void FillUnits()
+		{
+			foreach (var species in _unitsConfig.HeroUnits)
 				if (_gameProfile.Units.Upgrades.ContainsKey(species) == false)
 					_gameProfile.Units.Upgrades.Add(species, new IntReactiveProperty(1));
-        }
+		}
 
 		private void AddMissingEnergy()
 		{
@@ -122,7 +150,7 @@ namespace Game.Profiles
 #if UNITY_EDITOR
 		private const string PathSavesEditor = "/YandexGame/WorkingData/Editor/SavesEditorYG.json";
 
-		[UnityEditor.MenuItem("Game/Delete saved game")]
+		[UnityEditor.MenuItem("Game/Delete Yandex saved game")]
 		public static void DeleteSaveFile()
 		{
 			string path = Application.dataPath + PathSavesEditor;

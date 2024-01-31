@@ -101,7 +101,7 @@
 			return true;
 		}
 
-		private void Save() => _gameProfileManager.Save();
+		private void Save() => _gameProfileManager.Save(true);
 
 		public void RegisterTransaction(int amount, SoftTransaction type, string detail)
 		{

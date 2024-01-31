@@ -12,6 +12,7 @@
 	using UniRx;
 	using UnityEngine;
 	using System.Linq;
+	using Sirenix.Utilities;
 
 	public interface IHeroUnitSummoner
 	{
@@ -36,6 +37,7 @@
 
 		Dictionary<IUnitFacade, IDisposable> _unitDiedSubscribes = new Dictionary<IUnitFacade, IDisposable>();
 		Dictionary<IUnitFacade, IDisposable> _vanishSubscribes = new Dictionary<IUnitFacade, IDisposable>();
+		Dictionary<Species, int> _speciesCounter = new Dictionary<Species, int>();
 
 		bool _isPaidSummonInterrupted;
 
@@ -45,11 +47,14 @@
 				.Where(state => state == GameState.CompleteWave)
 				.Subscribe(_ => OnCompleteWave())
 				.AddTo(this);
+
+			InitCounter();
 		}
 
 		private void OnCompleteWave()
 		{
 			var units = _vanishSubscribes.Keys.ToList();
+
 			for (var i = 0; i < units.Count; i++)
 				RemoveDeadUnit(units[i]);
 		}
@@ -97,14 +102,15 @@
 			return unit;
 		}
 
-		public void InterruptPaidSummon() => 
+		public void InterruptPaidSummon() =>
 			_isPaidSummonInterrupted = true;
 
 		#endregion
 
 		private void Summon()
 		{
-			Species summonSpecies = _unitsConfig.HeroDefaultSquad[UnityEngine.Random.Range(0, _unitsConfig.HeroDefaultSquad.Count)];
+			Species summonSpecies = GetRandomSpecies();
+
 			int defaultGradeIndex = 0;
 			int defaultPower = _gameUpgrades.GetUnitPower(summonSpecies);
 
@@ -114,6 +120,24 @@
 			SummonedPaidUnit.Execute(unit);
 
 			SubscribeToUnit(unit);
+		}
+
+		// TODO: Refact: Optimize for units count > 2
+		private Species GetRandomSpecies()
+		{
+			UpdateCounter();
+			int summonedCount = _speciesCounter.Sum(v => v.Value);
+			List<Species> species = new List<Species>(_unitsConfig.HeroDefaultSquad);
+
+			_unitsConfig.HeroDefaultSquad.ForEach(s =>
+			{
+				float speciesRatio = (float)_speciesCounter[s] / summonedCount;
+
+				if (speciesRatio > _unitsConfig.SummonCountRatioLimit)
+					species.Remove(s);
+			});
+
+			return species[UnityEngine.Random.Range(0, species.Count)];
 		}
 
 		private void SubscribeToUnit(IUnitFacade unit)
@@ -138,6 +162,15 @@
 			_vanishSubscribes.Remove(unit);
 
 			unit.SetActive(false);
+		}
+
+		private void InitCounter() =>
+			_unitsConfig.HeroDefaultSquad.ForEach(species => _speciesCounter.Add(species, 0));
+
+		private void UpdateCounter()
+		{
+			_unitsConfig.HeroDefaultSquad.ForEach(species => _speciesCounter[species] = 0);
+			_fieldFacade.Units.ForEach(unit => _speciesCounter[unit.Species]++);
 		}
 	}
 }

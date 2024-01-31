@@ -16,6 +16,7 @@
 		bool HasTarget { get; }
 		IUnitFacade Target { get; }
 		void SearchTarget();
+		void ActualizeTarget();
 		void Reset();
 	}
 
@@ -44,6 +45,14 @@
 		{
 			InitFields();
 			SelectTarget();
+		}
+
+		public void ActualizeTarget()
+		{
+			_target = _enemyField.Units
+				.Where(u => u.IsDead == false)
+				.OrderBy(u => (_unitFacade.Transform.position - u.Transform.position).sqrMagnitude)
+				.FirstOrDefault();
 		}
 
 		public void Reset()
