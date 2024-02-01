@@ -12,10 +12,10 @@ namespace Game.Ui
 	{
 		[SerializeField] private Button _button;
 
-		[Inject] IUiBattleMenuWindow _window;
-		[Inject] IGameCycle _gameCycle;
-		[Inject] GameProfile _gameProfile;
-		[Inject] MenuConfig _menuConfig;
+		[Inject] private IUiBattleMenuWindow _window;
+		[Inject] private IGameCycle _gameCycle;
+		[Inject] private GameProfile _gameProfile;
+		[Inject] private MenuConfig _menuConfig;
 
 		private void Awake()
 		{

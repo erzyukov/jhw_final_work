@@ -62,6 +62,11 @@ namespace Game.Installers
 				.AsSingle();
 
 			Container
+				.Bind<Toggle>()
+				.FromComponentsInHierarchy()
+				.AsSingle();
+
+			Container
 				.BindInterfacesTo<UiGameSettingsWindow>()
 				.FromComponentsInHierarchy()
 				.AsSingle();

@@ -9,7 +9,7 @@ namespace Game.Ui
 	{
 		[SerializeField] private Button _button;
 
-		[Inject] IUiGameSettingsWindow _window;
+		[Inject] private IUiGameSettingsWindow _window;
 
 		private void Awake()
 		{

@@ -7,9 +7,9 @@
 
 	public class UiGameSettings : ControllerBase, IInitializable
 	{
-		[Inject] IUiGameSettingsWindow _window;
-		[Inject] GameProfile _gameProfile;
-		[Inject] IGameProfileManager _gameProfileManager;
+		[Inject] private IUiGameSettingsWindow _window;
+		[Inject] private GameProfile _gameProfile;
+		[Inject] private IGameProfileManager _gameProfileManager;
 
 		public void Initialize()
 		{
