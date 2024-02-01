@@ -36,6 +36,7 @@
 		private int IsAimingParameter => Animator.StringToHash("IsAiming");
 		private int IsDeadParameter => Animator.StringToHash("IsDead");
 		private int AimParameter => Animator.StringToHash("Aim");
+		private int IdleOffsetParameter => Animator.StringToHash("IdleOffset");
 		private Animator Animator => _builder.UnitRenderer.Animator;
 
 		public void Initialize()
@@ -174,6 +175,7 @@
 			_unitPosition.ResetPosition();
 			_view.SetActive(true);
 			_view.NavMeshAgent.enabled = false;
+			Animator.SetFloat(IdleOffsetParameter, UnityEngine.Random.value);
 			Animator.Play(IdleAnimation);
 		}
 
