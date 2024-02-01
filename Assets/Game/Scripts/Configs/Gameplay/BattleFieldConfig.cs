@@ -11,19 +11,15 @@ namespace Game.Configs
 		[SerializeField] private float _fieldCellWidth;
 		[SerializeField] private FieldCellView _fieldCellPrefab;
 		[Header("Cell / Colors")]
-		[SerializeField] private Color _heroEvenCollor;
-		[SerializeField] private Color _heroOddCollor;
-		[SerializeField] private Color _enemyEvenCollor;
-		[SerializeField] private Color _enemyOddCollor;
-		[SerializeField] private Color _selectedCollor;
+		[SerializeField] private Sprite _heroSprite;
+		[SerializeField] private Sprite _enemySprite;
+		[SerializeField] private Sprite _selectedSprite;
 
 		public Vector2Int TeamFieldSize => _teamFieldSize;
 		public float FieldCellWidth => _fieldCellWidth;
 		public FieldCellView FieldCellView => _fieldCellPrefab;
-		public Color HeroEvenCollor => _heroEvenCollor;
-		public Color HeroOddCollor => _heroOddCollor;
-		public Color EnemyEvenCollor => _enemyEvenCollor;
-		public Color EnemyOddCollor => _enemyOddCollor;
-		public Color SelectedCollor => _selectedCollor;
+		public Sprite HeroSprite => _heroSprite;
+		public Sprite EnemySprite => _enemySprite;
+		public Sprite SelectedSprite => _selectedSprite;
 	}
 }

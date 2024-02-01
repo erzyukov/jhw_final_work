@@ -28,8 +28,9 @@
 			foreach (Vector2Int cellPosition in map)
 			{
 				IFieldCellView cellView = GameObject.Instantiate(_cellViewPrefab, _view.Transform);
-				cellView.SetColor(GetCellColor(cellPosition));
-				cellView.SetSelectedColor(_config.SelectedCollor);
+				Sprite sellSprite = _fieldType == FieldType.Hero ? _config.HeroSprite : _config.EnemySprite;
+				cellView.SetSprite(sellSprite);
+				cellView.SetSelectedSprite(_config.SelectedSprite);
 				map[cellPosition] = new FieldCell(cellView, cellPosition);
 				Vector3 worldPosition = GetCellWorldPosition(cellPosition);
 				cellView.SetPosition(worldPosition);
@@ -47,15 +48,6 @@
 			worldPosition += _viewOffset;
 
 			return worldPosition;
-		}
-
-		private Color GetCellColor(Vector2Int cellPosition)
-		{
-			bool isEven = (cellPosition.x + cellPosition.y) % 2 == 0;
-			Color color = _fieldType == FieldType.Hero
-				? (isEven) ? _config.HeroEvenCollor : _config.HeroOddCollor
-				:  (isEven) ? _config.EnemyEvenCollor : _config.EnemyOddCollor;
-			return color;
 		}
 	}
 }
