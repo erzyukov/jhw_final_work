@@ -15,8 +15,6 @@ MonoBehaviour:
   _teamFieldSize: {x: 5, y: 4}
   _fieldCellWidth: 1
   _fieldCellPrefab: {fileID: 4718736829820020704, guid: 250f0711a59ca5842aa61eec8ca5efba, type: 3}
-  _heroEvenCollor: {r: 0.99011296, g: 1, b: 0.65, a: 1}
-  _heroOddCollor: {r: 0.79550564, g: 0.8, b: 0.5213483, a: 1}
-  _enemyEvenCollor: {r: 0.8, g: 0.6039216, b: 0.5176471, a: 1}
-  _enemyOddCollor: {r: 1, g: 0.7529412, b: 0.6509804, a: 1}
-  _selectedCollor: {r: 0.5377398, g: 0.8490566, b: 0.11614456, a: 1}
+  _heroSprite: {fileID: 21300000, guid: cf5421d6aaeeb424db51b327bbf5690e, type: 3}
+  _enemySprite: {fileID: 21300000, guid: 6a99875b8bdcbad48b9b3c32653737f1, type: 3}
+  _selectedSprite: {fileID: 21300000, guid: 47b1f19daba29e14ba5c2b9c796d3e5d, type: 3}

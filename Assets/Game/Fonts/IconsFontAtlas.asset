@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IconsFontAtlas
   m_EditorClassIdentifier: 
   hashCode: -2076027712
-  material: {fileID: 226431699968671169}
+  material: {fileID: 7161281876679195149}
   materialHashCode: 0
   m_Version: 1.1.0
   m_FaceInfo:
@@ -22,6 +22,7 @@ MonoBehaviour:
     m_StyleName: 
     m_PointSize: 0
     m_Scale: 0
+    m_UnitsPerEM: 0
     m_LineHeight: 0
     m_AscentLine: 0
     m_CapLine: 0
@@ -72,6 +73,7 @@ MonoBehaviour:
       m_Height: 43
     m_Scale: 1
     m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
     sprite: {fileID: -1415153604, guid: 3e6f804bcc6b26d41ac8b7ee9d13f269, type: 3}
   - m_Index: 1
     m_Metrics:
@@ -87,6 +89,7 @@ MonoBehaviour:
       m_Height: 43
     m_Scale: 1
     m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
     sprite: {fileID: -608647092, guid: 3e6f804bcc6b26d41ac8b7ee9d13f269, type: 3}
   - m_Index: 2
     m_Metrics:
@@ -102,10 +105,11 @@ MonoBehaviour:
       m_Height: 43
     m_Scale: 1
     m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
     sprite: {fileID: -276915991, guid: 3e6f804bcc6b26d41ac8b7ee9d13f269, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
---- !u!21 &226431699968671169
+--- !u!21 &7161281876679195149
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 1
@@ -114,6 +118,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: TextMeshPro/Sprite
   m_Shader: {fileID: 4800000, guid: cf81c85f95fe47e1a27f6ae460cf182c, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -122,6 +128,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:

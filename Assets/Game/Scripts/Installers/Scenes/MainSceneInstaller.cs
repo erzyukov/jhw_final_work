@@ -60,6 +60,20 @@ namespace Game.Installers
 				.Bind<Button>()
 				.FromComponentsInHierarchy()
 				.AsSingle();
+
+			Container
+				.Bind<Toggle>()
+				.FromComponentsInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiGameSettingsWindow>()
+				.FromComponentsInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiGameSettings>()
+				.AsSingle();
 		}
 
 		private void InstallGameControllers()

@@ -11,9 +11,9 @@ namespace Game.Core
 
     public class AudioSources : MonoBehaviour, IAudioSources
 	{
-		[SerializeField] AudioSource _sound;
-		[SerializeField] AudioSource _music;
-		[SerializeField] AudioSource _ui;
+		[SerializeField] private AudioSource _sound;
+		[SerializeField] private AudioSource _music;
+		[SerializeField] private AudioSource _ui;
 
 		#region IAudioSources
 

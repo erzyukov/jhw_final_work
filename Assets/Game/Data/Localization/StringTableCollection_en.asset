@@ -35,7 +35,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 11563825532928
-    m_Localized: VERSUS
+    m_Localized: VS
     m_Metadata:
       m_Items: []
   - m_Id: 12019083677696
@@ -236,6 +236,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 11415812669083648
     m_Localized: MAIN MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22314108472168448
+    m_Localized: MUSIC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22314468846768128
+    m_Localized: SOUND
     m_Metadata:
       m_Items: []
   references:

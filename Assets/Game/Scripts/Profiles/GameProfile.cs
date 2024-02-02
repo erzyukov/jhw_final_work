@@ -25,6 +25,9 @@ namespace Game.Profiles
 		public UnitsProfile Units = new UnitsProfile();
 		public EnergyProfile Energy = new EnergyProfile();
 
+		public readonly BoolReactiveProperty IsMusicEnabled = new BoolReactiveProperty(true);
+		public readonly BoolReactiveProperty IsSoundEnabled = new BoolReactiveProperty(true);
+
 		public AnalyticsProfile Analytics = new AnalyticsProfile();
 	}
 }

@@ -234,6 +234,14 @@ MonoBehaviour:
     m_Key: 1 - Main/Canvas/Windows/LevelMenu/Window/NewGameButton/Text (TMP)
     m_Metadata:
       m_Items: []
+  - m_Id: 22314108472168448
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22314468846768128
+    m_Key: New Entry 1
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

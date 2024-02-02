@@ -10,6 +10,8 @@ namespace Game.Core
 	using UnityEngine.UI;
 	using System.Collections.Generic;
 	using Game.Field;
+	using Game.Profiles;
+	using System;
 
 	public interface IGameAudio
 	{
@@ -23,23 +25,47 @@ namespace Game.Core
 		[Inject] private AudioConfig _audioConfig;
 		[Inject] private IGameCycle _gameCycle;
 		[Inject] private List<Button> _uiButtons;
+		[Inject] private List<Toggle> _uiToggles;
 		[Inject] private IGameplayEvents _gameplayEvents;
+		[Inject] private GameProfile _gameProfile;
 
 		public void Initialize()
 		{
-			_audioSources.Sound.volume = _audioConfig.DefaultSoundVolume;
-			_audioSources.Music.volume = _audioConfig.DefaultMusicVolume;
-			_audioSources.Ui.volume = _audioConfig.DefaultUiVolume;
+			_gameProfile.IsMusicEnabled
+				.Subscribe(OnMusicEnabledChanged)
+				.AddTo(this);
+
+			_gameProfile.IsSoundEnabled
+				.Subscribe(OnSoundEnabledChanged)
+				.AddTo(this);
 
 			_gameCycle.State
+				.Where(_ => _gameProfile.IsMusicEnabled.Value)
 				.Subscribe(PlayGameStateTheme)
 				.AddTo(this);
 
 			_gameplayEvents.UnitsMerged
+				.Where(_ => _gameProfile.IsSoundEnabled.Value)
 				.Subscribe(_ => PlayUnitMerge())
 				.AddTo(this);
 
-			_uiButtons.ForEach(button => button.OnClickAsObservable().Subscribe(_ => PlayUiClick()));
+			Observable.Timer(TimeSpan.FromSeconds(1))
+				.Subscribe(_ => RegisterUiElements())
+				.AddTo(this);
+		}
+
+		private void OnMusicEnabledChanged(bool value)
+		{
+			_audioSources.Music.volume = (value) ? _audioConfig.DefaultMusicVolume : 0;
+
+			if (value)
+				PlayGameStateTheme(_gameCycle.State.Value);
+		}
+
+		private void OnSoundEnabledChanged(bool value)
+		{
+			_audioSources.Sound.volume = (value) ? _audioConfig.DefaultSoundVolume : 0;
+			_audioSources.Ui.volume = (value) ? _audioConfig.DefaultUiVolume : 0;
 		}
 
 		private void PlayGameStateTheme(GameState state)
@@ -72,26 +98,44 @@ namespace Game.Core
 
 		private void PlaySmoothly(AudioClip clip, float volume)
 		{
+			if (_gameProfile.IsMusicEnabled.Value == false)
+				return;
+
 			_audioSources.Music.clip = clip;
 			_audioSources.Music.Play();
 			_audioSources.Music.DOFade(volume, _audioConfig.FadeDuration);
 		}
 
-		private void PlayUnitMerge() =>
-			_audioSources.Ui.PlayOneShot(_audioConfig.UnitMerge, 1);
+		private void PlayUnitMerge()
+		{
+			if (_gameProfile.IsSoundEnabled.Value)
+				_audioSources.Ui.PlayOneShot(_audioConfig.UnitMerge, 1);
+		}
+
+		private void RegisterUiElements()
+		{
+			_uiButtons.ForEach(button => button.OnClickAsObservable().Subscribe(_ => PlayUiClick()));
+			_uiToggles.ForEach(toggle => toggle.OnValueChangedAsObservable().Skip(1).Subscribe(_ => PlayUiClick()));
+		}
 
 		#region IGameAudio
 
 		public void PlayUnitShoot(Species species)
 		{
+			if (_gameProfile.IsSoundEnabled.Value == false)
+				return;
+
 			AudioClip clip = _audioConfig.GetShootClip(species);
 
 			if (clip != null)
 				_audioSources.Sound.PlayOneShot(clip);
 		}
 
-		public void PlayUiClick() =>
-			_audioSources.Ui.PlayOneShot(_audioConfig.UiButtonClick);
+		public void PlayUiClick()
+		{
+			if (_gameProfile.IsSoundEnabled.Value)
+				_audioSources.Ui.PlayOneShot(_audioConfig.UiButtonClick);
+		}
 
 		#endregion
 	}
