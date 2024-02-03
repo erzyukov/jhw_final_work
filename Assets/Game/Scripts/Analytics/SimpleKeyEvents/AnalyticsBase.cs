@@ -28,7 +28,7 @@
 
 			properties.ToList().ForEach(x => globalProperties.Add(x.Key, x.Value));
 
-			_eventSender.SendMessage(key, globalProperties, immediately);
+			_eventSender.SendEvent(key, globalProperties, immediately);
 		}
 	}
 }
