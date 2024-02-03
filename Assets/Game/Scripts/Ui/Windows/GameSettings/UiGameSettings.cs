@@ -16,10 +16,6 @@
 			_window.SetMusicActive(_gameProfile.IsMusicEnabled.Value);
 			_window.SetSoundActive(_gameProfile.IsSoundEnabled.Value);
 
-			_window.CancelButtonClicked
-				.Subscribe(_ => _window.SetActive(false))
-				.AddTo(this);
-
 			_window.MusicToggleChanged
 				.Subscribe(OnMusicToggleChanged)
 				.AddTo(this);

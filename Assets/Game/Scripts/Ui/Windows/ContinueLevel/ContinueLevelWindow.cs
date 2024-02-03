@@ -1,4 +1,4 @@
-namespace Game
+namespace Game.Ui
 {
 	using System;
 	using UniRx;
@@ -6,29 +6,25 @@ namespace Game
 	using UnityEngine.UI;
     using TMPro;
 	
-	public interface IContinueLevelWindow
+	public interface IContinueLevelWindow : IUiWindow
 	{
 		IObservable<Unit> NewGameButtonClicked { get; }
 		IObservable<Unit> ContinueButtonClicked { get; }
-		IObservable<Unit> CancelButtonClicked { get; }
-		void SetActive(bool value);
         void SetNewGameButtonText(string value);
 	}
 
-	public class ContinueLevelWindow : MonoBehaviour, IContinueLevelWindow
+	public class ContinueLevelWindow : UiWindow, IContinueLevelWindow
 	{
 		[SerializeField] private Button _newGameButton;
 		[SerializeField] private Button _continueButton;
-		[SerializeField] private Button _cancelButton;
 		[SerializeField] private TextMeshProUGUI _newGameButtonText;
 
 		#region IContinueLevelWindow
 
+		public override Window Type => Window.ContinueLevel;
+
 		public IObservable<Unit> NewGameButtonClicked => _newGameButton.OnClickAsObservable();
 		public IObservable<Unit> ContinueButtonClicked => _continueButton.OnClickAsObservable();
-		public IObservable<Unit> CancelButtonClicked => _cancelButton.OnClickAsObservable();
-
-		public void SetActive(bool value) => gameObject.SetActive(value);
         public void SetNewGameButtonText(string value) => _newGameButtonText.text = value;
 
         #endregion

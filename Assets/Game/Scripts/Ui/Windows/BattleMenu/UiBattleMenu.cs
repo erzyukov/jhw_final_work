@@ -14,7 +14,6 @@
 		{
 			Observable.Merge(
 					_window.ContinueButtonClicked,
-					_window.CancelButtonClicked,
 					_window.LobbyButtonClicked
 				)
 				.Subscribe(_ => _window.SetActive(false))

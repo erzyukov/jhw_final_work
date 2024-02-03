@@ -1312,9 +1312,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 548a4349a9ea34b4c9b06716702bbb33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _closeButton: {fileID: 680960609}
   _lobbyButton: {fileID: 471760668}
   _continueButton: {fileID: 1181551686}
-  _cancelButton: {fileID: 680960609}
 --- !u!1 &101187894
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,9 +1374,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 721c6ad38f627174a9389368c27570e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _closeButton: {fileID: 310495337}
   _newGameButton: {fileID: 735161867}
   _continueButton: {fileID: 467317862}
-  _cancelButton: {fileID: 310495337}
   _newGameButtonText: {fileID: 426579844}
 --- !u!1 &101427461
 GameObject:
@@ -8389,9 +8389,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87975c063c180ea45b8d7505c618dc2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _closeButton: {fileID: 1084649573}
   _musicToggle: {fileID: 738091895}
   _soundToggle: {fileID: 220703418}
-  _cancelButton: {fileID: 1084649573}
 --- !u!1 &872005201
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,6 @@
     using Game.Utilities;
     using System;
 	using UniRx;
-    using UnityEngine;
     using Zenject;
 
 	public interface IContinueLevelRequest
@@ -27,10 +26,6 @@
 
 		public void Initialize()
 		{
-			_window.CancelButtonClicked
-				.Subscribe(_ => CloseWindow())
-				.AddTo(this);
-
 			_window.ContinueButtonClicked
 				.Subscribe(_ => ContinueButtonClickedHandler())
 				.AddTo(this);
@@ -56,20 +51,15 @@
 
 		#endregion
 
-		private void CloseWindow()
-		{
-			_window.SetActive(false);
-		}
-
 		private void NewGameButtonClickedHandler()
 		{
-			CloseWindow();
+			_window.SetActive(false);
 			_currentNewGameAction?.Invoke();
 		}
 
 		private void ContinueButtonClickedHandler()
 		{
-			CloseWindow();
+			_window.SetActive(false);
 			_currentContinueAction?.Invoke();
 		}
 	}
