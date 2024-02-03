@@ -79,7 +79,7 @@ namespace Game.Installers
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<TechnicalAnalytics>()
+				.BindInterfacesTo<TechnicalHierarchyAnalytics>()
 				.AsSingle();
 		}
 

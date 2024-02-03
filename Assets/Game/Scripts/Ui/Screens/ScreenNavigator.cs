@@ -19,11 +19,10 @@
 		[Inject] private IGameCycle _gameCycle;
 		[Inject] private IUiVeil _uiViel;
 
-		readonly ReactiveProperty<Screen> _screen;
+		readonly private ReactiveProperty<Screen> _screen = new ReactiveProperty<Screen>();
 
 		ScreenNavigator()
 		{
-			_screen = new ReactiveProperty<Screen>();
 			Screen = _screen.ToReadOnlyReactiveProperty();
         }
 
@@ -76,6 +75,7 @@
 				return;
 
 			_screen.Value = screen;
+
 			_screens.ForEach(s => s.SetActive(s.Screen == screen));
 			_uiViel.Fade();
 		}

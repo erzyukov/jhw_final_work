@@ -26,14 +26,8 @@
 		protected virtual void Start()
 		{
 			_closeButton.OnClickAsObservable()
-				.Subscribe(_ => OnCloseButtonClicked())
+				.Subscribe(_ => SetActive(false))
 				.AddTo(this);
-		}
-
-		private void OnCloseButtonClicked()
-		{
-			SetActive(false);
-			Closed.Execute();
 		}
 
 		#region IUiWindow
@@ -48,6 +42,8 @@
 
 			if (value)
 				Opened.Execute();
+			else
+				Closed.Execute();
 		}
 
 		#endregion

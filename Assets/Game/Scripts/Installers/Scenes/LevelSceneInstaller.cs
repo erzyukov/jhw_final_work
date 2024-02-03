@@ -127,9 +127,6 @@ namespace Game.Installers
 
 		private void InstallAnalytics()
 		{
-			Container
-				.BindInterfacesTo<UiAnalytics>()
-				.AsSingle();
 		}
 	}
 }
