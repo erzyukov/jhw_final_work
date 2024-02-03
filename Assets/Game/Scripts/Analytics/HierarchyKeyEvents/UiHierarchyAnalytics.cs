@@ -5,7 +5,6 @@
 	using UniRx;
 	using Game.Profiles;
 	using Game.Ui;
-	using Game.Configs;
 	using UnityEngine;
 	using Screen = Game.Ui.Screen;
 	using System.Linq;
@@ -13,29 +12,18 @@
 
 	public class UiHierarchyAnalytics : HierarchyAnalyticsBase, IInitializable
 	{
-		[Inject] private LevelsConfig _levelsConfig;
-
 		[Inject] private IScreenNavigator _screenNavigator;
 		[Inject] private List<IUiWindow> _windows;
 		
 		private const string UiEventKey = "UI";
 		private const string OpenedPostfixEventKey = "_opened";
 		private const string ClosedPostfixEventKey = "_closed";
-		private const string RegionEventKey = "Region_";
-		private const string LevelEventKey = "Level_";
-		private const string WaveEventKey = "Wave_";
 		private const string WindowOpenDefaultSourceEventKey = "on_button";
-
 
 		private Screen[] _ignoreScreen = new Screen[] { Screen.None, Screen.Loading, Screen.Lobby };
 
 		private float _previousScreenOpenedTime;
 		private float _windowOpenedTime;
-
-		private int RegionNumber => (int)_levelsConfig.Levels[GameProfile.LevelNumber.Value - 1].Region + 1;
-		private string LevelKey => $"{RegionEventKey}_{RegionNumber}-{LevelEventKey}_{GameProfile.LevelNumber.Value}";
-		private string WaveKey => $"{WaveEventKey}_{GameProfile.WaveNumber.Value}";
-
 
 		public void Initialize()
 		{

@@ -137,11 +137,11 @@ namespace Game.Installers
 				.BindInterfacesTo<UiHierarchyAnalytics>()
 				.AsSingle();
 
-			/*
 			Container
-				.BindInterfacesTo<GameplayAnalytics>()
+				.BindInterfacesTo<GameplayHierarchyAnalytics>()
 				.AsSingle();
 
+			/*
 			Container
 				.BindInterfacesTo<ResourcesAnalytics>()
 				.AsSingle();

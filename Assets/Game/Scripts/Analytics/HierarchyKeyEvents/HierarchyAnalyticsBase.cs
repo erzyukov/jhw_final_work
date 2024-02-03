@@ -4,14 +4,23 @@ namespace Game.Analytics
 	using Zenject;
 	using System.Collections.Generic;
 	using Game.Profiles;
+	using Game.Configs;
 
 	abstract public class HierarchyAnalyticsBase : ControllerBase
 	{
+		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] protected IGameProfileManager GameProfileManager;
-
 		[Inject] private IGameAnalyticsSender _eventSender;
 
+		private const string RegionEventKey = "Region_";
+		private const string LevelEventKey = "Level_";
+		private const string WaveEventKey = "Wave_";
+
 		protected GameProfile GameProfile => GameProfileManager.GameProfile;
+
+		protected int RegionNumber => (int)_levelsConfig.Levels[GameProfile.LevelNumber.Value - 1].Region + 1;
+		protected string LevelKey => $"{RegionEventKey}{RegionNumber}-{LevelEventKey}{GameProfile.LevelNumber.Value}";
+		protected string WaveKey => $"{WaveEventKey}{GameProfile.WaveNumber.Value}";
 
 		private Dictionary<string, object> GlobalProperties => new Dictionary<string, object>
 			{
