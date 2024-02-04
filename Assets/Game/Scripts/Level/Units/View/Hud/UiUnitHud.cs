@@ -17,16 +17,21 @@ namespace Game.Units
 		void SetHealthRatio(float value);
 		void SetGradeActive(bool value);
 		void SetGradeSprite(Sprite value);
+		void SetHeroHealthColor();
+		void SetEnemyHealthColor();
 	}
 
 	public class UiUnitHud : MonoBehaviour, IUiUnitHud
 	{
-		[SerializeField] private Slider _slider;
+		[SerializeField] private Slider _healthSlider;
+		[SerializeField] private Image _healthImage;
 		[SerializeField] private Transform _uiHealthCanvas;
 		[SerializeField] private TextMeshProUGUI _power;
 		[SerializeField] private Image _grade;
 		[SerializeField] private Color _defaultPowerColor;
 		[SerializeField] private Color _supposedPowerColor;
+		[SerializeField] private Color _heroHealthColor;
+		[SerializeField] private Color _enemyHealthColor;
 
 		void Start() =>
 			Initialized.Execute();
@@ -48,16 +53,22 @@ namespace Game.Units
 			_uiHealthCanvas.localPosition = _uiHealthCanvas.localPosition.WithY(value);
 
 		public void SetHealthBarActive(bool value) =>
-			_slider.gameObject.SetActive(value);
+			_healthSlider.gameObject.SetActive(value);
 
 		public void SetHealthRatio(float value) =>
-			_slider.value = value;
+			_healthSlider.value = value;
 
 		public void SetGradeActive(bool value) =>
 			_grade.gameObject.SetActive(value);
 
 		public void SetGradeSprite(Sprite value) =>
 			_grade.sprite = value;
+
+		public void SetHeroHealthColor() =>
+			_healthImage.color = _heroHealthColor;
+		
+		public void SetEnemyHealthColor() =>
+			_healthImage.color = _enemyHealthColor;
 
 		#endregion
 	}
