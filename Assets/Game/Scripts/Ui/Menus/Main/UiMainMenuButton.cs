@@ -13,6 +13,7 @@ namespace Game.Ui
 		[SerializeField] private Image _icon;
 		[SerializeField] private GameState _targetGameState;
 		[SerializeField] private Image _buttonBackground;
+		[SerializeField] private Image _buttonInnerBackground;
 		[SerializeField] private GameObject _title;
 
 		private Button _button;
@@ -28,11 +29,17 @@ namespace Game.Ui
 
 		public IObservable<Unit> ButtonClicked => _button.OnClickAsObservable();
 
-		public void SetBackgroundColor(Color value) => _buttonBackground.color = value;
+		//public void SetBackgroundColor(Color value) => _buttonBackground.color = value;
+		
+		public void SetBackgroundSprite(Sprite value) => _buttonBackground.sprite = value;
+		
+		public void SetInnerBackgroundSprite(Sprite value) => _buttonInnerBackground.sprite = value;
+		
+		public void SetInnerBackgroundActive(bool value) => _buttonInnerBackground.enabled = value;
 
-		public void SetIcon(Sprite lockedIcon) => _icon.sprite = lockedIcon;
+		public void SetIconSprite(Sprite value) => _icon.sprite = value;
 
-		public void SetIconColor(Color value) => _icon.color = value;
+		//public void SetIconColor(Color value) => _icon.color = value;
 		
 		public void SetDefaultIcon() => _icon.sprite = _defaultIcon;
 
