@@ -22,7 +22,6 @@
 		private const string HeroLevelNumberEventKey = "Level_";
 
 		private const string BattleEventKey = "Battle";
-		private const string BattleDefaultTypeEventKey = "normal";
 		private const string BattleStartEventKey = "Start";
 		private const string BattleWinEventKey = "Win";
 		private const string BattleFailEventKey = "Fail";

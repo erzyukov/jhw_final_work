@@ -144,6 +144,10 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<ResourcesHierarchyAnalytics>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<ProgressionHierarchyAnalytics>()
+				.AsSingle();
 		}
 	}
 }

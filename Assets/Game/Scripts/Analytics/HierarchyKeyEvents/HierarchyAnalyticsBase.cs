@@ -13,6 +13,8 @@ namespace Game.Analytics
 		[Inject] protected IGameProfileManager GameProfileManager;
 		[Inject] private IGameAnalyticsSender _eventSender;
 
+		protected const string BattleDefaultTypeEventKey = "normal";
+
 		private const string RegionEventKey = "Region_";
 		private const string LevelEventKey = "Level_";
 		private const string WaveEventKey = "Wave_";
@@ -37,9 +39,11 @@ namespace Game.Analytics
 
 		protected void SendDesignEvent(string key, float value) =>
 			_eventSender.SendDesignEvent(key, value, GlobalProperties);
-		protected void SendResourceEvent(GAResourceFlowType resourceFlowType, string currency, float amount, string itemType, string itemId)
-		{
+
+		protected void SendResourceEvent(GAResourceFlowType resourceFlowType, string currency, float amount, string itemType, string itemId) =>
 			_eventSender.SendResourceEvent(resourceFlowType, currency, amount, itemType, itemId, GlobalProperties);
-		}
+
+		protected void SendProgressionEvent(GAProgressionStatus progressionStatus, string progression01, string progression02, string progression03) =>
+			_eventSender.SendProgressionEvent(progressionStatus, progression01, progression02, progression03, GlobalProperties);
 	}
 }
