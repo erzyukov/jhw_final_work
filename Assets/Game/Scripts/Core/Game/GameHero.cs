@@ -20,6 +20,7 @@ namespace Game.Core
 		public ExperienceTransaction Type;
 		public int Amount;
 		public int ToNextLevel;
+		public string Detail;
 	}
 
 	public interface IGameHero
@@ -30,7 +31,7 @@ namespace Game.Core
 		int GetExperienceToLevel { get; }
 		void AddLevelHeroExperience(int value);
 		void ResetLevelHeroExperience();
-		void ConsumeLevelHeroExperience();
+		void ConsumeLevelHeroExperience(string detail);
 	}
 
 	public class GameHero : ControllerBase, IGameHero, IInitializable
@@ -63,7 +64,7 @@ namespace Game.Core
 		public void ResetLevelHeroExperience() =>
 			_profile.LevelHeroExperience.Value = 0;
 
-		public void ConsumeLevelHeroExperience()
+		public void ConsumeLevelHeroExperience(string detail)
 		{
 			int obtainExperience = _profile.LevelHeroExperience.Value;
 			AnimatieObtainedExperience(() =>
@@ -74,6 +75,7 @@ namespace Game.Core
 					Type = ExperienceTransaction.LevelFinished,
 					Amount = obtainExperience,
 					ToNextLevel = nextLevelExperience,
+					Detail = detail,
 				});
 			});
 			

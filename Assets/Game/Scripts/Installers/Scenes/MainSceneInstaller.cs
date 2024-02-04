@@ -65,15 +65,6 @@ namespace Game.Installers
 				.Bind<Toggle>()
 				.FromComponentsInHierarchy()
 				.AsSingle();
-
-			Container
-				.BindInterfacesTo<UiGameSettingsWindow>()
-				.FromComponentsInHierarchy()
-				.AsSingle();
-
-			Container
-				.BindInterfacesTo<UiGameSettings>()
-				.AsSingle();
 		}
 
 		private void InstallGameControllers()
@@ -118,6 +109,15 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<UiBattleMenu>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiGameSettingsWindow>()
+				.FromComponentsInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiGameSettings>()
+				.AsSingle();
 		}
 
 		private void TutorialInstall()
@@ -130,19 +130,27 @@ namespace Game.Installers
 		private void InstallAnalytics()
 		{
 			Container
-				.BindInterfacesTo<TutorialAnalytics>()
+				.BindInterfacesTo<TutorialHierarchyAnalytics>()
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<GameplayAnalytics>()
+				.BindInterfacesTo<UiHierarchyAnalytics>()
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<ResourcesAnalytics>()
+				.BindInterfacesTo<GameplayHierarchyAnalytics>()
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<CustomAnalytics>()
+				.BindInterfacesTo<ResourcesHierarchyAnalytics>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<ProgressionHierarchyAnalytics>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<SettingsHierarchyAnalytics>()
 				.AsSingle();
 		}
 	}

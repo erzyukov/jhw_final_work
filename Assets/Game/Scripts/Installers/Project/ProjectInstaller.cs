@@ -75,11 +75,11 @@ namespace Game.Installers
 		private void InstallAnalytics()
 		{
 			Container
-				.BindInterfacesTo<AnalyticEventSender>()
+				.BindInterfacesTo<GameAnalyticsSender>()
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<TechnicalAnalytics>()
+				.BindInterfacesTo<TechnicalHierarchyAnalytics>()
 				.AsSingle();
 		}
 

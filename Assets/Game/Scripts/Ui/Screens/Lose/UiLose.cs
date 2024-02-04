@@ -24,7 +24,7 @@ namespace Game.Ui
 
 		private void OnScreenOpeningHandler()
 		{
-			_hero.ConsumeLevelHeroExperience();
+			_hero.ConsumeLevelHeroExperience("fail");
 		}
 
 		private void OnScreenClosedHandler()
