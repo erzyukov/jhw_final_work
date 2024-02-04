@@ -5,6 +5,7 @@ namespace Game.Analytics
 	using System.Collections.Generic;
 	using Game.Profiles;
 	using Game.Configs;
+	using GameAnalyticsSDK;
 
 	abstract public class HierarchyAnalyticsBase : ControllerBase
 	{
@@ -36,5 +37,9 @@ namespace Game.Analytics
 
 		protected void SendDesignEvent(string key, float value) =>
 			_eventSender.SendDesignEvent(key, value, GlobalProperties);
+		protected void SendResourceEvent(GAResourceFlowType resourceFlowType, string currency, float amount, string itemType, string itemId)
+		{
+			_eventSender.SendResourceEvent(resourceFlowType, currency, amount, itemType, itemId, GlobalProperties);
+		}
 	}
 }

@@ -141,15 +141,9 @@ namespace Game.Installers
 				.BindInterfacesTo<GameplayHierarchyAnalytics>()
 				.AsSingle();
 
-			/*
 			Container
-				.BindInterfacesTo<ResourcesAnalytics>()
+				.BindInterfacesTo<ResourcesHierarchyAnalytics>()
 				.AsSingle();
-
-			Container
-				.BindInterfacesTo<CustomAnalytics>()
-				.AsSingle();
-			*/
 		}
 	}
 }

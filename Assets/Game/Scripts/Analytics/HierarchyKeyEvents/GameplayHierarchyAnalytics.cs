@@ -11,7 +11,6 @@
 
 	public class GameplayHierarchyAnalytics : HierarchyAnalyticsBase, IInitializable
 	{
-		[Inject] private IGameLevel _gameLevel;
 		[Inject] private IGameCycle _gameCycle;
 		[Inject] private IGameplayEvents _gameplayEvents;
 		[Inject] private IGameUpgrades _gameUpgrades;
