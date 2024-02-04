@@ -148,6 +148,10 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<ProgressionHierarchyAnalytics>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<SettingsHierarchyAnalytics>()
+				.AsSingle();
 		}
 	}
 }
