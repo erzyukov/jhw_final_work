@@ -15,6 +15,6 @@ MonoBehaviour:
   _teamFieldSize: {x: 5, y: 4}
   _fieldCellWidth: 1
   _fieldCellPrefab: {fileID: 4718736829820020704, guid: 250f0711a59ca5842aa61eec8ca5efba, type: 3}
-  _heroSprite: {fileID: 21300000, guid: cf5421d6aaeeb424db51b327bbf5690e, type: 3}
+  _heroSprite: {fileID: 21300000, guid: 16bf8c68bc2e55f44b5c86947ea6b6d9, type: 3}
   _enemySprite: {fileID: 21300000, guid: 6a99875b8bdcbad48b9b3c32653737f1, type: 3}
   _selectedSprite: {fileID: 21300000, guid: 47b1f19daba29e14ba5c2b9c796d3e5d, type: 3}

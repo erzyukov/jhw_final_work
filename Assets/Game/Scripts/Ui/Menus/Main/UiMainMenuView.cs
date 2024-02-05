@@ -22,12 +22,18 @@ namespace Game.Ui
 		[SerializeField] private Sprite _lockedIcon;
 		[SerializeField] private List<GameState> _activeOnGameState;
 		[SerializeField] private List<UiMainMenuButton> _buttons;
-		[SerializeField] private Color _lockedButtonColor;
-		[SerializeField] private Color _activeButtonColor;
-		[SerializeField] private Color _selectedButtonColor;
-		[SerializeField] private Color _lockedIconColor;
-		[SerializeField] private Color _activeIconColor;
-		[SerializeField] private Color _selectedIconColor;
+		
+		[SerializeField] private Sprite _lockedButtonSprite;
+		[SerializeField] private Sprite _activeButtonSprite;
+		[SerializeField] private Sprite _activeButtonInnerSprite;
+		[SerializeField] private Sprite _selectedButtonInnerSprite;
+		
+		//[SerializeField] private Color _lockedButtonColor;
+		//[SerializeField] private Color _activeButtonColor;
+		//[SerializeField] private Color _selectedButtonColor;
+		//[SerializeField] private Color _lockedIconColor;
+		//[SerializeField] private Color _activeIconColor;
+		//[SerializeField] private Color _selectedIconColor;
 		[SerializeField] private float _defaultButtonHeight;
 		[SerializeField] private float _selectedButtonHeight;
 
@@ -49,9 +55,9 @@ namespace Game.Ui
 			if (button == null)
 				return;
 
-			button.SetBackgroundColor(_lockedButtonColor);
-			button.SetIcon(_lockedIcon);
-			button.SetIconColor(_lockedIconColor);
+			button.SetBackgroundSprite(_lockedButtonSprite);
+			button.SetIconSprite(_lockedIcon);
+			button.SetInnerBackgroundActive(false);
 			button.SetTitleActive(false);
 			button.SetInteractable(false);
 			button.SetHeight(_defaultButtonHeight);
@@ -65,8 +71,9 @@ namespace Game.Ui
 				return;
 
 			button.SetDefaultIcon();
-			button.SetIconColor(_activeIconColor);
-			button.SetBackgroundColor(_activeButtonColor);
+			button.SetBackgroundSprite(_activeButtonSprite);
+			button.SetInnerBackgroundActive(true);
+			button.SetInnerBackgroundSprite(_activeButtonInnerSprite);
 			button.SetTitleActive(false);
 			button.SetInteractable(true);
 			button.SetHeight(_defaultButtonHeight);
@@ -79,8 +86,9 @@ namespace Game.Ui
 			if (button == null)
 				return;
 
-			button.SetIconColor(_selectedIconColor);
-			button.SetBackgroundColor(_selectedButtonColor);
+			button.SetBackgroundSprite(_activeButtonSprite);
+			button.SetInnerBackgroundActive(true);
+			button.SetInnerBackgroundSprite(_selectedButtonInnerSprite);
 			button.SetTitleActive(true);
 			button.SetInteractable(false);
 			button.SetHeight(_selectedButtonHeight);

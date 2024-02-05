@@ -52,6 +52,11 @@
 
 			_uiHud.SetGradeSprite(_unitsConfig.GradeSprites[_unitData.GradeIndex]);
 
+			if (_unitData.IsHero)
+				_uiHud.SetHeroHealthColor();
+			else
+				_uiHud.SetEnemyHealthColor();
+
 			if (_unitConfig.IsDebug)
 			{
 				_unitData.SupposedPower

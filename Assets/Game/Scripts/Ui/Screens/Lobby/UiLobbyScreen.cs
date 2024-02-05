@@ -12,7 +12,8 @@
 		void SetTitle(string value);
 		void SetLastWaveValue(string value);
 		void SetLastWaveActive(bool value);
-        void SetPlayButtonText(string value);
+        void SetPlayPriceText(string value);
+		void SetPlayPriceActive(bool value);
 		void SetPlayButtonEnabled(bool value);
 	}
 
@@ -22,7 +23,9 @@
 		[SerializeField] private GameObject _lastWave;
 		[SerializeField] private TextMeshProUGUI _lastWaveValue;
 		[SerializeField] private Button _playButton;
-		[SerializeField] private TextMeshProUGUI _playButtonText;
+		[SerializeField] private GameObject _playIcon;
+		[SerializeField] private GameObject _playPrice;
+		[SerializeField] private TextMeshProUGUI _playPriceText;
 
 		public override Screen Screen => Screen.Lobby;
 
@@ -36,7 +39,13 @@
 
 		public void SetLastWaveActive(bool value) => _lastWave.SetActive(value);
 
-        public void SetPlayButtonText(string value) => _playButtonText.text = value;
+		public void SetPlayPriceActive(bool value)
+		{
+			_playIcon.SetActive(!value);
+			_playPrice.SetActive(value);
+		}
+
+		public void SetPlayPriceText(string value) => _playPriceText.text = value;
 
 		public void SetPlayButtonEnabled(bool value) => _playButton.interactable = value;
 
