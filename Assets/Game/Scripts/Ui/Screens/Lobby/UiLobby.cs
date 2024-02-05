@@ -53,9 +53,13 @@
             string waveInfo = $"{_localizator.GetString(lastWavePrefixKey)} {_profile.WaveNumber.Value}/{levelConfig.Waves.Length}";
             _lobbyScreen.SetLastWaveValue(waveInfo);
 
-            string playButtonTitle = _localizator.GetString(playKey)
+			_lobbyScreen.SetPlayPriceActive(IsPlayEnergyFree == false);
+			_lobbyScreen.SetPlayPriceText(_energyConfig.LevelPrice.ToString());
+			/*
+			string playButtonTitle = _localizator.GetString(playKey)
                 + (IsPlayEnergyFree == false ? $"\n{_localizator.GetString(pricePrefixKey)}{_energyConfig.LevelPrice}" : "");
             _lobbyScreen.SetPlayButtonText(playButtonTitle);
+			*/
         }
 
         private void OnPlayButtonClickedHandler()
