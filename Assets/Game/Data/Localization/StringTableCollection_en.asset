@@ -97,7 +97,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1431262374014976
-    m_Localized: 'HAVE NEED OF: <sprite=1>TOKEN'
+    m_Localized: 'HAVE NEED OF: <size=160%><sprite=1><size=100%>TOKEN'
     m_Metadata:
       m_Items: []
   - m_Id: 1431849803067392
@@ -179,7 +179,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5066819859787776
-    m_Localized: 'HAVE NEED OF: <sprite=0>MONEY'
+    m_Localized: 'HAVE NEED OF: <size=160%><sprite=0><size=100%>MONEY'
     m_Metadata:
       m_Items: []
   - m_Id: 5791061190520832

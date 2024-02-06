@@ -10,26 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Localization-Assets-Shared
+  m_Name: Localization-Asset-Tables-Russian (ru)
   m_EditorClassIdentifier: 
-  m_GroupName: Localization-Assets-Shared
+  m_GroupName: Localization-Asset-Tables-Russian (ru)
   m_Data:
     m_SerializedData: []
-  m_GUID: afe37d73e7babe3428a948802aa280f8
+  m_GUID: e3264e92017c83c4b8326dd6ccd28da6
   m_SerializeEntries:
-  - m_GUID: 5f31ae77c27018a4d8effc3283048516
-    m_Address: Assets/Game/Data/Localization/StringTableCollection Shared Data.asset
+  - m_GUID: b3a8f64926b5ce94cb8232bc3f08302d
+    m_Address: AssetTableCollection_ru
     m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cec7528aae18d774e8e8aa0231e1dfa7
-    m_Address: cec7528aae18d774e8e8aa0231e1dfa7
-    m_ReadOnly: 1
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Locale-ru
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 4a4070c40d0d17b46ab2e9a899a0961d, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 63ebfa91bd28f264bb83a61be72456a5, type: 2}
-    - {fileID: 11400000, guid: f3693516fb38edf4a90c11ab7006658b, type: 2}
+    - {fileID: 11400000, guid: 3a66b45dbabd09747b7290b60843b98e, type: 2}
+    - {fileID: 11400000, guid: 593520fa08a995e49a8f72d6028856de, type: 2}

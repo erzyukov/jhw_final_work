@@ -16,7 +16,7 @@ namespace Game.Ui
 
 		#region IUiLevelRewardScreen
 
-		public void SetSoftRewardAmount(int value) => _rewardAmount.text = $"X{value}";
+		public void SetSoftRewardAmount(int value) => _rewardAmount.text = value.ToString();
 		
 		#endregion
 	}
