@@ -18115,29 +18115,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1039925874}
     m_Modifications:
-    - target: {fileID: 335998256736467874, guid: 56c32c58b8ff0e3408cbc2807516cc6d, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
+    - target: {fileID: 802030248879147527, guid: 56c32c58b8ff0e3408cbc2807516cc6d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.748
+      objectReference: {fileID: 0}
+    - target: {fileID: 802030248879147527, guid: 56c32c58b8ff0e3408cbc2807516cc6d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1590387091945706048, guid: 56c32c58b8ff0e3408cbc2807516cc6d, type: 3}
       propertyPath: m_Name
       value: HeroLevelFinishScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 3046211509025533256, guid: 56c32c58b8ff0e3408cbc2807516cc6d, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3523381157994424330, guid: 56c32c58b8ff0e3408cbc2807516cc6d, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6209248733545825919, guid: 56c32c58b8ff0e3408cbc2807516cc6d, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7280044252119255160, guid: 56c32c58b8ff0e3408cbc2807516cc6d, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7598933568172007138, guid: 56c32c58b8ff0e3408cbc2807516cc6d, type: 3}
       propertyPath: m_Pivot.x
@@ -18217,18 +18205,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7598933568172007138, guid: 56c32c58b8ff0e3408cbc2807516cc6d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7657526116600168351, guid: 56c32c58b8ff0e3408cbc2807516cc6d, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8402307687358567623, guid: 56c32c58b8ff0e3408cbc2807516cc6d, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9156289206669677598, guid: 56c32c58b8ff0e3408cbc2807516cc6d, type: 3}
-      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
