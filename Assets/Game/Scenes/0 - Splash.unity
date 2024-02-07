@@ -464,6 +464,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1152180860 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 331684236228389831, guid: a0ed120e935c8be46906a88cb85f4d71, type: 3}
+  m_PrefabInstance: {fileID: 4701965883207326473}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1152180862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1271372545604921129, guid: a0ed120e935c8be46906a88cb85f4d71, type: 3}
+  m_PrefabInstance: {fileID: 4701965883207326473}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152180860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1152180864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152180860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackedObjects:
+  - rid: 2398326393941000198
+  references:
+    version: 2
+    RefIds:
+    - rid: 2398326393941000198
+      type: {class: TrackedUGuiGraphic, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects, asm: Unity.Localization}
+      data:
+        m_Target: {fileID: 1152180862}
+        m_TrackedProperties:
+          items:
+          - rid: 2398326393941000199
+        m_UpdateType: 0
+    - rid: 2398326393941000199
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 2398326393941000200
+        m_PropertyPath: m_Sprite
+    - rid: 2398326393941000200
+      type: {class: LocalizedSprite, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:cec7528aae18d774e8e8aa0231e1dfa7
+        m_TableEntryReference:
+          m_KeyId: 277726971203584
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
 --- !u!1 &1558398087
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,10 +710,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 539329012}
     m_Modifications:
-    - target: {fileID: 4637460817320931644, guid: a0ed120e935c8be46906a88cb85f4d71, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.29467773
+    - target: {fileID: 1057365056285499658, guid: a0ed120e935c8be46906a88cb85f4d71, type: 3}
+      propertyPath: m_TrackedObjects.Array.size
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1271372545604921129, guid: a0ed120e935c8be46906a88cb85f4d71, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b81a17b0e14a4f94f80f015dba216520, type: 3}
     - target: {fileID: 4701965883170323514, guid: a0ed120e935c8be46906a88cb85f4d71, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -664,10 +725,6 @@ PrefabInstance:
     - target: {fileID: 4701965883170323514, guid: a0ed120e935c8be46906a88cb85f4d71, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4701965883170323514, guid: a0ed120e935c8be46906a88cb85f4d71, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4701965883170323514, guid: a0ed120e935c8be46906a88cb85f4d71, type: 3}
       propertyPath: m_AnchorMax.x
@@ -748,7 +805,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 331684236228389831, guid: a0ed120e935c8be46906a88cb85f4d71, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1152180864}
   m_SourcePrefab: {fileID: 100100000, guid: a0ed120e935c8be46906a88cb85f4d71, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
