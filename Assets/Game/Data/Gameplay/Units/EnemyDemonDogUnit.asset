@@ -28,4 +28,5 @@ MonoBehaviour:
   _experiencePowerMultiplier: 2
   _gradePrefabs:
   - {fileID: 1503547998484457933, guid: 468d4ce87b5b58e43a0e26ba6ddb855c, type: 3}
+  - {fileID: 1503547998484457933, guid: 34cb3218eb4d7da4e8cdfc8e96f96baf, type: 3}
   _isDebug: 0
