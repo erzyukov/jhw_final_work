@@ -246,6 +246,10 @@ MonoBehaviour:
     m_Localized: SOUND
     m_Metadata:
       m_Items: []
+  - m_Id: 26824618945896448
+    m_Localized: 'SETTINGS:'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -242,6 +242,10 @@ MonoBehaviour:
     m_Key: soundSettings
     m_Metadata:
       m_Items: []
+  - m_Id: 26824618945896448
+    m_Key: SettingsWindowTitle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
