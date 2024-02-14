@@ -179,7 +179,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5791061190520832
-    m_Key: pricePrefix
+    m_Key: energyPriceValue
     m_Metadata:
       m_Items: []
   - m_Id: 5799258752167936
