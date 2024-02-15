@@ -113,9 +113,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1798343896477696
-    m_Localized: 'CONTINUE FROM LAST
+    m_Localized: 'CONTINUE FROM
 
-      SESSION?'
+      LAST SESSION?'
     m_Metadata:
       m_Items: []
   - m_Id: 1802796930314240
@@ -183,7 +183,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5791061190520832
-    m_Localized: <sprite=2>X
+    m_Localized: <size=85%>{{}} <size=125%><sprite=2>
     m_Metadata:
       m_Items: []
   - m_Id: 5799258752167936
@@ -244,6 +244,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 22314468846768128
     m_Localized: SOUND
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26824618945896448
+    m_Localized: 'SETTINGS:'
     m_Metadata:
       m_Items: []
   references:

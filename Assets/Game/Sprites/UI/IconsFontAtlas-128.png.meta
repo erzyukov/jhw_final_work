@@ -74,7 +74,7 @@ TextureImporter:
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
-    crunchedCompression: 0
+    crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
     ignorePlatformSupport: 0
@@ -131,7 +131,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.11235735, y: 0.30519468}
+      pivot: {x: 0.031680424, y: 0.3642262}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,7 +173,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.2599368, y: 0.252066}
+      pivot: {x: 0.24616241, y: 0.21074344}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

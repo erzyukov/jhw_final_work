@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IconsFontAtlas-128
   m_EditorClassIdentifier: 
   hashCode: -755489802
-  material: {fileID: 1001055501284624824}
+  material: {fileID: 4473510147967836157}
   materialHashCode: 0
   m_Version: 1.1.0
   m_FaceInfo:
@@ -63,8 +63,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 128
       m_Height: 128
-      m_HorizontalBearingX: -14.381741
-      m_HorizontalBearingY: 88.93508
+      m_HorizontalBearingX: -4.0550942
+      m_HorizontalBearingY: 81.37904
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 0
@@ -95,8 +95,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 128
       m_Height: 128
-      m_HorizontalBearingX: -33.27191
-      m_HorizontalBearingY: 95.73555
+      m_HorizontalBearingX: -31.50879
+      m_HorizontalBearingY: 101.02484
       m_HorizontalAdvance: 128
     m_GlyphRect:
       m_X: 256
@@ -109,7 +109,7 @@ MonoBehaviour:
     sprite: {fileID: -1538257863, guid: 425184ca11cefed488dffa58964c30dc, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
---- !u!21 &1001055501284624824
+--- !u!21 &4473510147967836157
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 1

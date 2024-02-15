@@ -19,7 +19,8 @@
         [Inject] private ILocalizator _localizator;
 
         private const string newGameKey = "newGame";
-        private const string pricePrefixKey = "pricePrefix";
+        private const string pricePrefixKey = "energyPriceValue";
+        private const string valueTemplate = "{{}}";
 
         private Action _currentNewGameAction;
 		private Action _currentContinueAction;
@@ -42,8 +43,8 @@
 			_currentNewGameAction = newGameCallback;
 			_currentContinueAction = continueCallback;
 
-            string newGameButtonTitle = _localizator.GetString(newGameKey)
-                + $"\n{_localizator.GetString(pricePrefixKey)}{_energyConfig.LevelPrice}";
+			string price = _localizator.GetString(pricePrefixKey).Replace(valueTemplate, _energyConfig.LevelPrice.ToString());
+			string newGameButtonTitle = _localizator.GetString(newGameKey) + "\n" + price;
             _window.SetNewGameButtonText(newGameButtonTitle);
 
             _window.SetActive(true);

@@ -179,7 +179,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5791061190520832
-    m_Key: pricePrefix
+    m_Key: energyPriceValue
     m_Metadata:
       m_Items: []
   - m_Id: 5799258752167936
@@ -240,6 +240,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 22314468846768128
     m_Key: soundSettings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26824618945896448
+    m_Key: SettingsWindowTitle
     m_Metadata:
       m_Items: []
   m_Metadata:
