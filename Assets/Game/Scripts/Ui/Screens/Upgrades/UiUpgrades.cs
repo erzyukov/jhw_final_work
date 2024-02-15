@@ -5,11 +5,9 @@
 	using Game.Profiles;
 	using Game.Units;
 	using Game.Utilities;
-	using System;
 	using UniRx;
 	using UnityEngine;
 	using Zenject;
-	using static Game.Configs.UnitsConfig;
 
 	public class UiUpgrades : ControllerBase, IInitializable
 	{
@@ -33,6 +31,7 @@
 			_screen.UnitsContainer.DestroyChildren();
 			CreateUnitList();
 			FillUnitInfo(_firstElement);
+			UpdateUnitElement(_firstElement, true);
 		}
 
 		private void FillUnitInfo(Species species)
@@ -48,7 +47,7 @@
 			int damage = Mathf.CeilToInt(unit.Damage + unit.DamagePowerMultiplier * power);
 			int damageUpgradeDelta = Mathf.CeilToInt(unit.DamagePowerMultiplier * _upgradesConfig.UpgradePowerBonus);
 
-			_screen.SetIcon(unit.Icon);
+			_screen.SetIcon(unit.FullLength);
 			_screen.SetName(_localizator.GetString(unit.TitleKey));
 			_screen.SetLevel($"{_localizator.GetString(LevelTitleKey)} {unitLevel}");
 			_screen.SetHealthValue(
@@ -82,7 +81,6 @@
 
 				UiUnitUpgradeElement element = GameObject.Instantiate(_screen.UnitElementPrefab, _screen.UnitsContainer);
 				element.SetIcon(unit.Icon);
-				Debug.LogWarning(LevelShortTitleKey);
 				element.SetLevel($"{_localizator.GetString(LevelShortTitleKey)} {unitLevel}");
 				element.SetTitle(_localizator.GetString(unit.TitleKey));
 				element.SetPrice(_gameUpgrades.GetUpgradePrice(species).ToString());
@@ -98,18 +96,22 @@
 			}
 		}
 
-		private void UpdateUnitElement(Species species)
+		private void UpdateUnitElement(Species species, bool isSelected = false)
 		{
 			UiUnitUpgradeElement element = _screen.UnitElements[species];
 			int unitLevel = _gameProfile.Units.Upgrades[species].Value;
 			element.SetLevel($"{_localizator.GetString(LevelShortTitleKey)} {unitLevel}");
 			element.SetPrice(_gameUpgrades.GetUpgradePrice(species).ToString());
+			element.SetSelected(isSelected);
 		}
 
 		private void OnSelectButtonClicked(Species species)
 		{
 			_gameAudio.PlayUiClick();
 			FillUnitInfo(species);
+
+			foreach (Species unitSpecies in _unitsConfig.HeroUnits)
+				_screen.UnitElements[ unitSpecies ].SetSelected(unitSpecies == species);
 		}
 
 		private void OnUpgradeButtonClickedHandler(Species species)
@@ -121,7 +123,7 @@
 			else
 			{
 				foreach (Species unitSpecies in _unitsConfig.HeroUnits)
-					UpdateUnitElement(unitSpecies);
+					UpdateUnitElement(unitSpecies, unitSpecies == species);
 			}
 
 			_gameAudio.PlayUiClick();

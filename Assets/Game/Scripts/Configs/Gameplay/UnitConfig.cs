@@ -9,6 +9,7 @@
 	{
 		[SerializeField] private string _titleKey;
 		[SerializeField] private Sprite _icon;
+		[SerializeField] private Sprite _fullLength;
 
 		[Header("Combat")]
 		[SerializeField] private Class _class;
@@ -35,6 +36,7 @@
 
 		public string TitleKey => _titleKey;
 		public Sprite Icon => _icon;
+		public Sprite FullLength => _fullLength;
 		public Class Class => _class;
 		public float AttackRange => _attackRange;
 		public float AttackDelay => _attackDelay;
