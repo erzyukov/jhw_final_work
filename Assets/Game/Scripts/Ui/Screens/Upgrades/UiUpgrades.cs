@@ -82,7 +82,9 @@
 
 				UiUnitUpgradeElement element = GameObject.Instantiate(_screen.UnitElementPrefab, _screen.UnitsContainer);
 				element.SetIcon(unit.Icon);
+				Debug.LogWarning(LevelShortTitleKey);
 				element.SetLevel($"{_localizator.GetString(LevelShortTitleKey)} {unitLevel}");
+				element.SetTitle(_localizator.GetString(unit.TitleKey));
 				element.SetPrice(_gameUpgrades.GetUpgradePrice(species).ToString());
 				_screen.UnitElements.Add(species, element);
 

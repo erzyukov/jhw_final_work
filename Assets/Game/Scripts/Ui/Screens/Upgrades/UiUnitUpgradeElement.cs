@@ -12,7 +12,9 @@ namespace Game.Ui
 		[SerializeField] private TextMeshProUGUI _level;
 		[SerializeField] private Button _selectButton;
 		[SerializeField] private Button _upgradeButton;
+		[SerializeField] private TextMeshProUGUI _title;
 		[SerializeField] private TextMeshProUGUI _upgradePrice;
+		[SerializeField] private string _upgradePricePrefix;
 
 		public Button SelectButton => _selectButton;
 
@@ -24,8 +26,11 @@ namespace Game.Ui
 		public void SetLevel(string value) =>
 			_level.text = value;
 
+		public void SetTitle(string value) =>
+			_title.text = value;
+
 		public void SetPrice(string value) =>
-			_upgradePrice.text = $"<sprite=0> {value}";
+			_upgradePrice.text = $"{_upgradePricePrefix}{value}";
 
 		public void SetSelectInteractable(bool value) =>
 			_selectButton.interactable = value;
