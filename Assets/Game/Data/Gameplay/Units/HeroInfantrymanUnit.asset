@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: HeroInfantrymanUnit
   m_EditorClassIdentifier: 
   _titleKey: InfantrymanTitle
-  _icon: {fileID: 21300000, guid: 5119c0e68643d004c977aabc5ca1ae20, type: 3}
+  _icon: {fileID: 21300000, guid: c527f3f56cdd7f34da7cdf70af47f706, type: 3}
+  _fullLength: {fileID: 21300000, guid: fc6511669c8de4b42a0ae25c1e8c1514, type: 3}
   _class: 0
   _attackRange: 1
   _attackDelay: 1.1
