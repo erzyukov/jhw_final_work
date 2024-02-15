@@ -27,18 +27,22 @@ MonoBehaviour:
   - Step: 1
     Species: 1
     GradeIndex: 0
+    Power: 0
     Position: {x: 1, y: 1}
   - Step: 2
     Species: 2
     GradeIndex: 0
+    Power: 0
     Position: {x: 2, y: 2}
   - Step: 5
     Species: 1
     GradeIndex: 0
+    Power: 0
     Position: {x: 0, y: 1}
   - Step: 6
     Species: 2
     GradeIndex: 0
+    Power: 0
     Position: {x: 1, y: 0}
   _beginerTurorialMerges:
   - Step: 7
@@ -53,13 +57,13 @@ MonoBehaviour:
     Place: 0
   - Step: 2
     TranslationKey: upgradeTutorialFirstUpgrade
-    Place: 2
+    Place: 0
   - Step: 3
     TranslationKey: upgradeTutorialSelectNextUnit
     Place: 2
   - Step: 4
     TranslationKey: upgradeTutorialSecondUpgrade
-    Place: 2
+    Place: 0
   - Step: 5
     TranslationKey: upgradeTutorialUpgradeHint
     Place: 0
