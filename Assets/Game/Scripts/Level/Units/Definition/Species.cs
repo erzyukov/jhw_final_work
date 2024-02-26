@@ -12,5 +12,6 @@
 		EnemySuccubus,
 		EnemyDemon,
 		EnemyDemonDog,
+		EnemyImpBoss,
 	}
 }
