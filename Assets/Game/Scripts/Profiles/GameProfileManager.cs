@@ -146,19 +146,5 @@ namespace Game.Profiles
 			if (_gameProfile.Analytics == null)
 				_gameProfile.Analytics = new AnalyticsProfile();
 		}
-
-#if UNITY_EDITOR
-		private const string PathSavesEditor = "/YandexGame/WorkingData/Editor/SavesEditorYG.json";
-
-		[UnityEditor.MenuItem("Game/Delete Yandex saved game")]
-		public static void DeleteSaveFile()
-		{
-			string path = Application.dataPath + PathSavesEditor;
-			if (File.Exists(path))
-				File.Delete(path);
-			if (File.Exists(path + ".meta"))
-				File.Delete(path + ".meta");
-		}
-#endif
 	}
 }
