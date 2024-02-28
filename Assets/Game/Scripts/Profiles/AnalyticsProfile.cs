@@ -1,5 +1,9 @@
 ﻿namespace Game.Profiles
 {
+	using System;
+
+
+	[Serializable]
 	public class AnalyticsProfile
 	{
 		public bool IsFirstRunApp = true;
