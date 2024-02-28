@@ -289,7 +289,7 @@
         var errorArguments = Array.from(arguments);
         var errorMessage = errorArguments.join(' ');
         if(errorMessage.includes("both async and sync fetching of the wasm failed")) {
-          console.help("Чика: Убедитесь, что интернет соедининение в норме");
+          console.help("Убедитесь, что интернет соедининение в норме");
         }
         writeToConsole("> " + errorMessage, "red");
       };
@@ -308,7 +308,7 @@
         if(type === 'error') {
           console.error(msg);
           if(msg.includes("Unable to parse")) {
-            console.help("Чика: Скорее всего, вы забыли поставить галочку рядом с Decompression Fallback, который находится в Player Settings (File > Build Settings > Player Settings > Publishing Settings). Не забывайте ставить его, если вы используете Gzip или Brotli. В ином же случае попробуйте убрать сжатие (Compression Format: none) и снять галочку с Decompression Fallback");
+            console.help("Скорее всего, вы забыли поставить галочку рядом с Decompression Fallback, который находится в Player Settings (File > Build Settings > Player Settings > Publishing Settings). Не забывайте ставить его, если вы используете Gzip или Brotli. В ином же случае попробуйте убрать сжатие (Compression Format: none) и снять галочку с Decompression Fallback");
           }
         } else if(type === "warning") {
           console.warn(msg);
@@ -413,7 +413,7 @@
       script.onerror = () => {
         #if ENABLE_CONSOLE && ENABLE_CONSOLE !== "-" && ENABLE_CONSOLE !== " "
         console.error("Failed to load resourse: " + loaderUrl);
-        console.help("Чика: Попробуйте убрать сжатие (Compression Format: none) и снять галочку с Decompression Fallback в Player Settings (File > Build Settings > Player Settings > Publishing Settings). Всегда делайте билд в папку с англ.названием. А еще убедитесь в том, что в консоли движка нет ошибок");
+        console.help("Попробуйте убрать сжатие (Compression Format: none) и снять галочку с Decompression Fallback в Player Settings (File > Build Settings > Player Settings > Publishing Settings). Всегда делайте билд в папку с англ.названием. А еще убедитесь в том, что в консоли движка нет ошибок");
         #endif
       };
       script.onload = () => {
@@ -423,21 +423,6 @@
           myGameInstance = unityInstance;
           loadingBar.style.display = "none";
           canvas.style.backgroundImage = "none";
-
-          // Недобросовестная реклама
-          if(isEnglish) {
-            #if ENABLE_CONSOLE && ENABLE_CONSOLE !== "-" && ENABLE_CONSOLE !== " "
-            writeToConsole("> " + "Ad: The game uses a free version of advanced templates for Unity. Our group: https://t.me/chikadev. To support us and explore the templates, please visit: https://boosty.to/chikadev. Enjoy your game! Best regards, Chika", "orange");
-            #else
-            console.log("%cAd: The game uses a free version of advanced templates for Unity. Our group: https://t.me/chikadev. To support us and explore the templates, please visit: https://boosty.to/chikadev. Enjoy your game! Best regards, Chika", "background: orange; color: white; padding: 2px 4px; border-radius: 2px; font-family: sans-serif;");
-            #endif
-          } else {
-            #if ENABLE_CONSOLE && ENABLE_CONSOLE !== "-" && ENABLE_CONSOLE !== " "
-            writeToConsole("> " + "Реклама: Игра использует бесплатную версию расширенных шаблонов для Unity. Наша группа: https://t.me/chikadev. Поддержать и ознакомиться с шаблонами можно здесь: https://boosty.to/chikadev. Приятной игры! С уважением, Чика", "orange");
-            #else
-            console.log("%cРеклама: Игра использует бесплатную версию расширенных шаблонов для Unity. Наша группа: https://t.me/chikadev. Поддержать и ознакомиться с шаблонами можно здесь: https://boosty.to/chikadev. Приятной игры! С уважением, Чика", "background: orange; color: white; padding: 2px 4px; border-radius: 2px; font-family: sans-serif;");
-            #endif
-          }
 
           // Проверяем устройство и фиксируем экран, если включено
           if(isTouchDevice) {
