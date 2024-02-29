@@ -1,0 +1,26 @@
+﻿namespace Game.Utilities
+{
+	using Game.Core;
+	using Zenject;
+	using UniRx;
+	using YG;
+
+	public class YandexGameHandler : ControllerBase, IInitializable
+	{
+		[Inject] IScenesManager _scenesManager;
+		[Inject] private ILocalizator _localizator;
+
+		public void Initialize()
+		{
+			_scenesManager.ResourceLoading
+				.Subscribe(_ => InitLang())
+				.AddTo( this );
+		}
+
+		private void InitLang()
+		{
+			YandexGame.LanguageRequest();
+			_localizator.SetLocale( YandexGame.lang );
+		}
+	}
+}
