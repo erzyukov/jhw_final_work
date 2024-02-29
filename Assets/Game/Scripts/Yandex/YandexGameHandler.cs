@@ -4,6 +4,7 @@
 	using Zenject;
 	using UniRx;
 	using YG;
+	using System;
 
 	public class YandexGameHandler : ControllerBase, IInitializable
 	{
@@ -15,12 +16,21 @@
 			_scenesManager.ResourceLoading
 				.Subscribe(_ => InitLang())
 				.AddTo( this );
+
+			_scenesManager.MainLoaded
+				.Subscribe(_ => OnMainLoaded())
+				.AddTo( this );
 		}
 
 		private void InitLang()
 		{
 			YandexGame.LanguageRequest();
 			_localizator.SetLocale( YandexGame.lang );
+		}
+
+		private void OnMainLoaded()
+		{
+			YandexGame.StickyAdActivity( true );
 		}
 	}
 }
