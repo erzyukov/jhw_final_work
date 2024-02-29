@@ -5,16 +5,20 @@ namespace Game.Core
 	using Zenject;
 	using System.Collections;
 	using UnityEngine;
+	using UnityEngine.Localization;
 
 	public interface ILocalizator
 	{
 		IEnumerator Preload();
+		void SetLocale(string key);
 		string GetString(string key);
 	}
 
 	public class Localizator : ILocalizator
 	{
 		[Inject] LocalizationConfig _config;
+
+		private Locale _locale;
 
 		#region IInitializable
 
@@ -25,11 +29,14 @@ namespace Game.Core
 			yield return LocalizationSettings.InitializationOperation;
 			yield return wait;
 
-			LocalizationSettings.SelectedLocale = _config.DefaultLocale;
+			LocalizationSettings.SelectedLocale = _locale ?? _config.DefaultLocale;
 
 			yield return LocalizationSettings.InitializationOperation;
 			yield return wait;
 		}
+
+		public void SetLocale( string key ) =>
+			_locale = _config.GetLocale( key );
 
 		public string GetString(string key) => 
 			LocalizationSettings.StringDatabase.GetLocalizedString(_config.StringTableKey, key);

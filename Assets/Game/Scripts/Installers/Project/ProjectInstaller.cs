@@ -6,9 +6,10 @@ namespace Game.Installers
 	using Game.Dev;
 	using Game.Input;
 	using Game.Profiles;
-	using System;
+	using Game.Utilities;
 	using UnityEngine;
 	using Zenject;
+
 
 	public class ProjectInstaller : MonoInstaller
 	{
@@ -31,6 +32,10 @@ namespace Game.Installers
 				.FromNewComponentOnNewGameObject()
 				.AsSingle()
 				.NonLazy();
+
+			Container
+				.BindInterfacesTo<YandexGameHandler>()
+				.AsSingle();
 
 			Container
 				.BindInterfacesTo<InputHandler>()
