@@ -50,7 +50,7 @@ namespace Game.Installers
 		private void InstallGameProfile()
 		{
 			Container
-				.BindInterfacesTo<FileProfileSaver>()
+				.BindInterfacesTo<YandexProfileSaver>()
 				.AsSingle();
 
 			Container
