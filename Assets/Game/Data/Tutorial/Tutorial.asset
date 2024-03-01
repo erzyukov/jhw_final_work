@@ -60,7 +60,7 @@ MonoBehaviour:
     Place: 0
   - Step: 3
     TranslationKey: upgradeTutorialSelectNextUnit
-    Place: 2
+    Place: 0
   - Step: 4
     TranslationKey: upgradeTutorialSecondUpgrade
     Place: 0
