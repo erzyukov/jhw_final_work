@@ -3,17 +3,17 @@
     using Game.Utilities;
     using Zenject;
     using UniRx;
+	using UnityEngine;
 
-    public interface IUnitEvents
+	public interface IUnitEvents
     {
         ReactiveCommand Dying { get; }
         ReactiveCommand Died { get; }
 		ReactiveCommand Dragging { get; }
+		ReactiveCommand<Vector2> Drag { get; }
 		ReactiveCommand Dropped { get; }
 		ReactiveCommand PointerDowned { get; }
 		ReactiveCommand PointerUped { get; }
-		ReactiveCommand MergeInitiated { get; }
-		ReactiveCommand MergeCanceled { get; }
 		ReactiveCommand Attacking { get; }
 		ReactiveCommand<float> DamageReceived { get; }
 	}
@@ -22,7 +22,6 @@
     {
         [Inject] private IUnitFsm _fsm;
 		[Inject] private IDraggable _draggable;
-		[Inject] private IUnitView _view;
 		[Inject] private IUnitAttacker _attacker;
 		[Inject] private IUnitHealth _unitHealth;
 
@@ -51,11 +50,10 @@
         public ReactiveCommand Dying { get; } = new ReactiveCommand();
         public ReactiveCommand Died { get; } = new ReactiveCommand();
 		public ReactiveCommand Dragging => _draggable.Dragging;
+		public ReactiveCommand<Vector2> Drag => _draggable.Drag;
 		public ReactiveCommand Dropped => _draggable.Dropped;
 		public ReactiveCommand PointerDowned => _draggable.PointerDowned;
 		public ReactiveCommand PointerUped => _draggable.PointerUped;
-		public ReactiveCommand MergeInitiated => _view.MergeInitiated;
-		public ReactiveCommand MergeCanceled => _view.MergeCanceled;
 		public ReactiveCommand Attacking => _attacker.Attacking;
 		public ReactiveCommand<float> DamageReceived => _unitHealth.DamageReceived;
 		#endregion

@@ -7,6 +7,7 @@ namespace Game.Utilities
 
 	public interface IDraggable
 	{
+		ReactiveCommand<Vector2> Drag { get; }
 		ReactiveCommand Dragging { get; }
 		ReactiveCommand Dropped { get; }
 		ReactiveCommand PointerDowned { get; }
@@ -29,10 +30,11 @@ namespace Game.Utilities
 
 		#region IDraggable
 
-		public ReactiveCommand Dragging { get; } = new ReactiveCommand();
-		public ReactiveCommand Dropped { get; } = new ReactiveCommand();
-		public ReactiveCommand PointerDowned { get; } = new ReactiveCommand();
-		public ReactiveCommand PointerUped { get; } = new ReactiveCommand();
+		public ReactiveCommand<Vector2> Drag { get; } = new();
+		public ReactiveCommand Dragging { get; } = new();
+		public ReactiveCommand Dropped { get; } = new();
+		public ReactiveCommand PointerDowned { get; } = new();
+		public ReactiveCommand PointerUped { get; } = new();
 
 		public void SetActive(bool value) =>
 			_isActive = value;
@@ -56,8 +58,10 @@ namespace Game.Utilities
 			if (IsActionAvailable(eventData) == false)
 				return;
 
-			if (GroundRaycast(eventData.position, out Vector3 groundPosition))
+			if (GroundRaycast( eventData.position, out Vector3 groundPosition ))
 				transform.position = groundPosition + _clickOffset;
+
+			Drag.Execute( transform.position.xz() );
 		}
 
 		public void OnEndDrag(PointerEventData eventData)

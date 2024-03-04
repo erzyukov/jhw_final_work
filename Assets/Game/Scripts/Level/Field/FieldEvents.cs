@@ -13,11 +13,10 @@
 		ReactiveCommand<IUnitFacade> UnitRemoved { get; }
 		ReactiveCommand UnitsCleared { get; }
 		ReactiveCommand<IUnitFacade> UnitDragging { get; }
+		ReactiveCommand<IUnitFacade> UnitDrag { get; }
 		ReactiveCommand<IUnitFacade> UnitDropped { get; }
 		ReactiveCommand<IUnitFacade> UnitPointerDowned { get; }
 		ReactiveCommand<IUnitFacade> UnitPointerUped { get; }
-		ReactiveCommand<IUnitFacade> UnitMergeInitiated { get; }
-		ReactiveCommand<IUnitFacade> UnitMergeCanceled { get; }
 		ReactiveCommand<IUnitFacade> UnitAttacking { get; }
 		ReactiveCommand<IUnitFacade> UnitDying { get; }
 		ReactiveCommand<IUnitFacade> UnitDied { get; }
@@ -52,18 +51,17 @@
 
 		#region IFieldEvents
 
-		public ReactiveCommand<IUnitFacade> UnitAdded { get; } = new ReactiveCommand<IUnitFacade>();
-		public ReactiveCommand<IUnitFacade> UnitRemoved { get; } = new ReactiveCommand<IUnitFacade>();
-		public ReactiveCommand UnitsCleared { get; } = new ReactiveCommand();
-		public ReactiveCommand<IUnitFacade> UnitDragging { get; } = new ReactiveCommand<IUnitFacade>();
-		public ReactiveCommand<IUnitFacade> UnitDropped { get; } = new ReactiveCommand<IUnitFacade>();
-		public ReactiveCommand<IUnitFacade> UnitPointerDowned { get; } = new ReactiveCommand<IUnitFacade>();
-		public ReactiveCommand<IUnitFacade> UnitPointerUped { get; } = new ReactiveCommand<IUnitFacade>();
-		public ReactiveCommand<IUnitFacade> UnitMergeInitiated { get; } = new ReactiveCommand<IUnitFacade>();
-		public ReactiveCommand<IUnitFacade> UnitMergeCanceled { get; } = new ReactiveCommand<IUnitFacade>();
-		public ReactiveCommand<IUnitFacade> UnitAttacking { get; } = new ReactiveCommand<IUnitFacade>();
-		public ReactiveCommand<IUnitFacade> UnitDying { get; } = new ReactiveCommand<IUnitFacade>();
-		public ReactiveCommand<IUnitFacade> UnitDied { get; } = new ReactiveCommand<IUnitFacade>();
+		public ReactiveCommand<IUnitFacade> UnitAdded { get; } = new();
+		public ReactiveCommand<IUnitFacade> UnitRemoved { get; } = new();
+		public ReactiveCommand UnitsCleared { get; } = new();
+		public ReactiveCommand<IUnitFacade> UnitDragging { get; } = new();
+		public ReactiveCommand<IUnitFacade> UnitDrag { get; } = new();
+		public ReactiveCommand<IUnitFacade> UnitDropped { get; } = new();
+		public ReactiveCommand<IUnitFacade> UnitPointerDowned { get; } = new();
+		public ReactiveCommand<IUnitFacade> UnitPointerUped { get; } = new();
+		public ReactiveCommand<IUnitFacade> UnitAttacking { get; } = new();
+		public ReactiveCommand<IUnitFacade> UnitDying { get; } = new();
+		public ReactiveCommand<IUnitFacade> UnitDied { get; } = new();
 
 		#endregion
 
@@ -85,11 +83,12 @@
 			_unitsLifetime.Add(unit, disposable);
 
 			unit.Events.Dragging.Subscribe(_ => UnitDragging.Execute(unit)).AddTo(disposable);
+			unit.Events.Drag.Subscribe(_ => UnitDrag.Execute(unit)).AddTo(disposable);
 			unit.Events.Dropped.Subscribe(_ => UnitDropped.Execute(unit)).AddTo(disposable);
 			unit.Events.PointerDowned.Subscribe(_ => UnitPointerDowned.Execute(unit)).AddTo(disposable);
 			unit.Events.PointerUped.Subscribe(_ => UnitPointerUped.Execute(unit)).AddTo(disposable);
-			unit.Events.MergeInitiated.Subscribe(_ => UnitMergeInitiated.Execute(unit)).AddTo(disposable);
-			unit.Events.MergeCanceled.Subscribe(_ => UnitMergeCanceled.Execute(unit)).AddTo(disposable);
+			//unit.Events.MergeInitiated.Subscribe(_ => UnitMergeInitiated.Execute(unit)).AddTo(disposable);
+			//unit.Events.MergeCanceled.Subscribe(_ => UnitMergeCanceled.Execute(unit)).AddTo(disposable);
 			unit.Events.Attacking.Subscribe(_ => UnitAttacking.Execute(unit)).AddTo(disposable);
 			unit.Events.Dying.Subscribe(_ => UnitDying.Execute(unit)).AddTo(disposable);
 			unit.Events.Died.Subscribe(_ => UnitDied.Execute(unit)).AddTo(disposable);
