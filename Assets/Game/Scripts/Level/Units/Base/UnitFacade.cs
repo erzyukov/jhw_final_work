@@ -77,20 +77,14 @@
 		public void ResetSupposedPower() =>
 			_unitData.SupposedPower.Value = 0;
 
-		public void EnterBattle()
-		{
+		public void EnterBattle() =>
 			_fsm.EnterBattle();
-			_view.SetMergeActive(false);
-		}
 
 		public void ResetPosition() =>
 			_unitPosition.ResetPosition();
 
-		public void Reset()
-		{
+		public void Reset() => 
 			_fsm.Reset();
-			_view.SetMergeActive(true);
-		}
 
 		public void Destroy() => 
 			_view.Destroy();

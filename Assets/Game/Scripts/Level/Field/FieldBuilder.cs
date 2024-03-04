@@ -36,7 +36,7 @@
 				cellView.SetPosition(worldPosition);
 			}
 
-			_field.InitMap(map);
+			_field.InitMap(map, _view.Transform.position, _config.FieldCellWidth);
 		}
 
 		private Vector3 GetCellWorldPosition(Vector2Int localPosition)
