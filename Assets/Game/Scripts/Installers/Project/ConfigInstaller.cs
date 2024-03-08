@@ -7,21 +7,28 @@ namespace Game.Installers
 	[CreateAssetMenu(fileName = "ConfigInstaller", menuName = "Installers/ConfigInstaller")]
 	public class ConfigInstaller : ScriptableObjectInstaller<ConfigInstaller>
 	{
+		[SerializeField] private TutorialConfig _tutorial;
+		[SerializeField] private DevConfig _dev;
+		[SerializeField] private MenuConfig _menu;
+
+		[Header("Tech")]
 		[SerializeField] private ScenesConfig _scenes;
-		[SerializeField] private UnitsConfig _units;
-		[SerializeField] private BattleFieldConfig _battleField;
+		[SerializeField] private LocalizationConfig _localization;
+		[SerializeField] private AudioConfig _audio;
+		[SerializeField] private PrefabsConfig _prefabs;
+
+		[Header("Balance")]
 		[SerializeField] private LevelsConfig _levels;
 		[SerializeField] private CurrencyConfig _currency;
 		[SerializeField] private TimingsConfig _timings;
-		[SerializeField] private LocalizationConfig _localization;
-		[SerializeField] private TutorialConfig _tutorial;
-		[SerializeField] private DevConfig _dev;
 		[SerializeField] private ExperienceConfig _experience;
-		[SerializeField] private WeaponsConfig _weapons;
-		[SerializeField] private MenuConfig _menu;
-		[SerializeField] private UpgradesConfig _upgrades;
 		[SerializeField] private EnergyConfig _energy;
-		[SerializeField] private AudioConfig _audio;
+
+		[Header("Gameplay")]
+		[SerializeField] private UnitsConfig _units;
+		[SerializeField] private BattleFieldConfig _battleField;
+		[SerializeField] private WeaponsConfig _weapons;
+		[SerializeField] private UpgradesConfig _upgrades;
 
 		public override void InstallBindings()
 		{
@@ -44,6 +51,7 @@ namespace Game.Installers
 			Container.BindInstance(_upgrades);
 			Container.BindInstance(_energy);
 			Container.BindInstance(_audio);
+			Container.BindInstance(_prefabs);
 		}
 	}
 }

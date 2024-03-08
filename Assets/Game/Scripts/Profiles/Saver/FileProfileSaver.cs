@@ -37,8 +37,6 @@
 				data = null;
 			}
 
-			Debug.LogWarning(data);
-
 			return data != null;
 		}
 

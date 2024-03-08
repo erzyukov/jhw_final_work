@@ -27,6 +27,7 @@
 		Localization,
 		Dev,
 		Audio,
+		Prefabs,
 
 		// Other
 		Tutorial = 400,

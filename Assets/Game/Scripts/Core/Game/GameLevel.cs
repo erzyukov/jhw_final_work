@@ -16,7 +16,7 @@
 		ReactiveCommand<GameLevel.Result> LevelFinished { get; }
 		ReactiveCommand<int> WaveStarted { get; }
 		ReactiveCommand<GameLevel.Result> WaveFinished { get; }
-		void GoToLevel(int number);
+		void GoToLevel(int number, int wave = -1);
 		void GoToNextWave();
 		void FinishLevel();
 		void LeaveBattle();
@@ -78,7 +78,7 @@
 
 		public ReactiveCommand<Result> WaveFinished { get; } = new ReactiveCommand<Result>();
 
-		public void GoToLevel(int number)
+		public void GoToLevel(int number, int wave = -1)
 		{
 			_gameCycle.SetState(GameState.LoadingLevel);
 
@@ -91,6 +91,7 @@
 				}
 
 				_profile.LevelNumber.Value = ClampLevelNumber(number);
+				_profile.WaveNumber.Value = (wave != -1) ? wave : _profile.WaveNumber.Value;
 				Save();
 
 				_scenesManager.LoadLevel();
