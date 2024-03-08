@@ -43,5 +43,7 @@ namespace Game.Fx
 				_particleSystem.Play();
 			}
 		}
+
+		protected virtual void OnParticleSystemStopped() {}
 	}
 }
