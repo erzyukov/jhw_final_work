@@ -108,7 +108,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19858590, guid: 044c3c43ee7558d40bc1177d185264bc, type: 3}
       propertyPath: ClampVelocityModule.dampen
-      value: 0.25
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19858590, guid: 044c3c43ee7558d40bc1177d185264bc, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 19858590, guid: 044c3c43ee7558d40bc1177d185264bc, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 19858590, guid: 044c3c43ee7558d40bc1177d185264bc, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.ctime0
@@ -141,6 +149,10 @@ PrefabInstance:
     - target: {fileID: 19858590, guid: 044c3c43ee7558d40bc1177d185264bc, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.m_ColorSpace
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19887852, guid: 044c3c43ee7558d40bc1177d185264bc, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 19887852, guid: 044c3c43ee7558d40bc1177d185264bc, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.ctime0

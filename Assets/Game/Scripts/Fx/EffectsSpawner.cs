@@ -36,7 +36,14 @@
 			tr.SetParent( parent );
 
 			if (parent != null)
+			{
 				tr.rotation = parent.rotation;
+				tr.localPosition = parent.localPosition;
+			}
+			else
+			{
+				tr.position = position;
+			}
 
 			return particle;
 		}

@@ -2,6 +2,7 @@
 {
 	using Game.Configs;
 	using Game.Field;
+	using Game.Fx;
 	using Game.Level;
 	using Game.Units;
 	using Game.Utilities;
@@ -15,6 +16,7 @@
 		[Inject] private IFieldHeroFacade _fieldHeroFacade;
 		[Inject] private IHeroUnitSummoner _heroUnitSummoner;
 		[Inject] private UnitsConfig _unitsConfig;
+		[Inject] private IEffectsSpawner _effectsSpawner;
 
 		private ReactiveProperty<IFieldCell> _targetCell = new();
 
@@ -130,6 +132,8 @@
 			IUnitFacade unit = _heroUnitSummoner.Summon(species, gradeIndex, power, cellPosition);
 
 			_fieldHeroFacade.UnitsMerged.Execute( unit );
+
+			_effectsSpawner.Spawn( VfxElement.UnitMerge, unit.Transform.position );
 		}
 
 		private int GetMergingUnitPower() =>
