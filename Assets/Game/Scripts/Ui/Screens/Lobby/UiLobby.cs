@@ -14,6 +14,7 @@
 		[Inject] private IUiMessage _uiMessage;
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private IGameEnergy _gameEnergy;
+		[Inject] private IGameCurrency _gameCurrency;
 		[Inject] private GameProfile _profile;
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] private EnergyConfig _energyConfig;
@@ -77,9 +78,16 @@
 			if (_profile.LevelNumber.Value >= _energyConfig.FreeLevelTo)
 			{
 				if (_gameEnergy.TryPayLevel() || resetWave == false)
+				{
+					if (resetWave)
+						_gameCurrency.ResetLevelSoftCurrency();
+
 					_gameLevel.GoToLevel( _profile.LevelNumber.Value, targetWave );
+				}
 				else
+				{
 					_uiMessage.ShowMessage( UiMessage.NotEnoughEnergy );
+				}
 			}
 			else
 			{
