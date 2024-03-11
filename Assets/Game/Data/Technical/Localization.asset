@@ -69,3 +69,4 @@ MonoBehaviour:
       Data: 
   _defaultLocale: {fileID: 11400000, guid: 38be1984ecc95f447b78341ba17d74fc, type: 2}
   _stringTableKey: StringTableCollection
+  _assetTableKey: AssetTableCollection

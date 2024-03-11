@@ -4,7 +4,6 @@
 	using Zenject;
 	using UniRx;
 	using YG;
-	using System;
 
 	public class YandexGameHandler : ControllerBase, IInitializable
 	{

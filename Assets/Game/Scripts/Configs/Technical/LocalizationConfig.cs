@@ -10,11 +10,13 @@
 	{
 		[SerializeField] private Locale _defaultLocale;
 		[SerializeField] private string _stringTableKey;
+		[SerializeField] private string _assetTableKey;
 
 		[SerializeField] private Dictionary<string, Locale> _locales = new();
 
 		public Locale DefaultLocale => _defaultLocale;
 		public string StringTableKey => _stringTableKey;
+		public string AssetTableKey => _assetTableKey;
 
 		public Locale GetLocale( string key )
 		{
