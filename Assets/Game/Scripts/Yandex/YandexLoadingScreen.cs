@@ -1,41 +1,37 @@
 namespace Game.Utilities
 {
-	using Game.Profiles;
 	using UnityEngine;
 	using UnityEngine.UI;
 	using Zenject;
 	using UniRx;
 	using Game.Core;
-	using System;
+	using Game.Configs;
 
 	public class YandexLoadingScreen : MonoBehaviour
     {
 		[SerializeField] private Image _loadingText;
 
-		[Inject] private IGameProfileManager _profileManager;
-		[Inject] IScenesManager _scenesManager;
 		[Inject] private ILocalizator _localizator;
-
-		private const string LoadingTextKey = "loadingText";
+		[Inject] private LocalizationConfig _config;
 
         void Awake()
         {
-			if (_localizator.IsLangInitialized.Value)
+			if (_localizator.LangKey.Value != null)
 			{
-				SetupLoadingText();
+				SetupLoadingText( _localizator.LangKey.Value );
 			}
 			else
 			{
-				_localizator.IsLangInitialized
-					.Where( v => v )
-					.Subscribe( _ => SetupLoadingText() )
+				_localizator.LangKey
+					.Where( v => v != null )
+					.Subscribe( key => SetupLoadingText( key ) )
 					.AddTo( this );
 			}
         }
 
-		private void SetupLoadingText()
+		private void SetupLoadingText( string key )
 		{
-			_loadingText.sprite = _localizator.GetSprite(LoadingTextKey);
+			_loadingText.sprite = _config.GetLoadingSprite( key );
 			_loadingText.enabled = true;
 		}
 	}

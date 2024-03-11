@@ -14,6 +14,9 @@
 
 		[SerializeField] private Dictionary<string, Locale> _locales = new();
 
+		// Triks for webgl
+		[SerializeField] private Dictionary<string, Sprite> _loadingSprites = new();
+
 		public Locale DefaultLocale => _defaultLocale;
 		public string StringTableKey => _stringTableKey;
 		public string AssetTableKey => _assetTableKey;
@@ -23,6 +26,13 @@
 			_locales.TryGetValue(key, out Locale locale) ;
 
 			return locale;
+		}
+
+		public Sprite GetLoadingSprite( string key )
+		{
+			_loadingSprites.TryGetValue(key, out Sprite sprite);
+
+			return sprite;
 		}
 	}
 }
