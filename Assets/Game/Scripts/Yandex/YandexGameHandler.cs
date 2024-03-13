@@ -29,6 +29,7 @@
 
 		private void OnMainLoaded()
 		{
+			YandexGame.GameReadyAPI();
 			YandexGame.StickyAdActivity( true );
 		}
 	}
