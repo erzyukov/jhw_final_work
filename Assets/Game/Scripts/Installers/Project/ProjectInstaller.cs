@@ -33,19 +33,23 @@ namespace Game.Installers
 				.AsSingle()
 				.NonLazy();
 
-			Container
-				.BindInterfacesTo<YandexGameHandler>()
-				.AsSingle();
+			if (_devConfig.GamePatform == EGamePatform.YandexGames)
+			{
+				Container
+					.BindInterfacesTo<YandexGameHandler>()
+					.AsSingle();
+			}
 
 			Container
 				.BindInterfacesTo<InputHandler>()
 				.AsSingle();
 
-			// IApplicationPaused
+#if UNITY_WEBGL && !UNITY_EDITOR
 			Container
 				.BindInterfacesTo<WebGLEvents>()
 				.FromComponentInHierarchy()
 				.AsSingle();
+#endif
 
 			InstallEvents();
 			InstallAnalytics();
@@ -54,9 +58,20 @@ namespace Game.Installers
 
 		private void InstallGameProfile()
 		{
-			Container
-				.BindInterfacesTo<YandexProfileSaver>()
-				.AsSingle();
+			switch (_devConfig.GamePatform)
+			{
+				case EGamePatform.None: 
+					Container
+						.BindInterfacesTo<FileProfileSaver>()
+						.AsSingle();
+					break;
+
+				case EGamePatform.YandexGames: 
+					Container
+						.BindInterfacesTo<YandexProfileSaver>()
+						.AsSingle();
+					break;
+			}
 
 			Container
 				.BindInterfacesTo<GameProfileManager>()
