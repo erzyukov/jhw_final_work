@@ -7,7 +7,7 @@ namespace Game.Utilities
 	using Game.Core;
 	using Game.Configs;
 
-	public class YandexLoadingScreen : MonoBehaviour
+	public class LoadingScreen : MonoBehaviour
     {
 		[SerializeField] private Image _loadingText;
 
