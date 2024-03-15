@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Dev
   m_EditorClassIdentifier: 
   _buildType: 0
+  _gamePatform: 10
   _timeScale: 1
