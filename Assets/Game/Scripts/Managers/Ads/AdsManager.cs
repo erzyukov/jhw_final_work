@@ -12,7 +12,7 @@
 	using Game.Ui;
 	using Screen = Game.Ui.Screen;
 
-	public interface IAdsController
+	public interface IAdsManager
     {
 		Dictionary<ERewardedType, ReactiveCommand<Rewarded>> OnCompleted {get;}
 		Dictionary<ERewardedType, ReactiveCommand<Rewarded>> OnCanceled {get;}
@@ -25,15 +25,14 @@
 
 		BoolReactiveProperty IsPlaying { get; }
 		BoolReactiveProperty IsRewardedAvailable { get; }
-		ReactiveCommand OnShowInterstitialComplete { get; }
-		FloatReactiveProperty SecondsToInterstitial { get; }
+		BoolReactiveProperty IsInterstitialReady { get; }
 
-		bool HasInterstitialBlocker { get; }
-		bool HasBannerBlocker { get; }
+		ReadOnlyReactiveProperty<bool> HasInterstitialBlocker { get; }
+		ReadOnlyReactiveProperty<bool> HasBannerBlocker { get; }
 		void AddRemoveBlocker( EAdsBlocker blocker, bool add );
 	}
 
-	public class AdsController: ControllerBase, IAdsController, IInitializable
+	public class AdsManager: ControllerBase, IAdsManager, IInitializable
 	{
 		[Inject] AdsConfig _adsConfig;
 		[Inject] IAdsProvider _adsProvider;
@@ -45,20 +44,13 @@
 		private ERewardedType _rewardType;
 		private Rewarded _currentRewarded;
 
-		private float _interInterval;
-		private bool _bannerState;
-
-		private ITimer _interTimer = new Timer(true);
-
-		private List<EAdsBlocker> _blockersInter = new List<EAdsBlocker>();
-		private List<EAdsBlocker> _blockersBanner = new List<EAdsBlocker>();
-
-		private BoolReactiveProperty IsInterstitialReady = new BoolReactiveProperty();
+		private ReactiveCollection<EAdsBlocker> _blockersInter = new();
+		private ReactiveCollection<EAdsBlocker> _blockersBanner = new();
 
 		private string AdPlace =>
 			(_screenNavigator.Screen.Value == Screen.None) ? DefaultPlace : _screenNavigator.Screen.Value.ToString();
 
-		public void Initialize()
+		public virtual void Initialize()
 		{
 			AddRemoveBlocker( EAdsBlocker.Mediation_Loading, true );
 
@@ -66,13 +58,13 @@
 			InitIntersitial();
 			InitRewarded();
 
+			HasInterstitialBlocker = _blockersInter
+				.ObserveCountChanged().Select( count => count > 0 ).ToReadOnlyReactiveProperty();
+			HasBannerBlocker = _blockersBanner
+				.ObserveCountChanged().Select( count => count > 0 ).ToReadOnlyReactiveProperty();
+
 			_adsProvider.Initialized
 				.Subscribe( _ => OnProviderInitialized() )
-				.AddTo( this );
-
-			IsInterstitialReady
-				.Where( v => v && _interTimer.Remained < _adsConfig.SecondsToShowAdsTimer )
-				.Subscribe( _ => _interTimer.Set( _adsConfig.SecondsToShowAdsTimer ) )
 				.AddTo( this );
 
 			// Disable ads by UI
@@ -108,12 +100,8 @@
 
 		void InitIntersitial()
 		{
-			_interInterval = _adsConfig.InterstitialInterval;
-
 			if (Time.timeScale != 0)
 				_timeScale = Time.timeScale;
-
-			SetInterTimer();
 		}
 
 		void InitRewarded()
@@ -146,10 +134,9 @@
 		public Dictionary<ERewardedType, ReactiveCommand<Rewarded>> OnCanceled { get; }
 			= new Dictionary<ERewardedType, ReactiveCommand<Rewarded>>();
 
-		public BoolReactiveProperty IsPlaying { get; } = new BoolReactiveProperty();
-		public BoolReactiveProperty IsRewardedAvailable { get; } = new BoolReactiveProperty();
-		public ReactiveCommand OnShowInterstitialComplete { get; } = new ReactiveCommand();
-		public FloatReactiveProperty SecondsToInterstitial { get; } = new FloatReactiveProperty();
+		public BoolReactiveProperty IsPlaying { get; } = new();
+		public BoolReactiveProperty IsRewardedAvailable { get; } = new();
+		public BoolReactiveProperty IsInterstitialReady { get; } = new();
 
 		public void ShowRewardedVideo( ERewardedType type )
         {
@@ -176,8 +163,6 @@
 			_rewardType = type;
 			IsPlaying.Value = true;
 
-			_interTimer.Pause();
-
 			_adsProvider.ShowRevardedVideo( type.ToString() );
 		}
 
@@ -192,25 +177,18 @@
 			if (!IsInterstitialReady.Value)
 				return;
 
-			SecondsToInterstitial.Value = _interTimer.Remained;
-
-			if (
-				_interTimer.IsReady == false ||
-				_adsProvider.IsAdAvailable( EAdType.RewardedVideo ) == false
-			)
+			if (_adsProvider.IsAdAvailable( EAdType.RewardedVideo ) == false)
 				return;
 			
 			IsInterstitialReady.Value = false;
 			IsPlaying.Value = true;
 
-			_interTimer.Pause();
-
 			_adsProvider.ShowInterstitialVideo( AdPlace );
 		}
 
-		public bool HasInterstitialBlocker => _blockersInter.Any();
+		public ReadOnlyReactiveProperty<bool> HasInterstitialBlocker { get; private set; }
 		
-		public bool HasBannerBlocker => _blockersBanner.Any();
+		public ReadOnlyReactiveProperty<bool> HasBannerBlocker { get; private set; }
 
 		public void AddRemoveBlocker(EAdsBlocker blocker, bool add)
 		{
@@ -231,17 +209,8 @@
 				if (isBanner) _blockersBanner.Remove(blocker);
 			}
 
-			if (isInter && add == false && _blockersInter.Count() == 0 && _interTimer.Remained < _adsConfig.SecondsToShowAdsTimer)
-				_interTimer.Set(_adsConfig.SecondsToShowAdsTimer);
-
 			if (isBanner)
 				UpdateBannerState();
-
-			if (isInter)
-				if (_blockersInter.Any())
-					_interTimer.Pause();
-				else if (_interTimer.IsPaused)
-					_interTimer.Unpause();
 		}
 
 #endregion
@@ -332,15 +301,11 @@
 		void OnInterstitialAdClosed()
 		{
 			IsPlaying.Value = false;
-			SetInterTimer();
 			RestoreTimeScale();
-
-			OnShowInterstitialComplete.Execute();
 		}
 
 		void OnRewardVideoClosed()
 		{
-			SetInterTimer();
 			IsPlaying.Value = false;
 			RestoreTimeScale();
 		}
@@ -349,18 +314,12 @@
 		{
 			IsInterstitialReady.Value = false;
 			IsPlaying.Value = false;
-
-			_interTimer.Unpause();
 		}
 
 		void OnRewardedVideoAdShowFailed()
 		{
 			IsPlaying.Value = false;
-			_interTimer.Unpause();
 		}
-
-		void SetInterTimer() =>
-			_interTimer.Set( _interInterval );
 
 		void SetZeroTimeScale()
 		{
@@ -384,8 +343,6 @@
 				_adsProvider.DisplayBanner( AdPlace );
 			else
 				_adsProvider.HideBanner();
-
-			_bannerState = show;
 		}
 	}
 }
