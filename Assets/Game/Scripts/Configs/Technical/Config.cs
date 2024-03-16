@@ -32,5 +32,8 @@
 		// Other
 		Tutorial = 400,
 		Menu,
+
+		// Monetization
+		Ads = 500,
 	}
 }
