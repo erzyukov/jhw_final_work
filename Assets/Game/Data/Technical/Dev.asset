@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buildType: 0
   _timeScale: 1
-  DisableAnalytics: 1
+  DisableAnalytics: 0
