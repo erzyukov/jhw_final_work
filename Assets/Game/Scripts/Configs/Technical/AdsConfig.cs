@@ -10,8 +10,8 @@
 		public List<EAdsBlocker> BlockersInter;
 		public List<EAdsBlocker> BlockersBanner;
 
-		public float    InterstitialInterval;
+		public float InterstitialInterval;
 
-		public float    SecondsToShowAdsTimer;
+		public int InterActiveLevelNumber;
 	}
 }

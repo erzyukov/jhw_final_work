@@ -35,9 +35,9 @@
 
 	public class AdsManager: ControllerBase, IAdsManager, IInitializable
 	{
-		[Inject] AdsConfig _adsConfig;
-		[Inject] IAdsProvider _adsProvider;
-		[Inject] IScreenNavigator _screenNavigator;
+		[Inject] protected AdsConfig _adsConfig;
+		[Inject] protected IAdsProvider _adsProvider;
+		[Inject] protected IScreenNavigator _screenNavigator;
 
 		private const string DefaultPlace = "Gameplay";
 
@@ -68,7 +68,7 @@
 
 			// Disable ads by UI
 			_screenNavigator.Screen
-				.StartWith( Screen.None )
+				.Where( s => s != Screen.None )
 				.Pairwise()
 				.Subscribe( pair => OnUiScreenChanged( pair.Previous, pair.Current ) )
 				.AddTo( this );
@@ -244,6 +244,8 @@
 
 		void OnAdLoaded(EAdType type)
 		{
+			WebGLDebug.Log($"------> OnAdLoaded: {type}");
+
 			switch (type)
 			{
 				case EAdType.Interstitial:
@@ -260,6 +262,8 @@
 
 		void OnAdOpened(EAdType type)
 		{
+			WebGLDebug.Log($"------> OnAdOpened: {type}");
+
 			switch (type)
 			{
 				case EAdType.Interstitial:
@@ -271,6 +275,8 @@
 
 		void OnAdClosed(EAdType type)
 		{
+			WebGLDebug.Log($"------> OnAdClosed: {type}");
+
 			switch (type)
 			{
 				case EAdType.Interstitial:

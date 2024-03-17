@@ -7,7 +7,7 @@
 
 	public class YandexGameHandler : ControllerBase, IInitializable
 	{
-		[Inject] IScenesManager _scenesManager;
+		[Inject] private IScenesManager _scenesManager;
 		[Inject] private ILocalizator _localizator;
 
 		public void Initialize()

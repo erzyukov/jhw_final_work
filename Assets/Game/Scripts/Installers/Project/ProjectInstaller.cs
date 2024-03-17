@@ -95,6 +95,9 @@ namespace Game.Installers
 
 		private void InstallAnalytics()
 		{
+			if (_devConfig.DisableAnalytics)
+				return;
+
 			Container
 				.BindInterfacesTo<GameAnalyticsSender>()
 				.AsSingle();

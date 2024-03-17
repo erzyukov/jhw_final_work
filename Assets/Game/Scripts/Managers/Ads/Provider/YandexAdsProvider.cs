@@ -1,6 +1,5 @@
 ﻿namespace Game.Managers
 {
-	using System;
 	using UniRx;
 	using Zenject;
 	using YG;
@@ -20,7 +19,12 @@
 			if (YandexGame.SDKEnabled)
 				OnInit();
 			else
-				ObserveEvent( YandexGame.GetDataEvent, () => OnInit() );
+				Observable.FromEvent(
+					x => YandexGame.GetDataEvent += x,
+					x => YandexGame.GetDataEvent -= x
+				)
+				.Subscribe( _ => OnInit() )
+				.AddTo( this );
 		}
 
 		private void OnInit()
@@ -33,31 +37,64 @@
 					AdLoaded.Execute( EAdType.Banner );
 					AdLoaded.Execute( EAdType.RewardedVideo );
 					AdLoaded.Execute( EAdType.Interstitial );
-
 				} )
 				.AddTo( this );
 		}
 
 		private void InterstitialSubscribe()
 		{
-			ObserveEvent( YandexGame.OpenFullAdEvent, () => AdOpened.Execute( EAdType.Interstitial ) );
-			ObserveEvent( YandexGame.ErrorFullAdEvent, () => AdShowFailed.Execute( EAdType.Interstitial ) );
-			ObserveEvent( YandexGame.CloseFullAdEvent, () =>
-			{
-				AdClosed.Execute( EAdType.Interstitial );
-				AdLoaded.Execute( EAdType.Interstitial );
-			} );
+			Observable.FromEvent(
+				x => YandexGame.OpenFullAdEvent += x,
+				x => YandexGame.OpenFullAdEvent -= x
+			)
+				.Subscribe( _ => AdOpened.Execute( EAdType.Interstitial ) )
+				.AddTo( this );
+
+			Observable.FromEvent(
+				x => YandexGame.ErrorFullAdEvent += x,
+				x => YandexGame.ErrorFullAdEvent -= x
+			)
+				.Subscribe( _ => AdShowFailed.Execute( EAdType.Interstitial ) )
+				.AddTo( this );
+
+			Observable.FromEvent(
+				x => YandexGame.CloseFullAdEvent += x,
+				x => YandexGame.CloseFullAdEvent -= x
+			)
+				.Subscribe( _ =>
+				{
+					AdClosed.Execute( EAdType.Interstitial );
+					AdLoaded.Execute( EAdType.Interstitial );
+				} )
+				.AddTo( this );
 		}
 
 		private void RewardedVideoSubscribe()
 		{
-			ObserveEvent( YandexGame.OpenVideoEvent, () => AdOpened.Execute( EAdType.RewardedVideo ) );
-			ObserveEvent( YandexGame.ErrorVideoEvent, () => AdShowFailed.Execute( EAdType.RewardedVideo ) );
-			ObserveEvent( YandexGame.CloseVideoEvent, () =>
-			{
-				AdClosed.Execute( EAdType.RewardedVideo );
-				AdLoaded.Execute( EAdType.RewardedVideo );
-			} );
+			Observable.FromEvent(
+				x => YandexGame.OpenVideoEvent += x,
+				x => YandexGame.OpenVideoEvent -= x
+			)
+				.Subscribe( _ => AdOpened.Execute( EAdType.RewardedVideo ) )
+				.AddTo( this );
+
+			Observable.FromEvent(
+				x => YandexGame.ErrorVideoEvent += x,
+				x => YandexGame.ErrorVideoEvent -= x
+			)
+				.Subscribe( _ => AdShowFailed.Execute( EAdType.RewardedVideo ) )
+				.AddTo( this );
+
+			Observable.FromEvent(
+				x => YandexGame.CloseVideoEvent += x,
+				x => YandexGame.CloseVideoEvent -= x
+			)
+				.Subscribe( _ =>
+				{
+					AdClosed.Execute( EAdType.RewardedVideo );
+					AdLoaded.Execute( EAdType.RewardedVideo );
+				} )
+				.AddTo( this );
 
 			Observable.FromEvent<int>(
 					x => YandexGame.RewardVideoEvent += x,
@@ -96,16 +133,6 @@
 			YandexGame.RewVideoShow( (int)type );
 
 #endregion
-
-		private void ObserveEvent(Action action, Action callback)
-		{
-			Observable.FromEvent(
-					x => action += x,
-					x => action -= x
-				)
-				.Subscribe( _ => callback.Invoke() )
-				.AddTo( this );
-		}
 
 	}
 }
