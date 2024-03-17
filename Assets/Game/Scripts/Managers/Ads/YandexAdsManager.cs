@@ -58,17 +58,15 @@
 
 		protected void OnUiScreenChanged( Screen previous, Screen current )
 		{
-			if (_interTimer.IsReady == false)
+			if (
+				_interTimer.IsReady == false ||
+				BeforAdScreen.Contains( previous ) == false ||
+				_gameProfile.LevelNumber.Value < _adsConfig.InterActiveLevelNumber ||
+				current != Screen.Lobby
+			)
 				return;
 
-			if (BeforAdScreen.Contains( previous ) == false)
-				return;
-
-			if (_gameProfile.LevelNumber.Value < _adsConfig.InterActiveLevelNumber)
-				return;
-
-			if (current == Screen.Lobby)
-				ShowInterstitialVideo();
+			ShowInterstitialVideo();
 		}
 	}
 }
