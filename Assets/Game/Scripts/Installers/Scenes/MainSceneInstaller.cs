@@ -5,12 +5,15 @@ namespace Game.Installers
 	using Zenject;
 	using Game.Ui;
 	using Game.Tutorial;
-	using System;
 	using UnityEngine.UI;
 	using Game.Analytics;
+	using Game.Configs;
+	using Game.Managers;
 
 	public class MainSceneInstaller : MonoInstaller
 	{
+		[Inject] private DevConfig _devConfig;
+
 		public override void InstallBindings()
 		{
 			Container
@@ -30,9 +33,10 @@ namespace Game.Installers
 				.AsSingle();
 
 			InstallUI();
-			WindowsInstall();
-			TutorialInstall();
+			InstallWindows();
+			InstallTutorial();
 			InstallAnalytics();
+			InstallAds();
 		}
 
 		private void InstallUI()
@@ -90,7 +94,7 @@ namespace Game.Installers
 				.AsSingle();
 		}
 
-		private void WindowsInstall()
+		private void InstallWindows()
 		{
 			Container
 				.BindInterfacesTo<ContinueLevelWindow>()
@@ -120,7 +124,7 @@ namespace Game.Installers
 				.AsSingle();
 		}
 
-		private void TutorialInstall()
+		private void InstallTutorial()
 		{
 			Container
 				.BindInterfacesTo<MainSceneTutorial>()
@@ -152,6 +156,18 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<SettingsHierarchyAnalytics>()
 				.AsSingle();
+		}
+
+		private void InstallAds()
+		{
+			switch (_devConfig.GamePatform)
+			{
+				case EGamePatform.YandexGames: 
+					Container
+						.BindInterfacesTo<YandexAdsManager>()
+						.AsSingle();
+					break;
+			}
 		}
 	}
 }

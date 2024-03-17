@@ -5,6 +5,7 @@ namespace Game.Installers
 	using Game.Core;
 	using Game.Dev;
 	using Game.Input;
+	using Game.Managers;
 	using Game.Profiles;
 	using Game.Utilities;
 	using UnityEngine;
@@ -54,6 +55,7 @@ namespace Game.Installers
 			InstallEvents();
 			InstallAnalytics();
 			InstallGameControllers();
+			InstallAds();
 		}
 
 		private void InstallGameProfile()
@@ -112,6 +114,18 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<GameCurrency>()
 				.AsSingle();
+		}
+
+		private void InstallAds()
+		{
+			switch (_devConfig.GamePatform)
+			{
+				case EGamePatform.YandexGames: 
+					Container
+						.BindInterfacesTo<YandexAdsProvider>()
+						.AsSingle();
+					break;
+			}
 		}
 	}
 }
