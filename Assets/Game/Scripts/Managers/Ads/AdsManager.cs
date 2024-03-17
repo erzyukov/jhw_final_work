@@ -163,7 +163,7 @@
 			_rewardType = type;
 			IsPlaying.Value = true;
 
-			_adsProvider.ShowRevardedVideo( type.ToString() );
+			_adsProvider.ShowRevardedVideo( type );
 		}
 
 		public void ShowRewardedVideo(ERewardedType place, Rewarded type)
