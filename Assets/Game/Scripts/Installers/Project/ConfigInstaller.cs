@@ -30,6 +30,9 @@ namespace Game.Installers
 		[SerializeField] private WeaponsConfig _weapons;
 		[SerializeField] private UpgradesConfig _upgrades;
 
+		[Header("Monetization")]
+		[SerializeField] private AdsConfig _ads;
+
 		public override void InstallBindings()
 		{
 			_units.Initialize();
@@ -52,6 +55,7 @@ namespace Game.Installers
 			Container.BindInstance(_energy);
 			Container.BindInstance(_audio);
 			Container.BindInstance(_prefabs);
+			Container.BindInstance(_ads);
 		}
 	}
 }

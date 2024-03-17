@@ -12,8 +12,6 @@
 
 		public float    InterstitialInterval;
 
-		public string   DefaultPlacements;
-
 		public float    SecondsToShowAdsTimer;
 	}
 }
