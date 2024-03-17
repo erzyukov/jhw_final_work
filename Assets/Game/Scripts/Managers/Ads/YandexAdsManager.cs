@@ -2,13 +2,16 @@
 {
 	using Zenject;
 	using UniRx;
-	using Game.Configs;
+	using System.Collections.Generic;
 	using Game.Utilities;
+	using Game.Profiles;
+	using Screen = Game.Ui.Screen;
 
 	public class YandexAdsManager : AdsManager, IInitializable
 	{
-		[Inject] AdsConfig _adsConfig;
-		[Inject] IAdsManager _controller;
+		[Inject] private GameProfile _gameProfile;
+
+		private readonly List<Screen> BeforAdScreen = new() {Screen.Win, Screen.Lose, Screen.LevelReward};
 
 		private float _interInterval;
 		private ITimer _interTimer = new Timer(true);
@@ -20,23 +23,26 @@
 			_interInterval = _adsConfig.InterstitialInterval;
 			SetInterTimer();
 
-			_controller.IsInterstitialReady
-				.Where( isReady => isReady && _interTimer.Remained < _adsConfig.SecondsToShowAdsTimer )
-				.Subscribe( _ => _interTimer.Set( _adsConfig.SecondsToShowAdsTimer ) )
-				.AddTo( this );
-
-			_controller.IsPlaying
+			IsPlaying
 				.Where( v => !v )
 				.Subscribe( _ => SetInterTimer() )
 				.AddTo( this );
 
 			Observable.CombineLatest(
-				_controller.IsPlaying,
-				_controller.HasInterstitialBlocker,
+				IsPlaying,
+				HasInterstitialBlocker,
 				( p, b ) => p || b
 			)
 				.Subscribe( needPause => SetTimerPaused( needPause ) )
 				.AddTo( this );
+
+			// Disable ads by UI
+			_screenNavigator.Screen
+				.Where( s => s != Screen.None )
+				.Pairwise()
+				.Subscribe( pair => OnUiScreenChanged( pair.Previous, pair.Current ) )
+				.AddTo( this );
+
 		}
 
 		private void SetTimerPaused( bool isPaused )
@@ -47,7 +53,22 @@
 				_interTimer.Unpause();
 		}
 
-		void SetInterTimer() =>
+		private void SetInterTimer() =>
 			_interTimer.Set( _interInterval );
+
+		protected void OnUiScreenChanged( Screen previous, Screen current )
+		{
+			if (_interTimer.IsReady == false)
+				return;
+
+			if (BeforAdScreen.Contains( previous ) == false)
+				return;
+
+			if (_gameProfile.LevelNumber.Value < _adsConfig.InterActiveLevelNumber)
+				return;
+
+			if (current == Screen.Lobby)
+				ShowInterstitialVideo();
+		}
 	}
 }
