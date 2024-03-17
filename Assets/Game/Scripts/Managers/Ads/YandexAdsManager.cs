@@ -33,9 +33,9 @@
 			Observable.CombineLatest(
 				_controller.IsPlaying,
 				_controller.HasInterstitialBlocker,
-				(p, b) => p || b
+				( p, b ) => p || b
 			)
-				.Subscribe( needPause => SetTimerPaused( needPause ))
+				.Subscribe( needPause => SetTimerPaused( needPause ) )
 				.AddTo( this );
 		}
 

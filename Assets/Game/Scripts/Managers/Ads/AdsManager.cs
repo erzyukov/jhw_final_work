@@ -11,6 +11,7 @@
 	using Game.Utilities;
 	using Game.Ui;
 	using Screen = Game.Ui.Screen;
+	using Game.Dev;
 
 	public interface IAdsManager
     {
@@ -43,6 +44,7 @@
 		private float _timeScale;
 		private ERewardedType _rewardType;
 		private Rewarded _currentRewarded;
+		private bool _isBannerActive;
 
 		private ReactiveCollection<EAdsBlocker> _blockersInter = new();
 		private ReactiveCollection<EAdsBlocker> _blockersBanner = new();
@@ -54,6 +56,7 @@
 		{
 			AddRemoveBlocker( EAdsBlocker.Mediation_Loading, true );
 
+			SubscribeInitialize();
 			AdSubscribe();
 			InitIntersitial();
 			InitRewarded();
@@ -63,16 +66,23 @@
 			HasBannerBlocker = _blockersBanner
 				.ObserveCountChanged().Select( count => count > 0 ).ToReadOnlyReactiveProperty();
 
-			_adsProvider.Initialized
-				.Subscribe( _ => OnProviderInitialized() )
-				.AddTo( this );
-
 			// Disable ads by UI
 			_screenNavigator.Screen
 				.StartWith( Screen.None )
 				.Pairwise()
 				.Subscribe( pair => OnUiScreenChanged( pair.Previous, pair.Current ) )
 				.AddTo( this );
+		}
+
+		private void SubscribeInitialize()
+		{
+			if (_adsProvider.IsInitialized.Value)
+				OnProviderInitialized();
+			else
+				_adsProvider.IsInitialized
+					.Where( v => v )
+					.Subscribe( _ => OnProviderInitialized() )
+					.AddTo( this );
 		}
 
 		void AdSubscribe()
@@ -154,10 +164,7 @@
 				return;
 			}
 
-			if (
-				Application.isEditor ||
-				_adsProvider.IsAdAvailable( EAdType.RewardedVideo ) == false
-			)
+			if (_adsProvider.IsAdAvailable( EAdType.RewardedVideo ) == false)
 				return;
 
 			_rewardType = type;
@@ -208,6 +215,8 @@
 				if (isInter) _blockersInter.Remove(blocker);
 				if (isBanner) _blockersBanner.Remove(blocker);
 			}
+
+			WebGLDebug.Log( $"Inter Blocker Changed: {String.Join( ", ", _blockersInter.ToArray() )}" );
 
 			if (isBanner)
 				UpdateBannerState();
@@ -339,10 +348,12 @@
 		{
 			bool show = !_blockersBanner.Any();
 
-			if (show)
+			if (show && _isBannerActive == false)
 				_adsProvider.DisplayBanner( AdPlace );
-			else
+			else if (show == false && _isBannerActive)
 				_adsProvider.HideBanner();
+
+			_isBannerActive = show;
 		}
 	}
 }

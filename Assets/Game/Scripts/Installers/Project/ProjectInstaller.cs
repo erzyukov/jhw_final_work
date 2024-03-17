@@ -55,7 +55,6 @@ namespace Game.Installers
 			InstallEvents();
 			InstallAnalytics();
 			InstallGameControllers();
-			InstallAds();
 		}
 
 		private void InstallGameProfile()
@@ -114,18 +113,6 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<GameCurrency>()
 				.AsSingle();
-		}
-
-		private void InstallAds()
-		{
-			switch (_devConfig.GamePatform)
-			{
-				case EGamePatform.YandexGames: 
-					Container
-						.BindInterfacesTo<YandexAdsProvider>()
-						.AsSingle();
-					break;
-			}
 		}
 	}
 }

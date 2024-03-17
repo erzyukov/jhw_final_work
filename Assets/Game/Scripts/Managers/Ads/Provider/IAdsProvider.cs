@@ -4,7 +4,7 @@
 
 	public interface IAdsProvider
 	{
-		ReactiveCommand Initialized { get; }
+		BoolReactiveProperty IsInitialized { get; }
 
 		ReactiveCommand<EAdType> AdLoaded { get; }
 		ReactiveCommand<EAdType> AdOpened { get; }

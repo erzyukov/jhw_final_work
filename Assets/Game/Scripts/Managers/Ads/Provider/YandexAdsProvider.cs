@@ -15,6 +15,40 @@
 			RewardedVideoSubscribe();
 		}
 
+		private void InitializeSubscribe()
+		{
+			if (YandexGame.SDKEnabled)
+				OnInit();
+			else
+				ObserveEvent( YandexGame.GetDataEvent, () => OnInit() );
+		}
+
+		private void OnInit()
+		{
+			IsInitialized.Value = true;
+
+			Observable.NextFrame()
+				.Subscribe( _ =>
+				{
+					AdLoaded.Execute( EAdType.Banner );
+					AdLoaded.Execute( EAdType.RewardedVideo );
+					AdLoaded.Execute( EAdType.Interstitial );
+
+				} )
+				.AddTo( this );
+		}
+
+		private void InterstitialSubscribe()
+		{
+			ObserveEvent( YandexGame.OpenFullAdEvent, () => AdOpened.Execute( EAdType.Interstitial ) );
+			ObserveEvent( YandexGame.ErrorFullAdEvent, () => AdShowFailed.Execute( EAdType.Interstitial ) );
+			ObserveEvent( YandexGame.CloseFullAdEvent, () =>
+			{
+				AdClosed.Execute( EAdType.Interstitial );
+				AdLoaded.Execute( EAdType.Interstitial );
+			} );
+		}
+
 		private void RewardedVideoSubscribe()
 		{
 			ObserveEvent( YandexGame.OpenVideoEvent, () => AdOpened.Execute( EAdType.RewardedVideo ) );
@@ -33,28 +67,6 @@
 				.AddTo( this );
 		}
 
-		private void InterstitialSubscribe()
-		{
-			ObserveEvent( YandexGame.OpenFullAdEvent, () => AdOpened.Execute( EAdType.Interstitial ) );
-			ObserveEvent( YandexGame.ErrorFullAdEvent, () => AdShowFailed.Execute( EAdType.Interstitial ) );
-			ObserveEvent( YandexGame.CloseFullAdEvent, () =>
-			{
-				AdClosed.Execute( EAdType.Interstitial );
-				AdLoaded.Execute( EAdType.Interstitial );
-			} );
-		}
-
-		private void InitializeSubscribe() =>
-			ObserveEvent( YandexGame.GetDataEvent, () => OnInit() );
-
-		private void OnInit()
-		{
-			Initialized.Execute();
-			AdLoaded.Execute( EAdType.Banner );
-			AdLoaded.Execute( EAdType.RewardedVideo );
-			AdLoaded.Execute( EAdType.Interstitial );
-		}
-
 #region IAdsProvider
 
 		public ReactiveCommand<EAdType> AdLoaded { get; } = new();
@@ -65,7 +77,7 @@
 
 		public ReactiveCommand<EAdType> AdShowFailed { get; } = new();
 
-		public ReactiveCommand Initialized { get; } = new();
+		public BoolReactiveProperty IsInitialized { get; } = new();
 
 		public ReactiveCommand<ERewardedType> Rewarded { get; } = new();
 

@@ -21,7 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  BlockersInter: 010000003200000068000000690000000000000000000000
+  BlockersInter: 01000000320000006800000069000000
   BlockersBanner: 0100000032000000
   InterstitialInterval: 61
   SecondsToShowAdsTimer: 0
