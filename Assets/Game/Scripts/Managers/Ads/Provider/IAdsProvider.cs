@@ -13,6 +13,10 @@
 
 		ReactiveCommand<ERewardedType> Rewarded { get; }
 
+		string InterstitialPlace { get; }
+		string RewardedPlace { get; }
+		string BannerPlace { get; }
+
 		bool IsAdAvailable( EAdType type );
 		void ShowInterstitialVideo( string place );
 		void ShowRevardedVideo( ERewardedType type );

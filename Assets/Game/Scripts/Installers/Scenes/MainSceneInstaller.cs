@@ -159,6 +159,10 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<SettingsHierarchyAnalytics>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<MediationHierarchyAnalytics>()
+				.AsSingle();
 		}
 
 		private void InstallAds()

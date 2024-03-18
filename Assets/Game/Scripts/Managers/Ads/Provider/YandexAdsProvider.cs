@@ -118,19 +118,38 @@
 
 		public ReactiveCommand<ERewardedType> Rewarded { get; } = new();
 
-		public void DisplayBanner( string place ) =>
-			YandexGame.StickyAdActivity( true );
 
-		public void HideBanner() =>
+		public string InterstitialPlace { get; private set; }
+		public string RewardedPlace { get; private set; }
+		public string BannerPlace { get; private set; }
+
+
+		public void DisplayBanner( string place )
+		{
+			BannerPlace = place;
+			YandexGame.StickyAdActivity( true );
+			AdOpened.Execute( EAdType.Banner );
+		}
+
+		public void HideBanner()
+		{
 			YandexGame.StickyAdActivity( false );
+			AdClosed.Execute( EAdType.Banner );
+		}
 
 		public bool IsAdAvailable( EAdType type ) => true;
 
-		public void ShowInterstitialVideo( string place ) =>
+		public void ShowInterstitialVideo( string place )
+		{
+			InterstitialPlace = place;
 			YandexGame.FullscreenShow();
+		}
 
-		public void ShowRevardedVideo( ERewardedType type ) =>
+		public void ShowRevardedVideo( ERewardedType type )
+		{
+			RewardedPlace = type.ToString();
 			YandexGame.RewVideoShow( (int)type );
+		}
 
 #endregion
 
