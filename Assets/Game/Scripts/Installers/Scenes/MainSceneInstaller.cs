@@ -16,6 +16,8 @@ namespace Game.Installers
 
 		public override void InstallBindings()
 		{
+			InstallAds();
+
 			Container
 				.BindInterfacesTo<AudioSources>()
 				.FromComponentInHierarchy()
@@ -36,7 +38,11 @@ namespace Game.Installers
 			InstallWindows();
 			InstallTutorial();
 			InstallAnalytics();
-			InstallAds();
+
+			Container
+				.Bind<IUiRewardedButton>()
+				.FromComponentsInHierarchy()
+				.AsSingle();
 		}
 
 		private void InstallUI()
