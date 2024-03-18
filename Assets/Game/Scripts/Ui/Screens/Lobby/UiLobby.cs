@@ -20,6 +20,7 @@
 		[Inject] private EnergyConfig _energyConfig;
 		[Inject] private ILocalizator _localizator;
 		[Inject] private IContinueLevelRequest _continueLevelRequest;
+		[Inject] private IResourceEvents _resourceEvents;
 
 		private const string LevelTitlePrefixKey = "level";
 		private const string lastWavePrefixKey = "uiLastWave";
@@ -87,6 +88,8 @@
 				else
 				{
 					_uiMessage.ShowMessage( UiMessage.NotEnoughEnergy );
+
+					_resourceEvents.LowEnergyAlert.Execute();
 				}
 			}
 			else

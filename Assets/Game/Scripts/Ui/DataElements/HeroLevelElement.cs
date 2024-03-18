@@ -6,20 +6,14 @@ namespace Game.Ui
 	using UnityEngine;
 	using UnityEngine.UI;
 	using Zenject;
-	using DG.Tweening;
 
 	public class HeroLevelElement : ProfileValueElement
 	{
 		[SerializeField] private Slider _expirience;
 		[SerializeField] private TextMeshProUGUI _expiriencePercent;
 
-		[Header("Low Hero Level Alert")]
-		[SerializeField] private ImageAlertInput _alert;
-
 		[Inject] private IGameHero _gameHero;
 		[Inject] private IResourceEvents _resourceEvents;
-
-		private Tween _alertTween;
 
 		protected override void Subscribes()
 		{
@@ -33,7 +27,7 @@ namespace Game.Ui
 					.AddTo( this );
 
 			_resourceEvents.LowHeroLevelAlert
-				.Subscribe( _ => OnLowHeroLevelAlert() )
+				.Subscribe( _ => PlayLowResourceAlert() )
 				.AddTo( this );
 		}
 
@@ -42,15 +36,6 @@ namespace Game.Ui
 			_expirience.value = value;
 			if (_expiriencePercent != null)
 				_expiriencePercent.text = $"{Mathf.Round( value * 100 )}%";
-		}
-
-		private void OnLowHeroLevelAlert()
-		{
-			_alertTween?.Rewind();
-
-			_alertTween = _alert.Image.DOColor( _alert.Color, _alert.Duration )
-				.SetLoops( _alert.Repeats, LoopType.Yoyo )
-				.SetEase( Ease.InOutSine );
 		}
 	}
 }

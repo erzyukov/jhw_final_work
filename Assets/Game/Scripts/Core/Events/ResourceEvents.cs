@@ -1,12 +1,11 @@
 namespace Game.Core
 {
-	using Game.Gameplay;
-	using Game.Units;
 	using UniRx;
 
 	public interface IResourceEvents
 	{
 		ReactiveCommand LowHeroLevelAlert { get; }
+		ReactiveCommand LowEnergyAlert { get; }
 	}
 
 	public class ResourceEvents : IResourceEvents
@@ -14,6 +13,7 @@ namespace Game.Core
 		#region IResourceEvents
 
 		public ReactiveCommand LowHeroLevelAlert { get; } = new();
+		public ReactiveCommand LowEnergyAlert { get; } = new();
 
 		#endregion
 	}
