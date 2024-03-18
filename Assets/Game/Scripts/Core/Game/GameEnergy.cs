@@ -7,8 +7,11 @@
     using UniRx;
     using System;
     using UnityEngine;
+	using Game.Ui;
+	using UnityEngine.UI;
+	using Game.Managers;
 
-    public interface IGameEnergy
+	public interface IGameEnergy
     {
         FloatReactiveProperty EnergyRatio { get; }
         IntReactiveProperty SecondsToRestoreOnePoint { get; }
@@ -22,6 +25,7 @@
         [Inject] private IGameCycle _gameCycle;
         [Inject] private IGameProfileManager _gameProfileManager;
         [Inject] private EnergyConfig _config;
+		[Inject] private IAdsManager _adsManager;
 
 		private EnergyProfile Energy => _profile.Energy;
 
@@ -45,6 +49,10 @@
                 .Where(value => value == 0)
                 .Subscribe(_ => Save())
                 .AddTo(this);
+
+			_adsManager.OnCompleted[ ERewardedType.AddEnergy ]
+				.Subscribe( _ => OnEnergyAdsReward() )
+				.AddTo( this );
 
             if (Energy.Amount.Value < _config.MaxEnery)
             {
@@ -119,10 +127,16 @@
             _secondsToOnePointPassed = 0;
         }
 
-        void UpdateRatio() =>
+        private void UpdateRatio() =>
             EnergyRatio.SetValueAndForceNotify((float)Energy.Amount.Value / _config.MaxEnery);
 
-        void Save()
+		private void OnEnergyAdsReward()
+		{
+			Energy.Amount.Value += _config.LevelPrice;
+			Save();
+		}
+
+        private void Save()
         {
 			Energy.LastEnergyChange = DateTime.Now;
             _gameProfileManager.Save();

@@ -22,6 +22,7 @@ namespace Game.Ui
 		[Inject] private GameProfile _gameProfile;
 		[Inject] private EnergyConfig _energyConfig;
 		[Inject] private IResourceEvents _resourceEvents;
+        [Inject] private IUiRewardedEnergyWindow _rewardedWindow;
 
 		protected override void Subscribes()
 		{
@@ -39,6 +40,10 @@ namespace Game.Ui
 
 			_resourceEvents.LowEnergyAlert
 				.Subscribe( _ => PlayLowResourceAlert() )
+				.AddTo( this );
+
+			_addonButton.OnClickAsObservable()
+				.Subscribe( _ => _rewardedWindow.SetActive( true ) )
 				.AddTo( this );
 		}
 

@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.97164285, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -351,13 +351,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4069015297865094870}
   - {fileID: 450976316876151149}
   - {fileID: 6437057424800432332}
   - {fileID: 4811802667512451165}
   - {fileID: 5021706095250814602}
   - {fileID: 2485320325557952492}
   - {fileID: 6985496142916524178}
+  - {fileID: 4069015297865094870}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
@@ -429,16 +429,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _value: {fileID: 2021607855426072421}
-  _energy: {fileID: 1534866147420498282}
-  _restoreTimer: {fileID: 404373740227953016}
-  _restoreTimerValue: {fileID: 8703355428018106323}
-  _addonImage: {fileID: 3241323785735300271}
-  _addonButton: {fileID: 3035734024743155301}
   _alert:
     Image: {fileID: 3209568785766551696}
     Color: {r: 1, g: 0.4129222, b: 0.4009434, a: 1}
     Duration: 0.2
     Repeats: 10
+  _energy: {fileID: 1534866147420498282}
+  _restoreTimer: {fileID: 404373740227953016}
+  _restoreTimerValue: {fileID: 8703355428018106323}
+  _addonImage: {fileID: 3241323785735300271}
+  _addonButton: {fileID: 3035734024743155301}
 --- !u!1 &5696994104621537826
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,7 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

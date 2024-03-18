@@ -3,7 +3,7 @@
 	using Sirenix.Utilities;
 	using System;
 	using System.Collections.Generic;
-    using System.Linq;
+	using System.Linq;
 	using UniRx;
 	using UnityEngine;
 	using Zenject;
@@ -14,9 +14,9 @@
 	using Game.Dev;
 
 	public interface IAdsManager
-    {
-		Dictionary<ERewardedType, ReactiveCommand<Rewarded>> OnCompleted {get;}
-		Dictionary<ERewardedType, ReactiveCommand<Rewarded>> OnCanceled {get;}
+	{
+		Dictionary<ERewardedType, ReactiveCommand<Rewarded>> OnCompleted { get; }
+		Dictionary<ERewardedType, ReactiveCommand<Rewarded>> OnCanceled { get; }
 
 		void ShowRewardedVideo( ERewardedType place );
 		void ShowRewardedVideo( ERewardedType place, Rewarded type );
@@ -33,11 +33,12 @@
 		void AddRemoveBlocker( EAdsBlocker blocker, bool add );
 	}
 
-	public class AdsManager: ControllerBase, IAdsManager, IInitializable
+	public class AdsManager : ControllerBase, IAdsManager, IInitializable
 	{
 		[Inject] protected AdsConfig _adsConfig;
 		[Inject] protected IAdsProvider _adsProvider;
 		[Inject] protected IScreenNavigator _screenNavigator;
+		[Inject] private List<IUiRewardedButton> _rewardedButtons;
 
 		private const string DefaultPlace = "Gameplay";
 
@@ -59,6 +60,7 @@
 			SubscribeInitialize();
 			AdSubscribe();
 			InitIntersitial();
+
 			InitRewarded();
 
 			HasInterstitialBlocker = _blockersInter
@@ -72,6 +74,13 @@
 				.Pairwise()
 				.Subscribe( pair => OnUiScreenChanged( pair.Previous, pair.Current ) )
 				.AddTo( this );
+
+			_rewardedButtons.ForEach( b =>
+				b.Clicked
+					.Where( _ => IsRewardedAvailable.Value )
+					.Subscribe( _ => ShowRewardedVideo( b.Type ) )
+					.AddTo( this )
+			);
 		}
 
 		private void SubscribeInitialize()
@@ -135,7 +144,7 @@
 			UpdateBannerState();
 		}
 
-#region IAdsManager
+		#region IAdsManager
 
 		public bool IsRewardedFree { get; set; }
 
@@ -149,7 +158,7 @@
 		public BoolReactiveProperty IsInterstitialReady { get; } = new();
 
 		public void ShowRewardedVideo( ERewardedType type )
-        {
+		{
 			_currentRewarded = new Rewarded( type );
 
 			if (IsRewardedFree)
@@ -173,20 +182,20 @@
 			_adsProvider.ShowRevardedVideo( type );
 		}
 
-		public void ShowRewardedVideo(ERewardedType place, Rewarded type)
-        {
+		public void ShowRewardedVideo( ERewardedType place, Rewarded type )
+		{
 			_currentRewarded = type;
 			ShowRewardedVideo( place );
 		}
 
 		public void ShowInterstitialVideo()
-        {
+		{
 			if (!IsInterstitialReady.Value)
 				return;
 
 			if (_adsProvider.IsAdAvailable( EAdType.RewardedVideo ) == false)
 				return;
-			
+
 			IsInterstitialReady.Value = false;
 			IsPlaying.Value = true;
 
@@ -194,10 +203,10 @@
 		}
 
 		public ReadOnlyReactiveProperty<bool> HasInterstitialBlocker { get; private set; }
-		
+
 		public ReadOnlyReactiveProperty<bool> HasBannerBlocker { get; private set; }
 
-		public void AddRemoveBlocker(EAdsBlocker blocker, bool add)
+		public void AddRemoveBlocker( EAdsBlocker blocker, bool add )
 		{
 			if (blocker == EAdsBlocker.None)
 				return;
@@ -207,13 +216,17 @@
 
 			if (add)
 			{
-				if (isInter) _blockersInter.Add(blocker);
-				if (isBanner) _blockersBanner.Add(blocker);
+				if (isInter)
+					_blockersInter.Add( blocker );
+				if (isBanner)
+					_blockersBanner.Add( blocker );
 			}
 			else
 			{
-				if (isInter) _blockersInter.Remove(blocker);
-				if (isBanner) _blockersBanner.Remove(blocker);
+				if (isInter)
+					_blockersInter.Remove( blocker );
+				if (isBanner)
+					_blockersBanner.Remove( blocker );
 			}
 
 			WebGLDebug.Log( $"Inter Blocker Changed: {String.Join( ", ", _blockersInter.ToArray() )}" );
@@ -222,12 +235,11 @@
 				UpdateBannerState();
 		}
 
-#endregion
+		#endregion
 
 		void OnUiScreenChanged( Screen previous, Screen current )
 		{
-			EAdsBlocker GetBlocker(Screen screen) => screen switch
-			{
+			EAdsBlocker GetBlocker( Screen screen ) => screen switch {
 				Screen.Loading => EAdsBlocker.UI_Loading,
 				Screen.Win => EAdsBlocker.UI_Info,
 				Screen.Lose => EAdsBlocker.UI_Info,
@@ -238,13 +250,13 @@
 			EAdsBlocker blockerPre = GetBlocker( previous );
 			EAdsBlocker blockerCur = GetBlocker( current );
 
-			AddRemoveBlocker(blockerPre, false);
-			AddRemoveBlocker(blockerCur, true);
+			AddRemoveBlocker( blockerPre, false );
+			AddRemoveBlocker( blockerCur, true );
 		}
 
-		void OnAdLoaded(EAdType type)
+		void OnAdLoaded( EAdType type )
 		{
-			WebGLDebug.Log($"------> OnAdLoaded: {type}");
+			WebGLDebug.Log( $"------> OnAdLoaded: {type}" );
 
 			switch (type)
 			{
@@ -260,9 +272,9 @@
 			}
 		}
 
-		void OnAdOpened(EAdType type)
+		void OnAdOpened( EAdType type )
 		{
-			WebGLDebug.Log($"------> OnAdOpened: {type}");
+			WebGLDebug.Log( $"------> OnAdOpened: {type}" );
 
 			switch (type)
 			{
@@ -273,9 +285,9 @@
 			}
 		}
 
-		void OnAdClosed(EAdType type)
+		void OnAdClosed( EAdType type )
 		{
-			WebGLDebug.Log($"------> OnAdClosed: {type}");
+			WebGLDebug.Log( $"------> OnAdClosed: {type}" );
 
 			switch (type)
 			{
@@ -288,7 +300,7 @@
 			}
 		}
 
-		void OnAdShowFailed(EAdType type)
+		void OnAdShowFailed( EAdType type )
 		{
 			switch (type)
 			{
@@ -302,10 +314,10 @@
 		}
 
 		void OnRewarded()
-        {
+		{
 			if (OnCompleted.ContainsKey( _rewardType ))
 				OnCompleted[ _rewardType ].Execute( _currentRewarded );
-        }
+		}
 
 		void OnStartPlayAd()
 		{
@@ -341,13 +353,13 @@
 			if (Time.timeScale != 0)
 				_timeScale = Time.timeScale;
 
-			Time.timeScale		= 0;
+			Time.timeScale = 0;
 		}
 
 		void RestoreTimeScale()
 		{
 			if (_timeScale != 0)
-				Time.timeScale		= _timeScale;
+				Time.timeScale = _timeScale;
 		}
 
 		void UpdateBannerState()
