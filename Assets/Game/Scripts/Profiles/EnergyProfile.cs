@@ -7,6 +7,6 @@
 	public class EnergyProfile
 	{
 		public readonly IntReactiveProperty Amount = new IntReactiveProperty();
-		public DateTime LastEnergyChange = new DateTime();
+		public DateTime LastEnergyChange = DateTime.Now;
 	}
 }

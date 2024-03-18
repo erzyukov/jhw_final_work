@@ -5,16 +5,14 @@ namespace Game.Profiles
 	using Game.Utilities;
 	using System;
 	using System.Collections.Generic;
-	using System.IO;
 	using UniRx;
-	using UnityEngine;
 	using Zenject;
 
 	public interface IGameProfileManager
 	{
 		BoolReactiveProperty IsReady { get; }
 		GameProfile GameProfile { get; }
-		void Save(bool forceInstant = false);
+		void Save( bool forceInstant = false );
 		void Reset();
 	}
 
@@ -33,11 +31,11 @@ namespace Game.Profiles
 
 		public void OnInstantiated()
 		{
-            CreateGameProfile();
+			CreateGameProfile();
 
 			_profileSaver.SaveSystemReady
-				.Subscribe(_ => OnSaveSystemReady())
-				.AddTo(this);
+				.Subscribe( _ => OnSaveSystemReady() )
+				.AddTo( this );
 		}
 
 		#region IGameProfileManager
@@ -46,12 +44,12 @@ namespace Game.Profiles
 
 		public GameProfile GameProfile => _gameProfile;
 
-		public void Save(bool forceInstant = false)
+		public void Save( bool forceInstant = false )
 		{
 			if (forceInstant)
 			{
-				_profileSaver.Save(_gameProfile);
-				_timer.Set(SaveDelay);
+				_profileSaver.Save( _gameProfile );
+				_timer.Set( SaveDelay );
 				return;
 			}
 
@@ -61,33 +59,34 @@ namespace Game.Profiles
 			_delayedSave = true;
 
 			Observable
-				.Timer(TimeSpan.FromSeconds(_timer.Remained))
-				.Subscribe(_ => {
-					_profileSaver.Save(_gameProfile);
-					_timer.Set(SaveDelay);
+				.Timer( TimeSpan.FromSeconds( _timer.Remained ) )
+				.Subscribe( _ =>
+				{
+					_profileSaver.Save( _gameProfile );
+					_timer.Set( SaveDelay );
 					_delayedSave = false;
-				})
-				.AddTo(this);
+				} )
+				.AddTo( this );
 		}
 
 		public void Reset()
 		{
-            CreateGameProfile();
+			CreateGameProfile();
 			Save();
 		}
 
 		#endregion
 
-        private void CreateGameProfile()
-        {
-            _gameProfile = new GameProfile();
+		private void CreateGameProfile()
+		{
+			_gameProfile = new GameProfile();
 			FillUnits();
 			_gameProfile.Energy.Amount.Value = _energyConfig.MaxEnery;
-        }
+		}
 
 		private void OnSaveSystemReady()
 		{
-			if (_profileSaver.Load(out GameProfile loadedProfile))
+			if (_profileSaver.Load( out GameProfile loadedProfile ))
 				_gameProfile = loadedProfile;
 
 			AddMissing();
@@ -112,8 +111,8 @@ namespace Game.Profiles
 			while (_gameProfile.Levels.Count < _levelsConfig.Levels.Length)
 			{
 				bool isUnlocked = _gameProfile.Levels.Count < _gameProfile.LevelNumber.Value;
-				_gameProfile.Levels.Add(new LevelProfile());
-				_gameProfile.Levels[_gameProfile.Levels.Count-1].Unlocked.Value = isUnlocked;
+				_gameProfile.Levels.Add( new LevelProfile() );
+				_gameProfile.Levels[ _gameProfile.Levels.Count - 1 ].Unlocked.Value = isUnlocked;
 			}
 		}
 
@@ -126,19 +125,22 @@ namespace Game.Profiles
 				_gameProfile.Units.Upgrades = new Dictionary<Species, IntReactiveProperty>();
 
 			FillUnits();
-        }
+		}
 
 		private void FillUnits()
 		{
 			foreach (var species in _unitsConfig.HeroUnits)
-				if (_gameProfile.Units.Upgrades.ContainsKey(species) == false)
-					_gameProfile.Units.Upgrades.Add(species, new IntReactiveProperty(1));
+				if (_gameProfile.Units.Upgrades.ContainsKey( species ) == false)
+					_gameProfile.Units.Upgrades.Add( species, new IntReactiveProperty( 1 ) );
 		}
 
 		private void AddMissingEnergy()
 		{
 			if (_gameProfile.Energy == null)
 				_gameProfile.Energy = new EnergyProfile();
+
+			if (_gameProfile.Energy.LastEnergyChange == new DateTime())
+				_gameProfile.Energy.LastEnergyChange = DateTime.Now.Subtract( TimeSpan.FromDays( 1 ) );
 		}
 
 		private void AddMissingAnalytics()
