@@ -23,7 +23,7 @@ namespace Game.Analytics
 
 		protected int RegionNumber => (int)_levelsConfig.Levels[GameProfile.LevelNumber.Value - 1].Region + 1;
 		protected string LevelKey => $"{RegionEventKey}{RegionNumber}-{LevelEventKey}{GameProfile.LevelNumber.Value}";
-		protected string WaveKey => $"{WaveEventKey}{GameProfile.WaveNumber.Value}";
+		protected string WaveKey => $"{WaveEventKey}{(GameProfile.WaveNumber.Value==0? 1: GameProfile.WaveNumber.Value)}";
 
 		private Dictionary<string, object> GlobalProperties => new Dictionary<string, object>
 			{
