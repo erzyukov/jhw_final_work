@@ -9,6 +9,7 @@
 		BattleMenu,
 		ContinueLevel,
 		GameSettings,
+		RewardedEnergy,
 	}
 
 	public interface IUiWindow

@@ -122,11 +122,16 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<UiGameSettingsWindow>()
-				.FromComponentsInHierarchy()
+				.FromComponentInHierarchy()
 				.AsSingle();
 
 			Container
 				.BindInterfacesTo<UiGameSettings>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiRewardedEnergyWindow>()
+				.FromComponentInHierarchy()
 				.AsSingle();
 		}
 
