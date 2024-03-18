@@ -7,6 +7,8 @@
 
 	public class YandexAdsProvider : ControllerBase, IAdsProvider, IInitializable
 	{
+		private const string DefaultPlace = "Gameplay";
+
 		public void Initialize()
 		{
 			InitializeSubscribe();
@@ -119,9 +121,9 @@
 		public ReactiveCommand<ERewardedType> Rewarded { get; } = new();
 
 
-		public string InterstitialPlace { get; private set; }
-		public string RewardedPlace { get; private set; }
-		public string BannerPlace { get; private set; }
+		public string InterstitialPlace { get; private set; } = DefaultPlace;
+		public string RewardedPlace { get; private set; } = DefaultPlace;
+		public string BannerPlace { get; private set; } = DefaultPlace;
 
 
 		public void DisplayBanner( string place )
