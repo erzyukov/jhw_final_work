@@ -20,5 +20,7 @@
 		public EGamePatform GamePatform => _gamePatform;
 		
 		public float TimeScale => _timeScale;
+
+		public bool DisableAnalytics;
 	}
 }

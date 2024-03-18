@@ -5,14 +5,15 @@ namespace Game
 	using UniRx;
 	using UnityEngine;
 
-    public class WebGLEvents : MonoBehaviour, IApplicationPaused
+	public class WebGLEvents : MonoBehaviour, IApplicationPaused
 	{
-		[DllImport("__Internal")]
+		[DllImport( "__Internal" )]
 		private static extern void RegisterVisibilityChangeEvent();
 
 		private void Awake()
 		{
-			DontDestroyOnLoad(this);
+			transform.SetParent( null );
+			DontDestroyOnLoad( this );
 		}
 
 		private void Start()
@@ -22,7 +23,7 @@ namespace Game
 #endif
 		}
 
-		public void OnVisibilityChange(string visibilityState)
+		public void OnVisibilityChange( string visibilityState )
 		{
 			IsApplicationPaused.Value = visibilityState == "visible";
 		}

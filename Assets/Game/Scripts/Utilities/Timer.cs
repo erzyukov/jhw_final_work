@@ -79,6 +79,9 @@
 
 		public void Unpause()
 		{
+			if (IsPaused == false)
+				return;
+
 			double pauseTime = Time - _t_Paused.Value;
 
 			_t_Bgn += pauseTime;

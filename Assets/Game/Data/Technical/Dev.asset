@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Dev
   m_EditorClassIdentifier: 
   _buildType: 0
+  _gamePatform: 0
   _timeScale: 1
+  DisableAnalytics: 1

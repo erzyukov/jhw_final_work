@@ -5,6 +5,7 @@ namespace Game.Installers
 	using Game.Core;
 	using Game.Dev;
 	using Game.Input;
+	using Game.Managers;
 	using Game.Profiles;
 	using Game.Utilities;
 	using UnityEngine;
@@ -94,6 +95,9 @@ namespace Game.Installers
 
 		private void InstallAnalytics()
 		{
+			if (_devConfig.DisableAnalytics)
+				return;
+
 			Container
 				.BindInterfacesTo<GameAnalyticsSender>()
 				.AsSingle();
