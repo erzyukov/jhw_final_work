@@ -19,6 +19,7 @@
 		[Inject] private IGameUpgrades _gameUpgrades;
 		[Inject] private IUiMessage _uiMessage;
 		[Inject] private IGameAudio _gameAudio;
+		[Inject] private IResourceEvents _resourceEvents;
 
 		private const string LevelTitleKey = "unitLevel";
 		private const string LevelShortTitleKey = "lvl";
@@ -116,7 +117,12 @@
 
 		private void OnUpgradeButtonClickedHandler(Species species)
 		{
-			if (_gameUpgrades.TryBuyUpgrade(species) == false)
+			if (_gameUpgrades.CanUpgradeByLevel(species) == false)
+			{
+				_uiMessage.ShowMessage(UiMessage.LowHeroLevel);
+				_resourceEvents.LowHeroLevelAlert.Execute();
+			}
+			else if (_gameUpgrades.TryBuyUpgrade(species) == false)
 			{
 				_uiMessage.ShowMessage(UiMessage.NotEnoughSoftCurrency);
 			}

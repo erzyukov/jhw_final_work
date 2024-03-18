@@ -250,6 +250,10 @@ MonoBehaviour:
     m_Localized: 'SETTINGS:'
     m_Metadata:
       m_Items: []
+  - m_Id: 39118975644295168
+    m_Localized: YOU LEVEL IS TOOL LOW
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

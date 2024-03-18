@@ -246,6 +246,10 @@ MonoBehaviour:
     m_Key: SettingsWindowTitle
     m_Metadata:
       m_Items: []
+  - m_Id: 39118975644295168
+    m_Key: LowHeroLevel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

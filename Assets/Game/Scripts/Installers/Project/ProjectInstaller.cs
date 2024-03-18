@@ -91,6 +91,10 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<GameplayEvents>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<ResourceEvents>()
+				.AsSingle();
 		}
 
 		private void InstallAnalytics()

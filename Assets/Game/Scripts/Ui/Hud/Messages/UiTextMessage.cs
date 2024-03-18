@@ -14,6 +14,7 @@ namespace Game.Ui
 		NotEnoughChestKeys,
 		NotEnoughSoftCurrency,
 		NotEnoughEnergy,
+		LowHeroLevel,
 	}
 
 	public interface IUiMessage

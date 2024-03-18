@@ -15,6 +15,7 @@ namespace Game.Core
 		int GetUnitLevel(Species species);
 		int GetUpgradePrice(Species species);
 		bool TryBuyUpgrade(Species species);
+		bool CanUpgradeByLevel(Species species);
 	}
 
 	public class GameUpgrades : ControllerBase, IGameUpgrades
@@ -60,6 +61,9 @@ namespace Game.Core
 			
 			return true;
 		}
+
+		public bool CanUpgradeByLevel( Species species ) =>
+			_gameProfile.Units.Upgrades[ species ].Value < _gameProfile.HeroLevel.Value;
 
 		#endregion
 
