@@ -250,6 +250,14 @@ MonoBehaviour:
     m_Key: LowHeroLevel
     m_Metadata:
       m_Items: []
+  - m_Id: 39368102173040640
+    m_Key: AdsButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39375417672556544
+    m_Key: RewardedEnergyTitle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

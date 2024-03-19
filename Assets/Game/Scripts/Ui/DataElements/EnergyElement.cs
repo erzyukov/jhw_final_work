@@ -9,20 +9,27 @@ namespace Game.Ui
 	using UnityEngine.UI;
 	using Zenject;
 	using TMPro;
+	using DG.Tweening;
 
 	public class EnergyElement : ProfileValueElement
 	{
 		[SerializeField] private Slider _energy;
 		[SerializeField] private GameObject _restoreTimer;
 		[SerializeField] private TextMeshProUGUI _restoreTimerValue;
-		[SerializeField] private GameObject _addonImage;
+		//[SerializeField] private GameObject _addonImage;
 		[SerializeField] private Button _addonButton;
+
+		[Header("Plus Alert Animation")]
+		[SerializeField] private ImageAlertInput _addonImage;
 
 		[Inject] private IGameEnergy _gameEnargy;
 		[Inject] private GameProfile _gameProfile;
 		[Inject] private EnergyConfig _energyConfig;
 		[Inject] private IResourceEvents _resourceEvents;
-        [Inject] private IUiRewardedEnergyWindow _rewardedWindow;
+		[Inject] private IUiRewardedEnergyWindow _rewardedWindow;
+
+		private Tween _addonTween;
+		private bool _isAddonPlaing;
 
 		protected override void Subscribes()
 		{
@@ -57,8 +64,24 @@ namespace Game.Ui
 		{
 			SetValue( $"{value}/{_energyConfig.MaxEnery}" );
 
-			_addonImage.SetActive( value < _energyConfig.LevelPrice );
-			_addonButton.interactable = value <= _energyConfig.MaxEnery - _energyConfig.LevelPrice;
+			if (value < _energyConfig.LevelPrice && _isAddonPlaing == false)
+			{
+				_addonTween?.Rewind();
+				_addonTween = _addonImage.Image.DOColor( _addonImage.Color, _addonImage.Duration )
+					.SetLoops( _addonImage.Repeats, LoopType.Yoyo )
+					.SetEase( Ease.InOutSine );
+				_isAddonPlaing = true;
+			}
+			else if (value >= _energyConfig.LevelPrice && _isAddonPlaing)
+			{
+				_addonTween?.Rewind();
+				_addonTween.Kill();
+				_isAddonPlaing = false;
+			}
+
+			bool isEnaughtToBuff = value <= _energyConfig.MaxEnery - _energyConfig.LevelPrice;
+			_addonButton.interactable = isEnaughtToBuff;
+			_addonImage.Image.gameObject.SetActive( isEnaughtToBuff );
 		}
 
 		private void SetTimerValue( int value )
