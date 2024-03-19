@@ -6,7 +6,7 @@
 	using Game.Core;
 	using Game.Profiles;
 	using Game.Configs;
-
+	using UnityEngine;
 
 	public class UiLobby : ControllerBase, IInitializable
 	{
@@ -66,36 +66,34 @@
 
 		private void OnPlayButtonClickedHandler()
 		{
-			if (_profile.WaveNumber.Value == 0 || _profile.LevelNumber.Value < _energyConfig.FreeLevelTo)
+			if (_profile.LevelNumber.Value < _energyConfig.FreeLevelTo)
+				GoToLevelFree();
+			else if (_profile.WaveNumber.Value == 0)
 				GoToLevel();
 			else
-				_continueLevelRequest.ShowRequest( () => GoToLevel( true ), () => GoToLevel() );
+				_continueLevelRequest.ShowRequest( () => GoToLevel( true ), () => GoToLevelFree() );
 		}
 
 		private void GoToLevel( bool resetWave = false )
 		{
 			int targetWave = (resetWave)? 0: _profile.WaveNumber.Value;
 
-			if (_profile.LevelNumber.Value >= _energyConfig.FreeLevelTo)
+			if (_gameEnergy.TryPayLevel())
 			{
-				if (_gameEnergy.TryPayLevel() || resetWave == false)
-				{
-					if (resetWave)
-						_gameCurrency.ResetLevelSoftCurrency();
+				if (resetWave)
+					_gameCurrency.ResetLevelSoftCurrency();
 
-					_gameLevel.GoToLevel( _profile.LevelNumber.Value, targetWave );
-				}
-				else
-				{
-					_uiMessage.ShowMessage( UiMessage.NotEnoughEnergy );
-
-					_resourceEvents.LowEnergyAlert.Execute();
-				}
+				_gameLevel.GoToLevel( _profile.LevelNumber.Value, targetWave );
 			}
 			else
 			{
-				_gameLevel.GoToLevel( _profile.LevelNumber.Value, targetWave );
+				_uiMessage.ShowMessage( UiMessage.NotEnoughEnergy );
+
+				_resourceEvents.LowEnergyAlert.Execute();
 			}
 		}
+
+		private void GoToLevelFree() =>
+			_gameLevel.GoToLevel( _profile.LevelNumber.Value, _profile.WaveNumber.Value );
 	}
 }

@@ -6,7 +6,6 @@ namespace Game.Analytics
 	using Game.Profiles;
 	using Game.Configs;
 	using GameAnalyticsSDK;
-	using UnityEngine;
 
 	abstract public class HierarchyAnalyticsBase : ControllerBase
 	{
@@ -36,15 +35,15 @@ namespace Game.Analytics
 			};
 
 		protected void SendDesignEvent( string key ) =>
-			_eventSender.SendDesignEvent( key, GlobalProperties );
+			_eventSender.SendDesignEvent( key, null );
 
 		protected void SendDesignEvent( string key, float value ) =>
-			_eventSender.SendDesignEvent( key, value, GlobalProperties );
+			_eventSender.SendDesignEvent( key, value, null );
 
 		protected void SendResourceEvent( GAResourceFlowType resourceFlowType, string currency, float amount, string itemType, string itemId ) =>
-			_eventSender.SendResourceEvent( resourceFlowType, currency, amount, itemType, itemId, GlobalProperties );
+			_eventSender.SendResourceEvent( resourceFlowType, currency, amount, itemType, itemId, null );
 
 		protected void SendProgressionEvent( GAProgressionStatus progressionStatus, string progression01, string progression02, string progression03 ) =>
-			_eventSender.SendProgressionEvent( progressionStatus, progression01, progression02, progression03, GlobalProperties );
+			_eventSender.SendProgressionEvent( progressionStatus, progression01, progression02, progression03, null );
 	}
 }

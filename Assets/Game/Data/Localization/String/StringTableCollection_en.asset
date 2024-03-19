@@ -254,6 +254,14 @@ MonoBehaviour:
     m_Localized: YOU LEVEL IS TOOL LOW
     m_Metadata:
       m_Items: []
+  - m_Id: 39368102173040640
+    m_Localized: WATCH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39375417672556544
+    m_Localized: MORE ENERGY
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
