@@ -262,6 +262,14 @@ MonoBehaviour:
     m_Localized: MORE ENERGY
     m_Metadata:
       m_Items: []
+  - m_Id: 39490323575037952
+    m_Localized: INCREASE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39491225912434688
+    m_Localized: SKIP
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

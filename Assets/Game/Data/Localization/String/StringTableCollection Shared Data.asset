@@ -258,6 +258,14 @@ MonoBehaviour:
     m_Key: RewardedEnergyTitle
     m_Metadata:
       m_Items: []
+  - m_Id: 39490323575037952
+    m_Key: AdsIncreaseReward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39491225912434688
+    m_Key: AdsSkipReward
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
