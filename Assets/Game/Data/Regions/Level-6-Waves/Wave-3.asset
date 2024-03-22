@@ -23,6 +23,6 @@ MonoBehaviour:
     Position: {x: 2, y: 0}
     GradeIndex: 0
   - Species: 5002
-    Power: 4
+    Power: 6
     Position: {x: 3, y: 2}
     GradeIndex: 0
