@@ -25,7 +25,7 @@ MonoBehaviour:
   _damagePowerMultiplier: 24
   _softReward: 7.5
   _experience: 6
-  _softRewardPowerMultiplier: 3
+  _softRewardPowerMultiplier: 1.35
   _experiencePowerMultiplier: 2
   _gradePrefabs:
   - {fileID: 1503547998484457933, guid: 280231e01b4725b4c8a23862e0a9cd95, type: 3}
