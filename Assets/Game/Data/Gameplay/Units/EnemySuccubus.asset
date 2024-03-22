@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _titleKey: SniperTitle
   _icon: {fileID: 0}
+  _fullLength: {fileID: 0}
   _class: 1
   _attackRange: 3
-  _attackDelay: 2.1
+  _attackDelay: 1.9
   _projectileType: 2
-  _health: 150
-  _damage: 51
-  _healthPowerMultiplier: 18
-  _damagePowerMultiplier: 22
-  _softReward: 15
+  _health: 165
+  _damage: 54
+  _healthPowerMultiplier: 19
+  _damagePowerMultiplier: 24
+  _softReward: 7.5
   _experience: 6
   _softRewardPowerMultiplier: 3
   _experiencePowerMultiplier: 2

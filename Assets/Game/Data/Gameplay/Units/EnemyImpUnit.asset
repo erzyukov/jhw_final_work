@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _titleKey: ImpTitle
   _icon: {fileID: 0}
+  _fullLength: {fileID: 0}
   _class: 0
   _attackRange: 1
-  _attackDelay: 1.5
+  _attackDelay: 1.4
   _projectileType: 0
-  _health: 150
-  _damage: 10
-  _healthPowerMultiplier: 26
-  _damagePowerMultiplier: 3
-  _softReward: 3
+  _health: 160
+  _damage: 12
+  _healthPowerMultiplier: 27
+  _damagePowerMultiplier: 4
+  _softReward: 1.5
   _experience: 2
   _softRewardPowerMultiplier: 0.5
   _experiencePowerMultiplier: 1
