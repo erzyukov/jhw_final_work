@@ -270,6 +270,10 @@ MonoBehaviour:
     m_Localized: SKIP
     m_Metadata:
       m_Items: []
+  - m_Id: 40213801647300608
+    m_Localized: 'INCREASE YOUR REWARD:'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -4,6 +4,7 @@
 	using System;
 	using UnityEngine;
 	using System.Linq;
+	using UnityEngine.UI;
 
 	public static class ExtensionMethods
 	{
@@ -24,6 +25,13 @@
 		public static Vector3 x0y( this Vector2 v ) => new Vector3( v.x, 0, v.y );
 		
 		public static Vector2 xz( this Vector3 v ) => new Vector2( v.x, v.z );
+
+		public static void SetAlpha ( this Image i, float a )
+		{
+			Color color = i.color;
+			color.a = a;
+			i.color = color;
+		}
 
 		public static Vector2Int FloorToInt(this Vector2 v) => new Vector2Int( Mathf.FloorToInt(v.x), Mathf.FloorToInt(v.y) );
 

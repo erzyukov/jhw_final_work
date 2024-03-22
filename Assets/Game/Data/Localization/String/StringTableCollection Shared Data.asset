@@ -266,6 +266,10 @@ MonoBehaviour:
     m_Key: AdsSkipReward
     m_Metadata:
       m_Items: []
+  - m_Id: 40213801647300608
+    m_Key: RewardMultiplierTitle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
