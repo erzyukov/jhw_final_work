@@ -133,6 +133,8 @@ namespace Game.Core
 
 		public void PlayUiClick()
 		{
+			return;
+
 			if (_gameProfile.IsSoundEnabled.Value)
 				_audioSources.Ui.PlayOneShot(_audioConfig.UiButtonClick);
 		}
