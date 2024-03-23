@@ -136,6 +136,15 @@ namespace Game.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IncreaseHeroLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""c8bfb49e-c255-4c29-be2a-c7a21e953c0d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -325,6 +334,17 @@ namespace Game.Input
                     ""action"": ""KillAllEnemies"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ada361c-f5cc-4b02-8943-3e44313e2ac7"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IncreaseHeroLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -345,6 +365,7 @@ namespace Game.Input
             m_DevCheats_RestoreEnergy = m_DevCheats.FindAction("RestoreEnergy", throwIfNotFound: true);
             m_DevCheats_KillEnemyUnit = m_DevCheats.FindAction("KillEnemyUnit", throwIfNotFound: true);
             m_DevCheats_KillAllEnemies = m_DevCheats.FindAction("KillAllEnemies", throwIfNotFound: true);
+            m_DevCheats_IncreaseHeroLevel = m_DevCheats.FindAction("IncreaseHeroLevel", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -418,6 +439,7 @@ namespace Game.Input
         private readonly InputAction m_DevCheats_RestoreEnergy;
         private readonly InputAction m_DevCheats_KillEnemyUnit;
         private readonly InputAction m_DevCheats_KillAllEnemies;
+        private readonly InputAction m_DevCheats_IncreaseHeroLevel;
         public struct DevCheatsActions
         {
             private @Controls m_Wrapper;
@@ -434,6 +456,7 @@ namespace Game.Input
             public InputAction @RestoreEnergy => m_Wrapper.m_DevCheats_RestoreEnergy;
             public InputAction @KillEnemyUnit => m_Wrapper.m_DevCheats_KillEnemyUnit;
             public InputAction @KillAllEnemies => m_Wrapper.m_DevCheats_KillAllEnemies;
+            public InputAction @IncreaseHeroLevel => m_Wrapper.m_DevCheats_IncreaseHeroLevel;
             public InputActionMap Get() { return m_Wrapper.m_DevCheats; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -479,6 +502,9 @@ namespace Game.Input
                 @KillAllEnemies.started += instance.OnKillAllEnemies;
                 @KillAllEnemies.performed += instance.OnKillAllEnemies;
                 @KillAllEnemies.canceled += instance.OnKillAllEnemies;
+                @IncreaseHeroLevel.started += instance.OnIncreaseHeroLevel;
+                @IncreaseHeroLevel.performed += instance.OnIncreaseHeroLevel;
+                @IncreaseHeroLevel.canceled += instance.OnIncreaseHeroLevel;
             }
 
             private void UnregisterCallbacks(IDevCheatsActions instance)
@@ -519,6 +545,9 @@ namespace Game.Input
                 @KillAllEnemies.started -= instance.OnKillAllEnemies;
                 @KillAllEnemies.performed -= instance.OnKillAllEnemies;
                 @KillAllEnemies.canceled -= instance.OnKillAllEnemies;
+                @IncreaseHeroLevel.started -= instance.OnIncreaseHeroLevel;
+                @IncreaseHeroLevel.performed -= instance.OnIncreaseHeroLevel;
+                @IncreaseHeroLevel.canceled -= instance.OnIncreaseHeroLevel;
             }
 
             public void RemoveCallbacks(IDevCheatsActions instance)
@@ -550,6 +579,7 @@ namespace Game.Input
             void OnRestoreEnergy(InputAction.CallbackContext context);
             void OnKillEnemyUnit(InputAction.CallbackContext context);
             void OnKillAllEnemies(InputAction.CallbackContext context);
+            void OnIncreaseHeroLevel(InputAction.CallbackContext context);
         }
     }
 }

@@ -45,6 +45,8 @@
 			
 			Subscribe(Cheats.AddSummonCurrency, (_) => _gameCurrency.AddSummonCurrency(SummonCurrencyCheatAmount));
 			
+			Subscribe(Cheats.IncreaseHeroLevel, (_) => _profile.HeroLevel.Value++);
+
 			Subscribe(Cheats.RemoveGameSaves, (context) =>
 			{
 				if (context.performed && context.ReadValueAsButton())
