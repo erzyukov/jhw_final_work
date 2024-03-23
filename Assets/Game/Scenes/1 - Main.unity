@@ -1582,6 +1582,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3294226828724262688, guid: 698bd1f214b638e45aa6c8da4218c026, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3605348622771142759, guid: 698bd1f214b638e45aa6c8da4218c026, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1637,6 +1641,10 @@ PrefabInstance:
     - target: {fileID: 6919579678819456446, guid: 698bd1f214b638e45aa6c8da4218c026, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -1.5893555
+      objectReference: {fileID: 0}
+    - target: {fileID: 7085181951177503114, guid: 698bd1f214b638e45aa6c8da4218c026, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8248237181895381380, guid: 698bd1f214b638e45aa6c8da4218c026, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2830,6 +2838,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3772951969661057080, guid: 1f9af9927f969ab4f9970aced1a45465, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772951969661057080, guid: 1f9af9927f969ab4f9970aced1a45465, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4393243560576729136, guid: 1f9af9927f969ab4f9970aced1a45465, type: 3}
       propertyPath: m_Name
       value: LoseScreen
@@ -3292,12 +3308,24 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6623202926154896213, guid: 5dd6983f549604b4aa5dcb5ef5da863d, type: 3}
+      propertyPath: managedReferences[9072704050978619455].m_VariantData.Array.data[1].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623202926154896213, guid: 5dd6983f549604b4aa5dcb5ef5da863d, type: 3}
       propertyPath: managedReferences[9072704050978619456].m_VariantData.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6623202926154896213, guid: 5dd6983f549604b4aa5dcb5ef5da863d, type: 3}
+      propertyPath: managedReferences[9072704050978619456].m_VariantData.Array.data[1].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623202926154896213, guid: 5dd6983f549604b4aa5dcb5ef5da863d, type: 3}
       propertyPath: managedReferences[9072704050978619457].m_VariantData.Array.data[0].value
       value: 108
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623202926154896213, guid: 5dd6983f549604b4aa5dcb5ef5da863d, type: 3}
+      propertyPath: managedReferences[9072704050978619457].m_VariantData.Array.data[1].value
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6994883027242300274, guid: 5dd6983f549604b4aa5dcb5ef5da863d, type: 3}
       propertyPath: _defaultIcon
@@ -3499,10 +3527,6 @@ PrefabInstance:
     - target: {fileID: 7289134317044685306, guid: ddd7a51d93fd1014a821515975171d42, type: 3}
       propertyPath: m_Name
       value: WinScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 7289134317044685306, guid: ddd7a51d93fd1014a821515975171d42, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8952086733595978591, guid: ddd7a51d93fd1014a821515975171d42, type: 3}
       propertyPath: m_Pivot.x
