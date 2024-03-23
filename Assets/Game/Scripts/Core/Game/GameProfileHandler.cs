@@ -14,6 +14,7 @@
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private IGameCurrency _gameCurrency;
 		[Inject] private LevelsConfig _levelsConfig;
+		[Inject] private CommonGameplayConfig _commonConfig;
 
 		private bool _isWaveFirstInBattle;
 		private LevelConfig _levelConfig;
@@ -29,8 +30,10 @@
 				.Subscribe(_ => OnTacticalStageBeginHandler())
 				.AddTo(this);
 
-			_gameCycle.State
-				.Where(state => state == GameState.WinBattle || state == GameState.LoseBattle)
+			Observable.Merge(
+				_gameCycle.State.Where(state => state == GameState.WinBattle).AsUnitObservable(),
+				_gameLevel.LevelClosing
+			)
 				.Subscribe(_ => OnBattleFinishHandler())
 				.AddTo(this);
 
@@ -47,10 +50,11 @@
 
 			if (_gameProfile.WaveNumber.Value == 0)
 			{
-				int waveIndex = _gameProfile.WaveNumber.Value;
-				WaveConfig waveConfig = _levelConfig.Waves[waveIndex];
+				int tokenAmount = _gameLevel.GetCurrentWaveSummonCurrency();
+
+				_gameProfile.ReviveAttemptsCount = _commonConfig.DefaultReviveAttempts;
 				_gameProfile.HeroField.Units.Clear();
-				_gameCurrency.SetSummonCurrency(waveConfig.SummonCurrencyAmount);
+				_gameCurrency.SetSummonCurrency(tokenAmount);
 				_gameProfileManager.Save();
 			}
 
@@ -65,9 +69,8 @@
 			}
 			else
 			{
-				int waveIndex = _gameProfile.WaveNumber.Value - 1;
-				WaveConfig waveConfig = _levelConfig.Waves[waveIndex];
-				_gameCurrency.AddSummonCurrency(waveConfig.SummonCurrencyAmount);
+				int tokenAmount = _gameLevel.GetCurrentWaveSummonCurrency();
+				_gameCurrency.AddSummonCurrency(tokenAmount);
 			}
 		}
 

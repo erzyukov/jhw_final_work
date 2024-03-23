@@ -29,6 +29,7 @@ namespace Game.Installers
 		[SerializeField] private BattleFieldConfig _battleField;
 		[SerializeField] private WeaponsConfig _weapons;
 		[SerializeField] private UpgradesConfig _upgrades;
+		[SerializeField] private CommonGameplayConfig _commonGameplay;
 
 		[Header("Monetization")]
 		[SerializeField] private AdsConfig _ads;
@@ -56,6 +57,7 @@ namespace Game.Installers
 			Container.BindInstance(_audio);
 			Container.BindInstance(_prefabs);
 			Container.BindInstance(_ads);
+			Container.BindInstance(_commonGameplay);
 		}
 	}
 }

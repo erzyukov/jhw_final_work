@@ -18,6 +18,7 @@ namespace Game.Profiles
 		public readonly IntReactiveProperty LevelHeroExperience = new IntReactiveProperty(0);
 		public bool IsReturnFromBattle;
 		public bool IsWonLastBattle;
+		public int ReviveAttemptsCount;
 
 		public List<LevelProfile> Levels = new List<LevelProfile>();
 		public TutorialProfile Tutorial = new TutorialProfile();

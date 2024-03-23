@@ -14,6 +14,7 @@
 		Upgrades,
 		UnitUpgrades,
         Energy,
+		Common,
 
         // Levels
         Regions = 250,
