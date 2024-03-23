@@ -55,6 +55,8 @@
 
 		public virtual void Initialize()
 		{
+			_currentRewarded = default;
+
 			AddRemoveBlocker( EAdsBlocker.Mediation_Loading, true );
 
 			SubscribeInitialize();
@@ -157,16 +159,16 @@
 		public BoolReactiveProperty IsRewardedAvailable { get; } = new();
 		public BoolReactiveProperty IsInterstitialReady { get; } = new();
 
-		public void ShowRewardedVideo( ERewardedType type )
+		public void ShowRewardedVideo( ERewardedType place )
 		{
-			_currentRewarded = new Rewarded( type );
+			_currentRewarded.Type = place;
 
 			if (IsRewardedFree)
 			{
 				IsPlaying.Value = true;
 
-				if (OnCompleted.ContainsKey( type ))
-					OnCompleted[ type ].Execute( _currentRewarded );
+				if (OnCompleted.ContainsKey( place ))
+					OnCompleted[ place ].Execute( _currentRewarded );
 
 				IsPlaying.Value = false;
 
@@ -176,15 +178,15 @@
 			if (_adsProvider.IsAdAvailable( EAdType.RewardedVideo ) == false)
 				return;
 
-			_rewardType = type;
+			_rewardType = place;
 			IsPlaying.Value = true;
 
-			_adsProvider.ShowRevardedVideo( type );
+			_adsProvider.ShowRevardedVideo( place );
 		}
 
 		public void ShowRewardedVideo( ERewardedType place, Rewarded type )
 		{
-			_currentRewarded = type;
+			_currentRewarded.UpgradeUnit = type.UpgradeUnit;
 			ShowRewardedVideo( place );
 		}
 
