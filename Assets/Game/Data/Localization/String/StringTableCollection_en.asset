@@ -274,6 +274,20 @@ MonoBehaviour:
     m_Localized: 'INCREASE YOUR REWARD:'
     m_Metadata:
       m_Items: []
+  - m_Id: 40579838825816064
+    m_Localized: 'RETURN TO BATTLE AND
+
+      STRENGTHEN YOUR PLATOON?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40582830417338368
+    m_Localized: RETURN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40583015000268800
+    m_Localized: GIVE UP
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

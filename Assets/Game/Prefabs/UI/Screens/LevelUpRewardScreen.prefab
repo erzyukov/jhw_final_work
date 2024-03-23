@@ -807,7 +807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7794d305b46e29d46a30a212235d7aee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _closeButton: {fileID: 496370110279467666}
+  CloseButton: {fileID: 496370110279467666}
   _rewardAmount: {fileID: 693465087440515946}
 --- !u!114 &496370110279467666
 MonoBehaviour:
@@ -903,6 +903,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _value: {fileID: 7543614108318642280}
+  _alert:
+    Image: {fileID: 0}
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Duration: 0
+    Repeats: 0
   _expirience: {fileID: 0}
   _expiriencePercent: {fileID: 0}
 --- !u!1 &3766699518340330570
@@ -1632,6 +1637,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _value: {fileID: 693465087440515946}
+  _alert:
+    Image: {fileID: 0}
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Duration: 0
+    Repeats: 0
 --- !u!1001 &81318352798036238
 PrefabInstance:
   m_ObjectHideFlags: 0

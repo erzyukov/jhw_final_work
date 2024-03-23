@@ -270,6 +270,18 @@ MonoBehaviour:
     m_Key: RewardMultiplierTitle
     m_Metadata:
       m_Items: []
+  - m_Id: 40579838825816064
+    m_Key: RewardByLoseTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40582830417338368
+    m_Key: return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40583015000268800
+    m_Key: give_up
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

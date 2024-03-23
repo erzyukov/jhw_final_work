@@ -4098,7 +4098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283e2dcae8135c74aa2d29842b1a8bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _closeButton: {fileID: 963752520351213682}
+  CloseButton: {fileID: 963752520351213682}
   _multiplierSlider: {fileID: 4498582043944894092}
   _levelRewardText: {fileID: 1572021137650583112}
   _rewardedText: {fileID: 1073765948946927585}
