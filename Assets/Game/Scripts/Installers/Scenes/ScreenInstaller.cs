@@ -60,6 +60,10 @@ namespace Game.Installers
 				.BindInterfacesTo<UiIapShopScreen>()
 				.FromComponentInHierarchy()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiIapShopPresenter>()
+				.AsSingle();
 		}
 	}
 }
