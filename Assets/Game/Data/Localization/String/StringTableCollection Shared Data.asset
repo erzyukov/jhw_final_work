@@ -286,6 +286,10 @@ MonoBehaviour:
     m_Key: adButtonTitle
     m_Metadata:
       m_Items: []
+  - m_Id: 41669155845398528
+    m_Key: ui_menu_iap_shop
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
