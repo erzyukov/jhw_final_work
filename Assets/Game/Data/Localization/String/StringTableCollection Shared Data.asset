@@ -290,6 +290,10 @@ MonoBehaviour:
     m_Key: ui_menu_iap_shop
     m_Metadata:
       m_Items: []
+  - m_Id: 41672790880903168
+    m_Key: iap_item_noads
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

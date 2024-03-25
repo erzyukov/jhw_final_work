@@ -296,6 +296,10 @@ MonoBehaviour:
     m_Localized: SHOP
     m_Metadata:
       m_Items: []
+  - m_Id: 41672790880903168
+    m_Localized: DISABLE ADS
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
