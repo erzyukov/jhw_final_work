@@ -17,7 +17,7 @@ MonoBehaviour:
     GameState: 2
   - LevelNumber: 3
     GameState: 11
-  - LevelNumber: 99
+  - LevelNumber: 4
     GameState: 12
   - LevelNumber: 99
     GameState: 13

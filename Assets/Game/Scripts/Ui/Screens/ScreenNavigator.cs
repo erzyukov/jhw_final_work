@@ -62,6 +62,9 @@
 				case GameState.Upgrades:
 					Open(Ui.Screen.Upgrades);
 					break;
+				case GameState.IapShop:
+					Open(Ui.Screen.IapShop);
+					break;
 			}
 		}
 

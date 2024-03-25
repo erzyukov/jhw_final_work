@@ -13,6 +13,7 @@ namespace Game.Ui
 		Lose,
 		LevelReward,
 		Upgrades,
+		IapShop,
 	}
 
 	public interface IUiScreen
