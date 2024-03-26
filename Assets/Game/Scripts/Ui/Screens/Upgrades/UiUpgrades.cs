@@ -163,12 +163,9 @@
 			{
 				_uiMessage.ShowMessage( UiMessage.NotEnoughSoftCurrency );
 			}
-			else
-			{
-				UpdateUnitList( species );
-			}
-
+				
 			_gameAudio.PlayUiClick();
+			UpdateUnitList( species );
 			FillUnitInfo( species );
 		}
 

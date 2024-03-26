@@ -1,5 +1,6 @@
 namespace Game
 {
+	using Game.Utilities;
 	using System;
 	using TMPro;
 	using UniRx;
@@ -23,7 +24,8 @@ namespace Game
 		public void SetAdActive( bool value )
 		{
 			_adsButton.gameObject.SetActive( value );
-			_defaultButton.gameObject.SetActive( !value );
+			_defaultButton.interactable = !value;
+			_defaultButtonText.color = _defaultButtonText.color.WithAlpha( value ? 0.2f : 1 );
 		}
 
 		public void SetDefaultValue( string value ) =>

@@ -33,6 +33,8 @@
 			i.color = color;
 		}
 
+		public static Color WithAlpha( this Color c, float a ) { c.a = a; return c; }
+
 		public static Vector2Int FloorToInt(this Vector2 v) => new Vector2Int( Mathf.FloorToInt(v.x), Mathf.FloorToInt(v.y) );
 
 		public static void DestroyChildren(this Transform transform)
