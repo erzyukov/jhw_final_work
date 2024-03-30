@@ -294,6 +294,14 @@ MonoBehaviour:
     m_Key: iap_item_noads
     m_Metadata:
       m_Items: []
+  - m_Id: 43183668549029888
+    m_Key: YandexCurrency
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43185999734804480
+    m_Key: sold_button_title
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

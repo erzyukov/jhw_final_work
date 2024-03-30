@@ -552,10 +552,10 @@ PrefabInstance:
     - target: {fileID: 1338214890802306871, guid: 682d01ae1eaf997419a8364198249e43, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 0e94cfaaabe816d49b1b016b3f7ed773, type: 3}
     - target: {fileID: 1338214890802306871, guid: 682d01ae1eaf997419a8364198249e43, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4206410598695891960, guid: 682d01ae1eaf997419a8364198249e43, type: 3}
       propertyPath: m_AnchorMax.y
@@ -584,7 +584,7 @@ PrefabInstance:
     - target: {fileID: 4249294637744562583, guid: 682d01ae1eaf997419a8364198249e43, type: 3}
       propertyPath: _defaultIcon
       value: 
-      objectReference: {fileID: 21300000, guid: beb0f1a588aa9dc42a101bcca8c04a98, type: 3}
+      objectReference: {fileID: 21300000, guid: e3897f995b98e60478ae4e84fc95ac46, type: 3}
     - target: {fileID: 4249294637744562583, guid: 682d01ae1eaf997419a8364198249e43, type: 3}
       propertyPath: _targetGameState
       value: 12
@@ -596,7 +596,7 @@ PrefabInstance:
     - target: {fileID: 6730756673738564211, guid: 682d01ae1eaf997419a8364198249e43, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: beb0f1a588aa9dc42a101bcca8c04a98, type: 3}
+      objectReference: {fileID: 21300000, guid: e3897f995b98e60478ae4e84fc95ac46, type: 3}
     - target: {fileID: 6730756673738564211, guid: 682d01ae1eaf997419a8364198249e43, type: 3}
       propertyPath: m_Color.b
       value: 1
