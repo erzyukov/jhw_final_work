@@ -1,10 +1,11 @@
 namespace Game.Installers
 {
 	using Game.Configs;
+	using Game.Iap;
 	using UnityEngine;
 	using Zenject;
 
-	[CreateAssetMenu(fileName = "ConfigInstaller", menuName = "Installers/ConfigInstaller")]
+	[CreateAssetMenu( fileName = "ConfigInstaller", menuName = "Installers/ConfigInstaller" )]
 	public class ConfigInstaller : ScriptableObjectInstaller<ConfigInstaller>
 	{
 		[SerializeField] private TutorialConfig _tutorial;
@@ -33,6 +34,7 @@ namespace Game.Installers
 
 		[Header("Monetization")]
 		[SerializeField] private AdsConfig _ads;
+		[SerializeField] private IapConfig _iap;
 
 		public override void InstallBindings()
 		{
@@ -40,24 +42,25 @@ namespace Game.Installers
 			_tutorial.Initialize();
 			_upgrades.Initialize();
 
-			Container.BindInstance(_scenes);
-			Container.BindInstance(_units);
-			Container.BindInstance(_battleField);
-			Container.BindInstance(_levels);
-			Container.BindInstance(_currency);
-			Container.BindInstance(_timings);
-			Container.BindInstance(_localization);
-			Container.BindInstance(_tutorial);
-			Container.BindInstance(_dev);
-			Container.BindInstance(_experience);
-			Container.BindInstance(_weapons);
-			Container.BindInstance(_menu);
-			Container.BindInstance(_upgrades);
-			Container.BindInstance(_energy);
-			Container.BindInstance(_audio);
-			Container.BindInstance(_prefabs);
-			Container.BindInstance(_ads);
-			Container.BindInstance(_commonGameplay);
+			Container.BindInstance( _scenes );
+			Container.BindInstance( _units );
+			Container.BindInstance( _battleField );
+			Container.BindInstance( _levels );
+			Container.BindInstance( _currency );
+			Container.BindInstance( _timings );
+			Container.BindInstance( _localization );
+			Container.BindInstance( _tutorial );
+			Container.BindInstance( _dev );
+			Container.BindInstance( _experience );
+			Container.BindInstance( _weapons );
+			Container.BindInstance( _menu );
+			Container.BindInstance( _upgrades );
+			Container.BindInstance( _energy );
+			Container.BindInstance( _audio );
+			Container.BindInstance( _prefabs );
+			Container.BindInstance( _ads );
+			Container.BindInstance( _commonGameplay );
+			Container.BindInstance( (IIapConfig)_iap );
 		}
 	}
 }

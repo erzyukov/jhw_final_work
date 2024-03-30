@@ -30,5 +30,7 @@ namespace Game.Profiles
 		public readonly BoolReactiveProperty IsSoundEnabled = new BoolReactiveProperty(true);
 
 		public AnalyticsProfile Analytics = new AnalyticsProfile();
+
+		public IapShopProfile IapShopProfile = new IapShopProfile();
 	}
 }

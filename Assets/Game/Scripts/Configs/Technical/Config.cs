@@ -36,5 +36,6 @@
 
 		// Monetization
 		Ads = 500,
+		Iap,
 	}
 }
