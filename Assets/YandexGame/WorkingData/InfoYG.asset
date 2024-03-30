@@ -273,24 +273,12 @@ MonoBehaviour:
     de: 
     hi: 
   purshasesSimulation:
-  - id: gun
-    title: Gun
-    description: Product - Gun
+  - id: com.dd.noads
+    title: NoAds
+    description: Disable Force Ads
     imageURI: https://justplaygames.ru/public/Paymant1.png
-    priceValue: 5
-    consumed: 1
-  - id: armor
-    title: Armor
-    description: Product - Armor
-    imageURI: https://justplaygames.ru/public/Paymant2.png
-    priceValue: 10
-    consumed: 1
-  - id: grenade
-    title: Grenade
-    description: Product - Grenade
-    imageURI: https://justplaygames.ru/public/Paymant3.png
-    priceValue: 30
-    consumed: 1
+    priceValue: 49
+    consumed: 0
   metricaEnable: 0
   metricaCounterID: 0
   debug: 1
