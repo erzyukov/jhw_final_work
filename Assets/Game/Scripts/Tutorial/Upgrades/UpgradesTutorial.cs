@@ -155,7 +155,7 @@
 			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetUpgradeInteractable(false);
 			_uiUpgradesScreen.UnitElements[Species.HeroInfantryman].SetSelectInteractable(false);
 
-			HintedButton hintedButton = _uiUpgradesScreen.UnitElements[Species.HeroInfantryman].UpgradeButton.GetComponent<HintedButton>();
+			HintedButton hintedButton = _uiUpgradesScreen.UnitElements[Species.HeroInfantryman].UpgradeButton.DefaultButton.GetComponent<HintedButton>();
 			ShowUpgradeFingerHint(hintedButton.HintParameters);
 
 			ActivateDialogMessege();
@@ -184,7 +184,7 @@
 			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetSelectInteractable(false);
 			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetUpgradeInteractable(true);
 
-			HintedButton hintedButton = _uiUpgradesScreen.UnitElements[Species.HeroSniper].UpgradeButton.GetComponent<HintedButton>();
+			HintedButton hintedButton = _uiUpgradesScreen.UnitElements[Species.HeroSniper].UpgradeButton.DefaultButton.GetComponent<HintedButton>();
 			ShowUpgradeFingerHint(hintedButton.HintParameters);
 
 			ActivateDialogMessege();
