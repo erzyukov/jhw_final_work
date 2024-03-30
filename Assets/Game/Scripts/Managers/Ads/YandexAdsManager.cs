@@ -9,8 +9,6 @@
 
 	public class YandexAdsManager : AdsManager, IInitializable
 	{
-		[Inject] private GameProfile _gameProfile;
-
 		private readonly List<Screen> BeforAdScreen = new() {Screen.Win, Screen.Lose, Screen.LevelReward};
 
 		private float _interInterval;
@@ -20,7 +18,7 @@
 		{
 			base.Initialize();
 
-			_interInterval = _adsConfig.InterstitialInterval;
+			_interInterval = AdsConfig.InterstitialInterval;
 			SetInterTimer();
 
 			IsPlaying
@@ -37,7 +35,7 @@
 				.AddTo( this );
 
 			// Disable ads by UI
-			_screenNavigator.Screen
+			ScreenNavigator.Screen
 				.Where( s => s != Screen.None )
 				.Pairwise()
 				.Subscribe( pair => OnUiScreenChanged( pair.Previous, pair.Current ) )
@@ -61,7 +59,7 @@
 			if (
 				_interTimer.IsReady == false ||
 				BeforAdScreen.Contains( previous ) == false ||
-				_gameProfile.LevelNumber.Value < _adsConfig.InterActiveLevelNumber ||
+				GameProfile.LevelNumber.Value < AdsConfig.InterActiveLevelNumber ||
 				current != Screen.Lobby
 			)
 				return;

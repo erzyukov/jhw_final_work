@@ -12,6 +12,7 @@
 	using Game.Ui;
 	using Screen = Game.Ui.Screen;
 	using Game.Dev;
+	using Game.Profiles;
 
 	public interface IAdsManager
 	{
@@ -35,10 +36,12 @@
 
 	public class AdsManager : ControllerBase, IAdsManager, IInitializable
 	{
-		[Inject] protected AdsConfig _adsConfig;
-		[Inject] protected IAdsProvider _adsProvider;
-		[Inject] protected IScreenNavigator _screenNavigator;
+		[Inject] protected AdsConfig AdsConfig;
+		[Inject] protected IScreenNavigator ScreenNavigator;
+		[Inject] protected GameProfile GameProfile;
+
 		[Inject] private List<IUiRewardedButton> _rewardedButtons;
+		[Inject] private IAdsProvider _adsProvider;
 
 		private const string DefaultPlace = "Gameplay";
 
@@ -51,7 +54,7 @@
 		private ReactiveCollection<EAdsBlocker> _blockersBanner = new();
 
 		private string AdPlace =>
-			(_screenNavigator.Screen.Value == Screen.None) ? DefaultPlace : _screenNavigator.Screen.Value.ToString();
+			( ScreenNavigator.Screen.Value == Screen.None ) ? DefaultPlace : ScreenNavigator.Screen.Value.ToString();
 
 		public virtual void Initialize()
 		{
@@ -70,8 +73,13 @@
 			HasBannerBlocker = _blockersBanner
 				.ObserveCountChanged().Select( count => count > 0 ).ToReadOnlyReactiveProperty();
 
+			// Iap NoAds
+			GameProfile.IapShopProfile.NoAdsProduct
+				.Subscribe( noAds => AddRemoveBlocker( EAdsBlocker.NoAds_IAP, noAds ) )
+				.AddTo( this );
+
 			// Disable ads by UI
-			_screenNavigator.Screen
+			ScreenNavigator.Screen
 				.Where( s => s != Screen.None )
 				.Pairwise()
 				.Subscribe( pair => OnUiScreenChanged( pair.Previous, pair.Current ) )
@@ -131,7 +139,7 @@
 			IsRewardedAvailable.Value = true;
 #endif
 
-			((ERewardedType[])Enum.GetValues( typeof( ERewardedType ) ))
+			( (ERewardedType[])Enum.GetValues( typeof( ERewardedType ) ) )
 				.Where( type => type != ERewardedType.None )
 				.ForEach( type =>
 				{
@@ -168,7 +176,7 @@
 				IsPlaying.Value = true;
 
 				if (OnCompleted.ContainsKey( place ))
-					OnCompleted[ place ].Execute( _currentRewarded );
+					OnCompleted[place].Execute( _currentRewarded );
 
 				IsPlaying.Value = false;
 
@@ -213,8 +221,8 @@
 			if (blocker == EAdsBlocker.None)
 				return;
 
-			bool isInter = _adsConfig.BlockersInter.Contains(blocker);
-			bool isBanner = _adsConfig.BlockersBanner.Contains(blocker);
+			bool isInter = AdsConfig.BlockersInter.Contains(blocker);
+			bool isBanner = AdsConfig.BlockersBanner.Contains(blocker);
 
 			if (add)
 			{
@@ -232,6 +240,7 @@
 			}
 
 			WebGLDebug.Log( $"Inter Blocker Changed: {String.Join( ", ", _blockersInter.ToArray() )}" );
+			WebGLDebug.Log( $"Banner Blocker Changed: {String.Join( ", ", _blockersBanner.ToArray() )}" );
 
 			if (isBanner)
 				UpdateBannerState();
@@ -258,8 +267,6 @@
 
 		void OnAdLoaded( EAdType type )
 		{
-			WebGLDebug.Log( $"------> OnAdLoaded: {type}" );
-
 			switch (type)
 			{
 				case EAdType.Interstitial:
@@ -276,8 +283,6 @@
 
 		void OnAdOpened( EAdType type )
 		{
-			WebGLDebug.Log( $"------> OnAdOpened: {type}" );
-
 			switch (type)
 			{
 				case EAdType.Interstitial:
@@ -289,8 +294,6 @@
 
 		void OnAdClosed( EAdType type )
 		{
-			WebGLDebug.Log( $"------> OnAdClosed: {type}" );
-
 			switch (type)
 			{
 				case EAdType.Interstitial:
@@ -318,7 +321,7 @@
 		void OnRewarded()
 		{
 			if (OnCompleted.ContainsKey( _rewardType ))
-				OnCompleted[ _rewardType ].Execute( _currentRewarded );
+				OnCompleted[_rewardType].Execute( _currentRewarded );
 		}
 
 		void OnStartPlayAd()
