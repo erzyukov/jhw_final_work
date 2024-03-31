@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TownGround
+  m_Name: GroundSprite
   m_Shader: {fileID: 4800000, guid: de9082207784c4f4d823b900babcbc1f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -23,14 +23,22 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 1b3a8ef57bd80244688bff8c01871ec4, type: 3}
-        m_Scale: {x: 3, y: 1.24}
-        m_Offset: {x: -0.992, y: -0.13}
+        m_Texture: {fileID: 2800000, guid: 3888a650b71eae4488f06c81f2db4e65, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Glossiness: 0
-    - _Metallic: 0.3
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
+    - _Glossiness: 0.1
+    - _Metallic: 0.2
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

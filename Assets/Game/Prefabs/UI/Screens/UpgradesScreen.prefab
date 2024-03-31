@@ -1888,7 +1888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36853fc88ceb2e4419d2c2c35f0fa53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _closeButton: {fileID: 0}
+  CloseButton: {fileID: 0}
   _unitIcon: {fileID: 8726828833717410803}
   _unitName: {fileID: 2376906359659024011}
   _unitLevel: {fileID: 5811829284619878649}

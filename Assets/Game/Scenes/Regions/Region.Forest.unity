@@ -523,9 +523,9 @@ Light:
     m_Type: 2
     m_Resolution: 1
     m_CustomResolution: -1
-    m_Strength: 0.8
+    m_Strength: 0.9
     m_Bias: 0
-    m_NormalBias: 0.7
+    m_NormalBias: 0.45
     m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
@@ -551,7 +551,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 65
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -660,14 +660,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Region.Forest.Environment
       objectReference: {fileID: 0}
-    - target: {fileID: 1464319315194564202, guid: 42bb5beb8c98edc4eaa853cc474ec723, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2688952480079204416, guid: 42bb5beb8c98edc4eaa853cc474ec723, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 2688952480079204417, guid: 42bb5beb8c98edc4eaa853cc474ec723, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -676,17 +668,21 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2027720116}
-    - target: {fileID: 2688952480079204429, guid: 42bb5beb8c98edc4eaa853cc474ec723, type: 3}
-      propertyPath: m_VersionIndex
-      value: 1346
-      objectReference: {fileID: 0}
     - target: {fileID: 2688952480079204430, guid: 42bb5beb8c98edc4eaa853cc474ec723, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2027720116}
     - target: {fileID: 6228893013989442224, guid: 42bb5beb8c98edc4eaa853cc474ec723, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228893013989442224, guid: 42bb5beb8c98edc4eaa853cc474ec723, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6228893013989442224, guid: 42bb5beb8c98edc4eaa853cc474ec723, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6228893013989442224, guid: 42bb5beb8c98edc4eaa853cc474ec723, type: 3}
       propertyPath: m_LocalRotation.w

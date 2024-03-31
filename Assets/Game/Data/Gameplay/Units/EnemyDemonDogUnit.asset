@@ -14,17 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _titleKey: DemonDogTitle
   _icon: {fileID: 0}
+  _fullLength: {fileID: 0}
   _class: 0
   _attackRange: 1
-  _attackDelay: 1.8
+  _attackDelay: 1.7
   _projectileType: 0
-  _health: 210
-  _damage: 29
-  _healthPowerMultiplier: 64
-  _damagePowerMultiplier: 17
-  _softReward: 12
+  _health: 220
+  _damage: 31
+  _healthPowerMultiplier: 65
+  _damagePowerMultiplier: 18
+  _softReward: 6
   _experience: 5
-  _softRewardPowerMultiplier: 2
+  _softRewardPowerMultiplier: 0.9
   _experiencePowerMultiplier: 2
   _gradePrefabs:
   - {fileID: 1503547998484457933, guid: 468d4ce87b5b58e43a0e26ba6ddb855c, type: 3}

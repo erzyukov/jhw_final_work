@@ -258,6 +258,50 @@ MonoBehaviour:
     m_Key: RewardedEnergyTitle
     m_Metadata:
       m_Items: []
+  - m_Id: 39490323575037952
+    m_Key: AdsIncreaseReward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39491225912434688
+    m_Key: AdsSkipReward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40213801647300608
+    m_Key: RewardMultiplierTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40579838825816064
+    m_Key: RewardByLoseTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40582830417338368
+    m_Key: return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40583015000268800
+    m_Key: give_up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40938627844366336
+    m_Key: adButtonTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41669155845398528
+    m_Key: ui_menu_iap_shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41672790880903168
+    m_Key: iap_item_noads
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43183668549029888
+    m_Key: YandexCurrency
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43185999734804480
+    m_Key: sold_button_title
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

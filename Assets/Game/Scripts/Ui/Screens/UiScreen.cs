@@ -13,6 +13,7 @@ namespace Game.Ui
 		Lose,
 		LevelReward,
 		Upgrades,
+		IapShop,
 	}
 
 	public interface IUiScreen
@@ -27,15 +28,15 @@ namespace Game.Ui
 
 	public abstract class UiScreen : MonoBehaviour, IUiScreen
 	{
-		[SerializeField] private Button _closeButton;
+		[SerializeField] protected Button CloseButton;
 
 		protected virtual void OnEnable() { }
 
 		protected virtual void Start()
 		{
-			if (_closeButton != null)
+			if (CloseButton != null)
 			{
-				_closeButton.OnClickAsObservable()
+				CloseButton.OnClickAsObservable()
 					.Subscribe(_ => OnCloseHandler())
 					.AddTo(this);
 			}

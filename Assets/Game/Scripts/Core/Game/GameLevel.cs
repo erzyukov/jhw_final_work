@@ -12,6 +12,7 @@
 	{
 		BoolReactiveProperty IsLevelLoaded { get; }
 		ReactiveCommand LevelLoading { get; }
+		ReactiveCommand LevelClosing { get; }
 		ReactiveCommand<bool> LevelLoaded { get; }
 		ReactiveCommand<GameLevel.Result> LevelFinished { get; }
 		ReactiveCommand<int> WaveStarted { get; }
@@ -20,6 +21,7 @@
 		void GoToNextWave();
 		void FinishLevel();
 		void LeaveBattle();
+		int GetCurrentWaveSummonCurrency();
 	}
 
 	public class GameLevel : ControllerBase, IGameLevel, IInitializable
@@ -66,17 +68,19 @@
 
 		#region IGameLevel
 
-		public BoolReactiveProperty IsLevelLoaded { get; } = new BoolReactiveProperty();
+		public BoolReactiveProperty IsLevelLoaded { get; } = new();
 		
-		public ReactiveCommand LevelLoading { get; } = new ReactiveCommand();
+		public ReactiveCommand LevelLoading { get; } = new();
+		
+		public ReactiveCommand LevelClosing { get; } = new();
 
-		public ReactiveCommand<bool> LevelLoaded { get; } = new ReactiveCommand<bool>();
+		public ReactiveCommand<bool> LevelLoaded { get; } = new();
 
-		public ReactiveCommand<Result> LevelFinished { get; } = new ReactiveCommand<Result>();
+		public ReactiveCommand<Result> LevelFinished { get; } = new();
 
-		public ReactiveCommand<int> WaveStarted { get; } = new ReactiveCommand<int>();
+		public ReactiveCommand<int> WaveStarted { get; } = new();
 
-		public ReactiveCommand<Result> WaveFinished { get; } = new ReactiveCommand<Result>();
+		public ReactiveCommand<Result> WaveFinished { get; } = new();
 
 		public void GoToLevel(int number, int wave = -1)
 		{
@@ -134,6 +138,8 @@
 				return;
 			}
 
+			LevelClosing.Execute();
+
 			_uiViel.Appear(() =>
 			{
 				_profile.WaveNumber.Value = 0;
@@ -155,6 +161,15 @@
 				IsLevelLoaded.Value = false;
 				_gameCycle.SetState(GameState.Lobby);
 			});
+		}
+
+		public int GetCurrentWaveSummonCurrency()
+		{
+			int waveIndex = Mathf.Max( 0 ,_profile.WaveNumber.Value - 1 );
+			int levelIndex = _profile.LevelNumber.Value - 1;
+			var wave = _levelsConfig.Levels[levelIndex].Waves[waveIndex];
+
+			return wave.SummonCurrencyAmount;
 		}
 
 		#endregion

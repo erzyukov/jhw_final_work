@@ -4,6 +4,7 @@ namespace Game.Installers
 	using Game.Configs;
 	using Game.Core;
 	using Game.Dev;
+	using Game.Iap;
 	using Game.Input;
 	using Game.Managers;
 	using Game.Profiles;
@@ -55,6 +56,7 @@ namespace Game.Installers
 			InstallEvents();
 			InstallAnalytics();
 			InstallGameControllers();
+			InstallIap();
 		}
 
 		private void InstallGameProfile()
@@ -120,6 +122,36 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<GameCurrency>()
 				.AsSingle();
+		}
+
+		public void InstallIap()
+		{
+			if (_devConfig.GamePatform == EGamePatform.None)
+				return;
+
+			// IapDeliver
+			// (!) Should be bound BEFORE IapCore, so it is ready to listen events before IapCore Init()
+			Container
+				.BindInterfacesTo<IapDeliver>()
+				.AsSingle();
+
+			// IapFacade
+			Container
+				.BindInterfacesTo<IapFacade>()
+				.AsSingle();
+
+			// IapCore
+			Container
+				.Bind<IIapCoreFacade>()
+				.FromSubContainerResolve()
+				.ByInstaller<IapCoreYandexInstaller>()
+				.WithKernel()
+				.AsSingle()
+				// .WhenInjectedInto( typeof( IapDeliver ) )		// Not working
+				;
+
+			// https://github.com/modesttree/Zenject/issues/160
+			Container.Resolve<IIapCoreFacade>();                    // Required for .WithKernel() above to work
 		}
 	}
 }

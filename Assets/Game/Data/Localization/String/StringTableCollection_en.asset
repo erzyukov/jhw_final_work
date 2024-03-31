@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: 5f31ae77c27018a4d8effc3283048516, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 1729294972177874946
   m_TableData:
   - m_Id: 4015764443136
     m_Localized: TOKEN
@@ -262,6 +263,59 @@ MonoBehaviour:
     m_Localized: MORE ENERGY
     m_Metadata:
       m_Items: []
+  - m_Id: 39490323575037952
+    m_Localized: INCREASE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39491225912434688
+    m_Localized: SKIP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40213801647300608
+    m_Localized: 'INCREASE YOUR REWARD:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40579838825816064
+    m_Localized: 'RETURN TO BATTLE AND
+
+      STRENGTHEN YOUR PLATOON?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40582830417338368
+    m_Localized: RETURN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40583015000268800
+    m_Localized: GIVE UP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40938627844366336
+    m_Localized: FREE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41669155845398528
+    m_Localized: SHOP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41672790880903168
+    m_Localized: 'DISABLE
+
+      ADS'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43183668549029888
+    m_Localized: '{price} YAN'
+    m_Metadata:
+      m_Items:
+      - rid: 1729294972177874946
+  - m_Id: 43185999734804480
+    m_Localized: SOLD
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1729294972177874946
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0090f657516b9900

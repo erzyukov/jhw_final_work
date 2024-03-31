@@ -17,12 +17,12 @@ MonoBehaviour:
   _fullLength: {fileID: 21300000, guid: fc6511669c8de4b42a0ae25c1e8c1514, type: 3}
   _class: 0
   _attackRange: 1
-  _attackDelay: 1.1
+  _attackDelay: 1.2
   _projectileType: 0
   _health: 150
-  _damage: 22
-  _healthPowerMultiplier: 18
-  _damagePowerMultiplier: 3
+  _damage: 21
+  _healthPowerMultiplier: 19
+  _damagePowerMultiplier: 2.8
   _softReward: 0
   _experience: 0
   _softRewardPowerMultiplier: 0

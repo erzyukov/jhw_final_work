@@ -14,6 +14,7 @@
 		Upgrades,
 		UnitUpgrades,
         Energy,
+		Common,
 
         // Levels
         Regions = 250,
@@ -35,5 +36,6 @@
 
 		// Monetization
 		Ads = 500,
+		Iap,
 	}
 }

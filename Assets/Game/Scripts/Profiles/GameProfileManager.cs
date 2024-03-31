@@ -99,8 +99,23 @@ namespace Game.Profiles
 			AddMissingUnits();
 			AddMissingEnergy();
 			AddMissingAnalytics();
+			AddMissingIapShop();
 
 			Save();
+		}
+
+		private void AddMissingIapShop()
+		{
+			/*
+			if (_gameProfile.IapShopProfile == null)
+				_gameProfile.IapShopProfile = new();
+
+			if (_gameProfile.IapShopProfile.BoughtProducts == null)
+				_gameProfile.IapShopProfile.BoughtProducts = new();
+
+			if (_gameProfile.IapShopProfile.NoAdsProduct == null)
+				_gameProfile.IapShopProfile.NoAdsProduct = new();
+			*/
 		}
 
 		private void AddMissingLevels()

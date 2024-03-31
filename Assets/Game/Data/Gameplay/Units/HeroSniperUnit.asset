@@ -19,10 +19,10 @@ MonoBehaviour:
   _attackRange: 5
   _attackDelay: 1.4
   _projectileType: 1
-  _health: 90
-  _damage: 35
-  _healthPowerMultiplier: 11
-  _damagePowerMultiplier: 4
+  _health: 85
+  _damage: 34
+  _healthPowerMultiplier: 10
+  _damagePowerMultiplier: 3.8
   _softReward: 0
   _experience: 0
   _softRewardPowerMultiplier: 0

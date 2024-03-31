@@ -55,6 +55,15 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<UiUpgrades>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiIapShopScreen>()
+				.FromComponentInHierarchy()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<UiIapShopPresenter>()
+				.AsSingle();
 		}
 	}
 }

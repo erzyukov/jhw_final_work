@@ -1,5 +1,6 @@
 ﻿namespace Game.Core
 {
+	using Game.Configs;
 	using Game.Profiles;
 	using UniRx;
 	using Zenject;

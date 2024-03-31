@@ -28,4 +28,6 @@ MonoBehaviour:
   _battleField: {fileID: 11400000, guid: 67d76da5b9bc6f646a94e824fa96aa81, type: 2}
   _weapons: {fileID: 11400000, guid: 0b043dcfb24e6934eb2b9946cf2541f9, type: 2}
   _upgrades: {fileID: 11400000, guid: c3137a23aa7499a47b42bb96df16a498, type: 2}
+  _commonGameplay: {fileID: 11400000, guid: 140275154a708224e9b4283a5d970e84, type: 2}
   _ads: {fileID: 11400000, guid: 34bc97d6d183a7f4786c731d4514e88b, type: 2}
+  _iap: {fileID: 11400000, guid: 9ba52ae59642763439d8f3c89418869a, type: 2}

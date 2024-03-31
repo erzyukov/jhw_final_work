@@ -112,6 +112,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "IncreaseHeroLevel",
+                    "type": "Button",
+                    "id": "c8bfb49e-c255-4c29-be2a-c7a21e953c0d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -301,6 +310,17 @@
                     "action": "KillAllEnemies",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "5ada361c-f5cc-4b02-8943-3e44313e2ac7",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "IncreaseHeroLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
