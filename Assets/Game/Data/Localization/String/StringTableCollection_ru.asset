@@ -320,7 +320,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 43183668549029888
-    m_Localized: "{price} \u042F\u041D"
+    m_Localized: '{price} YAN'
     m_Metadata:
       m_Items:
       - rid: 1729294972177874947
