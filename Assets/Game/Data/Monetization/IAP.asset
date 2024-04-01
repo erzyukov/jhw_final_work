@@ -52,10 +52,10 @@ MonoBehaviour:
       Data: 2|Game.Iap.IapData, Assembly-CSharp
     - Name: Bundle
       Entry: 1
-      Data: com.dd.noads
+      Data: com_dd_noads
     - Name: Price
       Entry: 4
-      Data: 49
+      Data: 39
     - Name: IsConsumable
       Entry: 5
       Data: false
