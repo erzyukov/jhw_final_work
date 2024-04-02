@@ -22,6 +22,6 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   BlockersInter: 01000000320000006800000069000000
-  BlockersBanner: 0100000032000000
+  BlockersBanner: 01000000
   InterstitialInterval: 61
   InterActiveLevelNumber: 4

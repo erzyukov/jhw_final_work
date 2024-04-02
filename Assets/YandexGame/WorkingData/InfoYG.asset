@@ -273,11 +273,11 @@ MonoBehaviour:
     de: 
     hi: 
   purshasesSimulation:
-  - id: com.dd.noads
+  - id: com_dd_noads
     title: NoAds
     description: Disable Force Ads
     imageURI: https://justplaygames.ru/public/Paymant1.png
-    priceValue: 49
+    priceValue: 39
     consumed: 0
   metricaEnable: 0
   metricaCounterID: 0
