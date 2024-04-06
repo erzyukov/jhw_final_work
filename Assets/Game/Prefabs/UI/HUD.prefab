@@ -1481,7 +1481,7 @@ MonoBehaviour:
       data:
         m_Localized:
           m_TableReference:
-            m_TableCollectionName: GUID:5f31ae77c27018a4d8effc3283048516
+            m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
           m_TableEntryReference:
             m_KeyId: 10973024260096
             m_Key: 
@@ -1926,7 +1926,7 @@ MonoBehaviour:
       data:
         m_Localized:
           m_TableReference:
-            m_TableCollectionName: GUID:5f31ae77c27018a4d8effc3283048516
+            m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
           m_TableEntryReference:
             m_KeyId: 11563825532928
             m_Key: 
@@ -2258,6 +2258,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _value: {fileID: 7258714754422064845}
+  _alert:
+    Image: {fileID: 0}
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Duration: 0
+    Repeats: 0
 --- !u!114 &4446176663842312850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2463,7 +2468,7 @@ MonoBehaviour:
       data:
         m_Localized:
           m_TableReference:
-            m_TableCollectionName: GUID:5f31ae77c27018a4d8effc3283048516
+            m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
           m_TableEntryReference:
             m_KeyId: 10854585503744
             m_Key: 
@@ -2750,6 +2755,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _value: {fileID: 1300311768426998859}
+  _alert:
+    Image: {fileID: 0}
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    Duration: 0
+    Repeats: 0
   _valuePostfix: <size=120%><sprite=1>
 --- !u!1 &6821947610591322520
 GameObject:
