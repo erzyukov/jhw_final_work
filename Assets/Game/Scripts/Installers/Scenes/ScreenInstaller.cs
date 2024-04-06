@@ -1,10 +1,13 @@
 namespace Game.Installers
 {
+	using Game.Configs;
 	using Game.Ui;
 	using Zenject;
 
 	public class ScreenInstaller : MonoInstaller
 	{
+		[Inject] private DevConfig _devConfig;
+
 		public override void InstallBindings()
 		{
 			Container
@@ -56,14 +59,17 @@ namespace Game.Installers
 				.BindInterfacesTo<UiUpgrades>()
 				.AsSingle();
 
-			Container
-				.BindInterfacesTo<UiIapShopScreen>()
-				.FromComponentInHierarchy()
-				.AsSingle();
+			if (_devConfig.GamePatform != EGamePatform.None)
+			{
+				Container
+					.BindInterfacesTo<UiIapShopScreen>()
+					.FromComponentInHierarchy()
+					.AsSingle();
 
-			Container
-				.BindInterfacesTo<UiIapShopPresenter>()
-				.AsSingle();
+				Container
+					.BindInterfacesTo<UiIapShopPresenter>()
+					.AsSingle();
+			}
 		}
 	}
 }

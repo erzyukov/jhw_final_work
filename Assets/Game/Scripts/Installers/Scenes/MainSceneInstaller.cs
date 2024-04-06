@@ -191,6 +191,18 @@ namespace Game.Installers
 						.AsSingle();
 
 					break;
+
+				default:
+					
+					Container
+						.BindInterfacesTo<DefaultAdsProvider>()
+						.AsSingle();
+
+					Container
+						.BindInterfacesTo<AdsManager>()
+						.AsSingle();
+					
+					break;
 			}
 		}
 	}
