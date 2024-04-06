@@ -149,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:5f31ae77c27018a4d8effc3283048516
+      m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
     m_TableEntryReference:
       m_KeyId: 39375417672556544
       m_Key: 
@@ -594,7 +594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StringReference:
     m_TableReference:
-      m_TableCollectionName: GUID:5f31ae77c27018a4d8effc3283048516
+      m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
     m_TableEntryReference:
       m_KeyId: 39368102173040640
       m_Key: 

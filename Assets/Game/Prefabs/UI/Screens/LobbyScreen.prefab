@@ -355,7 +355,7 @@ MonoBehaviour:
       data:
         m_Localized:
           m_TableReference:
-            m_TableCollectionName: GUID:5f31ae77c27018a4d8effc3283048516
+            m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
           m_TableEntryReference:
             m_KeyId: 19023760101376
             m_Key: 
@@ -1460,7 +1460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89fe043218282c94881292edf3b4dd13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _closeButton: {fileID: 0}
+  CloseButton: {fileID: 0}
   _levelTitle: {fileID: 673188120348423765}
   _lastWave: {fileID: 7126296215064068504}
   _lastWaveValue: {fileID: 3382622870673346304}
