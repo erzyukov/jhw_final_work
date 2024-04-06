@@ -14,17 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: en
-  m_SharedData: {fileID: 11400000, guid: 5f31ae77c27018a4d8effc3283048516, type: 2}
+  m_SharedData: {fileID: 11400000, guid: a85e39e96efe1144eae385d630010f58, type: 2}
   m_Metadata:
-    m_Items:
-    - rid: 1729294972177874946
+    m_Items: []
   m_TableData:
-  - m_Id: 4015764443136
-    m_Localized: TOKEN
-    m_Metadata:
-      m_Items: []
   - m_Id: 3741385658368
     m_Localized: 'HAVE NEED OF:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4015764443136
+    m_Localized: TOKEN
     m_Metadata:
       m_Items: []
   - m_Id: 10854585503744
@@ -306,16 +305,11 @@ MonoBehaviour:
   - m_Id: 43183668549029888
     m_Localized: '{price} YAN'
     m_Metadata:
-      m_Items:
-      - rid: 1729294972177874946
+      m_Items: []
   - m_Id: 43185999734804480
     m_Localized: SOLD
     m_Metadata:
       m_Items: []
   references:
     version: 2
-    RefIds:
-    - rid: 1729294972177874946
-      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
-      data:
-        m_Entries: 0090f657516b9900
+    RefIds: []

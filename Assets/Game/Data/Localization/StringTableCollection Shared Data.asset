@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StringTableCollection Shared Data
   m_EditorClassIdentifier: 
   m_TableCollectionName: StringTableCollection
-  m_TableCollectionNameGuidString: 5f31ae77c27018a4d8effc3283048516
+  m_TableCollectionNameGuidString: a85e39e96efe1144eae385d630010f58
   m_Entries:
   - m_Id: 3741385658368
     m_Key: 1 - Main/Canvas/HUD/Messages/HaveNeedOf/Title
@@ -116,8 +116,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1804974357098496
-    m_Key: 1 - Main/Canvas/Windows/ContinueLevelRequest/Window/ContinueButton/Text
-      (TMP)
+    m_Key: continue
     m_Metadata:
       m_Items: []
   - m_Id: 3040516373622784
@@ -166,8 +165,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4558519665831936
-    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/Scroll View/Viewport/Content/UnitElementUnavailable/UpgradeButton/Text
-      (TMP)
+    m_Key: unavailable
     m_Metadata:
       m_Items: []
   - m_Id: 4566552647184384
@@ -231,7 +229,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 11415812669083648
-    m_Key: 1 - Main/Canvas/Windows/LevelMenu/Window/NewGameButton/Text (TMP)
+    m_Key: Windows_LevelMenu_MainMenu
     m_Metadata:
       m_Items: []
   - m_Id: 22314108472168448
@@ -305,11 +303,11 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 9072703802301743128
+    rid: 5784176776087601179
   references:
     version: 2
     RefIds:
-    - rid: 9072703802301743128
+    - rid: 5784176776087601179
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1701465974926
+        m_CustomEpoch: 1712397086425

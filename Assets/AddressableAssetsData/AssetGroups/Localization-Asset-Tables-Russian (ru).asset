@@ -15,9 +15,9 @@ MonoBehaviour:
   m_GroupName: Localization-Asset-Tables-Russian (ru)
   m_Data:
     m_SerializedData: []
-  m_GUID: e3264e92017c83c4b8326dd6ccd28da6
+  m_GUID: 80adf8e735614f343879e27601db47d0
   m_SerializeEntries:
-  - m_GUID: b3a8f64926b5ce94cb8232bc3f08302d
+  - m_GUID: b4ee56875a26e8745aa631190907f6ef
     m_Address: AssetTableCollection_ru
     m_ReadOnly: 1
     m_SerializedLabels:

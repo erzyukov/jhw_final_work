@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db626ad063b13545924a9839ac5fa83, type: 3}
   m_Name: AssetTableCollection
   m_EditorClassIdentifier: 
-  m_SharedTableData: {fileID: 11400000, guid: cec7528aae18d774e8e8aa0231e1dfa7, type: 2}
+  m_SharedTableData: {fileID: 11400000, guid: f6b0ab203bc59e847af08f62ed038f1e, type: 2}
   m_Tables:
-  - {fileID: 11400000, guid: 71514c99d9935b940b15623a3b6157c6, type: 2}
-  - {fileID: 11400000, guid: b3a8f64926b5ce94cb8232bc3f08302d, type: 2}
+  - {fileID: 11400000, guid: 61df2fca9f4472144bc0033532ecc47c, type: 2}
+  - {fileID: 11400000, guid: b4ee56875a26e8745aa631190907f6ef, type: 2}
   m_Extensions: []
   m_Group: Asset Table
   references:
