@@ -506,9 +506,9 @@ MonoBehaviour:
       data:
         m_Localized:
           m_TableReference:
-            m_TableCollectionName: GUID:5f31ae77c27018a4d8effc3283048516
+            m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
           m_TableEntryReference:
-            m_KeyId: 3040516373622784
+            m_KeyId: 59502782484480
             m_Key: 
           m_FallbackState: 0
           m_WaitForCompletion: 0
@@ -681,9 +681,9 @@ MonoBehaviour:
       data:
         m_Localized:
           m_TableReference:
-            m_TableCollectionName: GUID:5f31ae77c27018a4d8effc3283048516
+            m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
           m_TableEntryReference:
-            m_KeyId: 4399172084183040
+            m_KeyId: 19351314272256
             m_Key: 
           m_FallbackState: 0
           m_WaitForCompletion: 0
@@ -1231,9 +1231,9 @@ MonoBehaviour:
       type: {class: LocalizedSprite, ns: UnityEngine.Localization, asm: Unity.Localization}
       data:
         m_TableReference:
-          m_TableCollectionName: GUID:cec7528aae18d774e8e8aa0231e1dfa7
+          m_TableCollectionName: 
         m_TableEntryReference:
-          m_KeyId: 137551581184
+          m_KeyId: 0
           m_Key: 
         m_FallbackState: 0
         m_WaitForCompletion: 0
@@ -1578,7 +1578,7 @@ MonoBehaviour:
       data:
         m_Localized:
           m_TableReference:
-            m_TableCollectionName: GUID:5f31ae77c27018a4d8effc3283048516
+            m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
           m_TableEntryReference:
             m_KeyId: 3040879600349184
             m_Key: 

@@ -1,0 +1,315 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: StringTableCollection_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: a85e39e96efe1144eae385d630010f58, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 3741385658368
+    m_Localized: 'HAVE NEED OF:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4015764443136
+    m_Localized: TOKEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10854585503744
+    m_Localized: SUMMON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10973024260096
+    m_Localized: BATTLE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11563825532928
+    m_Localized: VS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12019083677696
+    m_Localized: WAVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19023760101376
+    m_Localized: PLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19142035279872
+    m_Localized: LAST WAVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19351314272256
+    m_Localized: LEVEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59502782484480
+    m_Localized: VICTORY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59759893319680
+    m_Localized: TAP TO CONTINUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65332927959040
+    m_Localized: DEFEAT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65524175638528
+    m_Localized: 'NEVER GIVE UP!
+
+      UPGRADE YOUR TROOPS AND TRY AGAIN!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 358944567889920
+    m_Localized: LOADING...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 476285012185088
+    m_Localized: SUMMON A RANDOM UNIT!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 508781783322624
+    m_Localized: SUMMON ANOTHER UNIT!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 730388798517248
+    m_Localized: MERGE UNITS TO ENHANCE THEM!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 730395614261248
+    m_Localized: MERGE UNITS TO CHANGE YOUR FORMATION!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 731561861459968
+    m_Localized: YOU ARE OUT OF SUMMON TOKENS. LET THE BATTLE BEGIN!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1431262374014976
+    m_Localized: 'HAVE NEED OF: <size=160%><sprite=1><size=100%>TOKEN'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1431849803067392
+    m_Localized: NOT ENOUGH SPACE!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433670948892672
+    m_Localized: 'HAVE NEED OF: CHEST KEY'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1688172746649600
+    m_Localized: 'LAST WAVE:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1798343896477696
+    m_Localized: 'CONTINUE FROM
+
+      LAST SESSION?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1802796930314240
+    m_Localized: NEW GAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1804974357098496
+    m_Localized: CONTINUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3040516373622784
+    m_Localized: CONGRATULATION!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3040879600349184
+    m_Localized: LEVEL REWARD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3045861565280256
+    m_Localized: NEW PLAYER LEVEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3995855386456064
+    m_Localized: HOME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3997344985133056
+    m_Localized: UPGRADE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396387498340352
+    m_Localized: HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396521988698112
+    m_Localized: DAMAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396777035935744
+    m_Localized: SPEED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396879217569792
+    m_Localized: RANGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4399172084183040
+    m_Localized: LEVEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4412267393331200
+    m_Localized: UPGRADE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4558519665831936
+    m_Localized: UNAVAILABLE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4566552647184384
+    m_Localized: LV.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5066819859787776
+    m_Localized: 'HAVE NEED OF: <size=160%><sprite=0><size=100%>MONEY'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5791061190520832
+    m_Localized: <size=85%>{{}} <size=125%><sprite=2>
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5799258752167936
+    m_Localized: 'HAVE NEED OF: <sprite=2>ENERGY'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7758452608110592
+    m_Localized: IT'S TIME TO UPGRADE YOUR UNITS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8677005616123904
+    m_Localized: SELECT SNIPER UNIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8679098993250304
+    m_Localized: BUY UPGRADE FOR INFANTRYMAN TO MAKE YOUR UNIT MORE POWERFUL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9035584596512768
+    m_Localized: BUY THE SNIPER UPGRADE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9035602543939584
+    m_Localized: ALWAYS UPGRADE YOUR UNITS TO OVERCOME YOUR ENEMY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9035616703909888
+    m_Localized: CHECK YOUR UPGRADED UNITS IN BATTLE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9428361570324480
+    m_Localized: CONTINUE TO DESTROY YOUR ENEMY!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458325862649856
+    m_Localized: SNIPER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458497627787264
+    m_Localized: INFANTRYMAN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458633628094464
+    m_Localized: IMP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458713282121728
+    m_Localized: DEMON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11415812669083648
+    m_Localized: MAIN MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22314108472168448
+    m_Localized: MUSIC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22314468846768128
+    m_Localized: SOUND
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26824618945896448
+    m_Localized: 'SETTINGS:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39118975644295168
+    m_Localized: YOU LEVEL IS TOOL LOW
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39368102173040640
+    m_Localized: WATCH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39375417672556544
+    m_Localized: MORE ENERGY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39490323575037952
+    m_Localized: INCREASE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39491225912434688
+    m_Localized: SKIP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40213801647300608
+    m_Localized: 'INCREASE YOUR REWARD:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40579838825816064
+    m_Localized: 'RETURN TO BATTLE AND
+
+      STRENGTHEN YOUR PLATOON?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40582830417338368
+    m_Localized: RETURN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40583015000268800
+    m_Localized: GIVE UP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40938627844366336
+    m_Localized: FREE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41669155845398528
+    m_Localized: SHOP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41672790880903168
+    m_Localized: 'DISABLE
+
+      ADS'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43183668549029888
+    m_Localized: '{price} YAN'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43185999734804480
+    m_Localized: SOLD
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

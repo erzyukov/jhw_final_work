@@ -92,14 +92,13 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.localization": {
-      "version": "1.4.5",
+      "version": "file:com.unity.localization",
       "depth": 0,
-      "source": "registry",
+      "source": "embedded",
       "dependencies": {
         "com.unity.addressables": "1.21.8",
         "com.unity.nuget.newtonsoft-json": "3.0.2"
-      },
-      "url": "https://packages.unity.com"
+      }
     },
     "com.unity.nuget.newtonsoft-json": {
       "version": "3.2.1",

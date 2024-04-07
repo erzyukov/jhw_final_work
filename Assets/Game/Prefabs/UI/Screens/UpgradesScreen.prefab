@@ -450,9 +450,9 @@ MonoBehaviour:
       data:
         m_Localized:
           m_TableReference:
-            m_TableCollectionName: GUID:5f31ae77c27018a4d8effc3283048516
+            m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
           m_TableEntryReference:
-            m_KeyId: 4396879217569792
+            m_KeyId: 4396387498340352
             m_Key: 
           m_FallbackState: 0
           m_WaitForCompletion: 0
@@ -623,7 +623,7 @@ MonoBehaviour:
       data:
         m_Localized:
           m_TableReference:
-            m_TableCollectionName: GUID:5f31ae77c27018a4d8effc3283048516
+            m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
           m_TableEntryReference:
             m_KeyId: 4396387498340352
             m_Key: 
@@ -2350,9 +2350,9 @@ MonoBehaviour:
       data:
         m_Localized:
           m_TableReference:
-            m_TableCollectionName: GUID:5f31ae77c27018a4d8effc3283048516
+            m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
           m_TableEntryReference:
-            m_KeyId: 4396777035935744
+            m_KeyId: 4396387498340352
             m_Key: 
           m_FallbackState: 0
           m_WaitForCompletion: 0
@@ -3166,9 +3166,9 @@ MonoBehaviour:
       data:
         m_Localized:
           m_TableReference:
-            m_TableCollectionName: GUID:5f31ae77c27018a4d8effc3283048516
+            m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
           m_TableEntryReference:
-            m_KeyId: 4396521988698112
+            m_KeyId: 4396387498340352
             m_Key: 
           m_FallbackState: 0
           m_WaitForCompletion: 0
@@ -3873,6 +3873,10 @@ PrefabInstance:
     - target: {fileID: 3784895138836894734, guid: c62b80ba453588f42b0cee07cda98e83, type: 3}
       propertyPath: m_Name
       value: UnitElementUnavailable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5225213443593493151, guid: c62b80ba453588f42b0cee07cda98e83, type: 3}
+      propertyPath: managedReferences[1729294474856628225].m_Localized.m_TableReference.m_TableCollectionName
+      value: GUID:a85e39e96efe1144eae385d630010f58
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

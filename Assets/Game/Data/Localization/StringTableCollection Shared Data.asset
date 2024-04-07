@@ -1,0 +1,313 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: StringTableCollection Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: StringTableCollection
+  m_TableCollectionNameGuidString: a85e39e96efe1144eae385d630010f58
+  m_Entries:
+  - m_Id: 3741385658368
+    m_Key: 1 - Main/Canvas/HUD/Messages/HaveNeedOf/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4015764443136
+    m_Key: 1 - Main/Canvas/HUD/Messages/HaveNeedOf/SummonCurrencyTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10854585503744
+    m_Key: 1 - Main/Canvas/HUD/TacticalStage/SummonButton/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10973024260096
+    m_Key: 1 - Main/Canvas/HUD/TacticalStage/StartBattleButton/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11563825532928
+    m_Key: "1 - Main/Canvas/HUD/BattleStage/Team\u0421omposition/Title"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12019083677696
+    m_Key: wave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19023760101376
+    m_Key: play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19142035279872
+    m_Key: lastWave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19351314272256
+    m_Key: level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59502782484480
+    m_Key: 1 - Main/Canvas/Screens/WinScreen/Header/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59759893319680
+    m_Key: 1 - Main/Canvas/Screens/WinScreen/ContinueHint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65332927959040
+    m_Key: 1 - Main/Canvas/Screens/LoseScreen/Header/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65524175638528
+    m_Key: 1 - Main/Canvas/Screens/LoseScreen/Hint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 358944567889920
+    m_Key: 0 - Splash/Canvas/LoadingScreen/LoadingText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 476285012185088
+    m_Key: beginerTutorialFirstStep
+    m_Metadata:
+      m_Items: []
+  - m_Id: 508781783322624
+    m_Key: beginerTutorialSectondSummon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 730388798517248
+    m_Key: beginerTutorialFirstMerge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 730395614261248
+    m_Key: beginerTutorialSecondMerge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 731561861459968
+    m_Key: beginerTutorialThirdBattle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1431262374014976
+    m_Key: NotEnoughSummonCurrency
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1431849803067392
+    m_Key: NotEnoughFreeSpace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1433670948892672
+    m_Key: NotEnoughChestKeys
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1688172746649600
+    m_Key: uiLastWave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1798343896477696
+    m_Key: 1 - Main/Canvas/Windows/ContinueLevelRequest/Window/MessageBg/Text (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1802796930314240
+    m_Key: newGame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1804974357098496
+    m_Key: continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3040516373622784
+    m_Key: 1 - Main/Canvas/Screens/LevelUpRewardScreen/Congratulation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3040879600349184
+    m_Key: 1 - Main/Canvas/Screens/LevelUpRewardScreen/RewardTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3045861565280256
+    m_Key: 1 - Main/Canvas/Screens/LevelUpRewardScreen/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3995855386456064
+    m_Key: 1 - Main/Canvas/MainMenu/BaseButton/Content/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3997344985133056
+    m_Key: 1 - Main/Canvas/MainMenu/UpgradesButton/Content/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396387498340352
+    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/SelectedUnit/Content/HealthParameter/ValueBg/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396521988698112
+    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/SelectedUnit/Content/DamageParameter/ValueBg/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396777035935744
+    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/SelectedUnit/Content/MoveSpeedParameter/ValueBg/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4396879217569792
+    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/SelectedUnit/Content/RangeParameter/ValueBg/Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4399172084183040
+    m_Key: unitLevel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4412267393331200
+    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/Scroll View/Viewport/Content/UnitElement/UpgradeButton/Text
+      (TMP)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4558519665831936
+    m_Key: unavailable
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4566552647184384
+    m_Key: lvl
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5066819859787776
+    m_Key: NotEnoughSoftCurrency
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5791061190520832
+    m_Key: energyPriceValue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5799258752167936
+    m_Key: NotEnoughEnergy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7758452608110592
+    m_Key: upgradeTutorialMenuButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8677005616123904
+    m_Key: upgradeTutorialSelectNextUnit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8679098993250304
+    m_Key: upgradeTutorialFirstUpgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9035584596512768
+    m_Key: upgradeTutorialSecondUpgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9035602543939584
+    m_Key: upgradeTutorialUpgradeHint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9035616703909888
+    m_Key: upgradeTutorialGoToBattle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9428361570324480
+    m_Key: battleHintGoToSecondBattle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458325862649856
+    m_Key: SniperTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458497627787264
+    m_Key: InfantrymanTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458633628094464
+    m_Key: ImpTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9458713282121728
+    m_Key: DemonTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11415812669083648
+    m_Key: Windows_LevelMenu_MainMenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22314108472168448
+    m_Key: musicSettings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22314468846768128
+    m_Key: soundSettings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26824618945896448
+    m_Key: SettingsWindowTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39118975644295168
+    m_Key: LowHeroLevel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39368102173040640
+    m_Key: AdsButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39375417672556544
+    m_Key: RewardedEnergyTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39490323575037952
+    m_Key: AdsIncreaseReward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 39491225912434688
+    m_Key: AdsSkipReward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40213801647300608
+    m_Key: RewardMultiplierTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40579838825816064
+    m_Key: RewardByLoseTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40582830417338368
+    m_Key: return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40583015000268800
+    m_Key: give_up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40938627844366336
+    m_Key: adButtonTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41669155845398528
+    m_Key: ui_menu_iap_shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41672790880903168
+    m_Key: iap_item_noads
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43183668549029888
+    m_Key: YandexCurrency
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43185999734804480
+    m_Key: sold_button_title
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5784176776087601179
+  references:
+    version: 2
+    RefIds:
+    - rid: 5784176776087601179
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1712397086425
