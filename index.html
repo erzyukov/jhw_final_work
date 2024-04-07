@@ -59,13 +59,13 @@
         const buildUrl = "Build";
         const loaderUrl = buildUrl + "/WebGL.loader.js";
         const config = {
-            dataUrl: buildUrl + "/18c88a2c12491db4c37b423b2e4e5a91.data.unityweb",
-            frameworkUrl: buildUrl + "/8969a7d40bfc9fcdfa93f1f4ee3c3683.js.unityweb",
-            codeUrl: buildUrl + "/e39c4226f044363a6a85e2884aefeff0.wasm.unityweb",
+            dataUrl: buildUrl + "/cd0fbd7e529033347b44ab0a2482b98b.data.unityweb",
+            frameworkUrl: buildUrl + "/e098040da9e93fa418c3d3db962e5ba1.js.unityweb",
+            codeUrl: buildUrl + "/0c42c25c824b267ffcb47dba320e1e69.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
             companyName: "Ecris",
             productName: "Doomsday",
-            productVersion: "0.0.648"
+            productVersion: "0.0.656"
         };
 
         const container = document.querySelector("#unity-container");
@@ -130,7 +130,9 @@
         const script = document.createElement("script");
         script.src = loaderUrl;
         script.onload = () => {
-            
+
+			console.log(">>> Banner: " + GetMobileBannerHeight());
+
             updateAspectRatio();
             window.addEventListener("resize", updateAspectRatio);
 
@@ -161,7 +163,7 @@
             var windowWidth = window.innerWidth;
             var windowHeight = window.innerHeight;
             var defaultAspectRatio = 9 / 16;
-			var windowAspectRatio = windowWidth / (windowHeight - GetMobileBannerHeight());
+			var windowAspectRatio = windowWidth / windowHeight;
 			var maxAspectRatio = 0.68182;
 
 			var targetAspectRatio = (windowAspectRatio <= defaultAspectRatio) 
