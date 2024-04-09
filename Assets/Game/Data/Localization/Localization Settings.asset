@@ -27,7 +27,7 @@ MonoBehaviour:
   m_ProjectLocaleIdentifier:
     m_Code: en
   m_PreloadBehavior: 3
-  m_InitializeSynchronously: 1
+  m_InitializeSynchronously: 0
   references:
     version: 2
     RefIds:
@@ -68,7 +68,7 @@ MonoBehaviour:
         m_CustomTablePostprocessor:
           rid: -2
         m_UseFallback: 0
-        m_MissingTranslationState: 1
+        m_MissingTranslationState: 0
         m_NoTranslationFoundMessage: No translation found for '{key}' in {table.TableCollectionName}
         m_SmartFormat:
           rid: 5784176776087601161
