@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144a0572a280cbd41a926380977e6c29, type: 3}
   m_Name: Dev
   m_EditorClassIdentifier: 
-  _buildType: 1
-  _gamePatform: 0
+  _buildType: 0
+  _gamePatform: 10
   _timeScale: 1
   DisableAnalytics: 1
