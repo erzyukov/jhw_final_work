@@ -22,4 +22,4 @@ MonoBehaviour:
   - Region: 0
     Scene:
       _sceneAsset: {fileID: 102900000, guid: 39607b32dcfe3064d85dc87ec8dc5d2a, type: 3}
-      _sceneName: Region.Forest
+      _sceneName: 2 - Region

@@ -29,15 +29,11 @@ namespace Game.Core
 
 		public IEnumerator Preload()
 		{
-			WaitForFixedUpdate wait = new WaitForFixedUpdate();
-
 			yield return LocalizationSettings.InitializationOperation;
-			yield return wait;
 
 			LocalizationSettings.SelectedLocale = _locale ?? _config.DefaultLocale;
 
 			yield return LocalizationSettings.InitializationOperation;
-			yield return wait;
 		}
 
 		public void SetLocale( string key )

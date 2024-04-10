@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6228893013989442224}
+  - component: {fileID: 850057344263531115}
   m_Layer: 0
-  m_Name: Region.Forest.Environment
+  m_Name: Level.Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,6 +34,19 @@ Transform:
   - {fileID: 8018958831592391534}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &850057344263531115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464319315194564202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc28b99e9e9bf9548ac8a2fd69a2bdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _groundRenderer: {fileID: 2567853734438498036}
 --- !u!1 &2688952480079204416
 GameObject:
   m_ObjectHideFlags: 0

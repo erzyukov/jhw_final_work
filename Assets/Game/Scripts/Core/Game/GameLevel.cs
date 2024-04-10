@@ -4,6 +4,7 @@
 	using Game.Profiles;
 	using Game.Ui;
 	using Game.Utilities;
+	using System.Linq;
 	using UniRx;
 	using UnityEngine;
 	using Zenject;
@@ -17,6 +18,7 @@
 		ReactiveCommand<GameLevel.Result> LevelFinished { get; }
 		ReactiveCommand<int> WaveStarted { get; }
 		ReactiveCommand<GameLevel.Result> WaveFinished { get; }
+		int MaxOpened { get; }
 		void GoToLevel(int number, int wave = -1);
 		void GoToNextWave();
 		void FinishLevel();
@@ -81,6 +83,9 @@
 		public ReactiveCommand<int> WaveStarted { get; } = new();
 
 		public ReactiveCommand<Result> WaveFinished { get; } = new();
+
+		public int MaxOpened =>
+			_profile.Levels.Where( l => l.Unlocked.Value ).Select( ( l, i ) => i ).Max() + 1;
 
 		public void GoToLevel(int number, int wave = -1)
 		{
