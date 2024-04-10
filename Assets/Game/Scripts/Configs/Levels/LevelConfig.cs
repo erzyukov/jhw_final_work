@@ -11,11 +11,13 @@ namespace Game.Configs
 	{
 		[SerializeField] private string _title;
 		[SerializeField] private Sprite _icon;
+		[SerializeField] private Sprite _environment;
 		[SerializeField] private Region _region;
 		[SerializeField] private WaveConfig[] _waves;
 
 		public string Title => _title;
 		public Sprite Icon => _icon;
+		public Sprite Environment => _environment;
 		public Region Region => _region;
 		public WaveConfig[] Waves => _waves;
 	}
