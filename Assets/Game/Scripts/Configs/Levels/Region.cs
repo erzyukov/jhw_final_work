@@ -2,8 +2,8 @@
 {
 	public enum Region
 	{
-		Forest,
-		Desert,
-		Jungle,
+		City,
+		Suburb,
+		Fields,
 	}
 }
