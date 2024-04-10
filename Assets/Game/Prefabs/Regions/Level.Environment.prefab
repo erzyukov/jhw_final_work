@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6228893013989442224}
   m_Layer: 0
-  m_Name: Region.Forest.Environment
+  m_Name: Level.Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
