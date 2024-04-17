@@ -5,6 +5,7 @@
 		// Hero Units
 		HeroInfantryman = 1,
 		HeroSniper,
+		GrenadeLauncher,
 		HeroMedic,
 
 		// Enemy Units

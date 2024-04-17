@@ -35,7 +35,13 @@
 			if (target == null)
 				return;
 
-			_projectileSpawner.Spawn(_shootPoint.transform.position, _unitConfig.ProjectileType, target, CurrentDamage);
+			_projectileSpawner.Spawn(
+				_shootPoint.transform.position, 
+				_unitConfig.ProjectileType, 
+				target, 
+				CurrentDamage,
+				_unitConfig.AttackRange
+			);
 			AtackTimer.Set(_unitConfig.AttackDelay);
         }
 

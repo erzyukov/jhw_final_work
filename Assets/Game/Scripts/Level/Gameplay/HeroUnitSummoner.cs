@@ -133,7 +133,7 @@
 			{
 				float speciesRatio = (float)_speciesCounter[s] / summonedCount;
 
-				if (speciesRatio > _unitsConfig.SummonCountRatioLimit)
+				if (speciesRatio > _unitsConfig.SummonCountRatioLimit && species.Count > 1)
 					species.Remove(s);
 			});
 

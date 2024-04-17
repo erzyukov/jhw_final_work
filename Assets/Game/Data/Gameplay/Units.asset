@@ -45,7 +45,9 @@ MonoBehaviour:
     Config: {fileID: 11400000, guid: f9e6f103822b6b94b8cb8a484d6fbe44, type: 2}
   - Species: 5005
     Config: {fileID: 11400000, guid: 2c73bfc2ce9700a4e924aeb656412915, type: 2}
+  - Species: 3
+    Config: {fileID: 11400000, guid: 9d9059d7b1e933843a181aaf3ec9a784, type: 2}
   _summonCountRatioLimit: 0.6
-  _heroUnits: 0100000002000000
+  _heroUnits: 010000000200000003000000
   _additionalMergeGradePower: 0e0000000900000005000000
-  _heroDefaultSquad: 0100000002000000
+  _heroDefaultSquad: 03000000

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
+  m_Name: HeroGrenadeLauncherUnit
+  m_EditorClassIdentifier: 
+  _titleKey: GranadeLaungerTitle
+  _icon: {fileID: 21300000, guid: f533a01bffb899c41ac9c3bad01acab5, type: 3}
+  _fullLength: {fileID: 21300000, guid: 360c4a8dffc1cb74bba3cef7c16e9900, type: 3}
+  _class: 1
+  _attackRange: 4
+  _attackDelay: 1.8
+  _projectileType: 3
+  _health: 85
+  _damage: 34
+  _healthPowerMultiplier: 10
+  _damagePowerMultiplier: 3.8
+  _softReward: 0
+  _experience: 0
+  _softRewardPowerMultiplier: 0
+  _experiencePowerMultiplier: 0
+  _gradePrefabs:
+  - {fileID: 3009363758071439639, guid: 35b67a6b4983f9e46a192d174cd0266f, type: 3}
+  - {fileID: 3009363758071439639, guid: fabe634ee6801cb44ba66bc474b58143, type: 3}
+  - {fileID: 3009363758071439639, guid: c828ba763d5849d40ac66eed57d60636, type: 3}
+  - {fileID: 3009363758071439639, guid: d222e29fac9c05c42b761084569c1e8e, type: 3}
+  _isDebug: 1

@@ -5,6 +5,7 @@ Shader "Game/SurfaceHDR"
         _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_ORM ("ORM", 2D) = "bump" {}
+		_BumpMap ("Bumpmap", 2D) = "bump" {}
     }
     SubShader
     {
@@ -20,11 +21,13 @@ Shader "Game/SurfaceHDR"
 
         sampler2D _MainTex;
 		sampler2D _ORM;
+		sampler2D _BumpMap;
 
         struct Input
         {
             float2 uv_MainTex;
 			float2 uv_ORM;
+			float2 uv_BumpMap;
         };
 
         fixed4 _Color;
@@ -45,6 +48,8 @@ Shader "Game/SurfaceHDR"
 			o.Occlusion = (tex2D (_ORM, IN.uv_ORM)).r;
 			o.Smoothness = (tex2D (_ORM, IN.uv_ORM)).g;
             o.Metallic = (tex2D (_ORM, IN.uv_ORM)).b;
+
+			o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
         }
         ENDCG
     }
