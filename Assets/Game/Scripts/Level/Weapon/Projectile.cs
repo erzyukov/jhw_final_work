@@ -1,5 +1,6 @@
 namespace Game.Weapon
 {
+	using Game.Core;
 	using Game.Fx;
 	using Game.Units;
 	using System;
@@ -12,68 +13,77 @@ namespace Game.Weapon
 
 		SniperBullet,
 		Fireball,
+		GrenadeCapsule,
 	}
 
 	[RequireComponent(typeof(Rigidbody))]
-    public class Projectile : MonoBehaviour, IPoolable<ProjectileData, IMemoryPool>, IDisposable
+    public class Projectile : MonoBehaviour, IPoolable<ProjectileArgs, IMemoryPool>, IDisposable
 	{
+		[Inject] protected IBattleEvents BattleEvents;
+
 		[SerializeField] private ParticleFx _particles;
 
-		private IMemoryPool _pool;
-		private IUnitFacade _target;
-		private float _speed;
-		private float _damage;
-		private Rigidbody _rigidbody;
+		protected IMemoryPool Pool;
+		protected IUnitFacade Target;
+		protected float Speed;
+		protected float Damage;
+		protected Rigidbody Rigidbody;
+		protected Vector3 TargetPosition;
+		protected ProjectileArgs Args;
 
 		private void Awake()
 		{
-			_rigidbody = GetComponent<Rigidbody>();
+			Rigidbody = GetComponent<Rigidbody>();
 		}
-
-		private Vector3 _targetPosition;
 
 		private void FixedUpdate()
 		{
-			_targetPosition = (_target == null || _target.IsDead) ? _targetPosition : _target.ModelRendererTransform.position;
-			Vector3 newPosition = Vector3.MoveTowards(transform.position, _targetPosition, _speed * Time.fixedDeltaTime);
-			_rigidbody.MovePosition(newPosition);
+			Move();
 
-			if (transform.position == _targetPosition)
+			if (transform.position == TargetPosition)
 			{
-				_target.TakeDamage(_damage);
+				Target.TakeDamage(Damage);
 				Dispose();
 			}
 		}
 		
 		private void OnTriggerEnter(Collider other)
 		{
-			if (_target.IsDead || other.transform != _target.Transform)
+			if (Target.IsDead || other.transform != Target.Transform)
 				return;
 
-			_target.TakeDamage(_damage);
+			Target.TakeDamage(Damage);
 			Dispose();
+		}
+
+		protected virtual void Move()
+		{
+			TargetPosition = (Target == null || Target.IsDead) ? TargetPosition : Target.ModelRendererTransform.position;
+			Vector3 newPosition = Vector3.MoveTowards(transform.position, TargetPosition, Speed * Time.fixedDeltaTime);
+			Rigidbody.MovePosition(newPosition);
 		}
 
 		public void Dispose()
 		{
 			_particles?.Pause();
-			_pool.Despawn(this);
+			Pool.Despawn(this);
 		}
 
 		public void OnDespawned()
 		{
-			_pool = null;
-			_target = null;
-			_speed = 0;
+			Pool = null;
+			Target = null;
+			Speed = 0;
 		}
 
-		public void OnSpawned(ProjectileData data, IMemoryPool pool)
+		public virtual void OnSpawned(ProjectileArgs args, IMemoryPool pool)
 		{
-			transform.position = data.StartPosition;
-			_pool = pool;
-			_target = data.Target;
-			_speed = data.Speed;
-			_damage = data.Damage;
+			Args = args;
+			transform.position = args.StartPosition;
+			Pool = pool;
+			Target = args.Target;
+			Speed = args.Speed;
+			Damage = args.Damage;
 			_particles?.Play();
 		}
 	}
