@@ -6,5 +6,8 @@
 
 		// Core
 		UnitMerge = 1,
+
+		// Weapon
+		GrenadeExplode = 100,
 	}
 }
