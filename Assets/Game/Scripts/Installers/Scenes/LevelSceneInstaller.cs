@@ -170,6 +170,10 @@ namespace Game.Installers
 			Container
 				.BindInterfacesTo<EffectsSpawner>()
 				.AsSingle();
+
+			Container
+				.BindInterfacesTo<LevelFxSpawner>()
+				.AsSingle();
 		}
 
 		private Transform CreatePoolParent( string poolName )
