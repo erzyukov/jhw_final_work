@@ -28,8 +28,8 @@ MonoBehaviour:
   _softRewardPowerMultiplier: 0
   _experiencePowerMultiplier: 0
   _gradePrefabs:
-  - {fileID: 3009363758071439639, guid: 35b67a6b4983f9e46a192d174cd0266f, type: 3}
-  - {fileID: 3009363758071439639, guid: fabe634ee6801cb44ba66bc474b58143, type: 3}
-  - {fileID: 3009363758071439639, guid: c828ba763d5849d40ac66eed57d60636, type: 3}
-  - {fileID: 3009363758071439639, guid: d222e29fac9c05c42b761084569c1e8e, type: 3}
+  - {fileID: 3009363758071439639, guid: 7e34a6d506a0d264588cde3c9c8e7a24, type: 3}
+  - {fileID: 3009363758071439639, guid: 7e34a6d506a0d264588cde3c9c8e7a24, type: 3}
+  - {fileID: 3009363758071439639, guid: 7e34a6d506a0d264588cde3c9c8e7a24, type: 3}
+  - {fileID: 3009363758071439639, guid: 7e34a6d506a0d264588cde3c9c8e7a24, type: 3}
   _isDebug: 1

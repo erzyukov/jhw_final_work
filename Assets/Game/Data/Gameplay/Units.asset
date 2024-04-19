@@ -50,4 +50,4 @@ MonoBehaviour:
   _summonCountRatioLimit: 0.6
   _heroUnits: 010000000200000003000000
   _additionalMergeGradePower: 0e0000000900000005000000
-  _heroDefaultSquad: 03000000
+  _heroDefaultSquad: 030000000200000001000000
