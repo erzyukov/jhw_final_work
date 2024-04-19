@@ -19,13 +19,8 @@
 	public class WeaponsConfig : SerializedScriptableObject
 	{
 		[Header("Projectile / Technical")]
-		//[SerializeField] private Dictionary<ProjectileType, Projectile> _projectilePrefabs = new Dictionary<ProjectileType, Projectile>();
 		public Dictionary<ProjectileType, ProjectileConfig> Projectile = new Dictionary<ProjectileType, ProjectileConfig>();
 		public int ProjectilePoolSize;
-		//public float BulletSpeed;
-
-		//public int BulletPoolSize => _bulletPoolSize;
-		//public float BulletSpeed => _bulletSpeed;
 
 		public Projectile GetProjectilePrefab(ProjectileType type)
 		{
