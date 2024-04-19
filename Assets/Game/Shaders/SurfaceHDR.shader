@@ -46,7 +46,7 @@ Shader "Game/SurfaceHDR"
             o.Albedo = c.rgb;
 
 			o.Occlusion = (tex2D (_ORM, IN.uv_ORM)).r;
-			o.Smoothness = (tex2D (_ORM, IN.uv_ORM)).g;
+			o.Smoothness = 1 - (tex2D (_ORM, IN.uv_ORM)).g;
             o.Metallic = (tex2D (_ORM, IN.uv_ORM)).b;
 
 			o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
