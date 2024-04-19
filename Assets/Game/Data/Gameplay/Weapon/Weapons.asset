@@ -55,7 +55,7 @@ MonoBehaviour:
       Data: Game.Configs.ProjectileConfig, Assembly-CSharp
     - Name: Speed
       Entry: 4
-      Data: 5
+      Data: 25
     - Name: Height
       Entry: 4
       Data: 0
