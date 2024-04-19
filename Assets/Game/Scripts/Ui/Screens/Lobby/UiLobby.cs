@@ -60,6 +60,8 @@
 
 		private void OnScreenOpeningHandler()
 		{
+			_selectedLevelIndex = _profile.LevelNumber.Value - 1;
+
 			SetLevelInfo( _selectedLevelIndex );
 
 			UpdateScreenState();
