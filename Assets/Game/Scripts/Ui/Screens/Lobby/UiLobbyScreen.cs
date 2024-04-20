@@ -27,8 +27,8 @@
 		void SetPrewLevelIcon( Sprite value );
 		void SetNextLevelIcon( Sprite value );
 		void SetIconNormalizedPosition( float value );
-		void SetPrewButtonActive( bool value );
-		void SetPrewGlowActive( bool value );
+		void SetPrevButtonActive( bool value );
+		void SetPrevGlowActive( bool value );
 		void SetNextButtonActive( bool value );
 		void SetNextGlowActive( bool value );
 	}
@@ -104,10 +104,10 @@
 		public void SetIconNormalizedPosition( float value ) => 
 			_levelScrollRect.horizontalNormalizedPosition = value;
 
-		public void SetPrewButtonActive( bool value ) => _previousLevelButton.interactable = value;
+		public void SetPrevButtonActive( bool value ) => _previousLevelButton.interactable = value;
 		public void SetNextButtonActive( bool value ) => _nextLevelButton.interactable = value;
 
-		public void SetPrewGlowActive( bool value ) => _previousLevelGlow.SetActive( value );
+		public void SetPrevGlowActive( bool value ) => _previousLevelGlow.SetActive( value );
 		public void SetNextGlowActive( bool value ) => _nextLevelGlow.SetActive( value );
 
 		public void SetLevelActive( bool value ) =>

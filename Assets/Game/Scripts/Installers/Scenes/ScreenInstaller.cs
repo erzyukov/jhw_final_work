@@ -15,12 +15,16 @@ namespace Game.Installers
 				.AsSingle();
 
 			Container
+				.BindInterfacesTo<UiLobbyFlow>()
+				.AsSingle();
+
+			Container
 				.BindInterfacesTo<UiLobbyScreen>()
 				.FromComponentInHierarchy()
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<UiLobby>()
+				.BindInterfacesTo<UiLobbyPresenter>()
 				.AsSingle();
 
 			Container

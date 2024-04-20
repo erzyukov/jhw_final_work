@@ -7,6 +7,7 @@
 	using UniRx;
 	using System;
 	using Game.Ui;
+	using UnityEngine;
 
 	public class MainSceneTutorial : ControllerBase, IInitializable
 	{
@@ -15,7 +16,7 @@
 		[Inject] private IFingerHint _fingerHint;
 		[Inject] private IDialogHint _dialogHint;
 		[Inject] private ILocalizator _localizator;
-		[Inject] private IUiLobbyScreen _uiLobbyScreen;
+		[Inject] private IUiLobbyFlow _uiLobbyFlow;
 
 		private const int BattleHintLevelNumber = 2;
 		private const string BattleHintStringCode = "battleHintGoToSecondBattle";
@@ -46,7 +47,9 @@
 			_dialogHint.SetPlace(DialogHintPlace.Middle);
 			_dialogHint.SetActive(true);
 
-			_initBattleHint = _uiLobbyScreen.PlayButtonClicked
+			_uiLobbyFlow.IsSelectLevelAvailable.Value = false;
+
+			_initBattleHint = _uiLobbyFlow.PlayButtonClicked
 				.Subscribe(_ => OnPlayButtonClicked())
 				.AddTo(this);
 		}
@@ -57,7 +60,8 @@
 			
 			_fingerHint.Hide();
 			_dialogHint.SetActive(false);
-			
+
+			_uiLobbyFlow.IsSelectLevelAvailable.Value = true;
 			_profile.Tutorial.IsBattleHintComplete.Value = true;
 		}
 	}

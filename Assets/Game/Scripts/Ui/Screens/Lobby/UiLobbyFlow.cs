@@ -1,0 +1,20 @@
+﻿namespace Game.Ui
+{
+	using UniRx;
+
+	public interface IUiLobbyFlow
+	{
+		ReactiveCommand PlayButtonClicked { get; }
+		IntReactiveProperty SelectedLevelIndex { get; }
+		BoolReactiveProperty IsStartAvailable { get; }
+		BoolReactiveProperty IsSelectLevelAvailable { get; }
+	}
+
+	public class UiLobbyFlow : IUiLobbyFlow
+	{
+		public ReactiveCommand PlayButtonClicked { get; } = new();
+		public IntReactiveProperty SelectedLevelIndex { get; } = new();
+		public BoolReactiveProperty IsStartAvailable { get; } = new();
+		public BoolReactiveProperty IsSelectLevelAvailable { get; } = new();
+	}
+}

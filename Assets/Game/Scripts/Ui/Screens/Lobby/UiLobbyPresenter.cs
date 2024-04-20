@@ -9,10 +9,12 @@
 	using UnityEngine;
 	using DG.Tweening;
 	using System;
+	using Newtonsoft.Json.Linq;
 
-	public class UiLobby : ControllerBase, IInitializable
+	public class UiLobbyPresenter : ControllerBase, IInitializable
 	{
 		[Inject] private IUiLobbyScreen _lobbyScreen;
+		[Inject] private IUiLobbyFlow _flow;
 		[Inject] private IUiMessage _uiMessage;
 		[Inject] private IGameLevel _gameLevel;
 		[Inject] private IGameEnergy _gameEnergy;
@@ -33,13 +35,13 @@
 		private string _levelTitlePrefix;
 
 		private bool CanPlayEnergyFree => WaveNumber != 0 || _gameLevel.MaxOpened < _energyConfig.FreeLevelTo;
-
-		private int _selectedLevelIndex;
+		private int SelectedLevelIndex => _flow.SelectedLevelIndex.Value;
 
 		public void Initialize()
 		{
 			_levelTitlePrefix = _localizator.GetString( LevelTitlePrefixKey );
-			_selectedLevelIndex = _profile.LevelNumber.Value - 1;
+			_flow.SelectedLevelIndex.Value = _profile.LevelNumber.Value - 1;
+			_flow.IsSelectLevelAvailable.Value = true;
 
 			_lobbyScreen.Opened
 				.Subscribe( _ => OnScreenOpeningHandler() )
@@ -56,13 +58,21 @@
 			_lobbyScreen.NextLevelClicked
 				.Subscribe( _ => OnNextLevelClicked() )
 				.AddTo( this );
+
+			_flow.IsStartAvailable
+				.Subscribe( OnStartButtonAvailable )
+				.AddTo( this );
+
+			_flow.IsSelectLevelAvailable
+				.Subscribe( SetSwitcherActive )
+				.AddTo( this );
 		}
 
 		private void OnScreenOpeningHandler()
 		{
-			_selectedLevelIndex = _profile.LevelNumber.Value - 1;
+			_flow.SelectedLevelIndex.Value = _profile.LevelNumber.Value - 1;
 
-			SetLevelInfo( _selectedLevelIndex );
+			SetLevelInfo( SelectedLevelIndex );
 
 			UpdateScreenState();
 
@@ -85,12 +95,14 @@
 		}
 
 		private int WaveNumber =>
-			( _selectedLevelIndex == _profile.LevelNumber.Value - 1 )
+			( SelectedLevelIndex == _profile.LevelNumber.Value - 1 )
 				? _profile.WaveNumber.Value
 				: 0;
 
 		private void OnPlayButtonClickedHandler()
 		{
+			_flow.PlayButtonClicked.Execute();
+
 			if (_gameLevel.MaxOpened < _energyConfig.FreeLevelTo)
 				GoToLevelFree();
 			else if (WaveNumber == 0)
@@ -108,7 +120,7 @@
 				if (resetWave)
 					_gameCurrency.ResetLevelSoftCurrency();
 
-				_gameLevel.GoToLevel( _selectedLevelIndex + 1, targetWave );
+				_gameLevel.GoToLevel( SelectedLevelIndex + 1, targetWave );
 			}
 			else
 			{
@@ -119,7 +131,7 @@
 		}
 
 		private void GoToLevelFree() =>
-			_gameLevel.GoToLevel( _selectedLevelIndex + 1, WaveNumber );
+			_gameLevel.GoToLevel( SelectedLevelIndex + 1, WaveNumber );
 
 		private void OnPreviousLevelClicked() =>
 			AnimateSwitching( 0.5f, 0, () => SetSelectedPrew() );
@@ -128,15 +140,15 @@
 			AnimateSwitching( 0.5f, 1, () => SetSelectedNext() );
 
 		private void SetSelectedPrew() =>
-			_selectedLevelIndex = Mathf.Max( 0, _selectedLevelIndex - 1 );
+			_flow.SelectedLevelIndex.Value = Mathf.Max( 0, SelectedLevelIndex - 1 );
 
 		private void SetSelectedNext() =>
-			_selectedLevelIndex = Mathf.Min( _levelsConfig.Levels.Length - 1, _selectedLevelIndex + 1 );
+			_flow.SelectedLevelIndex.Value = Mathf.Min( _levelsConfig.Levels.Length - 1, SelectedLevelIndex + 1 );
 
 		private void AnimateSwitching(float from, float to, Action callback)
 		{
-			SetSwitcherActive( false );
-			_lobbyScreen.SetPlayButtonEnabled( false );
+			_flow.IsSelectLevelAvailable.Value = false;
+			_flow.IsStartAvailable.Value = false;
 
 			DOVirtual.Float( from, to, SwitchDuration, ( t ) =>
 			{
@@ -144,8 +156,9 @@
 			} ).SetEase( Ease.InOutCubic )
 			.OnComplete(() =>
 			{
+				_flow.IsSelectLevelAvailable.Value = true;
 				callback.Invoke();
-				SetLevelInfo( _selectedLevelIndex );
+				SetLevelInfo( SelectedLevelIndex );
 				UpdateScreenState();
 				ResetSwitcherPosition();
 			} );
@@ -153,25 +166,23 @@
 
 		private void UpdateScreenState()
 		{
-			int prevIndex = Mathf.Max( 0 , _selectedLevelIndex - 1);
-			int nextIndex = Mathf.Min( _levelsConfig.Levels.Length - 1, _selectedLevelIndex + 1 );
+			int prevIndex = Mathf.Max( 0 , SelectedLevelIndex - 1);
+			int nextIndex = Mathf.Min( _levelsConfig.Levels.Length - 1, SelectedLevelIndex + 1 );
 
 			_lobbyScreen.SetPrewLevelIcon( _levelsConfig.Levels[prevIndex].Icon );
 			_lobbyScreen.SetNextLevelIcon( _levelsConfig.Levels[nextIndex].Icon );
 
-			bool isPrevButtonActive = _selectedLevelIndex != prevIndex;
-			_lobbyScreen.SetPrewButtonActive( isPrevButtonActive );
-			_lobbyScreen.SetPrewGlowActive( isPrevButtonActive );
+			bool isPrevButtonActive = SelectedLevelIndex != prevIndex;
+			SetPrevButtonActive( isPrevButtonActive );
 
-			bool isNextButtonActive = _selectedLevelIndex != nextIndex;
-			_lobbyScreen.SetNextButtonActive( isNextButtonActive );
-			_lobbyScreen.SetNextGlowActive( isNextButtonActive );
+			bool isNextButtonActive = SelectedLevelIndex != nextIndex;
+			SetNextButtonActive( isNextButtonActive );
 
-			_lobbyScreen.SetPrewLevelActive( _selectedLevelIndex - 1 <= _gameLevel.MaxOpened - 1 );
-			_lobbyScreen.SetNextLevelActive( _selectedLevelIndex + 1 <= _gameLevel.MaxOpened - 1 );
+			_lobbyScreen.SetPrewLevelActive( SelectedLevelIndex - 1 <= _gameLevel.MaxOpened - 1 );
+			_lobbyScreen.SetNextLevelActive( SelectedLevelIndex + 1 <= _gameLevel.MaxOpened - 1 );
 
-			bool isLevelAvailable = _selectedLevelIndex <= _gameLevel.MaxOpened - 1;
-			_lobbyScreen.SetPlayButtonEnabled( isLevelAvailable );
+			bool isLevelAvailable = SelectedLevelIndex <= _gameLevel.MaxOpened - 1;
+			_flow.IsStartAvailable.Value = isLevelAvailable;
 			_lobbyScreen.SetLevelActive( isLevelAvailable );
 		}
 
@@ -180,10 +191,32 @@
 
 		private void SetSwitcherActive ( bool value )
 		{
-			_lobbyScreen.SetPrewButtonActive( value );
-			_lobbyScreen.SetPrewGlowActive( value );
+			SetPrevButtonActive( value );
+			SetNextButtonActive( value );
+
+			if (value == true)
+				UpdateScreenState();
+		}
+
+		private void SetPrevButtonActive( bool value )
+		{
+			value &= _flow.IsSelectLevelAvailable.Value;
+
+			_lobbyScreen.SetPrevButtonActive( value );
+			_lobbyScreen.SetPrevGlowActive( value );
+		}
+
+		private void SetNextButtonActive( bool value )
+		{
+			value &= _flow.IsSelectLevelAvailable.Value;
+
 			_lobbyScreen.SetNextButtonActive( value );
 			_lobbyScreen.SetNextGlowActive( value );
+		}
+
+		private void OnStartButtonAvailable( bool value )
+		{
+			_lobbyScreen.SetPlayButtonEnabled( value );
 		}
 	}
 }

@@ -24,8 +24,8 @@
 		[Inject] private IFingerHint _fingerHint;
 		[Inject] private IDialogHint _dialogHint;
 		[Inject] private IUiMainMenuView _uiMainMenuView;
-		[Inject] private IUiLobbyScreen _uiLobbyScreen;
 		[Inject] private IUiUpgradesScreen _uiUpgradesScreen;
+		[Inject] private IUiLobbyFlow _uiLobbyFlow;
 		[Inject] private IScenesManager _scenesManager;
 
 		readonly private CompositeDisposable _disposable = new CompositeDisposable();
@@ -142,7 +142,8 @@
 		{
 			_fingerHint.Show(FingerPlace.MainMenuUpgrade);
 			ActivateDialogMessege();
-			_uiLobbyScreen.SetPlayButtonEnabled(false);
+			_uiLobbyFlow.IsSelectLevelAvailable.Value = false;
+			_uiLobbyFlow.IsStartAvailable.Value = false;
 		}
 		#endregion
 
@@ -229,7 +230,7 @@
 
 		protected override void OnEnterGoToBattle()
 		{
-			_uiLobbyScreen.SetPlayButtonEnabled(true);
+			_uiLobbyFlow.IsStartAvailable.Value = true;
 			_fingerHint.Show(FingerPlace.LobbyBattle);
 			_uiMainMenuView.SetButtonInteractable(GameState.Upgrades, false);
 			ActivateDialogMessege();
@@ -237,6 +238,7 @@
 
 		protected override void OnExitGoToBattle()
 		{
+			_uiLobbyFlow.IsSelectLevelAvailable.Value = true;
 			_uiUpgradesScreen.UnitElements[Species.HeroInfantryman].SetSelectInteractable(true);
 			_uiUpgradesScreen.UnitElements[Species.HeroInfantryman].SetUpgradeInteractable(true);
 			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetSelectInteractable(true);
