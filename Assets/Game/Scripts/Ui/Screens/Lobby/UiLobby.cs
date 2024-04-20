@@ -9,6 +9,7 @@
 	using UnityEngine;
 	using DG.Tweening;
 	using System;
+	using Newtonsoft.Json.Linq;
 
 	public class UiLobby : ControllerBase, IInitializable
 	{
@@ -153,16 +154,26 @@
 
 		private void UpdateScreenState()
 		{
-			int prewIndex = Mathf.Max( 0 , _selectedLevelIndex - 1);
+			int prevIndex = Mathf.Max( 0 , _selectedLevelIndex - 1);
 			int nextIndex = Mathf.Min( _levelsConfig.Levels.Length - 1, _selectedLevelIndex + 1 );
 
-			_lobbyScreen.SetPrewLevelIcon( _levelsConfig.Levels[prewIndex].Icon );
+			_lobbyScreen.SetPrewLevelIcon( _levelsConfig.Levels[prevIndex].Icon );
 			_lobbyScreen.SetNextLevelIcon( _levelsConfig.Levels[nextIndex].Icon );
 
-			_lobbyScreen.SetPrewButtonActive( _selectedLevelIndex != prewIndex );
-			_lobbyScreen.SetNextButtonActive( _selectedLevelIndex != nextIndex );
+			bool isPrevButtonActive = _selectedLevelIndex != prevIndex;
+			_lobbyScreen.SetPrewButtonActive( isPrevButtonActive );
+			_lobbyScreen.SetPrewGlowActive( isPrevButtonActive );
 
-			_lobbyScreen.SetPlayButtonEnabled( _selectedLevelIndex <= _gameLevel.MaxOpened - 1 );
+			bool isNextButtonActive = _selectedLevelIndex != nextIndex;
+			_lobbyScreen.SetNextButtonActive( isNextButtonActive );
+			_lobbyScreen.SetNextGlowActive( isNextButtonActive );
+
+			_lobbyScreen.SetPrewLevelActive( _selectedLevelIndex - 1 <= _gameLevel.MaxOpened - 1 );
+			_lobbyScreen.SetNextLevelActive( _selectedLevelIndex + 1 <= _gameLevel.MaxOpened - 1 );
+
+			bool isLevelAvailable = _selectedLevelIndex <= _gameLevel.MaxOpened - 1;
+			_lobbyScreen.SetPlayButtonEnabled( isLevelAvailable );
+			_lobbyScreen.SetLevelActive( isLevelAvailable );
 		}
 
 		private void ResetSwitcherPosition() =>
@@ -171,7 +182,9 @@
 		private void SetSwitcherActive ( bool value )
 		{
 			_lobbyScreen.SetPrewButtonActive( value );
+			_lobbyScreen.SetPrewGlowActive( value );
 			_lobbyScreen.SetNextButtonActive( value );
+			_lobbyScreen.SetNextGlowActive( value );
 		}
 	}
 }

@@ -310,6 +310,10 @@ MonoBehaviour:
     m_Localized: SOLD
     m_Metadata:
       m_Items: []
+  - m_Id: 4930925585928192
+    m_Localized: COMPLETE THE PREVIOUS STAGE
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

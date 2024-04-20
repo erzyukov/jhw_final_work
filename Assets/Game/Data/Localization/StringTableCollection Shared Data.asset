@@ -300,6 +300,10 @@ MonoBehaviour:
     m_Key: sold_button_title
     m_Metadata:
       m_Items: []
+  - m_Id: 4930925585928192
+    m_Key: complete_alert
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
