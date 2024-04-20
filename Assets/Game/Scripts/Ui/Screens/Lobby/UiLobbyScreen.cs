@@ -6,6 +6,7 @@
 	using System;
 	using UniRx;
 	using Game.Utilities;
+	using Sirenix.Utilities;
 
 	public interface IUiLobbyScreen : IUiScreen
 	{
@@ -35,6 +36,9 @@
 	public class UiLobbyScreen : UiScreen, IUiLobbyScreen
 	{
 		[SerializeField] private Button _playButton;
+		[SerializeField] private Image _playGlowImage;
+		[SerializeField] private GameObject[] _playDecorates;
+		[SerializeField] private CanvasGroup _playCanvasGroup;
 		[SerializeField] private GameObject _playIcon;
 		[SerializeField] private GameObject _playPrice;
 		[SerializeField] private TextMeshProUGUI _playPriceText;
@@ -61,6 +65,8 @@
 		[Header("Settings")]
 		[SerializeField] private Material _regionDefaultMaterial;
 		[SerializeField] private Material _regionDisabledMaterial;
+		[SerializeField] private Sprite _activePlayGlowSprite;
+		[SerializeField] private Sprite _disabledPlayGlowSprite;
 
 		public override Screen Screen => Screen.Lobby;
 
@@ -84,7 +90,13 @@
 
 		public void SetPlayPriceText( string value ) => _playPriceText.text = value;
 
-		public void SetPlayButtonEnabled( bool value ) => _playButton.interactable = value;
+		public void SetPlayButtonEnabled( bool value )
+		{
+			_playButton.interactable = value;
+			_playGlowImage.sprite = value ? _activePlayGlowSprite : _disabledPlayGlowSprite;
+			_playCanvasGroup.alpha = GetAlphaByActive( value );
+			_playDecorates.ForEach( e => e.SetActive( value ) );
+		}
 
 		public void SetLevelIcon( Sprite value ) => _levelIcon.sprite = value;
 		public void SetPrewLevelIcon( Sprite value ) => _prevLevelIcon.sprite = value;

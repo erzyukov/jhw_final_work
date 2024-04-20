@@ -9,7 +9,6 @@
 	using UnityEngine;
 	using DG.Tweening;
 	using System;
-	using Newtonsoft.Json.Linq;
 
 	public class UiLobby : ControllerBase, IInitializable
 	{
