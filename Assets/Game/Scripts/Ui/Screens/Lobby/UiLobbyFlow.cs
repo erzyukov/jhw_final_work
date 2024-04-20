@@ -8,6 +8,7 @@
 		IntReactiveProperty SelectedLevelIndex { get; }
 		BoolReactiveProperty IsStartAvailable { get; }
 		BoolReactiveProperty IsSelectLevelAvailable { get; }
+		BoolReactiveProperty IsNextStageAvailable { get; }
 	}
 
 	public class UiLobbyFlow : IUiLobbyFlow
@@ -16,5 +17,6 @@
 		public IntReactiveProperty SelectedLevelIndex { get; } = new();
 		public BoolReactiveProperty IsStartAvailable { get; } = new();
 		public BoolReactiveProperty IsSelectLevelAvailable { get; } = new();
+		public BoolReactiveProperty IsNextStageAvailable { get; } = new();
 	}
 }

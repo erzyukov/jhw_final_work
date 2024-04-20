@@ -66,10 +66,20 @@
 			_flow.IsSelectLevelAvailable
 				.Subscribe( SetSwitcherActive )
 				.AddTo( this );
+
+			_flow.IsNextStageAvailable
+				.Subscribe( _lobbyScreen.SetNextLevelAnimationActive )
+				.AddTo( this );
+
+			_flow.SelectedLevelIndex
+				.Subscribe( i => _flow.IsNextStageAvailable.Value = i + 1 < _gameLevel.MaxOpened )
+				.AddTo( this );
 		}
 
 		private void OnScreenOpeningHandler()
 		{
+			_flow.IsNextStageAvailable.Value = _profile.LevelNumber.Value < _gameLevel.MaxOpened;
+
 			_flow.SelectedLevelIndex.Value = _profile.LevelNumber.Value - 1;
 
 			SetLevelInfo( SelectedLevelIndex );

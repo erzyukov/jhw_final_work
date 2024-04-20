@@ -7,6 +7,7 @@
 	using UniRx;
 	using Game.Utilities;
 	using Sirenix.Utilities;
+	using DG.Tweening;
 
 	public interface IUiLobbyScreen : IUiScreen
 	{
@@ -31,6 +32,8 @@
 		void SetPrevGlowActive( bool value );
 		void SetNextButtonActive( bool value );
 		void SetNextGlowActive( bool value );
+
+		void SetNextLevelAnimationActive( bool value );
 	}
 
 	public class UiLobbyScreen : UiScreen, IUiLobbyScreen
@@ -67,8 +70,12 @@
 		[SerializeField] private Material _regionDisabledMaterial;
 		[SerializeField] private Sprite _activePlayGlowSprite;
 		[SerializeField] private Sprite _disabledPlayGlowSprite;
+		[SerializeField] private float _nextLevelAnimationScale;
+		[SerializeField] private float _nextLevelAnimationDuration;
 
 		public override Screen Screen => Screen.Lobby;
+
+		private Tween _nextButtonAnimation;
 
 		#region IUiLobbyScreen
 
@@ -118,6 +125,21 @@
 
 		public void SetNextLevelActive( bool value ) =>
 			SetRegionActive( value, _nextLevelAlert, _nextLevelIcon, _nextLevelIconGlow );
+
+		public void SetNextLevelAnimationActive( bool value )
+		{
+			if (value == false)
+			{
+				_nextButtonAnimation?.Rewind();
+				_nextButtonAnimation?.Kill();
+			}
+			else
+			{
+				_nextButtonAnimation = _nextLevelButton.transform.DOScale( _nextLevelAnimationScale, _nextLevelAnimationDuration )
+					.SetEase( Ease.InOutSine )
+					.SetLoops( -1, LoopType.Yoyo );
+			}
+		}
 
 		#endregion
 
