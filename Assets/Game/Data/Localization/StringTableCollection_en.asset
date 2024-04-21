@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: a85e39e96efe1144eae385d630010f58, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 5784177084190425105
   m_TableData:
   - m_Id: 3741385658368
     m_Localized: 'HAVE NEED OF:'
@@ -338,6 +339,19 @@ MonoBehaviour:
     m_Localized: SUCCUBUS
     m_Metadata:
       m_Items: []
+  - m_Id: 5381767308939264
+    m_Localized: Locked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5382876509409280
+    m_Localized: unlocked at {levelNumber} level
+    m_Metadata:
+      m_Items:
+      - rid: 5784177084190425105
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5784177084190425105
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0090369ab21f1300

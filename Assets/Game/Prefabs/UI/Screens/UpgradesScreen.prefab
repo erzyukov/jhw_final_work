@@ -452,7 +452,7 @@ MonoBehaviour:
           m_TableReference:
             m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
           m_TableEntryReference:
-            m_KeyId: 4396387498340352
+            m_KeyId: 4396879217569792
             m_Key: 
           m_FallbackState: 0
           m_WaitForCompletion: 0
@@ -871,15 +871,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3605348622771142759}
-  - {fileID: 9073675533021980365}
   - {fileID: 5736431803416922316}
+  - {fileID: 9073675533021980365}
+  - {fileID: 3605348622771142759}
   m_Father: {fileID: 8398488800865167323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1078.4, y: 470.73}
+  m_SizeDelta: {x: 0, y: 470.73}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &6389108936683891564
 MonoBehaviour:
@@ -1816,7 +1816,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1002077194175759971
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2352,7 +2352,7 @@ MonoBehaviour:
           m_TableReference:
             m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
           m_TableEntryReference:
-            m_KeyId: 4396387498340352
+            m_KeyId: 4396777035935744
             m_Key: 
           m_FallbackState: 0
           m_WaitForCompletion: 0
@@ -3168,7 +3168,7 @@ MonoBehaviour:
           m_TableReference:
             m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
           m_TableEntryReference:
-            m_KeyId: 4396387498340352
+            m_KeyId: 4396521988698112
             m_Key: 
           m_FallbackState: 0
           m_WaitForCompletion: 0
@@ -3580,7 +3580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2496306605114100194, guid: edc072fd63518ab4a969b864fd230748, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 883.4
+      value: 195
       objectReference: {fileID: 0}
     - target: {fileID: 2496306605114100194, guid: edc072fd63518ab4a969b864fd230748, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3852,7 +3852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3784895138836894733, guid: c62b80ba453588f42b0cee07cda98e83, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 195
+      value: 883.4
       objectReference: {fileID: 0}
     - target: {fileID: 3784895138836894733, guid: c62b80ba453588f42b0cee07cda98e83, type: 3}
       propertyPath: m_AnchoredPosition.y

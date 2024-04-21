@@ -140,19 +140,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4396387498340352
-    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/SelectedUnit/Content/HealthParameter/ValueBg/Title
+    m_Key: health_parameter
     m_Metadata:
       m_Items: []
   - m_Id: 4396521988698112
-    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/SelectedUnit/Content/DamageParameter/ValueBg/Title
+    m_Key: damage_parameter
     m_Metadata:
       m_Items: []
   - m_Id: 4396777035935744
-    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/SelectedUnit/Content/MoveSpeedParameter/ValueBg/Title
+    m_Key: move_speed_parameter
     m_Metadata:
       m_Items: []
   - m_Id: 4396879217569792
-    m_Key: 1 - Main/Canvas/Screens/UpgradesScreen/SelectedUnit/Content/RangeParameter/ValueBg/Title
+    m_Key: range_parameter
     m_Metadata:
       m_Items: []
   - m_Id: 4399172084183040
@@ -326,6 +326,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 5377170062348288
     m_Key: succubus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5381767308939264
+    m_Key: locked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5382876509409280
+    m_Key: upgrade_locked_alert
     m_Metadata:
       m_Items: []
   m_Metadata:
