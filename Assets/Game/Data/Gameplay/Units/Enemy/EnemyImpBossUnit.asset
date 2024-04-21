@@ -13,6 +13,15 @@ MonoBehaviour:
   m_Name: EnemyImpBossUnit
   m_EditorClassIdentifier: 
   _titleKey: ImpTitle
+  _name:
+    m_TableReference:
+      m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
+    m_TableEntryReference:
+      m_KeyId: 5376748920672256
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   _icon: {fileID: 0}
   _fullLength: {fileID: 0}
   _class: 0
@@ -30,3 +39,6 @@ MonoBehaviour:
   _gradePrefabs:
   - {fileID: 1503547998484457933, guid: 7197817875e99e840a72ce237bb7a2dc, type: 3}
   _isDebug: 0
+  references:
+    version: 2
+    RefIds: []

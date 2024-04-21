@@ -13,6 +13,15 @@ MonoBehaviour:
   m_Name: EnemyDemonDogUnit
   m_EditorClassIdentifier: 
   _titleKey: DemonDogTitle
+  _name:
+    m_TableReference:
+      m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
+    m_TableEntryReference:
+      m_KeyId: 5376306421600256
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   _icon: {fileID: 0}
   _fullLength: {fileID: 0}
   _class: 0
@@ -31,3 +40,6 @@ MonoBehaviour:
   - {fileID: 1503547998484457933, guid: 468d4ce87b5b58e43a0e26ba6ddb855c, type: 3}
   - {fileID: 1503547998484457933, guid: 34cb3218eb4d7da4e8cdfc8e96f96baf, type: 3}
   _isDebug: 0
+  references:
+    version: 2
+    RefIds: []

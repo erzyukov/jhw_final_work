@@ -213,11 +213,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 9458325862649856
-    m_Key: SniperTitle
+    m_Key: sniper
     m_Metadata:
       m_Items: []
   - m_Id: 9458497627787264
-    m_Key: InfantrymanTitle
+    m_Key: infantryman
     m_Metadata:
       m_Items: []
   - m_Id: 9458633628094464
@@ -302,6 +302,30 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4930925585928192
     m_Key: complete_alert
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5375359607803904
+    m_Key: granadier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5376306421600256
+    m_Key: demon_dog
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5376616284196864
+    m_Key: demon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5376748920672256
+    m_Key: imp_boss
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5377073299755008
+    m_Key: imp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5377170062348288
+    m_Key: succubus
     m_Metadata:
       m_Items: []
   m_Metadata:

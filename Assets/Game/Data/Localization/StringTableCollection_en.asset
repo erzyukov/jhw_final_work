@@ -314,6 +314,30 @@ MonoBehaviour:
     m_Localized: COMPLETE THE PREVIOUS STAGE
     m_Metadata:
       m_Items: []
+  - m_Id: 5375359607803904
+    m_Localized: GRENADIER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5376306421600256
+    m_Localized: HELL DOG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5376616284196864
+    m_Localized: DEMON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5376748920672256
+    m_Localized: IMP BOSS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5377073299755008
+    m_Localized: Imp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5377170062348288
+    m_Localized: SUCCUBUS
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -3,11 +3,12 @@
 	using Game.Units;
 	using Game.Weapon;
 	using UnityEngine;
+	using UnityEngine.Localization;
 
 	[CreateAssetMenu(fileName = "Unit", menuName = "Configs/Unit", order = (int)Config.Unit)]
 	public class UnitConfig : ScriptableObject
 	{
-		[SerializeField] private string _titleKey;
+		[SerializeField] private LocalizedString _name;
 		[SerializeField] private Sprite _icon;
 		[SerializeField] private Sprite _fullLength;
 
@@ -34,7 +35,7 @@
 		[Header("Debug")]
 		[SerializeField] private bool _isDebug;
 
-		public string TitleKey => _titleKey;
+		public string Name => _name.GetLocalizedString();
 		public Sprite Icon => _icon;
 		public Sprite FullLength => _fullLength;
 		public Class Class => _class;

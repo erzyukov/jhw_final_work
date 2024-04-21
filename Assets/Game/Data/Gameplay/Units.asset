@@ -35,8 +35,6 @@ MonoBehaviour:
     Config: {fileID: 11400000, guid: afafe5346bf1e544daa470fd14b26621, type: 2}
   - Species: 5001
     Config: {fileID: 11400000, guid: 5ade38ffdf96eae42a20ddfbb1b22c29, type: 2}
-  - Species: 5003
-    Config: {fileID: 11400000, guid: 9529a9b3c43cdbb4d82e0eb5fb404753, type: 2}
   - Species: 2
     Config: {fileID: 11400000, guid: fcc59ef5ca78eb94a865703689810490, type: 2}
   - Species: 5004

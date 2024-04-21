@@ -82,7 +82,7 @@
 			int damageUpgradeDelta = Mathf.CeilToInt(unit.DamagePowerMultiplier * _upgradesConfig.UpgradePowerBonus);
 
 			_screen.SetIcon( unit.FullLength );
-			_screen.SetName( _localizator.GetString( unit.TitleKey ) );
+			_screen.SetName( unit.Name );
 			_screen.SetLevel( $"{_localizator.GetString( LevelTitleKey )} {unitLevel}" );
 			_screen.SetHealthValue(
 				health.ToString(),
@@ -116,7 +116,7 @@
 				UiUnitUpgradeElement element = GameObject.Instantiate( _screen.UnitElementPrefab, _screen.UnitsContainer );
 				element.SetIcon( unit.Icon );
 				element.SetLevel( $"{_localizator.GetString( LevelShortTitleKey )} {unitLevel}" );
-				element.SetTitle( _localizator.GetString( unit.TitleKey ) );
+				element.SetTitle( unit.Name );
 				element.SetPrice( _gameUpgrades.GetUpgradePrice( species ).ToString() );
 				_screen.UnitElements.Add( species, element );
 
