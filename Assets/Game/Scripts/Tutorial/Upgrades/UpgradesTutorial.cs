@@ -16,15 +16,14 @@
 		[Inject] private GameProfile			_profile;
 		[Inject] private IGameProfileManager	_gameProfileManager;
 		[Inject] private IGameCycle				_gameCycle;
-		[Inject] private IGameLevel				_gameLevel;
 		[Inject] private IGameUpgrades			_gameUpgrades;
 		[Inject] private ILocalizator			_localizator;
 		[Inject] private MenuConfig				_menuConfig;
 		[Inject] private TutorialConfig			_config;
+		[Inject] private UnitsConfig			_unitsConfig;
 		[Inject] private IFingerHint			_fingerHint;
 		[Inject] private IDialogHint			_dialogHint;
 		[Inject] private IUiMainMenuView		_uiMainMenuView;
-		[Inject] private IUiUpgradesScreen		_uiUpgradesScreen;
 		[Inject] private IUiLobbyFlow			_uiLobbyFlow;
 		[Inject] private IScenesManager			_scenesManager;
 		[Inject] private IUiUpgradeFlow			_uiUpgradeFlow;
@@ -78,6 +77,10 @@
 				.Where(_ => State == UpgradesStep.MenuButton)
 				.Subscribe(_ =>
 				{
+					SetActiveAllSelection( false );
+					SetActiveAllUpgrades( false );
+					SetActiveUpgrade( Species.HeroInfantryman, true );
+
 					int infantryLevel = _gameUpgrades.GetUnitLevel(Species.HeroInfantryman);
 					int sniperLevel = _gameUpgrades.GetUnitLevel(Species.HeroSniper);
 					UpgradesStep nextStep = (infantryLevel == 1)
@@ -153,9 +156,9 @@
 		protected override void OnEnterFirstUpgrade()
 		{
 			_uiMainMenuView.SetButtonInteractable(GameState.Lobby, false);
-			_uiUpgradeFlow.SelectDisabled.Add( Species.HeroInfantryman );
-			_uiUpgradeFlow.SelectDisabled.Add( Species.HeroSniper );
-			_uiUpgradeFlow.UpgradeDisabled.Add( Species.HeroSniper );
+			SetActiveSelection( Species.HeroInfantryman, false );
+			SetActiveSelection( Species.HeroSniper, false );
+			SetActiveUpgrade( Species.HeroSniper, false );
 
 			HintedButton hintedButton = _uiUpgradeFlow.UpgradeButtons[Species.HeroInfantryman].GetComponent<HintedButton>();
 			ShowUpgradeFingerHint(hintedButton.HintParameters);
@@ -170,8 +173,8 @@
 		{
 			_uiMainMenuView.SetButtonInteractable(GameState.Lobby, false);
 
-			_uiUpgradeFlow.SelectDisabled.Remove( Species.HeroSniper );
-			_uiUpgradeFlow.UpgradeDisabled.Add( Species.HeroInfantryman );
+			SetActiveSelection( Species.HeroSniper, true );
+			SetActiveUpgrade( Species.HeroInfantryman, false );
 
 			HintedButton hintedButton = _uiUpgradeFlow.SelectButtons[Species.HeroSniper].GetComponent<HintedButton>();
 			ShowUpgradeFingerHint(hintedButton.HintParameters);
@@ -184,8 +187,8 @@
 
 		protected override void OnEnterSecondUpgrade()
 		{
-			_uiUpgradeFlow.SelectDisabled.Add( Species.HeroSniper );
-			_uiUpgradeFlow.UpgradeDisabled.Remove( Species.HeroSniper );
+			SetActiveSelection( Species.HeroSniper, false );
+			SetActiveUpgrade( Species.HeroSniper, true );
 
 			HintedButton hintedButton = _uiUpgradeFlow.UpgradeButtons[Species.HeroSniper].GetComponent<HintedButton>();
 			ShowUpgradeFingerHint(hintedButton.HintParameters);
@@ -198,10 +201,8 @@
 
 		protected override void OnEnterUpgradeHint()
 		{
-			_uiUpgradeFlow.SelectDisabled.Add( Species.HeroInfantryman );
-			_uiUpgradeFlow.SelectDisabled.Add( Species.HeroSniper );
-			_uiUpgradeFlow.UpgradeDisabled.Add( Species.HeroInfantryman );
-			_uiUpgradeFlow.UpgradeDisabled.Add( Species.HeroSniper );
+			SetActiveAllSelection( false );
+			SetActiveAllUpgrades( false );
 
 			_fingerHint.Hide();
 			ActivateDialogMessege();
@@ -242,10 +243,8 @@
 		protected override void OnExitGoToBattle()
 		{
 			_uiLobbyFlow.IsSelectLevelAvailable.Value = true;
-			_uiUpgradeFlow.SelectDisabled.Remove( Species.HeroInfantryman );
-			_uiUpgradeFlow.SelectDisabled.Remove( Species.HeroSniper );
-			_uiUpgradeFlow.UpgradeDisabled.Remove( Species.HeroInfantryman );
-			_uiUpgradeFlow.UpgradeDisabled.Remove( Species.HeroSniper );
+			SetActiveAllSelection( true );
+			SetActiveAllUpgrades( true );
 
 			_fingerHint.Hide();
 			_dialogHint.SetActive(false);
@@ -281,5 +280,27 @@
 				_dialogHint.SetActive(true);
             }
         }
+
+		private void SetActiveAllSelection( bool value ) =>
+			_unitsConfig.HeroUnits.ForEach( s => SetActiveSelection( s, value ) );
+
+		private void SetActiveAllUpgrades( bool value ) =>
+			_unitsConfig.HeroUnits.ForEach( s => SetActiveUpgrade( s, value ) );
+
+		private void SetActiveSelection( Species species, bool value )
+		{
+			if (value)
+				_uiUpgradeFlow.SelectDisabled.Remove( species );
+			else
+				_uiUpgradeFlow.SelectDisabled.Add( species );
+		}
+
+		private void SetActiveUpgrade( Species species, bool value )
+		{
+			if (value)
+				_uiUpgradeFlow.UpgradeDisabled.Remove( species );
+			else
+				_uiUpgradeFlow.UpgradeDisabled.Add( species );
+		}
     }
 }
