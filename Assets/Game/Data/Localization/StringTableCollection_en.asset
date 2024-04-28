@@ -176,9 +176,10 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4566552647184384
-    m_Localized: LV.
+    m_Localized: LV. {level}
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 5784177084190425105
   - m_Id: 5066819859787776
     m_Localized: 'HAVE NEED OF: <size=160%><sprite=0><size=100%>MONEY'
     m_Metadata:
@@ -348,10 +349,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 5784177084190425105
+  - m_Id: 5423461551214592
+    m_Localized: <size=200%><sprite=0><size=100%>{price}
+    m_Metadata:
+      m_Items:
+      - rid: 5784177084190425105
   references:
     version: 2
     RefIds:
     - rid: 5784177084190425105
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 0090369ab21f1300
+        m_Entries: 0090369ab21f130000306264413910000090360b9c441300

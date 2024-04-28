@@ -7,35 +7,40 @@
 	using Game.Units;
 	using Game.Utilities;
 	using Sirenix.Utilities;
+	using System;
+	using System.Linq;
 	using UniRx;
 	using UnityEngine;
 	using Zenject;
+	using UnitViewArgs = UiUpgradeUnitViewFactory.Args;
 
 	public class UiUpgrades : ControllerBase, IInitializable
 	{
-		[Inject] private IUiUpgradesScreen _screen;
-		[Inject] private UnitsConfig _unitsConfig;
-		[Inject] private UpgradesConfig _upgradesConfig;
-		[Inject] private ILocalizator _localizator;
-		[Inject] private GameProfile _gameProfile;
-		[Inject] private IGameUpgrades _gameUpgrades;
-		[Inject] private IUiMessage _uiMessage;
-		[Inject] private IGameAudio _gameAudio;
-		[Inject] private IResourceEvents _resourceEvents;
-		[Inject] private IAdsManager _adsManager;
+		[Inject] private IUiUpgradesScreen				_screen;
+		[Inject] private UnitsConfig					_unitsConfig;
+		[Inject] private UpgradesConfig					_upgradesConfig;
+		[Inject] private ILocalizator					_localizator;
+		[Inject] private GameProfile					_gameProfile;
+		[Inject] private IGameUpgrades					_gameUpgrades;
+		[Inject] private IUiMessage						_uiMessage;
+		[Inject] private IGameAudio						_gameAudio;
+		[Inject] private IResourceEvents				_resourceEvents;
+		[Inject] private IAdsManager					_adsManager;
+		[Inject] private UiUpgradeUnitView.Factory		_upgradeUnitViewFactory;
 
-		private const string LevelTitleKey = "unitLevel";
-		private const string LevelShortTitleKey = "lvl";
-		private const int DummyElementsCount = 3;
+		private const string	LevelTitleKey = "unitLevel";
+		private const string	LevelShortTitleKey = "lvl";
+		private const int		DummyElementsCount = 3;
 
-		private Species _firstElement;
+		private Species			_firstElement;
 
 		public void Initialize()
 		{
+			var first = _gameProfile.Units.Upgrades.First().Key;
 			_screen.UnitsContainer.DestroyChildren();
 			CreateUnitList();
-			FillUnitInfo( _firstElement );
-			UpdateUnitElement( _firstElement, true );
+			FillUnitInfo( first );
+			//UpdateUnitElement( first, true );
 
 			Observable.Merge(
 				_gameUpgrades.Upgraded.AsUnitObservable(),
@@ -98,6 +103,14 @@
 
 		private void CreateUnitList()
 		{
+			_gameProfile.Units.Upgrades.ForEach( kvp =>
+			{
+				CreateUnitItem(kvp.Key);
+			} );
+
+			
+
+			/*
 			for (int i = 0; i < DummyElementsCount; i++)
 				GameObject.Instantiate( _screen.UnitUnavailableDummyPrefab, _screen.UnitsContainer );
 
@@ -132,6 +145,23 @@
 					.Subscribe( _ => _adsManager.ShowRewardedVideo( ERewardedType.UnitUpgrade, new Rewarded( species ) ) )
 					.AddTo( this );
 			}
+			*/
+		}
+
+		private void CreateUnitItem( Species species )
+		{
+			if (_unitsConfig.Units.TryGetValue( species, out var unit ) == false)
+				return;
+
+			UnitViewArgs args = new()
+			{
+				Species		= species,
+				Config		= unit,
+			};
+
+			var item	= _upgradeUnitViewFactory.Create(args);
+
+			item.SetParent( _screen.UnitsContainer );
 		}
 
 		private void UpdateUnitElement( Species species, bool isSelected = false )

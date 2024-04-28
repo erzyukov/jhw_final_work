@@ -1,14 +1,15 @@
 ﻿namespace Game.Ui
 {
 	using Game.Configs;
+	using Game.Units;
 	using Zenject;
 
 	public class UiUpgradeUnitViewFactory : IFactory<UiUpgradeUnitViewFactory.Args, IUiUpgradeUnitView>
 	{
 		public struct Args
 		{
-			public uint		GachaId;
-			public int		Stack;
+			public Species			Species;
+			public UnitConfig		Config;
 		}
 
 		[Inject] PrefabsConfig		_prefabsConfig;

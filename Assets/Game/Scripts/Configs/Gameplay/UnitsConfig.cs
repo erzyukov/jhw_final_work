@@ -54,18 +54,6 @@ namespace Game.Configs
 
 		public List<Species>	HeroDefaultSquad;
 
-
-		//public Dictionary<Species, UnitConfig>		Units => _unitData;
-		//private Dictionary<Species, UnitConfig>		_unitData;
-		/*
-		public void Initialize()
-		{
-			_unitData = new Dictionary<Species, UnitConfig>();
-
-            foreach (var unit in _units)
-				_unitData.Add(unit.Species, unit.Config);
-		}
-		*/
 		
 		public int GetAdditionalPower(int gradeIndex)
 		{

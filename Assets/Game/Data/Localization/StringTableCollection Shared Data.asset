@@ -336,6 +336,10 @@ MonoBehaviour:
     m_Key: upgrade_locked_alert
     m_Metadata:
       m_Items: []
+  - m_Id: 5423461551214592
+    m_Key: upgrade_unit_price
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
   m_Name: HeroGrenadeLauncherUnit
   m_EditorClassIdentifier: 
-  _titleKey: GranadeLaungerTitle
   _name:
     m_TableReference:
       m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
@@ -24,6 +23,7 @@ MonoBehaviour:
     m_LocalVariables: []
   _icon: {fileID: 21300000, guid: f533a01bffb899c41ac9c3bad01acab5, type: 3}
   _fullLength: {fileID: 21300000, guid: 360c4a8dffc1cb74bba3cef7c16e9900, type: 3}
+  _unlockHeroLevel: 3
   _class: 1
   _attackRange: 4
   _attackDelay: 1.8

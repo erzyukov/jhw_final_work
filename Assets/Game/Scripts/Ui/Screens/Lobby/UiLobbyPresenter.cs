@@ -25,6 +25,7 @@
 		[Inject] private ILocalizator _localizator;
 		[Inject] private IContinueLevelRequest _continueLevelRequest;
 		[Inject] private IResourceEvents _resourceEvents;
+		[Inject] private UiUpgradeUnitView.Factory _unitViewFactory;
 
 		private const float SwitchDuration = 0.8f;
 		private const string LevelTitlePrefixKey = "level";

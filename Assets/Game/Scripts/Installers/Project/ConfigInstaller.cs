@@ -38,7 +38,6 @@ namespace Game.Installers
 
 		public override void InstallBindings()
 		{
-			_units.Initialize();
 			_tutorial.Initialize();
 			_upgrades.Initialize();
 

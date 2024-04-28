@@ -16,9 +16,6 @@
 			string path = AssetDatabase.GUIDToAssetPath(guid) + AssetExtention;
 			UnitsConfig unitsConfig = AssetDatabase.LoadAssetAtPath<UnitsConfig>(path);
 			
-			if (unitsConfig != null)
-				unitsConfig.Initialize();
-
 			return unitsConfig;
 		}
 	}

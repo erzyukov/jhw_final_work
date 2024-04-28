@@ -906,7 +906,7 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
-  m_ReverseArrangement: 1
+  m_ReverseArrangement: 0
 --- !u!114 &6190725052345119658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3580,7 +3580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2496306605114100194, guid: edc072fd63518ab4a969b864fd230748, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 195
+      value: 883.4
       objectReference: {fileID: 0}
     - target: {fileID: 2496306605114100194, guid: edc072fd63518ab4a969b864fd230748, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3852,7 +3852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3784895138836894733, guid: c62b80ba453588f42b0cee07cda98e83, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 883.4
+      value: 195
       objectReference: {fileID: 0}
     - target: {fileID: 3784895138836894733, guid: c62b80ba453588f42b0cee07cda98e83, type: 3}
       propertyPath: m_AnchoredPosition.y

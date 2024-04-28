@@ -11,6 +11,7 @@
 		[SerializeField] private LocalizedString _name;
 		[SerializeField] private Sprite _icon;
 		[SerializeField] private Sprite _fullLength;
+		[SerializeField] private int _unlockHeroLevel;
 
 		[Header("Combat")]
 		[SerializeField] private Class _class;
@@ -38,6 +39,8 @@
 		public string Name => _name.GetLocalizedString();
 		public Sprite Icon => _icon;
 		public Sprite FullLength => _fullLength;
+		public int UnlockHeroLevel => _unlockHeroLevel;
+
 		public Class Class => _class;
 		public float AttackRange => _attackRange;
 		public float AttackDelay => _attackDelay;

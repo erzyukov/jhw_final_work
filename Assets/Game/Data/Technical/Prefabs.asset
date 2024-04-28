@@ -73,3 +73,4 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  UpgradeUnit: {fileID: 3123404785010135718, guid: be58881e5fffd0b40b79942e2d2c601b, type: 3}
