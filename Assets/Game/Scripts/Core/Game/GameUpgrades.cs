@@ -55,7 +55,7 @@ namespace Game.Core
 			UnitUpgradesConfig upgrade = _upgradesConfig.UnitsUpgrades[species];
 			int level = Mathf.Clamp(_gameProfile.Units.Upgrades[species].Value, 0, upgrade.Price.Length);
 
-			return upgrade.Price[level - 1];
+			return upgrade.Price[level];
 		}
 
 		public bool TryBuyUpgrade( Species species )

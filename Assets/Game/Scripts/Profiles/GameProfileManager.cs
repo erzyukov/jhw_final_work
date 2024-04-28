@@ -145,8 +145,13 @@ namespace Game.Profiles
 		private void FillUnits()
 		{
 			foreach (var species in _unitsConfig.HeroUnits)
+			{
 				if (_gameProfile.Units.Upgrades.ContainsKey( species ) == false)
-					_gameProfile.Units.Upgrades.Add( species, new IntReactiveProperty( 1 ) );
+				{
+					int defaultLevel = _unitsConfig.HeroDefaultSquad.Contains( species ) ? 1 : 0 ;
+					_gameProfile.Units.Upgrades.Add( species, new IntReactiveProperty( defaultLevel ) );
+				}
+			}
 		}
 
 		private void AddMissingEnergy()
