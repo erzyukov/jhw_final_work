@@ -7,7 +7,6 @@
 	using Game.Units;
 	using Game.Utilities;
 	using Sirenix.Utilities;
-	using System;
 	using System.Linq;
 	using UniRx;
 	using UnityEngine;
@@ -27,12 +26,9 @@
 		[Inject] private IResourceEvents				_resourceEvents;
 		[Inject] private IAdsManager					_adsManager;
 		[Inject] private UiUpgradeUnitView.Factory		_upgradeUnitViewFactory;
+		[Inject] private IUiUpgradeFlow					_flow;
 
 		private const string	LevelTitleKey = "unitLevel";
-		private const string	LevelShortTitleKey = "lvl";
-		private const int		DummyElementsCount = 3;
-
-		private Species			_firstElement;
 
 		public void Initialize()
 		{
@@ -40,7 +36,14 @@
 			_screen.UnitsContainer.DestroyChildren();
 			CreateUnitList();
 			FillUnitInfo( first );
-			//UpdateUnitElement( first, true );
+
+			_flow.SelectedUnit
+				.Subscribe( OnUnitSelected )
+				.AddTo( this );
+
+			_flow.UpgradeClicked
+				.Subscribe( OnUpgradeButtonClicked )
+				.AddTo( this );
 
 			Observable.Merge(
 				_gameUpgrades.Upgraded.AsUnitObservable(),
@@ -62,6 +65,7 @@
 			int ccy = _gameProfile.SoftCurrency.Value;
 			bool isRewardAvailable = _adsManager.IsRewardedAvailable.Value;
 
+/*
 			_screen.UnitElements.ForEach( element =>
 			{
 				int unitLevel = _gameUpgrades.GetUnitLevel( element.Key );
@@ -70,6 +74,7 @@
 
 				element.Value.UpgradeButton.SetAdActive( isAdAcitve );
 			} );
+*/
 
 		}
 
@@ -166,23 +171,22 @@
 
 		private void UpdateUnitElement( Species species, bool isSelected = false )
 		{
+			/*
 			UiUnitUpgradeElement element = _screen.UnitElements[species];
 			int unitLevel = _gameProfile.Units.Upgrades[species].Value;
 			element.SetLevel( $"{_localizator.GetString( LevelShortTitleKey )} {unitLevel}" );
 			element.SetPrice( _gameUpgrades.GetUpgradePrice( species ).ToString() );
 			element.SetSelected( isSelected );
+			*/
 		}
 
-		private void OnSelectButtonClicked( Species species )
+		private void OnUnitSelected( Species species )
 		{
 			_gameAudio.PlayUiClick();
 			FillUnitInfo( species );
-
-			foreach (Species unitSpecies in _unitsConfig.HeroUnits)
-				_screen.UnitElements[unitSpecies].SetSelected( unitSpecies == species );
 		}
 
-		private void OnUpgradeButtonClickedHandler( Species species )
+		private void OnUpgradeButtonClicked( Species species )
 		{
 			if (_gameUpgrades.CanUpgradeByLevel( species ) == false)
 			{

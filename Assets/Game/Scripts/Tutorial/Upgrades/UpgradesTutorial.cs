@@ -13,20 +13,21 @@
 
 	public class UpgradesTutorial : UpgradesTutorialFsmBase, IInitializable, IDisposable
 	{
-		[Inject] private GameProfile _profile;
-		[Inject] private IGameProfileManager _gameProfileManager;
-		[Inject] private IGameCycle _gameCycle;
-		[Inject] private IGameLevel _gameLevel;
-		[Inject] private IGameUpgrades _gameUpgrades;
-		[Inject] private ILocalizator _localizator;
-		[Inject] private MenuConfig _menuConfig;
-		[Inject] private TutorialConfig _config;
-		[Inject] private IFingerHint _fingerHint;
-		[Inject] private IDialogHint _dialogHint;
-		[Inject] private IUiMainMenuView _uiMainMenuView;
-		[Inject] private IUiUpgradesScreen _uiUpgradesScreen;
-		[Inject] private IUiLobbyFlow _uiLobbyFlow;
-		[Inject] private IScenesManager _scenesManager;
+		[Inject] private GameProfile			_profile;
+		[Inject] private IGameProfileManager	_gameProfileManager;
+		[Inject] private IGameCycle				_gameCycle;
+		[Inject] private IGameLevel				_gameLevel;
+		[Inject] private IGameUpgrades			_gameUpgrades;
+		[Inject] private ILocalizator			_localizator;
+		[Inject] private MenuConfig				_menuConfig;
+		[Inject] private TutorialConfig			_config;
+		[Inject] private IFingerHint			_fingerHint;
+		[Inject] private IDialogHint			_dialogHint;
+		[Inject] private IUiMainMenuView		_uiMainMenuView;
+		[Inject] private IUiUpgradesScreen		_uiUpgradesScreen;
+		[Inject] private IUiLobbyFlow			_uiLobbyFlow;
+		[Inject] private IScenesManager			_scenesManager;
+		[Inject] private IUiUpgradeFlow			_uiUpgradeFlow;
 
 		readonly private CompositeDisposable _disposable = new CompositeDisposable();
 
@@ -91,8 +92,8 @@
 				.Subscribe(_ => SetProfileStepValue(UpgradesStep.SelectNextUnit))
 				.AddTo(_disposable);
 
-			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SelectButtonClicked
-				.Where(_ => State == UpgradesStep.SelectNextUnit)
+			_uiUpgradeFlow.SelectedUnit
+				.Where( s => s == Species.HeroSniper && State == UpgradesStep.SelectNextUnit )
 				.Subscribe(_ => SetProfileStepValue(UpgradesStep.SecondUpgrade))
 				.AddTo(_disposable);
 
@@ -152,11 +153,11 @@
 		protected override void OnEnterFirstUpgrade()
 		{
 			_uiMainMenuView.SetButtonInteractable(GameState.Lobby, false);
-			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetSelectInteractable(false);
-			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetUpgradeInteractable(false);
-			_uiUpgradesScreen.UnitElements[Species.HeroInfantryman].SetSelectInteractable(false);
+			_uiUpgradeFlow.SelectDisabled.Add( Species.HeroInfantryman );
+			_uiUpgradeFlow.SelectDisabled.Add( Species.HeroSniper );
+			_uiUpgradeFlow.UpgradeDisabled.Add( Species.HeroSniper );
 
-			HintedButton hintedButton = _uiUpgradesScreen.UnitElements[Species.HeroInfantryman].UpgradeButton.DefaultButton.GetComponent<HintedButton>();
+			HintedButton hintedButton = _uiUpgradeFlow.UpgradeButtons[Species.HeroInfantryman].GetComponent<HintedButton>();
 			ShowUpgradeFingerHint(hintedButton.HintParameters);
 
 			ActivateDialogMessege();
@@ -168,10 +169,11 @@
 		protected override void OnEnterSelectNextUnit()
 		{
 			_uiMainMenuView.SetButtonInteractable(GameState.Lobby, false);
-			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetSelectInteractable(true);
-			_uiUpgradesScreen.UnitElements[Species.HeroInfantryman].SetUpgradeInteractable(false);
 
-			HintedButton hintedButton = _uiUpgradesScreen.UnitElements[Species.HeroSniper].SelectButton.GetComponent<HintedButton>();
+			_uiUpgradeFlow.SelectDisabled.Remove( Species.HeroSniper );
+			_uiUpgradeFlow.UpgradeDisabled.Add( Species.HeroInfantryman );
+
+			HintedButton hintedButton = _uiUpgradeFlow.SelectButtons[Species.HeroSniper].GetComponent<HintedButton>();
 			ShowUpgradeFingerHint(hintedButton.HintParameters);
 
 			ActivateDialogMessege();
@@ -182,10 +184,10 @@
 
 		protected override void OnEnterSecondUpgrade()
 		{
-			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetSelectInteractable(false);
-			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetUpgradeInteractable(true);
+			_uiUpgradeFlow.SelectDisabled.Add( Species.HeroSniper );
+			_uiUpgradeFlow.UpgradeDisabled.Remove( Species.HeroSniper );
 
-			HintedButton hintedButton = _uiUpgradesScreen.UnitElements[Species.HeroSniper].UpgradeButton.DefaultButton.GetComponent<HintedButton>();
+			HintedButton hintedButton = _uiUpgradeFlow.UpgradeButtons[Species.HeroSniper].GetComponent<HintedButton>();
 			ShowUpgradeFingerHint(hintedButton.HintParameters);
 
 			ActivateDialogMessege();
@@ -196,10 +198,11 @@
 
 		protected override void OnEnterUpgradeHint()
 		{
-			_uiUpgradesScreen.UnitElements[Species.HeroInfantryman].SetSelectInteractable(false);
-			_uiUpgradesScreen.UnitElements[Species.HeroInfantryman].SetUpgradeInteractable(false);
-			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetSelectInteractable(false);
-			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetUpgradeInteractable(false);
+			_uiUpgradeFlow.SelectDisabled.Add( Species.HeroInfantryman );
+			_uiUpgradeFlow.SelectDisabled.Add( Species.HeroSniper );
+			_uiUpgradeFlow.UpgradeDisabled.Add( Species.HeroInfantryman );
+			_uiUpgradeFlow.UpgradeDisabled.Add( Species.HeroSniper );
+
 			_fingerHint.Hide();
 			ActivateDialogMessege();
 			_dialogHint.SetNextMessageIndicatorActive(true);
@@ -239,10 +242,11 @@
 		protected override void OnExitGoToBattle()
 		{
 			_uiLobbyFlow.IsSelectLevelAvailable.Value = true;
-			_uiUpgradesScreen.UnitElements[Species.HeroInfantryman].SetSelectInteractable(true);
-			_uiUpgradesScreen.UnitElements[Species.HeroInfantryman].SetUpgradeInteractable(true);
-			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetSelectInteractable(true);
-			_uiUpgradesScreen.UnitElements[Species.HeroSniper].SetUpgradeInteractable(true);
+			_uiUpgradeFlow.SelectDisabled.Remove( Species.HeroInfantryman );
+			_uiUpgradeFlow.SelectDisabled.Remove( Species.HeroSniper );
+			_uiUpgradeFlow.UpgradeDisabled.Remove( Species.HeroInfantryman );
+			_uiUpgradeFlow.UpgradeDisabled.Remove( Species.HeroSniper );
+
 			_fingerHint.Hide();
 			_dialogHint.SetActive(false);
 		}
