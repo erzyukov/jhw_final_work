@@ -7,96 +7,79 @@ namespace Game.Configs
 	using DG.Tweening;
 	using Sirenix.OdinInspector;
 
-	// TODO: Refact: HeroDefaultSquad - Move to profile - user can edit battle squad
 
 	[CreateAssetMenu(fileName = "Units", menuName = "Configs/Units", order = (int)Config.Units)]
-	public class UnitsConfig : ScriptableObject
+	public class UnitsConfig : SerializedScriptableObject
 	{
 		[Header("Visual")]
-		[SerializeField] private GameObject _unitPrefab;
-		[SerializeField] private float _uiHealthIndent;
-		[SerializeField] private Sprite[] _gradeSprites;
+		public GameObject		UnitPrefab;
+		public float			UiHealthIndent;
+		public Sprite[]			GradeSprites;
+
 		[FoldoutGroup("Damage Fx")]
-		[SerializeField] private DamageNumberFx _damageFxPrefab;
+		public DamageNumberFx		DamageFxPrefab;
 		[FoldoutGroup("Damage Fx")]
-		[SerializeField] private int _damageFxPoolSize;
+		public int					DamageFxPoolSize;
 		[FoldoutGroup("Damage Fx")]
-		[SerializeField] private Color _damageFxHeroUnitColor;
+		public Color				DamageFxHeroUnitColor;
 		[FoldoutGroup("Damage Fx")]
-		[SerializeField] private Color _damageFxEnemyUnitColor;
+		public Color				DamageFxEnemyUnitColor;
 		[FoldoutGroup("Damage Fx")]
-		[SerializeField] private float _damageFxSpawnOffset;
+		public float				DamageFxSpawnOffset;
 		[FoldoutGroup("Damage Fx")]
-		[SerializeField] private float _damageFxHeight;
+		public float				DamageFxHeight;
 		[FoldoutGroup("Damage Fx")]
-		[SerializeField] private float _damageFxDuration;
+		public float				DamageFxDuration;
 		[FoldoutGroup("Damage Fx")]
-		[SerializeField] private Ease _damageFxEase;
+		public Ease					DamageFxEase;
 		[FoldoutGroup("Damage Fx")]
-		[SerializeField] private Color _damageFxMaterialColor;
+		public Color				DamageFxMaterialColor;
 
 		[Header("Gameplay")]
-		[SerializeField] private float _speed;
+		public float		Speed;
+
 		[Tooltip("Seconds to full rotate (360gr)")]
-		[SerializeField] private float _rotationSpeed;
-		[SerializeField] private UnitData[] _units;
+		public float			RotationSpeed;
+
+		public Dictionary<Species, UnitConfig>		Units;
 
 		[Header("Summon")]
-		[SerializeField] private float _summonCountRatioLimit;
+		public float			SummonCountRatioLimit;
 
 		[Header("Hero")]
-		[SerializeField] private List<Species> _heroUnits;
+		public List<Species>	HeroUnits;
 
 		[Header("Merge")]
-		[SerializeField] private int[] _additionalMergeGradePower;
+		public int[]			AdditionalMergeGradePower;
 
-		[Header("Dev")]
-		[SerializeField] private List<Species> _heroDefaultSquad;
+		public List<Species>	HeroDefaultSquad;
 
-		private Dictionary<Species, UnitConfig> _unitData;
 
-		public GameObject UnitPrefab => _unitPrefab;
-		public float UiHealthIndent => _uiHealthIndent;
-		public Sprite[] GradeSprites => _gradeSprites;
-
-		public DamageNumberFx DamageFxPrefab => _damageFxPrefab;
-		public int DamageFxPoolSize => _damageFxPoolSize;
-		public Color DamageFxHeroUnitColor => _damageFxHeroUnitColor;
-		public Color DamageFxEnemyUnitColor => _damageFxEnemyUnitColor;
-		public float DamageFxSpawnOffset => _damageFxSpawnOffset;
-		public float DamageFxHeight => _damageFxHeight;
-		public float DamageFxDuration => _damageFxDuration;
-		public Ease DamageFxEase => _damageFxEase;
-		public Color DamageFxMaterialColor => _damageFxMaterialColor;
-
-		public float SummonCountRatioLimit => _summonCountRatioLimit;
-
-		public float Speed => _speed;
-		public float RotationSpeed => _rotationSpeed;
-		public Dictionary<Species, UnitConfig> Units => _unitData;
-		public List<Species> HeroDefaultSquad => _heroDefaultSquad;
-		public List<Species> HeroUnits => _heroUnits;
-
+		//public Dictionary<Species, UnitConfig>		Units => _unitData;
+		//private Dictionary<Species, UnitConfig>		_unitData;
+		/*
 		public void Initialize()
 		{
 			_unitData = new Dictionary<Species, UnitConfig>();
+
             foreach (var unit in _units)
 				_unitData.Add(unit.Species, unit.Config);
 		}
+		*/
 		
 		public int GetAdditionalPower(int gradeIndex)
 		{
-			if (gradeIndex >= _additionalMergeGradePower.Length)
+			if (gradeIndex >= AdditionalMergeGradePower.Length)
 				return 0;
 
-			return _additionalMergeGradePower[gradeIndex];
+			return AdditionalMergeGradePower[gradeIndex];
 		}
 
 		[Serializable]
 		public struct UnitData
 		{
-			public Species Species;
-			public UnitConfig Config;
+			public Species		Species;
+			public UnitConfig	Config;
 		}
     }
 }

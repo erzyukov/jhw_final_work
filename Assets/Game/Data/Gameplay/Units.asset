@@ -12,40 +12,151 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba901327ab9d1e14aaec6b0d0294ba36, type: 3}
   m_Name: Units
   m_EditorClassIdentifier: 
-  _unitPrefab: {fileID: 8733958787987239910, guid: 51826799d4a3bd54985dcaf25f6cd13e, type: 3}
-  _uiHealthIndent: 0.7
-  _gradeSprites:
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: afafe5346bf1e544daa470fd14b26621, type: 2}
+    - {fileID: 11400000, guid: fcc59ef5ca78eb94a865703689810490, type: 2}
+    - {fileID: 11400000, guid: 9d9059d7b1e933843a181aaf3ec9a784, type: 2}
+    - {fileID: 11400000, guid: 5ade38ffdf96eae42a20ddfbb1b22c29, type: 2}
+    - {fileID: 11400000, guid: f9e6f103822b6b94b8cb8a484d6fbe44, type: 2}
+    - {fileID: 11400000, guid: 6cc50b0c4cb573945a668210697c186c, type: 2}
+    - {fileID: 11400000, guid: 2c73bfc2ce9700a4e924aeb656412915, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Units
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[Game.Units.Species, Assembly-CSharp],[Game.Configs.UnitConfig,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Game.Units.Species,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 7
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 5001
+    - Name: $v
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 5002
+    - Name: $v
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 5004
+    - Name: $v
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 5005
+    - Name: $v
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  UnitPrefab: {fileID: 8733958787987239910, guid: 51826799d4a3bd54985dcaf25f6cd13e, type: 3}
+  UiHealthIndent: 0.7
+  GradeSprites:
   - {fileID: 21300000, guid: 6990ff4705b762f419ac073e31251390, type: 3}
   - {fileID: 21300000, guid: e1886493ca244ba4cbbe03358edf95b5, type: 3}
   - {fileID: 21300000, guid: b104dff91c46d8a41bdd5ea5cb57f1c6, type: 3}
   - {fileID: 21300000, guid: e9268017f002c75498a9dc9ea0a98195, type: 3}
-  _damageFxPrefab: {fileID: -7729824606463882939, guid: 455ec93ad64d09c409e1d9528e562899, type: 3}
-  _damageFxPoolSize: 20
-  _damageFxHeroUnitColor: {r: 1, g: 0.2971698, b: 0.2971698, a: 1}
-  _damageFxEnemyUnitColor: {r: 1, g: 1, b: 1, a: 1}
-  _damageFxSpawnOffset: 0.1
-  _damageFxHeight: 0.8
-  _damageFxDuration: 1
-  _damageFxEase: 9
-  _damageFxMaterialColor: {r: 1, g: 0.5424528, b: 0.5424528, a: 1}
-  _speed: 1.5
-  _rotationSpeed: 0
-  _units:
-  - Species: 1
-    Config: {fileID: 11400000, guid: afafe5346bf1e544daa470fd14b26621, type: 2}
-  - Species: 5001
-    Config: {fileID: 11400000, guid: 5ade38ffdf96eae42a20ddfbb1b22c29, type: 2}
-  - Species: 2
-    Config: {fileID: 11400000, guid: fcc59ef5ca78eb94a865703689810490, type: 2}
-  - Species: 5004
-    Config: {fileID: 11400000, guid: 6cc50b0c4cb573945a668210697c186c, type: 2}
-  - Species: 5002
-    Config: {fileID: 11400000, guid: f9e6f103822b6b94b8cb8a484d6fbe44, type: 2}
-  - Species: 5005
-    Config: {fileID: 11400000, guid: 2c73bfc2ce9700a4e924aeb656412915, type: 2}
-  - Species: 3
-    Config: {fileID: 11400000, guid: 9d9059d7b1e933843a181aaf3ec9a784, type: 2}
-  _summonCountRatioLimit: 0.6
-  _heroUnits: 010000000200000003000000
-  _additionalMergeGradePower: 0e0000000900000005000000
-  _heroDefaultSquad: 0200000001000000
+  DamageFxPrefab: {fileID: -7729824606463882939, guid: 455ec93ad64d09c409e1d9528e562899, type: 3}
+  DamageFxPoolSize: 20
+  DamageFxHeroUnitColor: {r: 1, g: 0.2971698, b: 0.2971698, a: 1}
+  DamageFxEnemyUnitColor: {r: 1, g: 1, b: 1, a: 1}
+  DamageFxSpawnOffset: 0.1
+  DamageFxHeight: 0.8
+  DamageFxDuration: 1
+  DamageFxEase: 9
+  DamageFxMaterialColor: {r: 1, g: 0.5424528, b: 0.5424528, a: 1}
+  Speed: 1.5
+  RotationSpeed: 0
+  SummonCountRatioLimit: 0.6
+  HeroUnits: 010000000200000003000000
+  AdditionalMergeGradePower: 0e0000000900000005000000
+  HeroDefaultSquad: 0100000002000000
