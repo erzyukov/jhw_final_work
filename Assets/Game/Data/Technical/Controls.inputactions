@@ -121,6 +121,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ResetUpgrades",
+                    "type": "Button",
+                    "id": "4b97bdc7-11ab-4418-bc99-e7deb7733fd0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -191,7 +200,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "R [Keyboard]",
+                    "name": "M [Keyboard]",
                     "id": "04dbef62-1695-4d9d-9547-c5b4dccff747",
                     "path": "OneModifier",
                     "interactions": "",
@@ -319,6 +328,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "IncreaseHeroLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e4da24d1-5089-4884-bf94-0b2b171f2e80",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetUpgrades",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

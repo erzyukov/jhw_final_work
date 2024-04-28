@@ -11,8 +11,10 @@
 	using Zenject;
 	using static UnityEngine.InputSystem.InputAction;
     using UnityEngine;
+	using Sirenix.Utilities;
+	using Game.Units;
 
-    public class DevCheats : ControllerBase, IInitializable
+	public class DevCheats : ControllerBase, IInitializable
 	{
 		[Inject] private IInputHandler _inputManager;
 		[Inject] private IGameLevel _gameLevel;
@@ -22,6 +24,7 @@
 		[Inject] private EnergyConfig _energyConfig;
 		[Inject] private IScenesManager _scenesManager;
 		[Inject] private IGameProfileManager _gameProfileManager;
+		[Inject] private UnitsConfig _unitsConfig;
 
 		const int SoftCurrencyCheatAmount = 10000;
 		const int SummonCurrencyCheatAmount = 10;
@@ -55,6 +58,16 @@
 
             Subscribe(Cheats.SpentEnergy, (_) => _profile.Energy.Amount.Value = Mathf.Max(_profile.Energy.Amount.Value - _energyConfig.LevelPrice, 0));
             Subscribe(Cheats.RestoreEnergy, (_) => _profile.Energy.Amount.Value = Mathf.Min(_profile.Energy.Amount.Value + _energyConfig.LevelPrice, _energyConfig.MaxEnery));
+
+			Subscribe( Cheats.ResetUpgrades, ( _ ) =>
+			{
+				_profile.Units.Upgrades.Keys.ForEach( k =>
+				{
+					int defaultLevel = _unitsConfig.HeroDefaultSquad.Contains( k ) ? 1 : 0 ;
+					_profile.Units.Upgrades[k].Value = defaultLevel;
+				} );
+				_gameProfileManager.Save();
+			} );
         }
 
         void Subscribe(InputAction inputAction, Action<CallbackContext> action)
