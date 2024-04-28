@@ -16,6 +16,8 @@
 		[Inject] private GameProfile			_gameProfile;
 		[Inject] private IUiUpgradeFlow			_flow;
 
+		private Species Species => _args.Species;
+
 		public void Initialize()
 		{
 			ControlSubscribe();
@@ -24,8 +26,13 @@
 				.Subscribe( OnUnitSelected )
 				.AddTo( this );
 
-			_flow.SelectButtons.Add( _args.Species, _view.SelectButton.gameObject );
-			_flow.UpgradeButtons.Add( _args.Species, _view.UpgradeButton.DefaultButton.gameObject );
+			_gameUpgrades.Upgraded
+				.Where( s => s == Species )
+				.Subscribe( _ => OnUnitUpgraded() )
+				.AddTo( this );
+
+			_flow.SelectButtons.Add( Species, _view.SelectButton.gameObject );
+			_flow.UpgradeButtons.Add( Species, _view.UpgradeButton.DefaultButton.gameObject );
 
 			SetupView();
 		}
@@ -63,19 +70,30 @@
 
 		private void SetupView()
 		{
-			int levelNumber		= _gameProfile.Units.Upgrades[_args.Species].Value;
-			int price			= _gameUpgrades.GetUpgradePrice( _args.Species );
 			var unit			= _args.Config;
 
 			_view.SetIcon( unit.Icon );
-			_view.SetLevel( levelNumber );
 			_view.SetTitle( unit.Name );
+			UpdateUnitParameters();
+		}
+
+		private void OnUnitUpgraded()
+		{
+			UpdateUnitParameters();
+			_view.SetSelected( true );
+		}
+
+		private void UpdateUnitParameters()
+		{
+			int levelNumber		= _gameProfile.Units.Upgrades[Species].Value;
+			int price			= _gameUpgrades.GetUpgradePrice( Species );
+
+			_view.SetLevel( levelNumber );
 			_view.SetPrice( price );
-			
 		}
 
 		private void OnUnitSelected( Species species ) =>
-			_view.SetSelected( _args.Species == species );
+			_view.SetSelected( Species == species );
 
 
 	}

@@ -108,10 +108,7 @@
 
 		private void CreateUnitList()
 		{
-			_gameProfile.Units.Upgrades.ForEach( kvp =>
-			{
-				CreateUnitItem(kvp.Key);
-			} );
+			_gameProfile.Units.Upgrades.ForEach( kvp => CreateUnitItem( kvp.Key ) );
 
 			
 

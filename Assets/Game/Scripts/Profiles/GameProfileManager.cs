@@ -144,7 +144,7 @@ namespace Game.Profiles
 
 		private void FillUnits()
 		{
-			foreach (var species in _unitsConfig.HeroDefaultSquad)
+			foreach (var species in _unitsConfig.HeroUnits)
 				if (_gameProfile.Units.Upgrades.ContainsKey( species ) == false)
 					_gameProfile.Units.Upgrades.Add( species, new IntReactiveProperty( 1 ) );
 		}
