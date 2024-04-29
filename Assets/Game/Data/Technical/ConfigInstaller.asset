@@ -15,6 +15,7 @@ MonoBehaviour:
   _tutorial: {fileID: 11400000, guid: 1445287be641a974d906770af3a42d6e, type: 2}
   _dev: {fileID: 11400000, guid: 88e4ba0cd92b607418186893c2a4c08d, type: 2}
   _menu: {fileID: 11400000, guid: 19a8caa98b8753a498fc1061fa3d43b0, type: 2}
+  _uiCommon: {fileID: 11400000, guid: 5d34f53b808357f45967efff1e18ff17, type: 2}
   _scenes: {fileID: 11400000, guid: 473ad5fc18b696845914808028cf1fd8, type: 2}
   _localization: {fileID: 11400000, guid: c27340b364e2ca64b833e18a2898f644, type: 2}
   _audio: {fileID: 11400000, guid: 9aa5e61089e8fb843b8fa5d1c54854cb, type: 2}
