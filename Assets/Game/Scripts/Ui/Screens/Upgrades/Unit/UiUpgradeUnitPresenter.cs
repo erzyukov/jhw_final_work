@@ -7,6 +7,7 @@
 	using Zenject;
 	using UniRx;
 	using Args = UiUpgradeUnitViewFactory.Args;
+	using Game.Configs;
 
 	public class UiUpgradeUnitPresenter : ControllerBase, IInitializable
 	{
@@ -15,8 +16,11 @@
 		[Inject] private IGameUpgrades			_gameUpgrades;
 		[Inject] private GameProfile			_gameProfile;
 		[Inject] private IUiUpgradeFlow			_flow;
+		[Inject] private UpgradesConfig			_upgradesConfig;
 
-		private Species Species => _args.Species;
+		private Species Species		=> _args.Species;
+		private int LevelNumber		=> _gameUpgrades.GetUnitLevel( Species );
+		private bool IsBlocked		=> LevelNumber == 0;
 
 		public void Initialize()
 		{
@@ -29,6 +33,10 @@
 			_gameUpgrades.Upgraded
 				.Where( s => s == Species )
 				.Subscribe( _ => OnUnitUpgraded() )
+				.AddTo( this );
+
+			_gameProfile.LevelNumber
+				.Subscribe( _ => UpdateUnitParameters() )
 				.AddTo( this );
 
 			_flow.SelectButtons.Add( Species, _view.SelectButton.gameObject );
@@ -85,11 +93,15 @@
 
 		private void UpdateUnitParameters()
 		{
-			int levelNumber		= _gameProfile.Units.Upgrades[Species].Value;
 			int price			= _gameUpgrades.GetUpgradePrice( Species );
 
-			_view.SetLevel( levelNumber );
+			_view.SetLevel( LevelNumber );
 			_view.SetPrice( price );
+			_view.SetBlocked( IsBlocked );
+			_view.SetLevelNumberActive( LevelNumber > 0 );
+
+			bool canUnlock = _gameUpgrades.CanUnlockByLevel( Species );
+			_view.SetUnlockedLevelActive( canUnlock );
 		}
 
 		private void OnUnitSelected( Species species ) =>

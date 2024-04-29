@@ -3,6 +3,8 @@ namespace Game.Ui
 	using UnityEngine;
 	using UnityEngine.UI;
 	using TMPro;
+	using UnityEngine.Localization.Components;
+	using UnityEngine.Localization.SmartFormat.PersistentVariables;
 
 	public interface IUiUpgradesScreen : IUiScreen
 	{
@@ -10,8 +12,10 @@ namespace Game.Ui
 		UiUnitUpgradeElement UnitElementPrefab { get; }
 		GameObject UnitUnavailableDummyPrefab { get; }
 		void SetIcon(Sprite value);
+		void SetIconMaterial(Material value);
 		void SetName(string value);
-		void SetLevel(string value);
+		void SetLevel(int value);
+		void SetLevelActive( bool value );
 		void SetHealthValue(string value, string delta);
 		void SetDamageValue(string value, string delta);
 		void SetSpeedValue(string value);
@@ -22,7 +26,8 @@ namespace Game.Ui
 	{
 		[SerializeField] private Image _unitIcon;
 		[SerializeField] private TextMeshProUGUI _unitName;
-		[SerializeField] private TextMeshProUGUI _unitLevel;
+		//[SerializeField] private TextMeshProUGUI _unitLevel;
+		[SerializeField] private LocalizeStringEvent _localizedLevel;
 		[SerializeField] private TextMeshProUGUI _unitHealthValue;
 		[SerializeField] private TextMeshProUGUI _unitDamageValue;
 		[SerializeField] private TextMeshProUGUI _unitSpeedValue;
@@ -31,6 +36,8 @@ namespace Game.Ui
 		[SerializeField] private UiUnitUpgradeElement _unitUpgradeElementPrefab;
 		[SerializeField] private GameObject _unitUnavailableDummyPrefab;
 		[SerializeField] private Color _parameterDeltaColor;
+
+		private const string levelVariable		= "level";
 
 		public override Screen Screen => Screen.Upgrades;
 
@@ -42,25 +49,31 @@ namespace Game.Ui
 
 		public GameObject UnitUnavailableDummyPrefab => _unitUnavailableDummyPrefab;
 
-		public void SetIcon(Sprite value) =>
+		public void SetIcon( Sprite value ) =>
 			_unitIcon.sprite = value;
 
-		public void SetName(string value) =>
+		public void SetIconMaterial( Material value ) =>
+			_unitIcon.material = value;
+
+		public void SetName( string value ) =>
 			_unitName.text = value;
 
-		public void SetLevel(string value) =>
-			_unitLevel.text = value;
+		public void SetLevel( int value ) =>
+			( _localizedLevel.StringReference[levelVariable] as IntVariable ).Value = value;
 
-		public void SetHealthValue(string value, string delta) =>
-		_unitHealthValue.text = $"{value} <color=#{ColorUtility.ToHtmlStringRGB(_parameterDeltaColor)}>+ {delta}</color>";
+		public void SetLevelActive( bool value ) =>
+			_localizedLevel.gameObject.SetActive( value );
 
-		public void SetDamageValue(string value, string delta) =>
-		_unitDamageValue.text = $"{value} <color=#{ColorUtility.ToHtmlStringRGB(_parameterDeltaColor)}>+ {delta}</color>";
+		public void SetHealthValue( string value, string delta ) =>
+			_unitHealthValue.text = $"{value} <color=#{ColorUtility.ToHtmlStringRGB( _parameterDeltaColor )}>+ {delta}</color>";
 
-		public void SetSpeedValue(string value) =>
+		public void SetDamageValue( string value, string delta ) =>
+			_unitDamageValue.text = $"{value} <color=#{ColorUtility.ToHtmlStringRGB( _parameterDeltaColor )}>+ {delta}</color>";
+
+		public void SetSpeedValue( string value ) =>
 			_unitSpeedValue.text = value;
 
-		public void SetRangeValue(string value) =>
+		public void SetRangeValue( string value ) =>
 			_unitRangeValue.text = value;
 
 		#endregion

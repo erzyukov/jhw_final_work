@@ -25,6 +25,10 @@
 		void SetSelected( bool value );
 		void SetSelectInteractable( bool value );
 		void SetUpgradeInteractable( bool value );
+		void SetBlocked( bool value );
+		void SetLevelNumberActive(bool value);
+		void SetUnlockedLevelActive( bool value );
+		void SetUnlockedLevel( int value );
 	}
 
 	public class UiUpgradeUnitView : MonoBehaviour, IUiUpgradeUnitView
@@ -43,6 +47,11 @@
 		[SerializeField] private Image					_textDelimeter;
 		[SerializeField] private Color					_activeColor;
 		[SerializeField] private Color					_inactiveColor;
+		[SerializeField] private Material				_blockedImageMaterial;
+		[SerializeField] private GameObject				_defaultButton;
+		[SerializeField] private GameObject				_unlockButton;
+		[SerializeField] private GameObject				_unlockedLevel;
+		[SerializeField] private LocalizeStringEvent	_localizedUnlockedLevel;
 
 		private const string levelVariable		= "level";
 		private const string priceVariable		= "price";
@@ -84,6 +93,23 @@
 			_upgradeButton.SetDefaultInteractable( value );
 
 		public void SetParent( Transform unitsContainer ) => transform.SetParent( unitsContainer );
+
+		public void SetUnlockedLevelActive( bool value ) =>
+			_unlockedLevel.SetActive( value );
+
+		public void SetUnlockedLevel( int value ) =>
+			( _localizedUnlockedLevel.StringReference[levelVariable] as IntVariable ).Value = value;
+
+		public void SetLevelNumberActive(bool value) =>
+			_level.gameObject.SetActive( value );
+
+		public void SetBlocked( bool value )
+		{
+			_icon.material = ( value ) ? _blockedImageMaterial : null;
+			_localizedPrice.gameObject.SetActive( !value );
+			_defaultButton.SetActive( !value );
+			_unlockButton.SetActive( value );
+		}
 
 		public class Factory : PlaceholderFactory<UiUpgradeUnitViewFactory.Args, IUiUpgradeUnitView> { }
 	}

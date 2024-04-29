@@ -18,6 +18,7 @@
 		[Inject] private IUiUpgradesScreen				_screen;
 		[Inject] private UnitsConfig					_unitsConfig;
 		[Inject] private UpgradesConfig					_upgradesConfig;
+		[Inject] private UiCommonConfig					_uiCommonConfig;
 		[Inject] private ILocalizator					_localizator;
 		[Inject] private GameProfile					_gameProfile;
 		[Inject] private IGameUpgrades					_gameUpgrades;
@@ -91,9 +92,12 @@
 			int damage = Mathf.CeilToInt(unit.Damage + unit.DamagePowerMultiplier * power);
 			int damageUpgradeDelta = Mathf.CeilToInt(unit.DamagePowerMultiplier * _upgradesConfig.UpgradePowerBonus);
 
+			bool isBlocked = unitLevel == 0;
 			_screen.SetIcon( unit.FullLength );
+			_screen.SetIconMaterial( isBlocked ? _uiCommonConfig.BlockedElementMaterial : null );
 			_screen.SetName( unit.Name );
-			_screen.SetLevel( $"{_localizator.GetString( LevelTitleKey )} {unitLevel}" );
+			_screen.SetLevel( unitLevel );
+			_screen.SetLevelActive( !isBlocked );
 			_screen.SetHealthValue(
 				health.ToString(),
 				healthUpgradeDelta.ToString()

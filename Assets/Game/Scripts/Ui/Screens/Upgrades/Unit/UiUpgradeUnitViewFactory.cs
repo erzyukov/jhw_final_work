@@ -2,6 +2,7 @@
 {
 	using Game.Configs;
 	using Game.Units;
+	using UnityEngine;
 	using Zenject;
 
 	public class UiUpgradeUnitViewFactory : IFactory<UiUpgradeUnitViewFactory.Args, IUiUpgradeUnitView>
@@ -21,6 +22,7 @@
 			_container.BindInstance( args );
 
 			UiUpgradeUnitView prefab		= _prefabsConfig.UpgradeUnit;
+			Debug.LogWarning(prefab);
 			IUiUpgradeUnitView itemView		= _container.InstantiatePrefabForComponent<IUiUpgradeUnitView>( prefab );
 
 			return itemView;

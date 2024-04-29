@@ -164,9 +164,10 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4399172084183040
-    m_Localized: LEVEL
+    m_Localized: LEVEL {level}
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 5784177084190425105
   - m_Id: 4412267393331200
     m_Localized: UPGRADE
     m_Metadata:
@@ -344,13 +345,15 @@ MonoBehaviour:
     m_Localized: Locked
     m_Metadata:
       m_Items: []
-  - m_Id: 5382876509409280
-    m_Localized: unlocked at {levelNumber} level
+  - m_Id: 5423461551214592
+    m_Localized: <size=200%><sprite=0><size=100%>{price}
     m_Metadata:
       m_Items:
       - rid: 5784177084190425105
-  - m_Id: 5423461551214592
-    m_Localized: <size=200%><sprite=0><size=100%>{price}
+  - m_Id: 7963602840883200
+    m_Localized: 'Unlocked
+
+      On level {level}'
     m_Metadata:
       m_Items:
       - rid: 5784177084190425105
@@ -360,4 +363,4 @@ MonoBehaviour:
     - rid: 5784177084190425105
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 0090369ab21f130000306264413910000090360b9c441300
+        m_Entries: 00306264413910000090360b9c441300009076c6da4a1c000030621106a10f00

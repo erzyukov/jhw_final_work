@@ -156,7 +156,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4399172084183040
-    m_Key: unitLevel
+    m_Key: unit_level_full
     m_Metadata:
       m_Items: []
   - m_Id: 4412267393331200
@@ -332,12 +332,12 @@ MonoBehaviour:
     m_Key: locked
     m_Metadata:
       m_Items: []
-  - m_Id: 5382876509409280
-    m_Key: upgrade_locked_alert
-    m_Metadata:
-      m_Items: []
   - m_Id: 5423461551214592
     m_Key: upgrade_unit_price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7963602840883200
+    m_Key: upgrades_unlocked_level
     m_Metadata:
       m_Items: []
   m_Metadata:

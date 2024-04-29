@@ -62,12 +62,5 @@ namespace Game.Configs
 
 			return AdditionalMergeGradePower[gradeIndex];
 		}
-
-		[Serializable]
-		public struct UnitData
-		{
-			public Species		Species;
-			public UnitConfig	Config;
-		}
     }
 }
