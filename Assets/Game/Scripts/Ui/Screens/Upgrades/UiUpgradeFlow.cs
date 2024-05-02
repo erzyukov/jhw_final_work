@@ -11,7 +11,6 @@
 		ReactiveCollection<Species> SelectDisabled { get; }
 		ReactiveCollection<Species> UpgradeDisabled { get; }
 		ReactiveCommand<Species> UpgradeClicked { get; }
-		ReactiveCommand<Species> AdClicked { get; }
 
 		Dictionary<Species, GameObject> SelectButtons { get; }
 		Dictionary<Species, GameObject> UpgradeButtons { get; }
@@ -23,7 +22,6 @@
 		public ReactiveCollection<Species> SelectDisabled		{ get; } = new();
 		public ReactiveCollection<Species> UpgradeDisabled		{ get; } = new();
 		public ReactiveCommand<Species> UpgradeClicked			{ get; } = new();
-		public ReactiveCommand<Species> AdClicked				{ get; } = new();
 
 		public Dictionary<Species, GameObject> SelectButtons	{ get; } = new();
 		public Dictionary<Species, GameObject> UpgradeButtons	{ get; } = new();

@@ -46,37 +46,20 @@
 				.Subscribe( OnUpgradeButtonClicked )
 				.AddTo( this );
 
+			/*
 			Observable.Merge(
 				_gameUpgrades.Upgraded.AsUnitObservable(),
 				_gameProfile.SoftCurrency.AsUnitObservable(),
 				_gameProfile.HeroLevel.AsUnitObservable(),
 				_adsManager.IsRewardedAvailable.AsUnitObservable()
 			)
-				.Subscribe( _ => OnSoftCurrencyChanged() )
+				.Subscribe( _ => _flow.SoftCurrencyChanged.Execute() )
 				.AddTo( this );
+			*/
 
 			_gameUpgrades.Upgraded
 				.Subscribe( OnUnitUpgraded )
 				.AddTo( this );
-		}
-
-		private void OnSoftCurrencyChanged()
-		{
-			int heroLevel = _gameProfile.HeroLevel.Value;
-			int ccy = _gameProfile.SoftCurrency.Value;
-			bool isRewardAvailable = _adsManager.IsRewardedAvailable.Value;
-
-/*
-			_screen.UnitElements.ForEach( element =>
-			{
-				int unitLevel = _gameUpgrades.GetUnitLevel( element.Key );
-				int upgradePrice = _gameUpgrades.GetUpgradePrice( element.Key );
-				bool isAdAcitve = (upgradePrice > ccy) && isRewardAvailable && unitLevel < heroLevel;
-
-				element.Value.UpgradeButton.SetAdActive( isAdAcitve );
-			} );
-*/
-
 		}
 
 		private void FillUnitInfo( Species species )
@@ -113,45 +96,6 @@
 		private void CreateUnitList()
 		{
 			_gameProfile.Units.Upgrades.ForEach( kvp => CreateUnitItem( kvp.Key ) );
-
-			
-
-			/*
-			for (int i = 0; i < DummyElementsCount; i++)
-				GameObject.Instantiate( _screen.UnitUnavailableDummyPrefab, _screen.UnitsContainer );
-
-			for (int i = _unitsConfig.HeroUnits.Count - 1; i >= 0; i--)
-			{
-				Species species = _unitsConfig.HeroUnits[i];
-
-				if (_unitsConfig.Units.TryGetValue( species, out var unit ) == false)
-					continue;
-
-				if (_screen.UnitElements.Count == _unitsConfig.HeroUnits.Count - 1)
-					_firstElement = species;
-
-				int unitLevel = _gameProfile.Units.Upgrades[species].Value;
-
-				UiUnitUpgradeElement element = GameObject.Instantiate( _screen.UnitElementPrefab, _screen.UnitsContainer );
-				element.SetIcon( unit.Icon );
-				element.SetLevel( $"{_localizator.GetString( LevelShortTitleKey )} {unitLevel}" );
-				element.SetTitle( unit.Name );
-				element.SetPrice( _gameUpgrades.GetUpgradePrice( species ).ToString() );
-				_screen.UnitElements.Add( species, element );
-
-				element.SelectButtonClicked
-					.Subscribe( _ => OnSelectButtonClicked( species ) )
-					.AddTo( this );
-
-				element.UpgradeButton.Clicked
-					.Subscribe( _ => OnUpgradeButtonClickedHandler( species ) )
-					.AddTo( this );
-
-				element.UpgradeButton.AdClicked
-					.Subscribe( _ => _adsManager.ShowRewardedVideo( ERewardedType.UnitUpgrade, new Rewarded( species ) ) )
-					.AddTo( this );
-			}
-			*/
 		}
 
 		private void CreateUnitItem( Species species )

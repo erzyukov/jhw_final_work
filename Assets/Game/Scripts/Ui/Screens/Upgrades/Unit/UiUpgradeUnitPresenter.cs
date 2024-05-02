@@ -8,6 +8,7 @@
 	using UniRx;
 	using Args = UiUpgradeUnitViewFactory.Args;
 	using Game.Configs;
+	using Game.Managers;
 
 	public class UiUpgradeUnitPresenter : ControllerBase, IInitializable
 	{
@@ -17,6 +18,7 @@
 		[Inject] private GameProfile			_gameProfile;
 		[Inject] private IUiUpgradeFlow			_flow;
 		[Inject] private UpgradesConfig			_upgradesConfig;
+		[Inject] private IAdsManager			_adsManager;
 
 		private Species Species		=> _args.Species;
 		private int LevelNumber		=> _gameUpgrades.GetUnitLevel( Species );
@@ -33,12 +35,12 @@
 				.Subscribe( OnUnitSelected )
 				.AddTo( this );
 
-			_gameUpgrades.Upgraded
-				.Where( s => s == Species )
-				.Subscribe( _ => UpdateUnitParameters() )
-				.AddTo( this );
-
-			_gameProfile.HeroLevel
+			Observable.Merge(
+					_gameUpgrades.Upgraded.Where( s => s == Species ).AsUnitObservable(),
+					_gameProfile.HeroLevel.AsUnitObservable(),
+					_gameProfile.SoftCurrency.AsUnitObservable(),
+					_adsManager.IsRewardedAvailable.AsUnitObservable()
+				)
 				.Subscribe( _ => UpdateUnitParameters() )
 				.AddTo( this );
 
@@ -63,6 +65,10 @@
 					_view.UnlockButtonClicked
 				)
 				.Subscribe( _ => _flow.UpgradeClicked.Execute( _args.Species ) )
+				.AddTo( this );
+
+			_view.AdsButtonClicked
+				.Subscribe( _ => _adsManager.ShowRewardedVideo( ERewardedType.UnitUpgrade, new Rewarded( Species ) ) )
 				.AddTo( this );
 
 			_flow.SelectDisabled.ObserveAdd()
@@ -97,23 +103,33 @@
 
 		private void UpdateUnitParameters()
 		{
-			int price			= _gameUpgrades.GetUpgradePrice( Species );
+			int price					= _gameUpgrades.GetUpgradePrice( Species );
 
 			_view.SetLevel( LevelNumber );
 			_view.SetPrice( price );
 			_view.SetBlocked( IsBlocked );
 			_view.SetLevelNumberActive( LevelNumber > 0 );
 
-			bool isLocked		= _gameUpgrades.IsLockedByLevel( Species );
+			bool isLocked				= _gameUpgrades.IsLockedByLevel( Species );
 			_view.SetUnlockLevelActive( !isLocked );
 			_view.SetLockedButtonActive( isLocked && LevelNumber == 0 );
 
-			int unlockLevel = _upgradesConfig.UnitsUpgrades[Species].UnlockHeroLevel;
+			int unlockLevel				= _upgradesConfig.UnitsUpgrades[Species].UnlockHeroLevel;
 			_view.SetUnlockLevel( unlockLevel );
 
-			bool canUnlocked    = LevelNumber == 0 && isLocked == false;
+			bool canUnlocked			= LevelNumber == 0 && isLocked == false;
 			_view.SetUnlockButtonActive( canUnlocked );
 			_view.SetUnlockPrice( price );
+
+			int ccy						= _gameProfile.SoftCurrency.Value;
+			bool isRewardAvailable		= _adsManager.IsRewardedAvailable.Value;
+			bool isAdAcitve				= 
+				(price > ccy)		&& 
+				isRewardAvailable	&& 
+				LevelNumber != 0	&&
+				LevelNumber < _gameProfile.HeroLevel.Value;
+
+			_view.UpgradeButton.SetAdActive( isAdAcitve );
 		}
 
 		private void OnUnitSelected( Species species ) =>
