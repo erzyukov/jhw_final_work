@@ -340,6 +340,10 @@ MonoBehaviour:
     m_Key: upgrades_unlocked_level
     m_Metadata:
       m_Items: []
+  - m_Id: 9431902246572032
+    m_Key: unlock
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

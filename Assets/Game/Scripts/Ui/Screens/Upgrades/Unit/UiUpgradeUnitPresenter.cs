@@ -26,16 +26,19 @@
 		{
 			ControlSubscribe();
 
-			_flow.SelectedUnit
+			Observable.Merge(
+					_flow.SelectedUnit,
+					_gameUpgrades.Upgraded
+				)
 				.Subscribe( OnUnitSelected )
 				.AddTo( this );
 
 			_gameUpgrades.Upgraded
 				.Where( s => s == Species )
-				.Subscribe( _ => OnUnitUpgraded() )
+				.Subscribe( _ => UpdateUnitParameters() )
 				.AddTo( this );
 
-			_gameProfile.LevelNumber
+			_gameProfile.HeroLevel
 				.Subscribe( _ => UpdateUnitParameters() )
 				.AddTo( this );
 
@@ -47,11 +50,18 @@
 
 		private void ControlSubscribe()
 		{
-			_view.SelectButtonClicked
+			Observable.Merge(
+					_view.SelectButtonClicked,
+					_view.UpgradeButtonClicked,
+					_view.UnlockButtonClicked
+				)
 				.Subscribe( _ => _flow.SelectedUnit.Value = _args.Species )
 				.AddTo( this );
 
-			_view.UpgradeButtonClicked
+			Observable.Merge(
+					_view.UpgradeButtonClicked,
+					_view.UnlockButtonClicked
+				)
 				.Subscribe( _ => _flow.UpgradeClicked.Execute( _args.Species ) )
 				.AddTo( this );
 
@@ -85,12 +95,6 @@
 			UpdateUnitParameters();
 		}
 
-		private void OnUnitUpgraded()
-		{
-			UpdateUnitParameters();
-			_view.SetSelected( true );
-		}
-
 		private void UpdateUnitParameters()
 		{
 			int price			= _gameUpgrades.GetUpgradePrice( Species );
@@ -100,13 +104,19 @@
 			_view.SetBlocked( IsBlocked );
 			_view.SetLevelNumberActive( LevelNumber > 0 );
 
-			bool canUnlock = _gameUpgrades.CanUnlockByLevel( Species );
-			_view.SetUnlockedLevelActive( canUnlock );
+			bool isLocked		= _gameUpgrades.IsLockedByLevel( Species );
+			_view.SetUnlockLevelActive( !isLocked );
+			_view.SetLockedButtonActive( isLocked && LevelNumber == 0 );
+
+			int unlockLevel = _upgradesConfig.UnitsUpgrades[Species].UnlockHeroLevel;
+			_view.SetUnlockLevel( unlockLevel );
+
+			bool canUnlocked    = LevelNumber == 0 && isLocked == false;
+			_view.SetUnlockButtonActive( canUnlocked );
+			_view.SetUnlockPrice( price );
 		}
 
 		private void OnUnitSelected( Species species ) =>
 			_view.SetSelected( Species == species );
-
-
 	}
 }

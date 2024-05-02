@@ -14,6 +14,7 @@
 		IObservable<Unit> SelectButtonClicked { get; }
 		IObservable<Unit> UpgradeButtonClicked { get; }
 		IObservable<Unit> AdsButtonClicked { get; }
+		IObservable<Unit> UnlockButtonClicked { get; }
 		Button SelectButton { get; }
 		AdButton UpgradeButton { get; }
 
@@ -27,8 +28,11 @@
 		void SetUpgradeInteractable( bool value );
 		void SetBlocked( bool value );
 		void SetLevelNumberActive(bool value);
-		void SetUnlockedLevelActive( bool value );
-		void SetUnlockedLevel( int value );
+		void SetUnlockLevelActive( bool value );
+		void SetLockedButtonActive( bool value );
+		void SetUnlockLevel( int value );
+		void SetUnlockButtonActive( bool value );
+		void SetUnlockPrice( int value );
 	}
 
 	public class UiUpgradeUnitView : MonoBehaviour, IUiUpgradeUnitView
@@ -49,9 +53,11 @@
 		[SerializeField] private Color					_inactiveColor;
 		[SerializeField] private Material				_blockedImageMaterial;
 		[SerializeField] private GameObject				_defaultButton;
-		[SerializeField] private GameObject				_unlockButton;
+		[SerializeField] private GameObject				_lockedButton;
 		[SerializeField] private GameObject				_unlockedLevel;
-		[SerializeField] private LocalizeStringEvent	_localizedUnlockedLevel;
+		[SerializeField] private LocalizeStringEvent	_localizedUnlockLevel;
+		[SerializeField] private Button					_unlockButton;
+		[SerializeField] private LocalizeStringEvent	_unlockPrice;
 
 		private const string levelVariable		= "level";
 		private const string priceVariable		= "price";
@@ -59,6 +65,7 @@
 		public IObservable<Unit> SelectButtonClicked		=> _selectButton.OnClickAsObservable();
 		public IObservable<Unit> UpgradeButtonClicked		=> _upgradeButton.Clicked;
 		public IObservable<Unit> AdsButtonClicked			=> _upgradeButton.AdClicked;
+		public IObservable<Unit> UnlockButtonClicked		=> _unlockButton.OnClickAsObservable();
 		public Button SelectButton							=> _selectButton;
 		public AdButton UpgradeButton						=> _upgradeButton;
 
@@ -94,11 +101,11 @@
 
 		public void SetParent( Transform unitsContainer ) => transform.SetParent( unitsContainer );
 
-		public void SetUnlockedLevelActive( bool value ) =>
-			_unlockedLevel.SetActive( value );
+		public void SetUnlockLevelActive( bool value ) =>
+			_unlockedLevel.SetActive( !value );
 
-		public void SetUnlockedLevel( int value ) =>
-			( _localizedUnlockedLevel.StringReference[levelVariable] as IntVariable ).Value = value;
+		public void SetUnlockLevel( int value ) =>
+			( _localizedUnlockLevel.StringReference[levelVariable] as IntVariable ).Value = value;
 
 		public void SetLevelNumberActive(bool value) =>
 			_level.gameObject.SetActive( value );
@@ -108,8 +115,17 @@
 			_icon.material = ( value ) ? _blockedImageMaterial : null;
 			_localizedPrice.gameObject.SetActive( !value );
 			_defaultButton.SetActive( !value );
-			_unlockButton.SetActive( value );
+			_lockedButton.SetActive( value );
 		}
+
+		public void SetLockedButtonActive( bool value ) =>
+			_lockedButton.SetActive( value );
+
+		public void SetUnlockButtonActive( bool value ) => 
+			_unlockButton.gameObject.SetActive( value );
+
+		public void SetUnlockPrice( int value ) =>
+			( _unlockPrice.StringReference[priceVariable] as IntVariable ).Value = value;
 
 		public class Factory : PlaceholderFactory<UiUpgradeUnitViewFactory.Args, IUiUpgradeUnitView> { }
 	}

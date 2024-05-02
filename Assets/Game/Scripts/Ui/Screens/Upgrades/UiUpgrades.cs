@@ -170,17 +170,6 @@
 			item.SetParent( _screen.UnitsContainer );
 		}
 
-		private void UpdateUnitElement( Species species, bool isSelected = false )
-		{
-			/*
-			UiUnitUpgradeElement element = _screen.UnitElements[species];
-			int unitLevel = _gameProfile.Units.Upgrades[species].Value;
-			element.SetLevel( $"{_localizator.GetString( LevelShortTitleKey )} {unitLevel}" );
-			element.SetPrice( _gameUpgrades.GetUpgradePrice( species ).ToString() );
-			element.SetSelected( isSelected );
-			*/
-		}
-
 		private void OnUnitSelected( Species species )
 		{
 			_gameAudio.PlayUiClick();
@@ -200,20 +189,13 @@
 			}
 				
 			_gameAudio.PlayUiClick();
-			UpdateUnitList( species );
 			FillUnitInfo( species );
 		}
 
 		private void OnUnitUpgraded( Species species )
 		{
-			UpdateUnitList( species );
 			FillUnitInfo( species );
 		}
 
-		private void UpdateUnitList( Species selected )
-		{
-			foreach (Species unitSpecies in _unitsConfig.HeroUnits)
-				UpdateUnitElement( unitSpecies, unitSpecies == selected );
-		}
 	}
 }
