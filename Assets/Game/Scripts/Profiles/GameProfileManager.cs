@@ -5,6 +5,7 @@ namespace Game.Profiles
 	using Game.Utilities;
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 	using UniRx;
 	using Zenject;
 
@@ -134,10 +135,13 @@ namespace Game.Profiles
 		private void AddMissingUnits()
 		{
 			if (_gameProfile.Units == null)
-				_gameProfile.Units = new UnitsProfile();
+				_gameProfile.Units	= new UnitsProfile();
 
 			if (_gameProfile.Units.Upgrades == null)
 				_gameProfile.Units.Upgrades = new Dictionary<Species, IntReactiveProperty>();
+
+			if (_gameProfile.Squad == null)
+				_gameProfile.Squad	= new List<Species>();
 
 			FillUnits();
 		}
@@ -148,9 +152,13 @@ namespace Game.Profiles
 			{
 				if (_gameProfile.Units.Upgrades.ContainsKey( species ) == false)
 				{
-					int defaultLevel = _unitsConfig.HeroDefaultSquad.Contains( species ) ? 1 : 0 ;
+					bool isInDefaultSquad	= _unitsConfig.HeroDefaultSquad.Contains( species );
+					int defaultLevel		= isInDefaultSquad ? 1 : 0 ;
+
 					_gameProfile.Units.Upgrades.Add( species, new IntReactiveProperty( defaultLevel ) );
 				}
+
+				_gameProfile.Squad		= _unitsConfig.HeroDefaultSquad.ToList();
 			}
 		}
 

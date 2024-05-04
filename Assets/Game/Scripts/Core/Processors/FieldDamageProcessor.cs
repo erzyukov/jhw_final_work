@@ -25,6 +25,9 @@
 		{
 			var field = _fields.Where( f => f.HasUnit(data.Target) ).FirstOrDefault();
 
+			if (field == null)
+				return;
+
 			var targets = field.Units
 				.Select( u => (Unit : u, Distance : Vector3.Distance( u.Transform.position, data.Position )) )
 				.Where( r => r.Distance < data.Range )

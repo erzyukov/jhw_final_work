@@ -101,6 +101,10 @@ namespace Game.Installers
 				.BindInterfacesTo<GameUpgrades>()
 				.AsSingle();
 
+			Container
+				.BindInterfacesTo<GameHeroSquad>()
+				.AsSingle();
+
             Container
                 .BindInterfacesTo<GameEnergy>()
                 .AsSingle();

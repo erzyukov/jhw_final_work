@@ -159,4 +159,5 @@ MonoBehaviour:
   SummonCountRatioLimit: 0.6
   HeroUnits: 010000000200000003000000
   AdditionalMergeGradePower: 0e0000000900000005000000
+  MaxSquadSize: 5
   HeroDefaultSquad: 0100000002000000

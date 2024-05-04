@@ -1,5 +1,6 @@
 namespace Game.Profiles
 {
+	using Game.Units;
 	using System;
 	using System.Collections.Generic;
 	using UniRx;
@@ -7,30 +8,32 @@ namespace Game.Profiles
 	[Serializable]
 	public class GameProfile
     {
-		public readonly IntReactiveProperty LevelNumber = new IntReactiveProperty(1);
-		public readonly IntReactiveProperty WaveNumber = new IntReactiveProperty(0);
-		public readonly IntReactiveProperty SoftCurrency = new IntReactiveProperty(0);
-		public readonly IntReactiveProperty SummonCurrency = new IntReactiveProperty(0);
-		public readonly IntReactiveProperty HeroLevel = new IntReactiveProperty(1);
-		public readonly IntReactiveProperty HeroExperience = new IntReactiveProperty(0);
+		public readonly IntReactiveProperty		LevelNumber			= new(1);
+		public readonly IntReactiveProperty		WaveNumber			= new(0);
+		public readonly IntReactiveProperty		SoftCurrency		= new(0);
+		public readonly IntReactiveProperty		SummonCurrency		= new(0);
+		public readonly IntReactiveProperty		HeroLevel			= new(1);
+		public readonly IntReactiveProperty		HeroExperience		= new(0);
 
-		public readonly IntReactiveProperty LevelSoftCurrency = new IntReactiveProperty(0);
-		public readonly IntReactiveProperty LevelHeroExperience = new IntReactiveProperty(0);
-		public bool IsReturnFromBattle;
-		public bool IsWonLastBattle;
-		public int ReviveAttemptsCount;
+		public readonly IntReactiveProperty		LevelSoftCurrency		= new(0);
+		public readonly IntReactiveProperty		LevelHeroExperience		= new(0);
+		
+		public bool			IsReturnFromBattle;
+		public bool			IsWonLastBattle;
+		public int			ReviveAttemptsCount;
 
-		public List<LevelProfile> Levels = new List<LevelProfile>();
-		public TutorialProfile Tutorial = new TutorialProfile();
-		public HeroFieldProfile HeroField = new HeroFieldProfile();
-		public UnitsProfile Units = new UnitsProfile();
-		public EnergyProfile Energy = new EnergyProfile();
+		public List<LevelProfile>	Levels		= new();
+		public TutorialProfile		Tutorial	= new();
+		public HeroFieldProfile		HeroField	= new();
+		public UnitsProfile			Units		= new();
+		public EnergyProfile		Energy		= new();
+		public List<Species>		Squad		= new();
 
-		public readonly BoolReactiveProperty IsMusicEnabled = new BoolReactiveProperty(true);
-		public readonly BoolReactiveProperty IsSoundEnabled = new BoolReactiveProperty(true);
+		public readonly BoolReactiveProperty	IsMusicEnabled		= new(true);
+		public readonly BoolReactiveProperty	IsSoundEnabled		= new(true);
 
-		public AnalyticsProfile Analytics = new AnalyticsProfile();
+		public AnalyticsProfile			Analytics		= new();
 
-		public IapShopProfile IapShopProfile = new IapShopProfile();
+		public IapShopProfile			IapShopProfile	= new();
 	}
 }

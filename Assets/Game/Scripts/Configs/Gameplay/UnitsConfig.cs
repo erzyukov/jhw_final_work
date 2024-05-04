@@ -52,6 +52,8 @@ namespace Game.Configs
 		[Header("Merge")]
 		public int[]			AdditionalMergeGradePower;
 
+		[Header("Squad")]
+		public int              MaxSquadSize;
 		public List<Species>	HeroDefaultSquad;
 
 		

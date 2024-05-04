@@ -40,7 +40,7 @@ MonoBehaviour:
   - {fileID: 3009363758071439639, guid: 7e34a6d506a0d264588cde3c9c8e7a24, type: 3}
   - {fileID: 3009363758071439639, guid: 7e34a6d506a0d264588cde3c9c8e7a24, type: 3}
   - {fileID: 3009363758071439639, guid: 7e34a6d506a0d264588cde3c9c8e7a24, type: 3}
-  _isDebug: 1
+  _isDebug: 0
   references:
     version: 2
     RefIds: []
