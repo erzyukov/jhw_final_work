@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grenadier-1-Head
+  m_Name: Grenadier-Head
   m_Shader: {fileID: 4800000, guid: fc5fe073de2689046884dbba79865fdf, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: f5bd5ba2583d90c408e08eb8266040f3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 99d7ca356177dae41ad5f72d82584016, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 35c1fd875985c0e46916f09672581076, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4be478009631eec4ebcf6160725282c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -52,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ORM:
-        m_Texture: {fileID: 2800000, guid: 9c155ff31a8bdee44b0a5532717426a7, type: 3}
+        m_Texture: {fileID: 2800000, guid: c2d4166cb8af0484aba211e2f9df23bc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
