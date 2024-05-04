@@ -26,7 +26,6 @@ namespace Game.Ui
 	{
 		[SerializeField] private Image _unitIcon;
 		[SerializeField] private TextMeshProUGUI _unitName;
-		//[SerializeField] private TextMeshProUGUI _unitLevel;
 		[SerializeField] private LocalizeStringEvent _localizedLevel;
 		[SerializeField] private TextMeshProUGUI _unitHealthValue;
 		[SerializeField] private TextMeshProUGUI _unitDamageValue;

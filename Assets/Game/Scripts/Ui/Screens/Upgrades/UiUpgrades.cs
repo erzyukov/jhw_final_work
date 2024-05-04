@@ -29,8 +29,6 @@
 		[Inject] private UiUpgradeUnitView.Factory		_upgradeUnitViewFactory;
 		[Inject] private IUiUpgradeFlow					_flow;
 
-		private const string	LevelTitleKey = "unitLevel";
-
 		public void Initialize()
 		{
 			var first = _gameProfile.Units.Upgrades.First().Key;
@@ -45,17 +43,6 @@
 			_flow.UpgradeClicked
 				.Subscribe( OnUpgradeButtonClicked )
 				.AddTo( this );
-
-			/*
-			Observable.Merge(
-				_gameUpgrades.Upgraded.AsUnitObservable(),
-				_gameProfile.SoftCurrency.AsUnitObservable(),
-				_gameProfile.HeroLevel.AsUnitObservable(),
-				_adsManager.IsRewardedAvailable.AsUnitObservable()
-			)
-				.Subscribe( _ => _flow.SoftCurrencyChanged.Execute() )
-				.AddTo( this );
-			*/
 
 			_gameUpgrades.Upgraded
 				.Subscribe( OnUnitUpgraded )
