@@ -141,7 +141,7 @@ namespace Game.Profiles
 				_gameProfile.Units.Upgrades = new Dictionary<Species, IntReactiveProperty>();
 
 			if (_gameProfile.Squad == null)
-				_gameProfile.Squad	= new List<Species>();
+				_gameProfile.Squad	= _unitsConfig.HeroDefaultSquad.ToList();
 
 			FillUnits();
 		}
@@ -157,8 +157,6 @@ namespace Game.Profiles
 
 					_gameProfile.Units.Upgrades.Add( species, new IntReactiveProperty( defaultLevel ) );
 				}
-
-				_gameProfile.Squad		= _unitsConfig.HeroDefaultSquad.ToList();
 			}
 		}
 
