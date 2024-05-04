@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c65321322d820d41beb4941978b5a35, type: 3}
   m_Name: GrenadeLauncherUpgrades
   m_EditorClassIdentifier: 
-  UnlockHeroLevel: 3
+  UnlockHeroLevel: 7
   _price: 6400000032000000c2010000d3040000e3080000b20c0000ca120000a1180000781e0000572600002e2c00004e340000663a00007a3f00008e440000a2490000b64e0000ca530000

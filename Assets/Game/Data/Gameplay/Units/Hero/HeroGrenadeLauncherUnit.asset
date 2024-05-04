@@ -21,9 +21,8 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  _icon: {fileID: 21300000, guid: f533a01bffb899c41ac9c3bad01acab5, type: 3}
-  _fullLength: {fileID: 21300000, guid: 360c4a8dffc1cb74bba3cef7c16e9900, type: 3}
-  _unlockHeroLevel: 3
+  _icon: {fileID: 21300000, guid: cb990083e37792343b55760604ca3d10, type: 3}
+  _fullLength: {fileID: 21300000, guid: d5c7b1a5aab3f8b44ba7d959567f44cb, type: 3}
   _class: 1
   _attackRange: 4
   _attackDelay: 1.8
