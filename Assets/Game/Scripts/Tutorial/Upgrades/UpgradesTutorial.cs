@@ -10,6 +10,7 @@
     using System.Linq;
     using Game.Ui;
 	using Game.Units;
+	using UnityEngine;
 
 	public class UpgradesTutorial : UpgradesTutorialFsmBase, IInitializable, IDisposable
 	{
@@ -281,6 +282,7 @@
             }
         }
 
+		// TODO: Need refact code duplicate [UnlockUnitTutorial]
 		private void SetActiveAllSelection( bool value ) =>
 			_unitsConfig.HeroUnits.ForEach( s => SetActiveSelection( s, value ) );
 

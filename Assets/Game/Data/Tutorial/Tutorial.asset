@@ -70,3 +70,10 @@ MonoBehaviour:
   - Step: 7
     TranslationKey: upgradeTutorialGoToBattle
     Place: 0
+  _unlockUnitTutorialMessages:
+  - Step: 1
+    TranslationKey: unlock_unit_tutorial_menu_button
+    Place: 0
+  - Step: 3
+    TranslationKey: unlock_unit_tutorial_last_hint
+    Place: 0

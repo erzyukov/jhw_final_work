@@ -361,6 +361,14 @@ MonoBehaviour:
     m_Localized: Unlock
     m_Metadata:
       m_Items: []
+  - m_Id: 10457425739419648
+    m_Localized: You have reached level 3 and can unlock a new unit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10457768082706432
+    m_Localized: Check the availability of new units to strengthen your squad
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

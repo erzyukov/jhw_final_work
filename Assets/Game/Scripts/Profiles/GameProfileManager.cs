@@ -3,10 +3,12 @@ namespace Game.Profiles
 	using Game.Configs;
 	using Game.Units;
 	using Game.Utilities;
+	using ModestTree;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UniRx;
+	using UnityEngine;
 	using Zenject;
 
 	public interface IGameProfileManager
@@ -140,7 +142,7 @@ namespace Game.Profiles
 			if (_gameProfile.Units.Upgrades == null)
 				_gameProfile.Units.Upgrades = new Dictionary<Species, IntReactiveProperty>();
 
-			if (_gameProfile.Squad == null)
+			if (_gameProfile.Squad == null || _gameProfile.Squad.IsEmpty())
 				_gameProfile.Squad	= _unitsConfig.HeroDefaultSquad.ToList();
 
 			FillUnits();

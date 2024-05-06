@@ -9,22 +9,22 @@
 	using UnityEngine;
 	using DG.Tweening;
 	using System;
-	using Newtonsoft.Json.Linq;
+
 
 	public class UiLobbyPresenter : ControllerBase, IInitializable
 	{
-		[Inject] private IUiLobbyScreen _lobbyScreen;
-		[Inject] private IUiLobbyFlow _flow;
-		[Inject] private IUiMessage _uiMessage;
-		[Inject] private IGameLevel _gameLevel;
-		[Inject] private IGameEnergy _gameEnergy;
-		[Inject] private IGameCurrency _gameCurrency;
-		[Inject] private GameProfile _profile;
-		[Inject] private LevelsConfig _levelsConfig;
-		[Inject] private EnergyConfig _energyConfig;
-		[Inject] private ILocalizator _localizator;
-		[Inject] private IContinueLevelRequest _continueLevelRequest;
-		[Inject] private IResourceEvents _resourceEvents;
+		[Inject] private IUiLobbyScreen			_lobbyScreen;
+		[Inject] private IUiLobbyFlow			_flow;
+		[Inject] private IUiMessage				_uiMessage;
+		[Inject] private IGameLevel				_gameLevel;
+		[Inject] private IGameEnergy			_gameEnergy;
+		[Inject] private IGameCurrency			_gameCurrency;
+		[Inject] private GameProfile			_profile;
+		[Inject] private LevelsConfig			_levelsConfig;
+		[Inject] private EnergyConfig			_energyConfig;
+		[Inject] private ILocalizator			_localizator;
+		[Inject] private IContinueLevelRequest	_continueLevelRequest;
+		[Inject] private IResourceEvents		_resourceEvents;
 		[Inject] private UiUpgradeUnitView.Factory _unitViewFactory;
 
 		private const float SwitchDuration = 0.8f;
@@ -40,9 +40,9 @@
 
 		public void Initialize()
 		{
-			_levelTitlePrefix = _localizator.GetString( LevelTitlePrefixKey );
-			_flow.SelectedLevelIndex.Value = _profile.LevelNumber.Value - 1;
-			_flow.IsSelectLevelAvailable.Value = true;
+			_levelTitlePrefix					= _localizator.GetString( LevelTitlePrefixKey );
+			_flow.SelectedLevelIndex.Value		= _profile.LevelNumber.Value - 1;
+			_flow.IsSelectLevelAvailable.Value	= true;
 
 			_lobbyScreen.Opened
 				.Subscribe( _ => OnScreenOpeningHandler() )
@@ -88,6 +88,8 @@
 			UpdateScreenState();
 
 			_lobbyScreen.SetPlayPriceText( _energyConfig.LevelPrice.ToString() );
+
+			_flow.Loaded.Execute();
 		}
 
 		private void SetLevelInfo( int levelIndex )
@@ -193,6 +195,7 @@
 			_lobbyScreen.SetNextLevelActive( SelectedLevelIndex + 1 <= _gameLevel.MaxOpened - 1 );
 
 			bool isLevelAvailable = SelectedLevelIndex <= _gameLevel.MaxOpened - 1;
+
 			_flow.IsStartAvailable.Value = isLevelAvailable;
 			_lobbyScreen.SetLevelActive( isLevelAvailable );
 		}
