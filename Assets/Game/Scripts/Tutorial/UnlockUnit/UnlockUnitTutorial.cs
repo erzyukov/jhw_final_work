@@ -70,7 +70,6 @@
 			_gameCycle.State
 				.Where(gameState =>
 					gameState	== GameState.Lobby		&&
-					//State		== UnlockUnitStep.None	&&
 					IsComplete	== false				&&
 					_profile.HeroLevel.Value >= _levelForUnlock
 				)
@@ -166,6 +165,8 @@
 
 		protected override void OnExitUnlockHint()
 		{
+			_uiLobbyFlow.IsSelectLevelAvailable.Value	= true;
+			_uiLobbyFlow.IsStartAvailable.Value			= true;
 			_dialogHint.SetNextMessageIndicatorActive(false);
 			_dialogHint.SetNextMessageButtonActive(false);
 			_dialogHint.SetActive(false);
