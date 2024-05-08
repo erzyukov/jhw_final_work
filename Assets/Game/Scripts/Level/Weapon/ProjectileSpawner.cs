@@ -7,13 +7,14 @@
 
 	public struct ProjectileArgs
 	{
-		public Vector3 StartPosition;
-		public IUnitFacade Target;
-		public float Speed;
-		public float Damage;
-		public float Height;
-		public float MaxDistance;
-		public float DamageRange;
+		public Vector3		StartPosition;
+		public IUnitFacade	Target;
+		public float		Speed;
+		public float		Damage;
+		public float		Height;
+		public float		MaxDistance;
+		public float		DamageRange;
+		public ProjectileType Type;
 	}
 
 	public interface IProjectileSpawner
@@ -36,13 +37,14 @@
 
 			ProjectileArgs data = new ProjectileArgs()
 			{
-				StartPosition = position,
-				Target = target,
-				Speed = projectile.Speed,
-				Damage = damage,
-				Height = projectile.Height,
-				MaxDistance = distance,
-				DamageRange = projectile.DamageRange,
+				StartPosition		= position,
+				Target				= target,
+				Speed				= projectile.Speed,
+				Damage				= damage,
+				Height				= projectile.Height,
+				MaxDistance			= distance,
+				DamageRange			= projectile.DamageRange,
+				Type				= type,
 			};
 
 			return Create(type, data);

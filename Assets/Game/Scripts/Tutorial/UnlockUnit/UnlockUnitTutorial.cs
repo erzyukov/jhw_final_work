@@ -38,7 +38,6 @@
 
 		public void Initialize()
 		{
-			SetProfileStepValue( UnlockUnitStep.None );
 			_gameProfileManager.Save();
 
 			if (IsComplete)

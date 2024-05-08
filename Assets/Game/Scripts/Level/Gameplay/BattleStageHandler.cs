@@ -5,6 +5,7 @@
 	using Game.Field;
 	using Game.Units;
 	using Game.Utilities;
+	using Game.Weapon;
 	using Sirenix.Utilities;
 	using System;
 	using UniRx;
@@ -13,39 +14,49 @@
 
 	public class BattleStageHandler : ControllerBase, IInitializable
 	{
-		[Inject] private IGameCycle _gameCycle;
-		[Inject] private IGameLevel _gameLevel;
-		[Inject] private IGameCurrency _gameCurrency;
-		[Inject] private IGameHero _gameHero;
-		[Inject] private IFieldHeroFacade _fieldHeroFacade;
-		[Inject] private IFieldEnemyFacade _fieldEnemyFacade;
-		[Inject] private TimingsConfig _timingsConfig;
-		[Inject] private UnitsConfig _unitsConfig;
-		[Inject] private IFieldFacade[] _fields;
-		[Inject] private IGameAudio _gameAudio;
-		[Inject] private IGameplayEvents _gameplayEvents;
+		[Inject] private IGameCycle			_gameCycle;
+		[Inject] private IGameLevel			_gameLevel;
+		[Inject] private IGameCurrency		_gameCurrency;
+		[Inject] private IGameHero			_gameHero;
+		[Inject] private IFieldHeroFacade	_fieldHeroFacade;
+		[Inject] private IFieldEnemyFacade	_fieldEnemyFacade;
+		[Inject] private TimingsConfig		_timingsConfig;
+		[Inject] private UnitsConfig		_unitsConfig;
+		[Inject] private IFieldFacade[]		_fields;
+		[Inject] private IGameAudio			_gameAudio;
+		[Inject] private IGameplayEvents	_gameplayEvents;
+		[Inject] private IBattleEvents		_battleEvents;
 
 		public void Initialize()
 		{
 			_gameCycle.State
-				.Where(state => state == GameState.BattleStage)
-				.Subscribe(_ => OnBattleStageHandler())
-				.AddTo(this);
+				.Where( state => state == GameState.BattleStage )
+				.Subscribe( _ => OnBattleStageHandler() )
+				.AddTo( this );
 
 			_fieldEnemyFacade.Units.ObserveCountChanged()
-				.Subscribe(OnEnemyUnitsCountChanged)
-				.AddTo(this);
+				.Subscribe( OnEnemyUnitsCountChanged )
+				.AddTo( this );
 
 			_fieldHeroFacade.AliveUnitsCount
-				.Where(_ => _gameCycle.State.Value == GameState.BattleStage)
-				.Subscribe(OnHeroUnitsCountChanged)
-				.AddTo(this);
+				.Where( _ => _gameCycle.State.Value == GameState.BattleStage )
+				.Subscribe( OnHeroUnitsCountChanged )
+				.AddTo( this );
 
 			_fieldEnemyFacade.Events.UnitDying
-				.Subscribe(OnEnemyUnitDyingHandler)
-				.AddTo(this);
+				.Subscribe( OnEnemyUnitDyingHandler )
+				.AddTo( this );
 
-			_fields.ForEach(field => field.Events.UnitAttacking.Subscribe(unit => _gameAudio.PlayUnitShoot(unit.Species)).AddTo(this));
+			_fields.ForEach( field => 
+				field.Events.UnitAttacking
+					.Subscribe( unit => _gameAudio.PlayUnitShoot( unit.Species ) )
+					.AddTo( this )
+			);
+
+			_battleEvents.DamageApplyed
+				.Where( d => d.ProjectileType != ProjectileType.None )
+				.Subscribe( d => _gameAudio.PlayProjectileHit(d.ProjectileType) )
+				.AddTo( this );
 		}
 
 		private void OnEnemyUnitDyingHandler(IUnitFacade unit)

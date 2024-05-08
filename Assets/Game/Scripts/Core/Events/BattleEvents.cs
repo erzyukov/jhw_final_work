@@ -3,6 +3,7 @@
 	using UniRx;
 	using UnityEngine;
 	using Game.Units;
+	using Game.Weapon;
 
 	public struct DamageData
 	{
@@ -11,6 +12,7 @@
 		public EDamageType Type;
 		public float Range;
 		public Vector3 Position;
+		public ProjectileType ProjectileType;
 	}
 
 	public interface IBattleEvents
