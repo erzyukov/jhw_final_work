@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: ru
   m_SharedData: {fileID: 11400000, guid: a85e39e96efe1144eae385d630010f58, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 5784177084190425104
   m_TableData:
   - m_Id: 3741385658368
     m_Localized: "\u041D\u0415 \u0425\u0412\u0410\u0422\u0410\u0415\u0422:"
@@ -173,9 +174,10 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4399172084183040
-    m_Localized: "\u0423\u0420\u041E\u0412\u0415\u041D\u042C"
+    m_Localized: "\u0423\u0420\u041E\u0412\u0415\u041D\u042C {level}"
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 5784177084190425104
   - m_Id: 4412267393331200
     m_Localized: "\u0423\u0421\u0418\u041B\u0418\u0422\u042C"
     m_Metadata:
@@ -185,9 +187,10 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4566552647184384
-    m_Localized: "\u0423\u0420."
+    m_Localized: "\u0423\u0420. {level}"
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 5784177084190425104
   - m_Id: 5066819859787776
     m_Localized: "\u041D\u0415 \u0425\u0412\u0410\u0422\u0410\u0415\u0422: <size=160%><sprite=0><size=100%>\u0414\u0415\u041D\u0415\u0413"
     m_Metadata:
@@ -326,6 +329,72 @@ MonoBehaviour:
     m_Localized: "\u041F\u0420\u041E\u0414\u0410\u041D\u041E"
     m_Metadata:
       m_Items: []
+  - m_Id: 4930925585928192
+    m_Localized: "\u0417\u0410\u0412\u0415\u0420\u0428\u0418 \u041F\u0420\u0415\u0414\u042B\u0414\u0423\u0429\u0418\u0419
+      \u042D\u0422\u0410\u041F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5375359607803904
+    m_Localized: "\u0413\u0420\u0415\u041D\u0410\u0414\u0415\u0420"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5376306421600256
+    m_Localized: "\u0410\u0414\u0421\u041A\u0418\u0419 \u041F\u0415\u0421"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5376616284196864
+    m_Localized: "\u0414\u0415\u041C\u041E\u041D"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5376748920672256
+    m_Localized: "\u0411\u0415\u0421 \u0411\u0420\u0418\u0413\u0410\u0414\u0418\u0420"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5377073299755008
+    m_Localized: "\u0411\u0415\u0421"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5377170062348288
+    m_Localized: "\u0421\u0423\u041A\u041A\u0423\u0411"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5381767308939264
+    m_Localized: "\u0417\u0430\u043A\u0440\u044B\u0442\u043E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423461551214592
+    m_Localized: <size=200%><sprite=0><size=100%>{price}
+    m_Metadata:
+      m_Items:
+      - rid: 5784177084190425104
+  - m_Id: 7963602840883200
+    m_Localized: "\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E\n\u043D\u0430
+      \u0443\u0440\u043E\u0432\u043D\u0435 {level}"
+    m_Metadata:
+      m_Items:
+      - rid: 5784177084190425104
+  - m_Id: 9431902246572032
+    m_Localized: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10457425739419648
+    m_Localized: "\u0412\u044B \u043F\u043E\u043B\u0443\u0447\u0438\u043B\u0438 3
+      \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u0438 \u043C\u043E\u0436\u0435\u0442\u0435
+      \u0440\u0430\u0437\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C
+      \u043D\u043E\u0432\u043E\u0433\u043E \u044E\u043D\u0438\u0442\u0430"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10457768082706432
+    m_Localized: "\u041F\u0440\u043E\u0432\u0435\u0440\u044F\u0439\u0442\u0435 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E\u0441\u0442\u044C
+      \u043D\u043E\u0432\u044B\u0445 \u044E\u043D\u0438\u0442\u043E\u0432, \u0434\u043B\u044F
+      \u0443\u0441\u0438\u043B\u0435\u043D\u0438\u044F \u0432\u0430\u0448\u0435\u0433\u043E
+      \u043E\u0442\u0440\u044F\u0434\u0430"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5784177084190425104
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00306264413910000090360b9c441300009076c6da4a1c000030621106a10f00

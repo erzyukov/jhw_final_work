@@ -4,6 +4,6 @@
 
 	public class Bullet : Projectile
 	{
-		public class Factory : PlaceholderFactory<ProjectileData, Bullet> { }
+		public class Factory : PlaceholderFactory<ProjectileArgs, Bullet> { }
 	}
 }

@@ -36,8 +36,11 @@ namespace Game.Tutorial
 		public void Hide() =>
 			SetActive(false);
 
-		public void SetPosition(Transform value) =>
+		public void SetPosition(Transform value )
+		{
             transform.SetParent(value, false);
+			//transform.SetParent(null, false);
+		}
 
 		public void SetLeft(bool value) =>
 			transform.localScale = (value)? Vector3.one.WithX(-1): Vector3.one;

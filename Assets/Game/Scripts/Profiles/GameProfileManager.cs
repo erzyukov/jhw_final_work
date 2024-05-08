@@ -3,9 +3,12 @@ namespace Game.Profiles
 	using Game.Configs;
 	using Game.Units;
 	using Game.Utilities;
+	using ModestTree;
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 	using UniRx;
+	using UnityEngine;
 	using Zenject;
 
 	public interface IGameProfileManager
@@ -134,10 +137,13 @@ namespace Game.Profiles
 		private void AddMissingUnits()
 		{
 			if (_gameProfile.Units == null)
-				_gameProfile.Units = new UnitsProfile();
+				_gameProfile.Units	= new UnitsProfile();
 
 			if (_gameProfile.Units.Upgrades == null)
 				_gameProfile.Units.Upgrades = new Dictionary<Species, IntReactiveProperty>();
+
+			if (_gameProfile.Squad == null || _gameProfile.Squad.IsEmpty())
+				_gameProfile.Squad	= _unitsConfig.HeroDefaultSquad.ToList();
 
 			FillUnits();
 		}
@@ -145,8 +151,15 @@ namespace Game.Profiles
 		private void FillUnits()
 		{
 			foreach (var species in _unitsConfig.HeroUnits)
+			{
 				if (_gameProfile.Units.Upgrades.ContainsKey( species ) == false)
-					_gameProfile.Units.Upgrades.Add( species, new IntReactiveProperty( 1 ) );
+				{
+					bool isInDefaultSquad	= _unitsConfig.HeroDefaultSquad.Contains( species );
+					int defaultLevel		= isInDefaultSquad ? 1 : 0 ;
+
+					_gameProfile.Units.Upgrades.Add( species, new IntReactiveProperty( defaultLevel ) );
+				}
+			}
 		}
 
 		private void AddMissingEnergy()

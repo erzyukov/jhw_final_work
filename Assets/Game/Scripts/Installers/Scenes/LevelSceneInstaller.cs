@@ -2,6 +2,7 @@ namespace Game.Installers
 {
 	using Game.Configs;
 	using Game.Core;
+	using Game.Core.Processors;
 	using Game.Dev;
 	using Game.Field;
 	using Game.Fx;
@@ -77,6 +78,7 @@ namespace Game.Installers
 
 			InstallWeapons();
 			InstallUnits();
+			InstallProcessors();
 			InstallFx();
 			InstallDev();
 			InstallAnalytics();
@@ -96,18 +98,25 @@ namespace Game.Installers
 
 		private void InstallWeapons()
 		{
-			Container.BindFactory<ProjectileData, Bullet, Bullet.Factory>()
+			Container.BindFactory<ProjectileArgs, Bullet, Bullet.Factory>()
 				.FromMonoPoolableMemoryPool( x =>
-					x.WithInitialSize( _weaponsConfig.BulletPoolSize )
-						.FromComponentInNewPrefab( _weaponsConfig.GetProjectile( ProjectileType.SniperBullet ) )
+					x.WithInitialSize( _weaponsConfig.ProjectilePoolSize )
+						.FromComponentInNewPrefab( _weaponsConfig.GetProjectilePrefab( ProjectileType.SniperBullet ) )
 						.UnderTransformGroup( ProjectileType.SniperBullet.ToString() )
 				);
 
-			Container.BindFactory<ProjectileData, Fireball, Fireball.Factory>()
+			Container.BindFactory<ProjectileArgs, Fireball, Fireball.Factory>()
 				.FromMonoPoolableMemoryPool( x =>
-					x.WithInitialSize( _weaponsConfig.BulletPoolSize )
-						.FromComponentInNewPrefab( _weaponsConfig.GetProjectile( ProjectileType.Fireball ) )
+					x.WithInitialSize( _weaponsConfig.ProjectilePoolSize )
+						.FromComponentInNewPrefab( _weaponsConfig.GetProjectilePrefab( ProjectileType.Fireball ) )
 						.UnderTransformGroup( ProjectileType.Fireball.ToString() )
+				);
+
+			Container.BindFactory<ProjectileArgs, GrenadeCapsule, GrenadeCapsule.Factory>()
+				.FromMonoPoolableMemoryPool( x =>
+					x.WithInitialSize( _weaponsConfig.ProjectilePoolSize )
+						.FromComponentInNewPrefab( _weaponsConfig.GetProjectilePrefab( ProjectileType.GrenadeCapsule ) )
+						.UnderTransformGroup( ProjectileType.GrenadeCapsule.ToString() )
 				);
 
 			Container
@@ -125,6 +134,13 @@ namespace Game.Installers
 			Container
 				.BindFactory<UnityEngine.Object, IUnitRenderer, UnitRenderer.Factory>()
 				.FromFactory<PrefabFactory<IUnitRenderer>>();
+		}
+
+		private void InstallProcessors()
+		{
+			Container
+				.BindInterfacesTo<FieldDamageProcessor>()
+				.AsSingle();
 		}
 
 		private void InstallFx()
@@ -153,6 +169,10 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<EffectsSpawner>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<LevelFxSpawner>()
 				.AsSingle();
 		}
 

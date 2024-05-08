@@ -12,10 +12,12 @@ namespace Game.Core
 	using Game.Field;
 	using Game.Profiles;
 	using System;
+	using Game.Weapon;
 
 	public interface IGameAudio
 	{
-		void PlayUnitShoot(Species species);
+		void PlayUnitShoot( Species species );
+		void PlayProjectileHit( ProjectileType type );
 		void PlayUiClick();
 	}
 
@@ -32,26 +34,26 @@ namespace Game.Core
 		public void Initialize()
 		{
 			_gameProfile.IsMusicEnabled
-				.Subscribe(OnMusicEnabledChanged)
-				.AddTo(this);
+				.Subscribe( OnMusicEnabledChanged )
+				.AddTo( this );
 
 			_gameProfile.IsSoundEnabled
-				.Subscribe(OnSoundEnabledChanged)
-				.AddTo(this);
+				.Subscribe( OnSoundEnabledChanged )
+				.AddTo( this );
 
 			_gameCycle.State
-				.Where(_ => _gameProfile.IsMusicEnabled.Value)
-				.Subscribe(PlayGameStateTheme)
-				.AddTo(this);
+				.Where( _ => _gameProfile.IsMusicEnabled.Value )
+				.Subscribe( PlayGameStateTheme )
+				.AddTo( this );
 
 			_gameplayEvents.UnitsMerged
-				.Where(_ => _gameProfile.IsSoundEnabled.Value)
-				.Subscribe(_ => PlayUnitMerge())
-				.AddTo(this);
+				.Where( _ => _gameProfile.IsSoundEnabled.Value )
+				.Subscribe( _ => PlayUnitMerge() )
+				.AddTo( this );
 
-			Observable.Timer(TimeSpan.FromSeconds(1))
-				.Subscribe(_ => RegisterUiElements())
-				.AddTo(this);
+			Observable.Timer( TimeSpan.FromSeconds( 1 ) )
+				.Subscribe( _ => RegisterUiElements() )
+				.AddTo( this );
 		}
 
 		private void OnMusicEnabledChanged(bool value)
@@ -59,7 +61,7 @@ namespace Game.Core
 			_audioSources.Music.volume = (value) ? _audioConfig.DefaultMusicVolume : 0;
 
 			if (value)
-				PlayGameStateTheme(_gameCycle.State.Value);
+				PlayGameStateTheme( _gameCycle.State.Value );
 		}
 
 		private void OnSoundEnabledChanged(bool value)
@@ -120,23 +122,32 @@ namespace Game.Core
 
 		#region IGameAudio
 
-		public void PlayUnitShoot(Species species)
+		public void PlayUnitShoot( Species species )
 		{
 			if (_gameProfile.IsSoundEnabled.Value == false)
 				return;
 
-			AudioClip clip = _audioConfig.GetShootClip(species);
+			AudioClip clip = _audioConfig.GetShootClip( species );
 
 			if (clip != null)
-				_audioSources.Sound.PlayOneShot(clip);
+				_audioSources.Sound.PlayOneShot( clip );
+		}
+
+		public void PlayProjectileHit( ProjectileType type )
+		{
+			if (_gameProfile.IsSoundEnabled.Value == false)
+				return;
+
+			AudioClip clip = _audioConfig.GetProjectileClip( type );
+
+			if (clip != null)
+				_audioSources.Sound.PlayOneShot( clip );
 		}
 
 		public void PlayUiClick()
 		{
-			return;
-
-			if (_gameProfile.IsSoundEnabled.Value)
-				_audioSources.Ui.PlayOneShot(_audioConfig.UiButtonClick);
+			//if (_gameProfile.IsSoundEnabled.Value)
+				//_audioSources.Ui.PlayOneShot(_audioConfig.UiButtonClick);
 		}
 
 		#endregion

@@ -11,22 +11,32 @@ namespace Game.Configs
 	{
         // TODO: refact: BeginerTutorialMessage >> TutorialMessage<BeginnerStep>
         [Header("Beginer Tutorial")]
-		[SerializeField] private List<BeginerTutorialMessage> _beginerTutorialMessages = new List<BeginerTutorialMessage>();
-		[SerializeField] private List<BeginerTurorialSummonData> _beginerTurorialSummons = new List<BeginerTurorialSummonData>();
-		[SerializeField] private List<BeginerTurorialMergeData> _beginerTurorialMerges = new List<BeginerTurorialMergeData>();
+		[SerializeField] private List<BeginerTutorialMessage>		_beginerTutorialMessages = new();
+		[SerializeField] private List<BeginerTurorialSummonData>	_beginerTurorialSummons = new();
+		[SerializeField] private List<BeginerTurorialMergeData>		_beginerTurorialMerges = new();
 
         [Header("Upgrades Tutorial")]
-        [SerializeField] private List<TutorialMessage<UpgradesStep>> _upgradesTutorialMessages = new List<TutorialMessage<UpgradesStep>>();
+        [SerializeField] private List<TutorialMessage<UpgradesStep>>	_upgradesTutorialMessages = new();
+
+        [Header("Unlock Unit Tutorial")]
+        [SerializeField] private List<TutorialMessage<UnlockUnitStep>>	_unlockUnitTutorialMessages = new();
 
         private Dictionary<BeginnerStep, string> _beginerMessages;
 		private Dictionary<BeginnerStep, BeginerTurorialSummonData> _beginerSummons;
 		private Dictionary<BeginnerStep, BeginerTurorialMergeData> _beginerMerges;
         private Dictionary<UpgradesStep, TutorialMessage<UpgradesStep>> _upgradesMessages;
+        private Dictionary<UnlockUnitStep, TutorialMessage<UnlockUnitStep>> _unlockUnitMessages;
 		
-		public Dictionary<BeginnerStep, string> BeginerTutorialMessages => _beginerMessages;
-		public Dictionary<BeginnerStep, BeginerTurorialSummonData> BeginerTurorialSummons => _beginerSummons;
-		public Dictionary<BeginnerStep, BeginerTurorialMergeData> BeginerTurorialMerges => _beginerMerges;
-        public Dictionary<UpgradesStep, TutorialMessage<UpgradesStep>> UpgradesTutorialMessages => _upgradesMessages;
+		public Dictionary<BeginnerStep, string> BeginerTutorialMessages 
+			=> _beginerMessages;
+		public Dictionary<BeginnerStep, BeginerTurorialSummonData> BeginerTurorialSummons
+			=> _beginerSummons;
+		public Dictionary<BeginnerStep, BeginerTurorialMergeData> BeginerTurorialMerges
+			=> _beginerMerges;
+        public Dictionary<UpgradesStep, TutorialMessage<UpgradesStep>> UpgradesTutorialMessages
+			=> _upgradesMessages;
+		public Dictionary<UnlockUnitStep, TutorialMessage<UnlockUnitStep>> UnlockStepTutorialMessages
+			=> _unlockUnitMessages;
 
 
         public void Initialize()
@@ -46,6 +56,10 @@ namespace Game.Configs
             _upgradesMessages = new Dictionary<UpgradesStep, TutorialMessage<UpgradesStep>>();
             foreach (var message in _upgradesTutorialMessages)
                 _upgradesMessages.Add(message.Step, message);
+
+            _unlockUnitMessages = new Dictionary<UnlockUnitStep, TutorialMessage<UnlockUnitStep>>();
+            foreach (var message in _unlockUnitTutorialMessages)
+                _unlockUnitMessages.Add(message.Step, message);
         }
 
 		// TODO: switch to TutorialMessage<T>

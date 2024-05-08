@@ -1,6 +1,7 @@
 namespace Game.Installers
 {
 	using Game.Tutorial;
+	using System;
 	using UnityEngine;
 	using Zenject;
 
@@ -36,9 +37,10 @@ namespace Game.Installers
 
             BeginnerInstall();
             UpgradesInstall();
+            UnlockUnitInstall();
         }
 
-        private void BeginnerInstall()
+		private void BeginnerInstall()
         {
             if (_sceneContext == SceneContext.Main)
             {
@@ -64,5 +66,15 @@ namespace Game.Installers
                     .AsSingle();
             }
         }
-    }
+ 
+		private void UnlockUnitInstall()
+		{
+            if (_sceneContext == SceneContext.Main)
+            {
+                Container
+                    .BindInterfacesTo<UnlockUnitTutorial>()
+                    .AsSingle();
+            }
+		}
+   }
 }

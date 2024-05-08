@@ -21,6 +21,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: aff4897d7c75130409ad26c26615be21, type: 3}
     - {fileID: 8300000, guid: 4936f5c211978b842b4f1d435264427e, type: 3}
     - {fileID: 8300000, guid: ebc5dad25f142c140b922d74b52e4cd2, type: 3}
+    - {fileID: 8300000, guid: 3e1bdbac5843a2f48965e62c55ede512, type: 3}
+    - {fileID: 8300000, guid: ea3605de09f220048a6d7ff060ce3854, type: 3}
     - {fileID: 8300000, guid: c49af4887c9499147b6eb78b6ef99fe0, type: 3}
     - {fileID: 8300000, guid: 6e8a4b48754083b4a90ee54a4a20443d, type: 3}
     SerializedBytesString: 
@@ -47,7 +49,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 5
+      Data: 6
     - Name: 
       Entry: 7
       Data: 
@@ -109,6 +111,56 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: _projectile
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[Game.Weapon.ProjectileType,
+        Assembly-CSharp],[UnityEngine.AudioClip, UnityEngine.AudioModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[Game.Weapon.ProjectileType,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -116,11 +168,11 @@ MonoBehaviour:
       Data: 
     - Name: _gameStateThemes
       Entry: 7
-      Data: 2|System.Collections.Generic.Dictionary`2[[Game.Core.GameState, Assembly-CSharp],[Game.Configs.AudioConfig+GameStateAudioClip,
+      Data: 4|System.Collections.Generic.Dictionary`2[[Game.Core.GameState, Assembly-CSharp],[Game.Configs.AudioConfig+GameStateAudioClip,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 3|System.Collections.Generic.EnumEqualityComparer`1[[Game.Core.GameState,
+      Data: 5|System.Collections.Generic.EnumEqualityComparer`1[[Game.Core.GameState,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -148,7 +200,7 @@ MonoBehaviour:
       Data: 0.1
     - Name: AudioClip
       Entry: 10
-      Data: 5
+      Data: 7
     - Name: 
       Entry: 8
       Data: 
@@ -169,7 +221,7 @@ MonoBehaviour:
       Data: 0.1
     - Name: AudioClip
       Entry: 10
-      Data: 6
+      Data: 8
     - Name: 
       Entry: 8
       Data: 

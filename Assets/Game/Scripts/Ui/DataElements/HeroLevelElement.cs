@@ -1,6 +1,8 @@
 namespace Game.Ui
 {
 	using Game.Core;
+	using Game.Profiles;
+	using Newtonsoft.Json.Linq;
 	using TMPro;
 	using UniRx;
 	using UnityEngine;
@@ -14,9 +16,14 @@ namespace Game.Ui
 
 		[Inject] private IGameHero _gameHero;
 		[Inject] private IResourceEvents _resourceEvents;
+		[Inject] private GameProfile _profile;
 
 		protected override void Subscribes()
 		{
+			_profile.HeroLevel
+				.Subscribe( v => SetValue( v ) )
+				.AddTo( this );
+
 			_gameHero.AnimatedLevelNumber
 				.Subscribe( SetValue )
 				.AddTo( this );

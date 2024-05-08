@@ -18,6 +18,7 @@ namespace Game.Core
 		int GetUpgradePrice( Species species );
 		bool TryBuyUpgrade( Species species );
 		bool CanUpgradeByLevel( Species species );
+		bool IsLockedByLevel( Species species );
 	}
 
 	public class GameUpgrades : ControllerBase, IGameUpgrades, IInitializable
@@ -55,7 +56,7 @@ namespace Game.Core
 			UnitUpgradesConfig upgrade = _upgradesConfig.UnitsUpgrades[species];
 			int level = Mathf.Clamp(_gameProfile.Units.Upgrades[species].Value, 0, upgrade.Price.Length);
 
-			return upgrade.Price[level - 1];
+			return upgrade.Price[level];
 		}
 
 		public bool TryBuyUpgrade( Species species )
@@ -77,6 +78,9 @@ namespace Game.Core
 
 		public bool CanUpgradeByLevel( Species species ) =>
 			_gameProfile.Units.Upgrades[species].Value < _gameProfile.HeroLevel.Value;
+
+		public bool IsLockedByLevel( Species species ) =>
+			_upgradesConfig.UnitsUpgrades[species].UnlockHeroLevel > _gameProfile.HeroLevel.Value;
 
 		#endregion
 

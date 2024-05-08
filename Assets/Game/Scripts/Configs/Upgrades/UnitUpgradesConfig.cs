@@ -9,6 +9,8 @@
 	[CreateAssetMenu(fileName = "UnitUpgrades", menuName = "Configs/UnitUpgrades", order = (int)Config.UnitUpgrades)]
 	public class UnitUpgradesConfig : ScriptableObject
 	{
+		public int UnlockHeroLevel;
+
 		[SerializeField] private int[] _price;
 
 		public int[] Price => _price;

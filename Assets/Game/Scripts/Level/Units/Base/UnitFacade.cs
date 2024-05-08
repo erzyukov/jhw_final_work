@@ -45,7 +45,7 @@
 
 		public IUnitEvents Events => _events;
 
-		public string Name => _config.TitleKey;
+		public string Name => _config.Name;
 
 		public Species Species => _unitCreateData.Species;
 

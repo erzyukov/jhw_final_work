@@ -2,23 +2,37 @@
 {
 	using Game.Weapon;
 	using Sirenix.OdinInspector;
+	using System;
 	using System.Collections.Generic;
 	using UnityEngine;
+
+	[Serializable]
+	public struct ProjectileConfig
+	{
+		public float Speed;
+		public float Height;
+		public float DamageRange;
+		public Projectile Prefab;
+	}
 
 	[CreateAssetMenu(fileName = "Weapons", menuName = "Configs/Weapons", order = (int)Config.Weapons)]
 	public class WeaponsConfig : SerializedScriptableObject
 	{
-		[Header("Bullet / Technical")]
-		[SerializeField] private Dictionary<ProjectileType, Projectile> _projectilePrefabs = new Dictionary<ProjectileType, Projectile>();
-		[SerializeField] private int _bulletPoolSize;
-		[SerializeField] private float _bulletSpeed;
+		[Header("Projectile / Technical")]
+		public Dictionary<ProjectileType, ProjectileConfig> Projectile = new Dictionary<ProjectileType, ProjectileConfig>();
+		public int ProjectilePoolSize;
 
-		public int BulletPoolSize => _bulletPoolSize;
-		public float BulletSpeed => _bulletSpeed;
-
-		public Projectile GetProjectile(ProjectileType type)
+		public Projectile GetProjectilePrefab(ProjectileType type)
 		{
-			if (_projectilePrefabs.TryGetValue(type, out Projectile projectile))
+			if (Projectile.TryGetValue(type, out ProjectileConfig projectile))
+				return projectile.Prefab;
+
+			return null;
+		}
+
+		public ProjectileConfig? GetProjectile(ProjectileType type)
+		{
+			if (Projectile.TryGetValue(type, out ProjectileConfig projectile))
 				return projectile;
 
 			return null;

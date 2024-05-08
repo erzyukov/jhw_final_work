@@ -33,6 +33,7 @@
 		// Other
 		Tutorial = 400,
 		Menu,
+		UiCommon,
 
 		// Monetization
 		Ads = 500,

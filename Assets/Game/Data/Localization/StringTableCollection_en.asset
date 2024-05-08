@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: a85e39e96efe1144eae385d630010f58, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 5784177084190425105
   m_TableData:
   - m_Id: 3741385658368
     m_Localized: 'HAVE NEED OF:'
@@ -163,9 +164,10 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4399172084183040
-    m_Localized: LEVEL
+    m_Localized: LEVEL {level}
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 5784177084190425105
   - m_Id: 4412267393331200
     m_Localized: UPGRADE
     m_Metadata:
@@ -175,9 +177,10 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4566552647184384
-    m_Localized: LV.
+    m_Localized: LV. {level}
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 5784177084190425105
   - m_Id: 5066819859787776
     m_Localized: 'HAVE NEED OF: <size=160%><sprite=0><size=100%>MONEY'
     m_Metadata:
@@ -310,6 +313,66 @@ MonoBehaviour:
     m_Localized: SOLD
     m_Metadata:
       m_Items: []
+  - m_Id: 4930925585928192
+    m_Localized: COMPLETE THE PREVIOUS STAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5375359607803904
+    m_Localized: GRENADIER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5376306421600256
+    m_Localized: HELL DOG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5376616284196864
+    m_Localized: DEMON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5376748920672256
+    m_Localized: IMP BOSS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5377073299755008
+    m_Localized: Imp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5377170062348288
+    m_Localized: SUCCUBUS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5381767308939264
+    m_Localized: Locked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5423461551214592
+    m_Localized: <size=200%><sprite=0><size=100%>{price}
+    m_Metadata:
+      m_Items:
+      - rid: 5784177084190425105
+  - m_Id: 7963602840883200
+    m_Localized: 'Unlocked
+
+      On level {level}'
+    m_Metadata:
+      m_Items:
+      - rid: 5784177084190425105
+  - m_Id: 9431902246572032
+    m_Localized: Unlock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10457425739419648
+    m_Localized: You have reached level 3 and can unlock a new unit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10457768082706432
+    m_Localized: Check the availability of new units to strengthen your squad
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5784177084190425105
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00306264413910000090360b9c441300009076c6da4a1c000030621106a10f00

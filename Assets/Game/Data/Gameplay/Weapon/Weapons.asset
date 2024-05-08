@@ -13,15 +13,122 @@ MonoBehaviour:
   m_Name: Weapons
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
-    SerializedBytes: 0101120000005f00700072006f006a0065006300740069006c00650050007200650066006100620073002f00000000018a000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e00440069006300740069006f006e00610072007900600032005b005b00470061006d0065002e0057006500610070006f006e002e00500072006f006a0065006300740069006c00650054007900700065002c00200041007300730065006d0062006c0079002d004300530068006100720070005d002c005b00470061006d0065002e0057006500610070006f006e002e00500072006f006a0065006300740069006c0065002c00200041007300730065006d0062006c0079002d004300530068006100720070005d005d002c0020006d00730063006f0072006c00690062000000000001010800000063006f006d00700061007200650072002f01000000016a000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e0045006e0075006d0045007100750061006c0069007400790043006f006d0070006100720065007200600031005b005b00470061006d0065002e0057006500610070006f006e002e00500072006f006a0065006300740069006c00650054007900700065002c00200041007300730065006d0062006c0079002d004300530068006100720070005d005d002c0020006d00730063006f0072006c0069006200010000000600000000000000000705060200000000000000042e1d010200000024006b0001000000000000000b0102000000240076000000000005042e1d010200000024006b0002000000000000000b01020000002400760001000000050705
+    SerializedFormat: 2
+    SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 1656041010336475349, guid: 3b784687609c4584485381cc3e305d44, type: 3}
     - {fileID: 9123784584167302360, guid: b984cdcb39d52e94f83ad7014bbeda4d, type: 3}
+    - {fileID: -681434897407490326, guid: 98c439e39949ddd4abee9b5864f3d7b1, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
-  _bulletPoolSize: 5
-  _bulletSpeed: 15
+    SerializationNodes:
+    - Name: Projectile
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[Game.Weapon.ProjectileType,
+        Assembly-CSharp],[Game.Configs.ProjectileConfig, Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Game.Weapon.ProjectileType,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 7
+      Data: Game.Configs.ProjectileConfig, Assembly-CSharp
+    - Name: Speed
+      Entry: 4
+      Data: 25
+    - Name: Height
+      Entry: 4
+      Data: 0
+    - Name: DamageRange
+      Entry: 4
+      Data: 0
+    - Name: Prefab
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 7
+      Data: Game.Configs.ProjectileConfig, Assembly-CSharp
+    - Name: Speed
+      Entry: 4
+      Data: 5
+    - Name: Height
+      Entry: 4
+      Data: 0
+    - Name: DamageRange
+      Entry: 4
+      Data: 0
+    - Name: Prefab
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 7
+      Data: Game.Configs.ProjectileConfig, Assembly-CSharp
+    - Name: Speed
+      Entry: 4
+      Data: 6
+    - Name: Height
+      Entry: 4
+      Data: 1.2
+    - Name: DamageRange
+      Entry: 4
+      Data: 1.4
+    - Name: Prefab
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  ProjectilePoolSize: 5

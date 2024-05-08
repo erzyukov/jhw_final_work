@@ -1,16 +1,15 @@
 namespace Game.Installers
 {
+	using UnityEngine;
+	using Zenject;
 	using Game.Analytics;
 	using Game.Configs;
 	using Game.Core;
 	using Game.Dev;
 	using Game.Iap;
 	using Game.Input;
-	using Game.Managers;
 	using Game.Profiles;
 	using Game.Utilities;
-	using UnityEngine;
-	using Zenject;
 
 
 	public class ProjectInstaller : MonoInstaller
@@ -96,6 +95,10 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<ResourceEvents>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<BattleEvents>()
 				.AsSingle();
 		}
 

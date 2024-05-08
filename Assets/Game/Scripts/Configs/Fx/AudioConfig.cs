@@ -6,6 +6,7 @@ namespace Game.Configs
 	using Sirenix.OdinInspector;
 	using Game.Core;
 	using System;
+	using Game.Weapon;
 
 	[CreateAssetMenu(fileName = "Audio", menuName = "Configs/Audio", order = (int)Config.Audio)]
 	public class AudioConfig : SerializedScriptableObject
@@ -23,10 +24,11 @@ namespace Game.Configs
 
 		[Header("Units")]
 		[SerializeField] private AudioClip _unitMerge;
-		[SerializeField] private Dictionary<Species, AudioClip> _shoot = new Dictionary<Species, AudioClip>();
+		[SerializeField] private Dictionary<Species, AudioClip> _shoot = new();
+		[SerializeField] private Dictionary<ProjectileType, AudioClip> _projectile = new();
 		
 		[Header("Game")]
-		[SerializeField] private Dictionary<GameState, GameStateAudioClip> _gameStateThemes = new Dictionary<GameState, GameStateAudioClip>();
+		[SerializeField] private Dictionary<GameState, GameStateAudioClip> _gameStateThemes = new();
 
 		public float DefaultUiVolume => _defaultUiVolume;
 		public AudioClip UiButtonClick => _uiButtonClick;
@@ -35,17 +37,25 @@ namespace Game.Configs
 		public float FadeDuration => _fadeDuration;
 		public AudioClip UnitMerge => _unitMerge;
 
-		public AudioClip GetShootClip(Species species)
+		public AudioClip GetShootClip( Species species )
 		{
-			if (_shoot.TryGetValue(species, out AudioClip value))
+			if (_shoot.TryGetValue( species, out AudioClip value ))
 				return value;
 			
 			return null;
 		}
 
-		public AudioClip GetGameStateTheme(GameState state, out float volume)
+		public AudioClip GetProjectileClip( ProjectileType type )
 		{
-			if (_gameStateThemes.TryGetValue(state, out GameStateAudioClip value))
+			if (_projectile.TryGetValue( type, out AudioClip value ))
+				return value;
+			
+			return null;
+		}
+
+		public AudioClip GetGameStateTheme( GameState state, out float volume )
+		{
+			if (_gameStateThemes.TryGetValue( state, out GameStateAudioClip value ))
 			{
 				volume = value.Volume;
 				return value.AudioClip;

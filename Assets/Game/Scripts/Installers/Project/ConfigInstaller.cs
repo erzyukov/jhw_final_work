@@ -11,6 +11,7 @@ namespace Game.Installers
 		[SerializeField] private TutorialConfig _tutorial;
 		[SerializeField] private DevConfig _dev;
 		[SerializeField] private MenuConfig _menu;
+		[SerializeField] private UiCommonConfig _uiCommon;
 
 		[Header("Tech")]
 		[SerializeField] private ScenesConfig _scenes;
@@ -38,9 +39,8 @@ namespace Game.Installers
 
 		public override void InstallBindings()
 		{
-			_units.Initialize();
-			_tutorial.Initialize();
 			_upgrades.Initialize();
+			_tutorial.Initialize();
 
 			Container.BindInstance( _scenes );
 			Container.BindInstance( _units );
@@ -54,6 +54,7 @@ namespace Game.Installers
 			Container.BindInstance( _experience );
 			Container.BindInstance( _weapons );
 			Container.BindInstance( _menu );
+			Container.BindInstance( _uiCommon );
 			Container.BindInstance( _upgrades );
 			Container.BindInstance( _energy );
 			Container.BindInstance( _audio );

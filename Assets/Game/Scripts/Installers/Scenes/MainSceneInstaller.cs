@@ -9,6 +9,7 @@ namespace Game.Installers
 	using Game.Analytics;
 	using Game.Configs;
 	using Game.Managers;
+	using System;
 
 	public class MainSceneInstaller : MonoInstaller
 	{
@@ -34,6 +35,7 @@ namespace Game.Installers
 				.BindInterfacesTo<GameProfileHandler>()
 				.AsSingle();
 
+			InstallFactories();
 			InstallUI();
 			InstallWindows();
 			InstallTutorial();
@@ -43,6 +45,14 @@ namespace Game.Installers
 				.Bind<IUiRewardedButton>()
 				.FromComponentsInHierarchy()
 				.AsSingle();
+		}
+
+		private void InstallFactories()
+		{
+			// UiUpgradeUnitViewFactory
+			Container
+				.BindFactory< UiUpgradeUnitViewFactory.Args, IUiUpgradeUnitView, UiUpgradeUnitView.Factory >()
+				.FromFactory< UiUpgradeUnitViewFactory >();
 		}
 
 		private void InstallUI()
@@ -89,6 +99,10 @@ namespace Game.Installers
 
 			Container
 				.BindInterfacesTo<GameUpgrades>()
+				.AsSingle();
+
+			Container
+				.BindInterfacesTo<GameHeroSquad>()
 				.AsSingle();
 
             Container

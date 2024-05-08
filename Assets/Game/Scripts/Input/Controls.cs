@@ -145,6 +145,15 @@ namespace Game.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetUpgrades"",
+                    ""type"": ""Button"",
+                    ""id"": ""4b97bdc7-11ab-4418-bc99-e7deb7733fd0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -215,7 +224,7 @@ namespace Game.Input
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""R [Keyboard]"",
+                    ""name"": ""M [Keyboard]"",
                     ""id"": ""04dbef62-1695-4d9d-9547-c5b4dccff747"",
                     ""path"": ""OneModifier"",
                     ""interactions"": """",
@@ -345,6 +354,17 @@ namespace Game.Input
                     ""action"": ""IncreaseHeroLevel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4da24d1-5089-4884-bf94-0b2b171f2e80"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetUpgrades"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -366,6 +386,7 @@ namespace Game.Input
             m_DevCheats_KillEnemyUnit = m_DevCheats.FindAction("KillEnemyUnit", throwIfNotFound: true);
             m_DevCheats_KillAllEnemies = m_DevCheats.FindAction("KillAllEnemies", throwIfNotFound: true);
             m_DevCheats_IncreaseHeroLevel = m_DevCheats.FindAction("IncreaseHeroLevel", throwIfNotFound: true);
+            m_DevCheats_ResetUpgrades = m_DevCheats.FindAction("ResetUpgrades", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -440,6 +461,7 @@ namespace Game.Input
         private readonly InputAction m_DevCheats_KillEnemyUnit;
         private readonly InputAction m_DevCheats_KillAllEnemies;
         private readonly InputAction m_DevCheats_IncreaseHeroLevel;
+        private readonly InputAction m_DevCheats_ResetUpgrades;
         public struct DevCheatsActions
         {
             private @Controls m_Wrapper;
@@ -457,6 +479,7 @@ namespace Game.Input
             public InputAction @KillEnemyUnit => m_Wrapper.m_DevCheats_KillEnemyUnit;
             public InputAction @KillAllEnemies => m_Wrapper.m_DevCheats_KillAllEnemies;
             public InputAction @IncreaseHeroLevel => m_Wrapper.m_DevCheats_IncreaseHeroLevel;
+            public InputAction @ResetUpgrades => m_Wrapper.m_DevCheats_ResetUpgrades;
             public InputActionMap Get() { return m_Wrapper.m_DevCheats; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -505,6 +528,9 @@ namespace Game.Input
                 @IncreaseHeroLevel.started += instance.OnIncreaseHeroLevel;
                 @IncreaseHeroLevel.performed += instance.OnIncreaseHeroLevel;
                 @IncreaseHeroLevel.canceled += instance.OnIncreaseHeroLevel;
+                @ResetUpgrades.started += instance.OnResetUpgrades;
+                @ResetUpgrades.performed += instance.OnResetUpgrades;
+                @ResetUpgrades.canceled += instance.OnResetUpgrades;
             }
 
             private void UnregisterCallbacks(IDevCheatsActions instance)
@@ -548,6 +574,9 @@ namespace Game.Input
                 @IncreaseHeroLevel.started -= instance.OnIncreaseHeroLevel;
                 @IncreaseHeroLevel.performed -= instance.OnIncreaseHeroLevel;
                 @IncreaseHeroLevel.canceled -= instance.OnIncreaseHeroLevel;
+                @ResetUpgrades.started -= instance.OnResetUpgrades;
+                @ResetUpgrades.performed -= instance.OnResetUpgrades;
+                @ResetUpgrades.canceled -= instance.OnResetUpgrades;
             }
 
             public void RemoveCallbacks(IDevCheatsActions instance)
@@ -580,6 +609,7 @@ namespace Game.Input
             void OnKillEnemyUnit(InputAction.CallbackContext context);
             void OnKillAllEnemies(InputAction.CallbackContext context);
             void OnIncreaseHeroLevel(InputAction.CallbackContext context);
+            void OnResetUpgrades(InputAction.CallbackContext context);
         }
     }
 }
