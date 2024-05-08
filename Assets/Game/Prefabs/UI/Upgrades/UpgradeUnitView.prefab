@@ -605,6 +605,7 @@ MonoBehaviour:
   _localizedUnlockLevel: {fileID: 1980183773846955499}
   _unlockButton: {fileID: 8261111705319374749}
   _unlockPrice: {fileID: 1854513252477695564}
+  _lockedIconAlpha: 0.4
 --- !u!114 &2496306605114100193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2133,7 +2134,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ad8299142bc14924bae19838b41e6518, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

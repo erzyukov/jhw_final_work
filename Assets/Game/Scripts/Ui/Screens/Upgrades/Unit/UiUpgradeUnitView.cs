@@ -1,5 +1,6 @@
 ﻿namespace Game.Ui
 {
+	using Game.Utilities;
 	using System;
 	using TMPro;
 	using UniRx;
@@ -58,6 +59,7 @@
 		[SerializeField] private LocalizeStringEvent	_localizedUnlockLevel;
 		[SerializeField] private Button					_unlockButton;
 		[SerializeField] private LocalizeStringEvent	_unlockPrice;
+		[SerializeField] private float                  _lockedIconAlpha;
 
 		private const string levelVariable		= "level";
 		private const string priceVariable		= "price";
@@ -69,8 +71,7 @@
 		public Button SelectButton							=> _selectButton;
 		public AdButton UpgradeButton						=> _upgradeButton;
 
-		public void SetIcon( Sprite value ) =>
-			_icon.sprite = value;
+		public void SetIcon( Sprite value )			=> _icon.sprite = value;
 
 		public void SetLevel( int value ) =>
 			( _localizedLevel.StringReference[levelVariable] as IntVariable ).Value = value;
@@ -116,6 +117,7 @@
 			_localizedPrice.gameObject.SetActive( !value );
 			_defaultButton.SetActive( !value );
 			_lockedButton.SetActive( value );
+			_icon.color = _icon.color.WithAlpha( value ? _lockedIconAlpha : 1 );
 		}
 
 		public void SetLockedButtonActive( bool value ) =>
