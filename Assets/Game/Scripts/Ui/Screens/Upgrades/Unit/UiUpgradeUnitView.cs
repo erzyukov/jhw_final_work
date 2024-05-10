@@ -71,6 +71,9 @@
 		public Button SelectButton							=> _selectButton;
 		public AdButton UpgradeButton						=> _upgradeButton;
 
+		// Fix unrecognized scaling for screen with free aspect rate
+		public void OnEnable()			=> transform.localScale = Vector3.one;
+
 		public void SetIcon( Sprite value )			=> _icon.sprite = value;
 
 		public void SetLevel( int value ) =>

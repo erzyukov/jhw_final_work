@@ -9,8 +9,6 @@ namespace Game.Ui
 	public interface IUiUpgradesScreen : IUiScreen
 	{
 		Transform UnitsContainer { get; }
-		UiUnitUpgradeElement UnitElementPrefab { get; }
-		GameObject UnitUnavailableDummyPrefab { get; }
 		void SetIcon(Sprite value);
 		void SetIconMaterial(Material value);
 		void SetName(string value);
@@ -43,10 +41,6 @@ namespace Game.Ui
 		#region IUiLobbyScreen
 
 		public Transform UnitsContainer => _unitsContainer;
-
-		public UiUnitUpgradeElement UnitElementPrefab => _unitUpgradeElementPrefab;
-
-		public GameObject UnitUnavailableDummyPrefab => _unitUnavailableDummyPrefab;
 
 		public void SetIcon( Sprite value ) =>
 			_unitIcon.sprite = value;
