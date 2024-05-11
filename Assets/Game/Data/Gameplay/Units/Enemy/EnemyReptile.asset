@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
-  m_Name: EnemySuccubus
+  m_Name: EnemyReptile
   m_EditorClassIdentifier: 
   _name:
     m_TableReference:
       m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
     m_TableEntryReference:
-      m_KeyId: 5377170062348288
+      m_KeyId: 12868917751353344
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -24,19 +24,19 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _fullLength: {fileID: 0}
   _class: 1
-  _attackRange: 3.5
-  _attackDelay: 1.9
-  _projectileType: 2
-  _health: 165
-  _damage: 54
-  _healthPowerMultiplier: 19
-  _damagePowerMultiplier: 24
-  _softReward: 7.5
-  _experience: 6
-  _softRewardPowerMultiplier: 1.35
-  _experiencePowerMultiplier: 2
+  _attackRange: 3
+  _attackDelay: 1.2
+  _projectileType: 4
+  _health: 195
+  _damage: 48
+  _healthPowerMultiplier: 22
+  _damagePowerMultiplier: 27
+  _softReward: 11.2
+  _experience: 9
+  _softRewardPowerMultiplier: 1.65
+  _experiencePowerMultiplier: 2.8
   _gradePrefabs:
-  - {fileID: 1503547998484457933, guid: 280231e01b4725b4c8a23862e0a9cd95, type: 3}
+  - {fileID: 3009363758071439639, guid: 9cf49fb2bae94b843bf32d8118b5402f, type: 3}
   _isDebug: 0
   references:
     version: 2

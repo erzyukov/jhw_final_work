@@ -14,6 +14,7 @@ namespace Game.Weapon
 		SniperBullet,
 		Fireball,
 		GrenadeCapsule,
+		Acidbolt,
 	}
 
 	[RequireComponent(typeof(Rigidbody))]

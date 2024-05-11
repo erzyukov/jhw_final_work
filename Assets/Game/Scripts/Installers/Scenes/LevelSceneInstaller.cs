@@ -119,6 +119,13 @@ namespace Game.Installers
 						.UnderTransformGroup( ProjectileType.GrenadeCapsule.ToString() )
 				);
 
+			Container.BindFactory<ProjectileArgs, Acidbolt, Acidbolt.Factory>()
+				.FromMonoPoolableMemoryPool( x =>
+					x.WithInitialSize( _weaponsConfig.ProjectilePoolSize )
+						.FromComponentInNewPrefab( _weaponsConfig.GetProjectilePrefab( ProjectileType.Acidbolt ) )
+						.UnderTransformGroup( ProjectileType.Acidbolt.ToString() )
+				);
+
 			Container
 				.BindInterfacesTo<ProjectileSpawner>()
 				.AsSingle();

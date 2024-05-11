@@ -14,5 +14,6 @@
 		EnemyDemon,
 		EnemyDemonDog,
 		EnemyImpBoss,
+		EnemyReptile,
 	}
 }

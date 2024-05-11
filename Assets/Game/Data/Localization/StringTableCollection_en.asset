@@ -369,6 +369,10 @@ MonoBehaviour:
     m_Localized: Check the availability of new units to strengthen your squad
     m_Metadata:
       m_Items: []
+  - m_Id: 12868917751353344
+    m_Localized: Reptile
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
