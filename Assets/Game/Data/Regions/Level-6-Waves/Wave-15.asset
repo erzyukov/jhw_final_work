@@ -26,10 +26,10 @@ MonoBehaviour:
     Power: 50
     Position: {x: 2, y: 1}
     GradeIndex: 0
-  - Species: 5004
-    Power: 70
+  - Species: 10001
+    Power: 20
     Position: {x: 2, y: 0}
-    GradeIndex: 1
+    GradeIndex: 0
   - Species: 5002
     Power: 34
     Position: {x: 3, y: 2}

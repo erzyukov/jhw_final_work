@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
-  m_Name: EnemyDemonDogUnit
+  m_Name: EnemyBossImpUnit
   m_EditorClassIdentifier: 
   _name:
     m_TableReference:
       m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
     m_TableEntryReference:
-      m_KeyId: 5376306421600256
+      m_KeyId: 5376748920672256
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -24,19 +24,19 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _fullLength: {fileID: 0}
   _class: 0
-  _attackRange: 1
-  _attackDelay: 1.7
+  _attackRange: 1.3
+  _attackDelay: 1.8
   _projectileType: 0
-  _health: 220
-  _damage: 31
-  _healthPowerMultiplier: 65
-  _damagePowerMultiplier: 18
-  _softReward: 6
-  _experience: 5
-  _softRewardPowerMultiplier: 0.9
+  _health: 320
+  _damage: 21
+  _healthPowerMultiplier: 59
+  _damagePowerMultiplier: 9
+  _softReward: 40
+  _experience: 30
+  _softRewardPowerMultiplier: 2
   _experiencePowerMultiplier: 2
   _gradePrefabs:
-  - {fileID: 1503547998484457933, guid: 468d4ce87b5b58e43a0e26ba6ddb855c, type: 3}
+  - {fileID: 1503547998484457933, guid: 7197817875e99e840a72ce237bb7a2dc, type: 3}
   _isDebug: 0
   references:
     version: 2

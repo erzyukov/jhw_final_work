@@ -13,7 +13,11 @@
 		EnemySuccubus,
 		EnemyDemon,
 		EnemyDemonDog,
-		EnemyImpBoss,
 		EnemyReptile,
+
+
+		// Enemy Boss Units
+		EnemyBossDog = 10001,
+		EnemyImpBoss,
 	}
 }
