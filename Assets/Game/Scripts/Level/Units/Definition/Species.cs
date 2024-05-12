@@ -18,6 +18,7 @@
 
 		// Enemy Boss Units
 		EnemyBossDog = 10001,
-		EnemyImpBoss,
+		EnemyBossImp,
+		EnemyBossGorilla,
 	}
 }
