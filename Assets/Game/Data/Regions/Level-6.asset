@@ -15,7 +15,7 @@ MonoBehaviour:
   _title: 1-6
   _icon: {fileID: 21300000, guid: e4268108c011dcc47af2650d2c2d30e1, type: 3}
   _environment: {fileID: 21300000, guid: 1c596b5714034454d8ade07e00c71b99, type: 3}
-  _region: 0
+  _region: 10
   _waves:
   - {fileID: 11400000, guid: 780c46dbde0fb49418c49cdd8a4dea91, type: 2}
   - {fileID: 11400000, guid: 769f8f46c3fcd2a45ab74c77105b3c2c, type: 2}
