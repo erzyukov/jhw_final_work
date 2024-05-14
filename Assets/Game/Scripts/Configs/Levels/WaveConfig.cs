@@ -16,7 +16,7 @@ namespace Game.Configs
 
 		public int SummonCurrencyAmount => _summonCurrencyAmount;
 
-		public WaveUnit[] Units => _units;
+		public WaveUnit[] Units { get { return _units; } set { _units = value; } }
 
 		[Serializable]
 		public struct WaveUnit

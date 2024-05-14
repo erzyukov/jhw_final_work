@@ -1,0 +1,15 @@
+.custom-label {
+    font-size: 10px;
+    -unity-font-style: bold;
+    color: rgb(68, 138, 255);
+}
+
+.wave-element {
+    width: 18%;
+    height: 90px;
+    margin-top: 10px;
+}
+
+.species-field VisualElement {
+	background-color: rgb(68, 138, 255);
+}

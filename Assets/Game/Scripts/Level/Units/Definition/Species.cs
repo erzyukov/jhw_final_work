@@ -2,6 +2,8 @@
 {
 	public enum Species
 	{
+		None = 0,
+
 		// Hero Units
 		HeroInfantryman = 1,
 		HeroSniper,
