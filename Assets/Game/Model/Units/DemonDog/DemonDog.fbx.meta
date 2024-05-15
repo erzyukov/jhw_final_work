@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 6e10f37d48c04bf4daa5a123f1af1469
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
@@ -20,7 +20,7 @@ ModelImporter:
     second: Attack
   - first:
       74: 3672910778998720083
-    second: ExitIdle
+    second: ExitAim
   - first:
       74: -3956177450704724540
     second: Death
@@ -199,7 +199,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: ExitIdle
+      name: ExitAim
       takeName: Take 001
       internalID: 0
       firstFrame: 160
@@ -264,6 +264,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -291,6 +292,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -323,6 +325,7 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buildType: 1
   _gamePatform: 0
-  _timeScale: 2
+  _timeScale: 1
   DisableAnalytics: 1
