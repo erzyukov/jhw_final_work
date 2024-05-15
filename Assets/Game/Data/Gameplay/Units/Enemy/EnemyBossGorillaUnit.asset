@@ -24,7 +24,7 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _fullLength: {fileID: 0}
   _class: 0
-  _attackRange: 1.3
+  _attackRange: 1.8
   _attackDelay: 2.1
   _projectileType: 0
   _health: 950
