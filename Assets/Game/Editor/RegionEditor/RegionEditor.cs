@@ -20,6 +20,9 @@ namespace Game.Editor
 
 		private VisualElement	_root;
 		private LevelsConfig	_levelsConfig;
+		private UnitsConfig     _unitsConfig;
+
+#region Regions
 
 		private EnumField		_regionSelect;
 		private DropdownField	_levelSelect;
@@ -37,6 +40,19 @@ namespace Game.Editor
 		private List<WaveElement>			_waves					= new();
 		private List<IDisposable>			_elementsSubscribes		= new();
 
+#endregion
+
+#region WaveStats, TotalWaveStats
+
+		private Label			_waveRewardField;
+		private Label			_waveExpirienceField;
+		private Label			_waveHealthField;
+		private Label			_waveDamageField;
+		private Label			_totalRewardField;
+		private Label			_totalExpirienceField;
+
+#endregion
+
 		[MenuItem("Game/Tools/RegionEditor")]
 		public static void ShowRegionEditorWindow()
 		{
@@ -52,6 +68,8 @@ namespace Game.Editor
 			VisualElement labelFromUXML = _visualTreeAsset.Instantiate();
 			_root.Add(labelFromUXML);
 
+			_unitsConfig = GetUnitsConfig( out _ );
+
 			InitData();
 			InitFields();
 
@@ -63,6 +81,8 @@ namespace Game.Editor
 			_elementsSubscribes.ForEach( e => e.Dispose() );
 			_elementsSubscribes.Clear();
 		}
+
+#region Init
 
 		private void InitData()
 		{
@@ -77,6 +97,13 @@ namespace Game.Editor
 			_levelSelect	= _root.Q<DropdownField>( "LevelField" );
 			_waveSelect		= _root.Q<DropdownField>( "WaveField" );
 			_waveContainer	= _root.Q<GroupBox>("WaveElementsContainer");
+
+			_waveRewardField		= _root.Q<Label>( "WaveReward" );
+			_waveExpirienceField	= _root.Q<Label>( "WaveExperience" );
+			_waveHealthField		= _root.Q<Label>( "WaveHealth" );
+			_waveDamageField		= _root.Q<Label>( "WaveAvrDamage" );
+			_totalRewardField		= _root.Q<Label>( "TotalReward" );
+			_totalExpirienceField	= _root.Q<Label>( "TotalExperience" );
 		}
 
 		private void Subscribe()
@@ -85,6 +112,10 @@ namespace Game.Editor
 			_levelSelect.RegisterValueChangedCallback( e => OnLevelSelected( _levelSelect.choices.IndexOf(e.newValue) ) );
 			_waveSelect.RegisterValueChangedCallback( e => OnWaveSelected( _waveSelect.choices.IndexOf(e.newValue) ) );
 		}
+
+		#endregion
+
+#region Wave Selection
 
 		private void OnRegionSelected( Region region )
 		{
@@ -122,8 +153,8 @@ namespace Game.Editor
 			_selectedWaveIndex		= index;
 			_selectedWave.Value		= _selectedLevel.Value.Waves[index];
 			RefreshWave();
+			UpdateStats();
 		}
-
 		private void RefreshWave()
 		{
 			_waveContainer.Clear();
@@ -157,6 +188,8 @@ namespace Game.Editor
 			this.Repaint();
 		}
 
+#endregion
+
 		private void OnWaveElementChanged( WaveUnit unit )
 		{
 			WaveConfig waveConfig	= _levelsConfig.Levels[_selectedLevelIndex].Waves[_selectedWaveIndex];
@@ -169,8 +202,6 @@ namespace Game.Editor
 			if (founded.Any())
 			{
 				var r		= founded.First();
-
-				Debug.LogWarning($">>> founded: {r.u.Position}");
 
 				if (unit.Species == Units.Species.None)
 				{
@@ -199,8 +230,60 @@ namespace Game.Editor
 			AssetDatabase.SaveAssets();
 			AssetDatabase.Refresh();
 
-			Debug.LogWarning( ">>> Saved" );
+			UpdateStats();
 		}
+
+
+		private void UpdateStats()
+		{
+			UpdateWaveStats();
+		}
+
+
+		private void UpdateWaveStats()
+		{
+			WaveConfig waveConfig	= _levelsConfig.Levels[_selectedLevelIndex].Waves[_selectedWaveIndex];
+			
+			int totalReward			= waveConfig.Units.Sum(unit => 
+				Mathf.CeilToInt(
+					_unitsConfig.Units[unit.Species].SoftReward + 
+					_unitsConfig.Units[unit.Species].SoftRewardPowerMultiplier * unit.Power
+				)
+			);
+
+			_waveRewardField.text	= totalReward.ToString();
+
+			int totalExperience		= waveConfig.Units.Sum(unit =>
+				Mathf.CeilToInt(
+					_unitsConfig.Units[unit.Species].Experience +
+					_unitsConfig.Units[unit.Species].ExperiencePowerMultiplier * unit.Power
+				)
+			);
+
+			_waveExpirienceField.text	= totalExperience.ToString();
+
+			int totalHealth			= waveConfig.Units.Sum(unit =>
+				Mathf.CeilToInt(
+					_unitsConfig.Units[unit.Species].Health +
+					_unitsConfig.Units[unit.Species].HealthPowerMultiplier * unit.Power
+				)
+			);
+
+			_waveHealthField.text	= totalHealth.ToString();
+
+			float totalAvrDamage	= waveConfig.Units.Sum(unit =>
+				Mathf.Round(
+					(_unitsConfig.Units[unit.Species].Damage +
+					_unitsConfig.Units[unit.Species].DamagePowerMultiplier * unit.Power) /
+					_unitsConfig.Units[unit.Species].AttackDelay *
+					100
+				) / 100
+			);
+
+			_waveDamageField.text	= totalAvrDamage.ToString();
+
+		}
+
 
 		private void DeleteWaveElement( ref WaveUnit[] units, int index )
 		{
@@ -214,6 +297,24 @@ namespace Game.Editor
 
 			units = newUnits;
 		}
+
+
+#region Misc
+
+		const string UnitsConfigAssetName = "Units";
+		const string AssetExtention = ".asset";
+
+		protected UnitsConfig GetUnitsConfig(out string assetName)
+		{
+			assetName = UnitsConfigAssetName;
+			string guid = AssetDatabase.FindAssets(UnitsConfigAssetName, new string[] { "Assets/Game/Data" }).FirstOrDefault();
+			string path = AssetDatabase.GUIDToAssetPath(guid) + AssetExtention;
+			UnitsConfig unitsConfig = AssetDatabase.LoadAssetAtPath<UnitsConfig>(path);
+			
+			return unitsConfig;
+		}
+
+#endregion
 	}
 }
 #endif
