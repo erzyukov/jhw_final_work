@@ -28,36 +28,51 @@ MonoBehaviour:
   - ExperienceToLevel: 1870
     SoftCurrencyReward: 75
     HardCurrencyReward: 5
-  - ExperienceToLevel: 2630
+  - ExperienceToLevel: 2670
     SoftCurrencyReward: 100
     HardCurrencyReward: 8
-  - ExperienceToLevel: 4320
+  - ExperienceToLevel: 3130
     SoftCurrencyReward: 130
     HardCurrencyReward: 8
-  - ExperienceToLevel: 7850
+  - ExperienceToLevel: 5320
     SoftCurrencyReward: 170
     HardCurrencyReward: 8
-  - ExperienceToLevel: 13600
+  - ExperienceToLevel: 9550
     SoftCurrencyReward: 200
     HardCurrencyReward: 8
-  - ExperienceToLevel: 23300
-    SoftCurrencyReward: 200
+  - ExperienceToLevel: 14600
+    SoftCurrencyReward: 260
     HardCurrencyReward: 8
-  - ExperienceToLevel: 39100
-    SoftCurrencyReward: 200
+  - ExperienceToLevel: 25300
+    SoftCurrencyReward: 310
     HardCurrencyReward: 8
-  - ExperienceToLevel: 78200
-    SoftCurrencyReward: 200
-    HardCurrencyReward: 8
-  - ExperienceToLevel: 117300
-    SoftCurrencyReward: 200
-    HardCurrencyReward: 8
-  - ExperienceToLevel: 156400
-    SoftCurrencyReward: 200
-    HardCurrencyReward: 8
-  - ExperienceToLevel: 195500
-    SoftCurrencyReward: 200
-    HardCurrencyReward: 8
-  - ExperienceToLevel: 234600
-    SoftCurrencyReward: 200
-    HardCurrencyReward: 8
+  - ExperienceToLevel: 41100
+    SoftCurrencyReward: 370
+    HardCurrencyReward: 11
+  - ExperienceToLevel: 61200
+    SoftCurrencyReward: 510
+    HardCurrencyReward: 11
+  - ExperienceToLevel: 91300
+    SoftCurrencyReward: 630
+    HardCurrencyReward: 11
+  - ExperienceToLevel: 126400
+    SoftCurrencyReward: 700
+    HardCurrencyReward: 11
+  - ExperienceToLevel: 163500
+    SoftCurrencyReward: 820
+    HardCurrencyReward: 14
+  - ExperienceToLevel: 199600
+    SoftCurrencyReward: 990
+    HardCurrencyReward: 14
+  - ExperienceToLevel: 249000
+    SoftCurrencyReward: 1120
+    HardCurrencyReward: 14
+  - ExperienceToLevel: 291000
+    SoftCurrencyReward: 1310
+    HardCurrencyReward: 14
+  - ExperienceToLevel: 325000
+    SoftCurrencyReward: 1480
+    HardCurrencyReward: 17
+  - ExperienceToLevel: 359000
+    SoftCurrencyReward: 1600
+    HardCurrencyReward: 17
