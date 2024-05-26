@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4979439236031808108}
   - component: {fileID: -3272273062254429049}
   m_Layer: 0
-  m_Name: EnemySuccubusViewGrade1
+  m_Name: EnemySuccubusViewGrade3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4936,15 +4936,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9be70c0e01ba11e419bb85c2801e667f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.7
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9be70c0e01ba11e419bb85c2801e667f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.7
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9be70c0e01ba11e419bb85c2801e667f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.7
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9be70c0e01ba11e419bb85c2801e667f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5133,7 +5133,7 @@ PrefabInstance:
     - target: {fileID: -985542389825260074, guid: 9be70c0e01ba11e419bb85c2801e667f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9be48c77492a6204b8b2a1b352c6fb06, type: 2}
+      objectReference: {fileID: 2100000, guid: 411cd32674ec0a9469642bac88e3fef9, type: 2}
     - target: {fileID: -799671795429046310, guid: 9be70c0e01ba11e419bb85c2801e667f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -7.3176994

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4979439236031808108}
   - component: {fileID: -3272273062254429049}
   m_Layer: 0
-  m_Name: DemonDogViewGrade1
+  m_Name: DemonDogViewGrade3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,15 +62,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6e10f37d48c04bf4daa5a123f1af1469, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6e10f37d48c04bf4daa5a123f1af1469, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6e10f37d48c04bf4daa5a123f1af1469, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6e10f37d48c04bf4daa5a123f1af1469, type: 3}
       propertyPath: m_LocalPosition.x
@@ -127,7 +127,7 @@ PrefabInstance:
     - target: {fileID: 6804880249585438465, guid: 6e10f37d48c04bf4daa5a123f1af1469, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d02d6b0be43122a4cadc140db554e7dd, type: 2}
+      objectReference: {fileID: 2100000, guid: 632a76f3d12ecb0448fb78a90ee6bdda, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
