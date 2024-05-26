@@ -210,7 +210,7 @@ namespace Game.Editor
 
             for (int y = 4; y >= 0; y--)
             {
-                for (int x = 0; x < 5; x++)
+                for (int x = 4; x >= 0; x--)
                 {
 					var unit = _selectedWave.Value.Units
 						.Where(u => u.Position == new Vector2Int( x, y ) )
