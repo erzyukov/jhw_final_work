@@ -18,19 +18,7 @@ MonoBehaviour:
     Power: 1
     Position: {x: 2, y: 0}
     GradeIndex: 0
-  - Species: 5004
+  - Species: 5001
     Power: 1
     Position: {x: 2, y: 2}
-    GradeIndex: 0
-  - Species: 10003
-    Power: 1
-    Position: {x: 2, y: 3}
-    GradeIndex: 0
-  - Species: 5005
-    Power: 1
-    Position: {x: 4, y: 3}
-    GradeIndex: 0
-  - Species: 5005
-    Power: 1
-    Position: {x: 0, y: 3}
-    GradeIndex: 0
+    GradeIndex: 1

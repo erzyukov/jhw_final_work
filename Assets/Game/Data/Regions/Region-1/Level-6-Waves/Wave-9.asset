@@ -17,17 +17,17 @@ MonoBehaviour:
   - Species: 5001
     Power: 20
     Position: {x: 1, y: 0}
-    GradeIndex: 0
+    GradeIndex: 1
   - Species: 5004
     Power: 16
     Position: {x: 3, y: 0}
     GradeIndex: 0
   - Species: 5004
-    Power: 16
+    Power: 19
     Position: {x: 2, y: 0}
-    GradeIndex: 0
+    GradeIndex: 2
   - Species: 5002
-    Power: 13
+    Power: 15
     Position: {x: 3, y: 2}
     GradeIndex: 0
   - Species: 5002

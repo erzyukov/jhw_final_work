@@ -17,11 +17,11 @@ MonoBehaviour:
   - Species: 5001
     Power: 16
     Position: {x: 1, y: 1}
-    GradeIndex: 0
+    GradeIndex: 1
   - Species: 5001
     Power: 20
     Position: {x: 2, y: 1}
-    GradeIndex: 0
+    GradeIndex: 2
   - Species: 5004
     Power: 16
     Position: {x: 1, y: 0}
@@ -29,7 +29,7 @@ MonoBehaviour:
   - Species: 5004
     Power: 18
     Position: {x: 3, y: 0}
-    GradeIndex: 0
+    GradeIndex: 1
   - Species: 5002
     Power: 13
     Position: {x: 3, y: 2}
