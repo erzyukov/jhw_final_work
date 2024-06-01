@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _summonCurrencyAmount: 6
   _units:
-  - Species: 5004
+  - Species: 5001
     Power: 3
     Position: {x: 2, y: 0}
+    GradeIndex: 1
+  - Species: 5001
+    Power: 3
+    Position: {x: 3, y: 1}
     GradeIndex: 1
