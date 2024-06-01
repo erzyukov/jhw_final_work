@@ -190,8 +190,6 @@ namespace Game.Editor
 				.Select( (wave, index) => $"Wave {index + 1}" )
 				.ToList();
 			_waveSelect.choices			= titles;
-
-			Debug.LogWarning($"{_selectedLevel.Value.Title} [{_selectedLevel.Value.Region}]");
 		}
 
 		private void OnWaveSelected( int index )
@@ -253,7 +251,6 @@ namespace Game.Editor
 				{
 					DeleteWaveElement(ref units, r.i);
 					_waveConfig.Units = units;
-					Debug.LogWarning(units.Length);
 					RefreshWave();
 				}
 				else
