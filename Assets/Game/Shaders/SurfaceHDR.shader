@@ -6,6 +6,8 @@ Shader "Game/SurfaceHDR"
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_ORM ("ORM", 2D) = "bump" {}
 		_BumpMap ("Bumpmap", 2D) = "bump" {}
+		_Emission("Emission", 2D) = "black" {}
+		[HDR] _EmissionColor("Color", Color) = (0,0,0,0)
     }
     SubShader
     {
@@ -22,15 +24,18 @@ Shader "Game/SurfaceHDR"
         sampler2D _MainTex;
 		sampler2D _ORM;
 		sampler2D _BumpMap;
+		sampler2D _Emission;
 
         struct Input
         {
             float2 uv_MainTex;
 			float2 uv_ORM;
 			float2 uv_BumpMap;
+			float2 uv_Emission;
         };
 
         fixed4 _Color;
+        fixed4 _EmissionColor;
 
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
         // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -48,6 +53,8 @@ Shader "Game/SurfaceHDR"
 			o.Occlusion = (tex2D (_ORM, IN.uv_ORM)).r;
 			o.Smoothness = 1 - (tex2D (_ORM, IN.uv_ORM)).g;
             o.Metallic = (tex2D (_ORM, IN.uv_ORM)).b;
+            
+			o.Emission = (tex2D (_Emission, IN.uv_Emission)) * _EmissionColor;
 
 			o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
         }
