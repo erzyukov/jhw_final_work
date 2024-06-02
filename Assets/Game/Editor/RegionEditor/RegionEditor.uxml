@@ -1,0 +1,127 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="WaveElement" src="project://database/Assets/Game/Editor/RegionEditor/Wave/WaveElement.uxml?fileID=9197481963319205126&amp;guid=2876a39247e3d55449af74870181bb80&amp;type=3#WaveElement" />
+    <Style src="project://database/Assets/Game/Editor/RegionEditor/RegionEditor.uss?fileID=7433441132597879392&amp;guid=408a6aefb84512341b0691ab2e9487f5&amp;type=3#RegionEditor" />
+    <ui:VisualElement style="flex-grow: 0; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; align-items: stretch; justify-content: flex-start; align-self: auto; flex-wrap: nowrap; flex-direction: column;">
+        <ui:VisualElement name="Selection" style="flex-grow: 1; min-width: auto; min-height: auto; align-items: flex-start; justify-content: flex-start; height: 82px;">
+            <ui:EnumField label="Region" type="Game.Region, Assembly-CSharp" name="RegionField" style="width: 330px; flex-direction: row; transform-origin: center; height: 18px;" />
+            <ui:DropdownField label="Level" index="-1" name="LevelField" style="width: 335px; align-items: center; justify-content: flex-start; flex-direction: row; height: 18px;" />
+            <ui:DropdownField label="Wave" index="-1" name="WaveField" style="width: 335px; align-items: center; justify-content: flex-start; flex-direction: row; height: 18px;" />
+            <ui:VisualElement name="WaveStat" style="flex-grow: 0; align-self: flex-end; position: absolute; left: 350px; height: 100%; width: 150px; border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; flex-wrap: wrap;">
+                <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="WRew" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                    <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveReward" style="background-color: rgba(255, 255, 255, 0); color: rgb(26, 255, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="WExp" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                    <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveExperience" style="color: rgb(26, 255, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="WHp" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                    <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveHealth" style="font-size: 15px; -unity-font-style: bold; color: rgb(26, 255, 0); -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="WADmg" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                    <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveAvrDamage" style="font-size: 15px; -unity-font-style: bold; color: rgb(26, 255, 0); -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="TotalStat" style="flex-grow: 0; align-self: flex-end; position: absolute; left: 500px; height: 100%; width: 150px; border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; flex-wrap: wrap;">
+                <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="TRew" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                    <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TotalReward" style="background-color: rgba(255, 255, 255, 0); color: rgb(26, 255, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="TExp" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                    <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TotalExperience" style="color: rgb(26, 255, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                    <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TotalHealth" style="font-size: 15px; -unity-font-style: bold; color: rgb(26, 255, 0); -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                    <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TotalAvrDamage" style="font-size: 15px; -unity-font-style: bold; color: rgb(26, 255, 0); -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="HeroStat" style="flex-grow: 0; align-self: flex-end; position: absolute; left: 650px; height: 100%; width: 150px; border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; flex-wrap: wrap;">
+                <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="HLvl" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                    <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HeroLevel" style="background-color: rgba(255, 255, 255, 0); color: rgb(26, 255, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                    <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(26, 255, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                    <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 15px; -unity-font-style: bold; color: rgb(26, 255, 0); -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="-" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                    <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 15px; -unity-font-style: bold; color: rgb(26, 255, 0); -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Waves">
+            <ui:GroupBox name="WaveElementsContainer" style="height: 512px; flex-direction: row; flex-wrap: wrap; width: 800px; padding-right: 0; padding-left: 0; justify-content: space-around; margin-top: 10px; margin-right: 0; margin-bottom: 0; margin-left: 0; flex-shrink: 1; align-items: stretch; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-left-color: rgb(84, 84, 84); border-right-color: rgb(84, 84, 84); border-top-color: rgb(84, 84, 84); border-bottom-color: rgb(84, 84, 84); align-self: center; padding-top: 0; padding-bottom: 0; background-color: rgb(79, 79, 79);">
+                <ui:Instance template="WaveElement" name="player1" class="wave-element" />
+                <ui:Instance template="WaveElement" name="player2" class="wave-element" />
+                <ui:Instance template="WaveElement" name="player2" class="wave-element" />
+                <ui:Instance template="WaveElement" name="player2" class="wave-element" />
+                <ui:Instance template="WaveElement" name="player2" class="wave-element" />
+            </ui:GroupBox>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Stats" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="Units" style="flex-grow: 1; width: 30%; flex-direction: row;">
+            <ui:VisualElement name="Names" style="flex-grow: 1; width: 60%;">
+                <ui:Label tabindex="-1" text="Unit" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: auto; font-size: 16px; -unity-font-style: bold; -unity-text-align: upper-center;" />
+                <ui:Label tabindex="-1" text="Unit name&#10;Unit name&#10;Unit name" parse-escape-sequences="true" display-tooltip-when-elided="true" name="UnitList" style="-unity-font-style: bold; margin-left: 16px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Levels" style="flex-grow: 1; width: 20%;">
+                <ui:Label tabindex="-1" text="Level" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: auto; font-size: 16px; -unity-font-style: bold; -unity-text-align: upper-center;" />
+                <ui:Label tabindex="-1" text="2&#10;2&#10;1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="UnitLevels" style="-unity-font-style: bold; margin-left: 2px; -unity-text-align: upper-center; color: rgb(159, 148, 0);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; width: 30%;">
+            <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                <ui:Label tabindex="-1" text="Tot. Pwr" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="UnitsTotalPower" style="background-color: rgba(255, 255, 255, 0); color: rgb(26, 255, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                <ui:Label tabindex="-1" text="Tot. Dmg" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="UnitsTotalDamage" style="background-color: rgba(255, 255, 255, 0); color: rgb(26, 255, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                <ui:Label tabindex="-1" text="Tot. HP" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="UnitsTotalHealth" style="background-color: rgba(255, 255, 255, 0); color: rgb(26, 255, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                <ui:Label tabindex="-1" text="Enm. Pwr" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="EnemyTotalPower" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 141, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                <ui:Label tabindex="-1" text="Enm. Dmg" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="width: 40%; -unity-text-align: middle-left;" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="EnemyTotalDamage" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 142, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                <ui:Label tabindex="-1" text="Enm. HP" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="width: 40%; -unity-text-align: middle-left;" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="EnemyTotalHealth" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 142, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; width: 30%;">
+            <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                <ui:Label tabindex="-1" text="Hero Lifetime" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HeroLifetime" style="background-color: rgba(255, 255, 255, 0); color: rgb(26, 255, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                <ui:Label tabindex="-1" text="Enemy Lifetime" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="EnemyLifetime" style="background-color: rgba(255, 255, 255, 0); color: rgb(26, 255, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="VisualElement" style="flex-grow: 0; height: 18px; width: 100%; min-width: auto; min-height: auto; align-self: flex-start; flex-wrap: nowrap; flex-direction: row;">
+                <ui:Label tabindex="-1" text="Balance" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 40%; -unity-text-align: middle-left;" />
+                <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TotalBalance" style="background-color: rgba(255, 255, 255, 0); color: rgb(26, 255, 0); -unity-font-style: bold; font-size: 15px; -unity-text-align: middle-left;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:ListView focusable="true" />
+</ui:UXML>

@@ -2,12 +2,13 @@
 {
 	public enum VfxElement
 	{
-		None = 0,
+		None				= 0,
 
 		// Core
-		UnitMerge = 1,
+		UnitMerge			= 1,
 
 		// Weapon
-		GrenadeExplode = 100,
+		GrenadeExplode		= 100,
+		GroundAoeHit,
 	}
 }

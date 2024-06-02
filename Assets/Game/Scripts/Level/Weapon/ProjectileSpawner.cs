@@ -24,10 +24,11 @@
 
 	public class ProjectileSpawner : IProjectileSpawner
 	{
-		[Inject] private Bullet.Factory _bulletFactory;
-		[Inject] private Fireball.Factory _fireballFactory;
-		[Inject] private GrenadeCapsule.Factory _grenadeCapsuleFactory;
-		[Inject] private WeaponsConfig _weaponsConfig;
+		[Inject] private Bullet.Factory				_bulletFactory;
+		[Inject] private Fireball.Factory			_fireballFactory;
+		[Inject] private GrenadeCapsule.Factory		_grenadeCapsuleFactory;
+		[Inject] private Acidbolt.Factory			_acidboltFactory;
+		[Inject] private WeaponsConfig				_weaponsConfig;
 
 		#region IProjectileSpawner
 
@@ -54,9 +55,10 @@
 
 		private Projectile Create(ProjectileType type, ProjectileArgs data) => type switch
 		{
-			ProjectileType.SniperBullet => _bulletFactory.Create(data),
-			ProjectileType.Fireball => _fireballFactory.Create(data),
-			ProjectileType.GrenadeCapsule => _grenadeCapsuleFactory.Create(data),
+			ProjectileType.SniperBullet		=> _bulletFactory.Create(data),
+			ProjectileType.Fireball			=> _fireballFactory.Create(data),
+			ProjectileType.GrenadeCapsule	=> _grenadeCapsuleFactory.Create(data),
+			ProjectileType.Acidbolt			=> _acidboltFactory.Create(data),
 			_ => null
 		};
 	}

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 808d26dece7bb8c478006ac72c0f748a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_ViewDataDictionary: {instanceID: 0}
+  - _visualTreeAsset: {fileID: 9197481963319205126, guid: 2eb80f4fad9ff5d4f84dec502a6e38f2, type: 3}
+  - _vtaWaveElement: {fileID: 9197481963319205126, guid: 2876a39247e3d55449af74870181bb80, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

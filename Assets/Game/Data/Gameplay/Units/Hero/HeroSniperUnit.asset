@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
   m_Name: HeroSniperUnit
   m_EditorClassIdentifier: 
-  _titleKey: SniperTitle
   _name:
     m_TableReference:
       m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58

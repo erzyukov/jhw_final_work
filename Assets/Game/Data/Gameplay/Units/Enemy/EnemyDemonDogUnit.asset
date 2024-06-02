@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
   m_Name: EnemyDemonDogUnit
   m_EditorClassIdentifier: 
-  _titleKey: DemonDogTitle
   _name:
     m_TableReference:
       m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
@@ -28,6 +27,7 @@ MonoBehaviour:
   _attackRange: 1
   _attackDelay: 1.7
   _projectileType: 0
+  DamageRange: 0
   _health: 220
   _damage: 31
   _healthPowerMultiplier: 65
@@ -38,7 +38,8 @@ MonoBehaviour:
   _experiencePowerMultiplier: 2
   _gradePrefabs:
   - {fileID: 1503547998484457933, guid: 468d4ce87b5b58e43a0e26ba6ddb855c, type: 3}
-  - {fileID: 1503547998484457933, guid: 34cb3218eb4d7da4e8cdfc8e96f96baf, type: 3}
+  - {fileID: 1503547998484457933, guid: c379f180d13b7984ea2336313426562b, type: 3}
+  - {fileID: 1503547998484457933, guid: 34de925dd40d09e4fa1b609aef5a7874, type: 3}
   _isDebug: 0
   references:
     version: 2

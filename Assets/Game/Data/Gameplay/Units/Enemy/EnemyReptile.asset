@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
+  m_Name: EnemyReptile
+  m_EditorClassIdentifier: 
+  _name:
+    m_TableReference:
+      m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
+    m_TableEntryReference:
+      m_KeyId: 12868917751353344
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _icon: {fileID: 0}
+  _fullLength: {fileID: 0}
+  _class: 1
+  _attackRange: 3.7
+  _attackDelay: 1.2
+  _projectileType: 4
+  DamageRange: 0
+  _health: 235
+  _damage: 70
+  _healthPowerMultiplier: 42
+  _damagePowerMultiplier: 30
+  _softReward: 11.2
+  _experience: 9
+  _softRewardPowerMultiplier: 1.65
+  _experiencePowerMultiplier: 2.8
+  _gradePrefabs:
+  - {fileID: 3009363758071439639, guid: 9cf49fb2bae94b843bf32d8118b5402f, type: 3}
+  _isDebug: 0
+  references:
+    version: 2
+    RefIds: []

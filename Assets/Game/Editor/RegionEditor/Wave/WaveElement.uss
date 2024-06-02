@@ -1,0 +1,66 @@
+.unity-base-field {
+}
+
+#SpeciesSelect {
+}
+
+#SpeciesSelect .unity-label {
+    width: auto;
+    min-width: 10px;
+}
+
+#Power .unity-label {
+    width: auto;
+    min-width: 30px;
+}
+
+#Grade .unity-label {
+    width: auto;
+    min-width: 30px;
+}
+
+#Position > .unity-label {
+    width: auto;
+    min-width: 30px;
+}
+
+#Position VisualElement {
+    align-items: stretch;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    align-self: center;
+    justify-content: space-around;
+    -unity-text-align: upper-left;
+}
+
+#Position VisualElement .unity-label {
+    width: auto;
+    min-width: 20px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(255, 141, 141);
+    border-right-color: rgb(255, 141, 141);
+    border-top-color: rgb(255, 141, 141);
+    border-bottom-color: rgb(255, 141, 141);
+    -unity-font-style: normal;
+    -unity-text-align: middle-center;
+    white-space: normal;
+    left: auto;
+}
+
+#Position VisualElement .unity-base-text-field__input {
+    width: auto;
+    min-width: auto;
+    min-height: auto;
+    height: auto;
+}

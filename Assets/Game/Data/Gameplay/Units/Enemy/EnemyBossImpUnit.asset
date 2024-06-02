@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
+  m_Name: EnemyBossImpUnit
+  m_EditorClassIdentifier: 
+  _name:
+    m_TableReference:
+      m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
+    m_TableEntryReference:
+      m_KeyId: 5376748920672256
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _icon: {fileID: 0}
+  _fullLength: {fileID: 0}
+  _class: 0
+  _attackRange: 1.3
+  _attackDelay: 1.8
+  _projectileType: 0
+  DamageRange: 0
+  _health: 950
+  _damage: 66
+  _healthPowerMultiplier: 250
+  _damagePowerMultiplier: 75
+  _softReward: 40
+  _experience: 30
+  _softRewardPowerMultiplier: 2
+  _experiencePowerMultiplier: 2
+  _gradePrefabs:
+  - {fileID: 1503547998484457933, guid: 7197817875e99e840a72ce237bb7a2dc, type: 3}
+  _isDebug: 0
+  references:
+    version: 2
+    RefIds: []

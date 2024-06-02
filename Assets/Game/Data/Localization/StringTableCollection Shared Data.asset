@@ -352,6 +352,10 @@ MonoBehaviour:
     m_Key: unlock_unit_tutorial_last_hint
     m_Metadata:
       m_Items: []
+  - m_Id: 12868917751353344
+    m_Key: unit_name_reptile
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

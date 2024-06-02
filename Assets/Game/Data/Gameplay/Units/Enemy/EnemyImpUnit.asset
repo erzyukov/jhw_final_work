@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce95f8796768284988b1aec6dedd0ad, type: 3}
   m_Name: EnemyImpUnit
   m_EditorClassIdentifier: 
-  _titleKey: ImpTitle
   _name:
     m_TableReference:
       m_TableCollectionName: GUID:a85e39e96efe1144eae385d630010f58
@@ -28,6 +27,7 @@ MonoBehaviour:
   _attackRange: 1
   _attackDelay: 1.4
   _projectileType: 0
+  DamageRange: 0
   _health: 160
   _damage: 12
   _healthPowerMultiplier: 27
@@ -38,6 +38,8 @@ MonoBehaviour:
   _experiencePowerMultiplier: 1
   _gradePrefabs:
   - {fileID: 1503547998484457933, guid: 2e9f0ab90493d694c94d83b818dbab0c, type: 3}
+  - {fileID: 1503547998484457933, guid: 41ddf5199b3038b40b3deb870b9ca1bb, type: 3}
+  - {fileID: 1503547998484457933, guid: 686a0f432f9991344a9eb98a4a184a37, type: 3}
   _isDebug: 0
   references:
     version: 2

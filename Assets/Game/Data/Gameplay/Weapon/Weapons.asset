@@ -19,6 +19,7 @@ MonoBehaviour:
     - {fileID: 1656041010336475349, guid: 3b784687609c4584485381cc3e305d44, type: 3}
     - {fileID: 9123784584167302360, guid: b984cdcb39d52e94f83ad7014bbeda4d, type: 3}
     - {fileID: -681434897407490326, guid: 98c439e39949ddd4abee9b5864f3d7b1, type: 3}
+    - {fileID: -8969551190062959555, guid: c49dcd1797cab514c832061ed1523d98, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -43,7 +44,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 
@@ -119,6 +120,33 @@ MonoBehaviour:
     - Name: Prefab
       Entry: 10
       Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 4
+    - Name: $v
+      Entry: 7
+      Data: Game.Configs.ProjectileConfig, Assembly-CSharp
+    - Name: Speed
+      Entry: 4
+      Data: 9
+    - Name: Height
+      Entry: 4
+      Data: 0
+    - Name: DamageRange
+      Entry: 4
+      Data: 0
+    - Name: Prefab
+      Entry: 10
+      Data: 3
     - Name: 
       Entry: 8
       Data: 

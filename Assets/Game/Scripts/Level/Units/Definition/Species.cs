@@ -2,6 +2,8 @@
 {
 	public enum Species
 	{
+		None = 0,
+
 		// Hero Units
 		HeroInfantryman = 1,
 		HeroSniper,
@@ -13,6 +15,12 @@
 		EnemySuccubus,
 		EnemyDemon,
 		EnemyDemonDog,
-		EnemyImpBoss,
+		EnemyReptile,
+
+
+		// Enemy Boss Units
+		EnemyBossDog = 10001,
+		EnemyBossImp,
+		EnemyBossGorilla,
 	}
 }
