@@ -17,6 +17,8 @@
 		[SerializeField] private float _attackRange;
 		[SerializeField] private float _attackDelay;
 		[SerializeField] private ProjectileType _projectileType;
+		public float AoeRange;
+
 		[Space]
 		[SerializeField] private float _health;
 		[SerializeField] private float _damage;
@@ -53,5 +55,28 @@
 		public float ExperiencePowerMultiplier => _experiencePowerMultiplier;
 		public GameObject[] GradePrefabs => _gradePrefabs;
 		public bool IsDebug => _isDebug;
+
+// TODO: convert private fields to public (for config)
+/*
+		private void OnValidate()
+		{
+			// string path         = AssetDatabase.GetAssetPath( this );
+
+			//if (string.IsNullOrWhiteSpace( path ))
+				//return;
+
+			//Debug.LogWarning(path);
+
+			//UnitConfig unitConfig = AssetDatabase.LoadAssetAtPath<UnitConfig>(path);
+
+			DamageRange = _damageRange;
+			//unitConfig.DamageRange = _damageRange;
+			//unitConfig.Name = _name;
+
+			EditorUtility.SetDirty( this );
+			//AssetDatabase.SaveAssets();
+			//AssetDatabase.Refresh();
+		}
+*/
 	}
 }

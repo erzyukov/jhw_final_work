@@ -16,9 +16,9 @@
 
 	public abstract class UnitAttackerBase : ControllerBase, IInitializable, IUnitAttacker
 	{
-		[Inject] IUnitView _view;
+		[Inject] protected IUnitView View;
 		[Inject] private IUnitData _unitData;
-		[Inject] UnitConfig _unitConfig;
+		[Inject] private UnitConfig _unitConfig;
 
 		protected ITimer AtackTimer;
 		protected float CurrentDamage;
@@ -41,7 +41,7 @@
 		public bool IsTargetClose(IUnitFacade target) =>
 			target != null &&
 			target.IsDead == false &&
-			(_view.Transform.position - target.Transform.position).sqrMagnitude <
+			(View.Transform.position - target.Transform.position).sqrMagnitude <
 			_unitConfig.AttackRange * _unitConfig.AttackRange + Mathf.Epsilon;
 
 		#endregion

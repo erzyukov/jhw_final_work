@@ -10,8 +10,12 @@
 
 	public class FieldDamageProcessor : ControllerBase, IInitializable
 	{
-		[Inject] private IBattleEvents _battleEvents;
-		[Inject] private IFieldFacade[] _fields;
+		[Inject] private IBattleEvents		_battleEvents;
+		[Inject] private IFieldFacade[]		_fields;
+
+		const float MaxScaleInitValue		= 1f;
+		const float MinScaleTargetValue		= 0.4f;
+		const float MaxScaleTargetValue		= 0.9f;
 
 		public void Initialize()
 		{
@@ -39,8 +43,8 @@
 
 		private float CalcAoeDamage( DamageData data, float distance )
 		{
-			float distanceRatio = distance / data.Range;
-			float multiplier = 1 - Normalize(distanceRatio, 0, 1, 0, 0.5f);
+			float distanceRatio		= distance / data.Range;
+			float multiplier		= 1 - Normalize(distanceRatio, 0, MaxScaleInitValue, MinScaleTargetValue, MaxScaleTargetValue);
 
 			return multiplier * data.Amount;
 		}

@@ -27,6 +27,7 @@ MonoBehaviour:
   _attackRange: 1.3
   _attackDelay: 1.8
   _projectileType: 0
+  DamageRange: 0
   _health: 950
   _damage: 66
   _healthPowerMultiplier: 250
