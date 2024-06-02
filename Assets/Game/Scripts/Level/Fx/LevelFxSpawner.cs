@@ -14,8 +14,8 @@
 		public void Initialize()
 		{
 			_battleEvents.DamageApplyed
-				.Where( d => d.Type == EDamageType.Aoe )
-				.Subscribe( d => _effectsSpawner.Spawn( VfxElement.GrenadeExplode, d.Position ) )
+				.Where( d => d.VfxType != VfxElement.None )
+				.Subscribe( d => _effectsSpawner.Spawn( d.VfxType, d.Position ) )
 				.AddTo( this );
 		}
 	}

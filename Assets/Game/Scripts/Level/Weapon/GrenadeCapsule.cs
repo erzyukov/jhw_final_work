@@ -34,6 +34,7 @@
 					Target			= Target,
 					Amount			= Damage,
 					Type			= EDamageType.Aoe,
+					VfxType			= VfxElement.GrenadeExplode,
 					Range			= Args.DamageRange,
 					Position		= transform.position,
 					ProjectileType	= _projectileType

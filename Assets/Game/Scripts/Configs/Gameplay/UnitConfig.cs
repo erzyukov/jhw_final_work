@@ -17,7 +17,8 @@
 		[SerializeField] private float _attackRange;
 		[SerializeField] private float _attackDelay;
 		[SerializeField] private ProjectileType _projectileType;
-		public float AoeRange;
+		public float			AoeRange;
+		public VfxElement		DamageVfx;
 
 		[Space]
 		[SerializeField] private float _health;

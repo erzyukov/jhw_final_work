@@ -10,6 +10,7 @@
 		public float Amount;
 		public IUnitFacade Target;
 		public EDamageType Type;
+		public VfxElement VfxType;
 		public float Range;
 		public Vector3 Position;
 		public ProjectileType ProjectileType;

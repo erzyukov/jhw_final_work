@@ -29,6 +29,7 @@
 					Target			= target,
 					Amount			= CurrentDamage,
 					Type			= EDamageType.Aoe,
+					VfxType			= _unitConfig.DamageVfx,
 					Range			= _unitConfig.AoeRange,
 					Position		= target.Transform.position,
 					ProjectileType	= Weapon.ProjectileType.None
