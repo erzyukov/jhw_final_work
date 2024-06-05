@@ -85,10 +85,11 @@
 
 		private void OnUnitUpgraded(Species species)
 		{
-			int upgradeLevel = _gameUpgrades.GetUnitLevel(species);
-			UnitUpgradesConfig upgrade = _upgradesConfig.UnitsUpgrades[species];
-			int maxPriceLevel = Mathf.Clamp(upgradeLevel, 1, upgrade.Price.Length + 1);
-			int previousUpgradePrice = upgrade.Price[maxPriceLevel - 2];
+			int upgradeLevel			= _gameUpgrades.GetUnitLevel(species);
+			UnitUpgradesConfig upgrade	= _upgradesConfig.UnitsUpgrades[species];
+			int maxPriceLevel			= Mathf.Clamp(upgradeLevel, 1, upgrade.Price.Length + 1);
+			int prevPriceLevel			= Mathf.Max(maxPriceLevel - 2, 0);
+			int previousUpgradePrice	= upgrade.Price[prevPriceLevel];
 
 			SendDesignEvent($"{UnitUpgradeEventKey}:{(int)species}:{upgradeLevel}", previousUpgradePrice);
 		}
