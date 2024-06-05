@@ -27,6 +27,10 @@
 		[Inject] private IGameplayEvents	_gameplayEvents;
 		[Inject] private IBattleEvents		_battleEvents;
 
+		private const float		LoseAdditionalDelay = 1f;
+
+		private IDisposable		_loseDelayTimer;
+
 		public void Initialize()
 		{
 			_gameCycle.State
@@ -59,6 +63,12 @@
 				.AddTo( this );
 		}
 
+		public override void Dispose()
+		{
+			base.Dispose();
+			_loseDelayTimer?.Dispose();
+		}
+
 		private void OnEnemyUnitDyingHandler(IUnitFacade unit)
 		{
 			if (_unitsConfig.Units.TryGetValue(unit.Species, out UnitConfig unitConfig) == false)
@@ -75,9 +85,13 @@
 		{
 			if (count == 0 && _gameCycle.State.Value == GameState.BattleStage)
 			{
-				_gameplayEvents.BattleLost.Execute(CreateBattlefieldData());
-				Observable.Timer(TimeSpan.FromSeconds(_timingsConfig.WaveTransitionDelay))
-					.Subscribe(_ => _gameCycle.SetState(GameState.LoseBattle))
+				float showLoseDelay		= LoseAdditionalDelay + _timingsConfig.WaveTransitionDelay;
+				_loseDelayTimer			= Observable.Timer( TimeSpan.FromSeconds( showLoseDelay ))
+					.Subscribe( _ =>
+					{
+						_gameplayEvents.BattleLost.Execute( CreateBattlefieldData() );
+						_gameCycle.SetState(GameState.LoseBattle);
+					} )
 					.AddTo(this);
 			}
 		}
@@ -86,10 +100,11 @@
 		{
 			if (count == 0)
 			{
-				_gameplayEvents.BattleWon.Execute(CreateBattlefieldData());
 				Observable.Timer(TimeSpan.FromSeconds(_timingsConfig.WaveTransitionDelay))
 					.Subscribe(_ =>
 					{
+						_loseDelayTimer?.Dispose();
+						_gameplayEvents.BattleWon.Execute(CreateBattlefieldData());
 						_gameCycle.SetState(GameState.CompleteWave);
 						_gameLevel.GoToNextWave();
 					})
