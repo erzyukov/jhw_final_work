@@ -308,7 +308,8 @@ MonoBehaviour:
   - m_Id: 43183668549029888
     m_Localized: '{price} YAN'
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 5784177084190425105
   - m_Id: 43185999734804480
     m_Localized: SOLD
     m_Metadata:
@@ -379,4 +380,4 @@ MonoBehaviour:
     - rid: 5784177084190425105
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 00306264413910000090360b9c441300009076c6da4a1c000030621106a10f00
+        m_Entries: 00306264413910000090360b9c441300009076c6da4a1c000030621106a10f000090f657516b9900
