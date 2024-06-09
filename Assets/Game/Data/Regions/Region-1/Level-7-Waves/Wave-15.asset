@@ -15,11 +15,11 @@ MonoBehaviour:
   _summonCurrencyAmount: 6
   _units:
   - Species: 5001
-    Power: 22
+    Power: 18
     Position: {x: 0, y: 1}
     GradeIndex: 1
   - Species: 5001
-    Power: 22
+    Power: 18
     Position: {x: 4, y: 1}
     GradeIndex: 1
   - Species: 5001
@@ -27,11 +27,11 @@ MonoBehaviour:
     Position: {x: 2, y: 1}
     GradeIndex: 1
   - Species: 5005
-    Power: 7
+    Power: 5
     Position: {x: 4, y: 2}
     GradeIndex: 0
   - Species: 5005
-    Power: 7
+    Power: 5
     Position: {x: 0, y: 2}
     GradeIndex: 0
   - Species: 5002
@@ -47,14 +47,14 @@ MonoBehaviour:
     Position: {x: 1, y: 1}
     GradeIndex: 2
   - Species: 5004
-    Power: 26
+    Power: 14
     Position: {x: 2, y: 0}
     GradeIndex: 2
   - Species: 5004
-    Power: 22
+    Power: 12
     Position: {x: 4, y: 0}
     GradeIndex: 1
   - Species: 5004
-    Power: 22
+    Power: 12
     Position: {x: 0, y: 0}
     GradeIndex: 1
