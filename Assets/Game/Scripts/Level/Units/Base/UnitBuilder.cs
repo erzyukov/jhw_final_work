@@ -27,7 +27,10 @@
 
 		void SetupUnit(UnitCreateData unitCreateData)
 		{
-			GameObject prefab = _unitConfig.GradePrefabs[unitCreateData.GradeIndex];
+			int gradeIndex = (unitCreateData.GradeIndex < _unitConfig.GradePrefabs.Length) 
+				? unitCreateData.GradeIndex 
+				: 0;
+			GameObject prefab = _unitConfig.GradePrefabs[gradeIndex];
 			_unitRenderer = _unitRendererFactory.Create(prefab);
 			_unitView.RendererContainer.DestroyChildren();
 			_unitRenderer.Transform.SetParent(_unitView.RendererContainer, false);

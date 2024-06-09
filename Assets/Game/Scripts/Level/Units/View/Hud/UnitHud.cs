@@ -50,7 +50,10 @@
 				.Subscribe(SetDraggingState)
 				.AddTo(this);
 
-			_uiHud.SetGradeSprite(_unitsConfig.GradeSprites[_unitData.GradeIndex]);
+			int gradeIndex = (_unitData.GradeIndex < _unitsConfig.GradeSprites.Length) 
+				? _unitData.GradeIndex
+				: 0;
+			_uiHud.SetGradeSprite(_unitsConfig.GradeSprites[gradeIndex]);
 
 			if (_unitData.IsHero)
 				_uiHud.SetHeroHealthColor();
