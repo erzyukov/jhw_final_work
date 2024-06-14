@@ -199,6 +199,13 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "io.appmetrica.analytics": {
+      "version": "https://github.com/appmetrica/appmetrica-unity-plugin.git#v6.1.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "5897ff63840968413f90db943df32a212a6dd0e5"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
