@@ -366,7 +366,8 @@ PrefabInstance:
       value: PlatformContainer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -7737550247652395937, guid: 0003c8d0b96b8b941ab70fce6a756fda, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0003c8d0b96b8b941ab70fce6a756fda, type: 3}

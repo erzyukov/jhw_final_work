@@ -196,13 +196,13 @@ namespace Game.Installers
 			{
 				case EGamePatform.YandexGames: 
 
-					Container
-						.BindInterfacesTo<YandexAdsProvider>()
-						.AsSingle();
+					//Container
+					//	.BindInterfacesTo<YandexAdsProvider>()
+					//	.AsSingle();
 
-					Container
-						.BindInterfacesTo<YandexAdsManager>()
-						.AsSingle();
+					//Container
+					//	.BindInterfacesTo<YandexAdsManager>()
+					//	.AsSingle();
 
 					break;
 

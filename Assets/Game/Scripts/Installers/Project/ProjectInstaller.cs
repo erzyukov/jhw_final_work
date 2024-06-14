@@ -36,9 +36,9 @@ namespace Game.Installers
 
 			if (_devConfig.GamePatform == EGamePatform.YandexGames)
 			{
-				Container
-					.BindInterfacesTo<YandexGameHandler>()
-					.AsSingle();
+				//Container
+				//	.BindInterfacesTo<YandexGameHandler>()
+				//	.AsSingle();
 			}
 
 			Container
@@ -69,9 +69,9 @@ namespace Game.Installers
 					break;
 
 				case EGamePatform.YandexGames: 
-					Container
-						.BindInterfacesTo<YandexProfileSaver>()
-						.AsSingle();
+					//Container
+					//	.BindInterfacesTo<YandexProfileSaver>()
+					//	.AsSingle();
 					break;
 			}
 
@@ -147,7 +147,7 @@ namespace Game.Installers
 			Container
 				.Bind<IIapCoreFacade>()
 				.FromSubContainerResolve()
-				.ByInstaller<IapCoreYandexInstaller>()
+				.ByInstaller<IapCoreInstaller>()
 				.WithKernel()
 				.AsSingle()
 				// .WhenInjectedInto( typeof( IapDeliver ) )		// Not working
