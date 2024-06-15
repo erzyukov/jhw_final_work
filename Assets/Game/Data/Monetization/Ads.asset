@@ -21,11 +21,11 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  BlockersInter: 01000000320000006800000069000000
-  BlockersBanner: 01000000
+  BlockersInter: 0100000032000000680000006900000002000000
+  BlockersBanner: 010000003200000002000000
   InterstitialInterval: 61
   InterActiveLevelNumber: 4
-  MaxSdkKey: ---
-  MaxSdkInterstitialUnitId: ---
-  MaxSdkRewardedUnitId: ---
-  MaxSdkBannerUnitId: ---
+  MaxSdkKey: H0kZrbn_Bun0b_AlPUM37VtUk6TOIA11mTDyyvc462LeMUwaIh9dzOHU52yc4HWFVRrZ45mnKo6pFmR4uDLzmz
+  MaxSdkInterstitialUnitId: 2ce942b1de8dd6e2
+  MaxSdkRewardedUnitId: a890594b8f6a0ce5
+  MaxSdkBannerUnitId: c5a8d98a1c513f8d
