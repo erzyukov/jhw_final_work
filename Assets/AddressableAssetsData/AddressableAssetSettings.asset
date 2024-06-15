@@ -72,9 +72,9 @@ MonoBehaviour:
       - m_Id: 6b003b74348765b408f8d164b2cde8ca
         m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
       - m_Id: 4e70199bc0e34c44196d2561998aba0b
-        m_Value: ServerData/[BuildTarget]
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
       - m_Id: e47b7a653ef8fac41a0f2b40877ce7a5
-        m_Value: http://[PrivateIpAddress]:[HostingServicePort]
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
     m_ProfileEntryNames:
     - m_Id: 96c6613f4a9a17a4ebf777ca5ffe9017
       m_Name: BuildTarget
