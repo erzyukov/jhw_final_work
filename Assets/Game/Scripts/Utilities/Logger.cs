@@ -13,6 +13,7 @@
 		public enum Module
 		{
 			Core,
+			Ads,
 		}
 	}
 }

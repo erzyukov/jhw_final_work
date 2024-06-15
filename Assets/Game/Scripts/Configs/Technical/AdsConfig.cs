@@ -13,5 +13,7 @@
 		public float InterstitialInterval;
 
 		public int InterActiveLevelNumber;
+
+		public string MaxSdkKey;
 	}
 }

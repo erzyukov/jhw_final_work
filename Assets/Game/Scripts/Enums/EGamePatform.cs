@@ -4,6 +4,7 @@
 	{
 		None = 0,
 
-		YandexGames = 10,
+		YandexGames		= 10,
+		GooglePlay		= 20,
 	}
 }

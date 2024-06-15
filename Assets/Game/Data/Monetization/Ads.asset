@@ -25,3 +25,4 @@ MonoBehaviour:
   BlockersBanner: 01000000
   InterstitialInterval: 61
   InterActiveLevelNumber: 4
+  MaxSdkKey: ---

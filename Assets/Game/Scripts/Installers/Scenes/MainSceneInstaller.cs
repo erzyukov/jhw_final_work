@@ -206,6 +206,18 @@ namespace Game.Installers
 
 					break;
 
+				case EGamePatform.GooglePlay:
+
+					Container
+						.BindInterfacesTo<ApplovinAdsProvider>()
+						.AsSingle();
+
+					Container
+						.BindInterfacesTo<ApplovinAdsManager>()
+						.AsSingle();
+
+					break;
+
 				default:
 					
 					Container

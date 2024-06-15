@@ -59,14 +59,14 @@ namespace Game.Installers
 
 			if (_devConfig.GamePatform != EGamePatform.None)
 			{
-				Container
-					.BindInterfacesTo<UiIapShopScreen>()
-					.FromComponentInHierarchy()
-					.AsSingle();
+				//Container
+				//	.BindInterfacesTo<UiIapShopScreen>()
+				//	.FromComponentInHierarchy()
+				//	.AsSingle();
 
-				Container
-					.BindInterfacesTo<UiIapShopPresenter>()
-					.AsSingle();
+				//Container
+				//	.BindInterfacesTo<UiIapShopPresenter>()
+				//	.AsSingle();
 			}
 		}
 
