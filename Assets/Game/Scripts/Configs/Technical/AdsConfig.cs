@@ -15,5 +15,8 @@
 		public int InterActiveLevelNumber;
 
 		public string MaxSdkKey;
+		public string MaxSdkInterstitialUnitId;
+		public string MaxSdkRewardedUnitId;
+		public string MaxSdkBannerUnitId;
 	}
 }

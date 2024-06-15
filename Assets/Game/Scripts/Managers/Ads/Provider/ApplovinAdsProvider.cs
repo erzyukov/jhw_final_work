@@ -1,10 +1,12 @@
 ﻿namespace Game.Managers
 {
-	using Zenject;
+	using System;
 	using UniRx;
+	using Zenject;
 	using Game.Utilities;
 	using Game.Configs;
 	using Logger = Game.Logger;
+	using static MaxSdkBase;
 
 	public class ApplovinAdsProvider : ControllerBase, IAdsProvider, IInitializable
 	{
@@ -12,6 +14,12 @@
 		[Inject] DevConfig		_devConfig;
 
 		private const string	DefaultPlace = "Gameplay";
+
+		private string InterUnitId		=> _adsConfig.MaxSdkInterstitialUnitId;
+		private string RewardUnitId		=> _adsConfig.MaxSdkRewardedUnitId;
+
+		private int			_interstitialLoadRetryAttempt;
+		private int			_rewardedLoadRetryAttempt;
 
 		public void Initialize()
 		{
@@ -22,7 +30,23 @@
 
 		public override void Dispose()
 		{
-			MaxSdkCallbacks.OnSdkInitializedEvent -= OnSdkInitialized;
+			MaxSdkCallbacks.OnSdkInitializedEvent				-= OnSdkInitialized;
+
+			MaxSdkCallbacks.Interstitial.OnAdLoadedEvent		-= OnInterstitialLoaded;
+			MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent	-= OnInterstitialLoadFailed;
+			MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent -= OnInterstitialDisplayFailed;
+			MaxSdkCallbacks.Interstitial.OnAdHiddenEvent		-= OnInterstitialHidden;
+			MaxSdkCallbacks.Interstitial.OnAdDisplayedEvent		-= OnInterstitialDisplayed;
+			MaxSdkCallbacks.Interstitial.OnAdClickedEvent		-= OnInterstitialClicked;
+
+			MaxSdkCallbacks.Rewarded.OnAdLoadedEvent			-= OnRewardedLoaded;
+			MaxSdkCallbacks.Rewarded.OnAdLoadFailedEvent		-= OnRewardedLoadFailed;
+			MaxSdkCallbacks.Rewarded.OnAdDisplayedEvent			-= OnRewardedDisplayed;
+			MaxSdkCallbacks.Rewarded.OnAdClickedEvent			-= OnRewardedClicked;
+			MaxSdkCallbacks.Rewarded.OnAdRevenuePaidEvent		-= OnRewardedRevenuePaid;
+			MaxSdkCallbacks.Rewarded.OnAdHiddenEvent			-= OnRewardedHidden;
+			MaxSdkCallbacks.Rewarded.OnAdDisplayFailedEvent		-= OnRewardedDisplayFailed;
+			MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent	-= OnRewardedRewardReceived;
 		}
 
 		private void InitializeSubscribe()
@@ -51,80 +75,142 @@
 			}
 
 			IsInitialized.Value = true;
-
-			Observable.NextFrame()
-				.Subscribe( _ =>
-				{
-					AdLoaded.Execute( EAdType.Banner );
-					AdLoaded.Execute( EAdType.RewardedVideo );
-					AdLoaded.Execute( EAdType.Interstitial );
-				} )
-				.AddTo( this );
 		}
+
+#region Interstitial
 
 		private void InterstitialSubscribe()
 		{
-			//Observable.FromEvent(
-			//	x => YandexGame.OpenFullAdEvent += x,
-			//	x => YandexGame.OpenFullAdEvent -= x
-			//)
-			//	.Subscribe( _ => AdOpened.Execute( EAdType.Interstitial ) )
-			//	.AddTo( this );
+			MaxSdkCallbacks.Interstitial.OnAdLoadedEvent		+= OnInterstitialLoaded;
+			MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent	+= OnInterstitialLoadFailed;
+			MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent += OnInterstitialDisplayFailed;
+			MaxSdkCallbacks.Interstitial.OnAdHiddenEvent		+= OnInterstitialHidden;
+			MaxSdkCallbacks.Interstitial.OnAdDisplayedEvent		+= OnInterstitialDisplayed;
+			MaxSdkCallbacks.Interstitial.OnAdClickedEvent		+= OnInterstitialClicked;
 
-			//Observable.FromEvent(
-			//	x => YandexGame.ErrorFullAdEvent += x,
-			//	x => YandexGame.ErrorFullAdEvent -= x
-			//)
-			//	.Subscribe( _ => AdShowFailed.Execute( EAdType.Interstitial ) )
-			//	.AddTo( this );
-
-			//Observable.FromEvent(
-			//	x => YandexGame.CloseFullAdEvent += x,
-			//	x => YandexGame.CloseFullAdEvent -= x
-			//)
-			//	.Subscribe( _ =>
-			//	{
-			//		AdClosed.Execute( EAdType.Interstitial );
-			//		AdLoaded.Execute( EAdType.Interstitial );
-			//	} )
-			//	.AddTo( this );
+			LoadInterstitial();
 		}
+
+		private void LoadInterstitial()
+		{
+			MaxSdk.LoadInterstitial( InterUnitId );
+		}
+
+		private void OnInterstitialLoaded( string adUnitId, MaxSdkBase.AdInfo adInfo )
+		{
+			Logger.Log( Logger.Module.Ads, $"Interstitial loaded! {adInfo.NetworkName}" );
+
+			_interstitialLoadRetryAttempt = 0;
+
+			AdLoaded.Execute( EAdType.Interstitial );
+		}
+
+		private void OnInterstitialLoadFailed( string adUnitId, MaxSdkBase.ErrorInfo errorInfo )
+		{
+			Logger.Log( Logger.Module.Ads, $"Interstitial Load Failed! {errorInfo.Code}: {errorInfo.Message}" );
+
+			_interstitialLoadRetryAttempt++;
+			double retryDelay = Math.Pow(2, Math.Min(6, _interstitialLoadRetryAttempt));
+
+			Observable.Timer( TimeSpan.FromSeconds( retryDelay ) )
+				.Subscribe( _ => LoadInterstitial() )
+				.AddTo( this );
+		}
+
+		private void OnInterstitialDisplayFailed( string adUnitId, MaxSdkBase.ErrorInfo errorInfo, MaxSdkBase.AdInfo adInfo )
+		{
+			AdShowFailed.Execute( EAdType.Interstitial );
+
+			LoadInterstitial();
+		}
+
+		private void OnInterstitialHidden( string adUnitId, MaxSdkBase.AdInfo adInfo )
+		{
+			AdClosed.Execute( EAdType.Interstitial );
+
+			LoadInterstitial();
+		}
+
+		private void OnInterstitialDisplayed( string adUnitId, MaxSdkBase.AdInfo adInfo )
+		{
+			AdOpened.Execute( EAdType.Interstitial );
+		}
+
+		private void OnInterstitialClicked( string arg1, MaxSdkBase.AdInfo info ) {}
+
+#endregion
+
+#region Rewarded
 
 		private void RewardedVideoSubscribe()
 		{
-			//Observable.FromEvent(
-			//	x => YandexGame.OpenVideoEvent += x,
-			//	x => YandexGame.OpenVideoEvent -= x
-			//)
-			//	.Subscribe( _ => AdOpened.Execute( EAdType.RewardedVideo ) )
-			//	.AddTo( this );
+			MaxSdkCallbacks.Rewarded.OnAdLoadedEvent			+= OnRewardedLoaded;
+			MaxSdkCallbacks.Rewarded.OnAdLoadFailedEvent		+= OnRewardedLoadFailed;
+			MaxSdkCallbacks.Rewarded.OnAdDisplayedEvent			+= OnRewardedDisplayed;
+			MaxSdkCallbacks.Rewarded.OnAdClickedEvent			+= OnRewardedClicked;
+			MaxSdkCallbacks.Rewarded.OnAdRevenuePaidEvent		+= OnRewardedRevenuePaid;
+			MaxSdkCallbacks.Rewarded.OnAdHiddenEvent			+= OnRewardedHidden;
+			MaxSdkCallbacks.Rewarded.OnAdDisplayFailedEvent		+= OnRewardedDisplayFailed;
+			MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent	+= OnRewardedRewardReceived;
 
-			//Observable.FromEvent(
-			//	x => YandexGame.ErrorVideoEvent += x,
-			//	x => YandexGame.ErrorVideoEvent -= x
-			//)
-			//	.Subscribe( _ => AdShowFailed.Execute( EAdType.RewardedVideo ) )
-			//	.AddTo( this );
-
-			//Observable.FromEvent(
-			//	x => YandexGame.CloseVideoEvent += x,
-			//	x => YandexGame.CloseVideoEvent -= x
-			//)
-			//	.Subscribe( _ =>
-			//	{
-			//		AdClosed.Execute( EAdType.RewardedVideo );
-			//		AdLoaded.Execute( EAdType.RewardedVideo );
-			//	} )
-			//	.AddTo( this );
-
-			//Observable.FromEvent<int>(
-			//		x => YandexGame.RewardVideoEvent += x,
-			//		x => YandexGame.RewardVideoEvent -= x
-			//	)
-			//	.Subscribe( code => Rewarded.Execute( (ERewardedType)code ) )
-			//	.AddTo( this );
+			LoadRewardedAd();
 		}
 
+		private void LoadRewardedAd()
+		{
+			MaxSdk.LoadRewardedAd( RewardUnitId );
+		}
+
+		private void OnRewardedLoaded( string adUnitId, MaxSdkBase.AdInfo adInfo )
+		{
+			Logger.Log( Logger.Module.Ads, $"Rewarded loaded! {adInfo.NetworkName}" );
+
+			_rewardedLoadRetryAttempt = 0;
+
+			AdLoaded.Execute( EAdType.RewardedVideo );
+		}
+
+		private void OnRewardedLoadFailed( string adUnitId, MaxSdkBase.ErrorInfo errorInfo )
+		{
+			Logger.Log( Logger.Module.Ads, $"Rewarded Load Failed! {errorInfo.Code}: {errorInfo.Message}" );
+
+			_rewardedLoadRetryAttempt++;
+			double retryDelay = Math.Pow(2, Math.Min(6, _rewardedLoadRetryAttempt));
+
+			Observable.Timer( TimeSpan.FromSeconds( _rewardedLoadRetryAttempt ) )
+				.Subscribe( _ => LoadRewardedAd() )
+				.AddTo( this );
+		}
+
+		private void OnRewardedDisplayed( string adUnitId, AdInfo adInfo )
+		{
+			AdOpened.Execute( EAdType.RewardedVideo );
+		}
+
+		private void OnRewardedClicked( string adUnitId, AdInfo adInfo ) {}
+
+		private void OnRewardedRevenuePaid( string adUnitId, AdInfo adInfo ) {}
+
+		private void OnRewardedHidden( string arg1, AdInfo info )
+		{
+			AdClosed.Execute( EAdType.RewardedVideo );
+			
+			LoadRewardedAd();
+		}
+
+		private void OnRewardedDisplayFailed( string adUnitId, ErrorInfo errorInfo, AdInfo adInfo )
+		{
+			AdShowFailed.Execute( EAdType.RewardedVideo );
+
+			LoadRewardedAd();
+		}
+
+		private void OnRewardedRewardReceived( string adUnitId, Reward reward, AdInfo adInfo )
+		{
+			Rewarded.Execute( ERewardedType.None );
+		}
+
+#endregion
 
 #region IAdsProvider
 
@@ -149,31 +235,33 @@
 		public void DisplayBanner( string place )
 		{
 			BannerPlace = place;
-			//YandexGame.StickyAdActivity( true );
 			AdOpened.Execute( EAdType.Banner );
 		}
 
 		public void HideBanner()
 		{
-			//YandexGame.StickyAdActivity( false );
 			AdClosed.Execute( EAdType.Banner );
 		}
 
-		public bool IsAdAvailable( EAdType type ) => true;
+		public bool IsAdAvailable( EAdType type ) =>
+			type switch {
+				EAdType.Interstitial	=> MaxSdk.IsInterstitialReady( InterUnitId ),
+				EAdType.RewardedVideo	=> MaxSdk.IsRewardedAdReady( RewardUnitId ),
+				_ => false,
+			};
 
 		public void ShowInterstitialVideo( string place )
 		{
 			InterstitialPlace = place;
-			//YandexGame.FullscreenShow();
+			MaxSdk.ShowInterstitial( InterUnitId );
 		}
 
 		public void ShowRevardedVideo( ERewardedType type )
 		{
 			RewardedPlace = type.ToString();
-			//YandexGame.RewVideoShow( (int)type );
+			MaxSdk.ShowRewardedAd( RewardUnitId, RewardedPlace );
 		}
 
 #endregion
-
 	}
 }

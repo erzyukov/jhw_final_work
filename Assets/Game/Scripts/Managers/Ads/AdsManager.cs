@@ -91,6 +91,14 @@
 					.Subscribe( _ => ShowRewardedVideo( b.Type ) )
 					.AddTo( this )
 			);
+
+			IsPlaying
+				.Subscribe( v => Debug.LogWarning($">> Playing state: {v}") )
+				.AddTo( this );
+
+			IsPlaying
+				.Subscribe( v => { if (v) SetZeroTimeScale(); else RestoreTimeScale(); } )
+				.AddTo( this );
 		}
 
 		private void SubscribeInitialize()
@@ -324,23 +332,14 @@
 				OnCompleted[_rewardType].Execute( _currentRewarded );
 		}
 
-		void OnStartPlayAd()
-		{
+		void OnStartPlayAd() =>
 			IsPlaying.Value = true;
-			SetZeroTimeScale();
-		}
 
-		void OnInterstitialAdClosed()
-		{
+		void OnInterstitialAdClosed() =>
 			IsPlaying.Value = false;
-			RestoreTimeScale();
-		}
 
-		void OnRewardVideoClosed()
-		{
+		void OnRewardVideoClosed() =>
 			IsPlaying.Value = false;
-			RestoreTimeScale();
-		}
 
 		void OnInterstitialAdShowFailed()
 		{

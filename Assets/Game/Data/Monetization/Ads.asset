@@ -26,3 +26,6 @@ MonoBehaviour:
   InterstitialInterval: 61
   InterActiveLevelNumber: 4
   MaxSdkKey: ---
+  MaxSdkInterstitialUnitId: ---
+  MaxSdkRewardedUnitId: ---
+  MaxSdkBannerUnitId: ---
