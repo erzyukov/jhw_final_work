@@ -22,7 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   BlockersInter: 0100000032000000680000006900000002000000
-  BlockersBanner: 010000003200000002000000
+  BlockersBanner: 010000003200000002000000680000006b00000000000000
   InterstitialInterval: 61
   InterActiveLevelNumber: 4
   MaxSdkKey: H0kZrbn_Bun0b_AlPUM37VtUk6TOIA11mTDyyvc462LeMUwaIh9dzOHU52yc4HWFVRrZ45mnKo6pFmR4uDLzmz

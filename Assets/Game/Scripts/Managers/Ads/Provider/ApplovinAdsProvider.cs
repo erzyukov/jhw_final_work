@@ -7,6 +7,9 @@
 	using Game.Configs;
 	using Logger = Game.Logger;
 	using static MaxSdkBase;
+	using static MaxSdkCallbacks;
+	using UnityEngine.UIElements;
+	using UnityEngine;
 
 	public class ApplovinAdsProvider : ControllerBase, IAdsProvider, IInitializable
 	{
@@ -17,6 +20,7 @@
 
 		private string InterUnitId		=> _adsConfig.MaxSdkInterstitialUnitId;
 		private string RewardUnitId		=> _adsConfig.MaxSdkRewardedUnitId;
+		private string BannerUnitId		=> _adsConfig.MaxSdkBannerUnitId;
 
 		private int			_interstitialLoadRetryAttempt;
 		private int			_rewardedLoadRetryAttempt;
@@ -26,6 +30,7 @@
 			InitializeSubscribe();
 			InterstitialSubscribe();
 			RewardedVideoSubscribe();
+			BannerSubscribe();
 		}
 
 		public override void Dispose()
@@ -47,6 +52,13 @@
 			MaxSdkCallbacks.Rewarded.OnAdHiddenEvent			-= OnRewardedHidden;
 			MaxSdkCallbacks.Rewarded.OnAdDisplayFailedEvent		-= OnRewardedDisplayFailed;
 			MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent	-= OnRewardedRewardReceived;
+
+			MaxSdkCallbacks.Banner.OnAdLoadedEvent				-= OnBannerAdLoaded;
+			MaxSdkCallbacks.Banner.OnAdLoadFailedEvent			-= OnBannerAdLoadFailed;
+			MaxSdkCallbacks.Banner.OnAdClickedEvent				-= OnBannerAdClicked;
+			MaxSdkCallbacks.Banner.OnAdRevenuePaidEvent			-= OnBannerAdRevenuePaid;
+			MaxSdkCallbacks.Banner.OnAdExpandedEvent			-= OnBannerAdExpanded;
+			MaxSdkCallbacks.Banner.OnAdCollapsedEvent			-= OnBannerAdCollapsed;
 		}
 
 		private void InitializeSubscribe()
@@ -210,8 +222,43 @@
 			Rewarded.Execute( ERewardedType.None );
 		}
 
-#endregion
+		#endregion
 
+#region Banner
+
+		private void BannerSubscribe()
+		{
+			BannerPlace = MaxSdkBase.BannerPosition.BottomCenter.ToString();
+			MaxSdk.CreateBanner( BannerUnitId, MaxSdkBase.BannerPosition.BottomCenter );
+			MaxSdk.SetBannerBackgroundColor( BannerUnitId, new( 0, 0, 0, 0 ) );
+
+			MaxSdkCallbacks.Banner.OnAdLoadedEvent      += OnBannerAdLoaded;
+			MaxSdkCallbacks.Banner.OnAdLoadFailedEvent  += OnBannerAdLoadFailed;
+			MaxSdkCallbacks.Banner.OnAdClickedEvent     += OnBannerAdClicked;
+			MaxSdkCallbacks.Banner.OnAdRevenuePaidEvent += OnBannerAdRevenuePaid;
+			MaxSdkCallbacks.Banner.OnAdExpandedEvent    += OnBannerAdExpanded;
+			MaxSdkCallbacks.Banner.OnAdCollapsedEvent   += OnBannerAdCollapsed;
+		}
+
+		private void OnBannerAdLoaded(string adUnitId, MaxSdkBase.AdInfo adInfo)
+		{
+			AdLoaded.Execute( EAdType.Banner );
+		}
+
+		private void OnBannerAdLoadFailed(string adUnitId, MaxSdkBase.ErrorInfo errorInfo)
+		{
+			AdShowFailed.Execute( EAdType.Banner );
+		}
+
+		private void OnBannerAdClicked(string adUnitId, MaxSdkBase.AdInfo adInfo) {}
+
+		private void OnBannerAdRevenuePaid(string adUnitId, MaxSdkBase.AdInfo adInfo) {}
+
+		private void OnBannerAdExpanded(string adUnitId, MaxSdkBase.AdInfo adInfo)  {}
+
+		private void OnBannerAdCollapsed(string adUnitId, MaxSdkBase.AdInfo adInfo) {}
+
+#endregion
 #region IAdsProvider
 
 		public ReactiveCommand<EAdType> AdLoaded		{ get; } = new();
@@ -234,12 +281,13 @@
 
 		public void DisplayBanner( string place )
 		{
-			BannerPlace = place;
+			MaxSdk.ShowBanner( BannerUnitId );
 			AdOpened.Execute( EAdType.Banner );
 		}
 
 		public void HideBanner()
 		{
+			MaxSdk.HideBanner( BannerUnitId );
 			AdClosed.Execute( EAdType.Banner );
 		}
 
