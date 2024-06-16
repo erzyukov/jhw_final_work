@@ -203,7 +203,9 @@
       "version": "https://github.com/appmetrica/appmetrica-unity-plugin.git#v6.1.0",
       "depth": 0,
       "source": "git",
-      "dependencies": {},
+      "dependencies": {
+        "com.google.external-dependency-manager": "1.2.177"
+      },
       "hash": "5897ff63840968413f90db943df32a212a6dd0e5"
     },
     "com.unity.modules.ai": {
