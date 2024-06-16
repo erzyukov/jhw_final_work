@@ -38,8 +38,8 @@
 			Observable.Merge(
 					_gameUpgrades.Upgraded.Where( s => s == Species ).AsUnitObservable(),
 					_gameProfile.HeroLevel.AsUnitObservable(),
-					_gameProfile.SoftCurrency.AsUnitObservable(),
-					_adsManager.IsRewardedAvailable.AsUnitObservable()
+					_gameProfile.SoftCurrency.AsUnitObservable()//,
+					//_adsManager.IsRewardedAvailable.AsUnitObservable()
 				)
 				.Subscribe( _ => UpdateUnitParameters() )
 				.AddTo( this );
@@ -125,7 +125,7 @@
 			bool isRewardAvailable		= _adsManager.IsRewardedAvailable.Value;
 			bool isAdAcitve				= 
 				(price > ccy)		&& 
-				isRewardAvailable	&& 
+				//isRewardAvailable	&& 
 				LevelNumber != 0	&&
 				LevelNumber < _gameProfile.HeroLevel.Value;
 

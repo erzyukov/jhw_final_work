@@ -87,7 +87,7 @@
 
 			_rewardedButtons.ForEach( b =>
 				b.Clicked
-					.Where( _ => IsRewardedAvailable.Value )
+					.Where( _ => IsRewardedAvailable.Value && b.Type != ERewardedType.None )
 					.Subscribe( _ => ShowRewardedVideo( b.Type ) )
 					.AddTo( this )
 			);
