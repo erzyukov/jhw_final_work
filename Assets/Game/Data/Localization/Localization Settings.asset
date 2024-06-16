@@ -16,6 +16,7 @@ MonoBehaviour:
   - rid: 5784176776087601155
   - rid: 5784176776087601156
   - rid: 5784176776087601157
+  - rid: 6452950532426563588
   m_AvailableLocales:
     rid: 5784176776087601158
   m_AssetDatabase:
@@ -203,3 +204,8 @@ MonoBehaviour:
         - default
         - d
         - 
+    - rid: 6452950532426563588
+      type: {class: SpecificLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
+      data:
+        m_LocaleId:
+          m_Code: ru
