@@ -4,6 +4,11 @@
 	using UniRx;
 	using UnityEngine;
 	using UnityEngine.UI;
+	using Zenject;
+	using Game.Managers;
+	using TMPro;
+	using Sirenix.Utilities;
+	using Game.Utilities;
 
 	public interface IUiRewardedButton
 	{
@@ -13,16 +18,43 @@
 
 	public class UiRewardedButton : MonoBehaviour, IUiRewardedButton
 	{
-		[SerializeField] private Button _button;
-		[SerializeField] private ERewardedType _type;
+		[Inject] IAdsManager	_adsManager;
 
-		#region IUiRewardedButton
+		[SerializeField] private Button				_button;
+		[SerializeField] private ERewardedType		_type;
+		[SerializeField] private GameObject			_preloader;
+		[SerializeField] private Image[]            _imageDecors;
+		[SerializeField] private TextMeshProUGUI[]  _textDecors;
 
-		public ERewardedType Type => _type;
+		private const float		DisabledAlpha = 0.5f;
 
-		public IObservable<Unit> Clicked => _button.OnClickAsObservable();
+		private void Awake()
+		{
+			_adsManager.IsRewardedAvailable
+				.Subscribe( SetAdLoadingState )
+				.AddTo( this );
+		}
 
-		#endregion
+#region IUiRewardedButton
+
+		public ERewardedType		Type		=> _type;
+
+		public IObservable<Unit>	Clicked		=> _button.OnClickAsObservable();
+
+#endregion
+
+		private void SetAdLoadingState( bool isAvailable )
+		{
+			_imageDecors.ForEach( e => 
+				e.color = isAvailable? e.color.WithAlpha( 1 ) : e.color.WithAlpha( DisabledAlpha )
+			);
+			_textDecors.ForEach( e => 
+				e.color = isAvailable? e.color.WithAlpha( 1 ) : e.color.WithAlpha( DisabledAlpha )
+			);
+			
+			_preloader.SetActive( !isAvailable );
+			_button.interactable	= isAvailable;
+		}
 
 	}
 }
