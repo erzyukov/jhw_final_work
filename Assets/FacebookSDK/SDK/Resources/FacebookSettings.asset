@@ -16,9 +16,9 @@ MonoBehaviour:
   clientTokens:
   - 
   appIds:
-  - 0
+  - 900237955243178
   appLabels:
-  - App Name
+  - Doomsday
   cookie: 1
   logging: 1
   status: 1
