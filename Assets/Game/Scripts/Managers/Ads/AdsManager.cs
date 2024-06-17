@@ -13,6 +13,8 @@
 	using Screen = Game.Ui.Screen;
 	using Game.Dev;
 	using Game.Profiles;
+	using Game.Core;
+
 
 	public interface IAdsManager
 	{
@@ -25,6 +27,7 @@
 
 		bool IsRewardedFree { get; set; }
 
+		BoolReactiveProperty IsInitialized { get; }
 		BoolReactiveProperty IsPlaying { get; }
 		BoolReactiveProperty IsRewardedAvailable { get; }
 		BoolReactiveProperty IsInterstitialReady { get; }
@@ -36,19 +39,20 @@
 
 	public class AdsManager : ControllerBase, IAdsManager, IInitializable
 	{
-		[Inject] protected AdsConfig AdsConfig;
-		[Inject] protected IScreenNavigator ScreenNavigator;
-		[Inject] protected GameProfile GameProfile;
+		[Inject] protected AdsConfig			AdsConfig;
+		[Inject] protected IScreenNavigator		ScreenNavigator;
+		[Inject] protected GameProfile			GameProfile;
 
-		[Inject] private List<IUiRewardedButton> _rewardedButtons;
-		[Inject] private IAdsProvider _adsProvider;
+		[Inject] private List<IUiRewardedButton>		_rewardedButtons;
+		[Inject] private IAdsProvider					_adsProvider;
+		[Inject] protected IInitializePromoter          _initializePromoter;
 
-		private const string DefaultPlace = "Gameplay";
+		private const string			DefaultPlace = "Gameplay";
 
-		private float _timeScale;
-		private ERewardedType _rewardType;
-		private Rewarded _currentRewarded;
-		private bool _isBannerActive;
+		private float				_timeScale;
+		private ERewardedType		_rewardType;
+		private Rewarded			_currentRewarded;
+		private bool				_isBannerActive;
 
 		private ReactiveCollection<EAdsBlocker> _blockersInter = new();
 		private ReactiveCollection<EAdsBlocker> _blockersBanner = new();
@@ -91,10 +95,6 @@
 					.Subscribe( _ => ShowRewardedVideo( b.Type ) )
 					.AddTo( this )
 			);
-
-			IsPlaying
-				.Subscribe( v => Debug.LogWarning($">> Playing state: {v}") )
-				.AddTo( this );
 
 			IsPlaying
 				.Subscribe( v => { if (v) SetZeroTimeScale(); else RestoreTimeScale(); } )
@@ -158,11 +158,14 @@
 
 		void OnProviderInitialized()
 		{
+			_initializePromoter.SetAdsAsReady();
 			AddRemoveBlocker( EAdsBlocker.Mediation_Loading, false );
 			UpdateBannerState();
 		}
 
-		#region IAdsManager
+#region IAdsManager
+
+		public BoolReactiveProperty IsInitialized		=> _adsProvider.IsInitialized;
 
 		public bool IsRewardedFree { get; set; }
 
@@ -254,7 +257,7 @@
 				UpdateBannerState();
 		}
 
-		#endregion
+#endregion
 
 		void OnUiScreenChanged( Screen previous, Screen current )
 		{

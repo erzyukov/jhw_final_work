@@ -29,6 +29,10 @@ namespace Game.Installers
 				.AsSingle();
 
 			Container
+				.BindInterfacesTo<InitializePromoter>()
+				.AsSingle();
+
+			Container
 				.BindInterfacesTo<ScenesManager>()
 				.FromNewComponentOnNewGameObject()
 				.AsSingle()

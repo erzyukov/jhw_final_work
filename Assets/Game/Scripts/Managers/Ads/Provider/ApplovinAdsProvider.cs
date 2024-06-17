@@ -7,9 +7,7 @@
 	using Game.Configs;
 	using Logger = Game.Logger;
 	using static MaxSdkBase;
-	using static MaxSdkCallbacks;
-	using UnityEngine.UIElements;
-	using UnityEngine;
+
 
 	public class ApplovinAdsProvider : ControllerBase, IAdsProvider, IInitializable
 	{
@@ -63,7 +61,7 @@
 
 		private void InitializeSubscribe()
 		{
-			MaxSdkCallbacks.OnSdkInitializedEvent += OnSdkInitialized;
+			MaxSdkCallbacks.OnSdkInitializedEvent				+= OnSdkInitialized;
 
 			if (_devConfig.Build == DevConfig.BuildType.Debug)
 			{
@@ -81,6 +79,7 @@
 			if (_devConfig.Build == DevConfig.BuildType.Debug)
 			{
 				Logger.Log( Logger.Module.Ads, $"IsSuccessfullyInitialized: {sdkConfiguration.IsSuccessfullyInitialized} | IsTestModeEnabled: {sdkConfiguration.IsTestModeEnabled}" );
+
 #if !UNITY_EDITOR
 				MaxSdk.ShowMediationDebugger();
 #endif

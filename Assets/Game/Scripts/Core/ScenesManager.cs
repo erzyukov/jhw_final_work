@@ -12,6 +12,7 @@ namespace Game.Core
 	using UnityEngine.SceneManagement;
 	using Zenject;
 
+
 	public interface IScenesManager
 	{
 		ReactiveCommand ResourceLoading { get; }
@@ -27,10 +28,11 @@ namespace Game.Core
 
 	public class ScenesManager : MonoBehaviour, IScenesManager
 	{
-		[Inject] private ScenesConfig _scenesConfig;
-		[Inject] private LevelsConfig _levelsConfig;
-		[Inject] private ILocalizator _localizator;
-		[Inject] private IGameProfileManager _profileManager;
+		[Inject] private ScenesConfig			_scenesConfig;
+		[Inject] private LevelsConfig			_levelsConfig;
+		[Inject] private ILocalizator			_localizator;
+		[Inject] private IGameProfileManager	_profileManager;
+		[Inject] private IInitializePromoter    _initializePromoter;
 
 		private void Start() => StartCoroutine(LoadScenes());
 
@@ -63,6 +65,8 @@ namespace Game.Core
 			yield return wait;
 
 			MainLoaded.Execute();
+
+			yield return new WaitUntil( () => _initializePromoter.IsReadyToLevelLoad.Value );
 
 			if (IsSceneLoaded(_scenesConfig.Splash))
 				UnloadScene(_scenesConfig.Splash);
