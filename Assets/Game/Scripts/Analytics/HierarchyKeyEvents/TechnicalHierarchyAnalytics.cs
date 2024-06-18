@@ -43,7 +43,7 @@
 
 		private void SendTechnicalStep(string step)
 		{
-			SendDesignEvent($"{TechnicalEventKey}:{step}", Time.time);
+			//SendDesignEvent($"{TechnicalEventKey}:{step}", Time.time);
 		}
 	}
 }

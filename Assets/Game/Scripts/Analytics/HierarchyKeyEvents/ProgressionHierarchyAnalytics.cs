@@ -5,7 +5,7 @@
 	using UniRx;
 	using Game.Core;
 	using System.Linq;
-	using GameAnalyticsSDK;
+	//using GameAnalyticsSDK;
 
 	public class ProgressionHierarchyAnalytics : HierarchyAnalyticsBase, IInitializable
 	{
@@ -13,6 +13,7 @@
 
 		public void Initialize()
 		{
+			/*
 			Observable.Merge(
 				_gameLevel.WaveStarted.Select(_ => GAProgressionStatus.Start),
 				_gameLevel.WaveFinished.Where(v => v == GameLevel.Result.Win).Select(_ => GAProgressionStatus.Complete),
@@ -20,11 +21,13 @@
 			)
 				.Subscribe(OnProgressionChanged)
 				.AddTo(this);
+			*/
 		}
-
+		/*
 		private void OnProgressionChanged(GAProgressionStatus status)
 		{
 			SendProgressionEvent(status, BattleDefaultTypeEventKey, LevelKey, WaveKey);
 		}
+		*/
 	}
 }

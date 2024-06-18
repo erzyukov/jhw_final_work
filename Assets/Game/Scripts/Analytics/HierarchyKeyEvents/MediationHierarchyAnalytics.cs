@@ -39,7 +39,7 @@
 				_ => "unknown",
 			};
 
-			SendDesignEvent($"{MediationEventKey}:{status}:{type}:{place}");
+			//SendDesignEvent($"{MediationEventKey}:{status}:{type}:{place}");
 		}
 	}
 }

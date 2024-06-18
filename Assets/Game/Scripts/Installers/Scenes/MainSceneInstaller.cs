@@ -162,31 +162,31 @@ namespace Game.Installers
 				return;
 
 			Container
-				.BindInterfacesTo<TutorialHierarchyAnalytics>()
+				.BindInterfacesTo<TutorialAnalytics>()
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<UiHierarchyAnalytics>()
+				.BindInterfacesTo<UiAnalytics>()
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<GameplayHierarchyAnalytics>()
+				.BindInterfacesTo<GameplayAnalytics>()
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<ResourcesHierarchyAnalytics>()
+				.BindInterfacesTo<ResourcesAnalytics>()
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<ProgressionHierarchyAnalytics>()
+				.BindInterfacesTo<SettingsAnalytics>()
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<SettingsHierarchyAnalytics>()
+				.BindInterfacesTo<MediationAnalytics>()
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<MediationHierarchyAnalytics>()
+				.BindInterfacesTo<CustomAnalytics>()
 				.AsSingle();
 		}
 

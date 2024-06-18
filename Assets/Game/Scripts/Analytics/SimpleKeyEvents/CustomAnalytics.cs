@@ -9,12 +9,12 @@
 
 	public class CustomAnalytics : AnalyticsBase, IInitializable
 	{
-		[Inject] private IGameCurrency _gameCurrency;
-		[Inject] private IGameEnergy _gameEnergy;
-		[Inject] private IGameLevel _gameLevel;
+		[Inject] private IGameCurrency	_gameCurrency;
+		[Inject] private IGameEnergy	_gameEnergy;
+		[Inject] private IGameLevel		_gameLevel;
 
-		private const int MinuteStatInterval = 60;
-		private const string MinuteStatEventKey = "1_minute_stat";
+		private const int		MinuteStatInterval = 60;
+		private const string	MinuteStatEventKey = "1_minute_stat";
 
 		private int _minuteEventCount = 0;
 		private int _minuteLevelStartCount = 0;
@@ -75,15 +75,18 @@
 
 			var properties = new Dictionary<string, object>
 			{
-				{ "session_number", GameProfile.Analytics.SessionNumber },
-				{ "number", _minuteEventCount },
-				{ "game_start", _minuteLevelStartCount },
-				{ "wave_start", _minuteWaveStartCount },
-				{ "win", _minuteWinCount },
-				{ "exit", _minuteExitCount },
-				{ "coins_income", _minuteCoinsIncome },
-				{ "coins_spent", _minuteCoinsSpent },
-				{ "energy_used", _minuteEnergySpent },
+				{ "session_number",		GameProfile.Analytics.SessionNumber },
+				{ "count_ads",			GameProfile.Analytics.InterWatchNumber + GameProfile.Analytics.RewardedWatchNumber },
+				{ "count_int",			GameProfile.Analytics.InterWatchNumber },
+				{ "count_rew",			GameProfile.Analytics.RewardedWatchNumber },
+				{ "number",				_minuteEventCount },
+				{ "game_start",			_minuteLevelStartCount },
+				{ "wave_start",			_minuteWaveStartCount },
+				{ "win",				_minuteWinCount },
+				{ "exit",				_minuteExitCount },
+				{ "coins_income",		_minuteCoinsIncome },
+				{ "coins_spent",		_minuteCoinsSpent },
+				{ "energy_used",		_minuteEnergySpent },
 			};
 			SendMessage(MinuteStatEventKey, properties);
 

@@ -11,7 +11,7 @@ namespace Game.Analytics
 	public class TechnicalAnalytics : AnalyticsBase, IInitializable
 	{
 		[Inject] private IScenesManager _scenesManager;
-		[Inject] private IApplicationPaused _applicationPaused;
+		//[Inject] private IApplicationPaused _applicationPaused;
 
 		private const string AppPauseEventKey = "app_pause";
 		private const string AppResumeEventKey = "app_resume";
@@ -28,10 +28,12 @@ namespace Game.Analytics
 		{
 			_lastPauseEventTime = Time.time;
 
+			/*
 			_applicationPaused.IsApplicationPaused
 				.Skip(1)
 				.Subscribe(OnApplicationPaused)
 				.AddTo(this);
+			*/
 
 			_scenesManager.ResourceLoading
 				.Subscribe(_ => OnScenesLoading())

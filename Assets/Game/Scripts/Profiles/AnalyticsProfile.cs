@@ -8,6 +8,8 @@
 	{
 		public bool IsFirstRunApp = true;
 		public int SessionNumber = 0;
+		public int InterWatchNumber = 0;
+		public int RewardedWatchNumber = 0;
 
 		public int TutorialStep = 0;
 

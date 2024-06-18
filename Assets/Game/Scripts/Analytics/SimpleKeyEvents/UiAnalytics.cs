@@ -12,10 +12,10 @@
 
 	public class UiAnalytics : AnalyticsBase, IInitializable
 	{
-		[Inject] private IUiWinScreen _uiWinScreen;
-		[Inject] private IUiLoseScreen _uiLoseScreen;
-		[Inject] private IGameHero _gameHero;
-		[Inject] private LevelsConfig _levelsConfig;
+		[Inject] private IUiWinScreen		_uiWinScreen;
+		[Inject] private IUiLoseScreen		_uiLoseScreen;
+		[Inject] private IGameHero			_gameHero;
+		[Inject] private LevelsConfig		_levelsConfig;
 
 		private const string OpenFinishScreenEventKey = "level_finish_open";
 		private const string CloseFinishScreenEventKey = "level_finish_close";

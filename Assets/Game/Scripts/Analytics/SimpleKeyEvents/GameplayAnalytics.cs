@@ -14,23 +14,23 @@
 
 	public class GameplayAnalytics : AnalyticsBase, IInitializable
 	{
-		[Inject] private IGameLevel _gameLevel;
-		[Inject] private IGameProfileManager _gameProfileManager;
-		[Inject] private IGameplayEvents _gameplayEvents;
-		[Inject] private IGameUpgrades _gameUpgrades;
-		[Inject] private LevelsConfig _levelsConfig;
-		[Inject] private CurrencyConfig _currencyConfig;
-		[Inject] private UpgradesConfig _upgradesConfig;
+		[Inject] private IGameLevel				_gameLevel;
+		[Inject] private IGameProfileManager	_gameProfileManager;
+		[Inject] private IGameplayEvents		_gameplayEvents;
+		[Inject] private IGameUpgrades			_gameUpgrades;
+		[Inject] private LevelsConfig			_levelsConfig;
+		[Inject] private CurrencyConfig			_currencyConfig;
+		[Inject] private UpgradesConfig			_upgradesConfig;
 
-		private const string LevelStartEventKey = "level_start";
-		private const string LevelFinishEventKey = "level_finish";
-		private const string WaveStartEventKey = "wave_start";
-		private const string WaveFinishEventKey = "wave_finished";
-		private const string BattleStartEventKey = "battle_start";
-		private const string BattleFinishEventKey = "battle_finished";
-		private const string UnitSummonEventKey = "unit_summon";
-		private const string UnitMergeEventKey = "unit_merge";
-		private const string UnitUpgradeEventKey = "unit_upgrade";
+		private const string LevelStartEventKey		= "level_start";
+		private const string LevelFinishEventKey	= "level_finish";
+		private const string WaveStartEventKey		= "wave_start";
+		private const string WaveFinishEventKey		= "wave_finished";
+		private const string BattleStartEventKey	= "battle_start";
+		private const string BattleFinishEventKey	= "battle_finished";
+		private const string UnitSummonEventKey		= "unit_summon";
+		private const string UnitMergeEventKey		= "unit_merge";
+		private const string UnitUpgradeEventKey	= "unit_upgrade";
 
 		private float _levelStartTime;
 		private float _waveStartTime;

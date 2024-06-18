@@ -91,49 +91,49 @@
 			int prevPriceLevel			= Mathf.Max(maxPriceLevel - 2, 0);
 			int previousUpgradePrice	= upgrade.Price[prevPriceLevel];
 
-			SendDesignEvent($"{UnitUpgradeEventKey}:{(int)species}:{upgradeLevel}", previousUpgradePrice);
+			//SendDesignEvent($"{UnitUpgradeEventKey}:{(int)species}:{upgradeLevel}", previousUpgradePrice);
 		}
 
 		private void OnHeroLevelUp(int levelNumber)
 		{
-			SendDesignEvent($"{HeroLevelUpEventKey}:{HeroLevelNumberEventKey}{levelNumber}:{LevelKey}:{WaveKey}");
+			//SendDesignEvent($"{HeroLevelUpEventKey}:{HeroLevelNumberEventKey}{levelNumber}:{LevelKey}:{WaveKey}");
 		}
 
 		private void OnTacticalStarted()
 		{
 			_tacticalStartTime = Time.time;
-			SendDesignEvent($"{TacticalEventKey}:{BattleDefaultTypeEventKey}:{TacticalStartEventKey}:{LevelKey}:{WaveKey}");
+			//SendDesignEvent($"{TacticalEventKey}:{BattleDefaultTypeEventKey}:{TacticalStartEventKey}:{LevelKey}:{WaveKey}");
 		}
 
 		private void OnTacticalFinished()
 		{
-			SendDesignEvent($"{TacticalEventKey}:{BattleDefaultTypeEventKey}:{TacticalFinishEventKey}:{LevelKey}:{WaveKey}", Time.time - _tacticalStartTime);
+			//SendDesignEvent($"{TacticalEventKey}:{BattleDefaultTypeEventKey}:{TacticalFinishEventKey}:{LevelKey}:{WaveKey}", Time.time - _tacticalStartTime);
 		}
 
 		private void OnBattleStarted()
 		{
 			_battleStartTime = Time.time;
-			SendDesignEvent($"{BattleEventKey}:{BattleDefaultTypeEventKey}:{BattleStartEventKey}:{LevelKey}:{WaveKey}");
+			//SendDesignEvent($"{BattleEventKey}:{BattleDefaultTypeEventKey}:{BattleStartEventKey}:{LevelKey}:{WaveKey}");
 		}
 
 		private void OnBattleWon()
 		{
-			SendDesignEvent($"{BattleEventKey}:{BattleDefaultTypeEventKey}:{BattleWinEventKey}:{LevelKey}:{WaveKey}", Time.time - _battleStartTime);
+			//SendDesignEvent($"{BattleEventKey}:{BattleDefaultTypeEventKey}:{BattleWinEventKey}:{LevelKey}:{WaveKey}", Time.time - _battleStartTime);
 		}
 
 		private void OnBattleFailed()
 		{
-			SendDesignEvent($"{BattleEventKey}:{BattleDefaultTypeEventKey}:{BattleFailEventKey}:{LevelKey}:{WaveKey}", Time.time - _battleStartTime);
+			//SendDesignEvent($"{BattleEventKey}:{BattleDefaultTypeEventKey}:{BattleFailEventKey}:{LevelKey}:{WaveKey}", Time.time - _battleStartTime);
 		}
 
 		private void OnUnitSummoned(IUnitFacade unit)
 		{
-			SendDesignEvent($"{SummonEventKey}:{BattleDefaultTypeEventKey}:{(int)unit.Species}:{LevelKey}:{WaveKey}", _gameProfile.HeroField.Units.Count);
+			//SendDesignEvent($"{SummonEventKey}:{BattleDefaultTypeEventKey}:{(int)unit.Species}:{LevelKey}:{WaveKey}", _gameProfile.HeroField.Units.Count);
 		}
 
 		private void OnUnitsMerged(IUnitFacade unit)
 		{
-			SendDesignEvent($"{MergeEventKey}:{BattleDefaultTypeEventKey}:{(int)unit.Species}:{LevelKey}:{WaveKey}", _gameProfile.HeroField.Units.Count);
+			//SendDesignEvent($"{MergeEventKey}:{BattleDefaultTypeEventKey}:{(int)unit.Species}:{LevelKey}:{WaveKey}", _gameProfile.HeroField.Units.Count);
 		}
 	}
 }

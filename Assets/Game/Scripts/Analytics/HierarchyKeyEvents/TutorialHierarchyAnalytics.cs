@@ -108,7 +108,7 @@
 			GameProfile.Analytics.TutorialStep = step;
 			GameProfileManager.Save();
 
-			SendDesignEvent($"{TutorialEventKey}:step_{step}", Time.time - _lastStepTime);
+			//SendDesignEvent($"{TutorialEventKey}:step_{step}", Time.time - _lastStepTime);
 
 			_lastStepTime = Time.time;
 		}

@@ -5,13 +5,13 @@ namespace Game.Analytics
 	using System.Collections.Generic;
 	using Game.Profiles;
 	using Game.Configs;
-	using GameAnalyticsSDK;
+	//using GameAnalyticsSDK;
 
 	abstract public class HierarchyAnalyticsBase : ControllerBase
 	{
 		[Inject] private LevelsConfig _levelsConfig;
 		[Inject] protected IGameProfileManager GameProfileManager;
-		[Inject] private IGameAnalyticsSender _eventSender;
+		//[Inject] private IGameAnalyticsSender _eventSender;
 
 		protected const string BattleDefaultTypeEventKey = "normal";
 
@@ -34,6 +34,7 @@ namespace Game.Analytics
 				{ "energy_balance", GameProfile.Energy.Amount },
 			};
 
+		/*
 		protected void SendDesignEvent( string key ) =>
 			_eventSender.SendDesignEvent( key, null );
 
@@ -45,5 +46,6 @@ namespace Game.Analytics
 
 		protected void SendProgressionEvent( GAProgressionStatus progressionStatus, string progression01, string progression02, string progression03 ) =>
 			_eventSender.SendProgressionEvent( progressionStatus, progression01, progression02, progression03, null );
+		*/
 	}
 }

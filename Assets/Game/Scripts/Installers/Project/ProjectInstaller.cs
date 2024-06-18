@@ -113,11 +113,11 @@ namespace Game.Installers
 				return;
 
 			Container
-				.BindInterfacesTo<GameAnalyticsSender>()
+				.BindInterfacesTo<AnalyticEventSender>()
 				.AsSingle();
 
 			Container
-				.BindInterfacesTo<TechnicalHierarchyAnalytics>()
+				.BindInterfacesTo<TechnicalAnalytics>()
 				.AsSingle();
 		}
 

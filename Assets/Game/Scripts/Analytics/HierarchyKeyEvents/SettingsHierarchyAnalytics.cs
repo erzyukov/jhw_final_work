@@ -32,12 +32,12 @@
 
 		private void OnMusicSettingsChanged(bool value)
 		{
-			SendDesignEvent($"{SettingsEventKey}:{MusicSettingsEventKey}:{GetToggleString(value)}", Time.time);
+			//SendDesignEvent($"{SettingsEventKey}:{MusicSettingsEventKey}:{GetToggleString(value)}", Time.time);
 		}
 
 		private void OnSoundSettingsChanged(bool value)
 		{
-			SendDesignEvent($"{SettingsEventKey}:{SoundSettingsEventKey}:{GetToggleString(value)}", Time.time);
+			//SendDesignEvent($"{SettingsEventKey}:{SoundSettingsEventKey}:{GetToggleString(value)}", Time.time);
 		}
 
 		private string GetToggleString(bool value) =>

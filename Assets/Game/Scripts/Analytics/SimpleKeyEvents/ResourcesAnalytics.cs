@@ -8,13 +8,13 @@
 
 	public class ResourcesAnalytics : AnalyticsBase, IInitializable
 	{
-		[Inject] private IGameCurrency _gameCurrency;
-		[Inject] private IGameHero _gameHero;
-		[Inject] private IGameEnergy _gameEnergy;
+		[Inject] private IGameCurrency		_gameCurrency;
+		[Inject] private IGameHero			_gameHero;
+		[Inject] private IGameEnergy		_gameEnergy;
 
-		private const string SoftCurrencyEventKey = "soft_currency";
-		private const string PlayerExperienceEventKey = "player_xp";
-		private const string EnergyEventKey = "energy_used";
+		private const string SoftCurrencyEventKey		= "soft_currency";
+		private const string PlayerExperienceEventKey	= "player_xp";
+		private const string EnergyEventKey				= "energy_used";
 
 		public void Initialize()
 		{

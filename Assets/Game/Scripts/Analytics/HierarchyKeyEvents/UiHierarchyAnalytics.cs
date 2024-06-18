@@ -47,13 +47,13 @@
 
 		private void OnWindowOpened(Window type)
 		{
-			SendDesignEvent($"{UiEventKey}:{type}{OpenedPostfixEventKey}:{WindowOpenDefaultSourceEventKey}:{LevelKey}:{WaveKey}");
+			//SendDesignEvent($"{UiEventKey}:{type}{OpenedPostfixEventKey}:{WindowOpenDefaultSourceEventKey}:{LevelKey}:{WaveKey}");
 			_windowOpenedTime = Time.time;
 		}
 
 		private void OnWindowClosed(Window type)
 		{
-			SendDesignEvent($"{UiEventKey}:{type}{ClosedPostfixEventKey}:{WindowOpenDefaultSourceEventKey}:{LevelKey}:{WaveKey}", Time.time - _windowOpenedTime);
+			//SendDesignEvent($"{UiEventKey}:{type}{ClosedPostfixEventKey}:{WindowOpenDefaultSourceEventKey}:{LevelKey}:{WaveKey}", Time.time - _windowOpenedTime);
 		}
 
 		void UiScreenChangedHandler(Pair<Screen> pair)
@@ -63,11 +63,11 @@
 
 			if (pair.Previous != Screen.None)
 			{
-				SendDesignEvent($"{UiEventKey}:{pair.Previous}{ClosedPostfixEventKey}:{LevelKey}:{WaveKey}", Time.time - _previousScreenOpenedTime);
+				//SendDesignEvent($"{UiEventKey}:{pair.Previous}{ClosedPostfixEventKey}:{LevelKey}:{WaveKey}", Time.time - _previousScreenOpenedTime);
 			}
 			else if (pair.Current != Screen.None)
 			{
-				SendDesignEvent($"{UiEventKey}:{pair.Current}{OpenedPostfixEventKey}:{LevelKey}:{WaveKey}");
+				//SendDesignEvent($"{UiEventKey}:{pair.Current}{OpenedPostfixEventKey}:{LevelKey}:{WaveKey}");
 				_previousScreenOpenedTime = Time.time;
 			}
 		}

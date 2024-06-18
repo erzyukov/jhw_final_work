@@ -67,7 +67,7 @@
 			{
 				MaxSdk.SetVerboseLogging( true );
 				string gaid = "bbdf33dd-9e91-4807-8e7e-6d50010a574d";
-				MaxSdk.SetTestDeviceAdvertisingIdentifiers(new string[]{gaid, gaid});
+				//MaxSdk.SetTestDeviceAdvertisingIdentifiers(new string[]{gaid, gaid});
 			}
 
 			MaxSdk.SetSdkKey( _adsConfig.MaxSdkKey );
