@@ -30,5 +30,10 @@
 
 			_eventSender.SendEvent(key, globalProperties, immediately);
 		}
-	}
+
+		protected void SendAdRevenue( EAdType type, RevenueData revenue )
+		{
+			_eventSender.SendAdRevenue( type, revenue );
+		}
+    }
 }

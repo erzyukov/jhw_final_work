@@ -250,11 +250,11 @@
 
 		private void OnUnitUpgraded(Species species)
 		{
-			int upgradeLevel = _gameUpgrades.GetUnitLevel(species);
-			int maxLevelUnlocked = GameProfile.Levels.Where(l => l.Unlocked.Value).Select((l, i) => i).LastOrDefault() + 1;
-			UnitUpgradesConfig upgrade = _upgradesConfig.UnitsUpgrades[species];
-			int maxPriceLevel = Mathf.Clamp(upgradeLevel, 1, upgrade.Price.Length + 1);
-			int previousUpgradePrice = upgrade.Price[maxPriceLevel - 2];
+			int upgradeLevel			= _gameUpgrades.GetUnitLevel(species);
+			int maxLevelUnlocked		= GameProfile.Levels.Where(l => l.Unlocked.Value).Select((l, i) => i).LastOrDefault() + 1;
+			UnitUpgradesConfig upgrade	= _upgradesConfig.UnitsUpgrades[species];
+			int maxPriceLevel			= Mathf.Clamp(upgradeLevel, 2, upgrade.Price.Length + 1);
+			int previousUpgradePrice	= upgrade.Price[maxPriceLevel - 2];
 
 			var properties = new Dictionary<string, object>
 			{

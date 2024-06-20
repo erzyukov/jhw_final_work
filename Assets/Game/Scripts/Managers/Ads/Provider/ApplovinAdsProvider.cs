@@ -7,7 +7,7 @@
 	using Game.Configs;
 	using Logger = Game.Logger;
 	using static MaxSdkBase;
-
+	using Game.Analytics;
 
 	public class ApplovinAdsProvider : ControllerBase, IAdsProvider, IInitializable
 	{
@@ -98,6 +98,7 @@
 			MaxSdkCallbacks.Interstitial.OnAdHiddenEvent		+= OnInterstitialHidden;
 			MaxSdkCallbacks.Interstitial.OnAdDisplayedEvent		+= OnInterstitialDisplayed;
 			MaxSdkCallbacks.Interstitial.OnAdClickedEvent		+= OnInterstitialClicked;
+			MaxSdkCallbacks.Interstitial.OnAdRevenuePaidEvent	+= OnInterstitialRevenuePaid;
 
 			LoadInterstitial();
 		}
@@ -148,6 +149,14 @@
 		}
 
 		private void OnInterstitialClicked( string arg1, MaxSdkBase.AdInfo info ) {}
+
+		private void OnInterstitialRevenuePaid( string adUnitId, AdInfo adInfo )
+		{
+			Logger.Log( Logger.Module.Ads, $"Interstitial Revenue: {adInfo.Revenue}: {adInfo.RevenuePrecision}" );
+
+			RevenueData data	= ToRevenueData( adInfo );
+			AdRevenued.Execute( (EAdType.Interstitial, data) );
+		}
 
 #endregion
 
@@ -200,7 +209,13 @@
 
 		private void OnRewardedClicked( string adUnitId, AdInfo adInfo ) {}
 
-		private void OnRewardedRevenuePaid( string adUnitId, AdInfo adInfo ) {}
+		private void OnRewardedRevenuePaid( string adUnitId, AdInfo adInfo )
+		{
+			Logger.Log( Logger.Module.Ads, $"Rewarded Revenue: {adInfo.Revenue}: {adInfo.RevenuePrecision}" );
+
+			RevenueData data	= ToRevenueData( adInfo );
+			AdRevenued.Execute( (EAdType.RewardedVideo, data) );
+		}
 
 		private void OnRewardedHidden( string arg1, AdInfo info )
 		{
@@ -251,7 +266,13 @@
 
 		private void OnBannerAdClicked(string adUnitId, MaxSdkBase.AdInfo adInfo) {}
 
-		private void OnBannerAdRevenuePaid(string adUnitId, MaxSdkBase.AdInfo adInfo) {}
+		private void OnBannerAdRevenuePaid(string adUnitId, MaxSdkBase.AdInfo adInfo)
+		{
+			Logger.Log( Logger.Module.Ads, $"Banner Revenue: {adInfo.Revenue}: {adInfo.RevenuePrecision}" );
+
+			RevenueData data	= ToRevenueData( adInfo );
+			AdRevenued.Execute( (EAdType.Banner, data) );
+		}
 
 		private void OnBannerAdExpanded(string adUnitId, MaxSdkBase.AdInfo adInfo)  {}
 
@@ -272,6 +293,7 @@
 
 		public ReactiveCommand<ERewardedType> Rewarded	{ get; } = new();
 
+		public ReactiveCommand<(EAdType, RevenueData)> AdRevenued { get; } = new();
 
 		public string InterstitialPlace { get; private set; }	= DefaultPlace;
 		public string RewardedPlace { get; private set; }		= DefaultPlace;
@@ -310,5 +332,18 @@
 		}
 
 #endregion
+
+		private RevenueData ToRevenueData( AdInfo adInfo )
+		{
+			return new(){
+				AdUnitIdentifier	= adInfo.AdUnitIdentifier,
+				AdFormat			= adInfo.AdFormat,
+				NetworkName			= adInfo.NetworkName,
+				NetworkPlacement	= adInfo.NetworkPlacement,
+				Placement			= adInfo.Placement,
+				Revenue				= adInfo.Revenue,
+				RevenuePrecision	= adInfo.RevenuePrecision
+			};
+		}
 	}
 }

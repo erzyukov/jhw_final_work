@@ -1,5 +1,6 @@
 ﻿namespace Game.Managers
 {
+	using Game.Analytics;
 	using Game.Utilities;
 	using UniRx;
 	using Zenject;
@@ -28,6 +29,7 @@
 
 		public ReactiveCommand<ERewardedType> Rewarded { get; } = new();
 
+		public ReactiveCommand<(EAdType, RevenueData)> AdRevenued { get; } = new();
 
 		public string InterstitialPlace { get; private set; } = DefaultPlace;
 		public string RewardedPlace { get; private set; } = DefaultPlace;

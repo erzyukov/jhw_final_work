@@ -1,5 +1,6 @@
 ﻿namespace Game.Managers
 {
+	using Game.Analytics;
 	using UniRx;
 
 	public interface IAdsProvider
@@ -12,6 +13,8 @@
 		ReactiveCommand<EAdType> AdShowFailed { get; }
 
 		ReactiveCommand<ERewardedType> Rewarded { get; }
+		
+		ReactiveCommand<(EAdType, RevenueData)> AdRevenued { get; }
 
 		string InterstitialPlace { get; }
 		string RewardedPlace { get; }
