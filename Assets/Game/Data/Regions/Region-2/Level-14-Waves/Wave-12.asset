@@ -21,7 +21,7 @@ MonoBehaviour:
   - Species: 5005
     Power: 12
     Position: {x: 0, y: 3}
-    GradeIndex: 0
+    GradeIndex: 1
   - Species: 5004
     Power: 22
     Position: {x: 0, y: 0}

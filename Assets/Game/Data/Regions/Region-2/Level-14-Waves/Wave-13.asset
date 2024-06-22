@@ -41,4 +41,4 @@ MonoBehaviour:
   - Species: 5005
     Power: 16
     Position: {x: 2, y: 3}
-    GradeIndex: 0
+    GradeIndex: 2
