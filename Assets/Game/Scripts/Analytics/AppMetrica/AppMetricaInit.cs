@@ -10,7 +10,6 @@ namespace Game
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		private static void Activate()
 		{
-			Debug.LogWarning("[Appmetrica] Activated");
 			AppMetrica.Activate( new AppMetricaConfig( ApiKey ) {
 				FirstActivationAsUpdate = !IsFirstLaunch(),
 			} );

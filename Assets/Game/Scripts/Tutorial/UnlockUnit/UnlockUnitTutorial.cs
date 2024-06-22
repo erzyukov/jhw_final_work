@@ -90,8 +90,6 @@
 						? UnlockUnitStep.UnlockUnit
 						: UnlockUnitStep.UnlockHint;
 
-					Debug.LogWarning($">> ButtonClicked >> {nextStep}");
-
 					SetProfileStepValue(nextStep);
 				})
 				.AddTo(_disposable);

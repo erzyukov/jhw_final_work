@@ -29,9 +29,6 @@
 
 			if (immediately)
 				AppMetrica.SendEventsBuffer();
-
-			//Debug.LogWarning( $">> [Analytics Event] {message}: {parameters.ToString<string, object>()}" );
-			Debug.LogWarning( $">> [Analytics Event] {message}: {json}" );
 		}
 
 		public void SendAdRevenue( EAdType type, RevenueData revenue )
@@ -49,8 +46,6 @@
 			};
 
 			AppMetrica.ReportAdRevenue( data );
-
-			Debug.LogWarning( $">> [Analytics Reveneu Event]: {data.AdRevenueValue} | {revenue.NetworkName}" );
 		}
 
 		#endregion
