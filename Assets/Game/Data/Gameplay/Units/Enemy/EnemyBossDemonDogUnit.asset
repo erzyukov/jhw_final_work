@@ -27,7 +27,8 @@ MonoBehaviour:
   _attackRange: 1
   _attackDelay: 1.7
   _projectileType: 0
-  DamageRange: 0
+  AoeRange: 0
+  DamageVfx: 0
   _health: 1600
   _damage: 95
   _healthPowerMultiplier: 210
@@ -37,7 +38,9 @@ MonoBehaviour:
   _softRewardPowerMultiplier: 1.5
   _experiencePowerMultiplier: 1.5
   _gradePrefabs:
-  - {fileID: 1503547998484457933, guid: 34cb3218eb4d7da4e8cdfc8e96f96baf, type: 3}
+  - {fileID: 1503547998484457933, guid: 4d3d979668191e743b3c90c0d99c5640, type: 3}
+  - {fileID: 7428469433517055575, guid: cfb0794fa14183d489bd1b39c55bbf26, type: 3}
+  - {fileID: 6847716876145871736, guid: 4e0fe901a35f81c4ba8909ed37e106ad, type: 3}
   _isDebug: 0
   references:
     version: 2
