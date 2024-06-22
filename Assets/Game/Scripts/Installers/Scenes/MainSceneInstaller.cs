@@ -9,7 +9,7 @@ namespace Game.Installers
 	using Game.Analytics;
 	using Game.Configs;
 	using Game.Managers;
-	using System;
+
 
 	public class MainSceneInstaller : MonoInstaller
 	{

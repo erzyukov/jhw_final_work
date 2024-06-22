@@ -16,15 +16,12 @@ MonoBehaviour:
   deleteDllAfterBuilds: 1
   AutomateForAllAOTPlatforms: 1
   automateForPlatforms: 0d000000
-  lastScan: 638539150651965948
+  lastScan: 638546768160563322
   supportSerializedTypes:
   - TypeName: UnityEngine.AudioClip, UnityEngine.AudioModule
     IsCustom: 0
     Emit: 1
   - TypeName: Game.Configs.AudioConfig+GameStateAudioClip, Assembly-CSharp
-    IsCustom: 0
-    Emit: 1
-  - TypeName: System.Boolean, mscorlib
     IsCustom: 0
     Emit: 1
   - TypeName: System.Collections.Generic.Dictionary`2[[Game.EIapProduct, Assembly-CSharp],[Game.Iap.IapData,

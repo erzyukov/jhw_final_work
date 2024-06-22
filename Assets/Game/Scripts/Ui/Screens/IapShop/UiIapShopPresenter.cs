@@ -9,19 +9,29 @@
 
 	public class UiIapShopPresenter : ControllerBase, IInitializable
 	{
-		[Inject] private IUiIapShopScreen _screen;
-		[Inject] private GameProfile _gameProfile;
-		[Inject] private IIapFacade _iapFacade;
+		[Inject] private IUiIapShopScreen	_screen;
+		[Inject] private GameProfile		_gameProfile;
+		[Inject] private IIapFacade			_iapFacade;
+		[Inject] private IIapConfig			_iapConfig;
 
 		IapShopProfile Profile => _gameProfile.IapShopProfile;
 
 		public void Initialize()
 		{
-			_screen.Products.ForEach( product => InitProductElement( product ) );
+			_iapFacade.IsInitialized
+				.Where( v => v )
+				.Subscribe( _ => IapInitializedHandler() )
+				.AddTo( this );
 
 			_iapFacade.OnBoughtOrRestored
+				.Select( product => _iapConfig.BundleToId( product.definition.id ) )
 				.Subscribe( OnProductBought )
 				.AddTo( this );
+		}
+
+        void IapInitializedHandler()
+        {
+			_screen.Products.ForEach( product => InitProductElement( product ) );
 		}
 
 		private void OnProductBought( EIapProduct product )
@@ -40,7 +50,7 @@
 			}
 			else
 			{
-				product.SetPrice( _iapFacade.GetLocalizedPrice( product.IapProduct ) );
+				product.SetPrice( _iapFacade.GetLocalizedPriceString( product.IapProduct ) );
 				product.Clicked
 					.Subscribe( _ => OnProductBuy(product.IapProduct))
 					.AddTo( this );

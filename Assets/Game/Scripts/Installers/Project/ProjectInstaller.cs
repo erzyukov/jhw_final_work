@@ -137,7 +137,6 @@ namespace Game.Installers
 			if (_devConfig.GamePatform == EGamePatform.None)
 				return;
 
-			/*
 			// IapDeliver
 			// (!) Should be bound BEFORE IapCore, so it is ready to listen events before IapCore Init()
 			Container
@@ -161,7 +160,6 @@ namespace Game.Installers
 
 			// https://github.com/modesttree/Zenject/issues/160
 			Container.Resolve<IIapCoreFacade>();                    // Required for .WithKernel() above to work
-			*/
 		}
 	}
 }

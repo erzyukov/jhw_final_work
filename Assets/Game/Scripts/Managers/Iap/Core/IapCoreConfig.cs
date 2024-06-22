@@ -5,28 +5,37 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
-	using UnityEngine.Localization.Tables;
+
 
 	[Serializable]
 	public class IapData
 	{
-		public string Bundle;
-		public float Price;
-		public bool IsConsumable;
+		public string   Bundle;
 	}
+
 
 	public interface IIapCoreConfig
 	{
+		string GooglePublicKey		{get;}
+		string Environment			{get;}
+
 		bool TryGetBundle( EIapProduct id, out string bundle );
-		bool TryGetIapData( EIapProduct id, out IapData iapData );
 		EIapProduct BundleToId( string bundle );
 	}
 
+
 	public class IapCoreConfig : SerializedScriptableObject, IIapCoreConfig
 	{
+		[SerializeField] string											_googlePublicKey;
+		[SerializeField] string											_environment;
 		[SerializeField] protected Dictionary<EIapProduct, IapData>		Products				= new Dictionary<EIapProduct, IapData>();
 
-		#region IIapCoreConfig
+
+#region IIapConfig
+
+		public string GooglePublicKey		=> _googlePublicKey;
+
+		public string Environment			=> _environment;
 
 		public bool TryGetBundle( EIapProduct id, out string bundle )
 		{
@@ -36,12 +45,17 @@
 			return found;
 		}
 
-		public virtual bool TryGetIapData( EIapProduct id, out IapData iapData ) =>
-			Products.TryGetValue( id, out iapData );
 
-		public virtual EIapProduct BundleToId( string bundle ) =>
+		public virtual EIapProduct BundleToId( string bundle )
+		=>
 			Products.First( pair => pair.Value.Bundle == bundle ).Key;
 
-		#endregion
+#endregion
+
+
+		protected virtual bool TryGetIapData( EIapProduct id, out IapData iapData )
+		=>
+			Products.TryGetValue( id, out iapData );
 	}
 }
+

@@ -6,6 +6,8 @@
 	{
 		public override void InstallBindings()
 		{
+			Logger.Log( Logger.Module.Iap, "-- IapCoreInstaller --" );
+
 			// IapCoreFacade
 			Container
 				.BindInterfacesTo< IapCoreFacade >()
@@ -18,7 +20,7 @@
 
 			// IapCore
 			Container
-				.BindInterfacesTo< IapCore >()
+				.BindInterfacesTo< IapCoreWithValidation >()
 				.FromNewComponentOnNewGameObject()
 				.AsSingle();
 		}

@@ -52,13 +52,7 @@ MonoBehaviour:
       Data: 2|Game.Iap.IapData, Assembly-CSharp
     - Name: Bundle
       Entry: 1
-      Data: com_dd_noads
-    - Name: Price
-      Entry: 4
-      Data: 39
-    - Name: IsConsumable
-      Entry: 5
-      Data: false
+      Data: com.dd.noads
     - Name: 
       Entry: 8
       Data: 
@@ -71,3 +65,31 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: ProductsNew
+      Entry: 7
+      Data: 3|System.Collections.Generic.Dictionary`2[[Game.EIapProduct, Assembly-CSharp],[Game.Iap.IapData,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 4|System.Collections.Generic.EnumEqualityComparer`1[[Game.EIapProduct,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  _googlePublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmNKA/oHF6l5JILkvi7AIJjeGl3auhRL3FZ/75Yb+dQ1Hiuxhm4Sj3ATjUZNurgMSp220FfOEvP/4f8sPxJ5MI5MDuEeDQAkc0MNv4uMtOtaFltZMZhNJBdXa4PQa3GxDDI5DeHx9DZ9ANWfPKeIrmpY7nFEEtbnlLTRzMZ1CjgBSEdhS1Jrzu1vWEaqA8eHc7Pl/OCGKauwEn8OQeqAF3JKxAekSNLtVycMF+/UXCpeOwWvZ7eOCibSSS1g/IS2dbgnlb7p9CEsP2jzq35DBnvNS42PMoWwVemOJngD3SkuFMeAQDlWk25WfTDL3fko7wJV+apD7i/usdnvWCwLGyQIDAQAB
+  _environment: production

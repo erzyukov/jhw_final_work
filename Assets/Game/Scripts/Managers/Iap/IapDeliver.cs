@@ -4,6 +4,8 @@
 	using System;
 	using Zenject;
 	using UniRx;
+	using UnityEngine.Purchasing;
+
 
 	public class IapDeliver : IInitializable, IDisposable
 	{
@@ -13,7 +15,7 @@
 
 		private readonly CompositeDisposable _lifetimeDisposables = new CompositeDisposable();
 
-		IapShopProfile IapShopProfile => _gameProfileManager.GameProfile.IapShopProfile;
+		private IapShopProfile		IapShopProfile => _gameProfileManager.GameProfile.IapShopProfile;
 
 		public void Initialize()
 		{
@@ -24,24 +26,23 @@
 
 		public void Dispose() => _lifetimeDisposables.Clear();
 
-		private void OnBoughtOrRestored( EIapProduct product )
+		private void OnBoughtOrRestored( Product product )
 		{
-			if (IapShopProfile.BoughtProducts.Contains( product ))
+			EIapProduct type		= _iapConfig.BundleToId( product.definition.id );
+
+			if (IapShopProfile.BoughtProducts.Contains( type ))
 				return;
 
-			if (GetProduct( product ))
+			if (GetProduct( type, product.definition.type ))
 				_gameProfileManager.Save( true );
 		}
 
-		private bool GetProduct( EIapProduct product )
+		private bool GetProduct( EIapProduct type, ProductType productType )
 		{
-			if (_iapConfig.TryGetIapData( product, out IapData data ) == false)
-				return false;
+			if (productType == ProductType.NonConsumable)
+				IapShopProfile.BoughtProducts.Add( type );
 
-			if (data.IsConsumable == false)
-				IapShopProfile.BoughtProducts.Add( product );
-
-			switch (product)
+			switch (type)
 			{
 				case EIapProduct.NoAds:
 					GetNoAds();
