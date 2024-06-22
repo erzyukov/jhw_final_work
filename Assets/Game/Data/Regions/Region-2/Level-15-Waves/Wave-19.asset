@@ -33,19 +33,19 @@ MonoBehaviour:
   - Species: 5005
     Power: 14
     Position: {x: 1, y: 3}
-    GradeIndex: 0
+    GradeIndex: 1
   - Species: 5005
     Power: 14
     Position: {x: 3, y: 3}
-    GradeIndex: 0
+    GradeIndex: 1
   - Species: 5005
     Power: 14
     Position: {x: 4, y: 3}
-    GradeIndex: 0
+    GradeIndex: 1
   - Species: 5005
     Power: 14
     Position: {x: 0, y: 3}
-    GradeIndex: 0
+    GradeIndex: 1
   - Species: 5001
     Power: 28
     Position: {x: 0, y: 0}
