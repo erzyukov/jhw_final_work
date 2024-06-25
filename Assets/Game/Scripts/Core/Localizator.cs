@@ -7,6 +7,8 @@ namespace Game.Core
 	using UnityEngine;
 	using UnityEngine.Localization;
 	using UniRx;
+	using System.Globalization;
+
 
 	public interface ILocalizator
 	{
@@ -31,7 +33,13 @@ namespace Game.Core
 		{
 			yield return LocalizationSettings.InitializationOperation;
 
-			LocalizationSettings.SelectedLocale = _locale ?? _config.DefaultLocale;
+			_locale = (Application.systemLanguage != SystemLanguage.Unknown)
+				? LocalizationSettings.AvailableLocales.GetLocale( Application.systemLanguage )
+				: LocalizationSettings.AvailableLocales.GetLocale( CultureInfo.CurrentCulture );
+
+			LocalizationSettings.SelectedLocale		= _locale ?? _config.DefaultLocale;
+
+			LangKey.Value		= _locale.Identifier.Code;
 
 			yield return LocalizationSettings.InitializationOperation;
 		}
