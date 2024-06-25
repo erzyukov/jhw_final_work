@@ -154,7 +154,7 @@
 		{
 			Logger.Log( Logger.Module.Ads, $"Interstitial Revenue: {adInfo.Revenue}: {adInfo.RevenuePrecision}" );
 
-			RevenueData data	= ToRevenueData( adInfo );
+			AdRevenueData data	= ToRevenueData( adInfo );
 			AdRevenued.Execute( (EAdType.Interstitial, data) );
 		}
 
@@ -213,7 +213,7 @@
 		{
 			Logger.Log( Logger.Module.Ads, $"Rewarded Revenue: {adInfo.Revenue}: {adInfo.RevenuePrecision}" );
 
-			RevenueData data	= ToRevenueData( adInfo );
+			AdRevenueData data	= ToRevenueData( adInfo );
 			AdRevenued.Execute( (EAdType.RewardedVideo, data) );
 		}
 
@@ -270,7 +270,7 @@
 		{
 			Logger.Log( Logger.Module.Ads, $"Banner Revenue: {adInfo.Revenue}: {adInfo.RevenuePrecision}" );
 
-			RevenueData data	= ToRevenueData( adInfo );
+			AdRevenueData data	= ToRevenueData( adInfo );
 			AdRevenued.Execute( (EAdType.Banner, data) );
 		}
 
@@ -293,7 +293,7 @@
 
 		public ReactiveCommand<ERewardedType> Rewarded	{ get; } = new();
 
-		public ReactiveCommand<(EAdType, RevenueData)> AdRevenued { get; } = new();
+		public ReactiveCommand<(EAdType, AdRevenueData)> AdRevenued { get; } = new();
 
 		public string InterstitialPlace { get; private set; }	= DefaultPlace;
 		public string RewardedPlace { get; private set; }		= DefaultPlace;
@@ -333,7 +333,7 @@
 
 #endregion
 
-		private RevenueData ToRevenueData( AdInfo adInfo )
+		private AdRevenueData ToRevenueData( AdInfo adInfo )
 		{
 			return new(){
 				AdUnitIdentifier	= adInfo.AdUnitIdentifier,

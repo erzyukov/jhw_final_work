@@ -1,6 +1,6 @@
 ﻿namespace Game.Analytics
 {
-	public struct RevenueData
+	public struct AdRevenueData
 	{
 		public string AdUnitIdentifier;
 		public string AdFormat;

@@ -186,6 +186,10 @@ namespace Game.Installers
 				.AsSingle();
 
 			Container
+				.BindInterfacesTo<IapAnalytics>()
+				.AsSingle();
+
+			Container
 				.BindInterfacesTo<CustomAnalytics>()
 				.AsSingle();
 		}

@@ -14,7 +14,7 @@
 
 		ReactiveCommand<ERewardedType> Rewarded { get; }
 		
-		ReactiveCommand<(EAdType, RevenueData)> AdRevenued { get; }
+		ReactiveCommand<(EAdType, AdRevenueData)> AdRevenued { get; }
 
 		string InterstitialPlace { get; }
 		string RewardedPlace { get; }

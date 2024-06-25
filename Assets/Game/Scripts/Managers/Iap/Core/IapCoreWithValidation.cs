@@ -1,21 +1,13 @@
 ﻿namespace Game.Iap
 {
 	using System;
-	using System.Collections.Generic;
 	using UnityEngine.Purchasing;
-	using Zenject;
-	//using Game.RemoteConfig;
-	using Game.Iap;
-	using Newtonsoft.Json;
 	using Logger = Game.Logger;
 	using Module = Game.Logger.Module;
 	using UnityEngine.Purchasing.Security;
-	using UnityEngine;
 
 	public class IapCoreWithValidation : IapCore
 	{
-
-		//[Inject] IRemoteConfigManager _remoteConfigManager;
 
 		protected override PurchaseProcessingResult ProductProcessPurchase( Product product )
 		{

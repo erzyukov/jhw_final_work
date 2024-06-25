@@ -71,7 +71,7 @@
 			SendMessage( key, properties );
 		}
 
-		private void SendMediationRevenue( EAdType type, RevenueData data )
+		private void SendMediationRevenue( EAdType type, AdRevenueData data )
 		{
 			var properties = new Dictionary<string, object>
 			{

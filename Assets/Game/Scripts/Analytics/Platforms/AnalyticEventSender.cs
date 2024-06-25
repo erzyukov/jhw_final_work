@@ -1,8 +1,6 @@
 ﻿namespace Game.Analytics
 {
 	using System.Collections.Generic;
-	using Game.Utilities;
-	using UnityEngine;
 	using Io.AppMetrica;
 	using Newtonsoft.Json;
 
@@ -10,12 +8,13 @@
 	{
 		void SendEvent( string message, bool immediately = false );
 		void SendEvent( string message, Dictionary<string, object> parameters, bool immediately = false );
-		void SendAdRevenue( EAdType type, RevenueData revenue );
+		void SendAdRevenue( EAdType type, AdRevenueData revenue );
+		void SendIapRevenue( IapRevenueData revenue );
 	}
 
 	public class AnalyticEventSender : IAnalyticEventSender
 	{
-		#region IAnalyticEventSender
+#region IAnalyticEventSender
 
 		public void SendEvent( string message, bool immediately = false )
 		{
@@ -24,14 +23,14 @@
 
 		public void SendEvent( string message, Dictionary<string, object> parameters, bool immediately = false )
 		{
-			string json		= JsonConvert.SerializeObject(parameters);
+			string json     = JsonConvert.SerializeObject( parameters );
 			AppMetrica.ReportEvent( message, json );
 
 			if (immediately)
 				AppMetrica.SendEventsBuffer();
 		}
 
-		public void SendAdRevenue( EAdType type, RevenueData revenue )
+		public void SendAdRevenue( EAdType type, AdRevenueData revenue )
 		{
 			AdRevenue data			= new(revenue.Revenue, "USD");
 			data.AdNetwork			= revenue.NetworkName;
@@ -48,6 +47,22 @@
 			AppMetrica.ReportAdRevenue( data );
 		}
 
-		#endregion
+		public void SendIapRevenue( IapRevenueData revenue )
+		{
+			Revenue data	= new( revenue.PriceMicros, revenue.Currency );
+			data.Payload	= revenue.Payload;
+			data.ProductID	= revenue.ProductID;
+			data.Quantity	= revenue.Quantity;
+
+			data.ReceiptValue	= new Revenue.Receipt() {
+				Data			= revenue.ReceiptData,
+				Signature		= revenue.ReceiptSignature,
+				TransactionID	= revenue.ReceiptTransactionID
+			};
+
+			AppMetrica.ReportRevenue( data );
+		}
+
+#endregion
 	}
 }

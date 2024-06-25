@@ -29,7 +29,7 @@
 
 		public ReactiveCommand<ERewardedType> Rewarded { get; } = new();
 
-		public ReactiveCommand<(EAdType, RevenueData)> AdRevenued { get; } = new();
+		public ReactiveCommand<(EAdType, AdRevenueData)> AdRevenued { get; } = new();
 
 		public string InterstitialPlace { get; private set; } = DefaultPlace;
 		public string RewardedPlace { get; private set; } = DefaultPlace;
