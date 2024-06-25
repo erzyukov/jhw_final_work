@@ -146,8 +146,8 @@ namespace Game.Core
 
 		public void PlayUiClick()
 		{
-			//if (_gameProfile.IsSoundEnabled.Value)
-				//_audioSources.Ui.PlayOneShot(_audioConfig.UiButtonClick);
+			if (_gameProfile.IsSoundEnabled.Value)
+				_audioSources.Ui.PlayOneShot(_audioConfig.UiButtonClick);
 		}
 
 		#endregion
