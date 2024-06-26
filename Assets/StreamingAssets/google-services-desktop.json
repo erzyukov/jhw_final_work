@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1026668983511",
+    "project_id": "doomsday-dd979",
+    "storage_bucket": "doomsday-dd979.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026668983511:android:dcbc47882b5024d99aec92",
+        "android_client_info": {
+          "package_name": "com.yellowbird.games.merge.doomsday"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOsmWzxvzyMN2ZGNd9J3CeDfhrpu0DIws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
