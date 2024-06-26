@@ -5,7 +5,6 @@
 	using UniRx;
 	using Game.Iap;
 	using System.Collections.Generic;
-	using UnityEngine.Purchasing;
 	using Newtonsoft.Json;
 	using UnityEngine;
 
@@ -28,22 +27,30 @@
 			var recptToJSON		= JsonConvert.DeserializeObject<Dictionary<string, object>>(data.Receipt);
 			var receiptPayload	= JsonConvert.DeserializeObject<Dictionary<string, object>>((string)recptToJSON["Payload"]);
 			var signature		= (string)receiptPayload["signature"];
-			var transactionID	= (string)recptToJSON[ "TransactionID" ];
+			var transactionID	= (string)recptToJSON["TransactionID"];
 
 			IapRevenueData revenue = new(){
-				PriceMicros = data.CentsAmount * 10000,
-				Currency = data.Currency,
-				Payload = (string)recptToJSON["Payload"],
-				ProductID = data.ItemId,
-				Quantity = 1,
-				ReceiptData = data.Receipt,
-				ReceiptSignature = signature,
-				ReceiptTransactionID = transactionID,
+				PriceMicros				= data.CentsAmount * 10000,
+				Currency				= data.Currency,
+				Payload					= (string)recptToJSON["Payload"],
+				ProductID				= data.ItemId,
+				Quantity				= 1,
+				ReceiptData				= data.Receipt,
+				ReceiptSignature		= signature,
+				ReceiptTransactionID	= transactionID,
 			};
 
-			Debug.LogWarning( revenue );
-
 			SendIapRevenue( revenue );
+
+			var properties = new Dictionary<string, object>
+			{
+				{ "inapp_id",	data.ItemId },
+				{ "price",		data.CentsAmount },
+				{ "inapp_type",	data.ItemType },
+				{ "place",		data.CartType },
+			};
+
+			SendMessage( PurchaseEvent, properties );
 #endif
 		}
 	}
