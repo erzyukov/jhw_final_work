@@ -1,13 +1,14 @@
 ﻿namespace Game.Configs
 {
+	using UnityEditor;
 	using UnityEngine;
 
 	[CreateAssetMenu(fileName = "Dev", menuName = "Configs/Development", order = (int)Config.Dev)]
 	public class DevConfig : ScriptableObject
 	{
-		[SerializeField] private BuildType _buildType = BuildType.Debug;
-		[SerializeField] private EGamePatform _gamePatform;
-		[SerializeField] private float _timeScale = 1;
+		[SerializeField] private BuildType		_buildType = BuildType.Debug;
+		[SerializeField] private EGamePatform	_gamePatform;
+		[SerializeField] private float			_timeScale = 1;
 
 		public enum BuildType
 		{
@@ -22,5 +23,17 @@
 		public float TimeScale => _timeScale;
 
 		public bool DisableAnalytics;
+
+		public int BundleVersionCode;
+
+#if UNITY_EDITOR
+		private void OnValidate()
+		{
+			BundleVersionCode	= PlayerSettings.Android.bundleVersionCode;
+
+			EditorUtility.SetDirty( this );
+		}
+#endif
+
 	}
 }
