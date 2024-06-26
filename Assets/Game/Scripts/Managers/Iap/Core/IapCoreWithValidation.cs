@@ -1,10 +1,11 @@
 ﻿namespace Game.Iap
 {
 	using System;
+	using UnityEngine;
 	using UnityEngine.Purchasing;
+	using UnityEngine.Purchasing.Security;
 	using Logger = Game.Logger;
 	using Module = Game.Logger.Module;
-	using UnityEngine.Purchasing.Security;
 
 	public class IapCoreWithValidation : IapCore
 	{
