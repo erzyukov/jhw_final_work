@@ -9,7 +9,7 @@ namespace Game.Installers
 	using Game.Iap;
 	using Game.Input;
 	using Game.Profiles;
-	using Game.Utilities;
+	using Game.RemoteConfig;
 
 
 	public class ProjectInstaller : MonoInstaller
@@ -56,6 +56,7 @@ namespace Game.Installers
 				.AsSingle();
 #endif
 
+			BindRemoteConfig();
 			InstallEvents();
 			InstallAnalytics();
 			InstallGameControllers();
@@ -88,6 +89,26 @@ namespace Game.Installers
 			Container
 				.Bind<GameProfile>()
 				.FromResolveGetter<IGameProfileManager>(gameProfileManager => gameProfileManager.GameProfile)
+				.AsSingle()
+				.MoveIntoAllSubContainers();
+		}
+
+		void BindRemoteConfig()
+		{
+			// RemoteConfigLoader
+			Container
+				.BindInterfacesTo<RemoteConfigLoader>()
+				.AsSingle();
+
+			// RemoteConfigParser
+			Container
+				.BindInterfacesTo<RemoteConfigManager>()
+				.AsSingle();
+
+			// RemoteConfig
+			Container
+				.Bind<RemoteConfig>()
+				.FromResolveGetter<IRemoteConfigManager>(remoteConfigManager => remoteConfigManager.RemoteConfig)
 				.AsSingle()
 				.MoveIntoAllSubContainers();
 		}

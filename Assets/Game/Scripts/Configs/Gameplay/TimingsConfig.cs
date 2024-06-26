@@ -14,6 +14,9 @@ namespace Game.Configs
 		[Header("Units")]
 		[SerializeField] private float _unitDeathVanishDelay;
 
+		[Header("RemoteConfig")]
+		public float MaxWaitLoadingRemoteConfig;
+
 
 		public float ExperienceAnimationDuration => _experienceAnimationDuration;
 		public float WaveTransitionDelay => _waveTransitionDelay;

@@ -15,6 +15,7 @@
 			Core,
 			Ads,
 			Iap,
+			RemoteConfig,
 		}
 	}
 }
